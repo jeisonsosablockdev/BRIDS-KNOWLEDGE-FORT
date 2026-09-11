@@ -114,7 +114,7 @@ This project includes a suite of utility and automation scripts located in `BRID
 
 | Script | Command | Purpose |
 | :--- | :--- | :--- |
-| **`sdd-manager.sh`** | `bash BRIDS-Engine/scripts/sdd-manager.sh <cmd>` | **Spec-Driven Development & Quality Optimizer:** `init`, `preview`, `approve`, `evaluate`, `status`, and `list` specs. Manages Two-Agent Evaluator-Optimizer loop ($\ge 8.5/9.0$ score, max 5 cycles, anti-cliché audit). |
+| **`sdd-manager.sh`** | `bash BRIDS-Engine/scripts/sdd-manager.sh <cmd>` | **Spec-Driven Development & Quality Optimizer con Doble HITL:** Gestiona specs y bucle Creador vs Revisor ($\ge 8.5/9.0$, máx 5 ciclos). Guardrails humanos: HITL-1 (`approve-spec`, `refine-spec`) e HITL-2 (`review-deliverable`, `approve-deliverable`, `refine-deliverable`). |
 | **`create-social-carousel.sh`** | `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img] [prenda] [ref]` | **4-Slide Social Carousel Pipeline:** Generates 4:5 carousels (Hero, Line-Art Figurine, PAS Details, Conversion CTA) with dedicated Obsidian asset folders. |
 | **`create-social-post.sh`** | `bash BRIDS-Engine/scripts/create-social-post.sh <red> "<idea>" [tipo] [ref] [prenda]` | **Social Content Extractor & Generator:** Instantiates production-ready social media posts from the protected SOP with automatic `YYYY-MM-DD-redsocial-idea.md` naming. |
 | **`test-idempotency.sh`** | `bash BRIDS-Engine/tests/test-idempotency.sh` | **Automated Idempotency Test Suite:** Verifies deterministic behavior across task initialization, state transitions, context sync, note refinement, rollback, SDD lifecycle, and skill symlinks. |

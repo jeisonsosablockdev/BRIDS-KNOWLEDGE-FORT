@@ -304,9 +304,13 @@ Texto base inicial inmutable.
     if (fs.existsSync(sddWorkDir)) fs.rmSync(sddWorkDir, { recursive: true, force: true });
     if (fs.existsSync(sddDeliverable)) fs.unlinkSync(sddDeliverable);
 
-    // 1. Initial Spec Creation
+    // 1. Initial Spec Creation (Starts in spec_review with HITL-1 pending)
     execSync(`bash "${sddScript}" init "${testSddSlug}" "Estrategia Tokenización Test" "02 Strategy & Research" "business-consultant,founder-ghostwriter" "Real Estate Sponsors" "Levantamiento de $10M"`, { stdio: 'pipe' });
     assert(fs.existsSync(sddSpecJson), 'Spec JSON creado correctamente en 00 Inbox/Specs');
+
+    const initialSpecData = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(initialSpecData.status === 'spec_review', 'Estado inicial del spec es spec_review (esperando HITL-1)');
+    assert(initialSpecData.hitl_checkpoints.hitl_1_spec_approval.status === 'pending', 'Checkpoint HITL-1 está en estado pending');
 
     const specJsonHash1 = getHash(sddSpecJson);
     // 2. Double-init idempotency
@@ -314,25 +318,40 @@ Texto base inicial inmutable.
     const specJsonHash2 = getHash(sddSpecJson);
     assert(specJsonHash1 === specJsonHash2, 'Doble inicialización de spec es 100% idempotente y preserva el estado');
 
-    // 3. Spec Approval
-    execSync(`bash "${sddScript}" approve "${testSddSlug}"`, { stdio: 'pipe' });
-    const approvedData1 = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
-    assert(approvedData1.status === 'approved', 'Spec pasa a estado approved formalmente');
-
-    // 4. Double-approve idempotency
-    execSync(`bash "${sddScript}" approve "${testSddSlug}"`, { stdio: 'pipe' });
-    const approvedData2 = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
-    assert(approvedData2.status === 'approved', 'Doble aprobación es idempotente y no corrompe el flujo');
-
-    // 5. Audit & Evaluator Loop: Rejection of draft with AI clichés
+    // 3. HITL-1 Guard: Drafting/evaluating before spec approval MUST be blocked
     const orchestrator = require(path.join(SCRIPTS_DIR, 'sdd-orchestrator.js'));
+    let evalBlockedBeforeH1 = false;
+    try {
+      orchestrator.evaluateDraft(testSddSlug, 'Intento de borrador prematuro');
+    } catch (e) {
+      evalBlockedBeforeH1 = true;
+    }
+    assert(evalBlockedBeforeH1, 'Intentar evaluar un borrador sin aprobar el spec (HITL-1) es bloqueado');
+
+    // 4. HITL-1 Refinement with user feedback
+    execSync(`bash "${sddScript}" refine-spec "${testSddSlug}" "Añadir requerimiento de gobernanza Delaware"`, { stdio: 'pipe' });
+    const refinedSpecData = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(refinedSpecData.hitl_checkpoints.hitl_1_spec_approval.user_feedback.length > 0, 'Feedback de usuario registrado en el historial de HITL-1');
+
+    // 5. Spec Approval (HITL-1 Cleared)
+    execSync(`bash "${sddScript}" approve-spec "${testSddSlug}"`, { stdio: 'pipe' });
+    const approvedData1 = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(approvedData1.status === 'spec_approved', 'Spec pasa a estado spec_approved formalmente');
+    assert(approvedData1.hitl_checkpoints.hitl_1_spec_approval.status === 'approved', 'Checkpoint HITL-1 marcado como approved');
+
+    // 6. Double-approve idempotency
+    execSync(`bash "${sddScript}" approve-spec "${testSddSlug}"`, { stdio: 'pipe' });
+    const approvedData2 = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(approvedData2.status === 'spec_approved', 'Doble aprobación es idempotente y no corrompe el flujo');
+
+    // 7. Audit & Evaluator Loop: Rejection of draft with AI clichés
     const flawedDraft = 'En resumen, en el vertiginoso mundo inmobiliario, BRIDS juega un papel crucial a la vanguardia. En conclusión es importante destacar el cambio de paradigma.';
     const auditFlawed = orchestrator.evaluateDraft(testSddSlug, flawedDraft, 1);
     assert(!auditFlawed.passed, 'Borrador con muletillas robóticas es rechazado con nota < 8.5');
     assert(auditFlawed.report.banned_phrases_detected.length > 0, 'El revisor detecta y lista las muletillas de IA encontradas');
     assert(!fs.existsSync(sddDeliverable), 'El entregable rechazado NO es promovido a la carpeta de producción en el vault');
 
-    // 6. Audit & Evaluator Loop: Passing high-quality draft (>= 8.5)
+    // 8. Audit & Evaluator Loop: Passing high-quality draft (>= 8.5) -> Transitions to HITL-2 (deliverable_review)
     const pristineDraft = `## Sindicación Inmobiliaria en Solana con BRIDS
 
 Eliminamos la intermediación arcaica en sindicaciones inmobiliarias mediante contratos inteligentes auditables on-chain sobre Solana y el estándar Metaplex Core con plugins de Freeze y Recovery.
@@ -347,12 +366,30 @@ Los participantes se verifican mediante Stripe Identity para cumplir estrictamen
 Agenda una sesión técnica con el equipo de estructuración en sponsors@brids.io para analizar tu cartera de activos.`;
     const auditPassed = orchestrator.evaluateDraft(testSddSlug, pristineDraft, 2);
     assert(auditPassed.passed, 'Borrador de alta calidad obtiene calificación >= 8.5');
-    assert(fs.existsSync(sddDeliverable), 'Entregable aprobado es promovido automáticamente a BRIDS-Brain/02 Strategy & Research');
 
+    const h2PendingData = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(h2PendingData.status === 'deliverable_review', 'Estado pasa a deliverable_review tras aprobar el revisor');
+    assert(!fs.existsSync(sddDeliverable), 'HITL-2 GUARDRAIL: El entregable aprobado por el revisor NO es promovido al vault hasta aprobación humana');
+
+    // 9. HITL-2 Refinement with user feedback
+    execSync(`bash "${sddScript}" refine-deliverable "${testSddSlug}" "Añadir cláusula de liquidez institucional"`, { stdio: 'pipe' });
+    const refinedDeliverableData = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(refinedDeliverableData.hitl_checkpoints.hitl_2_deliverable_approval.user_feedback.length > 0, 'Feedback de HITL-2 registrado correctamente');
+
+    // 10. HITL-2 Final User Approval -> Vault Promotion
+    execSync(`bash "${sddScript}" approve-deliverable "${testSddSlug}"`, { stdio: 'pipe' });
+    assert(fs.existsSync(sddDeliverable), 'Entregable aprobado en HITL-2 es promovido al vault canónico');
+
+    const finalCompletedData = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(finalCompletedData.status === 'completed', 'Estado del spec pasa a completed tras aprobación HITL-2');
+    assert(finalCompletedData.hitl_checkpoints.hitl_2_deliverable_approval.status === 'approved', 'Checkpoint HITL-2 marcado como approved');
+
+    // 11. Double-approve deliverable idempotency
+    execSync(`bash "${sddScript}" approve-deliverable "${testSddSlug}"`, { stdio: 'pipe' });
     const deliverableContent = fs.readFileSync(sddDeliverable, 'utf8');
-    assert(deliverableContent.includes('sdd-approved') && deliverableContent.includes('quality_score:'), 'El entregable final incluye metadatos de calidad y frontmatter estandarizado');
+    assert(deliverableContent.includes('sdd-approved') && deliverableContent.includes('hitl-validated'), 'El entregable final incluye metadatos de calidad y validación HITL');
 
-    // 7. Safety Guard: 5-Cycle Limit Freezes Document for Human Arbitration
+    // 12. Safety Guard: 5-Cycle Limit Freezes Document for Human Arbitration
     const testFreezeSlug = 'test-sdd-freeze';
     const freezeSpecJson = path.join(VAULT_INBOX, 'Specs', `${testFreezeSlug}.spec.json`);
     const freezeSpecMd = path.join(VAULT_INBOX, 'Specs', `${testFreezeSlug}.spec.md`);
@@ -360,7 +397,7 @@ Agenda una sesión técnica con el equipo de estructuración en sponsors@brids.i
     const freezeDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Strategy & Research', `${testFreezeSlug}.md`);
 
     execSync(`bash "${sddScript}" init "${testFreezeSlug}" "Freeze Test" "02 Strategy & Research" "business-consultant" "Sponsors" "Goal"`, { stdio: 'pipe' });
-    execSync(`bash "${sddScript}" approve "${testFreezeSlug}"`, { stdio: 'pipe' });
+    execSync(`bash "${sddScript}" approve-spec "${testFreezeSlug}"`, { stdio: 'pipe' });
 
     let freezeResult;
     for (let c = 1; c <= 5; c++) {

@@ -1,12 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "SDDCriticismReport",
-  "description": "Rúbrica y reporte formal de evaluación emitido por el Agente Revisor en el ciclo Evaluador-Optimizador de BRIDS.",
+  "description": "Rúbrica y reporte formal de evaluación emitido por el Agente Revisor en el ciclo Evaluador-Optimizador de BRIDS con doble guardrail HITL.",
   "spec_id": "SPEC-{{SLUG}}",
   "cycle": 1,
   "max_cycles": 5,
   "timestamp": "2026-09-11T12:00:00Z",
   "reviewer_agent": "sdd-reviewer",
+  "hitl_stage": "DRAFT_OPTIMIZATION",
   "target_file": "BRIDS-Brain/{{CATEGORY_FOLDER}}/{{FILENAME}}.md",
   "scoring_dimensions": {
     "1_goal_and_icp": {
@@ -47,10 +48,11 @@
   "scale_max": 9.0,
   "passing_threshold": 8.5,
   "passed": true,
-  "status": "approved",
+  "status": "ready_for_hitl_2",
   "banned_phrases_detected": [],
   "actionable_feedback": [
     "Mantener la concisión de los argumentos de tracción y unit economics."
   ],
+  "user_adjustments_applied": [],
   "remediation_directives": []
 }

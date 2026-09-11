@@ -6,9 +6,18 @@ target_file: "BRIDS-Brain/{{CATEGORY_FOLDER}}/{{FILENAME}}.md"
 subagents_involved:
   - "{{PRIMARY_AGENT}}"
   - "{{SECONDARY_AGENT}}"
-status: proposed # proposed | approved | in_progress | completed | rejected
+status: spec_review # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration
 created_at: "{{DATE}}"
 updated_at: "{{DATE}}"
+hitl_checkpoints:
+  hitl_1_spec_approval:
+    status: pending # pending | refining | approved
+    approved_at: null
+    user_feedback: []
+  hitl_2_deliverable_approval:
+    status: pending # pending | refining | approved
+    approved_at: null
+    user_feedback: []
 evaluation:
   target_score: 8.5
   scale_max: 9.0
@@ -23,6 +32,7 @@ evaluation:
 > [!NOTE]
 > **Resumen Ejecutivo:** {{EXECUTIVE_SUMMARY}}
 > Este artefacto define de manera formal e inmutable los requisitos, el destino canónico en `BRIDS-Brain/`, los subagentes responsables y las restricciones de calidad para el entregable antes de iniciar cualquier redacción o desarrollo.
+> Cuenta con dos puntos de parada humana obligatorios: **HITL-1 (Aprobación del Spec)** y **HITL-2 (Aprobación del Entregable)**.
 
 ---
 
@@ -30,7 +40,7 @@ evaluation:
 - **Carpeta de Destino:** `BRIDS-Brain/{{CATEGORY_FOLDER}}/`
 - **Archivo de Salida:** `BRIDS-Brain/{{CATEGORY_FOLDER}}/{{FILENAME}}.md`
 - **Taxonomía:** Cumple con la estructura numerada estándar de `BRIDS-Brain/` (00 a 10).
-- **Regla de Promoción:** El documento final solo se escribirá en esta ruta cuando el Agente Revisor otorgue una calificación $\ge 8.5 / 9.0$.
+- **Regla de Promoción:** El documento final solo se escribirá en esta ruta cuando el Agente Revisor otorgue una calificación $\ge 8.5 / 9.0$ **Y** el usuario otorgue su confirmación formal en el guardrail **HITL-2** (`approve-deliverable`).
 
 ---
 
@@ -88,12 +98,12 @@ Estructura obligatoria del documento final:
 
 ---
 
-## 7. Pasos Atómicos de Ejecución (Checklist)
-- [ ] **STEP-01 (Spec Approval):** Aprobación del presente spec mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve {{SLUG}}`.
-- [ ] **STEP-02 (Initial Draft):** Generación del borrador inicial por `{{PRIMARY_AGENT}}` guardado en ciclo 1.
-- [ ] **STEP-03 (Review & Criticism Loop):** Evaluación de `sdd-reviewer` contra la rúbrica de 0 a 9.
-- [ ] **STEP-04 (Remediation & Refinement):** Subsanación iterativa de observaciones hasta alcanzar puntaje $\ge 8.5 / 9.0$ (máximo 5 ciclos).
-- [ ] **STEP-05 (Vault Promotion):** Promoción idempotente del texto final a `BRIDS-Brain/{{CATEGORY_FOLDER}}/{{FILENAME}}.md`.
+## 7. Pasos Atómicos de Ejecución (Checklist con Doble HITL)
+- [ ] **STEP-01 (HITL-1 Spec Review & Approval):** Inspección humana del spec (`sdd-manager.sh preview {{SLUG}}`), refinamiento opcional con `refine-spec` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-spec {{SLUG}}`.
+- [ ] **STEP-02 (Initial Draft Generation):** Redacción inicial del borrador por `{{PRIMARY_AGENT}}` respetando el outline y las anclas técnicas.
+- [ ] **STEP-03 (Evaluator-Optimizer Autonomous Loop):** Bucle Creador vs Revisor hasta calificar con nota $\ge 8.5 / 9.0$ y cero clichés (máximo 5 ciclos).
+- [ ] **STEP-04 (HITL-2 Deliverable Review & Approval):** Inspección humana del texto pulido (`sdd-manager.sh review-deliverable {{SLUG}}`), ajustes con `refine-deliverable` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-deliverable {{SLUG}}`.
+- [ ] **STEP-05 (Vault Integration):** Promoción atómica e idempotente del documento aceptado a `BRIDS-Brain/{{CATEGORY_FOLDER}}/{{FILENAME}}.md`.
 
 ---
 
@@ -104,4 +114,4 @@ Estructura obligatoria del documento final:
 | **2. Veracidad Técnica & Fuentes** | 2.5 pts | Exactitud en Solana, Metaplex Core y estructura legal Delaware SPV. Cero alucinaciones. |
 | **3. Voz Fundadora vs Tono Robot** | 2.0 pts | Convicción auténtica de founder Web3/PropTech; ausencia de prosa corporativa hueca. |
 | **4. Originalidad Léxica & Cero Clichés** | 2.0 pts | Cero frases prohibidas de IA y riqueza expresiva. Penalización severa por muletilla detectada. |
-| **TOTAL MÁXIMO** | **9.0 pts** | **Nota mínima requerida para publicación: $\ge 8.5 / 9.0$** |
+| **TOTAL MÁXIMO** | **9.0 pts** | **Nota mínima requerida para pasar a HITL-2: $\ge 8.5 / 9.0$** |

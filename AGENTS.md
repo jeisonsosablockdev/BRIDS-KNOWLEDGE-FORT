@@ -50,25 +50,27 @@ Co-Authored-By: OpenAI Codex <noreply@openai.com>
 - Skill activation instructions live in `BRIDS-Engine/docs/skills-activation.md`
 - For Windows, prefer `enable-project-skills.ps1` and `sync-brand-context.ps1`
 
-## Anti-Drift Task Execution Protocol (5 Steps)
+## Anti-Drift Task Execution Protocol (5 Steps con Doble Guardrail HITL)
 To prevent prompt/context drift and ensure consistent quality, every document or content generation task must follow this sequence:
-1. **SDD Spec & Context Gate (Mandatory Artifact):** Before drafting any deliverable, generate an explicit specification artifact using `bash BRIDS-Engine/scripts/sdd-manager.sh init <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"`. The spec MUST declare:
-   - Canonical vault destination in `BRIDS-Brain/` (00 to 10).
-   - Sub-agents assigned from the squad (`business-consultant`, `market-research-analyst`, `pitch-deck-architect`, `compliance-officer`, `b2b-sponsor-lead`, `founder-ghostwriter`).
-   - Core commercial intent, ICP, and zero-hallucination technical anchors (Solana, Metaplex Core Freeze/Recovery, Delaware SPV, Stripe Identity).
-   - Anti-robot banned clichés filter (strict ban on *"en resumen"*, *"es importante destacar"*, *"un papel crucial"*, etc.).
-2. **Spec Review & Approval:** Inspect the specification (`bash BRIDS-Engine/scripts/sdd-manager.sh preview <slug>`) and approve it (`bash BRIDS-Engine/scripts/sdd-manager.sh approve <slug>`). Never start writing blindly without an approved spec artifact.
-3. **Two-Agent Evaluator-Optimizer Loop (Creator vs Reviewer):**
-   - **Creator/Editor Sub-Agent:** Writes the initial draft and remediates critique feedback.
-   - **Reviewer Agent (`sdd-reviewer`):** Audits draft on a 0 to 9 scale across 4 dimensions:
+1. **Solicitud de Usuario & Propuesta SDD:** El usuario expone el requerimiento o idea comercial. Se genera un artefacto de especificación formal previo usando `bash BRIDS-Engine/scripts/sdd-manager.sh init <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"`. El spec queda en estado `spec_review` y declara obligatoriamente:
+   - Destino canónico en `BRIDS-Brain/` (00 a 10) y nombre de archivo.
+   - Sub-agentes asignados del squad (`business-consultant`, `market-research-analyst`, `pitch-deck-architect`, `compliance-officer`, `b2b-sponsor-lead`, `founder-ghostwriter`).
+   - Anclas técnicas verificables (Solana, Metaplex Core Freeze/Recovery, Delaware SPV, Stripe Identity) y filtro anti-clichés de IA.
+2. **Primer Guardrail HITL (Aprobación Humana del Spec):** Se presenta el objeto canónico del spec al usuario (`bash BRIDS-Engine/scripts/sdd-manager.sh preview <slug>`).
+   - Si el usuario solicita ajustes: se corre el optimizador (`bash BRIDS-Engine/scripts/sdd-manager.sh refine-spec <slug> "<observaciones>"`).
+   - **Bloqueo Mandatorio:** Ningún sub-agente comienza a redactar hasta que el usuario apruebe formalmente con `bash BRIDS-Engine/scripts/sdd-manager.sh approve-spec <slug>`.
+3. **Bucle Evaluador-Optimizador Autónomo (Creador vs Revisor):** Redacción del borrador con los sub-agentes asignados respetando el spec aprobado.
+   - **Agente Revisor (`sdd-reviewer`):** Audita en escala de 0 a 9 puntos en 4 dimensiones:
      - 1. Cumplimiento del Objetivo & ICP (2.5 pts)
      - 2. Veracidad Técnica & Fuentes (2.5 pts)
      - 3. Voz Fundadora vs Tono Robot (2.0 pts)
      - 4. Originalidad Léxica & Cero Clichés (2.0 pts)
-   - **Passing Threshold:** Calificación mínima requerida $\ge 8.5 / 9.0$.
-   - **Safety Cap:** Máximo 5 ciclos iterativos. Si no alcanza 8.5 en el ciclo 5, el entregable se congela para arbitraje humano (`frozen_for_arbitration`).
-4. **Idempotent Promotion & Safe Refinement:** Once $\ge 8.5$ is achieved, the engine promotes the deliverable into its canonical folder in `BRIDS-Brain/` with quality metadata, frontmatter, and changelog. Subsequent edits must use `bash BRIDS-Engine/scripts/refine-note.sh`.
-5. **Measurement & Closure:** Register deliverables, track events and KPIs, and close the session in `task-manager.sh update`.
+   - **Condición de Calidad:** Debe superar una calificación $\ge 8.5 / 9.0$ (máximo 5 ciclos iterativos). Si no alcanza 8.5 en el ciclo 5, se congela para arbitraje (`frozen_for_arbitration`). Al superar 8.5, el texto pasa a estado `deliverable_review` (HITL-2).
+4. **Segundo Guardrail HITL (Aprobación del Entregable & Integración en Vault):** Se presenta el texto pulido al usuario (`bash BRIDS-Engine/scripts/sdd-manager.sh review-deliverable <slug>`).
+   - Si el usuario solicita cambios: se re-ejecuta el bucle (`bash BRIDS-Engine/scripts/sdd-manager.sh refine-deliverable <slug> "<observaciones>"`).
+   - **Bloqueo Mandatorio:** El archivo **NO se escribe en la carpeta de producción de `BRIDS-Brain/`** hasta la confirmación formal del usuario con `bash BRIDS-Engine/scripts/sdd-manager.sh approve-deliverable <slug>`.
+   - Al aprobarse, el motor promueve el entregable de forma atómica e idempotente con metadatos de calidad, tags `sdd-approved`, `hitl-validated` y changelog.
+5. **Medición & Cierre:** Registro del entregable, asignación de eventos y KPIs, y cierre en `task-manager.sh update`.
 
 ## Vault Conventions
 - Use existing category folders under `BRIDS-Brain/` (numbered 00 to 10)
