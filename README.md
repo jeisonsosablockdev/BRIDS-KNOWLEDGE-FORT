@@ -10,13 +10,13 @@ This project is based on the idea and skill library from [coreyhaines31/marketin
 
 This workspace adds a project structure around that idea:
 
-- `MarketingAgentCore/`
+- `BRIDS-Engine/`
   - imported upstream skills
   - local skill adaptations
   - persistent brand context
   - project docs
   - cross-platform skill activation scripts for Codex
-- `BRIDS Brain/`
+- `BRIDS-Brain/`
   - Obsidian vault
   - folders for each major marketing content category
   - final Markdown deliverables
@@ -28,12 +28,12 @@ This workspace adds a project structure around that idea:
 BRIDS KNOWLEDGE FORT/
 ├── AGENTS.md
 ├── README.md
-├── MarketingAgentCore/
+├── BRIDS-Engine/
 │   ├── context/
 │   ├── docs/
 │   ├── scripts/
 │   └── skills/
-└── BRIDS Brain/
+└── BRIDS-Brain/
     ├── 00 Inbox/
     ├── 01 Brand Context/
     ├── 02 Strategy & Research/
@@ -51,11 +51,11 @@ BRIDS KNOWLEDGE FORT/
 
 The persistent context file lives at:
 
-- `MarketingAgentCore/context/product-marketing-context.md`
+- `BRIDS-Engine/context/product-marketing-context.md`
 
 It is also exposed inside the vault through:
 
-- `MarketingAgentStudio/01 Brand Context/product-marketing-context.md`
+- `BRIDS-Brain/01 Brand Context/product-marketing-context.md`
 
 Use that file to keep product, audience, positioning, proof points, tone, and goals available for all future work.
 
@@ -64,16 +64,16 @@ Use that file to keep product, audience, positioning, proof points, tone, and go
 1. Fill or refine the brand context file.
 2. Choose the marketing task or skill family you want to work on.
 3. Use imported skills as reference and adapt local skills only when needed.
-4. Save final outputs as Markdown in the matching folder inside `MarketingAgentStudio/`.
+4. Save final outputs as Markdown in the matching folder inside `BRIDS-Brain/`.
 5. Review and iterate inside Obsidian without mixing business content with core logic.
-6. Follow `MarketingAgentCore/docs/document-organization.md` when a new folder or document structure is needed.
-7. If you want Codex to use the project-local skills, run `bash MarketingAgentCore/scripts/enable-project-skills.sh`.
+6. Follow `BRIDS-Engine/docs/document-organization.md` when a new folder or document structure is needed.
+7. If you want Codex to use the project-local skills, run `bash BRIDS-Engine/scripts/enable-project-skills.sh`.
 8. Open Obsidian, enable `Agent Client` if it is not already active, and use Codex as the default agent inside the vault.
 
 On Windows PowerShell, use:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\\MarketingAgentCore\\scripts\\enable-project-skills.ps1
+powershell -ExecutionPolicy Bypass -File .\\BRIDS-Engine\\scripts\\enable-project-skills.ps1
 ```
 
 ## Folder Purpose
@@ -99,7 +99,7 @@ It is preconfigured for Codex with:
 - adapter path: `/Users/jaymusicmachine/.nvm/versions/node/v24.10.0/bin/codex-acp`
 - Node path: `/Users/jaymusicmachine/.nvm/versions/node/v24.10.0/bin/node`
 - authentication mode: Codex CLI login
-- default chat export folder: `MarketingAgentStudio/00 Inbox/Agent Client Chats/`
+- default chat export folder: `BRIDS-Brain/00 Inbox/Agent Client Chats/`
 
 To rebuild the plugin from source:
 
@@ -110,34 +110,34 @@ npm run build
 
 ## Project Scripts & Automation
 
-This project includes a suite of utility and automation scripts located in `MarketingAgentCore/scripts/`:
+This project includes a suite of utility and automation scripts located in `BRIDS-Engine/scripts/`:
 
 | Script | Command | Purpose |
 | :--- | :--- | :--- |
-| **`create-social-carousel.sh`** | `bash MarketingAgentCore/scripts/create-social-carousel.sh "<idea>" [img] [prenda] [ref]` | **4-Slide Social Carousel Pipeline:** Generates 4:5 carousels (Hero, Line-Art Figurine, PAS Details, Conversion CTA) with dedicated Obsidian asset folders. |
-| **`create-social-post.sh`** | `bash MarketingAgentCore/scripts/create-social-post.sh <red> "<idea>" [tipo] [ref] [prenda]` | **Social Content Extractor & Generator:** Instantiates production-ready social media posts from the protected SOP with automatic `YYYY-MM-DD-redsocial-idea.md` naming. |
-| **`test-idempotency.sh`** | `bash MarketingAgentCore/tests/test-idempotency.sh` | **Automated Idempotency Test Suite:** Verifies deterministic behavior across task initialization, state transitions, context sync, note refinement, rollback, and skill symlinks. |
-| **`enforce-compliance.sh`** | `bash MarketingAgentCore/scripts/enforce-compliance.sh` | **Master Anti-Drift Compliance Suite:** Runs end-to-end audit of Brand Context Gate, Vault Linter, Task Sessions, and Skills. |
-| **`validate-context.sh`** | `bash MarketingAgentCore/scripts/validate-context.sh` | Audits `product-marketing-context.md` to ensure value proposition, ICP, and pain points are ready before drafting. |
-| **`validate-vault.sh`** | `bash MarketingAgentCore/scripts/validate-vault.sh` | Lints `BRIDS Brain/` deliverables for kebab-case naming, valid taxonomy folders (00-10), YAML properties, and changelogs. |
-| **`task-manager.sh`** | `bash MarketingAgentCore/scripts/task-manager.sh <cmd>` | **Full Task Lifecycle Manager:** `init`, `list`, `add`, `update`, `show`, and `close` task sessions with dependency tracking and progress dashboards. |
-| **`refine-note.sh`** | `bash MarketingAgentCore/scripts/refine-note.sh <cmd>` | **Non-Destructive Content Refinement:** `inspect`, `backup`, `refine`, `branch`, and `rollback` notes with safety snapshots, version bumping, and changelog tracking. |
-| **`check-obsidian-api.sh`** | `bash MarketingAgentCore/scripts/check-obsidian-api.sh` | Healthcheck and smoketest for **Obsidian Local REST API** (HTTPS port `27124`). Tests Bearer token authentication and queries vault status. |
-| **`init-task.sh`** | `bash MarketingAgentCore/scripts/init-task.sh <session-name> "<goal>" "<icp>"` | Initializes a structured task session JSON inside `BRIDS Brain/00 Inbox/<session-name>.json` using `task-tracking-template.json`. |
-| **`sync-brand-context.sh`** | `bash MarketingAgentCore/scripts/sync-brand-context.sh` | Syncs `product-marketing-context.md` from `MarketingAgentCore/context/` directly into `BRIDS Brain/01 Brand Context/`. |
-| **`validate-skills.sh`** | `bash MarketingAgentCore/scripts/validate-skills.sh` | Audits and validates marketing skills against the formal Agent Skills Specification (YAML frontmatter, naming, trigger phrases, <500 lines). |
+| **`create-social-carousel.sh`** | `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img] [prenda] [ref]` | **4-Slide Social Carousel Pipeline:** Generates 4:5 carousels (Hero, Line-Art Figurine, PAS Details, Conversion CTA) with dedicated Obsidian asset folders. |
+| **`create-social-post.sh`** | `bash BRIDS-Engine/scripts/create-social-post.sh <red> "<idea>" [tipo] [ref] [prenda]` | **Social Content Extractor & Generator:** Instantiates production-ready social media posts from the protected SOP with automatic `YYYY-MM-DD-redsocial-idea.md` naming. |
+| **`test-idempotency.sh`** | `bash BRIDS-Engine/tests/test-idempotency.sh` | **Automated Idempotency Test Suite:** Verifies deterministic behavior across task initialization, state transitions, context sync, note refinement, rollback, and skill symlinks. |
+| **`enforce-compliance.sh`** | `bash BRIDS-Engine/scripts/enforce-compliance.sh` | **Master Anti-Drift Compliance Suite:** Runs end-to-end audit of Brand Context Gate, Vault Linter, Task Sessions, and Skills. |
+| **`validate-context.sh`** | `bash BRIDS-Engine/scripts/validate-context.sh` | Audits `product-marketing-context.md` to ensure value proposition, ICP, and pain points are ready before drafting. |
+| **`validate-vault.sh`** | `bash BRIDS-Engine/scripts/validate-vault.sh` | Lints `BRIDS-Brain/` deliverables for kebab-case naming, valid taxonomy folders (00-10), YAML properties, and changelogs. |
+| **`task-manager.sh`** | `bash BRIDS-Engine/scripts/task-manager.sh <cmd>` | **Full Task Lifecycle Manager:** `init`, `list`, `add`, `update`, `show`, and `close` task sessions with dependency tracking and progress dashboards. |
+| **`refine-note.sh`** | `bash BRIDS-Engine/scripts/refine-note.sh <cmd>` | **Non-Destructive Content Refinement:** `inspect`, `backup`, `refine`, `branch`, and `rollback` notes with safety snapshots, version bumping, and changelog tracking. |
+| **`check-obsidian-api.sh`** | `bash BRIDS-Engine/scripts/check-obsidian-api.sh` | Healthcheck and smoketest for **Obsidian Local REST API** (HTTPS port `27124`). Tests Bearer token authentication and queries vault status. |
+| **`init-task.sh`** | `bash BRIDS-Engine/scripts/init-task.sh <session-name> "<goal>" "<icp>"` | Initializes a structured task session JSON inside `BRIDS-Brain/00 Inbox/<session-name>.json` using `task-tracking-template.json`. |
+| **`sync-brand-context.sh`** | `bash BRIDS-Engine/scripts/sync-brand-context.sh` | Syncs `product-marketing-context.md` from `BRIDS-Engine/context/` directly into `BRIDS-Brain/01 Brand Context/`. |
+| **`validate-skills.sh`** | `bash BRIDS-Engine/scripts/validate-skills.sh` | Audits and validates marketing skills against the formal Agent Skills Specification (YAML frontmatter, naming, trigger phrases, <500 lines). |
 
 For Windows PowerShell users:
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\create-social-carousel.ps1 <args>`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\create-social-post.ps1 <args>`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\tests\test-idempotency.ps1`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\enforce-compliance.ps1`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\validate-context.ps1`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\validate-vault.ps1`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\task-manager.ps1 <cmd>`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\refine-note.ps1 <cmd>`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\enable-project-skills.ps1`
-- `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\sync-brand-context.ps1`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\create-social-carousel.ps1 <args>`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\create-social-post.ps1 <args>`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\tests\test-idempotency.ps1`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\enforce-compliance.ps1`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\validate-context.ps1`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\validate-vault.ps1`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\task-manager.ps1 <cmd>`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\refine-note.ps1 <cmd>`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\enable-project-skills.ps1`
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\sync-brand-context.ps1`
 
 ---
 
@@ -156,7 +156,7 @@ flowchart LR
 1. **Intent Capture:** Captures the raw prompt, measurable business goal, target ICP, and constraints while verifying `product-marketing-context.md`.
 2. **Atomic Task Decomposition:** Breaks down the high-level objective into sequential, manageable tasks (`TASK-001`, `TASK-002`, etc.) with explicit `depends_on` relations.
 3. **Workflow Chaining:** Maps each atomic task to one of the 8 specialized workflows and selects relevant skills from the 36 available modules.
-4. **Execution & Vault Save:** Drafts structured Markdown deliverables using `note-template.md` (Obsidian Properties, `> [!NOTE]` callouts, and wikilinks) and writes to `BRIDS Brain/` via Local REST API or filesystem.
+4. **Execution & Vault Save:** Drafts structured Markdown deliverables using `note-template.md` (Obsidian Properties, `> [!NOTE]` callouts, and wikilinks) and writes to `BRIDS-Brain/` via Local REST API or filesystem.
 5. **Measurement & Closure:** Assigns tracking events and KPIs to measure impact, updating `status: completed` in the tracking JSON.
 
 ---
@@ -178,9 +178,9 @@ flowchart LR
 
 ## Working Rules
 
-- Keep the logic, scripts, templates, and adapted skills in `MarketingAgentCore/`
-- Keep final readable text deliverables and persistent knowledge in `BRIDS Brain/`
-- Use `MarketingAgentCore/templates/task-tracking-template.json` to monitor multi-step campaigns and dependencies
-- Use `MarketingAgentCore/templates/note-template.md` for consistent Obsidian Markdown formatting
+- Keep the logic, scripts, templates, and adapted skills in `BRIDS-Engine/`
+- Keep final readable text deliverables and persistent knowledge in `BRIDS-Brain/`
+- Use `BRIDS-Engine/templates/task-tracking-template.json` to monitor multi-step campaigns and dependencies
+- Use `BRIDS-Engine/templates/note-template.md` for consistent Obsidian Markdown formatting
 - Use the PowerShell scripts on Windows when symlinks or Bash are inconvenient
 
