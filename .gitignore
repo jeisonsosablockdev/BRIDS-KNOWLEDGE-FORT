@@ -1,0 +1,8 @@
+.DS_Store
+*.tmp
+*.log
+node_modules/
+obsidian-agent-client/node_modules/
+obsidian-agent-client/dist/
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json

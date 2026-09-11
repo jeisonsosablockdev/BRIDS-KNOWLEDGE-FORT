@@ -1,0 +1,235 @@
+{
+  "main": {
+    "id": "72264a5c785102ee",
+    "type": "split",
+    "children": [
+      {
+        "id": "b0f5c0f0c6b0b917",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fe11c1869dd7657e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "01 Brand Context/Positioning.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Positioning"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ccfe3b95423a7a1a",
+    "type": "split",
+    "children": [
+      {
+        "id": "3685f7de0cba1b71",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d64c1e421f7f0c6b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "10c4369dcc408ed5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "38f74390215a6965",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 390.3203125
+  },
+  "right": {
+    "id": "47783bde1fb75199",
+    "type": "split",
+    "children": [
+      {
+        "id": "2a84c1ab05d03cc5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "984519e7ec5094bc",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes"
+            }
+          },
+          {
+            "id": "85636036f124e106",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes"
+            }
+          },
+          {
+            "id": "fbe70d28137340e0",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "237bbe5e05986480",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "7d77e2ee0e5164ca",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "07 Paid, Social & Community/Social Content/Calendario Mensual de Publicaciones Instagram.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "fe11c1869dd7657e",
+  "lastOpenFiles": [
+    "01 Brand Context/index.md",
+    "01 Brand Context/ICP and personas.md",
+    "01 Brand Context/Canales Oficiales y Redes Sociales.md",
+    "01 Brand Context/Brand Visual Style Guide.md",
+    "01 Brand Context/product-marketing-context.md",
+    "00 Inbox/BRIDS.io - Definición Estratégica de Negocio (Lean Canvas).docx",
+    "00 Inbox/BRIDS.io - Executive One-Pager V2.docx",
+    "00 Inbox/BRIDS.io - Términos y Condiciones de Uso V3.docx",
+    "01 Brand Context/Tone and Voice.md",
+    "01 Brand Context/Product Description.md",
+    "01 Brand Context/Positioning.md",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/04-cad-blueprint-tecnico.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/02-figurin-lineas-tecnico.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/06-conversion-cta-violeta.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/04-conversion-cta.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/03-plano-detalle-pas.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/03-textura-macro-jacquard.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/02-maniqui-coleccion-knot-of-time.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/01-portada-hero-modelo.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/cad_blueprint.png",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/lineart_figure.png",
+    "07 Paid, Social & Community/Social Content/2026-08-16-instagram-carrusel-hanbok-moderno-knot-of-time.md",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/generation-prompts.json",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time",
+    "00 Inbox/hanbok-moderno-knot-of-time.json",
+    "07 Paid, Social & Community/Social Content/optimizacion-bio-instagram.md",
+    "07 Paid, Social & Community/Social Content/Calendario Mensual de Publicaciones Instagram.md",
+    "07 Paid, Social & Community/Social Content/2026-08-14-instagram-asmr-taller-bogota-corte-tijera.md",
+    "07 Paid, Social & Community/Social Content/2026-08-09-instagram-carrusel-capa-mago-abrigo-bogota.md",
+    "07 Paid, Social & Community/Social Content/2026-08-08-instagram-capa-akatsuki-confeccion.md",
+    "07 Paid, Social & Community/Social Content/2026-08-08-instagram-asmr-sonido-de-la-tijera-y-corte-de-tela-pesada-de-autor.md",
+    "02 Strategy & Research/Content Strategy/Master Content Strategy.md",
+    "07 Paid, Social & Community/Social Content/Parrilla de Publicaciones Instagram 15 Dias.md",
+    "02 Strategy & Research/Marketing Ideas/Ideas de Contenido por Tipo de Publicacion.md",
+    "00 Inbox/actualizaci-n-de-lnk-bio-oficial-de-instagram.json",
+    "00 Inbox/Archive/optimizacion-bio-instagram.md.2026-08-09T22-36-28-917Z.bak.md",
+    "00 Inbox/optimizaci-n-de-biograf-a-y-perfil-de-instagram.json",
+    "00 Inbox/Archive/index.md.2026-08-09T22-16-58-558Z.bak.md",
+    "00 Inbox/Archive/product-marketing-context.md.2026-08-09T22-16-47-165Z.bak.md",
+    "00 Inbox/registro-de-canales-digitales-y-acceso-a-redes-sociales.json",
+    "07 Paid, Social & Community/Social Content/2026-08-10-instagram-carrusel-hanbok-reinterpretado-concierto-bts.md",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-13-carrusel-hanbok-reinterpretado-concierto-bts/generation-prompts.json",
+    "07 Paid, Social & Community/Social Content/2026-08-09-instagram-carrusel-test-hakama-unit.md",
+    "07 Paid, Social & Community/Social Content/Assets/2026-08-09-carrusel-test-hakama-unit/README-ASSETS.md",
+    "00 Inbox/Archive/idem-test-note.md.2026-08-09T18-26-50-388Z.bak.md"
+  ]
+}
