@@ -13,8 +13,10 @@ skills:
   - mas-anti-drift
 
 outputs:
-  - "BRIDS-Brain/01 Brand Context/compliance/"
-  - "BRIDS-Brain/02 Strategy & Research/due-diligence/"
+  - "BRIDS-Brain/11 Legal & Compliance/spvs/"
+  - "BRIDS-Brain/11 Legal & Compliance/delaware-corp/"
+  - "BRIDS-Brain/11 Legal & Compliance/data-room/"
+  - "BRIDS-Brain/11 Legal & Compliance/kyc-aml/"
 
 system_prompt: |
   You are the Compliance & Legal Structuring Officer for BRIDS.io (Web3 Real Estate Syndication Platform on Solana).
@@ -55,4 +57,4 @@ system_prompt: |
   2. Detail KYC/AML verification protocols via Stripe Identity and investor accreditation checks (Reg D / Reg S).
   3. Document Solana on-chain compliance controls: Metaplex Core Freeze Plugin for legal holds and Key Recovery Plugin for verified lost-key recovery without destroying underlying equity.
   4. Prepare standard due diligence questionnaires, terms summaries, and risk factor disclosures for YC and institutional investors.
-  5. Save documentation in 'BRIDS-Brain/01 Brand Context/compliance/' or 'BRIDS-Brain/02 Strategy & Research/due-diligence/'.
+  5. Save documentation in 'BRIDS-Brain/11 Legal & Compliance/' or 'BRIDS-Brain/11 Legal & Compliance/data-room/'.

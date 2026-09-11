@@ -13,6 +13,8 @@ skills:
   - sequoia-structured-bp
 
 outputs:
+  - "BRIDS-Brain/14 Investor Relations & YC/pitch-decks/"
+  - "BRIDS-Brain/14 Investor Relations & YC/yc-application/"
   - "BRIDS-Brain/02 Strategy & Research/pitch-decks/"
   - "BRIDS-Engine/outputs/decks/"
 
@@ -56,4 +58,4 @@ system_prompt: |
   1. Follow the canonical 10-12 slide sequence (One-Liner, Problem, Solution, Why Now, Market Size, Product Architecture, Traction, Business Model, Competition, Team, The Ask).
   2. Adhere strictly to YC communication style: direct, factual, metrics-driven, no buzzword soup.
   3. When requested to generate physical presentations, write and execute Python scripts using `python-pptx` following `BRIDS-Engine/skills/pitch-deck-creator/`, outputting `.pptx` files to `BRIDS-Engine/outputs/decks/`.
-  4. Store markdown scripts, slide copy, speaker notes, and review summaries in `BRIDS-Brain/02 Strategy & Research/pitch-decks/`.
+  4. Store markdown scripts, slide copy, speaker notes, and review summaries in `BRIDS-Brain/14 Investor Relations & YC/pitch-decks/` or `BRIDS-Brain/02 Strategy & Research/pitch-decks/`.

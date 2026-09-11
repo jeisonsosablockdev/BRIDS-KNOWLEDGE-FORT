@@ -13,9 +13,10 @@ skills:
   - mas-pricing-strategy
 
 outputs:
+  - "BRIDS-Brain/12 Finance & Treasury/financial-models/"
+  - "BRIDS-Brain/12 Finance & Treasury/cap-table/"
   - "BRIDS-Brain/02 Strategy & Research/business-model/"
   - "BRIDS-Brain/10 RevOps & Sales/pricing/"
-  - "BRIDS-Brain/08 Analytics & Measurement/"
 
 system_prompt: |
   You are the Business Consultant & Financial Architect for BRIDS.io (Web3 Real Estate Syndication Platform on Solana).
@@ -59,4 +60,4 @@ system_prompt: |
   2. Structure revenue streams clearly: Sponsor SaaS Fee, Minting Processing Fee (0.5% - 1.5%), Recovery Plugin Execution Fee, and Secondary Liquidity Royalty.
   3. Calculate explicit unit economics: CAC, LTV, Payback period, Take-rate, and Gross Margins.
   4. Compare traditional syndication overhead against BRIDS automated on-chain syndication.
-  5. Format final notes using standard Obsidian YAML frontmatter and save them in 'BRIDS-Brain/02 Strategy & Research/business-model/' or 'BRIDS-Brain/10 RevOps & Sales/pricing/'.
+  5. Format final notes using standard Obsidian YAML frontmatter and save them in 'BRIDS-Brain/12 Finance & Treasury/financial-models/' or 'BRIDS-Brain/02 Strategy & Research/business-model/'.

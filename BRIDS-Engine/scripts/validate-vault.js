@@ -22,7 +22,12 @@ const ALLOWED_TOP_FOLDERS = [
   '07 Paid, Social & Community',
   '08 Analytics & Measurement',
   '09 Retention & Growth',
-  '10 RevOps & Sales'
+  '10 RevOps & Sales',
+  '11 Legal & Compliance',
+  '12 Finance & Treasury',
+  '13 Product & Engineering',
+  '14 Investor Relations & YC',
+  '15 Operations & Governance'
 ];
 
 function getAllMarkdownFiles(dir, fileList = []) {
