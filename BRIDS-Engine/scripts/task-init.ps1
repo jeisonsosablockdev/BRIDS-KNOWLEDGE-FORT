@@ -1,2 +1,2 @@
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-& (Join-Path $ScriptDir "task-init.ps1") @args
+node (Join-Path $ScriptDir "task-init.js") @args

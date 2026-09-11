@@ -7,6 +7,7 @@
 ## File-Scoped Commands
 | Task | Command |
 |------|---------|
+| Atomic Task Init & SDD Engine | `bash BRIDS-Engine/scripts/task-init.sh <slug> [titulo] [target-folder] [subagents] [icp] [goal]` |
 | Spec-Driven Development (SDD) | `bash BRIDS-Engine/scripts/sdd-manager.sh <init|preview|approve|evaluate|status|list>` |
 | Context-Aware Asset Generator | `bash BRIDS-Engine/scripts/generate-publication-assets.sh <nota|slug> [--input-image img]` |
 | Sync Master Content Grid | `bash BRIDS-Engine/scripts/sync-content-grid.sh [audit|sync|update]` |
@@ -52,7 +53,7 @@ Co-Authored-By: OpenAI Codex <noreply@openai.com>
 
 ## Anti-Drift Task Execution Protocol (5 Steps con Doble Guardrail HITL)
 To prevent prompt/context drift and ensure consistent quality, every document or content generation task must follow this sequence:
-1. **Solicitud de Usuario & Propuesta SDD:** El usuario expone el requerimiento o idea comercial. Se genera un artefacto de especificación formal previo usando `bash BRIDS-Engine/scripts/sdd-manager.sh init <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"`. El spec queda en estado `spec_review` y declara obligatoriamente:
+1. **Solicitud de Usuario & Propuesta SDD:** El usuario expone el requerimiento o idea comercial. Se genera un artefacto de especificación formal previo usando `bash BRIDS-Engine/scripts/task-init.sh <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"` (o `sdd-manager.sh init`). El spec queda en estado `spec_review` y declara obligatoriamente:
    - Destino canónico en `BRIDS-Brain/` (00 a 10) y nombre de archivo.
    - Sub-agentes asignados del squad (`business-consultant`, `market-research-analyst`, `pitch-deck-architect`, `compliance-officer`, `b2b-sponsor-lead`, `founder-ghostwriter`).
    - Anclas técnicas verificables (Solana, Metaplex Core Freeze/Recovery, Delaware SPV, Stripe Identity) y filtro anti-clichés de IA.
