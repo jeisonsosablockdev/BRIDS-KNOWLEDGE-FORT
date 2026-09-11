@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * Programmatic 4-Slide Social Carousel System & Asset Pipeline for AndreArt
+ * Programmatic 4-Slide Social Carousel System & Asset Pipeline for BRIDS
  *
  * Capabilities:
- * - Single carousel creation via positional arguments or CLI flags (--idea, --image, --garment, --ref)
+ * - Single carousel creation via positional arguments or CLI flags (--idea, --image, --asset, --ref)
  * - Batch creation via JSON config (--batch <path>)
  * - Exportable Node.js module API for programmatic integration
- * - Ultra-minimalist prompt engine with 50%+ negative space and brand tokens (#3E2356, #CBBAD9)
+ * - Institutional fintech prompt engine with clean Solana Green and Slate palette (#0F172A, #14F195)
  * - Direct asset management and Obsidian Markdown deliverable generation
  */
 
@@ -47,9 +47,9 @@ function createCarousel(options = {}) {
   const {
     idea,
     imagePath,
-    garment = 'Prenda de Autor Urban Fantasy',
-    culturalRef = 'Jujutsu Kaisen / Cyberpunk / Star Wars',
-    platform = 'instagram',
+    assetClass = options.garment || 'Real Estate RWA Tokenization',
+    technicalRef = options.culturalRef || 'Solana Metaplex Core / Delaware SPV',
+    platform = 'linkedin',
     force = false,
     date = getTodayString()
   } = options;
@@ -85,53 +85,53 @@ function createCarousel(options = {}) {
     hasInputImage = true;
   } else {
     const readmeContent = `# Activos del Carrusel: ${folderName}\n\n` +
-      `Coloca tu fotografía principal como \`01-portada-hero.png\` en esta carpeta.\n\n` +
+      `Coloca la imagen principal como \`01-portada-hero.png\` en esta carpeta.\n\n` +
       `Los prompts para generar los slides 2, 3 y 4 se encuentran en \`generation-prompts.json\`.`;
     fs.writeFileSync(path.join(assetDir, 'README-ASSETS.md'), readmeContent, 'utf8');
   }
 
   // 2. Generate Structured Prompts Manifest with Strict Minimalism
   const promptsManifest = {
-    system_version: "2.0-minimalist",
+    system_version: "2.0-brids-rwa",
     carousel_id: folderName,
     aspect_ratio: "4:5 (1080x1350 px)",
-    garment,
-    cultural_reference: culturalRef,
+    asset_class: assetClass,
+    technical_reference: technicalRef,
     brand_visual_identity: {
       palette: {
-        deep_violet: "#3E2356",
-        soft_lilac: "#CBBAD9",
-        atelier_ivory: "#F6F4EE",
-        obsidian_charcoal: "#1E1B24",
+        deep_slate: "#0F172A",
+        solana_green: "#14F195",
+        institutional_gold: "#F59E0B",
+        card_slate: "#1E293B",
         pure_white: "#FFFFFF"
       },
-      positive_tokens: "andreart brand visual style, ultra-minimalist, ample negative space, clean uncluttered composition, airy elegance, loose delicate fluid linework, zero clutter, spacious clean background, haute couture minimalism, simple and breathable layout",
-      negative_tokens: "cluttered, overcrowded, busy composition, excessive annotations, floating objects, saturated details, messy lines, text clutter, heavy textures, overly dense, visually noisy, cheap cosplay, bright neon party colors, childish cartoon, muddy colors"
+      positive_tokens: "BRIDS institutional visual style, sleek modern architectural real estate, glass and steel facade, high-end fintech UI, clean Solana green glowing accents, ultra-minimalist, ample negative space, sharp vector lines, institutional credibility, refined luxury typography",
+      negative_tokens: "cluttered, cartoon, low resolution, cheap cosplay, garment, anime, clothing, noisy textures, amateur composition, oversaturated neon"
     },
     slides: {
       slide_1_hero: {
         file: "01-portada-hero.png",
-        type: "Fotografía Editorial / Hero",
-        description: `Fotografía editorial vertical 4:5 de alta costura urbana. ${garment} luciendo en modelo con iluminación dramática de taller, atmósfera violeta profundo (#3E2356) y porte heroico inspirado en ${culturalRef}.`,
-        prompt: `High-fashion editorial vertical 4:5 portrait of a model wearing avant-garde ${garment}, Andreart brand style, deep violet atmospheric studio lighting (#3E2356), soft lavender rim light (#CBBAD9), moody cinematic depth, uncluttered clean background, sharp focus, haute couture styling.`
+        type: "Fotografía Arquitectónica / Hero",
+        description: `Fotografía arquitectónica vertical 4:5 de activo inmobiliario institucional tokenizado. ${assetClass} con iluminación natural, fachada contemporánea, líneas limpias y atmósfera fintech premium (#0F172A, acento #14F195).`,
+        prompt: `Architectural photography vertical 4:5 of premier modern commercial real estate, ${assetClass}, BRIDS brand style, dramatic natural lighting, clean deep slate facade (#0F172A) with subtle glowing Solana green accents (#14F195), ultra-clean glass reflection, sharp focus, institutional institutional asset quality.`
       },
-      slide_2_line_art_figurine: {
-        file: "02-figurin-lineas-tecnico.png",
-        type: "Ficha Técnica CAD de Patronaje (Figurín & Plano Técnico)",
-        description: `Ilustración técnica de moda y plano CAD de patronaje. Maniquí estilizado vistiendo el conjunto a la izquierda y dibujo plano técnico con cotas, pliegues y anotaciones a la derecha sobre fondo blanco puro.`,
-        prompt: `Professional fashion technical flat drawing and specification sheet of avant-garde ${garment}, in the exact artistic CAD style of the reference image, pure white background, crisp black vector line art. Left side shows a minimalist mannequin fashion figure wearing the ensemble. Right side shows the detailed technical flat drawing of the garment with seam lines, fabric drape arrows, and neat uppercase technical callout annotations with leader lines, and 'DESIGN NO. 042' at bottom right. High contrast, precise tailoring blueprints.`
+      slide_2_technical_architecture: {
+        file: "02-arquitectura-tecnica.png",
+        type: "Diagrama Técnico On-Chain (Metaplex Core & SPV)",
+        description: `Infografía técnica y diagrama de flujo on-chain en Solana. Estructuración legal dual con Delaware SPV y plugins de freeze/recovery de Metaplex Core sobre fondo oscuro (#0F172A).`,
+        prompt: `High-end fintech technical architecture diagram on deep dark slate background (#0F172A), Solana blockchain network nodes with clean glowing emerald green vector connections (#14F195), Delaware SPV legal flow box, Metaplex Core freeze and recovery plugin indicators, crisp typography, clean data visualization.`
       },
-      slide_3_pas_detail: {
-        file: "03-plano-detalle-pas.png",
-        type: "Planos Macro Detalle & Confort PAS",
-        description: `Fotografía macro a la textura textil de alto gramaje con matices lavanda (#CBBAD9), costuras reforzadas limpias y marquilla estampada suave imperceptible al tacto (confort PAS).`,
-        prompt: `Professional macro photography of dark heavyweight luxury textile weave with soft lavender undertones (#CBBAD9), clean reinforced tailoring stitches, seamless printed tagless label, tactile comfort PAS, clean studio lighting, shallow depth of field, minimalist composition.`
+      slide_3_financial_metrics: {
+        file: "03-metricas-financieras.png",
+        type: "Métricas Financieras & Dividendos",
+        description: `Dashboard financiero institucional mostrando APY proyectado, flujo fraccional de rentas y distribución automatizada en USDC.`,
+        prompt: `Minimalist fintech dashboard card showing financial metrics, real estate yield graph, clean percentage APY metrics in glowing Solana green (#14F195), fractional token distribution table, sleek glassmorphism UI over dark background (#0F172A), ultra-clean typography.`
       },
       slide_4_conversion_cta: {
         file: "04-conversion-cta.png",
         type: "Slide de Cierre Comercial (CTA)",
-        description: `Diseño gráfico comercial ultra-minimalista para Instagram en formato 4:5. Fondo liso en morado real (#3E2356), monograma geométrico blanco de Andreart, tipografía fina 'SÉ TU PROPIO HÉROE'. Máxima limpieza visual.`,
-        prompt: `Ultra-minimalist haute couture Instagram slide for Andreart, seamless flat solid deep royal violet background (#3E2356), vast empty negative space, perfectly centered clean white geometric Andreart logo monogram, minimal single-line elegant typography 'SÉ TU PROPIO HÉROE', clean refined luxury aesthetic, zero clutter, breathable and simple.`
+        description: `Diseño gráfico institucional en formato 4:5. Fondo sólido azul pizarra (#0F172A), isotipo minimalista de BRIDS en verde Solana (#14F195), tipografía 'BRIDS: THE INSTITUTIONAL BRIDGE FOR RWA ON SOLANA'. Máxima limpieza visual.`,
+        prompt: `Ultra-minimalist institutional fintech slide for BRIDS, seamless flat solid deep slate background (#0F172A), vast negative space, perfectly centered clean geometric BRIDS logo in glowing Solana green (#14F195), elegant typography 'THE INSTITUTIONAL BRIDGE FOR RWA ON SOLANA', clean refined look, zero clutter.`
       }
     }
   };
@@ -151,8 +151,11 @@ function createCarousel(options = {}) {
     let tpl = fs.readFileSync(TEMPLATE_PATH, 'utf8');
     tpl = tpl.replace(/{{TITLE}}/g, titleRaw);
     tpl = tpl.replace(/{{TITLE_UPPER}}/g, titleUpper);
-    tpl = tpl.replace(/{{GARMENT}}/g, garment);
-    tpl = tpl.replace(/{{CULTURAL_REF}}/g, culturalRef);
+    tpl = tpl.replace(/{{ASSET_CLASS}}/g, assetClass);
+    tpl = tpl.replace(/{{GARMENT}}/g, assetClass);
+    tpl = tpl.replace(/{{TECHNICAL_REF}}/g, technicalRef);
+    tpl = tpl.replace(/{{CULTURAL_REF}}/g, technicalRef);
+    tpl = tpl.replace(/{{PLATFORM}}/g, platformSlug);
     tpl = tpl.replace(/{{DATE}}/g, date);
     tpl = tpl.replace(/{{FOLDER_NAME}}/g, folderName);
     tpl = tpl.replace(/{{IDEA_SLUG}}/g, ideaSlug);
@@ -258,24 +261,25 @@ function parseArgs(args) {
   const options = {
     idea: '',
     imagePath: '',
-    garment: 'Prenda de Autor Urban Fantasy',
-    culturalRef: 'Jujutsu Kaisen / Cyberpunk / Star Wars',
-    platform: 'instagram',
+    assetClass: 'Real Estate RWA Tokenization',
+    technicalRef: 'Solana Metaplex Core / Delaware SPV',
+    platform: 'linkedin',
     force: false,
     batchPath: '',
     jsonOutput: false
   };
 
+  let positionalIdx = 0;
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (arg === '--idea' && args[i + 1]) {
       options.idea = args[++i];
     } else if (arg === '--image' && args[i + 1]) {
       options.imagePath = args[++i];
-    } else if (arg === '--garment' && args[i + 1]) {
-      options.garment = args[++i];
+    } else if ((arg === '--asset' || arg === '--garment') && args[i + 1]) {
+      options.assetClass = args[++i];
     } else if (arg === '--ref' && args[i + 1]) {
-      options.culturalRef = args[++i];
+      options.technicalRef = args[++i];
     } else if (arg === '--platform' && args[i + 1]) {
       options.platform = args[++i];
     } else if (arg === '--batch' && args[i + 1]) {
@@ -285,12 +289,13 @@ function parseArgs(args) {
     } else if (arg === '--json') {
       options.jsonOutput = true;
     } else if (!arg.startsWith('-')) {
-      // Positional args fallback
-      if (!options.idea) options.idea = arg;
-      else if (!options.imagePath) options.imagePath = arg;
-      else if (options.garment === 'Prenda de Autor Urban Fantasy') options.garment = arg;
-      else if (options.culturalRef === 'Jujutsu Kaisen / Cyberpunk / Star Wars') options.culturalRef = arg;
-      else if (options.platform === 'instagram') options.platform = arg;
+      // Positional args fallback by index
+      if (positionalIdx === 0) options.idea = arg;
+      else if (positionalIdx === 1) options.imagePath = arg;
+      else if (positionalIdx === 2) options.assetClass = arg;
+      else if (positionalIdx === 3) options.technicalRef = arg;
+      else if (positionalIdx === 4) options.platform = arg;
+      positionalIdx++;
     }
   }
 

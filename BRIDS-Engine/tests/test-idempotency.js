@@ -245,22 +245,22 @@ Texto base inicial inmutable.
     // -------------------------------------------------------------
     console.log('[TEST 7/7] Verificando Generación y Protección de Carruseles (create-social-carousel)...');
     const carouselScript = path.join(SCRIPTS_DIR, 'create-social-carousel.sh');
-    const testIdea = 'test-hakama-unit';
-    const expectedNote = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content', `${getTodayString()}-instagram-carrusel-${testIdea}.md`);
+    const testIdea = 'test-rwa-unit';
+    const expectedNote = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content', `${getTodayString()}-linkedin-carrusel-${testIdea}.md`);
     const expectedAssets = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content', 'Assets', `${getTodayString()}-carrusel-${testIdea}`);
 
     if (fs.existsSync(expectedNote)) fs.unlinkSync(expectedNote);
     if (fs.existsSync(expectedAssets)) fs.rmSync(expectedAssets, { recursive: true, force: true });
 
     // 1. Initial generation
-    execSync(`bash "${carouselScript}" "${testIdea}" "" "Pantalón Test" "Saga Test" instagram`, { stdio: 'pipe' });
+    execSync(`bash "${carouselScript}" "${testIdea}" "" "Commercial Real Estate" "Solana Metaplex Core" linkedin`, { stdio: 'pipe' });
     assert(fs.existsSync(expectedNote), 'Nota de carrusel creada correctamente en Social Content');
     assert(fs.existsSync(path.join(expectedAssets, 'generation-prompts.json')), 'Manifiesto de prompts generado en la carpeta de activos');
 
     // 2. Double generation must be rejected safely
     let doubleCreateThrew = false;
     try {
-      execSync(`bash "${carouselScript}" "${testIdea}" "" "Pantalón Test" "Saga Test" instagram`, { stdio: 'pipe' });
+      execSync(`bash "${carouselScript}" "${testIdea}" "" "Commercial Real Estate" "Solana Metaplex Core" linkedin`, { stdio: 'pipe' });
     } catch (e) {
       doubleCreateThrew = true;
     }
@@ -277,7 +277,7 @@ Texto base inicial inmutable.
     console.log('[TEST 8/8] Verificando Idempotencia en Sincronización de Parrilla (sync-content-grid)...');
     const syncGridScript = path.join(SCRIPTS_DIR, 'sync-content-grid.sh');
 
-    const gridDocPath = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content', 'Parrilla de Publicaciones Instagram 15 Dias.md');
+    const gridDocPath = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content', 'parrilla-publicaciones-redes-sociales.md');
     
     // First run: update doc
     execSync(`bash "${syncGridScript}" update`, { stdio: 'pipe' });

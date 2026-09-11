@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PYTHON_SCRIPT="$SCRIPT_DIR/extract_photo_lineart.py"
-
-exec /Users/jaymusicmachine/.local/bin/uv run \
-  --with opencv-python-headless \
-  --with pillow \
-  --with numpy \
-  python "$PYTHON_SCRIPT" "$@"
+echo "ℹ️ El módulo CAD/Lineart textil de la plantilla anterior ha sido retirado del motor BRIDS."
+echo "Para generar activos visuales institucionales, utilice el flujo SDD con 'bash BRIDS-Engine/scripts/task-init.sh' o 'generate-publication-assets.sh'."
+exit 0

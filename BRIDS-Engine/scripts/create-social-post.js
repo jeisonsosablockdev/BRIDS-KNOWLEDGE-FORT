@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Social Content Generator & Extractor for AndreArt Vestuario
- * Instantiates new social media posts based on the protected Content Production SOP (Guía Técnica).
- * Strictly follows the naming convention: YYYY-MM-DD-redsocial-idea.md
+ * Social Content Generator & Extractor for BRIDS
+ * Instantiates new social media posts and threads based on BRIDS Institutional Architecture.
+ * Strictly follows the naming convention: YYYY-MM-DD-platform-idea.md
  */
 
 const fs = require('fs');
@@ -11,7 +11,6 @@ const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const VAULT_SOCIAL_DIR = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content');
-const SOP_TEMPLATE_PATH = path.join(ROOT_DIR, 'BRIDS-Engine', 'templates', 'content-production-sop-template.md');
 
 function sanitizeSlug(str) {
   return (str || '')
@@ -37,20 +36,20 @@ function getTodayString() {
 // CLI GENERATOR
 // -------------------------------------------------------------
 
-function generatePost(platformInput, ideaInput, typeInput, culturalRefInput, garmentInput) {
+function generatePost(platformInput, ideaInput, typeInput, technicalRefInput, assetClassInput) {
   if (!platformInput || !ideaInput) {
     console.log(`
-Uso: create-social-post <redsocial> "<idea-o-concepto>" [tipo-video] [referencia-cultural] [prenda]
+Uso: create-social-post <redsocial> "<idea-o-concepto>" [tipo-contenido] [referencia-tecnica] [clase-activo]
 
 Parámetros:
-  redsocial:            instagram | tiktok | youtube-shorts | linkedin | facebook
-  idea-o-concepto:      Nombre o concepto en texto (ej. "capa-akatsuki", "hakama-oficina-tech")
-  tipo-video:           corte-tela | estilismo | encargo-saga | montaje-sofa (opcional)
-  referencia-cultural:  Anime / Película / Serie de culto (ej. "Jujutsu Kaisen", "Star Wars", "Dune")
-  prenda:               Pantalón Hakama | Haori Urbano | Capa de Autor | Kimono Deconstruido
+  redsocial:            linkedin | twitter | farcaster | telegram | youtube
+  idea-o-concepto:      Nombre o concepto en texto (ej. "delaware-spv-compliance", "metaplex-core-rwa")
+  tipo-contenido:       rwa-tokenization | institutional-gp | solana-yield | founder-insight (opcional)
+  referencia-tecnica:   Solana Metaplex Core | Delaware Series LLC | Stripe Identity KYC (opcional)
+  clase-activo:         Commercial Real Estate | Multifamily Class-A | Logistics Hubs (opcional)
 
 Ejemplo:
-  bash BRIDS-Engine/scripts/create-social-post.sh instagram "capa-akatsuki-confeccion" encargo-saga "Naruto / Akatsuki" "Capa de Autor"
+  bash BRIDS-Engine/scripts/create-social-post.sh linkedin "delaware-spv-compliance" institutional-gp "Delaware Series LLC" "Multifamily Class-A"
 `);
     process.exit(1);
   }
@@ -71,42 +70,26 @@ Ejemplo:
     process.exit(1);
   }
 
-  const videoType = (typeInput || 'estilismo').toLowerCase();
-  const culturalRef = culturalRefInput || 'Jujutsu Kaisen / Star Wars / Cyberpunk';
-  const garment = garmentInput || 'Prenda de Autor Urban Fantasy (Moldería XS-XL)';
+  const contentType = (typeInput || 'rwa-tokenization').toLowerCase();
+  const technicalRef = technicalRefInput || 'Solana Metaplex Core / Delaware SPV';
+  const assetClass = assetClassInput || 'Commercial Real Estate RWA';
 
-  let typeEmoji = '👔';
-  let typeTitle = 'Estilismo Urbano';
-  let shotSpecifics = `
-- **Toma A (Detalle):** Close-up al ajuste de pretina XS-XL, costuras reforzadas y marquilla estampada confort PAS.
-- **Toma B (Acción):** Persona caminando con paso firme, movimiento dinámico y caída pesada de la tela.
-- **Toma C (Cuerpo Entero):** Look completo combinando ${garment} con calzado urbano y prendas neutras.
-- **Toma D (Detrás de Cámara):** Andrea explicando la versatilidad de la silueta en el taller.`;
+  let typeEmoji = '🏢';
+  let typeTitle = 'Tokenización de Real Estate RWA';
+  let pillarFocus = `Demostración de liquidez on-chain, estructuración jurídica dual SPV y reducción de intermediarios.`;
 
-  if (videoType.includes('corte') || videoType.includes('tela') || videoType.includes('confeccion')) {
-    typeEmoji = '✂️';
-    typeTitle = 'Corte de Tela & Confección (ASMR)';
-    shotSpecifics = `
-- **Toma A (Detalle):** Close-up a 15 cm de la tijera cortando tela pesada, tiza marcando el patrón.
-- **Toma B (Acción):** Manos de Andrea doblando y sacudiendo el textil con sonido de impacto limpio.
-- **Toma C (Plano Medio):** Ensamble en máquina de confección con sonido ambiente rítmico.
-- **Toma D (Resultado):** Silueta terminada cayendo sobre la mesa de corte.`;
-  } else if (videoType.includes('encargo') || videoType.includes('saga') || videoType.includes('akatsuki') || videoType.includes('capa')) {
-    typeEmoji = '🛡️';
-    typeTitle = 'Encargo de Saga & Edición Especial';
-    shotSpecifics = `
-- **Toma A (Detalle):** Despliegue de tela pesada de alta densidad sobre la mesa de taller.
-- **Toma B (Acción):** Detalle de confección artesanal, forro interior y caída pesada de la prenda.
-- **Toma C (Cuerpo Entero):** Modelo luciendo la silueta con iluminación de contraste y porte imponente.
-- **Toma D (Detrás de Cámara):** Andrea firmando la pieza o empacando con tarjeta de autor.`;
-  } else if (videoType.includes('sofa') || videoType.includes('stand') || videoType.includes('evento')) {
-    typeEmoji = '🏛️';
-    typeTitle = 'Montaje de Stand & Experiencia SOFA';
-    shotSpecifics = `
-- **Toma A (Detalle):** POV en primera persona organizando percheros con la colección.
-- **Toma B (Acción):** Andrea ultimando detalles visuales y ambientación del stand.
-- **Toma C (Cuerpo Entero):** Vista general del espacio listo para recibir a la comunidad.
-- **Toma D (Comunidad):** Primeros visitantes probándose las prendas con asombro.`;
+  if (contentType.includes('gp') || contentType.includes('sponsor') || contentType.includes('institutional')) {
+    typeEmoji = '🤝';
+    typeTitle = 'Propuesta de Valor para B2B Sponsors / GPs';
+    pillarFocus = `Acceso a capital global minorista acreditado, sindicación sin fricción y dashboard de compliance unificado.`;
+  } else if (contentType.includes('yield') || contentType.includes('solana') || contentType.includes('defi')) {
+    typeEmoji = '⚡';
+    typeTitle = 'Rendimiento On-Chain & Ventaja Solana';
+    pillarFocus = `Liquidación sub-segundo, transacciones por menos de $0.001 y plugins nativos de freeze/recovery en Metaplex Core.`;
+  } else if (contentType.includes('founder') || contentType.includes('insight') || contentType.includes('thesis')) {
+    typeEmoji = '🧠';
+    typeTitle = 'Tesis Fundadora & Thought Leadership';
+    pillarFocus = `Por qué el 99% de las soluciones RWA en Ethereum fallan por costos de gas y rigidez regulatoria ERC-3643.`;
   }
 
   const postContent = `---
@@ -115,11 +98,12 @@ category: "07 Paid, Social & Community"
 workflow: "W5_CONTENT_SOCIAL"
 skills_used:
   - "mas-social-content"
-  - "mas-ad-creative"
   - "mas-copywriting"
+  - "founder-ghostwriter"
 platform: "${platform}"
-content_type: "${videoType}"
-cultural_reference: "${culturalRef}"
+content_type: "${contentType}"
+technical_reference: "${technicalRef}"
+asset_class: "${assetClass}"
 status: draft
 version: "1.0"
 created_at: ${dateStr}
@@ -127,6 +111,8 @@ updated_at: ${dateStr}
 tags:
   - marketing
   - social-content
+  - rwa
+  - solana
   - ${platform}
   - ${idea}
 ---
@@ -134,104 +120,62 @@ tags:
 # [${platform.toUpperCase()}] ${idea.replace(/-/g, ' ').toUpperCase()}
 
 > [!NOTE]
-> **Resumen Ejecutivo:** Publicación para ${platform.toUpperCase()} orientada a ${typeTitle}. Enfoque en ${garment} con referencia cultural a *${culturalRef}*, destacando moldería XS-XL, confort PAS y llamado a compra directo.
+> **Resumen Ejecutivo:** Publicación institucional para ${platform.toUpperCase()} orientada a ${typeTitle}. Enfoque en ${assetClass} con referencia técnica a *${technicalRef}*, destacando estructura de custodia, cumplimiento Delaware SPV y liquidación instantánea.
 
 ---
 
 ## 🎯 Contexto y Objetivo
-- **Plataforma:** ${platform.toUpperCase()}
-- **Formato:** Video Vertical 9:16 (Reel / TikTok) - Duración: 15-25 segundos
-- **Objetivo Comercial:** Tráfico calificado al WhatsApp / Tienda Web y posicionamiento de autor
-- **Prenda Protagonista:** ${garment}
-- **Referencia de Culto:** *${culturalRef}*
-- **Eslogan Oficial:** *"Sé tu propio héroe"*
+- **Plataforma:** ${platform.toUpperCase()} (`@brids_io`)
+- **Formato:** Publicación Institucional / Hilo de Liderazgo
+- **Pilar Temático:** ${pillarFocus}
+- **Activo Inmobiliario:** ${assetClass}
+- **Ancla Técnica:** *${technicalRef}*
 
 ---
 
-## 🎬 1. Especificaciones Técnicas (Basadas en SOP de Producción)
-- **Formato de Grabación:** 9:16 Vertical (1080p @ 60fps ó 4K @ 60fps)
-- **Iluminación:** Luz frontal natural o taller a 45° (sin sombras duras en negros)
-- **Lente:** Limpieza previa obligatoria con paño de microfibra
-- **Audio:** Captura directa a 15-20 cm para maximizar sonido textil/ASMR
+## 📋 Copy Oficial para ${platform.toUpperCase()}
 
----
+\`\`\`markdown
+La tokenización inmobiliaria tradicional intentó forzar estándares lentos en redes con tarifas exorbitantes.
 
-## 📸 2. Lista de Tomas Requeridas (Matriz SOP: ${typeEmoji} ${typeTitle})
-${shotSpecifics}
+En BRIDS cambiamos las reglas del juego:
+1. Infraestructura sobre Solana: Liquidación sub-segundo y costos inferiores a \$0.001 por transacción.
+2. Cumplimiento Dual Delaware SPV: Cada propiedad vive en una entidad jurídica independiente segregada de pasivos.
+3. Plugins Metaplex Core: Recuperación y congelamiento de activos ante incidentes o mandatos judiciales, sin perder descentralización.
 
----
+El capital institucional no busca especulación; busca rendimientos reales garantizados por activos tangibles.
 
-## ⏱️ 3. Guión & Estructura de Edición de Video (15 a 25s)
+Conoce la arquitectura en brids.io
 
-| Tiempo | Bloque Visual | Acción en Pantalla | Audio / Música | Texto en Pantalla |
-| :--- | :--- | :--- | :--- | :--- |
-| **00:00 - 00:03** | **HOOK VISUAL** | Toma de impacto rápido (corte de tela en seco / prenda volando en cámara lenta). | Sonido ASMR de tijera o beat drop de tendencia. | *"No naciste para vestir ropa aburrida."* |
-| **00:03 - 00:10** | **DESARROLLO** | 2-3 tomas dinámicas mostrando confección en Bogotá, detalles y confort PAS. | Música rítmica envolvente. | *"Diseño de autor en Bogotá. Tallas XS a XL."* |
-| **00:10 - 00:18** | **DEMOSTRACIÓN** | Prenda puesta en movimiento, silueta completa y caída pesada. | Audio continuo con energía alta. | *"Inspirado en ${culturalRef}."* |
-| **00:18 - 00:25** | **CTA FINAL** | Andrea o modelo mirando a cámara con actitud firme y eslogan de marca. | Cierre musical contundente. | *"Pide el tuyo en el link de la bio. Sé tu propio héroe."* |
-
----
-
-## ✍️ 4. Copy Comercial Asertivo (Aplicando las 4 Reglas de Oro)
-
-\`\`\`text
-Basta de uniformarte con lo que todos usan. 
-
-${garment} confeccionado en Bogotá con silueta deconstruida, moldería inteligente que se adapta de la talla XS a la XL y confort PAS sin etiquetas molestas.
-
-Inspirado en la mística de ${culturalRef}.
-
-Pide el tuyo hoy mismo en el enlace de la biografía o al WhatsApp oficial antes de agotar la tanda del taller.
-
-Sé tu propio héroe. 🛡️
-
-#Andreart #ModaDeAutor #UrbanFantasy #BogotaModa #${idea.replace(/-/g, '')} #SeTuPropioHeroe
+#BRIDS #RealWorldAssets #Solana #RealEstate #InstitutionalCrypto #Fintech #${idea.replace(/-/g, '')}
 \`\`\`
 
 ---
 
-## 📋 5. Checklist de Verificación Técnico
-
-### Antes de Grabar:
-- [ ] Lente del celular limpio con microfibra.
-- [ ] Cámara configurada a 1080p 60fps o 4K 60fps.
-- [ ] ${garment} planchada y lista en perchero.
-
-### Durante el Rodaje:
-- [ ] Grabadas al menos 2 tomas de detalle (marquilla PAS / costura).
-- [ ] Grabada toma de movimiento completo con caída de tela.
-- [ ] Capturado audio ASMR de corte/taller de cerca.
-
-### Antes de Publicar:
-- [ ] Subtítulos centrados (no tapados por botones de ${platform}).
-- [ ] Copy incluye llamado directo a compra y eslogan *"Sé tu propio héroe"*.
-- [ ] Portada seleccionada manualmente con frame de alto contraste.
-
----
-
 ## 🔄 Historial de Revisiones (Changelog)
-- **v1.0 (${dateStr}):** Creación del post extraído a partir de la Guía Técnica y Manual de Producción de Contenido (SOP).
+- **v1.0 (${dateStr}):** Creación de publicación institucional mediante el generador de BRIDS.
 
 ---
 
 ## 🔗 Referencias Cruzadas
-- Guía Técnica SOP: [[07 Paid, Social & Community/Social Content/Guia Tecnica de Produccion de Contenido.md]]
-- Estrategia Maestra de Contenidos: [[02 Strategy & Research/Content Strategy/Master Content Strategy.md]]
-- Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
+- Infraestructura RWA: [[02 Strategy & Research/Business Concepts/concept-solana-rwa-infrastructure.md]]
+- Estructuración Dual SPV: [[02 Strategy & Research/Business Concepts/concept-dual-entity-compliance.md]]
+- Propuesta de Sponsors: [[02 Strategy & Research/Business Concepts/concept-b2b-sponsor-value-prop.md]]
 `;
 
   fs.writeFileSync(targetPath, postContent, 'utf8');
 
-  console.log(`\n🎉 Publicación generada exitosamente según el Manual SOP:`);
+  console.log(`\n🎉 Publicación generada exitosamente para BRIDS:`);
   console.log(`   📄 Archivo:  ${fileName}`);
   console.log(`   📍 Ruta:     ${targetPath}`);
   console.log(`   📱 Red:      ${platform.toUpperCase()}`);
   console.log(`   💡 Concepto: ${idea}`);
-  console.log(`   🛡️ Tipo:     ${typeTitle} (${culturalRef})\n`);
+  console.log(`   🛡️ Tipo:     ${typeTitle} (${technicalRef})\n`);
 }
 
 // -------------------------------------------------------------
 // ROUTER
 // -------------------------------------------------------------
-const [,, platformArg, ideaArg, typeArg, culturalRefArg, garmentArg] = process.argv;
-generatePost(platformArg, ideaArg, typeArg, culturalRefArg, garmentArg);
+const [,, platformArg, ideaArg, typeArg, technicalRefArg, assetClassArg] = process.argv;
+generatePost(platformArg, ideaArg, typeArg, technicalRefArg, assetClassArg);
+

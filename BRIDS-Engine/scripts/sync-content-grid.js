@@ -17,7 +17,7 @@ const ROOT_DIR = path.resolve(__dirname, '../..');
 const VAULT_SOCIAL_DIR = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content');
 const ASSETS_ROOT = path.join(VAULT_SOCIAL_DIR, 'Assets');
 const DEFAULT_PLAN_PATH = path.join(ROOT_DIR, 'BRIDS-Engine', 'templates', 'content-grid-plan.json');
-const PARRILLA_DOC_PATH = path.join(VAULT_SOCIAL_DIR, 'Parrilla de Publicaciones Instagram 15 Dias.md');
+const PARRILLA_DOC_PATH = path.join(VAULT_SOCIAL_DIR, 'parrilla-publicaciones-redes-sociales.md');
 const CREATE_POST_SCRIPT = path.join(ROOT_DIR, 'BRIDS-Engine', 'scripts', 'create-social-post.js');
 
 function ensureDir(dir) {
@@ -260,7 +260,7 @@ function updateParrillaDocument(plan) {
   }
 
   const updatedContent = `---
-title: "Parrilla Estratégica de Publicaciones para Instagram (15 Días)"
+title: "Parrilla Estratégica de Publicaciones (15 Días)"
 category: "07 Paid, Social & Community"
 workflow: "W5_CONTENT_SOCIAL"
 skills_used:
@@ -268,24 +268,26 @@ skills_used:
   - "mas-ad-creative"
   - "mas-content-strategy"
 status: in_progress
-version: "2.5"
+version: "2.0"
 protected: true
 created_at: 2026-08-08
 updated_at: ${getTodayString()}
 tags:
   - marketing
   - social-content
-  - instagram-grid
-  - content-calendar
+  - rwa
+  - solana
+  - content-grid
 ---
 
-# Parrilla Estratégica de Publicaciones para Instagram (15 Días)
+# Parrilla Estratégica de Publicaciones (15 Días)
 
-*Matriz Maestra Intercalada y Sincronizada para @andreartvestuario*  
+*Matriz Maestra Intercalada y Sincronizada para @brids_io*  
 *Folder: 07 Paid, Social & Community / Social Content*  
 *Last updated: ${getTodayString()}*
 
-> 🛡️ **Eslogan Oficial de Marca:** *"Sé tu propio héroe"*
+> [!NOTE]
+> **Resumen Ejecutivo:** Matriz maestra de sincronización editorial de BRIDS para LinkedIn, X y Telegram. Mantiene alineación 1-a-1 entre la planificación estratégica, las tesis RWA, las notas entregables en Obsidian y los activos visuales.
 
 ---
 
@@ -293,54 +295,21 @@ tags:
 
 Esta tabla mantiene la **alineación 1-a-1** entre la planificación estratégica, los ganchos comerciales, los llamados a la acción (CTA), los textos alternativos accesibles (Alt Text), los hashtags de posicionamiento, las notas de contenido en Obsidian y las carpetas de activos visuales:
 
-| # | Fecha | Prenda / Concepto | Referencia Cultural | Gancho Principal (Hook) | Subtexto (CTA) | Texto Alt (SEO & Accesibilidad) | Hashtags | Copy Completo (Listo para Copiar) | Formato | Estado | ¿Publicado? | Link Publicación | Nota Entregable | Activos Visuales |
+| # | Fecha | Tesis / Concepto | Ancla Técnica | Gancho Principal (Hook) | Subtexto (CTA) | Texto Alt (SEO & Accesibilidad) | Hashtags | Copy Completo (Listo para Copiar) | Formato | Estado | ¿Publicado? | Link Publicación | Nota Entregable | Activos Visuales |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 ${tableRows}
 ---
 
-## 📌 Inventario de Productos Clave Incorporados
-
-1. 🌸 **Hanbok Reinterpretado** (Conexión especial con el próximo concierto de BTS / Eventos K-pop).
-2. 🩸 **Jujutsu Kaisen — Choso** (Silueta con carácter y mística de personaje de culto).
-3. ⛩️ **Sacerdotisa Sintoísta** (Deconstrucción de indumentaria tradicional oriental en moda urbana de autor).
-4. 🕶️ **Jujutsu Kaisen — Suguru Geto** (Arquetipo de hechicero oscuro urbano con presencia imponente).
-5. 🚀 **Star Wars — Chaqueta de Piloto** (Chaqueta de abrigo galáctico para la vida urbana).
-
----
-
-## 🗓️ MATRIZ DE 15 PUBLICACIONES INTERCALADAS (DIAGRAMA DE FLUJO)
-
-\`\`\`mermaid
-graph TD
-    P1["Post 1: Geto (Jujutsu Kaisen)"] --> P2["Post 2: Estilismo Hakama Oficina"]
-    P2 --> P3["Post 3: Confort PAS (Marquillas)"]
-    P3 --> P4["Post 4: Hanbok (Concierto BTS)"]
-    P4 --> P5["Post 5: ASMR Taller Bogotá"]
-    P5 --> P6["Post 6: Chaqueta Piloto (Star Wars)"]
-    P6 --> P7["Post 7: Nightlife Haori"]
-    P7 --> P8["Post 8: Test Caída Pesada"]
-    P8 --> P9["Post 9: Choso (Jujutsu Kaisen)"]
-    P9 --> P10["Post 10: Entrada Stand SOFA"]
-    P10 --> P11["Post 11: Sacerdotisa Sintoísta"]
-    P11 --> P12["Post 12: Estilismo Capa Mago"]
-    P12 --> P13["Post 13: Moldería XS-XL"]
-    P13 --> P14["Post 14: Colección Disponible"]
-    P14 --> P15["Post 15: Firma de Andrea"]
-\`\`\`
-
----
-
 ## 🔄 Historial de Revisiones (Changelog)
-- **v2.0 (${getTodayString()}):** Sincronización completa con el Sistema de Alineación Programática: tabla maestra interactiva con enlaces bidireccionales a cada nota entregable y carpeta de activos.
-- **v1.0 (2026-08-08):** Creación inicial de la parrilla intercalada de 15 publicaciones.
+- **v1.0 (2026-08-08):** Creación inicial de la matriz editorial.
+- **v2.0 (${getTodayString()}):** Migración a formato kebab-case institucional alineado con la arquitectura BRIDS.
 
 ---
 
 ## 🔗 Referencias Cruzadas
-- Guía Técnica SOP: [[07 Paid, Social & Community/Social Content/Guia Tecnica de Produccion de Contenido.md]]
-- Manual de Identidad Visual: [[01 Brand Context/Brand Visual Style Guide.md]]
-- Estrategia Maestra de Contenidos: [[02 Strategy & Research/Content Strategy/Master Content Strategy.md]]
-- Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
+- Infraestructura RWA: [[02 Strategy & Research/Business Concepts/concept-solana-rwa-infrastructure.md]]
+- Estructuración Dual SPV: [[02 Strategy & Research/Business Concepts/concept-dual-entity-compliance.md]]
+- Propuesta de Valor Sponsors: [[02 Strategy & Research/Business Concepts/concept-b2b-sponsor-value-prop.md]]
 `;
 
   fs.writeFileSync(PARRILLA_DOC_PATH, updatedContent, 'utf8');

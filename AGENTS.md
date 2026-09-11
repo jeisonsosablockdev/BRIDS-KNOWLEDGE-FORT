@@ -11,8 +11,8 @@
 | Spec-Driven Development (SDD) | `bash BRIDS-Engine/scripts/sdd-manager.sh <init|preview|approve|evaluate|status|list>` |
 | Context-Aware Asset Generator | `bash BRIDS-Engine/scripts/generate-publication-assets.sh <nota|slug> [--input-image img]` |
 | Sync Master Content Grid | `bash BRIDS-Engine/scripts/sync-content-grid.sh [audit|sync|update]` |
-| Generate 4-Slide Carousel | `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img] [prenda] [ref]` |
-| Generate Social Post from SOP | `bash BRIDS-Engine/scripts/create-social-post.sh <red> "<idea>" [tipo] [ref] [prenda]` |
+| Generate 4-Slide Carousel | `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img] [asset] [ref]` |
+| Generate Social Post | `bash BRIDS-Engine/scripts/create-social-post.sh <red> "<idea>" [tipo] [ref] [asset]` |
 | Verify Idempotency | `bash BRIDS-Engine/tests/test-idempotency.sh` |
 | Anti-Drift Compliance Audit | `bash BRIDS-Engine/scripts/enforce-compliance.sh` |
 | Manage Task Lifecycle | `bash BRIDS-Engine/scripts/task-manager.sh <init|add|show|update|list|close>` |

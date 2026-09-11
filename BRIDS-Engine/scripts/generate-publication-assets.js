@@ -132,7 +132,7 @@ function extractGarmentContext(garmentName) {
   } else if (cleanName.includes('sacerdotisa')) {
     lore.garment_specifics = "Silueta ceremonial sintoísta deconstruida en dos piezas con cortes geométricos y mística oriental.";
   } else {
-    lore.garment_specifics = "Indumentaria conceptual de autor con patronaje deconstruido y estética Urban Fantasy.";
+    lore.asset_specifics = "Activo inmobiliario de grado institucional estructurado mediante Delaware Series LLC y tokenizado en Solana.";
   }
 
   return lore;
@@ -141,23 +141,23 @@ function extractGarmentContext(garmentName) {
 /**
  * Parses Slide Details from Note Body
  */
-function extractSlideDetails(body, garment, culturalRef) {
+function extractSlideDetails(body, assetClass, technicalRef) {
   const slides = {
     slide_1: {
-      headline: "No naciste para vestir ropa aburrida.",
-      microcopy: `${garment} de Autor • Confección en Bogotá`
+      headline: "Real Estate Tokenization on Solana.",
+      microcopy: `${assetClass} • Rendimiento On-Chain Institucional`
     },
     slide_2: {
-      headline: "Arquitectura Textil de Autor",
-      microcopy: "Moldería inteligente multitalla adaptativa XS-XL • Patrón original por Andrea"
+      headline: "Infraestructura RWA de Alto Desempeño",
+      microcopy: "Metaplex Core Freeze/Recovery • Delaware SPV Non-Broker-Dealer"
     },
     slide_3: {
-      headline: "Cero Roces. Cero Etiquetas que Pican.",
-      microcopy: "Marquilla estampada ultrasuave • Telas pesadas con caída dramática"
+      headline: "Rendimiento Transparente y Fraccional",
+      microcopy: "Liquidación inmediata en USDC • Distribución automatizada"
     },
     slide_4: {
-      headline: "Elige tu Silueta. Sé tu Propio Héroe.",
-      microcopy: "Envíos a todo Colombia • Pide al WhatsApp o enlace en bio"
+      headline: "El Futuro del Real Estate Institucional",
+      microcopy: "Agenda una demo con el equipo de BRIDS en brids.io"
     }
   };
 
@@ -190,13 +190,13 @@ function buildContextualManifest(notePath, inputImagePath = null) {
 
   const noteFileName = path.basename(notePath);
   const isCarousel = frontmatter.content_type === 'carrusel-4-slides' || noteFileName.includes('carrusel');
-  const garment = frontmatter.garment || 'Prenda de Autor Urban Fantasy';
-  const culturalRef = frontmatter.cultural_reference || 'Anime & Fantasía Urbana';
-  const platform = frontmatter.platform || 'instagram';
+  const assetClass = frontmatter.asset_class || frontmatter.garment || 'Real Estate RWA Tokenization';
+  const technicalRef = frontmatter.technical_reference || frontmatter.cultural_reference || 'Solana Metaplex Core / Delaware SPV';
+  const platform = frontmatter.platform || 'linkedin';
   const aspectRatio = frontmatter.aspect_ratio || (isCarousel ? '4:5' : '9:16');
 
   // Derive Folder Name
-  const slugMatch = noteFileName.replace(/\.md$/, '').match(/\d{4}-\d{2}-\d{2}-(?:instagram|tiktok|facebook)-(?:carrusel-)?(.*)/);
+  const slugMatch = noteFileName.replace(/\.md$/, '').match(/\d{4}-\d{2}-\d{2}-(?:[a-z0-9]+)-(?:carrusel-)?(.*)/);
   const slug = slugMatch ? slugMatch[1] : noteFileName.replace(/\.md$/, '');
   const dateMatch = noteFileName.match(/^\d{4}-\d{2}-\d{2}/);
   const dateStr = dateMatch ? dateMatch[0] : new Date().toISOString().slice(0, 10);
@@ -205,34 +205,14 @@ function buildContextualManifest(notePath, inputImagePath = null) {
   const assetDir = path.join(ASSETS_ROOT, folderName);
   ensureDir(assetDir);
 
-  const garmentLore = extractGarmentContext(garment);
-  const slideDetails = extractSlideDetails(body, garment, culturalRef);
+  const slideDetails = extractSlideDetails(body, assetClass, technicalRef);
 
-  // If input image was provided, copy it to assetDir as 01-portada-hero.png and extract faithful Line-Art & CAD
+  // If input image was provided, copy it cleanly to assetDir as 01-portada-hero.png
   let heroImageCopied = false;
   if (inputImagePath && fs.existsSync(inputImagePath)) {
     const heroTarget = path.join(assetDir, '01-portada-hero.png');
     fs.copyFileSync(inputImagePath, heroTarget);
     heroImageCopied = true;
-
-    try {
-      const { execSync } = require('child_process');
-      const extractorScript = path.join(__dirname, 'extract_photo_lineart.py');
-      const cmd = `/Users/jaymusicmachine/.local/bin/uv run --with opencv-python-headless --with pillow --with numpy python "${extractorScript}" --input "${inputImagePath}" --output-dir "${assetDir}" --mode all --garment "${garment}"`;
-      execSync(cmd, { stdio: 'pipe' });
-      // Link generated files to standard slide positions
-      const cadGenerated = path.join(assetDir, 'cad_blueprint.png');
-      const lineartGenerated = path.join(assetDir, 'lineart_figure.png');
-      if (fs.existsSync(cadGenerated)) {
-        fs.copyFileSync(cadGenerated, path.join(assetDir, '02-figurin-lineas-tecnico.png'));
-        fs.copyFileSync(cadGenerated, path.join(assetDir, '06-patron-2-cad-plano-tecnico.png'));
-      }
-      if (fs.existsSync(lineartGenerated)) {
-        fs.copyFileSync(lineartGenerated, path.join(assetDir, '07-patron-3-figurin-lineas.png'));
-      }
-    } catch (err) {
-      console.warn(`[Aviso] No se pudo ejecutar el extractor local de lineart: ${err.message}`);
-    }
   }
 
   const manifest = {
