@@ -82,7 +82,7 @@ The workspace includes 6 specialized sub-agents defined in `BRIDS-Engine/agents/
 | `b2b-sponsor-lead` | Real Estate Sponsor Acquisition & RevOps | `10 RevOps & Sales/b2b-sponsors/` | Developer/GP value prop, institutional one-pagers, cold outbound sequences, pilot onboarding. |
 | `founder-ghostwriter` | Founder Voice, Thought Leadership & YC Storyteller | `04 Social & Community/`, `07 Newsletters/` | YC application essays ("Why now?", "Unique insight"), X/Twitter threads on Solana RWA, LinkedIn articles, investor updates. |
 
-- Manifest: `BRIDS-Engine/agents/agents-manifest.json`
+- Definitions: Individual autonomous YAML files in `BRIDS-Engine/agents/*.yaml`
 - Verification: `bash BRIDS-Engine/scripts/inspect-squad.sh`
 
 
