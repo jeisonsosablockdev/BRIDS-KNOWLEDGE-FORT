@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Master Content Alignment & Synchronization Tool for AndreArt Vestuario
+ * Master Content Alignment & Synchronization Tool for BRIDS.io
  *
  * Ensures 1-to-1 alignment between:
  * 1. La Parrilla de Publicaciones Estratégica (15 Días)
@@ -140,7 +140,7 @@ platform: "instagram"
 content_type: "reel-vertical"
 pillar: "${item.pillar}"
 cultural_reference: "${item.culturalRef}"
-garment: "${item.garment}"
+topic: "${item.garment}"
 status: draft
 version: "1.0"
 created_at: ${item.date}
@@ -150,78 +150,78 @@ tags:
   - social-content
   - reel
   - instagram
+  - rwa
+  - solana
   - ${item.slug}
 ---
 
 # [INSTAGRAM REEL] ${item.slug.replace(/-/g, ' ').toUpperCase()}
 
 > [!NOTE]
-> **Resumen Ejecutivo:** Video vertical Reel 9:16 para Instagram enfocado en ${item.garment} (${item.culturalRef}). Formato dinámico 15-25s aplicando la Guía Directorial SOP de 4 Escenas.
+> **Resumen Ejecutivo:** Video vertical Reel 9:16 para Instagram enfocado en ${item.garment} (${item.culturalRef}). Formato institucional de 15-30s con desglose técnico de infraestructura y propuesta de valor RWA en Solana.
 
 ---
 
 ## 🎯 Contexto y Objetivo
-- **Plataforma:** Instagram Reels (\`@andreartvestuario\`)
+- **Plataforma:** Instagram Reels (\`@brids_io\`)
 - **Pilar de Contenido:** ${item.pillar}
-- **Prenda Protagonista:** ${item.garment}
-- **Referencia Cultural:** *${item.culturalRef}*
+- **Concepto / Tesis:** ${item.garment}
+- **Referencia Técnica:** *${item.culturalRef}*
 - **Gancho Visual / Hook:** *"${item.hook}"*
-- **Eslogan Oficial:** *"Sé tu propio héroe"*
+- **Llamado a la Acción (CTA):** *${item.cta}*
 
 ---
 
-## 🎬 1. Especificaciones Técnicas (Guía Directorial SOP)
+## 🎬 1. Especificaciones Técnicas (Guía de Producción RWA)
 - **Formato:** 9:16 Vertical (1080p @ 60fps)
-- **Duración:** 15 a 25 segundos
-- **Audio:** Captura de sonido directo a 10-15 cm (ASMR) + música rítmica de fondo
+- **Duración:** 15 a 30 segundos
+- **Audio:** Voz en off institucional clara + música fintech rítmica de fondo
+- **Paleta Visual:** Azul Profundo (\`#0B192C\`), Verde Solana (\`#14F195\`), Blanco (\`#F8FAFC\`)
 
 ---
 
 ## ⏱️ 2. Guión de Grabación & Edición (4 Escenas)
 
-| Tiempo | Escena | Ángulo & Tomas | Acción en Pantalla | Audio / Texto |
+| Tiempo | Escena | Ángulo & Tomas | Acción en Pantalla | Audio / Voz en Off |
 |---|---|---|---|---|
-| **00:00 - 00:03** | **Escena 1 (Hook)** | Macro / Super Close-up (10-15 cm) | Raspado de tiza o tijera cortando tela en seco. | *"${item.hook}"* |
-| **00:03 - 00:10** | **Escena 2 (Desarrollo)** | Cenital a 90° sobre mesón | Trazado de moldería y confección en taller Bogotá. | *"Diseño de autor en Bogotá. Tallas XS a XL."* |
-| **00:10 - 00:18** | **Escena 3 (Densidad PAS)** | Slow-Motion 60fps + Macro | Caída pesada de tela y marquilla estampada suave. | *"Cero roces. Telas de alto gramaje."* |
-| **00:18 - 00:25** | **Escena 4 (Cierre CTA)** | Contrapicado leve a 15° | Prenda en movimiento con porte heroico. | *"Pide el tuyo en el link de la bio. Sé tu propio héroe. 🛡️"* |
+| **00:00 - 00:03** | **Escena 1 (Hook)** | Pantalla dividida / Tipografía cinética | Comparación visual de fricción tradicional vs solución on-chain. | *"${item.hook}"* |
+| **00:03 - 00:12** | **Escena 2 (Arquitectura)** | Screen recording de UI / B-roll inmobiliario | Demostración de trazabilidad en Solana y Delaware SPVs dedicados. | *"Cada propiedad vive en un SPV independiente, garantizando segregación de riesgos y titularidad jurídica."* |
+| **00:12 - 00:22** | **Escena 3 (Rendimiento)** | Motion graphic de flujo financiero USDC | Distribución automática de rentas y plugins de recuperación Metaplex Core. | *"Liquidación instantánea en USDC, auditoría pública on-chain y custodia sin intermediarios bancarios lentos."* |
+| **00:22 - 00:30** | **Escena 4 (Cierre CTA)** | Tarjeta de activo + URL brids.io | Logo BRIDS con llamado a la acción comercial. | *"${item.cta}"* |
 
 ---
 
-## ✍️ 3. Copy Comercial para el Caption (4 Reglas de Oro)
+## ✍️ 3. Copy Oficial para Publicación
 
 \`\`\`text
 ${item.hook}
 
-${item.garment} confeccionado en Bogotá con silueta deconstruida, moldería inteligente que abraza desde la talla XS a la XL y confort sensorial PAS con marquilla estampada (cero picazón).
+${item.garment}: Infraestructura Web3 de software para la sindicación e inversión inmobiliaria estructurada en EE.UU.
 
-Inspirado en la mística de ${item.culturalRef}.
+Respaldado por Delaware SPVs segregadas, verificación KYC biométrica con Stripe Identity y plugins nativos de Metaplex Core en la red de Solana.
 
-👉 Pide el tuyo hoy mismo en el enlace de la bio o al WhatsApp oficial antes de agotar la tanda del taller.
+${item.cta}
 
-Sé tu propio héroe. 🛡️
-
-#Andreart #ModaDeAutor #UrbanFantasy #BogotaModa #${item.slug.replace(/-/g, '')} #SeTuPropioHeroe
+${item.hashtags}
 \`\`\`
 
 ---
 
 ## 📋 4. Checklist Técnico de Verificación
-- [ ] Cámara en modo 1080p 60fps vertical 9:16.
-- [ ] Escena 1 (Hook macro ASMR) grabada con audio limpio.
-- [ ] Subtítulos centrados dentro del área segura de Instagram.
-- [ ] Copy verificado con llamado a la acción comercial.
+- [ ] Cámara y render en modo 1080p 60fps vertical 9:16.
+- [ ] Subtítulos centrados dentro del área segura de Instagram / Reels.
+- [ ] Copy verificado con llamado a la acción oficial y URL de brids.io.
+- [ ] Blindaje legal confirmado: sin promesa de retornos garantizados ni rol broker-dealer.
 
 ---
 
 ## 🔄 Historial de Revisiones (Changelog)
-- **v1.0 (${item.date}):** Creación del guión de Reel alineado con la Parrilla Estratégica de 15 Días.
+- **v1.0 (${item.date}):** Creación del guión de Reel institucional alineado con la Parrilla Estratégica de 15 Días.
 
 ---
 
 ## 🔗 Referencias Cruzadas
-- Parrilla Estratégica: [[07 Paid, Social & Community/Social Content/Parrilla de Publicaciones Instagram 15 Dias.md]]
-- Guía Técnica SOP: [[07 Paid, Social & Community/Social Content/Guia Tecnica de Produccion de Contenido.md]]
+- Biblioteca de Conceptos: [[02 Strategy & Research/master-business-concepts.md]]
 - Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
 `;
 
@@ -255,7 +255,7 @@ function updateParrillaDocument(plan) {
     const formatBadge = item.format === 'carrusel' ? '🖼️ Carrusel (4:5)' : '🎬 Reel (9:16)';
 
     const publishedBox = item.published ? '[x]' : '[ ]';
-    const fullCopy = `${item.hook}<br><br>${item.cta}<br><br>Sé tu propio héroe. 🛡️<br><br>${item.hashtags}`;
+    const fullCopy = `${item.hook}<br><br>${item.cta}<br><br>${item.hashtags}`;
     tableRows += `| **${item.postNumber}** | \`${item.date}\` | **${item.garment}** | *${item.culturalRef}* | *"${item.hook}"* | ${item.cta} | *${item.altText}* | \`${item.hashtags}\` | \`${fullCopy}\` | ${formatBadge} | ${item.statusEmoji} ${item.status} | ${publishedBox} | *(Sin link)* | ${noteLink} | ${assetLink} |\n`;
   }
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Task Lifecycle Manager CLI for AndreArt Marketing Knowledge
+ * Task Lifecycle Manager CLI for BRIDS Marketing Knowledge
  * Manages full lifecycle: init, list, add, update, show, and close.
  */
 
@@ -337,7 +337,7 @@ switch (command) {
     break;
   default:
     console.log(`
-Marketing Task Lifecycle Manager (AndreArt)
+Marketing Task Lifecycle Manager (BRIDS)
 
 Comandos disponibles:
   init   <id> [meta] [icp] [restricciones]                      Inicializa una nueva sesión de tarea

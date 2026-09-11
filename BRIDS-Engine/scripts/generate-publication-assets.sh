@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Script: generate-publication-assets.sh
-# Purpose: Context-Aware Publication Asset Generator for AndreArt
+# Purpose: Context-Aware Publication Asset Generator for BRIDS
 # ==============================================================================
 
 set -euo pipefail

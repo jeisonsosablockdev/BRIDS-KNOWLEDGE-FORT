@@ -29,10 +29,12 @@ BRIDS KNOWLEDGE FORT/
 ├── AGENTS.md
 ├── README.md
 ├── BRIDS-Engine/
+│   ├── agents/
 │   ├── context/
 │   ├── docs/
 │   ├── scripts/
-│   └── skills/
+│   ├── skills/
+│   └── templates/
 └── BRIDS-Brain/
     ├── 00 Inbox/
     ├── 01 Brand Context/
@@ -44,7 +46,12 @@ BRIDS KNOWLEDGE FORT/
     ├── 07 Paid, Social & Community/
     ├── 08 Analytics & Measurement/
     ├── 09 Retention & Growth/
-    └── 10 RevOps & Sales/
+    ├── 10 RevOps & Sales/
+    ├── 11 Legal & Compliance/
+    ├── 12 Finance & Treasury/
+    ├── 13 Product & Engineering/
+    ├── 14 Investor Relations & YC/
+    └── 15 Operations & Governance/
 ```
 
 ## Brand Context
@@ -73,40 +80,30 @@ Use that file to keep product, audience, positioning, proof points, tone, and go
 On Windows PowerShell, use:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\\BRIDS-Engine\\scripts\\enable-project-skills.ps1
+powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\enable-project-skills.ps1
 ```
 
 ## Folder Purpose
 
-- `00 Inbox`: rough captures, ideas, and quick drafts
-- `01 Brand Context`: persistent brand and product context
-- `02 Strategy & Research`: planning, research, positioning, pricing, launch work
+### Marketing, GTM & Growth (00-10)
+- `00 Inbox`: rough captures, ideas, quick drafts, and SDD task sessions
+- `01 Brand Context`: persistent brand and product context (`product-marketing-context.md`)
+- `02 Strategy & Research`: corporate strategy, master business concepts (`Business Concepts/`), market research
 - `03 Website & Copy`: page copy, website rewrites, lead magnets
 - `04 Email & Lifecycle`: cold email and email sequence work
-- `05 SEO & Discoverability`: SEO, AI SEO, schema, site structure, ASO
+- `05 SEO & Discoverability`: SEO, AI SEO (GEO), schema, site structure, ASO
 - `06 CRO & Funnel`: page optimization and funnel conversion work
-- `07 Paid, Social & Community`: ads, creative, social, and community content
-- `08 Analytics & Measurement`: tracking and measurement notes
+- `07 Paid, Social & Community`: ads, creative, social posts, carousels, and content grids
+- `08 Analytics & Measurement`: tracking plans (GA4/Mixpanel) and KPI dashboards
 - `09 Retention & Growth`: churn reduction, referrals, and growth loops
-- `10 RevOps & Sales`: revenue operations and sales collateral
+- `10 RevOps & Sales`: B2B sponsor acquisition and sales enablement
 
-
-
-
-It is preconfigured for Codex with:
-
-- default agent: `Codex`
-- adapter path: `/Users/jaymusicmachine/.nvm/versions/node/v24.10.0/bin/codex-acp`
-- Node path: `/Users/jaymusicmachine/.nvm/versions/node/v24.10.0/bin/node`
-- authentication mode: Codex CLI login
-- default chat export folder: `BRIDS-Brain/00 Inbox/Agent Client Chats/`
-
-To rebuild the plugin from source:
-
-```bash
-npm install
-npm run build
-```
+### Administrative & Corporate (11-15)
+- `11 Legal & Compliance`: Delaware C-Corp governance, SPVs (Series LLC), Data Room, KYC/AML
+- `12 Finance & Treasury`: 3-5y pro forma financial models, Cap Table, runway, Squads Multi-Sig
+- `13 Product & Engineering`: Solana architecture, Metaplex Core plugins, smart contract audits
+- `14 Investor Relations & YC`: Y Combinator application, pitch decks, investor updates
+- `15 Operations & Governance`: operational SOPs, team hiring, advisor agreements, board resolutions
 
 ## Project Scripts & Automation
 

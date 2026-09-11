@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Idempotency Test Suite for AndreArt Marketing Core
+ * Idempotency Test Suite for BRIDS Marketing Core
  * Verifies that all configuration, task lifecycle, sync, and refinement scripts
  * produce deterministic, stable results when executed multiple times.
  */

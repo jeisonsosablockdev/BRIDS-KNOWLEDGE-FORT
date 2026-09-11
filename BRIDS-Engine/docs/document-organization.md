@@ -49,64 +49,110 @@ Use for:
 - homepage copy
 - landing page copy
 - website rewrites
-- email drafts
-- cold outreach
 - lead magnets
+- copy editing
 
-### `04 SEO & Discoverability`
+### `04 Email & Lifecycle`
+
+Use for:
+- cold email sequences
+- email nurture flows
+- onboarding email lifecycles
+- outbound campaign drafts
+
+### `05 SEO & Discoverability`
 
 Use for:
 - SEO audits
-- AI SEO
-- ASO
+- AI SEO (GEO / Generative Engine Optimization)
+- ASO (App Store Optimization)
 - competitor alternatives
 - programmatic SEO
-- schema
+- schema markup
 - site architecture
 
-### `05 CRO & Funnel`
+### `06 CRO & Funnel`
 
 Use for:
 - page CRO
 - signup flow improvements
-- onboarding improvements
-- forms
-- popups
+- onboarding conversion
+- forms & popups
 - paywalls
 - experiments and A/B test plans
 
-### `06 Paid, Social & Community`
+### `07 Paid, Social & Community`
 
 Use for:
-- ad creative
-- paid campaign plans
-- social posts
-- social calendars
+- ad creative & paid campaigns
+- social media posts (LinkedIn, X, Telegram)
+- 4-slide carousels & publication assets
+- editorial content grids (parrilla)
 - community marketing assets
 
-### `07 Analytics & Measurement`
+### `08 Analytics & Measurement`
 
 Use for:
-- event tracking plans
-- measurement docs
-- KPI notes
-- analytics instrumentation artifacts
+- event tracking plans (GA4, Mixpanel)
+- measurement frameworks
+- KPI scorecards and dashboards
+- analytics instrumentation notes
 
-### `08 Retention & Growth`
+### `09 Retention & Growth`
 
 Use for:
-- churn reduction
+- churn reduction & prevention
 - referral programs
 - free tool strategy
-- retention ideas and loops
+- retention ideas and growth loops
 
-### `09 RevOps & Sales`
+### `10 RevOps & Sales`
 
 Use for:
-- revops docs
-- sales one-pagers
-- objection handling
-- enablement collateral
+- revops docs & pipeline management
+- B2B sponsor acquisition collateral
+- sales battlecards & one-pagers
+- objection handling and sales enablement
+
+### `11 Legal & Compliance`
+
+Use for:
+- Delaware C-Corp corporate governance
+- SPV (Series LLC) structuring & asset segregation
+- Data Room preparation & investor due diligence
+- Stripe Identity KYC/AML compliance & non-broker-dealer safe harbor
+
+### `12 Finance & Treasury`
+
+Use for:
+- quantitative 3-5 year financial models & unit economics
+- Cap Table & equity dilution scenarios
+- runway, cash burn & budget tracking
+- Squads Protocol Multi-Sig treasury governance
+
+### `13 Product & Engineering`
+
+Use for:
+- Solana blockchain infrastructure architecture
+- Metaplex Core plugin specifications (Freeze & Authority/Recovery)
+- smart contract security audits & PRDs
+- technical product roadmaps
+
+### `14 Investor Relations & YC`
+
+Use for:
+- Y Combinator application essays & interview preparation
+- 10-12 slide investor pitch decks (Sequoia / Seed format)
+- monthly investor updates & shareholder letters
+- venture capital pipeline & CRM
+
+### `15 Operations & Governance`
+
+Use for:
+- institutional standard operating procedures (SOPs)
+- key talent hiring plans & scorecards
+- advisor agreements & board resolutions
+- vendor management & operational compliance
 
 ## When to Create a New Folder
 

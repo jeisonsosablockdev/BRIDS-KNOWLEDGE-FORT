@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "MarketingTaskSession",
-  "description": "Plantilla estándar para el seguimiento, descomposición y encadenamiento de tareas de marketing en AndreArt.",
+  "description": "Plantilla estándar para el seguimiento, descomposición y encadenamiento de tareas de marketing en BRIDS.",
   "session_id": "nombre-de-sesion-kebab-case",
   "created_at": "2026-08-08T00:00:00Z",
   "updated_at": "2026-08-08T00:00:00Z",

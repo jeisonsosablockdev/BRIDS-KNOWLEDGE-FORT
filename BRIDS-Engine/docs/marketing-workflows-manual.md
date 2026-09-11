@@ -1,26 +1,27 @@
 # Manual Oficial de Workflows de Marketing y Harness Operativo
 
-Este documento contiene la especificación completa del sistema de marketing para **AndreArt**. Establece la taxonomía, los 8 workflows principales, la orquestación de las 36 skills de `BRIDS-Engine`, el ciclo de vida de tareas en 5 pasos y el protocolo de persistencia en **BRIDS-Brain** mediante Obsidian Local REST API.
+Este documento contiene la especificación completa del sistema de marketing para **BRIDS.io**. Establece la taxonomía, los 8 workflows principales, la orquestación de las skills de `BRIDS-Engine`, el ciclo de vida de tareas en 5 pasos y el protocolo de persistencia en **BRIDS-Brain** mediante Obsidian Local REST API.
 
 ---
 
 ## 1. Arquitectura del Sistema
 
 ```
-Marketing/
+BRIDS KNOWLEDGE FORT/
 ├── AGENTS.md                          # Reglas globales de gobernanza y no contaminación
 ├── README.md                          # Visión general del proyecto
-├── BRIDS-Engine/                # FUENTE DE VERDAD DE LÓGICA Y HABILIDADES
+├── BRIDS-Engine/                      # FUENTE DE VERDAD DE LÓGICA Y HABILIDADES
+│   ├── agents/                        # Definición de agentes especializados de negocio y YC
 │   ├── context/                       # Contexto central (product-marketing-context.md)
 │   ├── docs/                          # Documentación operativa y manual de workflows
-│   ├── skills/                        # 36 skills locales adaptadas para el proyecto
+│   ├── skills/                        # Skills locales adaptadas para el proyecto
 │   ├── templates/                     # Plantillas JSON de tracking y Markdown
 │   └── scripts/                       # Scripts de activación, sync y healthcheck
-└── BRIDS-Brain/                    # VAULT PERSISTENTE DE OBSIDIAN (CONTENIDO)
+└── BRIDS-Brain/                       # VAULT PERSISTENTE DE OBSIDIAN (CONTENIDO)
     ├── .obsidian/                     # Plugins comunitarios (Local REST API, Drive Sync)
     ├── 00 Inbox/                      # Sesiones de tareas JSON y borradores rápidos
     ├── 01 Brand Context/              # Contexto de marca, ICP y propuesta de valor
-    ├── 02 Strategy & Research/        # Estrategia de contenidos, lanzamientos, pricing
+    ├── 02 Strategy & Research/        # Estrategia de contenidos, lanzamientos, pricing y conceptos
     ├── 03 Website & Copy/             # Copys de landing pages, home y lead magnets
     ├── 04 Email & Lifecycle/          # Campañas frías y secuencias de ciclo de vida
     ├── 05 SEO & Discoverability/      # Auditorías SEO, AI SEO, schema markup
@@ -28,7 +29,12 @@ Marketing/
     ├── 07 Paid, Social & Community/   # Anuncios, creatividades, publicaciones sociales
     ├── 08 Analytics & Measurement/    # Planes de tracking GA4/Mixpanel y métricas
     ├── 09 Retention & Growth/         # Reducción de churn, programas de referidos
-    └── 10 RevOps & Sales/             # Battlecards comerciales, objeciones y RevOps
+    ├── 10 RevOps & Sales/             # Battlecards comerciales, sponsors B2B y RevOps
+    ├── 11 Legal & Compliance/         # Estructuración SPVs, KYC/AML, regulatorio
+    ├── 12 Finance & Treasury/         # Modelos pro forma, tesorería Multi-Sig, Cap Table
+    ├── 13 Product & Engineering/      # Arquitectura Solana, smart contracts Metaplex Core
+    ├── 14 Investor Relations & YC/    # Decks, aplicación YC, tesis de inversión
+    └── 15 Operations & Governance/    # SOPs institucionales, hiring y gobierno societario
 ```
 
 ---

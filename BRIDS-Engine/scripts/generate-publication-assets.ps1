@@ -1,6 +1,6 @@
 # ==============================================================================
 # Script: generate-publication-assets.ps1
-# Purpose: Context-Aware Publication Asset Generator for AndreArt (Windows)
+# Purpose: Context-Aware Publication Asset Generator for BRIDS (Windows)
 # ==============================================================================
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path

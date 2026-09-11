@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Non-Destructive Refinement & Content Governance CLI for AndreArt
+ * Non-Destructive Refinement & Content Governance CLI for BRIDS
  * Ensures notes are never accidentally wiped, takes safety snapshots,
  * manages incremental versioning, and appends to the document Changelog.
  */
@@ -302,7 +302,7 @@ switch (command) {
     break;
   default:
     console.log(`
-Non-Destructive Refinement & Content Governance CLI (AndreArt)
+Non-Destructive Refinement & Content Governance CLI (BRIDS)
 
 Comandos disponibles:
   inspect   <ruta>                            Audita el estado, frontmatter y secciones del archivo

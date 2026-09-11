@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 /**
- * Context-Aware Publication Visual Engine for AndreArt Vestuario
+ * Context-Aware Publication Visual Engine for BRIDS.io
  *
  * Capabilities:
  * - Reads and parses any publication note (Markdown frontmatter + content sections)
- * - Reads product marketing context (garment lore, ICP, PAS details, Bogotá tailoring)
- * - Reads brand visual style guide (palette #3E2356/#CBBAD9, line-art minimalism, negative tokens)
- * - Extracts specific slide hooks, micro-copys, and cultural narratives
- * - Generates high-fidelity contextual prompts tailored to the garment & story
+ * - Reads product marketing context (RWA architecture, Solana TPS, Delaware SPV, Stripe Identity)
+ * - Reads brand visual style guide (palette #0B192C/#14F195/#00F5D4, fintech minimalism)
+ * - Extracts specific slide hooks, micro-copys, and technical narratives
+ * - Generates high-fidelity contextual prompts tailored to the asset & architecture
  * - Updates/creates asset directories with generation-prompts.json and Obsidian embeds
  *
  * Usage:
@@ -102,41 +102,38 @@ function resolvePublicationNote(query) {
 }
 
 /**
- * Extracts lore and context details about a garment from product-marketing-context.md
+ * Extracts lore and context details about an RWA asset or infrastructure concept from product-marketing-context.md
  */
-function extractGarmentContext(garmentName) {
-  if (!fs.existsSync(BRAND_CONTEXT_PATH)) return {};
-
-  const content = fs.readFileSync(BRAND_CONTEXT_PATH, 'utf8');
-  const cleanName = (garmentName || '').toLowerCase();
+function extractAssetContext(topicName) {
+  const cleanName = (topicName || '').toLowerCase();
 
   const lore = {
-    brand_slogan: "Sé tu propio héroe",
-    atelier_location: "Bogotá, Colombia",
-    sizing: "Moldería inteligente XS a XL adaptable",
-    pas_comfort: "Marquilla estampada ultrasuave cero picazón y alta densidad táctil",
-    textiles: "Textiles pesados de alta densidad y caída estructurada",
-    garment_specifics: ""
+    brand_slogan: "Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados desde $100 USD",
+    platform_ecosystem: "Solana RWA / Metaplex Core / Delaware SPVs",
+    ticket_minimum: "$100 USD",
+    settlement_currency: "USDC",
+    compliance_framework: "Non-Broker-Dealer SaaS + Delaware Series LLC",
+    asset_specifics: "Activo inmobiliario de grado institucional estructurado en Delaware y tokenizado en Solana."
   };
 
-  if (cleanName.includes('hakama')) {
-    lore.garment_specifics = "Pantalón Hakama unisex con pliegues arquitectónicos, pretina adaptable multiposición e inspiración samurái urbana chic.";
-  } else if (cleanName.includes('hanbok')) {
-    lore.garment_specifics = "Hanbok reinterpretado con cruce frontal contemporáneo, lazos fluidos y caída noble para eventos K-pop o porte elegante.";
-  } else if (cleanName.includes('haori')) {
-    lore.garment_specifics = "Haori de corte recto oriental urbano, mangas estructuradas y estilo alternativo vanguardista para nightlife.";
-  } else if (cleanName.includes('capa') || cleanName.includes('mago')) {
-    lore.garment_specifics = "Capa de autor con capucha envolvente de media estación, caída pesada y corte de mago contemporáneo.";
-  } else if (cleanName.includes('piloto') || cleanName.includes('star wars')) {
-    lore.garment_specifics = "Chaqueta de piloto galáctico con cortes limpios de abrigo y presencia escénica inspirada en la ciencia ficción.";
-  } else if (cleanName.includes('sacerdotisa')) {
-    lore.garment_specifics = "Silueta ceremonial sintoísta deconstruida en dos piezas con cortes geométricos y mística oriental.";
-  } else {
-    lore.asset_specifics = "Activo inmobiliario de grado institucional estructurado mediante Delaware Series LLC y tokenizado en Solana.";
+  if (cleanName.includes('solana') || cleanName.includes('tps') || cleanName.includes('gas')) {
+    lore.asset_specifics = "Infraestructura blockchain en Solana de alta velocidad (>2,000 TPS) y tarifas submilesimales (<$0.001) para distribución masiva de rentas.";
+  } else if (cleanName.includes('spv') || cleanName.includes('delaware') || cleanName.includes('compliance')) {
+    lore.asset_specifics = "Estructuración dual con Delaware C-Corp operando el software y LLCs independientes (SPVs) como titulares jurídicos exclusivos del activo.";
+  } else if (cleanName.includes('metaplex') || cleanName.includes('core') || cleanName.includes('freeze') || cleanName.includes('recovery')) {
+    lore.asset_specifics = "Plugins avanzados de Metaplex Core (Freeze y Authority/Recovery) que permiten congelar y reemitir NFTs tras verificación de identidad KYC sin violar derechos fiduciarios.";
+  } else if (cleanName.includes('sponsor') || cleanName.includes('developer') || cleanName.includes('capital')) {
+    lore.asset_specifics = "Portal institucional de captación y sindicación que permite a General Partners (GPs) acceder a liquidez global y reducir costo de capital.";
+  } else if (cleanName.includes('stripe') || cleanName.includes('kyc') || cleanName.includes('identidad')) {
+    lore.asset_specifics = "Onboarding biométrico instantáneo con Stripe Identity, validando inversores acreditados y minoristas sin retener datos sensibles en servidores propios.";
+  } else if (cleanName.includes('multisig') || cleanName.includes('squads') || cleanName.includes('treasury')) {
+    lore.asset_specifics = "Custodia descentralizada de tesorería y desembolsos por hitos mediante contratos multifirma Squads Protocol en Solana.";
   }
 
   return lore;
 }
+
+const extractGarmentContext = extractAssetContext;
 
 /**
  * Parses Slide Details from Note Body
@@ -190,7 +187,7 @@ function buildContextualManifest(notePath, inputImagePath = null) {
 
   const noteFileName = path.basename(notePath);
   const isCarousel = frontmatter.content_type === 'carrusel-4-slides' || noteFileName.includes('carrusel');
-  const assetClass = frontmatter.asset_class || frontmatter.garment || 'Real Estate RWA Tokenization';
+  const assetTopic = frontmatter.topic || frontmatter.asset_class || frontmatter.garment || 'Real Estate RWA Tokenization';
   const technicalRef = frontmatter.technical_reference || frontmatter.cultural_reference || 'Solana Metaplex Core / Delaware SPV';
   const platform = frontmatter.platform || 'linkedin';
   const aspectRatio = frontmatter.aspect_ratio || (isCarousel ? '4:5' : '9:16');
@@ -205,7 +202,8 @@ function buildContextualManifest(notePath, inputImagePath = null) {
   const assetDir = path.join(ASSETS_ROOT, folderName);
   ensureDir(assetDir);
 
-  const slideDetails = extractSlideDetails(body, assetClass, technicalRef);
+  const slideDetails = extractSlideDetails(body, assetTopic, technicalRef);
+  const assetContext = extractAssetContext(assetTopic);
 
   // If input image was provided, copy it cleanly to assetDir as 01-portada-hero.png
   let heroImageCopied = false;
@@ -218,56 +216,56 @@ function buildContextualManifest(notePath, inputImagePath = null) {
   const manifest = {
     source_publication_note: path.relative(ROOT_DIR, notePath),
     publication_title: frontmatter.title || path.basename(notePath, '.md'),
-    garment: garment,
-    cultural_reference: culturalRef,
+    asset_topic: assetTopic,
+    technical_reference: technicalRef,
     aspect_ratio: `${aspectRatio} (${aspectRatio === '4:5' ? '1080x1350 px' : '1080x1920 px'})`,
     context_alignment: {
-      brand: "Andreart Vestuario",
-      slogan: garmentLore.brand_slogan,
-      atelier: garmentLore.atelier_location,
-      garment_lore: garmentLore.garment_specifics,
-      tactile_comfort: garmentLore.pas_comfort,
-      sizing_system: garmentLore.sizing
+      brand: "BRIDS.io",
+      slogan: assetContext.brand_slogan,
+      ecosystem: assetContext.platform_ecosystem,
+      asset_context: assetContext.asset_specifics,
+      ticket_minimum: assetContext.ticket_minimum,
+      settlement: assetContext.settlement_currency
     },
     brand_visual_tokens: {
       palette: {
-        deep_violet_primary: "#3E2356",
-        soft_lilac_accent: "#CBBAD9",
-        atelier_ivory_canvas: "#F6F4EE",
-        obsidian_charcoal_line: "#1E1B24",
-        pure_white_logo: "#FFFFFF"
+        deep_blue_primary: "#0B192C",
+        solana_green_accent: "#14F195",
+        cyan_neon_accent: "#00F5D4",
+        canvas_off_white: "#F8FAFC",
+        pure_white_text: "#FFFFFF"
       },
-      positive_tokens: "andreart brand visual style, ultra-minimalist, ample negative space, clean uncluttered composition, airy elegance, loose delicate fluid linework, zero clutter, spacious clean background, haute couture minimalism, simple and breathable layout",
-      negative_tokens: "cluttered, overcrowded, busy composition, excessive annotations, floating objects, saturated details, messy lines, text clutter, heavy textures, overly dense, visually noisy, cheap cosplay, bright neon party colors, childish cartoon, muddy colors"
+      positive_tokens: "brids institutional brand visual style, ultra-clean architectural photography, institutional real estate, solana ecosystem, modern financial charts, metaplex core diagrams, high-end fintech, ample negative space, clean typography, luxury commercial property",
+      negative_tokens: "cluttered, cartoon, low resolution, cheap cosplay, garment, anime, clothing, fashion, textiles, noisy textures, amateur composition, oversaturated neon"
     },
     slides: {
       slide_1_hero: {
         file: "01-portada-hero.png",
-        type: "Fotografía Editorial / Hero",
+        type: "Fotografía Arquitectónica Editorial / Hero",
         overlay_headline: slideDetails.slide_1.headline,
         overlay_microcopy: slideDetails.slide_1.microcopy,
-        context_prompt: `High-fashion editorial vertical ${aspectRatio} portrait of a model wearing avant-garde ${garment}, inspired by ${culturalRef}, deep violet atmospheric studio lighting (#3E2356), soft lavender rim light (#CBBAD9), moody cinematic depth, uncluttered clean background, sharp focus, haute couture styling, photorealistic.`
+        context_prompt: `High-end architectural photography of modern luxury commercial real estate building representing ${assetTopic}, dramatic dusk lighting with subtle cyan (#00F5D4) and solana green (#14F195) architectural accents, clean geometric lines, professional fintech real estate magazine cover aesthetic, photorealistic 8k.`
       },
-      slide_2_line_art_figurine: {
-        file: "02-figurin-lineas-tecnico.png",
-        type: "Ficha Técnica CAD de Patronaje (Figurín & Plano Técnico)",
+      slide_2_tech_diagram: {
+        file: "02-diagrama-arquitectura-tecnica.png",
+        type: "Diagrama de Arquitectura de Smart Contracts & SPV",
         overlay_headline: slideDetails.slide_2.headline,
         overlay_microcopy: slideDetails.slide_2.microcopy,
-        context_prompt: `Professional fashion technical flat drawing and specification sheet of avant-garde ${garment} (${garmentLore.garment_specifics}), pure white background, crisp black vector line art. Left side shows a minimalist mannequin fashion figure wearing the ensemble. Right side shows the detailed technical flat drawing of the garment with seam lines, fabric drape arrows, and neat uppercase technical callout annotations with leader lines, and 'DESIGN NO. 042' at bottom right. High contrast, precise tailoring blueprints.`
+        context_prompt: `Clean minimalist infographic technical diagram illustrating ${technicalRef} on deep navy background (#0B192C), glowing solana green accents (#14F195), elegant vector nodes showing Delaware SPV connected to Solana blockchain and Stripe KYC validation, precision fintech UI blueprint, sharp contrast, highly legible.`
       },
-      slide_3_pas_detail: {
-        file: "03-plano-detalle-pas.png",
-        type: "Planos Macro Detalle & Confort PAS",
+      slide_3_financial_breakdown: {
+        file: "03-desglose-financiero-rendimiento.png",
+        type: "Panel Financiero & Desglose de Rendimiento USDC",
         overlay_headline: slideDetails.slide_3.headline,
         overlay_microcopy: slideDetails.slide_3.microcopy,
-        context_prompt: `Professional macro photography of dark heavyweight luxury textile weave of ${garment} with soft lavender undertones (#CBBAD9), clean reinforced tailoring stitches, seamless printed tagless label, tactile comfort PAS, clean studio lighting, shallow depth of field, minimalist composition.`
+        context_prompt: `Sophisticated fintech dashboard metric visual showing fractional real estate yield and cash flow in USDC, clean charts, elegant dark mode UI (#0B192C), emerald green performance indicators (#14F195), pristine typography, minimal and breathable composition.`
       },
       slide_4_conversion_cta: {
         file: "04-conversion-cta.png",
-        type: "Slide de Cierre Comercial (CTA)",
+        type: "Slide de Cierre Institucional & CTA",
         overlay_headline: slideDetails.slide_4.headline,
         overlay_microcopy: slideDetails.slide_4.microcopy,
-        context_prompt: `Ultra-minimalist haute couture Instagram slide for Andreart, seamless flat solid deep royal violet background (#3E2356), vast empty negative space, perfectly centered clean white geometric Andreart logo monogram, minimal single-line elegant typography 'SÉ TU PROPIO HÉROE', clean refined luxury aesthetic, zero clutter, breathable and simple.`
+        context_prompt: `Minimalist high-end fintech slide on dark solid slate blue canvas (#0B192C), centered modern white BRIDS logo emblem, clean typography 'BRIDS.IO — REAL ESTATE ON SOLANA', subtle emerald glow (#14F195), vast negative space, institutional venture-backed startup aesthetic.`
       }
     }
   };
@@ -295,30 +293,30 @@ function runCli() {
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
 ╔═══════════════════════════════════════════════════════════════════════════════════════╗
-║         SISTEMA DE REFERENCIA DE PUBLICACIÓN & GENERADOR DE CONTEXTO VISUAL           ║
+║         SISTEMA DE REFERENCIA DE PUBLICACIÓN & GENERADOR DE CONTEXTO VISUAL (BRIDS)   ║
 ╚═══════════════════════════════════════════════════════════════════════════════════════╝
 
 DESCRIPCIÓN:
   Toma como referencia cualquier nota de publicación existente en Obsidian, extrae
-  automáticamente su frontmatter, hook, micro-copys y referencia cultural, los cruza con
-  el Marketing Context y la Guía Visual de Andreart, y genera los prompts contextualizados
-  y la carpeta de activos lista para producción de imágenes.
+  automáticamente su frontmatter, hook, micro-copys y referencia técnica, los cruza con
+  el Marketing Context y la Guía Visual de BRIDS.io, y genera los prompts contextualizados
+  y la carpeta de activos lista para producción de imágenes arquitectónicas y financieras.
 
 USO:
   bash BRIDS-Engine/scripts/generate-publication-assets.sh <nota-o-slug> [opciones]
 
 EJEMPLOS:
   # Referenciar por nombre de archivo:
-  bash BRIDS-Engine/scripts/generate-publication-assets.sh "2026-08-13-instagram-carrusel-hanbok-reinterpretado-concierto-bts.md"
+  bash BRIDS-Engine/scripts/generate-publication-assets.sh "2026-09-01-carrusel-solana-rwa-infrastructure-thesis.md"
 
-  # Referenciar por slug o palabra clave:
-  bash BRIDS-Engine/scripts/generate-publication-assets.sh "hanbok"
+  # Referenciar por slug o concepto:
+  bash BRIDS-Engine/scripts/generate-publication-assets.sh "delaware-spv"
 
-  # Referenciar y suministrar la foto de entrada de la prenda:
-  bash BRIDS-Engine/scripts/generate-publication-assets.sh "sacerdotisa" --input-image ./foto-prenda.jpg
+  # Referenciar y suministrar imagen de entrada:
+  bash BRIDS-Engine/scripts/generate-publication-assets.sh "multifamily" --input-image ./foto-inmueble.jpg
 
   # Salida en JSON para automatizaciones / agentes:
-  bash BRIDS-Engine/scripts/generate-publication-assets.sh "choso" --json
+  bash BRIDS-Engine/scripts/generate-publication-assets.sh "metaplex-core" --json
 
 OPCIONES:
   --input-image <path>   Copia la fotografía de entrada como 01-portada-hero.png
@@ -351,21 +349,21 @@ OPCIONES:
       console.log(JSON.stringify(result, null, 2));
     } else {
       console.log('\n' + '═'.repeat(85));
-      console.log('🎨 SISTEMA DE REFERENCIA DE PUBLICACIÓN & CONTEXTO VISUAL');
+      console.log('🎨 SISTEMA DE REFERENCIA DE PUBLICACIÓN & CONTEXTO VISUAL (BRIDS.io)');
       console.log('═'.repeat(85));
       console.log(`\n📄 Publicación Referenciada:  ${result.noteFileName}`);
-      console.log(`👗 Prenda Extraída:           ${result.manifest.garment}`);
-      console.log(`⛩️  Referencia Cultural:       ${result.manifest.cultural_reference}`);
+      console.log(`🏢 Tesis / Activo RWA:        ${result.manifest.asset_topic}`);
+      console.log(`🛡️ Ancla Técnica:             ${result.manifest.technical_reference}`);
       console.log(`📁 Carpeta de Activos:        ${result.assetDir}`);
       console.log(`📜 Manifiesto de Prompts:     ${result.manifestPath}`);
       console.log(`🖼️ Foto Hero de Entrada:      ${result.heroImageCopied ? 'Procesada ✅' : 'Colocar en la carpeta de activos ⏳'}\n`);
 
       console.log('✨ PROMPTS CONTEXTUALES GENERADOS (LISTOS PARA IA):');
       console.log('─'.repeat(85));
-      console.log(`[Slide 1 - Hero]:\n${result.manifest.slides.slide_1_hero.context_prompt}\n`);
-      console.log(`[Slide 2 - Figurín Minimalista]:\n${result.manifest.slides.slide_2_line_art_figurine.context_prompt}\n`);
-      console.log(`[Slide 3 - Detalle PAS]:\n${result.manifest.slides.slide_3_pas_detail.context_prompt}\n`);
-      console.log(`[Slide 4 - Cierre CTA Monograma]:\n${result.manifest.slides.slide_4_conversion_cta.context_prompt}\n`);
+      console.log(`[Slide 1 - Hero Arquitectónico]:\n${result.manifest.slides.slide_1_hero.context_prompt}\n`);
+      console.log(`[Slide 2 - Arquitectura Smart Contracts]:\n${result.manifest.slides.slide_2_tech_diagram.context_prompt}\n`);
+      console.log(`[Slide 3 - Desglose Financiero USDC]:\n${result.manifest.slides.slide_3_financial_breakdown.context_prompt}\n`);
+      console.log(`[Slide 4 - Cierre Institucional CTA]:\n${result.manifest.slides.slide_4_conversion_cta.context_prompt}\n`);
       console.log('═'.repeat(85) + '\n');
     }
   } catch (err) {
@@ -380,6 +378,7 @@ OPCIONES:
 
 module.exports = {
   resolvePublicationNote,
+  extractAssetContext,
   extractGarmentContext,
   buildContextualManifest
 };

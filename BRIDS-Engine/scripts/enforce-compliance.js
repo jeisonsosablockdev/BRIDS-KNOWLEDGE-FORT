@@ -14,7 +14,7 @@ const SCRIPTS_DIR = path.join(ROOT_DIR, 'BRIDS-Engine', 'scripts');
 const VAULT_INBOX = path.join(ROOT_DIR, 'BRIDS-Brain', '00 Inbox');
 
 console.log('\n' + '█'.repeat(80));
-console.log('🛡️  SUITE MAESTRA DE ENFORCEMENT & ANTI-DRIFTING (ANDREART MARKETING)');
+console.log('🛡️  SUITE MAESTRA DE ENFORCEMENT & ANTI-DRIFTING (BRIDS MARKETING)');
 console.log('█'.repeat(80));
 
 let failures = 0;

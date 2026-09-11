@@ -103,7 +103,7 @@ function lintNote(filePath) {
 
 function runAudit() {
   console.log('\n' + '═'.repeat(75));
-  console.log('🏛️ AUDITORÍA DE ENFORCEMENT: BÓVEDA OBSIDIAN (ANDREART BRAIN)');
+  console.log('🏛️ AUDITORÍA DE ENFORCEMENT: BÓVEDA OBSIDIAN (BRIDS BRAIN)');
   console.log('═'.repeat(75));
 
   const files = getAllMarkdownFiles(VAULT_ROOT);

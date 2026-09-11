@@ -194,22 +194,22 @@ tags:
 
 ## 🖼️ Galería Visual del Carrusel (4 Slides)
 
-### Slide 1: Portada Hero
+### Slide 1: Portada Hero Arquitectónica
 ![[07 Paid, Social & Community/Social Content/Assets/${folderName}/01-portada-hero.png]]
 
-### Slide 2: Figurín Técnico en Líneas
-![[07 Paid, Social & Community/Social Content/Assets/${folderName}/02-figurin-lineas-tecnico.png]]
+### Slide 2: Arquitectura Técnica & Smart Contracts
+![[07 Paid, Social & Community/Social Content/Assets/${folderName}/02-diagrama-arquitectura-tecnica.png]]
 
-### Slide 3: Planos Detalle & Confort PAS
-![[07 Paid, Social & Community/Social Content/Assets/${folderName}/03-plano-detalle-pas.png]]
+### Slide 3: Desglose Financiero & Rendimiento Estimado
+![[07 Paid, Social & Community/Social Content/Assets/${folderName}/03-desglose-financiero-rendimiento.png]]
 
-### Slide 4: Conversión & Actitud Heroica (CTA)
+### Slide 4: Llamado a la Acción (CTA) & Onboarding
 ![[07 Paid, Social & Community/Social Content/Assets/${folderName}/04-conversion-cta.png]]
 
 ---
 
 ## 🔄 Historial de Revisiones (Changelog)
-- **v1.0 (${date}):** Creación del carrusel de 4 slides.
+- **v1.0 (${date}):** Creación del carrusel de 4 slides institucional.
 `;
   }
 
@@ -308,19 +308,19 @@ function runCli() {
   if (rawArgs.length === 0 || rawArgs.includes('--help') || rawArgs.includes('-h')) {
     console.log(`
 ╔═══════════════════════════════════════════════════════════════════════════════════════╗
-║         SISTEMA PROGRAMÁTICO DE CARRUSELES VISUALES (ANDREART VESTUARIO)              ║
+║         SISTEMA PROGRAMÁTICO DE CARRUSELES VISUALES (BRIDS RWA)                       ║
 ╚═══════════════════════════════════════════════════════════════════════════════════════╝
 
 USO BÁSICO (Argumentos Posicionales):
-  bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [imagen] [prenda] [referencia] [red]
+  bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [imagen] [activo] [referencia] [red]
 
 USO AVANZADO (Flags Nombradas):
-  bash BRIDS-Engine/scripts/create-social-carousel.sh \\
-    --idea "haori-cyberpunk-nightlife" \\
-    --image ./foto-taller.jpg \\
-    --garment "Haori Urbano de Autor" \\
-    --ref "Cyberpunk Edgerunners" \\
-    --platform instagram
+  bash BRIDS-Engine/scripts/create-social-carousel.sh \
+    --idea "delaware-spv-compliance" \
+    --image ./propiedad.jpg \
+    --asset "Commercial Real Estate RWA" \
+    --ref "Delaware Series LLC" \
+    --platform linkedin
 
 USO POR LOTES (Batch Mode):
   bash BRIDS-Engine/scripts/create-social-carousel.sh --batch ./mi-plan-semanal.json
