@@ -20,7 +20,7 @@ These sub-agents are engineered to cover every critical business front—financi
 ---
 
 ## Canonical Manifest
-All sub-agents are registered in machine-readable format in [`agents-manifest.json`](agents-manifest.json).
+All sub-agents are registered in human- and machine-readable format in [`agents.yaml`](agents.yaml).
 
 ## Integration Protocol
 1. **Live Runtime Registration:** Sub-agents are registered into the Antigravity agent execution environment via `define_subagent`.

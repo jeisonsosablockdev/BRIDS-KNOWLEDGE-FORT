@@ -15,7 +15,8 @@ else
   TARGET="$ROOT/BRIDS-Brain/01 Brand Context/product-marketing-context.md"
 fi
 
-ln -sf "$SOURCE" "$TARGET"
+# Use relative symlink to keep repository clean and portable across environments
+ln -sf "../../BRIDS-Engine/context/product-marketing-context.md" "$TARGET"
 echo "Linked brand context into vault:"
-echo "  $TARGET -> $SOURCE"
+echo "  $TARGET -> ../../BRIDS-Engine/context/product-marketing-context.md"
 
