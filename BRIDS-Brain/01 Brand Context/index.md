@@ -1,53 +1,69 @@
-# 01 Brand Context — Centro Maestro de Marca
+# 01 Brand Context — Centro Maestro de Marca & Conceptos de Negocio
 
-Este directorio constituye la fuente de verdad persistente sobre la identidad, posicionamiento, cliente ideal, catálogo y tono de comunicación de **Andreart Vestuario**.
+Este directorio constituye la **fuente de verdad persistente** sobre la identidad, tesis de negocio, conceptos fundacionales, posicionamiento, cliente ideal y tono de comunicación de **BRIDS.io**.
 
-> 🛡️ **Eslogan Transversal de Marca:** *"Sé tu propio héroe"*
+> 🛡️ **Eslogan Oficial de Marca:** *"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados desde $100 USD"*
 
 ---
 
 ## 📌 Índice de Navegación Rápida
 
-- 👑 **[1. Estrategia Global & Contexto de Producto](#1-estrategia-global--contexto-de-producto)** ➔ 📄 `product-marketing-context.md`
-- ⚔️ **[2. Manifiesto & Declaración de Posicionamiento](#2-manifiesto--declaración-de-posicionamiento)** ➔ 📄 `Positioning.md`
-- 👘 **[3. Fichas Comerciales de Catálogo](#3-fichas-comerciales-de-catálogo)** ➔ 📄 `Product Description.md`
-- 👤 **[4. Perfil de Cliente Ideal & Personas](#4-perfil-de-cliente-ideal--personas)** ➔ 📄 `ICP and personas.md`
-- 🎙️ **[5. Manual de Tono y Voz de Marca](#5-manual-de-tono-y-voz-de-marca)** ➔ 📄 `Tone and Voice.md`
-- 📸 **[6. Canales Oficiales & Redes Sociales](#6-canales-oficiales--redes-sociales)** ➔ 📄 `Canales Oficiales y Redes Sociales.md`
-- 🎯 **[7. Guía Operativa por Tarea](#7-guía-operativa-por-tarea)**
+- 🏛️ **[1. Biblioteca Maestra de Ideas & Conceptos de Negocio](#1-biblioteca-maestra-de-ideas--conceptos-de-negocio)** ➔ 📄 [[01 Brand Context/master-business-concepts.md|master-business-concepts.md]]
+- 🧩 **[2. Conceptos Atómicos Reutilizables (Core Concepts)](#2-conceptos-atómicos-reutilizables-core-concepts)** ➔ 📂 `01 Brand Context/Core Concepts/`
+- 👑 **[3. Contexto Integral de Producto y Mercado](#3-contexto-integral-de-producto-y-mercado)** ➔ 📄 [[01 Brand Context/product-marketing-context.md|product-marketing-context.md]]
+- ⚔️ **[4. Manifiesto & Marco de Posicionamiento](#4-manifiesto--marco-de-posicionamiento)** ➔ 📄 [[01 Brand Context/Positioning.md|Positioning.md]]
+- 🏢 **[5. Fichas Comerciales de Catálogo Inmobiliario](#5-fichas-comerciales-de-catálogo-inmobiliario)** ➔ 📄 [[01 Brand Context/Product Description.md|Product Description.md]]
+- 👤 **[6. Perfiles de Cliente Ideal & Personas (ICP)](#6-perfiles-de-cliente-ideal--personas-icp)** ➔ 📄 [[01 Brand Context/ICP and personas.md|ICP and personas.md]]
+- 🎙️ **[7. Manual de Tono y Voz de Marca](#7-manual-de-tono-y-voz-de-marca)** ➔ 📄 [[01 Brand Context/Tone and Voice.md|Tone and Voice.md]]
+- 📸 **[8. Canales Oficiales y Redes Sociales](#8-canales-oficiales-y-redes-sociales)** ➔ 📄 [[01 Brand Context/Canales Oficiales y Redes Sociales.md|Canales Oficiales y Redes Sociales.md]]
+- 🎨 **[9. Guía de Estilo Visual de Marca](#9-guía-de-estilo-visual-de-marca)** ➔ 📄 [[01 Brand Context/Brand Visual Style Guide.md|Brand Visual Style Guide.md]]
 
 ---
 
-## 👑 1. Estrategia Global & Contexto de Producto
-📄 **[product-marketing-context.md](./product-marketing-context.md)** *(Obsidian: [[product-marketing-context.md]])*
-- Visión estratégica global de la marca, propuesta de valor Urban Fantasy, dirección creativa de la diseñadora Andrea, diferenciación competitiva, dinámicas de cambio y metas comerciales.
+## 🏛️ 1. Biblioteca Maestra de Ideas & Conceptos de Negocio
+📄 **[[01 Brand Context/master-business-concepts.md|master-business-concepts.md]]**
+- Hub unificado que indexa los 8 grandes pilares estratégicos de BRIDS.io, integrando sus One-Liners canónicos, anclajes técnicos y lineamientos de reutilización para sub-agentes del squad.
 
-## ⚔️ 2. Manifiesto & Declaración de Posicionamiento
-📄 **[Positioning.md](./Positioning.md)** *(Obsidian: [[Positioning.md]])*
-- Manifiesto oficial "Sé Tu Propio Héroe", Declaración de Posicionamiento, los 5 pilares estratégicos, matriz comparativa de 5 vías (vs. fast-fashion, TEMU/SHEIN/Amazon, cosplay plástico, streetwear anime impreso y ropa usada de Japón JPFans/Buyee), dominio de categoría y taglines.
+## 🧩 2. Conceptos Atómicos Reutilizables (Core Concepts)
+Directorio modular con notas atómicas estandarizadas para transclusión y citas directas:
+- ⚖️ **C1: Blindaje Dual-Entity & Non-Broker-Dealer:** [[01 Brand Context/Core Concepts/concept-dual-entity-compliance.md|concept-dual-entity-compliance]]
+- 🔑 **C2: Protocolo de Recuperación de Billetera (Lost-Key Recovery):** [[01 Brand Context/Core Concepts/concept-wallet-recovery-protocol.md|concept-wallet-recovery-protocol]]
+- ⚡ **C3: Ventaja de Infraestructura Solana & Metaplex Core:** [[01 Brand Context/Core Concepts/concept-solana-rwa-infrastructure.md|concept-solana-rwa-infrastructure]]
+- 💰 **C4: Arquitectura de Tarifas y Unit Economics:** [[01 Brand Context/Core Concepts/concept-fee-architecture-unit-economics.md|concept-fee-architecture-unit-economics]]
+- 🤝 **C5: Propuesta de Valor para Desarrolladores B2B (Sponsors):** [[01 Brand Context/Core Concepts/concept-b2b-sponsor-value-prop.md|concept-b2b-sponsor-value-prop]]
+- 🌍 **C6: Tesis de Democratización Retail ($100 USD):** [[01 Brand Context/Core Concepts/concept-retail-fractionalization-thesis.md|concept-retail-fractionalization-thesis]]
+- 🏗️ **C7: Modelos de Inversión Inmobiliaria (Blue Brick Capital):** [[01 Brand Context/Core Concepts/concept-real-estate-investment-models.md|concept-real-estate-investment-models]]
+- 🔐 **C8: Tesorería Squads Multi-Sig y Dispersión sin Custodia:** [[01 Brand Context/Core Concepts/concept-multisig-treasury-governance.md|concept-multisig-treasury-governance]]
 
-## 👘 3. Fichas Comerciales de Catálogo
-📄 **[Product Description.md](./Product%20Description.md)** *(Obsidian: [[Product Description.md]])*
-- Fichas comerciales completas de conversión para E-Commerce, redes sociales y ferias de las 15+ prendas del catálogo (Pantalón Hakama, Hanbok, Kimonos, Capas de Mago/Medievales, Sobretodos, etc.), incluyendo moldería adaptable (XS-XL), cuidado PAS y guía de estilismo.
+## 👑 3. Contexto Integral de Producto y Mercado
+📄 **[[01 Brand Context/product-marketing-context.md|product-marketing-context.md]]**
+- Documento integral de contexto de marketing: visión estratégica, catálogo de modelos, ICPs, diferenciación competitiva, manejo de objeciones y KPIs.
 
-## 👤 4. Perfil de Cliente Ideal & Personas
-📄 **[ICP and personas.md](./ICP%20and%20personas.md)** *(Obsidian: [[ICP and personas.md]])*
-- Definición del Cliente Ideal (clase media / media-alta con canal de compra e-commerce D2C) y desgloses detallados de las 5 Buyer Personas (Profesional IT/Tech, Profesional de la Salud, Creador de Contenido, Cosplayer de Alta Gama y Confort PAS/Neurodivergente) con historias *"Un día en la vida"*.
+## ⚔️ 4. Manifiesto & Marco de Posicionamiento
+📄 **[[01 Brand Context/Positioning.md|Positioning.md]]**
+- Manifiesto oficial de BRIDS.io, declaración formal de posicionamiento, matriz de diferenciación de 3 vías (vs crowdfunding tradicional y protocolos Web3 especulativos) y taglines oficiales.
 
-## 🎙️ 5. Manual de Tono y Voz de Marca
-📄 **[Tone and Voice.md](./Tone%20and%20Voice.md)** *(Obsidian: [[Tone and Voice.md]])*
-- Manual oficial de Tono y Voz, los 4 pilares de comunicación, la regla de oro de vocabulario ("geek-free"), guía Do's & Don'ts, matriz de copywriting por canal (Web, Redes, WhatsApp, Ferias) y transformaciones *Antes vs. Después*.
+## 🏢 5. Fichas Comerciales de Catálogo Inmobiliario
+📄 **[[01 Brand Context/Product Description.md|Product Description.md]]**
+- Estructura de fichas técnicas para proyectos sindicados: Fix & Flip, Fix & Hold y Desarrollo Integral en alianza con Blue Brick Capital.
 
-## 📸 6. Canales Oficiales & Redes Sociales
-📄 **[Canales Oficiales y Redes Sociales.md](./Canales%20Oficiales%20y%20Redes%20Sociales.md)** *(Obsidian: [[Canales Oficiales y Redes Sociales.md]])*
-- Directorio oficial de presencia digital de Andreart Vestuario. Enlaces directos de acceso a Instagram ([`@andreartvestuario`](https://www.instagram.com/andreartvestuario)), TikTok, WhatsApp Business y Catálogo Web, especificando el rol de cada canal en la estrategia D2C.
+## 👤 6. Perfiles de Cliente Ideal & Personas (ICP)
+📄 **[[01 Brand Context/ICP and personas.md|ICP and personas.md]]**
+- Desglose del cliente ideal retail (Sofia / Ahorradora), nativo Web3 (Alex / DeFi Investor) y desarrollador institucional (Carlos / Sponsor).
+
+## 🎙️ 7. Manual de Tono y Voz de Marca
+📄 **[[01 Brand Context/Tone and Voice.md|Tone and Voice.md]]**
+- Los 4 pilares de comunicación (Institucional, Transparente, Accesible, Resiliente), guía Do's & Don'ts de vocabulario y matriz de copywriting.
+
+## 📸 8. Canales Oficiales y Redes Sociales
+📄 **[[01 Brand Context/Canales Oficiales y Redes Sociales.md|Canales Oficiales y Redes Sociales.md]]**
+- Directorio de presencia digital oficial, web [brids.io](https://brids.io) y perfiles corporativos.
 
 ---
 
-## 🎯 7. Guía Operativa por Tarea
+## 🎯 Guía Operativa de Consulta para Sub-Agentes
 
-- **Para manifiestos, campañas de marca y taglines:** Abrir ⚔️ 📄 **[Positioning.md](./Positioning.md)** y 🎙️ 📄 **[Tone and Voice.md](./Tone%20and%20Voice.md)**.
-- **Para crear copys y contenidos de redes / anuncios:** Abrir 📸 📄 **[Canales Oficiales y Redes Sociales.md](./Canales%20Oficiales%20y%20Redes%20Sociales.md)**, 🎙️ 📄 **[Tone and Voice.md](./Tone%20and%20Voice.md)** y 👘 📄 **[Product Description.md](./Product%20Description.md)**.
-- **Para definir campañas de pauta, segmentación y email marketing:** Abrir 👤 📄 **[ICP and personas.md](./ICP%20and%20personas.md)**.
-- **Para redactar propuestas comerciales, pitches o convocatorias culturales (SOFA, FILBo):** Abrir 👑 📄 **[product-marketing-context.md](./product-marketing-context.md)** y ⚔️ 📄 **[Positioning.md](./Positioning.md)**.
-- **Para publicar productos en la tienda virtual (E-Commerce):** Abrir 👘 📄 **[Product Description.md](./Product%20Description.md)**.
+- **Para redacción de Pitch Decks (YC / Inversionistas):** Consultar [[01 Brand Context/master-business-concepts.md|master-business-concepts.md]] (C1, C3, C4, C6), [[01 Brand Context/Positioning.md|Positioning.md]] y [[01 Brand Context/product-marketing-context.md|product-marketing-context.md]].
+- **Para prospección y propuestas a Desarrolladores Inmobiliarios (B2B Sponsors):** Consultar [[01 Brand Context/Core Concepts/concept-b2b-sponsor-value-prop.md|concept-b2b-sponsor-value-prop]] (C5) y [[01 Brand Context/Core Concepts/concept-real-estate-investment-models.md|concept-real-estate-investment-models]] (C7).
+- **Para análisis de blindaje legal, KYC y términos:** Consultar [[01 Brand Context/Core Concepts/concept-dual-entity-compliance.md|concept-dual-entity-compliance]] (C1), [[01 Brand Context/Core Concepts/concept-wallet-recovery-protocol.md|concept-wallet-recovery-protocol]] (C2) y [[01 Brand Context/Core Concepts/concept-multisig-treasury-governance.md|concept-multisig-treasury-governance]] (C8).
+- **Para campañas de adquisición retail y contenido social:** Consultar [[01 Brand Context/Core Concepts/concept-retail-fractionalization-thesis.md|concept-retail-fractionalization-thesis]] (C6), [[01 Brand Context/ICP and personas.md|ICP and personas.md]] y [[01 Brand Context/Tone and Voice.md|Tone and Voice.md]].
