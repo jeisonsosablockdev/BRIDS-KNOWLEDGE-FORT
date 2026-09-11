@@ -46,9 +46,7 @@ Co-Authored-By: OpenAI Codex <noreply@openai.com>
 - Follow `MarketingAgentCore/docs/document-organization.md` before creating folders or moving files
 
 ## Skills
-- Upstream imported skills live in `MarketingAgentCore/imported-skills/`
 - Local adaptations live in `MarketingAgentCore/skills/`
-- Do not edit `imported-skills/` directly; promote a copy into `skills/` first
 - Skill activation instructions live in `MarketingAgentCore/docs/skills-activation.md`
 - For Windows, prefer `enable-project-skills.ps1` and `sync-brand-context.ps1`
 

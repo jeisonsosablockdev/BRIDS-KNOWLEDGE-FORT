@@ -33,7 +33,6 @@ Marketing/
 ├── MarketingAgentCore/
 │   ├── context/
 │   ├── docs/
-│   ├── imported-skills/
 │   └── skills/
 ├── MarketingAgentStudio/
 │   ├── 00 Inbox/
@@ -132,7 +131,6 @@ This project includes a suite of utility and automation scripts located in `Mark
 | **`refine-note.sh`** | `bash MarketingAgentCore/scripts/refine-note.sh <cmd>` | **Non-Destructive Content Refinement:** `inspect`, `backup`, `refine`, `branch`, and `rollback` notes with safety snapshots, version bumping, and changelog tracking. |
 | **`check-obsidian-api.sh`** | `bash MarketingAgentCore/scripts/check-obsidian-api.sh` | Healthcheck and smoketest for **Obsidian Local REST API** (HTTPS port `27124`). Tests Bearer token authentication and queries vault status. |
 | **`init-task.sh`** | `bash MarketingAgentCore/scripts/init-task.sh <session-name> "<goal>" "<icp>"` | Initializes a structured task session JSON inside `BRIDS Brain/00 Inbox/<session-name>.json` using `task-tracking-template.json`. |
-| **`enable-project-skills.sh`** | `bash MarketingAgentCore/scripts/enable-project-skills.sh [--force]` | Symlinks local (`skills/`) and imported (`imported-skills/`) marketing skills into `~/.codex/skills/` for agent runtime discovery. |
 | **`sync-brand-context.sh`** | `bash MarketingAgentCore/scripts/sync-brand-context.sh` | Syncs `product-marketing-context.md` from `MarketingAgentCore/context/` directly into `BRIDS Brain/01 Brand Context/`. |
 | **`validate-skills.sh`** | `bash marketingskills/validate-skills.sh` | Audits and validates marketing skills against the formal Agent Skills Specification (YAML frontmatter, naming, trigger phrases, <500 lines). |
 
@@ -189,7 +187,6 @@ flowchart LR
 
 - Keep the logic, scripts, templates, and adapted skills in `MarketingAgentCore/`
 - Keep final readable text deliverables and persistent knowledge in `BRIDS Brain/`
-- Treat `MarketingAgentCore/imported-skills/` as upstream source material, not the working copy
 - Use `MarketingAgentCore/templates/task-tracking-template.json` to monitor multi-step campaigns and dependencies
 - Use `MarketingAgentCore/templates/note-template.md` for consistent Obsidian Markdown formatting
 - Use the PowerShell scripts on Windows when symlinks or Bash are inconvenient

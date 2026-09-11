@@ -4,7 +4,6 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 CODEX_SKILLS_DIR="$HOME/.codex/skills"
-IMPORTED_DIR="$ROOT/MarketingAgentCore/imported-skills"
 LOCAL_DIR="$ROOT/MarketingAgentCore/skills"
 
 MODE="${1:-safe}"
@@ -30,17 +29,10 @@ link_skill() {
 }
 
 echo "Activating project skills from:"
-echo "  imported: $IMPORTED_DIR"
-echo "  local:    $LOCAL_DIR"
+echo "  local: $LOCAL_DIR"
 echo ""
 
 for dir in "$LOCAL_DIR"/*; do
-  [[ -d "$dir" ]] || continue
-  skill_name="$(basename "$dir")"
-  link_skill "$dir" "$skill_name"
-done
-
-for dir in "$IMPORTED_DIR"/*; do
   [[ -d "$dir" ]] || continue
   skill_name="$(basename "$dir")"
   link_skill "$dir" "$skill_name"

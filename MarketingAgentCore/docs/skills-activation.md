@@ -4,7 +4,6 @@ This project keeps the source of truth for skills inside the repository.
 
 ## Source Paths
 
-- Imported upstream skills: `MarketingAgentCore/imported-skills/`
 - Local adapted skills: `MarketingAgentCore/skills/`
 
 ## Activation for Codex

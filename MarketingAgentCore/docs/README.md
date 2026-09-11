@@ -4,7 +4,6 @@ Este directorio contiene la logica separada del vault de Obsidian y es la fuente
 
 ## Estructura
 
-- `imported-skills/`: copia completa del repo upstream `marketingskills` sin adaptar
 - `skills/`: versiones portadas de skills de marketing para tu proyecto
 - `context/`: contexto base de marca y producto
 - `outputs/`: entregables Markdown reutilizables
@@ -19,7 +18,6 @@ Las skills quedan dentro de este mismo proyecto.
 
 ## Modelo de trabajo
 
-- `imported-skills/` conserva los 36 skills originales importados desde `coreyhaines31/marketingskills`
 - `skills/` contiene las variantes locales que vayamos adaptando para tu flujo real
 - cuando necesitemos personalizar un skill, partimos del original importado y lo promovemos a una variante local
 

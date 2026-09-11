@@ -3,7 +3,6 @@ $ErrorActionPreference = "Stop"
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Root = Resolve-Path (Join-Path $ScriptDir "..\\..")
 $CodexSkillsDir = Join-Path $HOME ".codex\\skills"
-$ImportedDir = Join-Path $Root "MarketingAgentCore\\imported-skills"
 $LocalDir = Join-Path $Root "MarketingAgentCore\\skills"
 $Mode = if ($args.Count -gt 0) { $args[0] } else { "safe" }
 
@@ -36,7 +35,6 @@ function Link-Skill {
 }
 
 Write-Output "Activating project skills from:"
-Write-Output "  imported: $ImportedDir"
 Write-Output "  local:    $LocalDir"
 Write-Output ""
 

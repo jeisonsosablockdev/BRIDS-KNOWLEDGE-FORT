@@ -13,7 +13,6 @@ Marketing/
 ├── MarketingAgentCore/                # FUENTE DE VERDAD DE LÓGICA Y HABILIDADES
 │   ├── context/                       # Contexto central (product-marketing-context.md)
 │   ├── docs/                          # Documentación operativa y manual de workflows
-│   ├── imported-skills/               # 36 skills originales upstream
 │   ├── skills/                        # 36 skills locales adaptadas para el proyecto
 │   ├── templates/                     # Plantillas JSON de tracking y Markdown
 │   └── scripts/                       # Scripts de activación, sync y healthcheck
