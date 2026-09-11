@@ -1,3 +1,4 @@
+---
 name: mas-copy-editing
 description: "Marketing Agent Studio skill for editing existing brand or marketing copy in this workspace. Read `MarketingAgentCore/context/product-marketing-context.md` first and preserve the brand voice defined there."
 metadata:

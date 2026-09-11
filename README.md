@@ -16,37 +16,35 @@ This workspace adds a project structure around that idea:
   - persistent brand context
   - project docs
   - cross-platform skill activation scripts for Codex
-- `MarketingAgentStudio/`
+- `BRIDS Brain/`
   - Obsidian vault
   - folders for each major marketing content category
   - final Markdown deliverables
   - installed `Agent Client` plugin configured for Codex
-- `marketingskills/`
-  - upstream clone kept as a reference source
 
 ## Project Structure
 
 ```text
-Marketing/
+BRIDS KNOWLEDGE FORT/
 ├── AGENTS.md
 ├── README.md
 ├── MarketingAgentCore/
 │   ├── context/
 │   ├── docs/
+│   ├── scripts/
 │   └── skills/
-├── MarketingAgentStudio/
-│   ├── 00 Inbox/
-│   ├── 01 Brand Context/
-│   ├── 02 Strategy & Research/
-│   ├── 03 Website & Copy/
-│   ├── 04 Email & Lifecycle/
-│   ├── 05 SEO & Discoverability/
-│   ├── 06 CRO & Funnel/
-│   ├── 07 Paid, Social & Community/
-│   ├── 08 Analytics & Measurement/
-│   ├── 09 Retention & Growth/
-│   └── 10 RevOps & Sales/
-└── marketingskills/
+└── BRIDS Brain/
+    ├── 00 Inbox/
+    ├── 01 Brand Context/
+    ├── 02 Strategy & Research/
+    ├── 03 Website & Copy/
+    ├── 04 Email & Lifecycle/
+    ├── 05 SEO & Discoverability/
+    ├── 06 CRO & Funnel/
+    ├── 07 Paid, Social & Community/
+    ├── 08 Analytics & Measurement/
+    ├── 09 Retention & Growth/
+    └── 10 RevOps & Sales/
 ```
 
 ## Brand Context
@@ -112,7 +110,7 @@ npm run build
 
 ## Project Scripts & Automation
 
-This project includes a suite of utility and automation scripts located in `MarketingAgentCore/scripts/` and `marketingskills/`:
+This project includes a suite of utility and automation scripts located in `MarketingAgentCore/scripts/`:
 
 | Script | Command | Purpose |
 | :--- | :--- | :--- |
@@ -127,7 +125,7 @@ This project includes a suite of utility and automation scripts located in `Mark
 | **`check-obsidian-api.sh`** | `bash MarketingAgentCore/scripts/check-obsidian-api.sh` | Healthcheck and smoketest for **Obsidian Local REST API** (HTTPS port `27124`). Tests Bearer token authentication and queries vault status. |
 | **`init-task.sh`** | `bash MarketingAgentCore/scripts/init-task.sh <session-name> "<goal>" "<icp>"` | Initializes a structured task session JSON inside `BRIDS Brain/00 Inbox/<session-name>.json` using `task-tracking-template.json`. |
 | **`sync-brand-context.sh`** | `bash MarketingAgentCore/scripts/sync-brand-context.sh` | Syncs `product-marketing-context.md` from `MarketingAgentCore/context/` directly into `BRIDS Brain/01 Brand Context/`. |
-| **`validate-skills.sh`** | `bash marketingskills/validate-skills.sh` | Audits and validates marketing skills against the formal Agent Skills Specification (YAML frontmatter, naming, trigger phrases, <500 lines). |
+| **`validate-skills.sh`** | `bash MarketingAgentCore/scripts/validate-skills.sh` | Audits and validates marketing skills against the formal Agent Skills Specification (YAML frontmatter, naming, trigger phrases, <500 lines). |
 
 For Windows PowerShell users:
 - `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\create-social-carousel.ps1 <args>`

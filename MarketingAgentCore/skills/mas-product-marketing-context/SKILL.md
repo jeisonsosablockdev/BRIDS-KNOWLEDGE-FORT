@@ -1,3 +1,4 @@
+---
 name: mas-product-marketing-context
 description: "Marketing Agent Studio skill. Use when the user wants to create or update their brand and product marketing context for this workspace. It maintains `MarketingAgentCore/context/product-marketing-context.md`, which the other MAS marketing skills read before generating content."
 metadata:

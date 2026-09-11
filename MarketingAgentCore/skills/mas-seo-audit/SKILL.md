@@ -1,3 +1,4 @@
+---
 name: mas-seo-audit
 description: Marketing Agent Studio skill for SEO diagnostics in this workspace. Read `MarketingAgentCore/context/product-marketing-context.md` first and save audits as Markdown under `MarketingAgentCore/outputs/` when the result should be reusable.
 metadata:

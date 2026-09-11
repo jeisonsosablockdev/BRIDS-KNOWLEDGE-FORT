@@ -1,3 +1,4 @@
+---
 name: mas-copywriting
 description: Marketing Agent Studio skill for writing or rewriting persuasive brand copy in this workspace. Read `MarketingAgentCore/context/product-marketing-context.md` first, then produce Markdown that can be reviewed and later surfaced in Obsidian.
 metadata:

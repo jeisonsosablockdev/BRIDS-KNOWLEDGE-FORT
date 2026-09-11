@@ -2,7 +2,7 @@
 
 ## Package Manager
 - Content-first workspace; no package manager required for normal work
-- Upstream skill validation: `bash marketingskills/validate-skills.sh`
+- Skill validation: `bash MarketingAgentCore/scripts/validate-skills.sh`
 
 ## File-Scoped Commands
 | Task | Command |
@@ -17,7 +17,7 @@
 | Non-Destructive Refine | `bash MarketingAgentCore/scripts/refine-note.sh <inspect|backup|refine|branch|rollback>` |
 | Read Markdown | `sed -n '1,160p' path/to/file.md` |
 | List vault folders | `find "BRIDS Brain" -maxdepth 3 -type d | sort` |
-| Validate imported skills | `bash marketingskills/validate-skills.sh` |
+| Validate skills | `bash MarketingAgentCore/scripts/validate-skills.sh` |
 | Activate project skills | `bash MarketingAgentCore/scripts/enable-project-skills.sh` |
 | Activate project skills (Windows) | `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\enable-project-skills.ps1` |
 | Inspect Agent Squad | `bash MarketingAgentCore/scripts/inspect-squad.sh` |
@@ -35,9 +35,8 @@ Co-Authored-By: OpenAI Codex <noreply@openai.com>
 - For major structural pivots or alternative campaign angles, create a new versioned file (e.g. `homepage-copy-v2-aug-2026.md`) rather than destroying previous drafts.
 
 ## Workspace Layout
-- `MarketingAgentCore/`: source of truth for imported skills, adapted skills, docs, and brand context
+- `MarketingAgentCore/`: source of truth for skills, agents, automation scripts, docs, and brand context
 - `BRIDS Brain/`: Obsidian vault, persistent knowledge base and final Markdown deliverables
-- `marketingskills/`: upstream reference clone; do not use as the primary write target
 
 ## Content Workflow
 - Read `MarketingAgentCore/context/product-marketing-context.md` before creating marketing deliverables
