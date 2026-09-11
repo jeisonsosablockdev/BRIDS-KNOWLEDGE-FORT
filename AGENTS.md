@@ -20,7 +20,6 @@
 | Validate imported skills | `bash marketingskills/validate-skills.sh` |
 | Activate project skills | `bash MarketingAgentCore/scripts/enable-project-skills.sh` |
 | Activate project skills (Windows) | `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\enable-project-skills.ps1` |
-| Rebuild Obsidian Agent Client | `cd obsidian-agent-client && npm install && npm run build` |
 
 ## Commit Attribution
 - AI commits MUST include:
@@ -65,7 +64,6 @@ To prevent prompt/context drift and ensure consistent quality, every task must f
 - Create a new subfolder only when there are 3+ related deliverables that do not fit an existing subfolder cleanly
 - Do not create top-level folders beyond the existing numbered taxonomy unless explicitly requested
 - Prefer saving drafts in `00 Inbox` when the final destination is unclear
-- Obsidian Agent Client chat exports belong in `BRIDS Brain/00 Inbox/Agent Client Chats/`
 
 ## Obsidian Integration
 - The Obsidian vault is `BRIDS Brain/`

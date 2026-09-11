@@ -92,11 +92,8 @@ powershell -ExecutionPolicy Bypass -File .\\MarketingAgentCore\\scripts\\enable-
 - `09 Retention & Growth`: churn reduction, referrals, and growth loops
 - `10 RevOps & Sales`: revenue operations and sales collateral
 
-## Obsidian Agent Client
 
-This workspace now includes a local installation of [obsidian-agent-client](https://github.com/RAIT-09/obsidian-agent-client) inside:
 
-- `MarketingAgentStudio/.obsidian/plugins/agent-client/`
 
 It is preconfigured for Codex with:
 
@@ -109,10 +106,8 @@ It is preconfigured for Codex with:
 To rebuild the plugin from source:
 
 ```bash
-cd obsidian-agent-client
 npm install
 npm run build
-cp main.js manifest.json styles.css "../MarketingAgentStudio/.obsidian/plugins/agent-client/"
 ```
 
 ## Project Scripts & Automation
