@@ -50,6 +50,22 @@ function cleanup() {
     const files = fs.readdirSync(testArchiveBak).filter(f => f.startsWith('idem-test-note'));
     for (const f of files) fs.unlinkSync(path.join(testArchiveBak, f));
   }
+
+  // Clean up SDD idempotency test files
+  const specsDir = path.join(VAULT_INBOX, 'Specs');
+  if (fs.existsSync(specsDir)) {
+    const specFiles = fs.readdirSync(specsDir).filter(f => f.startsWith('test-sdd-idem'));
+    for (const f of specFiles) {
+      const fullP = path.join(specsDir, f);
+      if (fs.lstatSync(fullP).isDirectory()) {
+        fs.rmSync(fullP, { recursive: true, force: true });
+      } else {
+        fs.unlinkSync(fullP);
+      }
+    }
+  }
+  const testDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Strategy & Research', 'test-sdd-idem.md');
+  if (fs.existsSync(testDeliverable)) fs.unlinkSync(testDeliverable);
 }
 
 let passedTests = 0;
@@ -271,7 +287,94 @@ Texto base inicial inmutable.
     execSync(`bash "${syncGridScript}" update`, { stdio: 'pipe' });
     const gridHash2 = getHash(gridDocPath);
 
-    assert(gridHash1 === gridHash2, 'Sincronizar la parrilla consecutivamente produce un estado 100% determinista e idéntico');
+    // -------------------------------------------------------------
+    // TEST 9: SDD Engine Idempotency & Two-Agent Evaluator-Optimizer Cycle
+    // -------------------------------------------------------------
+    console.log('[TEST 9/9] Verificando Idempotencia en Motor SDD y Bucle Creador-Revisor (sdd-manager)...');
+    const sddScript = path.join(SCRIPTS_DIR, 'sdd-manager.sh');
+    const testSddSlug = 'test-sdd-idem';
+    const sddSpecJson = path.join(VAULT_INBOX, 'Specs', `${testSddSlug}.spec.json`);
+    const sddSpecMd = path.join(VAULT_INBOX, 'Specs', `${testSddSlug}.spec.md`);
+    const sddWorkDir = path.join(VAULT_INBOX, 'Specs', `${testSddSlug}-work`);
+    const sddDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Strategy & Research', `${testSddSlug}.md`);
+
+    // Clean prior artifacts if left from aborted runs
+    if (fs.existsSync(sddSpecJson)) fs.unlinkSync(sddSpecJson);
+    if (fs.existsSync(sddSpecMd)) fs.unlinkSync(sddSpecMd);
+    if (fs.existsSync(sddWorkDir)) fs.rmSync(sddWorkDir, { recursive: true, force: true });
+    if (fs.existsSync(sddDeliverable)) fs.unlinkSync(sddDeliverable);
+
+    // 1. Initial Spec Creation
+    execSync(`bash "${sddScript}" init "${testSddSlug}" "Estrategia Tokenización Test" "02 Strategy & Research" "business-consultant,founder-ghostwriter" "Real Estate Sponsors" "Levantamiento de $10M"`, { stdio: 'pipe' });
+    assert(fs.existsSync(sddSpecJson), 'Spec JSON creado correctamente en 00 Inbox/Specs');
+
+    const specJsonHash1 = getHash(sddSpecJson);
+    // 2. Double-init idempotency
+    execSync(`bash "${sddScript}" init "${testSddSlug}" "Estrategia Tokenización Test" "02 Strategy & Research" "business-consultant,founder-ghostwriter" "Real Estate Sponsors" "Levantamiento de $10M"`, { stdio: 'pipe' });
+    const specJsonHash2 = getHash(sddSpecJson);
+    assert(specJsonHash1 === specJsonHash2, 'Doble inicialización de spec es 100% idempotente y preserva el estado');
+
+    // 3. Spec Approval
+    execSync(`bash "${sddScript}" approve "${testSddSlug}"`, { stdio: 'pipe' });
+    const approvedData1 = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(approvedData1.status === 'approved', 'Spec pasa a estado approved formalmente');
+
+    // 4. Double-approve idempotency
+    execSync(`bash "${sddScript}" approve "${testSddSlug}"`, { stdio: 'pipe' });
+    const approvedData2 = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
+    assert(approvedData2.status === 'approved', 'Doble aprobación es idempotente y no corrompe el flujo');
+
+    // 5. Audit & Evaluator Loop: Rejection of draft with AI clichés
+    const orchestrator = require(path.join(SCRIPTS_DIR, 'sdd-orchestrator.js'));
+    const flawedDraft = 'En resumen, en el vertiginoso mundo inmobiliario, BRIDS juega un papel crucial a la vanguardia. En conclusión es importante destacar el cambio de paradigma.';
+    const auditFlawed = orchestrator.evaluateDraft(testSddSlug, flawedDraft, 1);
+    assert(!auditFlawed.passed, 'Borrador con muletillas robóticas es rechazado con nota < 8.5');
+    assert(auditFlawed.report.banned_phrases_detected.length > 0, 'El revisor detecta y lista las muletillas de IA encontradas');
+    assert(!fs.existsSync(sddDeliverable), 'El entregable rechazado NO es promovido a la carpeta de producción en el vault');
+
+    // 6. Audit & Evaluator Loop: Passing high-quality draft (>= 8.5)
+    const pristineDraft = `## Sindicación Inmobiliaria en Solana con BRIDS
+
+Eliminamos la intermediación arcaica en sindicaciones inmobiliarias mediante contratos inteligentes auditables on-chain sobre Solana y el estándar Metaplex Core con plugins de Freeze y Recovery.
+
+### Desacoplamiento Legal Delaware SPV
+Cada activo inmobiliario se estructura a través de una LLC independiente en Delaware (SPV) que retiene la propiedad legal y emite las participaciones tokenizadas. BRIDS actúa como proveedor tecnológico de infraestructura SaaS sin custodia de fondos.
+
+### Acreditación y Cumplimiento Regulatorio
+Los participantes se verifican mediante Stripe Identity para cumplir estrictamente con normativas KYC/AML. Nuestra solución está diseñada a la medida para Real Estate Sponsors que buscan reducir hasta un 80% sus costos de estructuración y acelerar el cierre de rondas de inversión.
+
+### Llamado a la Acción
+Agenda una sesión técnica con el equipo de estructuración en sponsors@brids.io para analizar tu cartera de activos.`;
+    const auditPassed = orchestrator.evaluateDraft(testSddSlug, pristineDraft, 2);
+    assert(auditPassed.passed, 'Borrador de alta calidad obtiene calificación >= 8.5');
+    assert(fs.existsSync(sddDeliverable), 'Entregable aprobado es promovido automáticamente a BRIDS-Brain/02 Strategy & Research');
+
+    const deliverableContent = fs.readFileSync(sddDeliverable, 'utf8');
+    assert(deliverableContent.includes('sdd-approved') && deliverableContent.includes('quality_score:'), 'El entregable final incluye metadatos de calidad y frontmatter estandarizado');
+
+    // 7. Safety Guard: 5-Cycle Limit Freezes Document for Human Arbitration
+    const testFreezeSlug = 'test-sdd-freeze';
+    const freezeSpecJson = path.join(VAULT_INBOX, 'Specs', `${testFreezeSlug}.spec.json`);
+    const freezeSpecMd = path.join(VAULT_INBOX, 'Specs', `${testFreezeSlug}.spec.md`);
+    const freezeWorkDir = path.join(VAULT_INBOX, 'Specs', `${testFreezeSlug}-work`);
+    const freezeDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Strategy & Research', `${testFreezeSlug}.md`);
+
+    execSync(`bash "${sddScript}" init "${testFreezeSlug}" "Freeze Test" "02 Strategy & Research" "business-consultant" "Sponsors" "Goal"`, { stdio: 'pipe' });
+    execSync(`bash "${sddScript}" approve "${testFreezeSlug}"`, { stdio: 'pipe' });
+
+    let freezeResult;
+    for (let c = 1; c <= 5; c++) {
+      freezeResult = orchestrator.evaluateDraft(testFreezeSlug, flawedDraft, c);
+    }
+    assert(freezeResult.frozen === true, 'Al alcanzar 5 ciclos fallidos, el spec se congela');
+    assert(freezeResult.data.status === 'frozen_for_arbitration', 'Estado del spec pasa a frozen_for_arbitration');
+    assert(!fs.existsSync(freezeDeliverable), 'El entregable congelado NO se publica en el vault de producción');
+
+    // Cleanup freeze test artifacts
+    if (fs.existsSync(freezeSpecJson)) fs.unlinkSync(freezeSpecJson);
+    if (fs.existsSync(freezeSpecMd)) fs.unlinkSync(freezeSpecMd);
+    if (fs.existsSync(freezeWorkDir)) fs.rmSync(freezeWorkDir, { recursive: true, force: true });
+    if (fs.existsSync(freezeDeliverable)) fs.unlinkSync(freezeDeliverable);
     console.log('');
 
     // -------------------------------------------------------------

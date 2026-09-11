@@ -7,6 +7,7 @@
 ## File-Scoped Commands
 | Task | Command |
 |------|---------|
+| Spec-Driven Development (SDD) | `bash BRIDS-Engine/scripts/sdd-manager.sh <init|preview|approve|evaluate|status|list>` |
 | Context-Aware Asset Generator | `bash BRIDS-Engine/scripts/generate-publication-assets.sh <nota|slug> [--input-image img]` |
 | Sync Master Content Grid | `bash BRIDS-Engine/scripts/sync-content-grid.sh [audit|sync|update]` |
 | Generate 4-Slide Carousel | `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img] [prenda] [ref]` |
@@ -50,12 +51,24 @@ Co-Authored-By: OpenAI Codex <noreply@openai.com>
 - For Windows, prefer `enable-project-skills.ps1` and `sync-brand-context.ps1`
 
 ## Anti-Drift Task Execution Protocol (5 Steps)
-To prevent prompt/context drift and ensure consistent quality, every task must follow this sequence:
-1. **Context Gate:** Always consult `BRIDS-Engine/context/product-marketing-context.md` before generating marketing content. Never invent ICPs, brand voice, or positioning in isolation.
-2. **Task Decomposition:** Use `bash BRIDS-Engine/scripts/task-manager.sh` to track multi-step initiatives, defining atomic tasks (`TASK-001`, `TASK-002`) and explicit dependencies (`depends_on`).
-3. **Skill Orchestration:** Load and adhere to the relevant `SKILL.md` from `BRIDS-Engine/skills/` (e.g. `mas-copywriting`, `mas-seo-audit`, `mas-email-sequence`).
-4. **Structured Drafting & Safe Refinement:** Apply `BRIDS-Engine/templates/note-template.md` (YAML frontmatter with version, `> [!NOTE]` callouts, and wikilinks). When modifying existing files, use `bash BRIDS-Engine/scripts/refine-note.sh` to take safety snapshots and maintain the changelog.
-5. **Measurement & Closure:** Register deliverables and mark tasks completed in the session JSON (`task-manager.sh update`), assigning tracking events and KPIs.
+To prevent prompt/context drift and ensure consistent quality, every document or content generation task must follow this sequence:
+1. **SDD Spec & Context Gate (Mandatory Artifact):** Before drafting any deliverable, generate an explicit specification artifact using `bash BRIDS-Engine/scripts/sdd-manager.sh init <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"`. The spec MUST declare:
+   - Canonical vault destination in `BRIDS-Brain/` (00 to 10).
+   - Sub-agents assigned from the squad (`business-consultant`, `market-research-analyst`, `pitch-deck-architect`, `compliance-officer`, `b2b-sponsor-lead`, `founder-ghostwriter`).
+   - Core commercial intent, ICP, and zero-hallucination technical anchors (Solana, Metaplex Core Freeze/Recovery, Delaware SPV, Stripe Identity).
+   - Anti-robot banned clichés filter (strict ban on *"en resumen"*, *"es importante destacar"*, *"un papel crucial"*, etc.).
+2. **Spec Review & Approval:** Inspect the specification (`bash BRIDS-Engine/scripts/sdd-manager.sh preview <slug>`) and approve it (`bash BRIDS-Engine/scripts/sdd-manager.sh approve <slug>`). Never start writing blindly without an approved spec artifact.
+3. **Two-Agent Evaluator-Optimizer Loop (Creator vs Reviewer):**
+   - **Creator/Editor Sub-Agent:** Writes the initial draft and remediates critique feedback.
+   - **Reviewer Agent (`sdd-reviewer`):** Audits draft on a 0 to 9 scale across 4 dimensions:
+     - 1. Cumplimiento del Objetivo & ICP (2.5 pts)
+     - 2. Veracidad Técnica & Fuentes (2.5 pts)
+     - 3. Voz Fundadora vs Tono Robot (2.0 pts)
+     - 4. Originalidad Léxica & Cero Clichés (2.0 pts)
+   - **Passing Threshold:** Calificación mínima requerida $\ge 8.5 / 9.0$.
+   - **Safety Cap:** Máximo 5 ciclos iterativos. Si no alcanza 8.5 en el ciclo 5, el entregable se congela para arbitraje humano (`frozen_for_arbitration`).
+4. **Idempotent Promotion & Safe Refinement:** Once $\ge 8.5$ is achieved, the engine promotes the deliverable into its canonical folder in `BRIDS-Brain/` with quality metadata, frontmatter, and changelog. Subsequent edits must use `bash BRIDS-Engine/scripts/refine-note.sh`.
+5. **Measurement & Closure:** Register deliverables, track events and KPIs, and close the session in `task-manager.sh update`.
 
 ## Vault Conventions
 - Use existing category folders under `BRIDS-Brain/` (numbered 00 to 10)
