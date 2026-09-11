@@ -1,3 +1,4 @@
+---
 name: mas-social-content
 description: "Marketing Agent Studio skill for creating, repurposing, and organizing social media content for your brand. Read `MarketingAgentCore/context/product-marketing-context.md` first and prefer Markdown deliverables that can later be mirrored into Obsidian."
 metadata:

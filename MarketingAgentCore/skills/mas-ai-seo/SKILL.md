@@ -1,3 +1,4 @@
+---
 name: mas-ai-seo
 description: "Marketing Agent Studio skill for AI-search visibility and citation optimization in this workspace. Read `MarketingAgentCore/context/product-marketing-context.md` first and produce reusable Markdown recommendations under `MarketingAgentCore/outputs/` when appropriate."
 metadata:

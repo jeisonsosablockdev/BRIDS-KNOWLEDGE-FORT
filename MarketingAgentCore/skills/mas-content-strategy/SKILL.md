@@ -1,3 +1,4 @@
+---
 name: mas-content-strategy
 description: Marketing Agent Studio skill for planning brand content strategy in this workspace. Read `MarketingAgentCore/context/product-marketing-context.md` first and save reusable plans as Markdown under `MarketingAgentCore/outputs/` when useful.
 metadata:

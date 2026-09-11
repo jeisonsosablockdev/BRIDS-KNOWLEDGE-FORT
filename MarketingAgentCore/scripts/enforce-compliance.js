@@ -74,9 +74,9 @@ console.log('─'.repeat(75));
 // 4. SKILLS AUDIT
 console.log('\n[4/4] Validando Habilidades de Marketing contra Especificación...');
 try {
-  const validateSkillsPath = path.join(ROOT_DIR, 'marketingskills', 'validate-skills.sh');
+  const validateSkillsPath = path.join(ROOT_DIR, 'MarketingAgentCore', 'scripts', 'validate-skills.sh');
   if (fs.existsSync(validateSkillsPath)) {
-    execSync(`bash "${validateSkillsPath}"`, { cwd: path.join(ROOT_DIR, 'marketingskills'), stdio: 'inherit' });
+    execSync(`bash "${validateSkillsPath}"`, { cwd: path.join(ROOT_DIR, 'MarketingAgentCore'), stdio: 'inherit' });
   }
 } catch (e) {
   // warnings in skills do not necessarily break build
