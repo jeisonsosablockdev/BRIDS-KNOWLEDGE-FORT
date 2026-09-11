@@ -20,6 +20,7 @@
 | Validate imported skills | `bash marketingskills/validate-skills.sh` |
 | Activate project skills | `bash MarketingAgentCore/scripts/enable-project-skills.sh` |
 | Activate project skills (Windows) | `powershell -ExecutionPolicy Bypass -File .\MarketingAgentCore\scripts\enable-project-skills.ps1` |
+| Inspect Agent Squad | `bash MarketingAgentCore/scripts/inspect-squad.sh` |
 
 ## Commit Attribution
 - AI commits MUST include:
@@ -69,4 +70,20 @@ To prevent prompt/context drift and ensure consistent quality, every task must f
 - The Obsidian vault is `BRIDS Brain/`
 - Local REST API is active on HTTPS port `27124` with Bearer token authentication
 - Sincroniza el contexto usando `bash MarketingAgentCore/scripts/sync-brand-context.sh`
+
+## BRIDS Founder & YC Sub-Agent Squad
+The workspace includes 6 specialized sub-agents defined in `MarketingAgentCore/agents/` and registered via `define_subagent` to build the business and prepare for Y Combinator:
+
+| Agent Identifier | Role | Output Vault Path | Core Mission |
+|---|---|---|---|
+| `business-consultant` | Business Model & Unit Economics Architect | `02 Strategy & Research/business-model/` | Fee architecture (SaaS, processing, recovery), CAC/LTV, 3-5y pro forma projections. |
+| `market-research-analyst` | Market Research & TAM/SAM/SOM Analyst | `02 Strategy & Research/market-research/` | Quantitative market sizing, live web research, competitor benchmarks (Lofty, RealT, Blocksquare). |
+| `pitch-deck-architect` | YC & Sequoia Pitch Deck Architect | `02 Strategy & Research/pitch-decks/` | 10-12 slide investor decks, native `.pptx` generation with `python-pptx`, slide scripts. |
+| `compliance-officer` | Legal Structuring & RWA Compliance Officer | `01 Brand Context/compliance/` | Dual-entity separation (Delaware C-Corp vs SPV LLCs), non-broker-dealer status, Stripe Identity KYC/AML, Metaplex Core Freeze/Recovery plugins, Data Room preparation. |
+| `b2b-sponsor-lead` | Real Estate Sponsor Acquisition & RevOps | `10 RevOps & Sales/b2b-sponsors/` | Developer/GP value prop, institutional one-pagers, cold outbound sequences, pilot onboarding. |
+| `founder-ghostwriter` | Founder Voice, Thought Leadership & YC Storyteller | `04 Social & Community/`, `07 Newsletters/` | YC application essays ("Why now?", "Unique insight"), X/Twitter threads on Solana RWA, LinkedIn articles, investor updates. |
+
+- Manifest: `MarketingAgentCore/agents/agents-manifest.json`
+- Verification: `bash MarketingAgentCore/scripts/inspect-squad.sh`
+
 
