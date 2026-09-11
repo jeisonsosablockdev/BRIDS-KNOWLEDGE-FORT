@@ -1,6 +1,24 @@
+---
+title: "Product Marketing Context: BRIDS.io"
+type: "brand-context"
+status: "active"
+workflow: "production"
+version: "1.0.0"
+last_updated: "2026-08-20"
+tags:
+  - "brand-context"
+  - "product"
+  - "marketing"
+  - "rwa"
+  - "solana"
+---
+
 # Product Marketing Context: BRIDS.io
 
 *Last updated: 2026-08-20*
+
+> [!NOTE] Resumen Ejecutivo
+> Contexto maestro de producto y marketing para BRIDS.io: infraestructura SaaS y software Web3 en Solana para la sindicación e inversión inmobiliaria fraccionada institucional en EE.UU.
 
 ## Product Overview
 **Eslogan Oficial (Brand Slogan):** *"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados desde $100 USD"*
@@ -22,7 +40,7 @@
 
 **Official Digital Channels & Handles:**
 - 🌐 **Web Oficial:** [https://brids.io](https://brids.io) (Portal Principal & Dashboards de Inmuebles)
-- 📄 **Documento Maestro de Canales:** [[01 Brand Context/Canales Oficiales y Redes Sociales.md]]
+- 📄 **Canales Oficiales:** Portal institucional, X/Twitter institucional y LinkedIn institucional.
 
 ---
 
@@ -183,3 +201,12 @@ BRIDS opera bajo un desacoplamiento estricto de funciones para garantizar el cum
 - **Time to Fund:** Tiempo promedio requerido para completar la representación digital de cada SPV.
 - **Reinvestment Rate:** Porcentaje de usuarios que reinvierten sus retornos en nuevas oportunidades.
 - **Onboarding Conversion:** Tasa de aprobación exitosa en Stripe Identity y checkout.
+
+---
+
+## 📜 Historial de Revisiones
+
+| Fecha | Versión | Autor | Resumen de Cambios |
+| :--- | :--- | :--- | :--- |
+| 2026-08-20 | 1.0.0 | BRIDS Squad | Contexto maestro de producto y marketing adaptado a RWA e infraestructura Solana. |
+

@@ -11,14 +11,10 @@
             "id": "fe11c1869dd7657e",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "01 Brand Context/Positioning.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Positioning"
+              "title": "Nueva pestaña"
             }
           }
         ]
@@ -186,6 +182,9 @@
   },
   "active": "d64c1e421f7f0c6b",
   "lastOpenFiles": [
+    "00 Inbox/Specs/test-sdd-freeze.spec.json",
+    "00 Inbox/Specs/test-sdd-freeze.spec.md",
+    "00 Inbox/Specs/test-sdd-freeze-work",
     "02 Strategy & Research/test-sdd-idem.md",
     "00 Inbox/Specs/test-sdd-idem-work/criticism_cycle_3.json",
     "00 Inbox/Specs/test-sdd-idem-work/draft_cycle_3.md",
@@ -201,11 +200,9 @@
     "07 Paid, Social & Community/Social Content/Assets/2026-09-11-carrusel-test-rwa-unit/generation-prompts.json",
     "07 Paid, Social & Community/Social Content/Assets/2026-09-11-carrusel-test-rwa-unit/README-ASSETS.md",
     "07 Paid, Social & Community/Social Content/Assets/2026-09-11-carrusel-test-rwa-unit",
-    "00 Inbox/Archive/idem-test-note.md.2026-09-11T22-49-54-108Z.bak.md",
+    "00 Inbox/Archive/idem-test-note.md.2026-09-11T23-04-31-751Z.bak.md",
     "00 Inbox/test-idempotency-session.json",
-    "00 Inbox/Specs/test-sdd-freeze.spec.json",
-    "00 Inbox/Specs/test-sdd-freeze.spec.md",
-    "00 Inbox/Specs/test-sdd-freeze-work",
+    "00 Inbox/Archive/idem-test-note.md.2026-09-11T22-49-54-108Z.bak.md",
     "07 Paid, Social & Community/Social Content/parrilla-publicaciones-redes-sociales.md",
     "00 Inbox/Archive/idem-test-note.md.2026-09-11T22-49-14-974Z.bak.md",
     "07 Paid, Social & Community/Social Content/2026-09-11-instagram-carrusel-test-rwa-unit.md",
@@ -220,7 +217,6 @@
     "13 Product & Engineering/index.md",
     "12 Finance & Treasury/index.md",
     "11 Legal & Compliance/index.md",
-    "02 Strategy & Research/index.md",
     "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/04-cad-blueprint-tecnico.png",
     "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/02-figurin-lineas-tecnico.png",
     "07 Paid, Social & Community/Social Content/Assets/2026-08-16-carrusel-hanbok-moderno-knot-of-time/06-conversion-cta-violeta.png",
