@@ -33,21 +33,21 @@ const VALID_SUBAGENTS = [
 
 const VALID_VAULT_PREFIXES = [
   '00 Inbox',
-  '01 Brand Context',
-  '02 Strategy & Research',
-  '03 Website & Copy',
-  '04 Email & Lifecycle',
-  '05 SEO & Discoverability',
-  '06 CRO & Funnel',
-  '07 Paid, Social & Community',
-  '08 Analytics & Measurement',
-  '09 Retention & Growth',
-  '10 RevOps & Sales',
-  '11 Legal & Compliance',
-  '12 Finance & Treasury',
-  '13 Product & Engineering',
-  '14 Investor Relations & YC',
-  '15 Operations & Governance'
+  '01 Negocio',
+  '02 Marketing',
+  '01 Negocio/01 Estrategia & Modelo',
+  '01 Negocio/02 Producto & Ingenieria',
+  '01 Negocio/03 Legal & Cumplimiento',
+  '01 Negocio/04 Finanzas & YC Investors',
+  '01 Negocio/05 Sponsors B2B & Ventas',
+  '01 Negocio/06 Operaciones & Gobernanza',
+  '02 Marketing/01 Contexto de Marca',
+  '02 Marketing/02 Estrategia & Parrilla',
+  '02 Marketing/03 Redes Sociales & Contenido',
+  '02 Marketing/04 Copywriting & Web',
+  '02 Marketing/05 Email Marketing',
+  '02 Marketing/06 SEO & Descubrimiento',
+  '02 Marketing/07 Analitica & Crecimiento'
 ];
 
 // Strict banned robot phrases & LLM clichés (Spanish & English)
@@ -294,7 +294,7 @@ function initSpec(slug, title, targetFolder, subagentsStr, icp, goal) {
 
   if (!isValidVaultFolder) {
     console.error(`❌ Carpeta de destino inválida: "${targetFolder}".`);
-    console.error(`   Debe ser una categoría numerada estándar de BRIDS-Brain (ej. "02 Strategy & Research", "10 RevOps & Sales").`);
+    console.error(`   Debe ser un dominio válido de BRIDS-Brain (ej. "01 Negocio/01 Estrategia & Modelo", "02 Marketing/03 Redes Sociales & Contenido").`);
     process.exit(1);
   }
 
@@ -862,14 +862,14 @@ function testRun() {
   if (fs.existsSync(testPaths.specMdPath)) fs.unlinkSync(testPaths.specMdPath);
   if (fs.existsSync(testPaths.workDir)) fs.rmSync(testPaths.workDir, { recursive: true, force: true });
 
-  const targetVaultFile = path.join(VAULT_DIR, '02 Strategy & Research', `${testSlug}.md`);
+  const targetVaultFile = path.join(VAULT_DIR, '01 Negocio', '01 Estrategia & Modelo', `${testSlug}.md`);
   if (fs.existsSync(targetVaultFile)) fs.unlinkSync(targetVaultFile);
 
   // 1. Init (Status: spec_review)
   initSpec(
     testSlug,
     'Sintético: Tokenización de Activos Inmobiliarios en Solana',
-    '02 Strategy & Research',
+    '01 Negocio/01 Estrategia & Modelo',
     'business-consultant,founder-ghostwriter',
     'Institutional Real Estate Sponsors',
     'Demostrar reducción de costos de sindicación del 80%'
@@ -944,7 +944,7 @@ Agenda una sesión técnica con el equipo de estructuración en sponsors@brids.i
   if (!fs.existsSync(targetVaultFile)) {
     throw new Error(`FALLO: El archivo final no se encontró en ${targetVaultFile} tras approve-deliverable!`);
   }
-  console.log('✅ Archivo final verificado exitosamente en BRIDS-Brain/02 Strategy & Research/');
+  console.log('✅ Archivo final verificado exitosamente en BRIDS-Brain/01 Negocio/01 Estrategia & Modelo/');
 
   // Cleanup test artifacts
   fs.unlinkSync(targetVaultFile);

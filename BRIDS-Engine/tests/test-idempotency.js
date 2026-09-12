@@ -64,7 +64,7 @@ function cleanup() {
       }
     }
   }
-  const testDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Strategy & Research', 'test-sdd-idem.md');
+  const testDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '01 Negocio', '01 Estrategia & Modelo', 'test-sdd-idem.md');
   if (fs.existsSync(testDeliverable)) fs.unlinkSync(testDeliverable);
 }
 
@@ -98,7 +98,7 @@ function runSuite() {
     
     // Run 3 consecutive syncs
     execSync(`bash "${syncScript}"`, { stdio: 'pipe' });
-    const targetContext = path.join(ROOT_DIR, 'BRIDS-Brain', '01 Brand Context', 'product-marketing-context.md');
+    const targetContext = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Marketing', '01 Contexto de Marca', 'product-marketing-context.md');
     assert(fs.existsSync(targetContext), 'El contexto de marca existe en el vault tras sync 1');
 
     const stat1 = fs.lstatSync(targetContext);
@@ -144,7 +144,7 @@ function runSuite() {
     // TEST 3: Task Updates & State Transition Idempotency
     // -------------------------------------------------------------
     console.log('[TEST 3/6] Verificando Idempotencia en Transición de Estados de Tareas (task-manager update)...');
-    execSync(`bash "${tmScript}" add ${sessionId} "Subtarea 1" W1_BRAND_STRATEGY "mas-product-marketing-context" "01 Brand Context/test.md"`, { stdio: 'pipe' });
+    execSync(`bash "${tmScript}" add ${sessionId} "Subtarea 1" W1_BRAND_STRATEGY "mas-product-marketing-context" "02 Marketing/01 Contexto de Marca/test.md"`, { stdio: 'pipe' });
 
     // Update to completed
     execSync(`bash "${tmScript}" update ${sessionId} TASK-001 completed "Entrega lista"`, { stdio: 'pipe' });
@@ -191,7 +191,7 @@ Texto base inicial inmutable.
 - **v1.0 (2026-08-08):** Creación inicial de la nota.
 
 ## 🔗 Referencias Cruzadas
-- Contexto: [[01 Brand Context/product-marketing-context.md]]
+- Contexto: [[02 Marketing/01 Contexto de Marca/product-marketing-context.md]]
 `;
 
     fs.writeFileSync(testNotePath, initialNoteContent, 'utf8');
@@ -246,8 +246,8 @@ Texto base inicial inmutable.
     console.log('[TEST 7/7] Verificando Generación y Protección de Carruseles (create-social-carousel)...');
     const carouselScript = path.join(SCRIPTS_DIR, 'create-social-carousel.sh');
     const testIdea = 'test-rwa-unit';
-    const expectedNote = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content', `${getTodayString()}-linkedin-carrusel-${testIdea}.md`);
-    const expectedAssets = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content', 'Assets', `${getTodayString()}-carrusel-${testIdea}`);
+    const expectedNote = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Marketing', '03 Redes Sociales & Contenido', `${getTodayString()}-linkedin-carrusel-${testIdea}.md`);
+    const expectedAssets = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Marketing', '03 Redes Sociales & Contenido', 'Assets', `${getTodayString()}-carrusel-${testIdea}`);
 
     if (fs.existsSync(expectedNote)) fs.unlinkSync(expectedNote);
     if (fs.existsSync(expectedAssets)) fs.rmSync(expectedAssets, { recursive: true, force: true });
@@ -277,7 +277,7 @@ Texto base inicial inmutable.
     console.log('[TEST 8/8] Verificando Idempotencia en Sincronización de Parrilla (sync-content-grid)...');
     const syncGridScript = path.join(SCRIPTS_DIR, 'sync-content-grid.sh');
 
-    const gridDocPath = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content', 'parrilla-publicaciones-redes-sociales.md');
+    const gridDocPath = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Marketing', '02 Estrategia & Parrilla', 'parrilla-publicaciones-redes-sociales.md');
     
     // First run: update doc
     execSync(`bash "${syncGridScript}" update`, { stdio: 'pipe' });
@@ -296,7 +296,7 @@ Texto base inicial inmutable.
     const sddSpecJson = path.join(VAULT_INBOX, 'Specs', `${testSddSlug}.spec.json`);
     const sddSpecMd = path.join(VAULT_INBOX, 'Specs', `${testSddSlug}.spec.md`);
     const sddWorkDir = path.join(VAULT_INBOX, 'Specs', `${testSddSlug}-work`);
-    const sddDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Strategy & Research', `${testSddSlug}.md`);
+    const sddDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '01 Negocio', '01 Estrategia & Modelo', `${testSddSlug}.md`);
 
     // Clean prior artifacts if left from aborted runs
     if (fs.existsSync(sddSpecJson)) fs.unlinkSync(sddSpecJson);
@@ -305,7 +305,7 @@ Texto base inicial inmutable.
     if (fs.existsSync(sddDeliverable)) fs.unlinkSync(sddDeliverable);
 
     // 1. Initial Spec Creation (Starts in spec_review with HITL-1 pending)
-    execSync(`bash "${sddScript}" init "${testSddSlug}" "Estrategia Tokenización Test" "02 Strategy & Research" "business-consultant,founder-ghostwriter" "Real Estate Sponsors" "Levantamiento de $10M"`, { stdio: 'pipe' });
+    execSync(`bash "${sddScript}" init "${testSddSlug}" "Estrategia Tokenización Test" "01 Negocio/01 Estrategia & Modelo" "business-consultant,founder-ghostwriter" "Real Estate Sponsors" "Levantamiento de $10M"`, { stdio: 'pipe' });
     assert(fs.existsSync(sddSpecJson), 'Spec JSON creado correctamente en 00 Inbox/Specs');
 
     const initialSpecData = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
@@ -314,7 +314,7 @@ Texto base inicial inmutable.
 
     const specJsonHash1 = getHash(sddSpecJson);
     // 2. Double-init idempotency
-    execSync(`bash "${sddScript}" init "${testSddSlug}" "Estrategia Tokenización Test" "02 Strategy & Research" "business-consultant,founder-ghostwriter" "Real Estate Sponsors" "Levantamiento de $10M"`, { stdio: 'pipe' });
+    execSync(`bash "${sddScript}" init "${testSddSlug}" "Estrategia Tokenización Test" "01 Negocio/01 Estrategia & Modelo" "business-consultant,founder-ghostwriter" "Real Estate Sponsors" "Levantamiento de $10M"`, { stdio: 'pipe' });
     const specJsonHash2 = getHash(sddSpecJson);
     assert(specJsonHash1 === specJsonHash2, 'Doble inicialización de spec es 100% idempotente y preserva el estado');
 
@@ -394,9 +394,9 @@ Agenda una sesión técnica con el equipo de estructuración en sponsors@brids.i
     const freezeSpecJson = path.join(VAULT_INBOX, 'Specs', `${testFreezeSlug}.spec.json`);
     const freezeSpecMd = path.join(VAULT_INBOX, 'Specs', `${testFreezeSlug}.spec.md`);
     const freezeWorkDir = path.join(VAULT_INBOX, 'Specs', `${testFreezeSlug}-work`);
-    const freezeDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Strategy & Research', `${testFreezeSlug}.md`);
+    const freezeDeliverable = path.join(ROOT_DIR, 'BRIDS-Brain', '01 Negocio', '01 Estrategia & Modelo', `${testFreezeSlug}.md`);
 
-    execSync(`bash "${sddScript}" init "${testFreezeSlug}" "Freeze Test" "02 Strategy & Research" "business-consultant" "Sponsors" "Goal"`, { stdio: 'pipe' });
+    execSync(`bash "${sddScript}" init "${testFreezeSlug}" "Freeze Test" "01 Negocio/01 Estrategia & Modelo" "business-consultant" "Sponsors" "Goal"`, { stdio: 'pipe' });
     execSync(`bash "${sddScript}" approve-spec "${testFreezeSlug}"`, { stdio: 'pipe' });
 
     let freezeResult;

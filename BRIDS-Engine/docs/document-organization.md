@@ -15,144 +15,94 @@ This file defines how the system should organize Markdown documents and when it 
 
 ## Folder Taxonomy
 
+The vault is structured into two primary operational macro-domains plus an inbox:
+1. `00 Inbox/`: Raw captures, draft ideas, and formal SDD specifications under review.
+2. `01 Negocio/`: Corporate, legal, technical architecture (synced from OKF), unit economics, B2B sales, and governance.
+3. `02 Marketing/`: Brand context, strategic content grid, social media assets, copy, lifecycle email, SEO, and growth analytics.
+
+---
+
 ### `00 Inbox`
-
 Use for:
-- rough notes
-- raw captures
-- unclear drafts
+- rough notes and quick captures
 - temporary holding files
+- `Specs/`: formal SDD specifications and active review workspaces (`*.spec.md`, `*.spec.json`)
+- `Archive/`: safety backups created automatically by `refine-note.sh`
 
-### `01 Brand Context`
+---
 
-Use for:
-- product context
-- brand voice
-- ICP
-- positioning
-- proof points
-- brand glossary
+### `01 Negocio` (Business & Infrastructure)
 
-### `02 Strategy & Research`
+#### `01 Estrategia & Modelo/`
+- Master business concepts (`master-business-concepts.md`)
+- Detailed unit business concept notes (`Business Concepts/`)
+- Market research and TAM/SAM/SOM sizing (`market-research/`)
+- Business model, pricing, and monetization frameworks (`business-model/`)
 
-Use for:
-- content strategy
-- customer research
-- launch planning
-- marketing ideas
-- pricing strategy
-- psychology and messaging frameworks
+#### `02 Producto & Ingenieria/` (OKF Technical Source of Truth)
+- Product status matrix (`current-product-status-matrix.md`) and investor roadmap briefs
+- Architecture and platform design (`arquitectura/`)
+- Metaplex Core and Solana smart contract specifications (`metaplex-core/`)
+- Security audits, threat modeling, and PCI compliance (`seguridad/`)
+- Database schemas and API integrations (`api-y-database/`)
+- Technical RFCs and implementation runbooks (`rfcs-tecnicos/`)
 
-### `03 Website & Copy`
+#### `03 Legal & Cumplimiento/`
+- Delaware C-Corp corporate governance and SPV (Series LLC) structuring
+- Stripe Identity biometric KYC/AML compliance policies
+- Non-broker-dealer safe harbor legal memos
+- Terms & Conditions and investor data room preparation (`terminos-condiciones/`)
 
-Use for:
-- homepage copy
-- landing page copy
-- website rewrites
-- lead magnets
-- copy editing
+#### `04 Finanzas & YC Investors/`
+- 3-5 year financial models, pro forma projections, and unit economics (`financial-models/`)
+- Investor pitch decks (Sequoia/Seed format) and one-pagers (`pitch-decks/`)
+- Squads Protocol Multi-Sig treasury governance and USDC yield models (`tesoreria-multisig/`)
+- Y Combinator application drafts and investor updates
 
-### `04 Email & Lifecycle`
+#### `05 Sponsors B2B & Ventas/`
+- B2B Sponsor acquisition collateral and developer pitch decks (`b2b-sponsors/`)
+- Sales battlecards, objection handling, and cold outbound sequences
+- Real Estate Sponsor onboarding pipelines and pilot agreements
 
-Use for:
-- cold email sequences
-- email nurture flows
-- onboarding email lifecycles
-- outbound campaign drafts
+#### `06 Operaciones & Gobernanza/`
+- Institutional standard operating procedures (SOPs)
+- Key talent hiring scorecards and advisor agreements
+- Vendor management and operational compliance
 
-### `05 SEO & Discoverability`
+---
 
-Use for:
-- SEO audits
-- AI SEO (GEO / Generative Engine Optimization)
-- ASO (App Store Optimization)
-- competitor alternatives
-- programmatic SEO
-- schema markup
-- site architecture
+### `02 Marketing` (Growth & Communications)
 
-### `06 CRO & Funnel`
+#### `01 Contexto de Marca/`
+- Single source of truth for brand voice, positioning, and ICP (`product-marketing-context.md`)
+- Positioning matrices and brand glossaries
 
-Use for:
-- page CRO
-- signup flow improvements
-- onboarding conversion
-- forms & popups
-- paywalls
-- experiments and A/B test plans
+#### `02 Estrategia & Parrilla/`
+- 15-day master editorial content grid (`parrilla-publicaciones-redes-sociales.md`)
+- Cross-channel promotional roadmaps and launch strategies
 
-### `07 Paid, Social & Community`
+#### `03 Redes Sociales & Contenido/`
+- Multi-platform publications: Instagram, LinkedIn, X/Twitter, Telegram, TikTok/Reels
+- 4-slide carousels and production manifests (`Assets/`)
+- Thought leadership essays and founder voice threads
 
-Use for:
-- ad creative & paid campaigns
-- social media posts (LinkedIn, X, Telegram)
-- 4-slide carousels & publication assets
-- editorial content grids (parrilla)
-- community marketing assets
+#### `04 Copywriting & Web/`
+- Homepage and landing page copy
+- Website rewrites, value proposition testing, and lead magnets
+- Conversion rate optimization (CRO) frameworks and experiments
 
-### `08 Analytics & Measurement`
+#### `05 Email Marketing/`
+- Cold outbound email sequences for investors and sponsors
+- Automated onboarding and lifecycle nurture sequences
 
-Use for:
-- event tracking plans (GA4, Mixpanel)
-- measurement frameworks
-- KPI scorecards and dashboards
-- analytics instrumentation notes
+#### `06 SEO & Descubrimiento/`
+- Search engine optimization audits and keyword matrices
+- AI Search / Generative Engine Optimization (GEO) strategies
+- Competitor alternative comparisons and programmatic landing pages
 
-### `09 Retention & Growth`
-
-Use for:
-- churn reduction & prevention
-- referral programs
-- free tool strategy
-- retention ideas and growth loops
-
-### `10 RevOps & Sales`
-
-Use for:
-- revops docs & pipeline management
-- B2B sponsor acquisition collateral
-- sales battlecards & one-pagers
-- objection handling and sales enablement
-
-### `11 Legal & Compliance`
-
-Use for:
-- Delaware C-Corp corporate governance
-- SPV (Series LLC) structuring & asset segregation
-- Data Room preparation & investor due diligence
-- Stripe Identity KYC/AML compliance & non-broker-dealer safe harbor
-
-### `12 Finance & Treasury`
-
-Use for:
-- quantitative 3-5 year financial models & unit economics
-- Cap Table & equity dilution scenarios
-- runway, cash burn & budget tracking
-- Squads Protocol Multi-Sig treasury governance
-
-### `13 Product & Engineering`
-
-Use for:
-- Solana blockchain infrastructure architecture
-- Metaplex Core plugin specifications (Freeze & Authority/Recovery)
-- smart contract security audits & PRDs
-- technical product roadmaps
-
-### `14 Investor Relations & YC`
-
-Use for:
-- Y Combinator application essays & interview preparation
-- 10-12 slide investor pitch decks (Sequoia / Seed format)
-- monthly investor updates & shareholder letters
-- venture capital pipeline & CRM
-
-### `15 Operations & Governance`
-
-Use for:
-- institutional standard operating procedures (SOPs)
-- key talent hiring plans & scorecards
-- advisor agreements & board resolutions
-- vendor management & operational compliance
+#### `07 Analitica & Crecimiento/`
+- Event tracking taxonomies (GA4, Mixpanel) and conversion funnels
+- Growth loops, referral programs, and KPI scorecards
 
 ## When to Create a New Folder
 

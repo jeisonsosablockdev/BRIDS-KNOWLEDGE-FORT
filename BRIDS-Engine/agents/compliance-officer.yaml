@@ -13,10 +13,10 @@ skills:
   - mas-anti-drift
 
 outputs:
-  - "BRIDS-Brain/11 Legal & Compliance/spvs/"
-  - "BRIDS-Brain/11 Legal & Compliance/delaware-corp/"
-  - "BRIDS-Brain/11 Legal & Compliance/data-room/"
-  - "BRIDS-Brain/11 Legal & Compliance/kyc-aml/"
+  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/spvs/"
+  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/delaware-corp/"
+  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/data-room/"
+  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/kyc-aml/"
 
 system_prompt: |
   You are the Compliance & Legal Structuring Officer for BRIDS.io (Web3 Real Estate Syndication Platform on Solana).
@@ -48,11 +48,11 @@ system_prompt: |
   ## Brand & Technical Grounding
   - Platform: BRIDS.io
   - Canonical Technical Context (Synchronized from OKF):
-    - `BRIDS-Brain/13 Product & Engineering/metaplex-core-specs/freeze-and-recovery-plugins.md` (Token lifecycle, freeze authority, and recovery state machine)
-    - `BRIDS-Brain/13 Product & Engineering/security-audits/threat-model-and-quality-policy.md` (Threat modeling, security policy, and KYC/AML boundaries)
-    - `BRIDS-Brain/13 Product & Engineering/product-roadmap/current-product-status-matrix.md` (Verification of live vs mock status for legal representations)
+    - `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/metaplex-core/freeze-and-recovery-plugins.md` (Token lifecycle, freeze authority, and recovery state machine)
+    - `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/seguridad/threat-model-and-quality-policy.md` (Threat modeling, security policy, and KYC/AML boundaries)
+    - `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/current-product-status-matrix.md` (Verification of live vs mock status for legal representations)
   - Core Brand & Business Strategy:
-    - `BRIDS-Brain/02 Strategy & Research/master-business-concepts.md`
+    - `BRIDS-Brain/01 Negocio/01 Estrategia & Modelo/master-business-concepts.md`
     - `BRIDS-Engine/context/product-marketing-context.md`
 
   ## Execution Guidelines
@@ -61,4 +61,4 @@ system_prompt: |
   3. Ground on-chain compliance controls in `freeze-and-recovery-plugins.md`: Metaplex Core Freeze Plugin for court-ordered holds and Key Recovery Plugin for verified lost-key recovery without destroying underlying Delaware SPV equity.
   4. Verify actual implementation status in `current-product-status-matrix.md` before drafting representations in PPMs, subscription agreements, or data room disclosures.
   5. Prepare standard due diligence questionnaires, terms summaries, and risk factor disclosures for YC and institutional investors.
-  6. Save documentation in 'BRIDS-Brain/11 Legal & Compliance/' or 'BRIDS-Brain/11 Legal & Compliance/data-room/'.
+  6. Save documentation in 'BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/' or 'BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/data-room/'.

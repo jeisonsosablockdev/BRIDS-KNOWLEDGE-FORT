@@ -56,7 +56,7 @@ Co-Authored-By: OpenAI Codex <noreply@openai.com>
 ## Anti-Drift Task Execution Protocol (5 Steps con Doble Guardrail HITL)
 To prevent prompt/context drift and ensure consistent quality, every document or content generation task must follow this sequence:
 1. **Solicitud de Usuario & Propuesta SDD:** El usuario expone el requerimiento o idea comercial. Se genera un artefacto de especificación formal previo usando `bash BRIDS-Engine/scripts/task-init.sh <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"` (o `sdd-manager.sh init`). El spec queda en estado `spec_review` y declara obligatoriamente:
-   - Destino canónico en `BRIDS-Brain/` (00 a 15) y nombre de archivo.
+   - Destino canónico en `BRIDS-Brain/` (`01 Negocio` o `02 Marketing`) y nombre de archivo.
    - Sub-agentes asignados del squad (`business-consultant`, `market-research-analyst`, `pitch-deck-architect`, `compliance-officer`, `b2b-sponsor-lead`, `founder-ghostwriter`).
    - Anclas técnicas verificables (Solana, Metaplex Core Freeze/Recovery, Delaware SPV, Stripe Identity) y filtro anti-clichés de IA.
 2. **Primer Guardrail HITL (Aprobación Humana del Spec):** Se presenta el objeto canónico del spec al usuario (`bash BRIDS-Engine/scripts/sdd-manager.sh preview <slug>`).
@@ -76,11 +76,14 @@ To prevent prompt/context drift and ensure consistent quality, every document or
 5. **Medición & Cierre:** Registro del entregable, asignación de eventos y KPIs, y cierre en `task-manager.sh update`.
 
 ## Vault Conventions
-- Use existing category folders under `BRIDS-Brain/` (numbered 00 to 15: 00-10 Growth/Marketing, 11-15 Corporate/Admin)
+- The vault is structured into two core macro-domains under `BRIDS-Brain/`:
+  - `01 Negocio/`: Estrategia & Modelo, Producto & Ingeniería (OKF sync), Legal & Cumplimiento, Finanzas & YC Investors, Sponsors B2B & Ventas, Operaciones & Gobernanza.
+  - `02 Marketing/`: Contexto de Marca, Estrategia & Parrilla, Redes Sociales & Contenido, Copywriting & Web, Email Marketing, SEO & Descubrimiento, Analítica & Crecimiento.
+  - `00 Inbox/`: Raw captures, drafts, and SDD specs under review.
 - Prefer descriptive file names like `linkedin-post-ideas-apr-2026.md`
 - Keep one note per deliverable or per coherent working artifact
 - Create a new subfolder only when there are 3+ related deliverables that do not fit an existing subfolder cleanly
-- Do not create top-level folders beyond the existing numbered taxonomy (00 to 15) unless explicitly requested
+- Do not create top-level folders beyond `00 Inbox`, `01 Negocio`, and `02 Marketing`
 - Prefer saving drafts in `00 Inbox` when the final destination is unclear
 
 ## Obsidian Integration
@@ -93,12 +96,12 @@ The workspace includes 6 specialized sub-agents defined in `BRIDS-Engine/agents/
 
 | Agent Identifier | Role | Output Vault Path | Core Mission |
 |---|---|---|---|
-| `business-consultant` | Business Model & Unit Economics Architect | `12 Finance & Treasury/financial-models/`, `02 Strategy & Research/business-model/` | Fee architecture (SaaS, processing, recovery), CAC/LTV, 3-5y pro forma projections. |
-| `market-research-analyst` | Market Research & TAM/SAM/SOM Analyst | `02 Strategy & Research/market-research/` | Quantitative market sizing, live web research, competitor benchmarks (Lofty, RealT, Blocksquare). |
-| `pitch-deck-architect` | YC & Sequoia Pitch Deck Architect | `14 Investor Relations & YC/pitch-decks/` | 10-12 slide investor decks, native `.pptx` generation with `python-pptx`, slide scripts. |
-| `compliance-officer` | Legal Structuring & RWA Compliance Officer | `11 Legal & Compliance/` | Dual-entity separation (Delaware C-Corp vs SPV LLCs), non-broker-dealer status, Stripe Identity KYC/AML, Metaplex Core Freeze/Recovery plugins, Data Room preparation. |
-| `b2b-sponsor-lead` | Real Estate Sponsor Acquisition & RevOps | `10 RevOps & Sales/b2b-sponsors/` | Developer/GP value prop, institutional one-pagers, cold outbound sequences, pilot onboarding. |
-| `founder-ghostwriter` | Founder Voice, Thought Leadership & YC Storyteller | `04 Social & Community/`, `14 Investor Relations & YC/` | YC application essays ("Why now?", "Unique insight"), X/Twitter threads on Solana RWA, LinkedIn articles, investor updates. |
+| `business-consultant` | Business Model & Unit Economics Architect | `01 Negocio/04 Finanzas & YC Investors/`, `01 Negocio/01 Estrategia & Modelo/` | Fee architecture (SaaS, processing, recovery), CAC/LTV, 3-5y pro forma projections. |
+| `market-research-analyst` | Market Research & TAM/SAM/SOM Analyst | `01 Negocio/01 Estrategia & Modelo/market-research/` | Quantitative market sizing, live web research, competitor benchmarks (Lofty, RealT, Blocksquare). |
+| `pitch-deck-architect` | YC & Sequoia Pitch Deck Architect | `01 Negocio/04 Finanzas & YC Investors/pitch-decks/` | 10-12 slide investor decks, native `.pptx` generation with `python-pptx`, slide scripts. |
+| `compliance-officer` | Legal Structuring & RWA Compliance Officer | `01 Negocio/03 Legal & Cumplimiento/` | Dual-entity separation (Delaware C-Corp vs SPV LLCs), non-broker-dealer status, Stripe Identity KYC/AML, Metaplex Core Freeze/Recovery plugins, Data Room preparation. |
+| `b2b-sponsor-lead` | Real Estate Sponsor Acquisition & RevOps | `01 Negocio/05 Sponsors B2B & Ventas/` | Developer/GP value prop, institutional one-pagers, cold outbound sequences, pilot onboarding. |
+| `founder-ghostwriter` | Founder Voice, Thought Leadership & YC Storyteller | `02 Marketing/03 Redes Sociales & Contenido/`, `01 Negocio/04 Finanzas & YC Investors/` | YC application essays ("Why now?", "Unique insight"), X/Twitter threads on Solana RWA, LinkedIn articles, investor updates. |
 
 - Definitions: Individual autonomous YAML files in `BRIDS-Engine/agents/*.yaml`
 - Verification: `bash BRIDS-Engine/scripts/inspect-squad.sh`

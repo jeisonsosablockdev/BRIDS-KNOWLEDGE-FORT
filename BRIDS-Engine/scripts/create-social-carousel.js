@@ -15,7 +15,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
-const VAULT_SOCIAL_DIR = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content');
+const VAULT_SOCIAL_DIR = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Marketing', '03 Redes Sociales & Contenido');
 const ASSETS_ROOT = path.join(VAULT_SOCIAL_DIR, 'Assets');
 const BRAND_ASSETS_DIR = path.join(ROOT_DIR, 'BRIDS-Engine', 'context', 'brand-assets');
 const TEMPLATE_PATH = path.join(ROOT_DIR, 'BRIDS-Engine', 'templates', 'carousel-post-template.md');
@@ -164,7 +164,7 @@ function createCarousel(options = {}) {
   } else {
     noteContent = `---
 title: "[INSTAGRAM CARRUSEL] ${titleRaw}"
-category: "07 Paid, Social & Community"
+category: "02 Marketing"
 workflow: "W5_CONTENT_SOCIAL"
 skills_used:
   - "mas-social-content"
@@ -195,16 +195,16 @@ tags:
 ## 🖼️ Galería Visual del Carrusel (4 Slides)
 
 ### Slide 1: Portada Hero Arquitectónica
-![[07 Paid, Social & Community/Social Content/Assets/${folderName}/01-portada-hero.png]]
+![[02 Marketing/03 Redes Sociales & Contenido/Assets/${folderName}/01-portada-hero.png]]
 
 ### Slide 2: Arquitectura Técnica & Smart Contracts
-![[07 Paid, Social & Community/Social Content/Assets/${folderName}/02-diagrama-arquitectura-tecnica.png]]
+![[02 Marketing/03 Redes Sociales & Contenido/Assets/${folderName}/02-diagrama-arquitectura-tecnica.png]]
 
 ### Slide 3: Desglose Financiero & Rendimiento Estimado
-![[07 Paid, Social & Community/Social Content/Assets/${folderName}/03-desglose-financiero-rendimiento.png]]
+![[02 Marketing/03 Redes Sociales & Contenido/Assets/${folderName}/03-desglose-financiero-rendimiento.png]]
 
 ### Slide 4: Llamado a la Acción (CTA) & Onboarding
-![[07 Paid, Social & Community/Social Content/Assets/${folderName}/04-conversion-cta.png]]
+![[02 Marketing/03 Redes Sociales & Contenido/Assets/${folderName}/04-conversion-cta.png]]
 
 ---
 

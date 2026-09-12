@@ -14,10 +14,10 @@ const path = require('path');
 const { createCarousel } = require('./create-social-carousel');
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
-const VAULT_SOCIAL_DIR = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content');
+const VAULT_SOCIAL_DIR = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Marketing', '03 Redes Sociales & Contenido');
 const ASSETS_ROOT = path.join(VAULT_SOCIAL_DIR, 'Assets');
 const DEFAULT_PLAN_PATH = path.join(ROOT_DIR, 'BRIDS-Engine', 'templates', 'content-grid-plan.json');
-const PARRILLA_DOC_PATH = path.join(VAULT_SOCIAL_DIR, 'parrilla-publicaciones-redes-sociales.md');
+const PARRILLA_DOC_PATH = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Marketing', '02 Estrategia & Parrilla', 'parrilla-publicaciones-redes-sociales.md');
 const CREATE_POST_SCRIPT = path.join(ROOT_DIR, 'BRIDS-Engine', 'scripts', 'create-social-post.js');
 
 function ensureDir(dir) {
@@ -130,7 +130,7 @@ function scaffoldAllMissing(plan) {
 
         const reelContent = `---
 title: "[INSTAGRAM REEL] ${item.slug.replace(/-/g, ' ')}"
-category: "07 Paid, Social & Community"
+category: "02 Marketing"
 workflow: "W5_CONTENT_SOCIAL"
 skills_used:
   - "mas-social-content"
@@ -221,8 +221,8 @@ ${item.hashtags}
 ---
 
 ## 🔗 Referencias Cruzadas
-- Biblioteca de Conceptos: [[02 Strategy & Research/master-business-concepts.md]]
-- Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
+- Biblioteca de Conceptos: [[01 Negocio/01 Estrategia & Modelo/master-business-concepts.md]]
+- Contexto de Marca: [[02 Marketing/01 Contexto de Marca/product-marketing-context.md]]
 `;
 
         fs.writeFileSync(notePath, reelContent, 'utf8');
@@ -245,11 +245,11 @@ function updateParrillaDocument(plan) {
   let tableRows = '';
   for (const item of audit) {
     const noteLink = item.matchedNote
-      ? `[[07 Paid, Social & Community/Social Content/${item.matchedNote}|📄 Ver Nota]]`
+      ? `[[02 Marketing/03 Redes Sociales & Contenido/${item.matchedNote}|📄 Ver Nota]]`
       : `*(Pendiente)*`;
 
     const assetLink = item.matchedAsset
-      ? `[[07 Paid, Social & Community/Social Content/Assets/${item.matchedAsset}|📁 Assets]]`
+      ? `[[02 Marketing/03 Redes Sociales & Contenido/Assets/${item.matchedAsset}|📁 Assets]]`
       : (item.format === 'carrusel' ? `*(Sin assets)*` : `*(Video directo)*`);
 
     const formatBadge = item.format === 'carrusel' ? '🖼️ Carrusel (4:5)' : '🎬 Reel (9:16)';
@@ -261,7 +261,7 @@ function updateParrillaDocument(plan) {
 
   const updatedContent = `---
 title: "Parrilla Estratégica de Publicaciones (15 Días)"
-category: "07 Paid, Social & Community"
+category: "02 Marketing"
 workflow: "W5_CONTENT_SOCIAL"
 skills_used:
   - "mas-social-content"
@@ -283,7 +283,7 @@ tags:
 # Parrilla Estratégica de Publicaciones (15 Días)
 
 *Matriz Maestra Intercalada y Sincronizada para @brids_io*  
-*Folder: 07 Paid, Social & Community / Social Content*  
+*Folder: 02 Marketing / 03 Redes Sociales & Contenido*  
 *Last updated: ${getTodayString()}*
 
 > [!NOTE]
@@ -307,9 +307,9 @@ ${tableRows}
 ---
 
 ## 🔗 Referencias Cruzadas
-- Infraestructura RWA: [[02 Strategy & Research/Business Concepts/concept-solana-rwa-infrastructure.md]]
-- Estructuración Dual SPV: [[02 Strategy & Research/Business Concepts/concept-dual-entity-compliance.md]]
-- Propuesta de Valor Sponsors: [[02 Strategy & Research/Business Concepts/concept-b2b-sponsor-value-prop.md]]
+- Infraestructura RWA: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md]]
+- Estructuración Dual SPV: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]
+- Propuesta de Valor Sponsors: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md]]
 `;
 
   fs.writeFileSync(PARRILLA_DOC_PATH, updatedContent, 'utf8');

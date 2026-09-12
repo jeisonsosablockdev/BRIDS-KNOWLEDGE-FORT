@@ -1,6 +1,6 @@
 ---
 title: "[SOCIAL CARRUSEL] {{TITLE}}"
-category: "07 Paid, Social & Community"
+category: "02 Marketing"
 workflow: "W5_CONTENT_SOCIAL"
 skills_used:
   - "mas-social-content"
@@ -36,35 +36,35 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** {{ASSET_CLASS}}
 - **Ancla Técnica:** *{{TECHNICAL_REF}}*
-- **Carpeta de Activos:** `Social Content/Assets/{{FOLDER_NAME}}/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/{{FOLDER_NAME}}/`
 
 ---
 
 ## 🖼️ Galería Visual del Carrusel (4 Slides)
 
 ### Slide 1: Portada Hero (Atracción Institucional)
-![[07 Paid, Social & Community/Social Content/Assets/{{FOLDER_NAME}}/01-portada-hero.png]]
+![[02 Marketing/03 Redes Sociales & Contenido/Assets/{{FOLDER_NAME}}/01-portada-hero.png]]
 *Titular en Imagen:* **"Real Estate Tokenization on Solana."**  
 *Micro-copy:* {{ASSET_CLASS}} • Rendimiento On-Chain Institucional
 
 ---
 
 ### Slide 2: Arquitectura Técnica & Legal (Dual Entity SPV)
-![[07 Paid, Social & Community/Social Content/Assets/{{FOLDER_NAME}}/02-arquitectura-tecnica.png]]
+![[02 Marketing/03 Redes Sociales & Contenido/Assets/{{FOLDER_NAME}}/02-arquitectura-tecnica.png]]
 *Titular en Imagen:* **"Infraestructura RWA de Alto Desempeño"**  
 *Micro-copy:* Metaplex Core Freeze/Recovery Plugins • Delaware SPV Non-Broker-Dealer
 
 ---
 
 ### Slide 3: Métricas Financieras & Rendimiento (Unit Economics)
-![[07 Paid, Social & Community/Social Content/Assets/{{FOLDER_NAME}}/03-metricas-financieras.png]]
+![[02 Marketing/03 Redes Sociales & Contenido/Assets/{{FOLDER_NAME}}/03-metricas-financieras.png]]
 *Titular en Imagen:* **"Rendimiento Transparente y Fraccional"**  
 *Micro-copy:* Liquidación inmediata • Distribución automatizada de dividendos
 
 ---
 
 ### Slide 4: Cierre Comercial & CTA
-![[07 Paid, Social & Community/Social Content/Assets/{{FOLDER_NAME}}/04-conversion-cta.png]]
+![[02 Marketing/03 Redes Sociales & Contenido/Assets/{{FOLDER_NAME}}/04-conversion-cta.png]]
 *Titular en Imagen:* **"El Futuro del Real Estate Institucional"**  
 *Micro-copy:* Agenda una demo con el equipo de BRIDS en brids.io
 
@@ -98,6 +98,7 @@ Descubre cómo la infraestructura de BRIDS en Solana permite tokenizar activos i
 ---
 
 ## 🔗 Referencias Cruzadas
-- Infraestructura RWA: [[02 Strategy & Research/Business Concepts/concept-solana-rwa-infrastructure.md]]
-- Cumplimiento Dual Delaware SPV: [[02 Strategy & Research/Business Concepts/concept-dual-entity-compliance.md]]
-- Propuesta de Valor Sponsors: [[02 Strategy & Research/Business Concepts/concept-b2b-sponsor-value-prop.md]]
+- Infraestructura RWA: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md]]
+- Cumplimiento Dual Delaware SPV: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]
+- Propuesta de Valor Sponsors: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md]]
+

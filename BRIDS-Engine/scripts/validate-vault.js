@@ -13,21 +13,8 @@ const VAULT_ROOT = path.join(ROOT_DIR, 'BRIDS-Brain');
 
 const ALLOWED_TOP_FOLDERS = [
   '00 Inbox',
-  '01 Brand Context',
-  '02 Strategy & Research',
-  '03 Website & Copy',
-  '04 Email & Lifecycle',
-  '05 SEO & Discoverability',
-  '06 CRO & Funnel',
-  '07 Paid, Social & Community',
-  '08 Analytics & Measurement',
-  '09 Retention & Growth',
-  '10 RevOps & Sales',
-  '11 Legal & Compliance',
-  '12 Finance & Treasury',
-  '13 Product & Engineering',
-  '14 Investor Relations & YC',
-  '15 Operations & Governance'
+  '01 Negocio',
+  '02 Marketing'
 ];
 
 function getAllMarkdownFiles(dir, fileList = []) {
@@ -40,7 +27,7 @@ function getAllMarkdownFiles(dir, fileList = []) {
     const stat = fs.statSync(fullPath);
 
     if (stat.isDirectory()) {
-      if (item === 'Archive') continue; // skip archive snapshots from strict linting
+      if (item === 'Archive' || item === 'Assets') continue; // skip archive snapshots and asset folders from strict linting
       getAllMarkdownFiles(fullPath, fileList);
     } else if (item.endsWith('.md')) {
       fileList.push(fullPath);
@@ -72,7 +59,7 @@ function lintNote(filePath) {
   // 3. Check Taxonomy Folder
   const topFolder = relPath.split(path.sep)[0];
   if (!isSpecialDoc && !ALLOWED_TOP_FOLDERS.includes(topFolder)) {
-    errors.push(`Carpeta fuera de la taxonomía oficial (00 a 10): "${topFolder}"`);
+    errors.push(`Carpeta fuera de la taxonomía oficial de dominios (00 Inbox, 01 Negocio, 02 Marketing): "${topFolder}"`);
   }
 
   // 4. Check Frontmatter

@@ -5,18 +5,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 SOURCE="$ROOT/BRIDS-Engine/context/product-marketing-context.md"
 
-# Support both BRIDS-Brain and BRIDS-Brain
-if [[ -d "$ROOT/BRIDS-Brain/01 Brand Context" ]]; then
-  TARGET="$ROOT/BRIDS-Brain/01 Brand Context/product-marketing-context.md"
-elif [[ -d "$ROOT/BRIDS-Brain/01 Brand Context" ]]; then
-  TARGET="$ROOT/BRIDS-Brain/01 Brand Context/product-marketing-context.md"
-else
-  mkdir -p "$ROOT/BRIDS-Brain/01 Brand Context"
-  TARGET="$ROOT/BRIDS-Brain/01 Brand Context/product-marketing-context.md"
-fi
+TARGET_DIR="$ROOT/BRIDS-Brain/02 Marketing/01 Contexto de Marca"
+mkdir -p "$TARGET_DIR"
+TARGET="$TARGET_DIR/product-marketing-context.md"
 
 # Use relative symlink to keep repository clean and portable across environments
-ln -sf "../../BRIDS-Engine/context/product-marketing-context.md" "$TARGET"
+ln -sf "../../../BRIDS-Engine/context/product-marketing-context.md" "$TARGET"
 echo "Linked brand context into vault:"
-echo "  $TARGET -> ../../BRIDS-Engine/context/product-marketing-context.md"
+echo "  $TARGET -> ../../../BRIDS-Engine/context/product-marketing-context.md"
 

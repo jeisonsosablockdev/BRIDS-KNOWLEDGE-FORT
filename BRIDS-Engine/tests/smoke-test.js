@@ -100,41 +100,52 @@ async function runSmokeTest() {
   // PASO 2: TAXONOMÍA CANÓNICA DE LA BÓVEDA OBSIDIAN
   // ───────────────────────────────────────────────────────────────────────────
   printHeader(2, 'TAXONOMÍA Y ARQUITECTURA DE BRIDS-BRAIN',
-    'La bóveda organiza el conocimiento en 16 dominios canónicos (00 a 15):\n' +
-    '   00-10: Growth, Marketing, RevOps y Copywriting.\n' +
-    '   11-15: Legal, Finanzas, Producto, Relaciones con Inversores y Gobernanza.');
+    'La bóveda organiza el conocimiento en macro-dominios canónicos:\n' +
+    '   00 Inbox: Entradas, borradores y specs en revisión.\n' +
+    '   01 Negocio: Estrategia, Producto/Ingeniería (OKF), Legal, Finanzas, B2B y Operaciones.\n' +
+    '   02 Marketing: Contexto de marca, Parrilla, Redes, Copywriting, SEO y Analítica.');
 
-  const expectedVaultFolders = [
+  const expectedTopFolders = [
     '00 Inbox',
-    '01 Brand Context',
-    '02 Strategy & Research',
-    '03 Website & Copy',
-    '04 Email & Lifecycle',
-    '05 SEO & Discoverability',
-    '06 CRO & Funnel',
-    '07 Paid, Social & Community',
-    '08 Analytics & Measurement',
-    '09 Retention & Growth',
-    '10 RevOps & Sales',
-    '11 Legal & Compliance',
-    '12 Finance & Treasury',
-    '13 Product & Engineering',
-    '14 Investor Relations & YC',
-    '15 Operations & Governance'
+    '01 Negocio',
+    '02 Marketing'
   ];
 
-  let foldersFound = 0;
-  for (const f of expectedVaultFolders) {
+  let topFoldersFound = 0;
+  for (const f of expectedTopFolders) {
     const folderPath = path.join(BRAIN_DIR, f);
     const exists = fs.existsSync(folderPath);
-    if (exists) foldersFound++;
+    if (exists) topFoldersFound++;
   }
-  assert(foldersFound === 16, `Los 16 dominios canónicos existen en BRIDS-Brain (16/16)`);
+  assert(topFoldersFound === 3, `Los 3 macro-dominios canónicos existen en BRIDS-Brain (3/3)`);
 
-  const masterConceptsPath = path.join(BRAIN_DIR, '02 Strategy & Research', 'master-business-concepts.md');
-  const productContextPath = path.join(BRAIN_DIR, '01 Brand Context', 'product-marketing-context.md');
-  assert(fs.existsSync(masterConceptsPath), 'Nota Maestra de Conceptos existe en 02 Strategy & Research');
-  assert(fs.existsSync(productContextPath), 'Contexto de Producto y Marca existe en 01 Brand Context');
+  const expectedSubFolders = [
+    '01 Negocio/01 Estrategia & Modelo',
+    '01 Negocio/02 Producto & Ingenieria',
+    '01 Negocio/03 Legal & Cumplimiento',
+    '01 Negocio/04 Finanzas & YC Investors',
+    '01 Negocio/05 Sponsors B2B & Ventas',
+    '01 Negocio/06 Operaciones & Gobernanza',
+    '02 Marketing/01 Contexto de Marca',
+    '02 Marketing/02 Estrategia & Parrilla',
+    '02 Marketing/03 Redes Sociales & Contenido',
+    '02 Marketing/04 Copywriting & Web',
+    '02 Marketing/05 Email Marketing',
+    '02 Marketing/06 SEO & Descubrimiento',
+    '02 Marketing/07 Analitica & Crecimiento'
+  ];
+
+  let subFoldersFound = 0;
+  for (const sf of expectedSubFolders) {
+    const subPath = path.join(BRAIN_DIR, sf);
+    if (fs.existsSync(subPath)) subFoldersFound++;
+  }
+  assert(subFoldersFound === expectedSubFolders.length, `Todas las subcarpetas de Negocio y Marketing existen (${subFoldersFound}/${expectedSubFolders.length})`);
+
+  const masterConceptsPath = path.join(BRAIN_DIR, '01 Negocio', '01 Estrategia & Modelo', 'master-business-concepts.md');
+  const productContextPath = path.join(BRAIN_DIR, '02 Marketing', '01 Contexto de Marca', 'product-marketing-context.md');
+  assert(fs.existsSync(masterConceptsPath), 'Nota Maestra de Conceptos existe en 01 Negocio/01 Estrategia & Modelo');
+  assert(fs.existsSync(productContextPath), 'Contexto de Producto y Marca existe en 02 Marketing/01 Contexto de Marca');
 
   try {
     const valOut = execSync(`node "${path.join(SCRIPTS_DIR, 'validate-vault.js')}"`, { encoding: 'utf8' });
@@ -159,14 +170,14 @@ async function runSmokeTest() {
   const testSpecJson = path.join(testInboxSpecs, `${testSlug}.spec.json`);
   const testSpecMd = path.join(testInboxSpecs, `${testSlug}.spec.md`);
   const testWorkDir = path.join(testInboxSpecs, `${testSlug}-work`);
-  const targetVaultPath = path.join(BRAIN_DIR, '02 Strategy & Research', `${testSlug}.md`);
+  const targetVaultPath = path.join(BRAIN_DIR, '01 Negocio', '01 Estrategia & Modelo', `${testSlug}.md`);
 
   try {
     // 3.1 Inicializar Spec
     const specPaths = sdd.initSpec(
       testSlug,
       'Smoke Test RWA Demo',
-      '02 Strategy & Research',
+      '01 Negocio/01 Estrategia & Modelo',
       'business-consultant',
       'Institutional Real Estate Sponsors',
       'Demostrar el funcionamiento del motor SDD sin alterar la bóveda'
@@ -271,7 +282,7 @@ Agenda una sesión técnica con el equipo de estructuración en sponsors@brids.i
     '   refine-note.js genera automáticamente una copia de seguridad en 00 Inbox/Archive\n' +
     '   con timestamp antes de actualizar metadatos o versionado.');
 
-  const sampleNote = path.join(BRAIN_DIR, '01 Brand Context', 'product-marketing-context.md');
+  const sampleNote = path.join(BRAIN_DIR, '02 Marketing', '01 Contexto de Marca', 'product-marketing-context.md');
   const originalContent = fs.readFileSync(sampleNote, 'utf8');
   assert(originalContent.includes('Product Marketing Context: BRIDS.io'), 'Nota de prueba leída correctamente');
 

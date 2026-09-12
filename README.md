@@ -37,21 +37,24 @@ BRIDS KNOWLEDGE FORT/
 │   └── templates/
 └── BRIDS-Brain/
     ├── 00 Inbox/
-    ├── 01 Brand Context/
-    ├── 02 Strategy & Research/
-    ├── 03 Website & Copy/
-    ├── 04 Email & Lifecycle/
-    ├── 05 SEO & Discoverability/
-    ├── 06 CRO & Funnel/
-    ├── 07 Paid, Social & Community/
-    ├── 08 Analytics & Measurement/
-    ├── 09 Retention & Growth/
-    ├── 10 RevOps & Sales/
-    ├── 11 Legal & Compliance/
-    ├── 12 Finance & Treasury/
-    ├── 13 Product & Engineering/
-    ├── 14 Investor Relations & YC/
-    └── 15 Operations & Governance/
+    │   ├── Specs/
+    │   └── Archive/
+    ├── 01 Negocio/
+    │   ├── 01 Estrategia & Modelo/
+    │   ├── 02 Producto & Ingenieria/
+    │   ├── 03 Legal & Cumplimiento/
+    │   ├── 04 Finanzas & YC Investors/
+    │   ├── 05 Sponsors B2B & Ventas/
+    │   └── 06 Operaciones & Gobernanza/
+    ├── 02 Marketing/
+    │   ├── 01 Contexto de Marca/
+    │   ├── 02 Estrategia & Parrilla/
+    │   ├── 03 Redes Sociales & Contenido/
+    │   ├── 04 Copywriting & Web/
+    │   ├── 05 Email Marketing/
+    │   ├── 06 SEO & Descubrimiento/
+    │   └── 07 Analitica & Crecimiento/
+    └── Workspace Map.md
 ```
 
 ## Brand Context
@@ -62,7 +65,7 @@ The persistent context file lives at:
 
 It is also exposed inside the vault through:
 
-- `BRIDS-Brain/01 Brand Context/product-marketing-context.md`
+- `BRIDS-Brain/02 Marketing/01 Contexto de Marca/product-marketing-context.md`
 
 Use that file to keep product, audience, positioning, proof points, tone, and goals available for all future work.
 
@@ -85,25 +88,22 @@ powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\enable-project-s
 
 ## Folder Purpose
 
-### Marketing, GTM & Growth (00-10)
-- `00 Inbox`: rough captures, ideas, quick drafts, and SDD task sessions
-- `01 Brand Context`: persistent brand and product context (`product-marketing-context.md`)
-- `02 Strategy & Research`: corporate strategy, master business concepts (`Business Concepts/`), market research
-- `03 Website & Copy`: page copy, website rewrites, lead magnets
-- `04 Email & Lifecycle`: cold email and email sequence work
-- `05 SEO & Discoverability`: SEO, AI SEO (GEO), schema, site structure, ASO
-- `06 CRO & Funnel`: page optimization and funnel conversion work
-- `07 Paid, Social & Community`: ads, creative, social posts, carousels, and content grids
-- `08 Analytics & Measurement`: tracking plans (GA4/Mixpanel) and KPI dashboards
-- `09 Retention & Growth`: churn reduction, referrals, and growth loops
-- `10 RevOps & Sales`: B2B sponsor acquisition and sales enablement
+### 01 Negocio (Corporate, Technical & Commercial)
+- `01 Estrategia & Modelo`: business model, unit economics, TAM/SAM/SOM market research, master business concepts (`master-business-concepts.md`, `Business Concepts/`).
+- `02 Producto & Ingenieria`: single source of truth for technical architecture, OKF sync, Solana stack, Metaplex Core plugins, security audits, database schemas, and RFCs.
+- `03 Legal & Cumplimiento`: Delaware C-Corp governance, SPVs (Series LLC), Data Room, Stripe Identity KYC/AML compliance, non-broker-dealer memos.
+- `04 Finanzas & YC Investors`: 3-5y pro forma financial models, Cap Table, Squads Multi-Sig treasury governance, Y Combinator applications, and pitch decks.
+- `05 Sponsors B2B & Ventas`: Real Estate Sponsor acquisition collateral, developer battlecards, cold outbound sequences, and pilot onboarding.
+- `06 Operaciones & Gobernanza`: institutional SOPs, hiring scorecards, advisor agreements, board resolutions, and operational compliance.
 
-### Administrative & Corporate (11-15)
-- `11 Legal & Compliance`: Delaware C-Corp governance, SPVs (Series LLC), Data Room, KYC/AML
-- `12 Finance & Treasury`: 3-5y pro forma financial models, Cap Table, runway, Squads Multi-Sig
-- `13 Product & Engineering`: Solana architecture, Metaplex Core plugins, smart contract audits
-- `14 Investor Relations & YC`: Y Combinator application, pitch decks, investor updates
-- `15 Operations & Governance`: operational SOPs, team hiring, advisor agreements, board resolutions
+### 02 Marketing (Growth, Brand & Distribution)
+- `01 Contexto de Marca`: persistent brand and product context (`product-marketing-context.md`), ICP, positioning, and brand glossary.
+- `02 Estrategia & Parrilla`: 15-day master editorial content grid (`parrilla-publicaciones-redes-sociales.md`) and launch roadmaps.
+- `03 Redes Sociales & Contenido`: publications (Instagram, LinkedIn, X, Telegram), 4-slide carousels, thought leadership, and publication manifests (`Assets/`).
+- `04 Copywriting & Web`: homepage copy, landing pages, website rewrites, and conversion rate optimization (CRO).
+- `05 Email Marketing`: cold email outbound sequences, lead magnet follow-ups, and lifecycle nurture sequences.
+- `06 SEO & Descubrimiento`: SEO audits, AI SEO / Generative Engine Optimization (GEO), competitor comparisons, and schema markup.
+- `07 Analitica & Crecimiento`: event tracking plans (GA4, Mixpanel), KPI dashboards, growth loops, and referral systems.
 
 ## Project Scripts & Automation
 
@@ -170,14 +170,14 @@ flowchart LR
 
 | Workflow | Focus | Core Skills | Vault Destination | Typical Deliverables |
 | :--- | :--- | :--- | :--- | :--- |
-| **W1: Brand Strategy** | Brand identity, ICP & value prop | `mas-product-marketing-context`, `mas-customer-research` | `01 Brand Context/`, `02 Strategy & Research/` | `product-marketing-context.md`, `brand-positioning-framework.md` |
-| **W2: Landing Pages & Copy** | High-conversion copy & page architecture | `mas-copywriting`, `mas-copy-editing`, `mas-page-cro` | `03 Website & Copy/`, `06 CRO & Funnel/` | `homepage-copy-v1.md`, `lead-magnet-landing-page.md` |
-| **W3: SEO & AI SEO (GEO)** | Search engines & LLM citation optimization | `mas-seo-audit`, `mas-ai-seo`, `mas-schema-markup` | `05 SEO & Discoverability/` | `ai-seo-strategy.md`, `competitor-vs-matrix.md` |
-| **W4: Email Lifecycle** | Cold outbound, onboarding & nurture sequences | `mas-cold-email`, `mas-email-sequence`, `mas-copy-editing`| `04 Email & Lifecycle/` | `cold-outreach-sequence-b2b.md`, `welcome-nurture-flow.md` |
-| **W5: Content & Social** | Demand generation, LinkedIn/X & lead magnets | `mas-content-strategy`, `mas-social-content`, `mas-lead-magnets` | `07 Paid, Social & Community/`, `02 Strategy/` | `linkedin-editorial-calendar.md`, `lead-magnet-guide.md` |
-| **W6: CRO & Funnel** | Registration flow, forms & A/B testing | `mas-signup-flow-cro`, `mas-onboarding-cro`, `mas-ab-test-setup` | `06 CRO & Funnel/` | `ab-test-plan-signup.md`, `paywall-pricing-audit.md` |
-| **W7: Sales & Retention** | Battlecards, objection handling & churn reduction | `mas-sales-enablement`, `mas-churn-prevention`, `mas-revops` | `10 RevOps & Sales/`, `09 Retention & Growth/` | `sales-battlecard-vs-competitors.md`, `churn-playbook.md` |
-| **W8: Analytics & Metrics** | GA4/Mixpanel tracking plans, scorecards & ROI | `mas-analytics-tracking`, `mas-ab-test-setup`, `mas-revops` | `08 Analytics & Measurement/` | `ga4-tracking-plan.md`, `monthly-performance-scorecard.md` |
+| **W1: Brand Strategy** | Brand identity, ICP & value prop | `mas-product-marketing-context`, `mas-customer-research` | `02 Marketing/01 Contexto de Marca/`, `01 Negocio/01 Estrategia & Modelo/` | `product-marketing-context.md`, `brand-positioning-framework.md` |
+| **W2: Landing Pages & Copy** | High-conversion copy & page architecture | `mas-copywriting`, `mas-copy-editing`, `mas-page-cro` | `02 Marketing/04 Copywriting & Web/` | `homepage-copy-v1.md`, `lead-magnet-landing-page.md` |
+| **W3: SEO & AI SEO (GEO)** | Search engines & LLM citation optimization | `mas-seo-audit`, `mas-ai-seo`, `mas-schema-markup` | `02 Marketing/06 SEO & Descubrimiento/` | `ai-seo-strategy.md`, `competitor-vs-matrix.md` |
+| **W4: Email Lifecycle** | Cold outbound, onboarding & nurture sequences | `mas-cold-email`, `mas-email-sequence`, `mas-copy-editing`| `02 Marketing/05 Email Marketing/` | `cold-outreach-sequence-b2b.md`, `welcome-nurture-flow.md` |
+| **W5: Content & Social** | Demand generation, LinkedIn/X & lead magnets | `mas-content-strategy`, `mas-social-content`, `mas-lead-magnets` | `02 Marketing/03 Redes Sociales & Contenido/`, `02 Marketing/02 Estrategia & Parrilla/` | `linkedin-editorial-calendar.md`, `lead-magnet-guide.md` |
+| **W6: CRO & Funnel** | Registration flow, forms & A/B testing | `mas-signup-flow-cro`, `mas-onboarding-cro`, `mas-ab-test-setup` | `02 Marketing/04 Copywriting & Web/` | `ab-test-plan-signup.md`, `paywall-pricing-audit.md` |
+| **W7: Sales & Retention** | Battlecards, objection handling & churn reduction | `mas-sales-enablement`, `mas-churn-prevention`, `mas-revops` | `01 Negocio/05 Sponsors B2B & Ventas/`, `02 Marketing/07 Analitica & Crecimiento/` | `sales-battlecard-vs-competitors.md`, `churn-playbook.md` |
+| **W8: Analytics & Metrics** | GA4/Mixpanel tracking plans, scorecards & ROI | `mas-analytics-tracking`, `mas-ab-test-setup`, `mas-revops` | `02 Marketing/07 Analitica & Crecimiento/` | `ga4-tracking-plan.md`, `monthly-performance-scorecard.md` |
 
 ---
 

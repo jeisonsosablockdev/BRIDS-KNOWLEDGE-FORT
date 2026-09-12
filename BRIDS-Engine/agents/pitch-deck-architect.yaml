@@ -13,9 +13,9 @@ skills:
   - sequoia-structured-bp
 
 outputs:
-  - "BRIDS-Brain/14 Investor Relations & YC/pitch-decks/"
-  - "BRIDS-Brain/14 Investor Relations & YC/yc-application/"
-  - "BRIDS-Brain/02 Strategy & Research/pitch-decks/"
+  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/pitch-decks/"
+  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/yc-application/"
+  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/pitch-decks/"
   - "BRIDS-Engine/outputs/decks/"
 
 system_prompt: |
@@ -49,11 +49,11 @@ system_prompt: |
   ## Brand & Technical Grounding
   - Platform: BRIDS.io
   - Canonical Technical Context (Synchronized from OKF):
-    - `BRIDS-Brain/13 Product & Engineering/product-roadmap/current-product-status-matrix.md` (Source of truth for feature maturity: devnet vs mocked vs roadmap)
-    - `BRIDS-Brain/13 Product & Engineering/product-roadmap/app-technical-roadmap-investor-brief.md` (Recommended investor claims, technical metrics, and gaps)
-    - `BRIDS-Brain/13 Product & Engineering/solana-architecture/architecture-overview.md` (System architecture, Solana stack, and cost advantages)
+    - `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/current-product-status-matrix.md` (Source of truth for feature maturity: devnet vs mocked vs roadmap)
+    - `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/app-technical-roadmap-investor-brief.md` (Recommended investor claims, technical metrics, and gaps)
+    - `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/arquitectura/architecture-overview.md` (System architecture, Solana stack, and cost advantages)
   - Core Brand & Business Strategy:
-    - `BRIDS-Brain/02 Strategy & Research/master-business-concepts.md`
+    - `BRIDS-Brain/01 Negocio/01 Estrategia & Modelo/master-business-concepts.md`
     - `BRIDS-Engine/context/product-marketing-context.md`
     - `BRIDS-Engine/context/brand-visual-style-guide.md`
 
@@ -62,4 +62,4 @@ system_prompt: |
   2. Adhere strictly to YC communication style: direct, factual, metrics-driven, zero buzzwords.
   3. Strict Technical Veracity: Ground Slide 6 (Product Architecture), Slide 7 (Traction & Pipeline), and Slide 11 (Roadmap) in `current-product-status-matrix.md`. Never claim mocked or in-progress features are live on mainnet; cite verified devnet capabilities accurately.
   4. When requested to generate physical presentations, write and execute Python scripts using `python-pptx` following `BRIDS-Engine/skills/pitch-deck-creator/`, outputting `.pptx` files to `BRIDS-Engine/outputs/decks/`.
-  5. Store markdown scripts, slide copy, speaker notes, and review summaries in `BRIDS-Brain/14 Investor Relations & YC/pitch-decks/` or `BRIDS-Brain/02 Strategy & Research/pitch-decks/`.
+  5. Store markdown scripts, slide copy, speaker notes, and review summaries in `BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/pitch-decks/` or `BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/pitch-decks/`.

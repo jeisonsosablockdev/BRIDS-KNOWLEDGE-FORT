@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
-const VAULT_SOCIAL_DIR = path.join(ROOT_DIR, 'BRIDS-Brain', '07 Paid, Social & Community', 'Social Content');
+const VAULT_SOCIAL_DIR = path.join(ROOT_DIR, 'BRIDS-Brain', '02 Marketing', '03 Redes Sociales & Contenido');
 
 function sanitizeSlug(str) {
   return (str || '')
@@ -94,7 +94,7 @@ Ejemplo:
 
   const postContent = `---
 title: "[${platform.toUpperCase()}] ${idea.replace(/-/g, ' ')}"
-category: "07 Paid, Social & Community"
+category: "02 Marketing"
 workflow: "W5_CONTENT_SOCIAL"
 skills_used:
   - "mas-social-content"
@@ -158,9 +158,9 @@ Conoce la arquitectura en brids.io
 ---
 
 ## 🔗 Referencias Cruzadas
-- Infraestructura RWA: [[02 Strategy & Research/Business Concepts/concept-solana-rwa-infrastructure.md]]
-- Estructuración Dual SPV: [[02 Strategy & Research/Business Concepts/concept-dual-entity-compliance.md]]
-- Propuesta de Sponsors: [[02 Strategy & Research/Business Concepts/concept-b2b-sponsor-value-prop.md]]
+- Infraestructura RWA: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md]]
+- Estructuración Dual SPV: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]
+- Propuesta de Sponsors: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md]]
 `;
 
   fs.writeFileSync(targetPath, postContent, 'utf8');

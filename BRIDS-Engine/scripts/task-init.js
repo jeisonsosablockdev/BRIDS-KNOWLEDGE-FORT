@@ -31,21 +31,21 @@ const KNOWN_COMMANDS = [
 
 const VALID_VAULT_PREFIXES = [
   '00 Inbox',
-  '01 Brand Context',
-  '02 Strategy & Research',
-  '03 Website & Copy',
-  '04 Email & Lifecycle',
-  '05 SEO & Discoverability',
-  '06 CRO & Funnel',
-  '07 Paid, Social & Community',
-  '08 Analytics & Measurement',
-  '09 Retention & Growth',
-  '10 RevOps & Sales',
-  '11 Legal & Compliance',
-  '12 Finance & Treasury',
-  '13 Product & Engineering',
-  '14 Investor Relations & YC',
-  '15 Operations & Governance'
+  '01 Negocio',
+  '02 Marketing',
+  '01 Negocio/01 Estrategia & Modelo',
+  '01 Negocio/02 Producto & Ingenieria',
+  '01 Negocio/03 Legal & Cumplimiento',
+  '01 Negocio/04 Finanzas & YC Investors',
+  '01 Negocio/05 Sponsors B2B & Ventas',
+  '01 Negocio/06 Operaciones & Gobernanza',
+  '02 Marketing/01 Contexto de Marca',
+  '02 Marketing/02 Estrategia & Parrilla',
+  '02 Marketing/03 Redes Sociales & Contenido',
+  '02 Marketing/04 Copywriting & Web',
+  '02 Marketing/05 Email Marketing',
+  '02 Marketing/06 SEO & Descubrimiento',
+  '02 Marketing/07 Analitica & Crecimiento'
 ];
 
 function toTitleCase(slug) {
@@ -129,7 +129,7 @@ Comandos HITL y Gestión del Ciclo de Vida:
     goal = arg1;
     if (arg2) icp = arg2;
     if (isVaultFolder(arg3)) targetFolder = arg3;
-    else targetFolder = '02 Strategy & Research';
+    else targetFolder = '01 Negocio/01 Estrategia & Modelo';
   } else {
     // Minimal format: task-init.sh <slug>
     title = toTitleCase(slug);

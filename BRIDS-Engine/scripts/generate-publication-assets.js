@@ -20,7 +20,7 @@ const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
 const VAULT_DIR = path.join(ROOT_DIR, 'BRIDS-Brain');
-const SOCIAL_CONTENT_DIR = path.join(VAULT_DIR, '07 Paid, Social & Community', 'Social Content');
+const SOCIAL_CONTENT_DIR = path.join(VAULT_DIR, '02 Marketing', '03 Redes Sociales & Contenido');
 const ASSETS_ROOT = path.join(SOCIAL_CONTENT_DIR, 'Assets');
 const BRAND_CONTEXT_PATH = path.join(ROOT_DIR, 'BRIDS-Engine', 'context', 'product-marketing-context.md');
 const STYLE_GUIDE_PATH = path.join(ROOT_DIR, 'BRIDS-Engine', 'context', 'brand-visual-style-guide.md');
