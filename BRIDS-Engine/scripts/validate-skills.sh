@@ -19,7 +19,7 @@ echo ""
 echo "Reference: https://agentskills.io/specification.md"
 echo ""
 
-# Validation rules from CLAUDE.md
+# Validation rules from AGENTS.md
 # REQUIRED: name, description
 # OPTIONAL: license, metadata
 # name: 1-64 chars, lowercase a-z, numbers, hyphens only, must match directory
