@@ -174,6 +174,12 @@ function auditText(text, specData = {}) {
     scoreTech -= 1.5;
     findings.technical_veracity.push('Alerta regulatoria: contiene promesas especulativas o garantías de retorno irrealistas.');
   }
+  // Check for false claims of mainnet deployment (grounded in current-product-status-matrix.md)
+  const mainnetFabrication = /(live on solana mainnet-beta|desplegado en mainnet de solana|operando en mainnet|production on solana mainnet)/i.test(content);
+  if (mainnetFabrication) {
+    scoreTech -= 1.0;
+    findings.technical_veracity.push('Alerta de veracidad técnica: El producto opera en devnet / staging con contratos Metaplex Core; no afirmar despliegue en mainnet-beta.');
+  }
   scoreTech = Math.max(0, Math.min(2.5, scoreTech));
 
   // --- Dimension 3: Voz Fundadora vs Tono Robot (Max 2.0 pts) ---

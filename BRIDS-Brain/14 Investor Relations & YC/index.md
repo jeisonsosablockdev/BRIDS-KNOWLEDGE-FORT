@@ -23,3 +23,12 @@ Este directorio alberga todo el material para **fondos de Venture Capital, la pr
   - [[02 Strategy & Research/Business Concepts/concept-solana-rwa-infrastructure.md|C3: Solana RWA Advantage]]
   - [[02 Strategy & Research/Business Concepts/concept-fee-architecture-unit-economics.md|C4: Fee Architecture & Economics]]
   - [[02 Strategy & Research/Business Concepts/concept-retail-fractionalization-thesis.md|C6: Retail Fractionalization Thesis]]
+
+---
+
+## 🔗 Soporte Técnico para Inversionistas y Due Diligence (OKF)
+
+Toda afirmación presentada a fondos de VC, Y Combinator o inversionistas ángeles debe respaldarse con la arquitectura e implementación verificada en:
+- [[13 Product & Engineering/product-roadmap/app-technical-roadmap-investor-brief.md|Technical Roadmap & Investor Brief]]: Tesis de inversión técnica, métricas on-chain y claims recomendados para VC.
+- [[13 Product & Engineering/product-roadmap/current-product-status-matrix.md|Matriz Viva de Estado de Producto]]: Guía canónica para evitar sobrepromesas de funcionalidades en decks y aplicaciones YC.
+- [[13 Product & Engineering/solana-architecture/architecture-overview.md|Arquitectura General y Solana Stack]]: Diagramas de arquitectura técnica y sustentación de ventajas de costes (99.9% menos fees que Ethereum).

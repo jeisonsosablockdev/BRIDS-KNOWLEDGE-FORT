@@ -23,3 +23,12 @@ Este directorio constituye el repositorio institucional de **estructuración soc
   - [[02 Strategy & Research/Business Concepts/concept-dual-entity-compliance.md|C1: Dual-Entity Compliance]]
   - [[02 Strategy & Research/Business Concepts/concept-wallet-recovery-protocol.md|C2: Lost-Key Recovery Protocol]]
   - [[02 Strategy & Research/Business Concepts/concept-multisig-treasury-governance.md|C8: Squads Multi-Sig Governance]]
+
+---
+
+## 🔗 Vinculación con Arquitectura Técnica e Ingeniería (OKF)
+
+Los aspectos legales de recuperación de llaves, cumplimiento normativo y custodia se sustentan directamente en las especificaciones técnicas sincronizadas en:
+- [[13 Product & Engineering/metaplex-core-specs/freeze-and-recovery-plugins.md|Freeze & Recovery Plugins]]: Justificación on-chain de retención legal y recuperación de títulos para SPVs Delaware.
+- [[13 Product & Engineering/security-audits/threat-model-and-quality-policy.md|Threat Model & Security Policy]]: Cumplimiento normativo y controles de ciberseguridad para Data Room institucional.
+- [[13 Product & Engineering/product-roadmap/current-product-status-matrix.md|Matriz de Estado del Producto]]: Verificación de estado real (live devnet vs mock) para representaciones legales en PPMs y contratos de suscripción.
