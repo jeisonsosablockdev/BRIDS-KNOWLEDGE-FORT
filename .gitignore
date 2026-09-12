@@ -6,3 +6,6 @@ node_modules/
 .obsidian/workspace-mobile.json
 __pycache__/
 *.pyc
+BRIDS-Engine/context/technical-okf/
+*.bak.md
+BRIDS-Brain/00 Inbox/Archive/

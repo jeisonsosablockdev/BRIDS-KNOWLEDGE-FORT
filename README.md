@@ -124,10 +124,12 @@ This project includes a suite of utility and automation scripts located in `BRID
 | **`refine-note.sh`** | `bash BRIDS-Engine/scripts/refine-note.sh <cmd>` | **Non-Destructive Content Refinement:** `inspect`, `backup`, `refine`, `branch`, and `rollback` notes with safety snapshots, version bumping, and changelog tracking. |
 | **`check-obsidian-api.sh`** | `bash BRIDS-Engine/scripts/check-obsidian-api.sh` | Healthcheck and smoketest for **Obsidian Local REST API** (HTTPS port `27124`). Tests Bearer token authentication and queries vault status. |
 | **`init-task.sh`** | `bash BRIDS-Engine/scripts/init-task.sh <session-name> "<goal>" "<icp>"` | Alias / retrocompatibilidad hacia `task-init.sh`. Inicializa sesiones de tarea con guardrails estructurados. |
+| **`sync-technical-docs.sh`** | `bash BRIDS-Engine/scripts/sync-technical-docs.sh [--force]` | **Automated Technical OKF Sync Engine:** Clona o sincroniza incrementalmente la documentación técnica OKF v0.1 desde `jeisonsosablockdev/brids:knowledge`, generando notas canónicas en `13 Product & Engineering/`. |
 | **`sync-brand-context.sh`** | `bash BRIDS-Engine/scripts/sync-brand-context.sh` | Syncs `product-marketing-context.md` from `BRIDS-Engine/context/` directly into `BRIDS-Brain/01 Brand Context/`. |
 | **`validate-skills.sh`** | `bash BRIDS-Engine/scripts/validate-skills.sh` | Audits and validates marketing skills against the formal Agent Skills Specification (YAML frontmatter, naming, trigger phrases, <500 lines). |
 
 For Windows PowerShell users:
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\sync-technical-docs.ps1`
 - `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\tests\smoke-test.ps1`
 - `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\task-init.ps1 <args>`
 - `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\sdd-manager.ps1 <args>`

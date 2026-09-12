@@ -138,8 +138,8 @@ async function runSmokeTest() {
 
   try {
     const valOut = execSync(`node "${path.join(SCRIPTS_DIR, 'validate-vault.js')}"`, { encoding: 'utf8' });
-    const isPassing = valOut.includes('Notas 100% conformes: 23') && valOut.includes('Errores críticos:     0');
-    assert(isPassing, 'Linter de Bóveda: 23/23 notas cumplen formalmente el estándar Obsidian');
+    const isPassing = valOut.includes('Avisos detectados:    0') && valOut.includes('Errores críticos:     0');
+    assert(isPassing, 'Linter de Bóveda: Todas las notas cumplen formalmente el estándar Obsidian (0 errores, 0 avisos)');
   } catch (err) {
     assert(false, 'Fallo en la ejecución de validate-vault.js', err.message);
   }

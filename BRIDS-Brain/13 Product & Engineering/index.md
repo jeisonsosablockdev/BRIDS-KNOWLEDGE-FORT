@@ -2,22 +2,33 @@
 
 Este directorio contiene las **especificaciones de ingeniería, arquitectura de smart contracts en Solana, integraciones de protocolos y reportes de seguridad** de **BRIDS.io**.
 
-> ⚡ **Principio Tecnológico:** *"Arquitectura de cuenta única de bajo coste con Metaplex Core en Solana, combinada con verificación biométrica en Stripe Identity y multisig institucional en Squads."*
+> [!NOTE]
+> **Principio Tecnológico:** *"Arquitectura de cuenta única de bajo coste con Metaplex Core en Solana, combinada con verificación biométrica en Stripe Identity y multisig institucional en Squads."*
+> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`) mediante `sync-technical-docs.sh`.
 
 ---
 
-## 📌 Estructura de Subdirectorios
+## 📌 Documentos Clave de Ingeniería Sincronizados
 
-- 🌐 **`solana-architecture/`**: Diagramas de arquitectura del sistema, especificaciones de interacción entre programas Anchor, nodos RPC de alta disponibilidad e indexadores.
-- 🧩 **`metaplex-core-specs/`**: Especificaciones técnicas de plugins de Metaplex Core (*Freeze Plugin* para lock-ups y *Authority Plugin* para reemisión por pérdida de llaves).
-- 🛡️ **`security-audits/`**: Informes de auditoría de seguridad de smart contracts, penetration tests, checklists de verificación y registros de resolución de hallazgos.
-- 🗺️ **`product-roadmap/`**: Documentos de Requerimientos de Producto (PRDs), roadmap de desarrollo trimestral y notas de versión (*release notes*).
+### 🗺️ 1. Roadmap y Madurez de Producto (`product-roadmap/`)
+- [[13 Product & Engineering/product-roadmap/current-product-status-matrix.md|Matriz Viva de Estado y Madurez de Producto]]
+- [[13 Product & Engineering/product-roadmap/app-technical-roadmap-investor-brief.md|Roadmap Técnico e Investor Brief de Producto]]
+
+### 🌐 2. Arquitectura Solana (`solana-architecture/`)
+- [[13 Product & Engineering/solana-architecture/architecture-overview.md|Arquitectura General del Sistema y Stack Tecnológico]]
+- [[13 Product & Engineering/solana-architecture/solana-stack-spec.md|Especificación Técnica de Infraestructura Solana]]
+
+### 🧩 3. Estándar Metaplex Core (`metaplex-core-specs/`)
+- [[13 Product & Engineering/metaplex-core-specs/metaplex-core-nft-spec.md|Estándar Metaplex Core y Especificación de NFTs RWA]]
+- [[13 Product & Engineering/metaplex-core-specs/freeze-and-recovery-plugins.md|Máquina de Estados de Tokens y Protocolo de Recuperación]]
+
+### 🛡️ 4. Seguridad y Auditorías (`security-audits/`)
+- [[13 Product & Engineering/security-audits/threat-model-and-quality-policy.md|Modelo de Amenazas y Política de Seguridad Técnica]]
 
 ---
 
 ## 🎯 Custodios y Subagentes Asignados
-
-- **Custodios Primarios:** Equipo de Ingeniería & `pitch-deck-architect` / `founder-ghostwriter` (para documentación y síntesis de producto).
+- **Custodios Primarios:** Equipo de Ingeniería, `compliance-officer`, `pitch-deck-architect`.
 - **Conceptos de Referencia:**
   - [[02 Strategy & Research/Business Concepts/concept-solana-rwa-infrastructure.md|C3: Solana RWA Advantage]]
   - [[02 Strategy & Research/Business Concepts/concept-wallet-recovery-protocol.md|C2: Lost-Key Recovery Protocol]]
