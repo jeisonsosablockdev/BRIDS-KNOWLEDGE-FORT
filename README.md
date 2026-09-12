@@ -115,6 +115,7 @@ This project includes a suite of utility and automation scripts located in `BRID
 | **`sdd-manager.sh`** | `bash BRIDS-Engine/scripts/sdd-manager.sh <cmd>` | **Spec-Driven Development & Quality Optimizer con Doble HITL:** Gestiona specs y bucle Creador vs Revisor ($\ge 8.5/9.0$, máx 5 ciclos). Guardrails humanos: HITL-1 (`approve-spec`, `refine-spec`) e HITL-2 (`review-deliverable`, `approve-deliverable`, `refine-deliverable`). |
 | **`create-social-carousel.sh`** | `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img] [prenda] [ref]` | **4-Slide Social Carousel Pipeline:** Generates 4:5 carousels (Hero, Line-Art Figurine, PAS Details, Conversion CTA) with dedicated Obsidian asset folders. |
 | **`create-social-post.sh`** | `bash BRIDS-Engine/scripts/create-social-post.sh <red> "<idea>" [tipo] [ref] [prenda]` | **Social Content Extractor & Generator:** Instantiates production-ready social media posts from the protected SOP with automatic `YYYY-MM-DD-redsocial-idea.md` naming. |
+| **`smoke-test.sh`** | `bash BRIDS-Engine/tests/smoke-test.sh` | **End-to-End System Smoke Test:** Ejecuta en segundos una validación integral de punta a punta: Squad YC, Taxonomía 00-15, Motor SDD con doble guardrail HITL, Parrilla RWA y Wrappers. |
 | **`test-idempotency.sh`** | `bash BRIDS-Engine/tests/test-idempotency.sh` | **Automated Idempotency Test Suite:** Verifies deterministic behavior across task initialization, state transitions, context sync, note refinement, rollback, SDD lifecycle, and skill symlinks. |
 | **`enforce-compliance.sh`** | `bash BRIDS-Engine/scripts/enforce-compliance.sh` | **Master Anti-Drift Compliance Suite:** Runs end-to-end audit of Brand Context Gate, Vault Linter, Task Sessions, and Skills. |
 | **`validate-context.sh`** | `bash BRIDS-Engine/scripts/validate-context.sh` | Audits `product-marketing-context.md` to ensure value proposition, ICP, and pain points are ready before drafting. |
@@ -127,6 +128,7 @@ This project includes a suite of utility and automation scripts located in `BRID
 | **`validate-skills.sh`** | `bash BRIDS-Engine/scripts/validate-skills.sh` | Audits and validates marketing skills against the formal Agent Skills Specification (YAML frontmatter, naming, trigger phrases, <500 lines). |
 
 For Windows PowerShell users:
+- `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\tests\smoke-test.ps1`
 - `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\task-init.ps1 <args>`
 - `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\sdd-manager.ps1 <args>`
 - `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\create-social-carousel.ps1 <args>`

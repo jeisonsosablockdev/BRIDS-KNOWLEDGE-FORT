@@ -23,6 +23,7 @@
 | Activate project skills | `bash BRIDS-Engine/scripts/enable-project-skills.sh` |
 | Activate project skills (Windows) | `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\enable-project-skills.ps1` |
 | Inspect Agent Squad | `bash BRIDS-Engine/scripts/inspect-squad.sh` |
+| End-to-End System Smoke Test | `bash BRIDS-Engine/tests/smoke-test.sh` |
 
 ## Commit Attribution
 - AI commits MUST include:
