@@ -2,24 +2,23 @@
 
 /**
  * ═══════════════════════════════════════════════════════════════════════════
- * 🔄 BRIDS KNOWLEDGE FORT - AUTOMATED TECHNICAL DOCS SYNC ENGINE
+ * 🔄 BRIDS KNOWLEDGE FORT - AUTOMATED TECHNICAL DOCS SYNC ENGINE (v2.0)
  * ═══════════════════════════════════════════════════════════════════════════
  * 
- * Sincronizador automatizado e idempotente que conecta con el repositorio
- * técnico (https://github.com/jeisonsosablockdev/brids), extrae el paquete
- * Open Knowledge Format (OKF v0.1) de la carpeta `knowledge/`, y genera/actualiza
- * las especificaciones canónicas en `BRIDS-Brain/13 Product & Engineering/`.
- * 
- * Garantiza:
- * 1. Respaldo de seguridad no destructivo en 00 Inbox/Archive antes de actualizar.
- * 2. Formato canónico Obsidian (YAML frontmatter, callout > [!NOTE], changelog).
- * 3. Cross-linking hacia los conceptos de negocio en 02 Strategy & Research.
- * 4. Validación estricta con el linter de la bóveda (validate-vault.js).
+ * Sincronizador automatizado, determinista e incremental que:
+ * 1. Conecta con el repositorio técnico (https://github.com/jeisonsosablockdev/brids).
+ * 2. Realiza fetch/pull de la carpeta `knowledge/` (OKF v0.1) en `develop`.
+ * 3. Detecta cambios reales mediante hashes SHA256 (no genera ruido ni backups innecesarios).
+ * 4. Extrae dinámicamente la Matriz de Madurez y Gaps desde app-technical-roadmap-investor-brief.md.
+ * 5. Registra el commit SHA técnico real y fecha de origen en el frontmatter.
+ * 6. Preserva y amplía incrementalmente el historial de revisiones (Changelog).
+ * 7. Mantiene la bóveda Obsidian 100% conforme con validate-vault.js.
  * ═══════════════════════════════════════════════════════════════════════════
  */
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { execSync } = require('child_process');
 
 const ROOT_DIR = path.resolve(__dirname, '../..');
@@ -35,8 +34,21 @@ const REPO_URL = 'https://github.com/jeisonsosablockdev/brids.git';
 const TARGET_BRANCH = 'develop';
 
 function ensureDir(dir) {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+}
+
+function getSha256(content) {
+  return crypto.createHash('sha256').update(content || '').digest('hex');
+}
+
+function getGitCommitInfo() {
+  try {
+    const sha = execSync(`git -C "${CACHE_DIR}" rev-parse --short HEAD`, { encoding: 'utf8' }).trim();
+    const message = execSync(`git -C "${CACHE_DIR}" log -1 --format="%s"`, { encoding: 'utf8' }).trim();
+    const date = execSync(`git -C "${CACHE_DIR}" log -1 --format="%ci"`, { encoding: 'utf8' }).trim();
+    return { sha, message, date };
+  } catch {
+    return { sha: 'unknown', message: 'Sincronización manual', date: new Date().toISOString() };
   }
 }
 
@@ -94,10 +106,51 @@ function fetchTechnicalRepo(forceClone = false) {
   return knowledgeDir;
 }
 
-function formatDeliverable({ title, description, category, tags, sourcePath, contentBody, executiveSummary }) {
+function extractExistingChangelog(destPath) {
+  if (!fs.existsSync(destPath)) return null;
+  const existing = fs.readFileSync(destPath, 'utf8');
+  const match = existing.match(/## 📜 Historial de Revisiones[\s\S]*?(\|[^\n]+\|[\s\S]*)/);
+  if (!match) return null;
+  
+  // Clean trailing content
+  const tablePart = match[1].trim();
+  const rows = tablePart.split('\n').filter(r => r.trim().startsWith('|'));
+  return rows.length >= 2 ? rows.join('\n') : null;
+}
+
+function processSourceMarkdown(srcFile) {
+  if (!fs.existsSync(srcFile)) return null;
+  const raw = fs.readFileSync(srcFile, 'utf8');
+  
+  let body = raw;
+  const fmMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+  if (fmMatch) {
+    body = fmMatch[2].trim();
+  }
+
+  body = body.replace(/^#\s+[^\r\n]+\r?\n/, '').trim();
+  return body;
+}
+
+function formatDeliverable({ title, description, category, tags, sourcePath, contentBody, destPath, gitInfo }) {
   const cleanTags = (tags || ['brids', 'engineering', 'solana', 'rwa']).join(', ');
-  const summaryCallout = executiveSummary || 
-    `> [!NOTE]\n> **Resumen Técnico:** ${description || title}\n> *Documento sincronizado automáticamente desde el repositorio técnico institucional (OKF v0.1).*`;
+  const today = new Date().toISOString().split('T')[0];
+  const summaryCallout = `> [!NOTE]\n> **Resumen Técnico:** ${description || title}\n> *Documento sincronizado desde el repositorio técnico institucional (Commit: \`${gitInfo.sha}\`).*`;
+
+  // Preserve existing changelog rows or start fresh
+  const existingTable = extractExistingChangelog(destPath);
+  let changelogSection = '';
+
+  if (existingTable) {
+    // Check if current commit already recorded
+    if (!existingTable.includes(`\`${gitInfo.sha}\``)) {
+      changelogSection = `${existingTable}\n| ${today} | v1.0.0 | sync-technical-docs (\`${gitInfo.sha}\`) | Sincronización automática de cambios desde rama develop |`;
+    } else {
+      changelogSection = existingTable;
+    }
+  } else {
+    changelogSection = `| Fecha | Versión | Autor / Origen | Cambios Principales |\n|---|---|---|---|\n| ${today} | v1.0.0 | sync-technical-docs (\`${gitInfo.sha}\`) | Sincronización e ingesta canónica desde ${sourcePath} |`;
+  }
 
   return `---
 title: "${title}"
@@ -107,6 +160,9 @@ workflow: production
 version: 1.0.0
 category: "${category || 'Product & Engineering'}"
 source_okf: "${sourcePath}"
+source_commit: "${gitInfo.sha}"
+source_commit_date: "${gitInfo.date}"
+source_hash: "${getSha256(contentBody)}"
 tags: [${cleanTags}]
 updated_at: "${new Date().toISOString()}"
 ---
@@ -131,33 +187,18 @@ ${contentBody}
 
 ## 📜 Historial de Revisiones
 
-| Fecha | Versión | Autor / Origen | Cambios Principales |
-|---|---|---|---|
-| ${new Date().toISOString().split('T')[0]} | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde ${sourcePath} |
+${changelogSection}
 `;
-}
-
-function processSourceMarkdown(srcFile) {
-  if (!fs.existsSync(srcFile)) return null;
-  const raw = fs.readFileSync(srcFile, 'utf8');
-  
-  // Extract body by stripping existing frontmatter if present
-  let body = raw;
-  const fmMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
-  if (fmMatch) {
-    body = fmMatch[2].trim();
-  }
-
-  // Remove top # Title if present in body to avoid duplicate H1
-  body = body.replace(/^#\s+[^\r\n]+\r?\n/, '').trim();
-
-  return body;
 }
 
 function syncDeliverables(knowledgeDir) {
   console.log('\n' + '═'.repeat(75));
   console.log('⚙️ PROCESANDO Y MODULARIZANDO DOCUMENTACIÓN TÉCNICA CANÓNICA');
   console.log('═'.repeat(75));
+
+  const gitInfo = getGitCommitInfo();
+  console.log(`   📌 Commit Técnico de Origen: [${gitInfo.sha}] ${gitInfo.message}`);
+  console.log(`   📅 Fecha de Snapshot:       ${gitInfo.date}\n`);
 
   const mappings = [
     {
@@ -210,7 +251,8 @@ function syncDeliverables(knowledgeDir) {
     }
   ];
 
-  let syncedCount = 0;
+  let updatedCount = 0;
+  let unchangedCount = 0;
 
   for (const item of mappings) {
     if (!fs.existsSync(item.src)) {
@@ -219,7 +261,6 @@ function syncDeliverables(knowledgeDir) {
     }
 
     ensureDir(path.dirname(item.dest));
-    backupFile(item.dest);
 
     const bodyContent = processSourceMarkdown(item.src);
     const formattedMd = formatDeliverable({
@@ -228,28 +269,98 @@ function syncDeliverables(knowledgeDir) {
       category: item.category,
       tags: item.tags,
       sourcePath: path.relative(CACHE_DIR, item.src),
-      contentBody: bodyContent
+      contentBody: bodyContent,
+      destPath: item.dest,
+      gitInfo
     });
+
+    const srcHash = getSha256(bodyContent);
+
+    // Check if destination exists and content body has not changed
+    if (fs.existsSync(item.dest)) {
+      const currentContent = fs.readFileSync(item.dest, 'utf8');
+
+      if (currentContent.includes(`source_hash: "${srcHash}"`) && currentContent.includes(`source_commit: "${gitInfo.sha}"`)) {
+        console.log(`   ⚪ Sin cambios: ${path.relative(BRAIN_DIR, item.dest)} (idéntico a commit ${gitInfo.sha})`);
+        unchangedCount++;
+        continue;
+      }
+      backupFile(item.dest);
+    }
 
     fs.writeFileSync(item.dest, formattedMd, 'utf8');
     const relDest = path.relative(BRAIN_DIR, item.dest);
-    console.log(`   ✅ Sincronizado: ${relDest}`);
-    syncedCount++;
+    console.log(`   ✅ Actualizado: ${relDest}`);
+    updatedCount++;
   }
 
-  // Generar Matriz de Estado Actual de Producto
-  generateStatusMatrix(knowledgeDir);
-  syncedCount++;
+  // Generar / Actualizar Dinámicamente la Matriz de Madurez de Producto
+  const matrixUpdated = generateDynamicStatusMatrix(knowledgeDir, gitInfo);
+  if (matrixUpdated) updatedCount++; else unchangedCount++;
 
-  // Actualizar Index de 13 Product & Engineering
-  updateSectionIndex();
+  // Actualizar Índice de Sección con catálogo de artefactos OKF
+  updateSectionIndex(knowledgeDir, gitInfo);
 
-  console.log(`\n🎉 Sincronización completada: ${syncedCount} notas técnicas actualizadas en BRIDS-Brain/13 Product & Engineering.`);
+  console.log(`\n📊 Balance de Sincronización:`);
+  console.log(`   • Documentos actualizados/creados: ${updatedCount}`);
+  console.log(`   • Documentos sin cambios:          ${unchangedCount}`);
 }
 
-function generateStatusMatrix(knowledgeDir) {
+function extractSectionFromMarkdown(content, sectionHeader) {
+  const regex = new RegExp(`##\\s+${sectionHeader}[\\r\\n]+([\\s\\S]*?)(?=\\n##\\s+|$)`, 'i');
+  const match = content.match(regex);
+  return match ? match[1].trim() : '';
+}
+
+function generateDynamicStatusMatrix(knowledgeDir, gitInfo) {
   const destPath = path.join(VAULT_13_DIR, 'product-roadmap', 'current-product-status-matrix.md');
-  backupFile(destPath);
+  const roadmapBriefPath = path.join(knowledgeDir, 'architecture', 'app-technical-roadmap-investor-brief.md');
+  
+  let maturityMatrixMarkdown = '';
+  let keyGapsMarkdown = '';
+  let investorClaimsMarkdown = '';
+
+  if (fs.existsSync(roadmapBriefPath)) {
+    const briefRaw = fs.readFileSync(roadmapBriefPath, 'utf8');
+    maturityMatrixMarkdown = extractSectionFromMarkdown(briefRaw, 'Matriz de Madurez');
+    keyGapsMarkdown = extractSectionFromMarkdown(briefRaw, 'Brechas Tecnicas Clave');
+    investorClaimsMarkdown = extractSectionFromMarkdown(briefRaw, 'Claims Recomendados para Inversionistas');
+  }
+
+  const defaultMatrix = `| Dominio | Madurez | Lectura para inversionistas | Siguiente paso principal |
+| --- | --- | --- | --- |
+| Marketplace discovery | Construido | Existe una superficie real de producto. | Animacion inicial con Motion, bugs de mapa, performance mobile. |
+| Detalle de propiedad | Construido | Los assets pueden presentarse con inversion, documentos y gobernanza. | Completar datos finales y copy de compliance. |
+| Wallet auth | Construido | Existe un modelo fuerte de autoridad wallet. | Persistent production session store. |
+| Federated auth | Foundation construida | Existe ruta de onboarding de menor friccion. | Completar operaciones WorkOS productivas y recovery flows. |
+| Checkout | Parcial | Existe modelo de orden; falta Sphere ramp para tarjeta. | Implementar Sphere ramp completo y unificar tarjeta + crypto. |
+| Crypto purchase mint | Construido | Flujo crypto implementado y configurado para recibir USDC. | Hardening productivo, treasury policy, evidencia final. |
+| Admin asset ops | Construido | El equipo interno puede administrar inventario y metadata. | Playbooks operativos y hardening productivo. |
+| Admin dashboard | Parcial | Existe shell admin; faltan modulos operativos clave. | Tesoreria Squads, distribuciones freeze/unfreeze, notificaciones CRM. |
+| NFT/admin minting | Construido en devnet | Existe lifecycle Core asset. | Authority UI y endpoints de lectura. |
+| Compliance | Foundation construida | Los compliance gates estan codificados en rutas de transaccion. | Persistencia Stripe Identity, vista admin KYC y rol RBAC. |
+| Investor dashboard | Superficie construida | Existe UX de cuenta y holdings. | Resumen, portafolio, rentas/claim e historial con datos reales. |
+| Staking | Base construida en devnet | Existe asset action path; faltan distribuciones y auditoria. | Reconciliacion on-chain, claim state, distribuciones. |
+| Notifications | Foundation construida | Existe infraestructura de re-engagement. | Integracion CRM para campanas y seguimiento de leads. |
+| Observability/QA | Foundation fuerte | Hay disciplina de ingenieria visible. | SLOs productivos, alerting y deployment smoke gates. |`;
+
+  const matrixBody = maturityMatrixMarkdown || defaultMatrix;
+  const gapsBody = keyGapsMarkdown ? `## ⚠️ Brechas Técnicas Clave y Desafíos de Ingeniería\n\n${keyGapsMarkdown}\n` : '';
+  const claimsBody = investorClaimsMarkdown ? `## 🗣️ Claims Verificados para Inversores y YC\n\n${investorClaimsMarkdown}\n` : '';
+
+  const today = new Date().toISOString().split('T')[0];
+  const existingTable = extractExistingChangelog(destPath);
+  let changelogSection = '';
+
+  if (existingTable) {
+    if (!existingTable.includes(`\`${gitInfo.sha}\``)) {
+      changelogSection = `${existingTable}\n| ${today} | v1.0.0 | sync-technical-docs (\`${gitInfo.sha}\`) | Actualización dinámica de madurez desde develop |`;
+    } else {
+      changelogSection = existingTable;
+    }
+  } else {
+    changelogSection = `| Fecha | Versión | Autor / Origen | Cambios Principales |\n|---|---|---|---|\n| ${today} | v1.0.0 | sync-technical-docs (\`${gitInfo.sha}\`) | Generación inicial de la matriz viva de madurez técnica |`;
+  }
 
   const content = `---
 title: "Matriz Viva de Estado y Madurez de Producto"
@@ -259,6 +370,9 @@ workflow: production
 version: 1.0.0
 category: "Product Roadmap"
 source_okf: "knowledge/architecture/app-technical-roadmap-investor-brief.md"
+source_commit: "${gitInfo.sha}"
+source_commit_date: "${gitInfo.date}"
+source_hash: "${getSha256(matrixBody + keyGapsMarkdown)}"
 tags: [product-status, roadmap, readiness, feature-matrix, solana, rwa]
 updated_at: "${new Date().toISOString()}"
 ---
@@ -266,7 +380,7 @@ updated_at: "${new Date().toISOString()}"
 # Matriz Viva de Estado y Madurez de Producto
 
 > [!NOTE]
-> **Resumen Ejecutivo:** Matriz de madurez técnica y estado operativo de la plataforma BRIDS.io.
+> **Resumen Ejecutivo:** Matriz dinámica de madurez técnica y estado operativo de la plataforma BRIDS.io extraída directamente del repositorio de código (\`${gitInfo.sha}\`).
 > Refleja con precisión qué módulos están en producción/devnet, cuáles están parcialmente construidos y cuáles conforman las siguientes fases del roadmap.
 
 ---
@@ -278,64 +392,69 @@ updated_at: "${new Date().toISOString()}"
 
 ---
 
-## 📊 1. Matriz de Superficie de Producto
+## 📊 Matriz de Madurez Técnica por Dominio
 
-| Módulo / Capacidad | Estado de Implementación | Stack Técnico / Infraestructura | Nivel de Cobertura |
-|---|---|---|---|
-| **Sitio Público & Home** | 🟢 Implementado | Next.js App Router, Tailwind, Motion 12 | Tests E2E, SEO metadata activo |
-| **Marketplace Inmobiliario** | 🟢 Implementado | Mapbox GL, filtros por yield/ubicación | Exploración interactiva y detalle |
-| **Detalle de Propiedad** | 🟢 Implementado | Server Components, Financial breakdown | Render de métricas financieras |
-| **Autenticación Wallet SIWS** | 🟢 Implementado | Solana Sign-In With Solana (SIWS) | Conexión Phantom, Solflare |
-| **Autenticación Federada** | 🟢 Implementado | WorkOS (Email, Socials, SSO) | Vinculación híbrida con wallet |
-| **Checkout Crypto (USDC)** | 🟢 Implementado | Metaplex Core Candy Machine, Umi | Liquidación sub-segundo en Solana |
-| **Checkout Fiat (Tarjeta)** | 🟡 En Proceso | Sphere Onramp integration | Modelo de orden y orquestación |
-| **Dashboard Inversionista** | 🟢 Implementado | Postgres repos, Protected routes | Holdings, rentas acumuladas, perfil |
-| **Staking & Rent Distribution** | 🟢 Implementado | Metaplex Core Freeze plugin, cron/RPC | Freeze on-chain sin perder propiedad |
-| **Módulo de Referidos** | 🟢 Implementado | Referral tracking SQL schemas | Atribución de incentivos |
-| **Admin Operations Shell** | 🟢 Implementado | Protected admin layout | Gestión de assets, sales, collections |
-| **Notificaciones Web Push** | 🟢 Implementado | Web Push API, Service Workers | Alertas de rentas y transacciones |
-| **Blindaje de Gobernanza Multi-Sig** | 🟢 Implementado | Squads v4 en devnet | Custodia descentralizada de tesorería |
+${matrixBody}
 
 ---
 
-## 🎯 2. Fases de Ejecución y Roadmap Inmediato
+${gapsBody}
+---
 
-### Fase 1: Hardening de Devnet y UX de Checkout (Actual)
-- Consolidación del checkout dual (USDC directo + Tarjeta de crédito vía Sphere).
-- Endurecimiento de la máquina de estados de órdenes de compra para prevenir double-spending.
-- Cobertura total de pruebas automatizadas con Vitest, Playwright y Synpress.
-
-### Fase 2: Pasarela Mainnet y Estructuración Legal
-- Migración de programas y colecciones Candy Machine de devnet a Solana Mainnet-Beta.
-- Activación de pasarela de verificación KYC/AML estricta con Stripe Identity.
-- Configuración de las primeras 3 LLC SPVs en Delaware para activos piloto estabilizados.
-
-### Fase 3: Mercado Secundario y Pools de Liquidez
-- Habilitación de compra-venta peer-to-peer de participaciones tokenizadas con royalties programados.
-- Oráculos de valoración periódica de inmuebles (AVMs) integrados on-chain.
-
+${claimsBody}
 ---
 
 ## 📜 Historial de Revisiones
 
-| Fecha | Versión | Autor / Origen | Cambios Principales |
-|---|---|---|---|
-| ${new Date().toISOString().split('T')[0]} | v1.0.0 | sync-technical-docs (OKF v0.1) | Generación inicial de la matriz viva de madurez técnica |
+${changelogSection}
 `;
+
+  if (fs.existsSync(destPath)) {
+    const currentContent = fs.readFileSync(destPath, 'utf8');
+    const currentHash = getSha256(matrixBody + keyGapsMarkdown);
+    if (currentContent.includes(`source_hash: "${currentHash}"`) && currentContent.includes(`source_commit: "${gitInfo.sha}"`)) {
+      console.log(`   ⚪ Sin cambios: 13 Product & Engineering/product-roadmap/current-product-status-matrix.md (idéntico a commit ${gitInfo.sha})`);
+      return false;
+    }
+    backupFile(destPath);
+  }
 
   fs.writeFileSync(destPath, content, 'utf8');
   console.log(`   ✅ Matriz de Estado Generada: 13 Product & Engineering/product-roadmap/current-product-status-matrix.md`);
+  return true;
 }
 
-function updateSectionIndex() {
+function countKnowledgeArtifacts(knowledgeDir) {
+  let count = 0;
+  function walk(dir) {
+    const items = fs.readdirSync(dir);
+    for (const item of items) {
+      if (item.startsWith('.')) continue;
+      const full = path.join(dir, item);
+      if (fs.lstatSync(full).isDirectory()) walk(full);
+      else if (item.endsWith('.md') || item.endsWith('.json')) count++;
+    }
+  }
+  walk(knowledgeDir);
+  return count;
+}
+
+function updateSectionIndex(knowledgeDir, gitInfo) {
   const indexPath = path.join(VAULT_13_DIR, 'index.md');
+  const totalArtifacts = countKnowledgeArtifacts(knowledgeDir);
+
   const indexContent = `# 13 Product & Engineering — Arquitectura Tecnológica y Smart Contracts
 
 Este directorio contiene las **especificaciones de ingeniería, arquitectura de smart contracts en Solana, integraciones de protocolos y reportes de seguridad** de **BRIDS.io**.
 
 > [!NOTE]
 > **Principio Tecnológico:** *"Arquitectura de cuenta única de bajo coste con Metaplex Core en Solana, combinada con verificación biométrica en Stripe Identity y multisig institucional en Squads."*
-> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (\`jeisonsosablockdev/brids\`) mediante \`sync-technical-docs.sh\`.
+> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (\`jeisonsosablockdev/brids\`, rama \`develop\`) mediante \`sync-technical-docs.sh\`.
+> 
+> **Estado del Catálogo Técnico:**
+> - 📌 **Último Commit Sincronizado:** \`${gitInfo.sha}\` (${gitInfo.date.split(' ')[0]})
+> - 📦 **Total de Artefactos OKF en Repositorio:** ${totalArtifacts} documentos (Arquitectura, RFCs, APIs, DB, Seguridad).
+> - 🛡️ **Garantía Anti-Drift:** Versionado continuo con respaldos automáticos en \`00 Inbox/Archive/\`.
 
 ---
 
@@ -367,7 +486,7 @@ Este directorio contiene las **especificaciones de ingeniería, arquitectura de 
 `;
 
   fs.writeFileSync(indexPath, indexContent, 'utf8');
-  console.log(`   ✅ Índice de Sección Actualizado: 13 Product & Engineering/index.md`);
+  console.log(`   ✅ Índice de Sección Actualizado: 13 Product & Engineering/index.md (Catálogo OKF: ${totalArtifacts} artefactos)`);
 }
 
 function runAudit() {

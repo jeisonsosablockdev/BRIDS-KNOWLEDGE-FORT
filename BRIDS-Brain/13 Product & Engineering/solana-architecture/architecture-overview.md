@@ -6,15 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/architecture-overview.md"
+source_commit: "6a40b30"
+source_commit_date: "2026-08-22 12:42:13 -0500"
+source_hash: "f5915d578bd74a25126377b188ebc86fbab636569a2040dc84bf5dea9b944d87"
 tags: [architecture, fullstack, solana, nextjs, postgres]
-updated_at: "2026-09-12T01:20:05.329Z"
+updated_at: "2026-09-12T01:26:18.852Z"
 ---
 
 # Arquitectura General del Sistema y Stack Tecnológico
 
 > [!NOTE]
 > **Resumen Técnico:** Especificación de alto nivel de componentes frontend, backend, RPCs, contratos Solana y modelos de datos.
-> *Documento sincronizado automáticamente desde el repositorio técnico institucional (OKF v0.1).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
 
 ---
 
@@ -148,3 +151,4 @@ Last Updated: 2026-04-01 08:20:33 UTC
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde knowledge/architecture/architecture-overview.md |
+| 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización automática de cambios desde rama develop |

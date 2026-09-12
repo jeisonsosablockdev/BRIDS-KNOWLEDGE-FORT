@@ -4,7 +4,12 @@ Este directorio contiene las **especificaciones de ingeniería, arquitectura de 
 
 > [!NOTE]
 > **Principio Tecnológico:** *"Arquitectura de cuenta única de bajo coste con Metaplex Core en Solana, combinada con verificación biométrica en Stripe Identity y multisig institucional en Squads."*
-> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`) mediante `sync-technical-docs.sh`.
+> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, rama `develop`) mediante `sync-technical-docs.sh`.
+> 
+> **Estado del Catálogo Técnico:**
+> - 📌 **Último Commit Sincronizado:** `6a40b30` (2026-08-22)
+> - 📦 **Total de Artefactos OKF en Repositorio:** 595 documentos (Arquitectura, RFCs, APIs, DB, Seguridad).
+> - 🛡️ **Garantía Anti-Drift:** Versionado continuo con respaldos automáticos en `00 Inbox/Archive/`.
 
 ---
 

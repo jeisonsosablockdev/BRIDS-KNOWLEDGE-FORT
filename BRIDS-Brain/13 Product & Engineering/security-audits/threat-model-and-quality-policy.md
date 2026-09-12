@@ -6,15 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Security & Audits"
 source_okf: "knowledge/architecture/threat-model.md"
+source_commit: "6a40b30"
+source_commit_date: "2026-08-22 12:42:13 -0500"
+source_hash: "816cf1027b20552fa7704a701e62833f41aaac25bf7fe75b2ad5e6325eee4cdf"
 tags: [security, threat-model, audit, compliance, solana-safety]
-updated_at: "2026-09-12T01:20:05.333Z"
+updated_at: "2026-09-12T01:26:18.856Z"
 ---
 
 # Modelo de Amenazas y Política de Seguridad Técnica
 
 > [!NOTE]
 > **Resumen Técnico:** Auditoría de vectores de ataque en smart contracts, seguridad de llaves privadas, validación de endpoints y devnet proof.
-> *Documento sincronizado automáticamente desde el repositorio técnico institucional (OKF v0.1).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
 
 ---
 
@@ -106,3 +109,4 @@ Last Updated: 2026-04-01 08:20:33 UTC
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde knowledge/architecture/threat-model.md |
+| 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización automática de cambios desde rama develop |
