@@ -1,11 +1,6 @@
 ---
 name: meeting-minutes-ai
-description: |
-  Extract action items, decisions, and key insights from meeting transcripts or recordings.
-  Transforms raw meeting content into structured, shareable minutes with owners and deadlines.
-  Use when: "会议纪要", "meeting minutes", "提取行动项", "action items", "会议总结", "meeting summary", "transcript analysis", "会议记录整理", "meeting notes", "extract decisions".
-  Cross-references: founder-daily-brief, content-multiplier, unique-club-founder-kit.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Extract action items, decisions, and key insights from meeting transcripts or recordings into structured notes. Use when the user asks for 'meeting minutes', 'action items', 'meeting summary', 'extract decisions', or 'transcript notes'. For daily briefs, see founder-daily-brief. For content repurposing, see content-multiplier."
 version: "1.0"
 ---
 

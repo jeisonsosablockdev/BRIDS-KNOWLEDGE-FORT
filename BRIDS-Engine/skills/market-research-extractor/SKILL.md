@@ -1,11 +1,6 @@
 ---
 name: market-research-extractor
-description: |
-  Extract and analyze content from multiple platforms for market research and competitive intelligence.
-  Supports 小宇宙, 抖音, 小红书, B站, 微信, Twitter/X for founder-driven market research and content strategy analysis.
-  Use when: "内容抓取", "竞品分析", "市场调研", "内容提取", "competitive research", "market research", "content extraction", "竞品监控", "行业调研", "research automation".
-  Cross-references: competitor-tracker, social-intelligence, market-intel-brief, china-content-research.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Extract quantitative data, market sizes, and statistical evidence from research reports and industry whitepapers. Use when the user asks to 'extract market data', 'TAM calculation', 'find industry stats', or 'research report data'. For competitive briefs, see market-intel-brief. For customer research, see mas-customer-research."
 version: "1.0"
 ---
 

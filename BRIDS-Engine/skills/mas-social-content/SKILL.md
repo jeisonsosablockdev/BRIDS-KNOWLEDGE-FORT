@@ -1,6 +1,6 @@
 ---
 name: mas-social-content
-description: "Marketing Agent Studio skill for creating, repurposing, and organizing social media content for your brand. Read `BRIDS-Engine/context/product-marketing-context.md` first and prefer Markdown deliverables that can later be mirrored into Obsidian."
+description: "Marketing Agent Studio skill for creating, formatting, and organizing multi-platform social media posts and carousels aligned with brand strategy. Use when the user asks for 'social media posts', 'carousel content', 'Twitter threads', or 'Instagram captions'. For copywriting, see mas-copywriting. For ad creative, see mas-ad-creative."
 metadata:
   version: 1.2.0-mas
 ---

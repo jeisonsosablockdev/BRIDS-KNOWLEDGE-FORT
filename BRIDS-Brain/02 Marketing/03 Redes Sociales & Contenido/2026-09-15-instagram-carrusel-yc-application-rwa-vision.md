@@ -36,7 +36,7 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** La Visión de BRIDS: El Shopify del Real Estate
 - **Ancla Técnica:** *Y Combinator Application & Future of Syndication*
-- **Carpeta de Activos:** `Social Content/Assets/2026-09-15-carrusel-yc-application-rwa-vision/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-15-carrusel-yc-application-rwa-vision/`
 
 ---
 

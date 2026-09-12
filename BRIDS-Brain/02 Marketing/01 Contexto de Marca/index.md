@@ -1,4 +1,4 @@
-# 01 Brand Context — Identidad y Posicionamiento de Marca
+# 01 Contexto de Marca — Identidad y Posicionamiento de Marca
 
 Este directorio constituye la **fuente de verdad persistente** sobre la identidad de marca, posicionamiento, tono de voz, cliente ideal y guías visuales de **BRIDS.io**.
 

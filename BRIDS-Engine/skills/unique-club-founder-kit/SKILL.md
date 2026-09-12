@@ -1,11 +1,6 @@
 ---
 name: unique-club-founder-kit
-description: |
-  Navigation layer for the complete 24-skill AI founder toolkit by UniqueClub across foundation, fundraising, market intelligence, content creation, and operations.
-  Includes pitch planning and generation, investor research, competitive intelligence, content workflows, meeting minutes, and daily briefs. Install this kit to bootstrap your startup with proven AI workflows.
-  Use when: 「AI创业工具包」「founder toolkit」「startup skills」「uniqueclub」「创业者技能」「AI founder tools」「创业必备」「工具包导航」「founder workflow」「创业效率套件」.
-  Cross-references: pitch-deck-creator, investor-research, competitor-tracker, market-intel-brief, founder-content-writer, content-multiplier, meeting-minutes-ai, founder-daily-brief.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Access the unified navigation layer and index for the 24-skill AI startup and founder toolkit. Use when the user mentions 'founder kit', 'startup skills index', 'founder tools', or 'startup workflow guide'. For pitch decks, see pitch-deck-creator. For investor research, see investor-research."
 version: "1.0"
 ---
 

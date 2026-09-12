@@ -1,10 +1,6 @@
 ---
 name: business-plan-ppt
-description: |
-  创建专业精美的投资路演PPT和商业计划书，风格参照中国创业公司融资路演材料，默认输出18页、白色背景搭配藏青色点缀的PPTX格式，也可导出PDF，支持中英文内容。
-  Use when: "路演PPT", "商业计划书", "融资方案PPT", "投资备忘录", "pitch deck PPT", "business plan presentation", "投资人演示文稿", "融资路演材料", "BP制作".
-  面向需要为投资人制作路演PPT、撰写商业计划书或融资方案的创业者。Cross-references: pitch-deck-creator, fundraising-bp-planner, deck-web-converter.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Create an 18-slide business plan presentation adhering to Chinese visual design standards and export to editable PPTX. Use when the user asks for 'business plan PPT', '18-page deck', 'BP presentation', or 'Chinese deck template'. For pitch decks, see pitch-deck-creator. For outline generation, see fundraising-bp-planner."
 license: MIT
 ---
 

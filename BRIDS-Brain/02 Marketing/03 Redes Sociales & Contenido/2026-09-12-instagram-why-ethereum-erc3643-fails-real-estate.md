@@ -91,5 +91,5 @@ Respaldado por Delaware SPVs segregadas, verificación KYC biométrica con Strip
 ---
 
 ## 🔗 Referencias Cruzadas
-- Biblioteca de Conceptos: [[02 Strategy & Research/master-business-concepts.md]]
-- Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
+- Biblioteca de Conceptos: [[01 Negocio/01 Estrategia & Modelo/master-business-concepts.md]]
+- Contexto de Marca: [[02 Marketing/01 Contexto de Marca/product-marketing-context.md]]

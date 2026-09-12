@@ -1,10 +1,6 @@
 ---
 name: fundraising-bp-planner
-description: |
-  生成融资BP大纲，完整覆盖从问题定义到融资需求的六大核心模块，并为每个模块提供具体的数据呈现建议与视觉化指引。通过结构化SOP流程将创业项目信息转化为专业融资BP大纲。
-  Use when: "融资BP", "商业计划书", "pitch deck大纲", "融资大纲", "帮我写个BP", "理一下融资思路", "准备投资人材料", "fundraising outline", "BP框架".
-  面向需要梳理融资思路、搭建BP内容框架的创业者。Cross-references: pitch-deck-creator, investor-pitch-planner, business-plan-ppt.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Generate a comprehensive fundraising business plan outline covering 6 core modules with data suggestions. Use when the user asks for 'fundraising BP', 'business plan outline', 'BP framework', or 'financing deck structure'. For PPTX creation, see pitch-deck-creator. For investor pitches in English, see investor-pitch-planner."
 license: MIT
 ---
 
@@ -448,49 +444,10 @@ Agent：[按 SOP 流程输出完整融资 BP 大纲]
 
 ---
 
-## 流程控制规则
+## 流程控制规则与方法论
 
-### 交互模式选择
-
-根据用户输入的详细程度选择模式：
-
-| 用户输入 | 模式 | 行为 |
-|----------|------|------|
-| 只有一句话（< 50 字） | **引导模式** | 执行 Phase 1 提问，等用户回答后继续 |
-| 有一定细节（50-200 字） | **半自动模式** | 提出 2-3 个关键问题，同时开始搭建框架 |
-| 详细项目描述（> 200 字） | **全自动模式** | 直接从 Phase 2 开始，跳过信息采集 |
-| 用户说"直接写/不用问" | **快速模式** | 基于合理假设直接输出完整大纲 |
-
-### 质量检查清单
-
-在输出最终 BP 大纲前，逐项检查：
-
-- [ ] 六大模块完整（问题、方案、市场、商业模式、团队、融资需求）
-- [ ] 每个模块都有数据呈现建议
-- [ ] 市场规模有 TAM/SAM/SOM 三层拆解
-- [ ] 资金用途有百分比分配
-- [ ] 里程碑有可衡量的指标
-- [ ] 数据来源已标注或提示用户补充
-- [ ] 总页数控制在 10-15 页建议范围内
-- [ ] 每个模块的演示页数建议合理
-- [ ] 待补充信息清单非空（总有需要用户提供的数据）
-- [ ] 无硬编码数据，所有占位符用 [方括号] 标注
-
-### 针对不同轮次的调整建议
-
-| 融资轮次 | 重点模块 | 数据要求 | 风格建议 |
-|----------|----------|----------|----------|
-| 天使轮 | 问题 + 方案 + 团队 | 可接受较多假设，强调愿景 | 简洁有力，10 页以内 |
-| Pre-A / A 轮 | 市场 + 商业模式 + 数据 | 需要初步业务数据验证 | 数据驱动，12-15 页 |
-| B 轮及以后 | 商业模式 + 财务 + 增长 | 需要完整财务数据 | 专业严谨，15-20 页 |
-
-### 迭代优化
-
-如果用户对大纲有反馈：
-1. 定位反馈涉及的模块
-2. 从对应 Phase 重新执行
-3. 向下级联更新所有受影响的内容
-4. 保持数据呈现建议与内容的一致性
+交互模式选择、质量检查清单、各轮次调整建议与参考方法论（Guy Kawasaki、Sequoia、YC Framework、TAM/SAM/SOM、Unit Economics）完整指引：
+👉 **[references/methodology-and-rules.md](references/methodology-and-rules.md)**
 
 ## Output
 
@@ -504,15 +461,6 @@ Agent：[按 SOP 流程输出完整融资 BP 大纲]
 - 所有占位符用[方括号]标注
 - 数据来源已标注
 
-## 参考方法论
-
-本 SOP 综合了以下融资演示方法论：
-
-- **Guy Kawasaki 10/20/30 Rule**：10 页幻灯片、20 分钟演示、30 号字体
-- **Sequoia Capital Pitch Deck Template**：经典的问题→方案→市场→商业模式结构
-- **Y Combinator Application Framework**：强调问题定义和 traction 数据
-- **TAM/SAM/SOM Framework**：市场规模三层估算法
-- **单位经济模型（Unit Economics）**：LTV、CAC、回本周期等核心指标体系
 
 ## Guardrails
 

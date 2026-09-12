@@ -1,6 +1,6 @@
 ---
 name: mas-copy-editing
-description: "Marketing Agent Studio skill for editing existing brand or marketing copy in this workspace. Read `BRIDS-Engine/context/product-marketing-context.md` first and preserve the brand voice defined there."
+description: "Marketing Agent Studio skill. Review, edit, and polish existing marketing copy to eliminate fluff and sharpen conversion focus. Use when the user asks to 'edit this copy', 'review copy', 'copy feedback', 'proofread', or 'polish messaging'. For writing new copy from scratch, see copywriting. For page optimization, see page-cro."
 metadata:
   version: 1.3.0-mas
 ---
@@ -471,13 +471,6 @@ This iterative process ensures each edit doesn't create new problems while respe
 - [Plain English Alternatives](references/plain-english-alternatives.md): Replace complex words with simpler alternatives
 - [Content Refresh](references/content-refresh.md): Full checklist, refresh vs. rewrite matrix, and cadence guide
 
----
-
-## Content Refresh Editing
-
-Copy editing isn't just for new content. Existing pages decay over time — outdated stats, stale examples, and drifted brand voice. Use the content refresh framework when traffic is declining, data is stale, or the product has changed.
-
-**For the full refresh checklist, refresh vs. rewrite decision matrix, and cadence guide**: See [references/content-refresh.md](references/content-refresh.md)
 
 ---
 
@@ -498,13 +491,4 @@ Copy editing isn't just for new content. Existing pages decay over time — outd
 - **marketing-psychology**: For understanding why certain edits improve conversion
 - **ab-test-setup**: For testing copy variations
 
----
 
-## When to Use Each Skill
-
-| Task | Skill to Use |
-|------|--------------|
-| Writing new page copy from scratch | copywriting |
-| Reviewing and improving existing copy | copy-editing (this skill) |
-| Editing copy you just wrote | copy-editing (this skill) |
-| Structural or strategic page changes | page-cro |

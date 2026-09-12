@@ -1,11 +1,6 @@
 ---
 name: social-post-generator
-description: |
-  Create engaging social media posts for LinkedIn, Twitter/X, WeChat, 小红书, Instagram, and more.
-  Generates platform-native posts with hooks, hashtags, and CTAs optimized for engagement and shares.
-  Use when: "写社媒文案", "social media post", "发LinkedIn", "Twitter文案", "小红书文案", "朋友圈文案", "social post", "内容营销", "病毒传播文案", "viral post".
-  Cross-references: content-multiplier, founder-content-writer, newsletter-autopilot, video-script-creator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Generate engaging social media posts with hooks, hashtags, and CTAs across multiple platforms. Use when the user asks to 'write social post', 'LinkedIn post', 'Twitter thread', or 'Instagram caption'. For content repurposing, see content-multiplier. For long-form founder content, see founder-content-writer."
 version: "1.0"
 ---
 

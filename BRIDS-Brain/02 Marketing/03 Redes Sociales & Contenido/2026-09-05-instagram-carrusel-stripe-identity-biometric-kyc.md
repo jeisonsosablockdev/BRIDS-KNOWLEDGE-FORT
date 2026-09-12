@@ -36,7 +36,7 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** Verificación de Identidad con Stripe Identity
 - **Ancla Técnica:** *KYC/AML Biométrico sin Custodia de Datos*
-- **Carpeta de Activos:** `Social Content/Assets/2026-09-05-carrusel-stripe-identity-biometric-kyc/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-05-carrusel-stripe-identity-biometric-kyc/`
 
 ---
 

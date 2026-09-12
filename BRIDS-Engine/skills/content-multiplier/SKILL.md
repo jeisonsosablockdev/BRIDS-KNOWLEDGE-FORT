@@ -1,11 +1,6 @@
 ---
 name: content-multiplier
-description: |
-  Transform one piece of content into multiple platform-optimized formats for different channels.
-  Takes a single source (blog post, video transcript, or idea) and generates versions for LinkedIn, Twitter/X, WeChat, 小红书, newsletters, Instagram, and video scripts.
-  Use when: "内容放大", "一鱼多吃", "repurposing content", "content distribution", "多平台分发", "博客转社媒", "内容复用", "content multiplier", "社交媒体矩阵", "cross-posting".
-  Cross-references: founder-content-writer, social-post-generator, newsletter-autopilot, video-script-creator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Transform a single core idea into multiple content formats including articles, carousels, threads, and newsletters. Use when the user asks to 'repurpose content', 'multiply content', 'content repurposing', or 'turn into multiple formats'. For social posts, see social-post-generator. For video scripts, see video-script-creator."
 version: "1.0"
 ---
 

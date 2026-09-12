@@ -1,10 +1,6 @@
 ---
 name: investor-research
-description: |
-  调研风险投资机构、天使投资人和融资资金来源。生成结构化的投资人调研报告，包含机构画像、投资 thesis、投资组合、联系策略和热介绍路径。
-  Use when: "投资人调研", "找VC", "research investors", "VC list", "funding sources", "investor database", "天使投资人", "venture capital", "融资对象", "投资人画像".
-  帮助创业者识别、评估并接触适合其融资轮次的投资人。Cross-references: investor-due-diligence, pitch-deck-creator, deck-web-converter.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Analyze venture capital funds, check sizes, thesis alignment, and relevant partner portfolios. Use when the user asks for 'VC research', 'investor targeting', 'find investors', or 'fund thesis'. For due diligence preparation, see investor-due-diligence. For deck planning, see investor-pitch-planner."
 license: MIT
 ---
 

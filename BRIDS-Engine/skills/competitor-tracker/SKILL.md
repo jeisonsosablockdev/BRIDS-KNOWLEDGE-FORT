@@ -1,11 +1,6 @@
 ---
 name: competitor-tracker
-description: |
-  Monitor competitor news, product launches, pricing changes, and strategic moves.
-  Generates structured competitor intelligence reports with recent updates, sentiment analysis, and strategic implications for startup founders.
-  Use when: "竞品追踪", "监控竞争对手", "competitor tracker", "竞争分析", "竞品动态", "competitive intelligence", "对手新闻", "market monitoring", "竞品情报", "competitor analysis".
-  Cross-references: market-intel-brief, social-intelligence, market-research-extractor, china-content-research.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Track competitor features, pricing changes, product launches, and strategic messaging. Use when the user asks for 'competitor analysis', 'track competitors', 'competitor monitoring', or 'battle cards'. For social monitoring, see social-intelligence. For market research, see market-intel-brief."
 version: "1.0"
 ---
 

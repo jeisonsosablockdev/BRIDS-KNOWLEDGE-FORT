@@ -1,10 +1,6 @@
 ---
 name: deck-web-converter
-description: |
-  将pitch deck PPT(.pptx)或PDF(.pdf)转换为精美的、响应式的、自包含HTML演示文稿。适合通过邮件、微信、二维码或浏览器分享路演材料，无需文件附件。
-  Use when: "BP转网页", "PPT转HTML", "pitch deck online", "商业计划书在线演示", "把PPT变成网页", "生成HTML版BP", "pdf to html presentation", "网页版PPT", "在线演示文稿".
-  输出单个离线可用的.html文件，支持幻灯片导航、键盘控制和移动端响应式。Cross-references: pitch-deck-creator, business-plan-ppt.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Convert static presentation decks or PPTX slides into interactive web-based presentations. Use when the user asks to 'convert deck to web', 'slides to html', 'interactive pitch deck', or 'web presentation'. For creating PPTX decks, see pitch-deck-creator. For deck narratives, see sequoia-structured-bp."
 license: MIT
 ---
 

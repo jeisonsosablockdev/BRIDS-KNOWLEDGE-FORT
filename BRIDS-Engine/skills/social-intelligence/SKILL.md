@@ -1,11 +1,6 @@
 ---
 name: social-intelligence
-description: |
-  Monitor Twitter/X for competitor activity, industry trends, and market signals.
-  Real-time social media monitoring for startup competitive intelligence, influencer identification, and trend tracking.
-  Use when: "社交监控", "竞品动态", "Twitter监控", "社交情报", "social listening", "competitor monitoring", "social media intelligence", "Twitter分析", "品牌监控", "趋势追踪".
-  Cross-references: competitor-tracker, market-intel-brief, market-research-extractor, china-content-research.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Monitor Twitter/X and social platforms for competitor movements, industry trends, and sentiment shifts. Use when the user asks for 'social listening', 'monitor Twitter', 'social intelligence', or 'track brand mentions'. For competitor tracking, see competitor-tracker. For market briefs, see market-intel-brief."
 version: "1.0"
 ---
 

@@ -1,10 +1,6 @@
 ---
 name: pitch-deck-creator
-description: |
-  从结构化JSON生成可编辑的10页创业公司融资Pitch Deck PPTX文件。覆盖问题、方案、商业模式、产品、竞争、 traction、路线图、团队和融资需求，支持中英文内容。
-  Use when: "生成pitch deck", "融资PPT", "BP生成", "pitch deck PPTX", "startup deck generator", "10页融资 deck", "投资人演示文稿", "fundraising deck".
-  这是BP系列中的可执行选项：产出PPTX而非仅大纲或写作框架。Cross-references: deck-web-converter, fundraising-bp-planner, business-plan-ppt.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Generate editable 10-slide startup pitch deck PPTX files from structured JSON outlines. Use when the user asks to 'create pitch deck', 'generate PPTX deck', 'investor presentation file', or 'export slides'. For deck structure planning, see fundraising-bp-planner. For HTML presentations, see deck-web-converter."
 license: MIT
 ---
 

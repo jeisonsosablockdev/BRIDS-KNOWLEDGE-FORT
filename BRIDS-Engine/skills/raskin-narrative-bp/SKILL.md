@@ -1,10 +1,6 @@
 ---
 name: raskin-narrative-bp
-description: |
-  Andy Raskin风格的叙事pitch框架。故事驱动的5节拍格式，专为现场演示和Demo Day设计。通过世界层面的设定而非产品层面的描述创造紧迫感和必然性。
-  Use when: "Raskin pitch", "叙事BP", "故事驱动pitch", "Demo Day演示", "路演比赛", "现场投资人会议", "narrative pitch framework", "B2B销售deck", "Andy Raskin框架".
-  最好的pitch不从你开始，从世界开始。投资人不投公司，他们投必然性。Cross-references: sequoia-structured-bp, yc-insight-driven-bp, pitch-deck-creator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Structure a 5-beat story-driven pitch deck following Andy Raskin's narrative framework for live pitches. Use when the user asks for 'Raskin narrative', 'story-driven pitch', 'Demo Day pitch', or 'narrative deck structure'. For Sequoia style, see sequoia-structured-bp. For YC format, see yc-insight-driven-bp."
 license: MIT
 ---
 

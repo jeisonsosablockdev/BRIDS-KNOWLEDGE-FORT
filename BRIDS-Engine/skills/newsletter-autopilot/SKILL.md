@@ -1,11 +1,6 @@
 ---
 name: newsletter-autopilot
-description: |
-  Draft newsletter content from company updates, meeting notes, or founder reflections.
-  Generates complete newsletter drafts with subject lines, preview text, body copy, and CTAs tailored to your audience.
-  Use when: "newsletter", "写newsletter", "邮件营销", "newsletter automation", "公司月报", "创始人 Newsletter", "email newsletter", "内容简报", "周报邮件", "newsletter draft".
-  Cross-references: content-multiplier, founder-content-writer, social-post-generator, market-intel-brief.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Draft engaging email newsletters with subject lines, preview text, and CTAs tailored to audience segments. Use when the user asks for 'draft newsletter', 'email newsletter', 'company update email', or 'weekly digest'. For email marketing sequences, see mas-email-sequence. For founder essays, see founder-content-writer."
 version: "1.0"
 ---
 

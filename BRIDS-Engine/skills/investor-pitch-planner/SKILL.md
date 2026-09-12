@@ -1,10 +1,6 @@
 ---
 name: investor-pitch-planner
-description: |
-  Generate a structured fundraising pitch deck outline covering Problem, Solution, Market, Business Model, Team, and The Ask, with data visualization suggestions for each module. Transforms startup project information into a professional pitch deck outline through a structured SOP workflow.
-  Use when: "pitch deck outline", "融资大纲", "investor presentation", "fundraising deck structure", "帮我写pitch deck", "BP框架", "startup pitch plan", "投资人材料", "pitch deck framework".
-  For founders who need to structure their fundraising story and build a pitch deck content framework in English. Cross-references: fundraising-bp-planner, pitch-deck-creator, business-plan-ppt.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Plan and outline an English 10-12 slide investor pitch deck with core modules and metrics. Use when the user asks for 'pitch deck outline', 'investor deck plan', 'fundraising slides structure', or 'pitch narrative'. For PPTX export, see pitch-deck-creator. For Chinese business plans, see fundraising-bp-planner."
 license: MIT
 ---
 
@@ -448,49 +444,10 @@ Return the complete pitch deck outline document (Markdown format), containing ea
 
 ---
 
-## Workflow Control Rules
+## Workflow Control Rules & Reference Methodologies
 
-### Interaction Mode Selection
-
-Choose a mode based on how detailed the user's input is:
-
-| User Input | Mode | Behavior |
-|------------|------|----------|
-| Just one sentence (< 50 words) | **Guided mode** | Run Phase 1 questions, wait for answers before proceeding |
-| Some detail (50–200 words) | **Semi-automatic mode** | Ask 2–3 key questions while starting to build the framework |
-| Detailed project description (> 200 words) | **Fully automatic mode** | Start directly from Phase 2, skip information gathering |
-| User says "just write it / don't ask" | **Express mode** | Output a complete outline based on reasonable assumptions |
-
-### Quality Checklist
-
-Before outputting the final pitch deck outline, verify each item:
-
-- [ ] All six modules are complete (Problem, Solution, Market, Business Model, Team, The Ask)
-- [ ] Every module includes data visualization recommendations
-- [ ] Market size includes TAM/SAM/SOM breakdown
-- [ ] Use of funds includes percentage allocation
-- [ ] Milestones include measurable metrics
-- [ ] Data sources are cited or flagged for the user to provide
-- [ ] Total slides stay within the 10–15 slide recommendation
-- [ ] Suggested slide counts per module are reasonable
-- [ ] Information To Be Provided list is non-empty (there is always data the user needs to supply)
-- [ ] No hardcoded data — all placeholders are marked with [brackets]
-
-### Adjustments by Fundraising Round
-
-| Round | Focus Modules | Data Requirements | Style |
-|-------|--------------|-------------------|-------|
-| Angel | Problem + Solution + Team | More assumptions acceptable; emphasize vision | Concise and punchy, under 10 slides |
-| Pre-A / Series A | Market + Business Model + Metrics | Early business data for validation required | Data-driven, 12–15 slides |
-| Series B+ | Business Model + Financials + Growth | Complete financial data required | Professional and rigorous, 15–20 slides |
-
-### Iterative Refinement
-
-If the user provides feedback on the outline:
-1. Identify which module the feedback applies to
-2. Re-execute from the corresponding Phase
-3. Cascade updates to all downstream content
-4. Keep data visualization recommendations consistent with the content
+Full interaction modes, quality checklist, round-by-round adjustments, and methodology guides (Guy Kawasaki, Sequoia, YC Framework, TAM/SAM/SOM, Unit Economics):
+👉 **[references/methodology-and-rules.md](references/methodology-and-rules.md)**
 
 ## Output
 
@@ -504,15 +461,6 @@ Output is a complete fundraising pitch deck outline document in Markdown format,
 - All placeholders marked with [brackets]
 - Data sources cited
 
-## Reference Methodologies
-
-This SOP incorporates the following fundraising presentation methodologies:
-
-- **Guy Kawasaki 10/20/30 Rule**: 10 slides, 20-minute presentation, 30-point font
-- **Sequoia Capital Pitch Deck Template**: The classic Problem → Solution → Market → Business Model structure
-- **Y Combinator Application Framework**: Emphasis on problem definition and traction data
-- **TAM/SAM/SOM Framework**: Three-tier market sizing methodology
-- **Unit Economics**: Core metrics including LTV, CAC, and payback period
 
 ## Guardrails
 

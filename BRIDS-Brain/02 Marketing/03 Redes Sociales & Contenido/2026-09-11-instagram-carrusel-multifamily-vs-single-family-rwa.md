@@ -36,7 +36,7 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** Modelos de Inversión: Multifamily vs Comercial
 - **Ancla Técnica:** *Diversificación de Portafolio RWA*
-- **Carpeta de Activos:** `Social Content/Assets/2026-09-11-carrusel-multifamily-vs-single-family-rwa/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-11-carrusel-multifamily-vs-single-family-rwa/`
 
 ---
 

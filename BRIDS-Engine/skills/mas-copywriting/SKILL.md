@@ -1,6 +1,6 @@
 ---
 name: mas-copywriting
-description: Marketing Agent Studio skill for writing or rewriting persuasive brand copy in this workspace. Read `BRIDS-Engine/context/product-marketing-context.md` first, then produce Markdown that can be reviewed and later surfaced in Obsidian.
+description: "Marketing Agent Studio skill for writing conversion-focused copy for landing pages, websites, and campaigns with rigorous brand grounding. Use when the user asks to 'write copy', 'website copy', 'landing page text', or 'marketing messaging'. For editing existing drafts, see mas-copy-editing. For social copy, see mas-social-content."
 metadata:
   version: 1.1.0-mas
 ---

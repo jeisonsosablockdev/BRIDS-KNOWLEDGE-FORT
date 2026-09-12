@@ -1,11 +1,6 @@
 ---
 name: video-script-creator
-description: |
-  Write scripts for product demos, explainer videos, elevator pitches, and founder storytelling.
-  Generates scene-by-scene scripts with visual cues, timing, and narration optimized for startup storytelling and product marketing.
-  Use when: "写视频脚本", "video script", "产品演示视频", "explainer video", "elevator pitch video", "创始人故事视频", "demo script", "宣传片脚本", "product demo", "短视频脚本".
-  Cross-references: content-multiplier, social-post-generator, founder-content-writer, infographic-generator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Write scene-by-scene scripts for product demos, explainer videos, elevator pitches, and storytelling. Use when the user asks for 'video script', 'product demo script', 'explainer video', or 'elevator pitch'. For social copy, see social-post-generator. For infographics, see infographic-generator."
 version: "1.0"
 ---
 

@@ -36,7 +36,7 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** Distribución Mensual de Rentas en USDC
 - **Ancla Técnica:** *Cash Flow Automatizado On-Chain*
-- **Carpeta de Activos:** `Social Content/Assets/2026-09-09-carrusel-monthly-yield-distributions-usdc/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-09-carrusel-monthly-yield-distributions-usdc/`
 
 ---
 

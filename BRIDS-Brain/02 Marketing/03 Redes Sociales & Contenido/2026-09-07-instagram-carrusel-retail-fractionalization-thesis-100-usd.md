@@ -36,7 +36,7 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** Inversión Inmobiliaria desde $100 USD
 - **Ancla Técnica:** *Democratización Financiera en Solana*
-- **Carpeta de Activos:** `Social Content/Assets/2026-09-07-carrusel-retail-fractionalization-thesis-100-usd/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-07-carrusel-retail-fractionalization-thesis-100-usd/`
 
 ---
 

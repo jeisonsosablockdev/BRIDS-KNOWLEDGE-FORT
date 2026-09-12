@@ -1,11 +1,6 @@
 ---
 name: founder-content-writer
-description: |
-  Write long-form content for founders — blog posts, LinkedIn articles, thought leadership, and technical docs.
-  Helps founders create authoritative, engaging content that builds thought leadership and brand authority.
-  Use when: "创始人写作", "长文写作", "博客文章", "LinkedIn长文", "thought leadership", "技术文档写作", "内容创作", "founder blog", "content writing", "long-form content".
-  Cross-references: content-multiplier, social-post-generator, newsletter-autopilot, video-script-creator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Ghostwrite authentic founder essays, thought leadership articles, and personal perspectives. Use when the user asks for 'founder essay', 'thought leadership', 'write in founder voice', or 'founder post'. For newsletters, see newsletter-autopilot. For social posts, see social-post-generator."
 version: "1.0"
 ---
 

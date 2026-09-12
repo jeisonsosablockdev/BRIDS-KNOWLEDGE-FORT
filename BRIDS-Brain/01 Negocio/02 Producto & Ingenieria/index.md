@@ -15,12 +15,11 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 
 ## 🧭 Mapa Canónico de Ingeniería (Estructura de Dominios)
 
-### 🗺️ 1. Roadmap y Madurez de Producto (`product-roadmap/`)
+### 🗺️ 1. Roadmap y Madurez de Producto
 - [[01 Negocio/02 Producto & Ingenieria/current-product-status-matrix.md|Matriz Viva de Estado y Madurez de Producto]]
 - [[01 Negocio/02 Producto & Ingenieria/app-technical-roadmap-investor-brief.md|Roadmap Técnico e Investor Brief de Producto]]
-- [[01 Negocio/02 Producto & Ingenieria/product-roadmap/index.md|Sub-Índice de Roadmap de Producto]]
 
-### 🌐 2. Arquitectura Solana & Auth Híbrido (`solana-architecture/`)
+### 🌐 2. Arquitectura Solana & Auth Híbrido (`arquitectura/`)
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/architecture-overview.md|Arquitectura General del Sistema y Stack Tecnológico]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/solana-stack-spec.md|Especificación Técnica de Infraestructura Solana]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/auth-flow-workos-siws.md|Flujo de Autenticación Híbrida WorkOS y SIWS]]
@@ -35,12 +34,12 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/rbac-permissions-model.md|Modelo de Control de Acceso Basado en Roles (RBAC)]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/index.md|Sub-Índice de Arquitectura Solana]]
 
-### 🧩 3. Estándar Metaplex Core (`metaplex-core-specs/`)
+### 🧩 3. Estándar Metaplex Core (`metaplex-core/`)
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/metaplex-core-nft-spec.md|Estándar Metaplex Core y Especificación de NFTs RWA]]
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/freeze-and-recovery-plugins.md|Máquina de Estados de Tokens y Protocolo de Recuperación]]
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/index.md|Sub-Índice de Metaplex Core]]
 
-### 🛡️ 4. Seguridad, Modelos de Amenazas y Auditorías (`security-audits/`)
+### 🛡️ 4. Seguridad, Modelos de Amenazas y Auditorías (`seguridad/`)
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/threat-model-and-quality-policy.md|Modelo de Amenazas y Política de Seguridad Técnica]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/smart-contract-security-guidelines.md|Guía y Políticas de Seguridad para Smart Contracts]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/data-handling-and-privacy-compliance.md|Políticas de Manejo de Datos y Privacidad (KYC/AML)]]
@@ -50,7 +49,7 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/marketplace-security-audit-plan.md|Plan de Auditoría de Seguridad del Marketplace (BRI-164)]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/index.md|Sub-Índice de Seguridad y Auditorías]]
 
-### 🗄️ 5. Arquitectura de Datos y Schemas (`database-architecture/`)
+### 🗄️ 5. Arquitectura de Datos y Schemas (`api-y-database/`)
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/user-profile-schema.md|Modelo de Datos: Perfil de Usuario y Estado KYC]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-entry-schema.md|Modelo de Datos: Catálogo Inmobiliario y Metadatos de Activos]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/mint-job-schema.md|Modelo de Datos: Cola de Trabajos de Minteo Asíncrono]]
@@ -59,7 +58,7 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/authority-registry-schema.md|Modelo de Datos: Registro de Autoridades y Permisos Off-Chain]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/index.md|Sub-Índice de Base de Datos]]
 
-### 🔌 6. Especificaciones de APIs & RPC (`api-specifications/`)
+### 🔌 6. Especificaciones de APIs & RPC (`api-y-database/`)
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-api.md|Especificación de API: Catálogo Público y Detalle de Inversión]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/purchase-flow-api.md|Especificación de API: Flujo de Compra y Checkout Unificado]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/auth-api.md|Especificación de API: Autenticación, Nonce y Sesión]]
@@ -72,7 +71,7 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/solana-rpc-methods.md|Especificación de RPC: Métodos Nativos de Solana y Priorización]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/index.md|Sub-Índice de APIs y RPC]]
 
-### 📋 7. Catálogo Maestro de RFCs Técnicos (`technical-rfcs/`)
+### 📋 7. Catálogo Maestro de RFCs Técnicos (`rfcs-tecnicos/`)
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/index.md|Índice Consolidado del Catálogo de RFCs (14 Epics)]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-001-admin-asset-create-form.md|EPIC-001: Formulario Administrativo de Creación de Activos]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-002-core-candy-machine-mint-module.md|EPIC-002: Módulo de Minteo con Metaplex Core Candy Machine]]
@@ -89,7 +88,7 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-013-pwa-push-notifications.md|EPIC-013: Aplicación Progresiva (PWA) y Notificaciones Web Push]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-014-stake-distribution-traceability.md|EPIC-014: Trazabilidad y Motor de Distribución de Rentas de Staking]]
 
-### 🛠️ 8. Operaciones, Procedimientos & Runbooks (`operations-and-runbooks/`)
+### 🛠️ 8. Operaciones, Procedimientos & Runbooks (`rfcs-tecnicos/`)
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/devnet-authority-lifecycle.md|Procedimiento Operativo: Ciclo de Vida de Autoridades Devnet]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/candy-machine-deploy-validation.md|Procedimiento Operativo: Validación de Despliegues de Candy Machine]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/health-checks-monitoring.md|Procedimiento Operativo: Monitoreo de Salud y Disponibilidad]]

@@ -1,10 +1,6 @@
 ---
 name: yc-insight-driven-bp
-description: |
-  Y Combinator风格的洞察先导商业计划书框架。极简5-8页格式，围绕一个反共识洞察构建。最适合pre-seed到seed、加速器、天使投资人和首次创业者。
-  Use when: "YC BP", "Y Combinator pitch", "洞察驱动BP", "极简BP", "pre-seed deck", "angel investor deck", "加速器申请", "insight-first BP", "YC风格融资".
-  投资人不投生意，他们投洞察——一个你看到而别人没看到的关于世界的真相。Cross-references: sequoia-structured-bp, raskin-narrative-bp, pitch-deck-creator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Structure a minimalist 5-8 slide pitch deck centered on a non-consensus insight for Y Combinator. Use when the user asks for 'YC pitch deck', 'insight-driven BP', 'pre-seed deck', or 'YC application slides'. For Sequoia format, see sequoia-structured-bp. For narrative pitches, see raskin-narrative-bp."
 license: MIT
 ---
 

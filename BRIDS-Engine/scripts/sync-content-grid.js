@@ -249,7 +249,7 @@ function updateParrillaDocument(plan) {
       : `*(Pendiente)*`;
 
     const assetLink = item.matchedAsset
-      ? `[[02 Marketing/03 Redes Sociales & Contenido/Assets/${item.matchedAsset}|📁 Assets]]`
+      ? `[[02 Marketing/03 Redes Sociales & Contenido/Assets/${item.matchedAsset}/README-ASSETS.md|📁 Assets]]`
       : (item.format === 'carrusel' ? `*(Sin assets)*` : `*(Video directo)*`);
 
     const formatBadge = item.format === 'carrusel' ? '🖼️ Carrusel (4:5)' : '🎬 Reel (9:16)';

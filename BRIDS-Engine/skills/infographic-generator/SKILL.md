@@ -1,11 +1,6 @@
 ---
 name: infographic-generator
-description: |
-  Create high-density information graphics, data visualizations, and blueprint-style infographics.
-  Transforms complex data, processes, and ideas into visually striking, shareable graphics for presentations, social media, and reports.
-  Use when: "信息图生成", "数据可视化", "infographic", "蓝图风格", "长图制作", "data visualization", "信息图表", "可视化报告", "技术架构图", "知识图谱".
-  Cross-references: content-multiplier, founder-content-writer, video-script-creator, social-post-generator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Generate structural prompts, layouts, and copy for informative infographics and visual diagrams. Use when the user asks for 'infographic design', 'visual diagram', 'data graphic', or 'infographic copy'. For social carousels, see mas-social-content. For video scripts, see video-script-creator."
 version: "1.0"
 ---
 

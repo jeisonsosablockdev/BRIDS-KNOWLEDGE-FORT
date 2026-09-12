@@ -1,10 +1,6 @@
 ---
 name: sequoia-structured-bp
-description: |
-  红杉资本风格的结构化商业计划书/pitch deck框架。10-12页数据驱动格式，包含逐页写作指南、示例和检查清单。最适合A轮及以后、机构投资人、尽调密集的融资轮次。
-  Use when: "红杉BP", "Sequoia pitch deck", "结构化BP", "数据驱动BP", "A轮融资 deck", "institutional investor deck", "投资人级BP结构", "sequoia framework", "严谨BP框架".
-  投资人只有3分钟，每页必须要么降低风险要么提升上行空间，没有装饰。Cross-references: yc-insight-driven-bp, raskin-narrative-bp, pitch-deck-creator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Structure a rigorous 10-12 slide data-driven pitch deck following Sequoia Capital's investment framework. Use when the user asks for 'Sequoia pitch deck', 'structured BP', 'Series A deck', or 'institutional investor slides'. For narrative decks, see raskin-narrative-bp. For YC format, see yc-insight-driven-bp."
 license: MIT
 ---
 

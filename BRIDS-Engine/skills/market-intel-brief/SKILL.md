@@ -1,11 +1,6 @@
 ---
 name: market-intel-brief
-description: |
-  Generate daily/weekly AI and startup industry intelligence briefings for founders.
-  Curates AI industry updates, funding news, and competitive intelligence into actionable founder briefings.
-  Use when: "市场情报", "行业简报", "market intelligence", "startup news", "AI日报", "industry briefing", "market brief", "行业趋势", "tech news digest", "市场分析简报".
-  Cross-references: competitor-tracker, social-intelligence, market-research-extractor, china-content-research.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Synthesize competitive landscape changes, regulatory updates, and emerging industry market trends. Use when the user asks for 'market intelligence', 'industry brief', 'market scan', or 'sector updates'. For competitor monitoring, see competitor-tracker. For web scraping and extraction, see market-research-extractor."
 version: "1.0"
 ---
 

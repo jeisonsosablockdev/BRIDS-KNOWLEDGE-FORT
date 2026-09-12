@@ -1,10 +1,6 @@
 ---
 name: investor-due-diligence
-description: |
-  在见投资人之前对其进行评级。米其林式3星评级体系，基于六维度1-4分评分。适用于中美投资人。帮助创业者判断投资人值不值得见、靠不靠谱。
-  Use when: "投资人背调", "查VC", "rate this VC", "投资人评级", "值不值得见", "靠不靠谱", "investor evaluation", "VC background check", "基金怎么样".
-  投资人对你做尽调，你也应该在见他们之前先查清楚他们是谁。Cross-references: investor-research, pitch-deck-creator.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Prepare and structure data room materials, due diligence responses, and risk mitigation documentation. Use when the user asks for 'due diligence checklist', 'investor Q&A', 'data room preparation', or 'due diligence docs'. For investor research, see investor-research. For pitch decks, see pitch-deck-creator."
 license: MIT
 ---
 

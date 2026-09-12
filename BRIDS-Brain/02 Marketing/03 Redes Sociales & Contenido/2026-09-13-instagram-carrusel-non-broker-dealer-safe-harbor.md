@@ -36,7 +36,7 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** Blindaje Legal: Non-Broker-Dealer Status
 - **Ancla Técnica:** *SEC Safe Harbors & Regulación EE.UU.*
-- **Carpeta de Activos:** `Social Content/Assets/2026-09-13-carrusel-non-broker-dealer-safe-harbor/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-13-carrusel-non-broker-dealer-safe-harbor/`
 
 ---
 

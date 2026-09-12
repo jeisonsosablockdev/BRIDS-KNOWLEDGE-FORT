@@ -1,11 +1,6 @@
 ---
 name: china-content-research
-description: |
-  Research and analyze WeChat articles and Chinese social content for market intelligence.
-  Specialized tool for China market content research, competitive intelligence, and consumer sentiment analysis across WeChat and Chinese platforms.
-  Use when: "微信公众号研究", "微信文章分析", "中国市场调研", "微信内容抓取", "WeChat research", "China market research", "微信竞品分析", "公众号监控", "China content analysis", "中国市场情报".
-  Cross-references: competitor-tracker, market-intel-brief, social-intelligence, market-research-extractor.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Research viral topics, engagement patterns, and trending formats on WeChat, Zhihu, and Xiaohongshu. Use when the user asks for 'Chinese social media research', 'WeChat article research', 'Zhihu trends', or 'Xiaohongshu topics'. For content generation, see social-post-generator. For competitor tracking, see competitor-tracker."
 version: "1.0"
 ---
 

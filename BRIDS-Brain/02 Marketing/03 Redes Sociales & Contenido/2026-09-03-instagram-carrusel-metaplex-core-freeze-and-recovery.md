@@ -36,7 +36,7 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** Plugins Metaplex Core
 - **Ancla Técnica:** *Seguridad Institucional & Key Recovery*
-- **Carpeta de Activos:** `Social Content/Assets/2026-09-03-carrusel-metaplex-core-freeze-and-recovery/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-03-carrusel-metaplex-core-freeze-and-recovery/`
 
 ---
 

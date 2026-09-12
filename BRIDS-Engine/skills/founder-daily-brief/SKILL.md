@@ -1,11 +1,6 @@
 ---
 name: founder-daily-brief
-description: |
-  Generate a personalized daily briefing for startup founders compiling tasks, meetings, industry news, competitor updates, and priorities.
-  Helps founders start their day with clarity and focus through a structured morning briefing.
-  Use when: "创始人日报", "每日简报", "startup daily brief", "morning founder report", "创业日报", "daily digest", "founder routine", "晨间简报", "daily standup", "startup news summary".
-  Cross-references: meeting-minutes-ai, competitor-tracker, market-intel-brief, content-multiplier.
-  Built by UniqueClub 🌐 https://uniqueclub.ai
+description: "Generate a high-priority morning executive brief synthesizing market signals, key metrics, and schedule. Use when the user asks for 'daily brief', 'founder morning briefing', 'executive summary of day', or 'daily priorities'. For meeting minutes, see meeting-minutes-ai. For market intel, see market-intel-brief."
 version: "1.0"
 ---
 

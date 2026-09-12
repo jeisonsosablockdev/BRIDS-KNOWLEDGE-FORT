@@ -36,7 +36,7 @@ tags:
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
 - **Activo / Tesis:** Infraestructura RWA en Solana
 - **Ancla Técnica:** *Arquitectura Blockchain & TPS*
-- **Carpeta de Activos:** `Social Content/Assets/2026-09-01-carrusel-solana-rwa-infrastructure-thesis/`
+- **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-01-carrusel-solana-rwa-infrastructure-thesis/`
 
 ---
 
