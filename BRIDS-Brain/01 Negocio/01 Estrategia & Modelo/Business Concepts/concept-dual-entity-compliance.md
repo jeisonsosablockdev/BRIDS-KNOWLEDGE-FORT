@@ -1,7 +1,7 @@
 ---
 title: "C1: Estructuración Dual-Entity y Blindaje Non-Broker-Dealer"
 concept_id: "concept-dual-entity-compliance"
-version: 1.0.0
+version: "1.1.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "compliance-legal"
@@ -66,14 +66,22 @@ flowchart TD
 
 ## 3. Anclajes Técnicos y Normativos Verificables
 
-1. **Securities Exchange Act of 1934 (Sección 15(a)(1)):**
-   - BRIDS no recibe compensación basada en transacciones de valores (*transaction-based compensation* que constituya comisión de éxito por colocación de valores). Su modelo de cobro es por uso de infraestructura de software (SaaS y procesamiento técnico de datos).
-2. **Delaware Limited Liability Company Act (Section 18-215 / Series LLC):**
+1. **Securities Exchange Act of 1934 (Sección 15(a)(1) — Non-Broker-Dealer Status):**
+   - BRIDS no recibe compensación basada en transacciones de valores (*transaction-based compensation* que constituya comisión de éxito por colocación de valores). Su modelo de cobro es por uso de infraestructura de software (SaaS y procesamiento técnico de datos fijas).  
+   🔗 [SEC Broker-Dealers Division of Trading and Markets](https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers)
+2. **Criterios de la SEC sobre Valores Tokenizados y Master Securityholder File:**
+   - La titularidad jurídica del socio emana del libro legal de socios de la LLC de Delaware. Conforme al criterio oficial de la SEC, **el NFT representa digitalmente una posición, pero no es el registro legal**: el registro legal lo lleva el actor legal correspondiente en el SPV.  
+   🔗 [SEC Corp Fin Statement on Tokenized Securities](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities)
+3. **Delaware Limited Liability Company Act (Section 18-215 / Series LLC & DGCL § 224):**
    - Cada inmueble cuenta con contabilidad, activos y pasivos jurídicamente segregados. La insolvencia eventual de un SPV no afecta a los demás ni a la empresa de software matriz.
-3. **Primatía del Master Securityholder File:**
-   - La titularidad jurídica del socio emana del libro legal de socios de la LLC de Delaware. El NFT de Metaplex Core en Solana es la **representación digital trazable** de dicha participación, no un título al portador anónimo.
-4. **Regulación D 506(c) y Regulación S (SEC Frameworks):**
-   - Emisiones privadas destinadas a inversionistas acreditados en EE.UU. o inversionistas internacionales no estadounidenses, implementando verificación KYC/AML estricta con Stripe Identity.
+4. **Reglas AML/CIP y No Intermediación Bancaria (FinCEN & 31 CFR 1023.220):**
+   - BRIDS no toca dinero y no hace KYC por sí mismo: la verificación de identidad se delega en partners especializados como Stripe Identity conforme a [31 CFR 1023.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220) y la [Guía de FinCEN sobre Monedas Virtuales Convertibles](https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf).
+5. **No Recomendación de Inversiones (Investment Advisers Act of 1940):**
+   - BRIDS no recomienda inversiones ni gestiona fondos privados de terceros.  
+   🔗 [SEC Private Fund Adviser Overview](https://www.sec.gov/about/divisions-offices/division-investment-management/private-fund-adviser-overview)
+6. **Seguridad de la Información (FTC Safeguards Rule):**
+   - Cero almacenamiento de PII sensible sin encriptación.  
+   🔗 [FTC Safeguards Rule](https://www.ftc.gov/legal-library/browse/rules/safeguards-rule)
 
 ---
 
@@ -105,8 +113,47 @@ flowchart TD
 
 ---
 
+## 7. Apéndice Breve: Versión Simplificada de Principios de Plataforma
+
+- **sec.gov:** [Private Fund Adviser Overview (SEC)](https://www.sec.gov/about/divisions-offices/division-investment-management/private-fund-adviser-overview)
+- **BRIDS no toca dinero.**
+- **BRIDS no hace KYC por sí mismo y no recomienda inversiones:** [ecfr.gov — 31 CFR 1023.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220).
+- **BRIDS no ejecuta la parte inmobiliaria y no reemplaza documentos legales:** [fincen.gov — FinCEN Guidance on Convertible Virtual Currency](https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf).
+- **El NFT representa digitalmente una posición, pero no es el registro legal:** [sec.gov — SEC Corp Fin Statement on Tokenized Securities](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities). El registro legal lo lleva el actor legal correspondiente en el SPV.
+- **Protección de Datos y Seguridad de Información:** [ftc.gov — FTC Safeguards Rule](https://www.ftc.gov/legal-library/browse/rules/safeguards-rule).
+- **Los partners hacen la parte especializada; BRIDS hace la infraestructura.**
+- **BRIDS no debe cobrar como intermediario financiero por funciones que no asume.**
+- **BRIDS debe comunicar siempre su rol real como plataforma tecnológica.**
+
+---
+
+## 8. Apéndice Orientativo de Normas y Referencias a Revisar con Counsel
+
+1. **Securities Exchange Act of 1934 (Broker-Dealer Regulations):**  
+   🔗 [https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers](https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers)
+2. **Securities Act of 1933, incluyendo Section 4(a)(6) para Crowdfunding:**  
+   🔗 [https://www.sec.gov/rules-regulations/2015/10/crowdfunding](https://www.sec.gov/rules-regulations/2015/10/crowdfunding)
+3. **Regulation Crowdfunding (Reg CF):**  
+   🔗 [https://www.sec.gov/resources-small-businesses/exempt-offerings/regulation-crowdfunding](https://www.sec.gov/resources-small-businesses/exempt-offerings/regulation-crowdfunding)
+4. **Investment Advisers Act of 1940 y exenciones aplicables para advisers de private funds:**  
+   🔗 [https://www.sec.gov/about/divisions-offices/division-investment-management/private-fund-adviser-overview](https://www.sec.gov/about/divisions-offices/division-investment-management/private-fund-adviser-overview)
+5. **Reglas AML/CIP aplicables a broker-dealers bajo 31 CFR 1023.220:**  
+   🔗 [https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220)
+6. **Guía de FinCEN sobre modelos con convertible virtual currency (CVC):**  
+   🔗 [https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf](https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf)
+7. **Criterios sobre tokenized securities y Master Securityholder File:**  
+   🔗 [https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities)
+8. **Referencias de seguridad de información y FTC Safeguards Rule:**  
+   🔗 [https://www.ftc.gov/legal-library/browse/rules/safeguards-rule](https://www.ftc.gov/legal-library/browse/rules/safeguards-rule)
+
+> [!IMPORTANT]
+> Este apéndice es solo de referencia institucional y debe ser validado y ampliado por asesores legales en la jurisdicción correspondiente.
+
+---
+
 ## Historial de Revisiones
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.1.0** | 2026-09-13 | `compliance-officer`, `business-consultant` | Integración de los 7 principios institucionales de BRIDS, enlaces oficiales (SEC, FinCEN, eCFR, FTC) y Apéndices 16 y 17 para counsel legal. |
 | **1.0.0** | 2026-09-11 | `compliance-officer` & SDD Loop | Creación inicial de la nota conceptual atómica bajo estándares de gobernanza. |

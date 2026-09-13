@@ -1,7 +1,7 @@
 ---
 title: "C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)"
 concept_id: "concept-wallet-recovery-protocol"
-version: "1.2.0"
+version: "1.3.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "technology-security-compliance"
@@ -18,13 +18,15 @@ tags:
   - "squads-multisig"
   - "delaware-spv"
   - "sec-compliance"
+  - "fincen"
   - "rwa-security"
 ---
 
 # C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)
 
 > [!NOTE] Resumen Ejecutivo
-> El mayor obstáculo para la adopción masiva de la inversión inmobiliaria en Web3 es el dogma cripto de que *"la pérdida de la llave privada equivale a la pérdida irreversible del patrimonio"*. En BRIDS.io, la propiedad jurídica del inmueble emana del registro societario del SPV de Delaware, no de la posesión efímera de una clave criptográfica. Respaldados por la doctrina regulatoria de la SEC y el derecho societario de Delaware, los NFTs en Solana actúan exclusivamente como **certificados digitales programables de derechos societarios**, facilitando la transaccionalidad y el cómputo sin sustituir las escrituras públicas (*deeds*) registradas en el condado. Mediante un protocolo institucional de 6 etapas con **re-verificación biométrica activa en Stripe Identity (3D Liveness), autenticación multi-canal (llamada telefónica, SMS OTP y correo), período de enfriamiento (Timelock de 72 horas), actualización de beneficiarios en Squads Protocol y plugins de Metaplex Core**, BRIDS garantiza que el extravío de una billetera solo requiera reasignar el NFT y la dirección de pago, manteniendo la titularidad societaria en el SPV y el inmueble 100% inmutables.
+> El mayor obstáculo para la adopción masiva de la inversión inmobiliaria en Web3 es el dogma cripto de que *"la pérdida de la llave privada equivale a la pérdida irreversible del patrimonio"*. En BRIDS.io, la propiedad jurídica del inmueble emana del registro societario del SPV de Delaware, no de la posesión efímera de una clave criptográfica. Siguiendo el criterio de la **SEC sobre valores tokenizados** (*Division of Corporation Finance Statement on Tokenized Securities*), **el NFT representa digitalmente una posición pero no es el registro legal**: el registro legal lo lleva el actor legal correspondiente en el *Master Securityholder File*.
+> BRIDS opera como **infraestructura tecnológica pura**: no toca dinero, no hace KYC por sí mismo (delegado en partners certificados como Stripe Identity), no recomienda inversiones y no ejecuta la parte inmobiliaria ni reemplaza documentos legales. Ante el reporte de una billetera perdida, se ejecuta un protocolo institucional de 6 etapas con **re-verificación biométrica activa en Stripe Identity (3D Liveness), autenticación multi-canal (llamada telefónica Voice 2FA, SMS OTP y correo), período de enfriamiento (Timelock de 72 horas), sobre-escritura de beneficiarios en Squads Protocol y reasignación en Metaplex Core**. **Solo cambia el NFT y la wallet de cobro; el SPV, la titularidad del socio y la escritura del inmueble en el condado permanecen 100% inmutables**.
 
 ---
 
@@ -34,37 +36,24 @@ tags:
 
 ---
 
-## 2. Marco Regulatorio y Doctrina SEC (Citas, Links y Jurisprudencia)
+## 2. Marco Regulatorio Oficial y Principios Institucionales (SEC, FinCEN, FTC)
 
-### 2.1. Doctrina de la SEC: "Substance Over Form" y Títulos de Propiedad Inmobiliaria
-La Comisión de Bolsa y Valores de EE.UU. (**Securities and Exchange Commission - SEC**) y la jurisprudencia federal han establecido de forma unánime que la tecnología de registro distribuido (*blockchain*) **no altera la naturaleza legal sustantiva de los derechos subyacentes**:
+### 2.1. Los 7 Principios Institucionales de BRIDS
+Para garantizar un blindaje legal absoluto frente a las autoridades financieras de EE.UU. (SEC, FinCEN, FINRA, FTC), BRIDS rige su operación bajo 7 principios inviolables:
 
-1. **Los NFTs no son escrituras de propiedad (*Deeds*):**  
-   Bajo las leyes de propiedad inmobiliaria de los 50 estados de EE.UU., una escritura pública de propiedad (*Grant Deed*, *Warranty Deed* o *Quitclaim Deed*) debe ser otorgada, legalizada y formalmente inscrita en el registro público local de la jurisdicción donde radica el inmueble (**County Recorder's Office** / Registro de Títulos del Condado). La SEC ha reiterado en sus análisis sobre tokenización que un token criptográfico o NFT alojado en una billetera digital **no constituye ni reemplaza el título legal de dominio inmobiliario**, sino que representa únicamente un certificado digital o contrato de inversión que confiere derechos económicos y societarios sobre la entidad propietaria.
-2. **Análisis de Contrato de Inversión (*SEC v. W.J. Howey Co.*, 328 U.S. 293):**  
-   En el marco de la prueba *Howey*, la SEC analiza la realidad económica del acuerdo, no la etiqueta técnica. En su documento institucional *Framework for "Investment Contract" Analysis of Digital Assets*, la división FinHub de la SEC advierte:
-   > *"El análisis sobre si un activo digital se ofrece o vende como un contrato de inversión no depende de la etiqueta asignada al activo... Los tokens que representan participaciones en activos subyacentes o entidades son instrumentos contractuales cuyos derechos dependen de la estructura legal y de gobernanza de la entidad emisora, no de la pura posesión del token en la red."*  
-   > 🔗 **Fuente Oficial:** [SEC FinHub — Framework for 'Investment Contract' Analysis of Digital Assets (PDF)](https://www.sec.gov/files/dpsa-guidance-040319.pdf)
-3. **Pronunciamiento de Comisionados de la SEC sobre NFTs (Impact Theory, 2023):**  
-   En la resolución de la SEC sobre activos no fungibles (*In the Matter of Impact Theory, LLC*, Release No. 33-11226) y en la posterior declaración conjunta de los comisionados **Hester M. Peirce** y **Mark T. Uyeda**, se enfatizó que los NFTs pueden funcionar como comprobantes de membresía, certificados de derechos o arte digital, pero que su valor y titularidad jurídica descansan en los compromisos legales y contractuales asumidos por el emisor en el plano corporativo:
-   > *"Los NFTs son fundamentalmente una tecnología de registro que puede asociarse a una multiplicidad de derechos... Cuando se vinculan a entidades comerciales, el token es la representación transmisible de una relación jurídica preexistente."*  
-   > 🔗 **Fuente Oficial:** [SEC Statement of Commissioners Hester M. Peirce and Mark T. Uyeda on Impact Theory (Aug 28, 2023)](https://www.sec.gov/news/statement/peirce-uyeda-statement-impact-theory-082823)
-4. **Declaraciones y Prospectos Registrados en SEC EDGAR (Reg D / Reg A+):**  
-   En las presentaciones de tokenización inmobiliaria estructurada presentadas ante la SEC (formularios Form D y Form 1-A en EDGAR), se consagra la cláusula estándar de protección registral:
-   > *"The digital tokens represent limited liability company membership interests. The tokens do not constitute direct title or deed to the real property; legal title to the property is held exclusively by the Company and recorded with the relevant municipal land registry."*  
-   > 🔗 **Consulta Pública:** [SEC EDGAR Company Search System](https://www.sec.gov/edgar/searchedgar/companysearch)
-
-### 2.2. Sustento en el Derecho Corporativo de Delaware
-- **DGCL § 224 y Delaware LLC Act (6 Del. C. § 18-305 / § 18-101 et seq.):**  
-  La ley del estado de Delaware permite expresamente que los libros de socios y registros societarios (*Stock Ledger* / *Membership Registry*) sean llevados en redes electrónicas o distribuidas (como Solana), siempre que puedan convertirse a un formato legible por humanos en caso de auditoría judicial.
-- **Prevalencia del Libro de Socios (*Master Securityholder File*):**  
-  Si existe discrepancia entre la posesión de una clave privada on-chain y el registro corporativo oficial del SPV, **el registro estatutario off-chain prevalece jurídicamente en cualquier tribunal**. La pérdida de la llave privada no extingue la condición de socio del inversor.
+1. **BRIDS no toca dinero:** La plataforma no custodia fondos fiduciarios ni ejerce intermediación bancaria.
+2. **BRIDS no hace KYC por sí mismo y no recomienda inversiones:** La verificación de identidad es operada mediante proveedores especializados y certificados (Stripe Identity) conforme a los estándares de [31 CFR 1023.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220). BRIDS no actúa como asesor financiero bajo el [Investment Advisers Act of 1940](https://www.sec.gov/about/divisions-offices/division-investment-management/private-fund-adviser-overview).
+3. **BRIDS no ejecuta la parte inmobiliaria y no reemplaza documentos legales:** La adquisición, administración y tenencia material de los inmuebles corresponde exclusivamente a los desarrolladores y al SPV de Delaware, cumpliendo con la [Guía de FinCEN sobre Monedas Virtuales Convertibles (CVC)](https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf).
+4. **El NFT representa digitalmente una posición, pero no es el registro legal:** Conforme al pronunciamiento oficial de la SEC en [SEC Corp Fin Statement on Tokenized Securities](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities), los tokens o NFTs en blockchain son representaciones digitales programables de derechos económicos. El registro legal formal (*legal title*) reside estatutariamente en el **Master Securityholder File** del SPV bajo la ley de Delaware y las normas de protección de datos de la [FTC Safeguards Rule](https://www.ftc.gov/legal-library/browse/rules/safeguards-rule).
+5. **Los partners hacen la parte especializada; BRIDS hace la infraestructura:** Cada actor asume su responsabilidad legal: desarrolladores operan inmuebles, Stripe Identity procesa identidades, Delaware Series LLCs emiten participaciones, y BRIDS provee el software y cómputo en Solana.
+6. **BRIDS no cobra como intermediario financiero por funciones que no asume:** No se cobran comisiones de éxito porcentuales (*broker-dealer fees*) prohibidas por la [Securities Exchange Act of 1934](https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers); se cobran exclusivamente tarifas fijas de transacción de software SaaS.
+7. **BRIDS comunica siempre su rol real como plataforma tecnológica:** En todos sus términos de uso, portales y presentaciones, BRIDS se declara como proveedor tecnológico independiente.
 
 ---
 
 ## 3. Arquitectura Estructural: Inversión en el SPV vs. Rol del NFT
 
-Para comprender la viabilidad del protocolo de recuperación, es indispensable distinguir con precisión la arquitectura de tres capas que opera en cada proyecto de BRIDS:
+Para comprender la viabilidad legal del protocolo de recuperación, es indispensable distinguir con precisión la arquitectura de tres capas que opera en cada proyecto de BRIDS:
 
 ```mermaid
 graph TD
@@ -84,7 +73,7 @@ graph TD
     end
 
     subgraph Capa_Tecnologica["3. Capa Tecnológica (Solana / BRIDS.io)"]
-        User["Inversor Verificado (KYC Stripe)"]
+        User["Inversor Verificado (Stripe Identity)"]
         NFT["Metaplex Core NFT (Certificado Digital Programable)"]
         Squads["Squads Multi-Sig (Bóveda de Dispersión No Custodial)"]
         User -->|Adquiere Participación en el SPV vía| NFT
@@ -119,9 +108,9 @@ Cuando un inversionista pierde el acceso a su billetera, olvida su frase semilla
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Inv as Inversor (Afectado)
+    actor Inv as Inversor (Wallet Extraviada)
     participant Web as Portal BRIDS (Auth)
-    participant Auth as Auth Multi-Canal (SMS/Voz/Email)
+    participant Auth as Auth Multi-Canal (Voice/SMS/Email)
     participant Stripe as Stripe Identity (3D Liveness)
     participant Time as Motor de Timelock (72h Cooldown)
     participant SPV as Administrador del SPV / Compliance
@@ -129,32 +118,32 @@ sequenceDiagram
     participant Sol as Metaplex Core (Solana)
 
     Note over Inv,Web: FASE 1: Notificación de Incidencia
-    Inv->>Web: Formulario de Pérdida de Wallet + Firma de Nueva Wallet
-    Web->>Sol: Invocación Preventiva de Freeze Plugin (Bloqueo del NFT Antiguo)
+    Inv->>Web: Formulario de Pérdida + Firma Criptográfica de Nueva Wallet
+    Web->>Sol: Invocación Preventiva de Freeze Plugin (NFT Antiguo Bloqueado)
 
     Note over Inv,Stripe: FASE 2: Re-autenticación Multi-Factor Mandatoria
-    Web->>Auth: Envío de SMS OTP + Disparo de Llamada Telefónica Automatizada (Voice 2FA)
-    Inv->>Auth: Ingreso de PIN telefónico + Código SMS + Confirmación por Email
+    Web->>Auth: Envío de SMS OTP + Disparo de Llamada Telefónica (Voice 2FA)
+    Inv->>Auth: Ingreso de PIN por Voz/Teclado + Código SMS + Clic en Email
     Web->>Stripe: Inicio de Sesión Biométrica Activa
     Inv->>Stripe: Selfie 3D Liveness Check + Re-escaneo Documental
     Stripe-->>Web: Match Biométrico Exitoso (>99% vs KYC Base)
 
     Note over Web,Time: FASE 3: Período de Enfriamiento (Timelock 72h)
-    Web->>Time: Inicio de Cuenta Regresiva de 72 Horas Hábiles
-    Time-->>Auth: Notificaciones Masivas de Seguridad (Canales Anteriores)
-    Note over Time: Ventana de Pánico: Si no fue el usuario, puede abortar el proceso
+    Web->>Time: Inicio de Timelock de 72 Horas Hábiles
+    Time-->>Auth: Notificaciones Masivas de Alerta a Todos los Canales
+    Note over Time: Ventana de Pánico: Si no fue el usuario, puede abortar la operación
 
     Note over Time,SPV: FASE 4: Vencimiento de Timelock y Aprobación
-    Time->>SPV: Conclusión de 72h sin disputa. Expediente listo para firma
+    Time->>SPV: Conclusión de 72h sin alerta. Expediente habilitado
     SPV->>SPV: Actualización del Libro de Socios (Master Securityholder File)
 
     Note over SPV,Sol: FASE 5: Ejecución On-Chain (Squads + Metaplex Core)
-    SPV->>Squads: Propuesta Multi-Sig: Reemplazar Pubkey de Pago en Bóveda de Dispersión
+    SPV->>Squads: Propuesta Multi-Sig: Reemplazar Pubkey de Pago en Bóveda
     Squads->>Squads: Aprobación y Sobre-escritura de Wallet Receptora
-    SPV->>Sol: Revocación / Burn de NFT antiguo + Emisión / Transfer a Nueva Wallet
+    SPV->>Sol: Revocación/Burn de NFT antiguo + Emisión/Transfer a Nueva Wallet
 
-    Note over Sol,Inv: FASE 6: Cierre y Restauración
-    Sol-->>Inv: Nuevo NFT disponible en nueva wallet. Dividendos reconectados en Squads.
+    Note over Sol,Inv: FASE 6: Cierre y Restauración Completa
+    Sol-->>Inv: Nuevo NFT en nueva wallet. Dividendos reconectados en Squads.
 ```
 
 ### Fase 1: Solicitud Criptográfica y Reporte de Incidencia
@@ -222,33 +211,59 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 ---
 
-## 6. Matriz de Diferenciación Técnica y Legal
+## 6. Snippets Reutilizables (Ready-to-Cite)
 
-| Dimensión | Cripto Tradicional (Ethereum / ERC-20) | Protocolos RWA Anónimos (RWA 1.0) | Protocolo BRIDS.io (Metaplex Core + Squads + Stripe) |
-| :--- | :--- | :--- | :--- |
-| **Consecuencia de Pérdida de Llaves** | Pérdida patrimonial definitiva e irreversible (Dogma *Code-is-Law*). | Fondos confiscados o congelados en contratos sin soporte legal. | **Recuperación patrimonial garantizada al 100% mediante re-emisión.** |
-| **Estatus del Token vs. Propiedad** | El token *es* el activo financiero. | Ambigüedad jurídica; tokens desvinculados del registro físico. | **El token es un certificado programable; la titularidad reside en el SPV.** |
-| **Prevención de Suplantación (*Anti-Fraud*)** | Ninguna. Quien tiene la llave, tiene los fondos. | Procedimientos manuales arbitrarios y vulnerables a sobornos. | **Re-KYC biométrico 3D en Stripe Identity + Voice 2FA + Timelock 72h.** |
-| **Gestión de Dividendos ante Pérdida** | Los fondos se acumulan en la wallet muerta para siempre. | Pérdida de rentas o apropiación indebida por el promotor. | **Sobre-escritura formal de wallet receptora en Squads Multi-Sig.** |
-| **Alineación con la SEC** | Calificado como valor no registrado o token desregulado. | Riesgo inminente de orden de cese y desistimiento (*Cease & Desist*). | **Cumplimiento pleno: SPVs Delaware, non-broker-dealer y contratos formales.** |
-
----
-
-## 7. Snippets Reutilizables (Ready-to-Cite)
-
-### Snippet 7.1: Para Preguntas Frecuentes (FAQ / Help Center)
+### Snippet 6.1: Para Preguntas Frecuentes (FAQ / Help Center)
 > *"**¿Si pierdo el acceso a mi billetera Web3, pierdo mi inversión en el inmueble?**  
 > No. En BRIDS.io tu derecho de propiedad no depende de una clave privada, sino de tu condición de socio en la Delaware Series LLC propietaria del inmueble. Si pierdes tu billetera, activas nuestro Protocolo Institucional de Recuperación: verificas tu identidad mediante biometría facial en Stripe Identity, confirmas la llamada de seguridad, se activa una ventana de protección de 72 horas para blindar tu cuenta, y reasignamos tu título digital y tu dirección de cobro en Squads Protocol a tu nueva billetera. Tu participación en el SPV nunca se ve alterada."*
 
-### Snippet 7.2: Para Pitch Decks de Y Combinator y Fondos de Venture Capital
+### Snippet 6.2: Para Pitch Decks de Y Combinator y Fondos de Venture Capital
 > *"Eliminamos la mayor fricción de entrada para el inversor tradicional: el terror a perder la clave privada. En BRIDS, el NFT es únicamente el software de comportamiento y liquidación sobre Solana; el activo real está blindado en una Delaware Series LLC. Gracias a Metaplex Core y Squads Protocol, podemos revocar y reemitir activos con verificación biométrica en Stripe Identity y timelocks auditables, combinando la liquidez instantánea de Web3 con la seguridad jurídica del derecho corporativo estadounidense."*
 
-### Snippet 7.3: Para el Memorando de Cumplimiento y Legal Data Room
+### Snippet 6.3: Para el Memorando de Cumplimiento y Legal Data Room
 > *"Conforme a la doctrina de la SEC ('Substance over Form') y las disposiciones de la Delaware General Corporation Law § 224, la titularidad de los títulos de inversión reside en el Master Securityholder File del SPV. Los NFTs de Metaplex Core operan como certificados digitales de participación. En caso de extravío o vulneración de llaves criptográficas, el emisor ejerce su derecho estatutario de conciliación registral, sustituyendo la clave pública en el registro societario y en el protocolo multifirma de Squads, sin alterar la titularidad legal del inmueble inscrito en el County Recorder."*
 
 ---
 
-## 8. Directrices Léxicas (Do's & Don'ts)
+## 7. Apéndice Breve: Versión Simplificada de Principios de Plataforma
+
+- **sec.gov:** [Private Fund Adviser Overview (SEC)](https://www.sec.gov/about/divisions-offices/division-investment-management/private-fund-adviser-overview)
+- **BRIDS no toca dinero.**
+- **BRIDS no hace KYC por sí mismo y no recomienda inversiones:** [ecfr.gov — 31 CFR 1023.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220).
+- **BRIDS no ejecuta la parte inmobiliaria y no reemplaza documentos legales:** [fincen.gov — FinCEN Guidance on Convertible Virtual Currency](https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf).
+- **El NFT representa digitalmente una posición, pero no es el registro legal:** [sec.gov — SEC Corp Fin Statement on Tokenized Securities](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities). El registro legal lo lleva el actor legal correspondiente en el SPV.
+- **Protección de Datos y Seguridad de Información:** [ftc.gov — FTC Safeguards Rule](https://www.ftc.gov/legal-library/browse/rules/safeguards-rule).
+- **Los partners hacen la parte especializada; BRIDS hace la infraestructura.**
+- **BRIDS no debe cobrar como intermediario financiero por funciones que no asume.**
+- **BRIDS debe comunicar siempre su rol real como plataforma tecnológica.**
+
+---
+
+## 8. Apéndice Orientativo de Normas y Referencias a Revisar con Counsel
+
+1. **Securities Exchange Act of 1934 (Broker-Dealer Regulations):**  
+   🔗 [https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers](https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers)
+2. **Securities Act of 1933, incluyendo Section 4(a)(6) para Crowdfunding:**  
+   🔗 [https://www.sec.gov/rules-regulations/2015/10/crowdfunding](https://www.sec.gov/rules-regulations/2015/10/crowdfunding)
+3. **Regulation Crowdfunding (Reg CF):**  
+   🔗 [https://www.sec.gov/resources-small-businesses/exempt-offerings/regulation-crowdfunding](https://www.sec.gov/resources-small-businesses/exempt-offerings/regulation-crowdfunding)
+4. **Investment Advisers Act of 1940 y exenciones aplicables para advisers de private funds:**  
+   🔗 [https://www.sec.gov/about/divisions-offices/division-investment-management/private-fund-adviser-overview](https://www.sec.gov/about/divisions-offices/division-investment-management/private-fund-adviser-overview)
+5. **Reglas AML/CIP aplicables a broker-dealers bajo 31 CFR 1023.220:**  
+   🔗 [https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220)
+6. **Guía de FinCEN sobre modelos con convertible virtual currency (CVC):**  
+   🔗 [https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf](https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf)
+7. **Criterios sobre tokenized securities y Master Securityholder File:**  
+   🔗 [https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities)
+8. **Referencias de seguridad de información y FTC Safeguards Rule:**  
+   🔗 [https://www.ftc.gov/legal-library/browse/rules/safeguards-rule](https://www.ftc.gov/legal-library/browse/rules/safeguards-rule)
+
+> [!IMPORTANT]
+> Este apéndice es solo de referencia institucional y debe ser validado y ampliado por asesores legales especializados en la jurisdicción correspondiente antes de cualquier emisión pública o despliegue en mercados regulados.
+
+---
+
+## 9. Directrices Léxicas (Do's & Don'ts)
 
 - **Obligatorio Usar:** Certificado digital programable, membresía en Delaware Series LLC, titularidad societaria inalienable, re-verificación biométrica activa en Stripe Identity, llamada automatizada Voice 2FA, timelock de enfriamiento de 72 horas, sobre-escritura en Squads Protocol, Master Securityholder File, doctrina SEC de sustancia sobre forma.
 - **Prohibido Terminantemente:** "El NFT es la escritura de la casa", "pérdida irreversible", "wallet irrecuperable", "code-is-law absoluto", "bypassear la ley estatal", "rescate manual discrecional sin timelock", "título de propiedad en la blockchain".
@@ -259,6 +274,7 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
-| **1.2.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Integración de doctrina regulatoria de la SEC (citas con links), diferenciación SPV vs NFT como software programable, y formalización del protocolo institucional de 6 fases con Re-KYC Stripe Identity (3D Liveness), Voice 2FA, Timelock de 72 horas y sobre-escritura en Squads Multi-Sig. |
+| **1.3.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Integración de los 7 principios institucionales de BRIDS, enlaces reales y oficiales de SEC (Corp Fin Statement on Tokenized Securities), FinCEN CVC Guidance, eCFR 31 CFR 1023.220, FTC Safeguards Rule, y adición de los Apéndices 16 y 17 para revisión con counsel. |
+| **1.2.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Integración de doctrina regulatoria de la SEC, diferenciación SPV vs NFT como software programable, y formalización del protocolo institucional de 6 fases con Re-KYC Stripe Identity (3D Liveness), Voice 2FA, Timelock de 72 horas y sobre-escritura en Squads Multi-Sig. |
 | **1.1.0** | 2026-09-13 | BRIDS Core Architecture | Actualización del título a nomenclatura canónica C2. |
 | **1.0.0** | 2026-09-11 | `compliance-officer` & SDD Loop | Formalización canónica inicial del protocolo de recuperación de billeteras. |
