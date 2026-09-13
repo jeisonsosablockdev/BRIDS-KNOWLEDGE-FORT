@@ -32,7 +32,7 @@ tags:
 
 ## 1. One-Liner Canónico (Pitch, FAQs & Legal Brief)
 
-> *"En BRIDS, perder tu billetera no significa perder tu propiedad: tu derecho legal está respaldado en Delaware y recuperas tu título digital mediante verificación biométrica en Stripe Identity, timelock de seguridad y reasignación en Squads y Metaplex Core."*
+> *"En BRIDS, perder tu billetera no significa perder tu propiedad: tu derecho legal está respaldado por su SPV y recuperas tu título digital mediante verificación biométrica en Stripe Identity, timelock de seguridad y reasignación en Squads y Metaplex Core."*
 
 ---
 
@@ -215,10 +215,10 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 ### Snippet 6.1: Para Preguntas Frecuentes (FAQ / Help Center)
 > *"**¿Si pierdo el acceso a mi billetera Web3, pierdo mi inversión en el inmueble?**  
-> No. En BRIDS.io tu derecho de propiedad no depende de una clave privada, sino de tu condición de socio en la Delaware Series LLC propietaria del inmueble. Si pierdes tu billetera, activas nuestro Protocolo Institucional de Recuperación: verificas tu identidad mediante biometría facial en Stripe Identity, confirmas la llamada de seguridad, se activa una ventana de protección de 72 horas para blindar tu cuenta, y reasignamos tu título digital y tu dirección de cobro en Squads Protocol a tu nueva billetera. Tu participación en el SPV nunca se ve alterada."*
+> No. En BRIDS.io tu derecho de propiedad no depende de una clave privada, sino de tu condición de socio en el SPV propietario del inmueble. Si pierdes tu billetera, activas nuestro Protocolo Institucional de Recuperación: verificas tu identidad mediante biometría facial en Stripe Identity, confirmas la llamada de seguridad, se activa una ventana de protección de 72 horas para blindar tu cuenta, y reasignamos tu título digital y tu dirección de cobro en Squads Protocol a tu nueva billetera. Tu participación en el SPV nunca se ve alterada."*
 
 ### Snippet 6.2: Para Pitch Decks de Y Combinator y Fondos de Venture Capital
-> *"Eliminamos la mayor fricción de entrada para el inversor tradicional: el terror a perder la clave privada. En BRIDS, el NFT es únicamente el software de comportamiento y liquidación sobre Solana; el activo real está blindado en una Delaware Series LLC. Gracias a Metaplex Core y Squads Protocol, podemos revocar y reemitir activos con verificación biométrica en Stripe Identity y timelocks auditables, combinando la liquidez instantánea de Web3 con la seguridad jurídica del derecho corporativo estadounidense."*
+> *"Eliminamos la mayor fricción de entrada para el inversor tradicional: el terror a perder la clave privada. En BRIDS, el NFT es únicamente el software de comportamiento y liquidación sobre Solana; el activo real está blindado por su SPV dedicado. Gracias a Metaplex Core y Squads Protocol, podemos revocar y reemitir activos con verificación biométrica en Stripe Identity y timelocks auditables, combinando la liquidez instantánea de Web3 con la seguridad jurídica del derecho corporativo estadounidense."*
 
 ### Snippet 6.3: Para el Memorando de Cumplimiento y Legal Data Room
 > *"Conforme a la doctrina de la SEC ('Substance over Form') y las disposiciones de la Delaware General Corporation Law § 224, la titularidad de los títulos de inversión reside en el Master Securityholder File del SPV. Los NFTs de Metaplex Core operan como certificados digitales de participación. En caso de extravío o vulneración de llaves criptográficas, el emisor ejerce su derecho estatutario de conciliación registral, sustituyendo la clave pública en el registro societario y en el protocolo multifirma de Squads, sin alterar la titularidad legal del inmueble inscrito en el County Recorder."*

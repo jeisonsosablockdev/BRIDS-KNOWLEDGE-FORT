@@ -75,7 +75,7 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-wallet-recovery-protocol.md|concept-wallet-recovery-protocol]]
 - **Custodio:** `compliance-officer`, `founder-ghostwriter`
 - **One-Liner Canónico:**
-  > *"En BRIDS, perder tu billetera no significa perder tu propiedad: tu derecho legal está respaldado en Delaware y recuperas tu título digital mediante verificación biométrica en Stripe Identity y Metaplex Core."*
+  > *"En BRIDS, perder tu billetera no significa perder tu propiedad: tu derecho legal está respaldado por su SPV y recuperas tu título digital mediante verificación biométrica en Stripe Identity y Metaplex Core."*
 - **Tesis de Reutilización:** Resuelve la mayor objeción del inversor tradicional y retail. Demuestra cómo la conciliación entre el *Master Securityholder File* y los plugins programáticos de Metaplex Core restaura el patrimonio del usuario sin romper la descentralización.
 
 ---
