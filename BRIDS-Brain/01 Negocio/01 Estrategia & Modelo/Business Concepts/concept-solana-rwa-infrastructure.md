@@ -1,7 +1,7 @@
 ---
 title: "C3: Solana RWA Advantage y Estándar Metaplex Core"
 concept_id: "concept-solana-rwa-infrastructure"
-version: "1.4.0"
+version: "1.5.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "technology-blockchain"
@@ -198,7 +198,57 @@ Con el universo de tokens elegibles delimitado por la `collection_address`, el m
 
 ---
 
-### 3.3. Ventajas Integrales de Metaplex Core en la Arquitectura de BRIDS
+### 3.3. Gobernanza de Tesorería y Ejecución de Dispersiones con Squads Multi-Sig v4 (BRI-8 / EPIC-014)
+
+La integridad de la inversión inmobiliaria exige que ningún individuo, servidor automatizado ni llave privada única mantenga custodia discrecional sobre los rendimientos recaudados. En la arquitectura de BRIDS, los fondos por concepto de alquileres se perciben y se dispersan directamente a través de una **bóveda multifirma no custodial en Squads Protocol v4** sobre Solana, sincronizando la gobernanza societaria del SPV con la ejecución criptográfica de pagos (**BRI-8** / [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-014-stake-distribution-traceability.md|EPIC-014]]).
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Prop as Operador / Rentas Inmueble
+    participant Vault as Bóveda Squads v4 (SPV en Solana)
+    participant Engine as Motor Distribución (BRI-8 / DAS)
+    participant Committee as Comité de Gobernanza (M-of-N)
+    participant Holders as Billeteras Inversionistas
+
+    Prop->>Vault: Depósito trimestral de rentas netas (USDC nativo)
+    Engine->>Engine: Filtra tokens por collection_address y audita FreezeDelegate
+    Engine->>Engine: Computa reparto exacto con algoritmo Hamilton BigInt
+    Engine->>Committee: Emite paquete de evidencia y propuestas de dispersión
+    Committee->>Committee: Revisión de auditoría y firma colegiada (M-of-N)
+    Committee->>Vault: Autoriza ejecución de la transacción multifirma
+    Vault->>Holders: Transferencias agrupadas por lotes (MAX_LEGS_PER_BATCH = 20)
+```
+
+#### 1. Bóveda No Custodial Descentralizada a Nivel SPV
+Cada desarrollo inmobiliario cuenta con una cuenta bóveda (*vault account*) dedicada dentro de Squads Protocol v4 a nombre exclusivo de la sociedad vehículo (SPV). Los pagos de los inquilinos se convierten a USDC nativo e ingresan directamente a esta cuenta on-chain. Los fondos nunca pasan por balances bancarios operativos de BRIDS Inc. ni por billeteras calientes (*hot wallets*), eliminando el riesgo de custodia fiduciaria y blindando la operación legal bajo el *safe harbor* de no intermediación de fondos.
+
+#### 2. Esquema de Firmas Colegiadas (M-of-N Multisig)
+Para autorizar cualquier retiro de fondos o dispersión de dividendos, Squads exige el cumplimiento estricto de un umbral de firmas independientes (esquema 2-de-3 o 3-de-5):
+- **Clave 1 (Operador Inmobiliario / Sponsor):** Certifica la recaudación efectiva de los alquileres y los gastos operativos devengados del inmueble.
+- **Clave 2 (Auditor de Cumplimiento / BRIDS Tech):** Valida que la propuesta de desembolso coincida al centavo con el snapshot de activos calificados bajo la `collection_address` y que las billeteras destinatarias mantengan su estado KYC/AML aprobado.
+- **Clave 3 (Custodio Notarial / Gobernanza SPV):** Actúa como firma dirimente y respaldo estatutario para contingencias o sustitución formal de miembros del comité.
+
+#### 3. Dispersión por Lotes y Optimización Computacional (`MAX_LEGS_PER_BATCH = 20`)
+Para dispersar dividendos a cientos o miles de copropietarios sin sobrepasar el presupuesto de unidades de cómputo (*Compute Budget*) ni el límite de tamaño de transacción de Solana, el motor de distribución estructura los pagos en lotes fragmentados (*chunked batch transfers*):
+- **Límite de Destinos por Lote:** Cada propuesta de Squads empaqueta hasta 20 tramos de transferencia individuales (`MAX_LEGS_PER_BATCH = 20`) ejecutados en una sola instrucción de bóveda atómica.
+- **Procesamiento Secuencial Escalable:** Para emisiones con miles de participaciones, el sistema genera secuencias encadenadas de propuestas auditables. Esto permite liquidar micro-dividendos de $2, $5 o $20 USD a toda la base de inversionistas en pocos minutos, con tarifas acumuladas de red inferiores a centavos de dólar.
+
+#### 4. Doble Esquema de Liquidación: Dispersión Programada y Reclamos Activos
+El motor soporta dos modalidades de acceso a los dividendos:
+- **Dispersión Programada (*Push*):** Envío directo y concurrente a las billeteras de los copropietarios calificados al cierre del trimestre, permitiendo a los inversionistas recibir sus dividendos de forma pasiva.
+- **Ciclo de Reclamo (*User-Initiated Claims*):** El inversionista consulta su saldo acumulado en el panel institucional y solicita la liquidación manual; el sistema realiza una verificación en tiempo real de su estado de cumplimiento (`compliance_status = approved`) y despacha la transferencia desde la bóveda de Squads. Si una billetera cae en observación por AML, los fondos quedan retenidos en la tesorería bajo un protocolo temporal (*compliance hold TTL* de 12 meses) antes de cualquier arbitraje societario.
+
+#### 5. Convergencia de Squads con los Delegados Permanentes de Metaplex Core
+La integración con Squads unifica en una sola estructura de gobernanza tanto los activos líquidos (USDC) como los derechos sobre los títulos digitales (NFTs). La dirección multifirma institucional de Squads es la autoridad designada para:
+- `SQUADS_FREEZE_AUTHORITY` en el `PermanentFreezeDelegate` (bloqueo preventivo ante extravíos o contingencias regulatorias).
+- `SQUADS_TRANSFER_AUTHORITY` en el `PermanentTransferDelegate` (transferencia directa hacia billeteras verificadas tras validación biométrica en Stripe Identity).
+
+Esta convergencia garantiza que ninguna acción administrativa crítica —ni mover fondos de la tesorería ni reasignar una fracción inmobiliaria— pueda ser ejecutada de manera unilateral por un único actor, erradicando los puntos únicos de fallo y elevando la seguridad a estándares de grado bancario.
+
+---
+
+### 3.4. Ventajas Integrales de Metaplex Core en la Arquitectura de BRIDS
 
 1. **Reducción del 85% en Costos de Almacenamiento (Single PDA):**
    - Todos los identificadores, balance, atributos y referencias contractuales residen en una única cuenta (*Program Derived Address*).
@@ -252,6 +302,7 @@ Con el universo de tokens elegibles delimitado por la `collection_address`, el m
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.5.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Inclusión exhaustiva del módulo Squads Multi-Sig v4 en la gobernanza y distribución de rentas (BRI-8 / EPIC-014): especificación de bóvedas no custodiales por SPV, firmas colegiadas M-of-N, dispersión por lotes fragmentados (MAX_LEGS_PER_BATCH = 20), modelos push vs claim con compliance hold TTL, y convergencia con las autoridades de delegados permanentes en Metaplex Core. |
 | **1.4.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Incorporación formal de la dirección de la colección (`collection_address`) como perímetro criptográfico y filtro de admisión en el motor de distribución de rentas (BRI-8 / EPIC-014), detallando la indexación DAS RPC, la prevención de suplantación y la triple validación de elegibilidad para la dispersión de dividendos en USDC desde Squads Multi-Sig. |
 | **1.3.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Profundización técnica en la arquitectura de plugins y delegados de Metaplex Core: especificación detallada de FreezeDelegate (nivel activo/Owner para staking), PermanentFreezeDelegate (nivel colección/Squads para bloqueo preventivo y regulatorio) y PermanentTransferDelegate (nivel colección/Squads para ejecución de transferencia directa en el protocolo de recuperación C2 sin quema de tokens). |
 | **1.2.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Reestructuración integral: profundización en los pilares positivos de Solana (velocidad subsegundo, comisiones subcéntimo, estado unificado, USDC nativo de Circle y paralelismo Sealevel), síntesis concisa de la comparativa frente a Ethereum y L2s, y sincronización del Authority Plugin de Metaplex Core con el flujo de recuperación de C2 (descongelamiento y transferencia sin quema obligatoria). |
