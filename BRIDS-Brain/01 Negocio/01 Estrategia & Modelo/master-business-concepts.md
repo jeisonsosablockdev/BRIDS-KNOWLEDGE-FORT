@@ -129,7 +129,7 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-retail-fractionalization-thesis.md|concept-retail-fractionalization-thesis]]
 - **Custodio:** `founder-ghostwriter`, `pitch-deck-architect`
 - **One-Liner Canónico:**
-  > *"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados en EE.UU. desde $200 USD."*
+  > *"Invierte en bienes raíces en Estados Unidos desde $200 USD y recibe rentas en dólares con respaldo legal en el mundo real."*
 - **Tesis de Reutilización:** El núcleo de la narrativa del fundador y de captación de usuarios retail: dolarización de ahorros protegida contra la inflación, colateral físico verificable y desvinculación total de memecoins especulativas con fracciones accesibles de $200 USD ($4 de fee).
 
 ---

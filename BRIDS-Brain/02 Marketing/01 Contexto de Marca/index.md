@@ -2,7 +2,7 @@
 
 Este directorio constituye la **fuente de verdad persistente** sobre la identidad de marca, posicionamiento, tono de voz, cliente ideal y guías visuales de **BRIDS.io**.
 
-> 🛡️ **Eslogan Oficial de Marca:** *"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados desde $200 USD"*
+> 🛡️ **Eslogan Oficial de Marca:** *"Invierte en bienes raíces en Estados Unidos desde $200 USD y recibe rentas en dólares con respaldo legal en el mundo real."*
 
 ---
 

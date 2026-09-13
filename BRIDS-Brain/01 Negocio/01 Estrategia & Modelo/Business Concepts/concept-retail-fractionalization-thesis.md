@@ -2,7 +2,7 @@
 updated_at: 2026-09-13
 title: "C6: Tesis de Democratización y Fraccionamiento Retail ($200 USD)"
 concept_id: "concept-retail-fractionalization-thesis"
-version: "1.1"
+version: "1.2.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "market-strategy-retail"
@@ -22,13 +22,13 @@ tags:
 # C6: Tesis de Democratización y Fraccionamiento Retail ($200 USD)
 
 > [!NOTE] Resumen Ejecutivo
-> Históricamente, el acceso a la inversión inmobiliaria en los Estados Unidos ha estado restringido a individuos de ultra alto patrimonio neto (UHNWI) e instituciones debido a tickets mínimos de entrada prohibitivos ($50,000 a $100,000 USD) y complejas barreras burocráticas bancarias internacionales. BRIDS.io derriba esta asimetría histórica al permitir la **participación fraccionada desde $200 USD por NFT** (con un split transparente de **$196 USD para el SPV inmobiliario y $4 USD de fee de transacción tecnológica**). Mediante la infraestructura de Solana y stablecoins (USDC), ofrecemos a la clase media global y a la comunidad nativa Web3 la oportunidad de dolarizar su patrimonio en activos tangibles que generan flujo de caja real, protegidos contra la inflación y desvinculados de la volatilidad especulativa de las criptomonedas.
+> Históricamente, el acceso a la inversión inmobiliaria en los Estados Unidos ha estado restringido a individuos de ultra alto patrimonio neto (UHNWI) e instituciones debido a tickets mínimos de entrada prohibitivos ($50,000 a $100,000 USD) y complejas barreras burocráticas bancarias internacionales. BRIDS.io derriba esta asimetría histórica al permitir la **participación fraccionada desde $200 USD por NFT** (con un split transparente de **$196 USD para el SPV inmobiliario y $4 USD de fee de transacción tecnológica**). Mediante la infraestructura de Solana y stablecoins (USDC), ofrecemos a inversionistas globales y ahorradores la oportunidad de dolarizar su patrimonio en activos tangibles que generan flujo de caja real, protegidos contra la inflación y desvinculados de la volatilidad especulativa de las criptomonedas.
 
 ---
 
 ## 1. One-Liner Canónico (Landing Page Hero & Social Tagline)
 
-> *"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados en EE.UU. desde $200 USD."*
+> *"Invierte en bienes raíces en Estados Unidos desde $200 USD y recibe rentas en dólares con respaldo legal en el mundo real."*
 
 ---
 
@@ -81,7 +81,7 @@ graph TD
 
 | Perfil | Buyer Persona Representativa | Mayor Dolor Actual | Propuesta de Valor de BRIDS |
 | :--- | :--- | :--- | :--- |
-| **Ahorrador Global / Anti-Inflación** | **Sofia (35 años, Gerente)** | Devaluación de su moneda local y falta de $100k para invertir en EE.UU. | Dolarización de ahorros desde $200 USD con respaldo en un SPV de Delaware. |
+| **Ahorrador Global / Anti-Inflación** | **Sofia (35 años, Gerente)** | Devaluación de su moneda local y falta de $100k para invertir en EE.UU. | Dolarización de ahorros desde $200 USD con respaldo en un SPV inmobiliario independiente. |
 | **Nativo Cripto / DeFi Investor** | **Alex (28 años, Dev Web3)** | Cansancio de la volatilidad extrema y rug pulls en protocolos DeFi. | Rendimiento real y sostenible respaldado por ladrillos en EE.UU. a velocidad Solana. |
 | **Micro-Inversor Frecuente** | **David (42 años, Consultor)** | Falta de tiempo para gestionar inquilinos o mantener propiedades. | Inversión pasiva 100% manos libres operada por Blue Brick Capital. |
 
@@ -108,5 +108,6 @@ graph TD
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.2.0** | 2026-09-13 | `founder-ghostwriter`, `copy-editing` | Refinamiento de copy-editing en el One-Liner canónico eliminando jerga técnica ('Web3'), generalización de la jurisdicción del SPV en buyer personas y consolidación de la propuesta de valor centrada en rentas en dólares y respaldo en el mundo real. |
 | **1.1.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Actualización del ticket mínimo y costo del NFT a $200 USD con fee de transacción tecnológica de $4 USD ($196 SPV / $4 BRIDS). |
 | **1.0.0** | 2026-09-11 | `founder-ghostwriter` & SDD Loop | Creación y fundamentación de la tesis de democratización retail. |
