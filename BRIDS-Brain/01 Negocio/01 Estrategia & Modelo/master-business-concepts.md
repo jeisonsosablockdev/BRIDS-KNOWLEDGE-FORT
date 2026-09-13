@@ -2,7 +2,7 @@
 updated_at: 2026-09-13
 title: "Documento Maestro de Conceptos e Ideas Fundacionales de Negocio"
 document_id: "master-business-concepts"
-version: "1.2"
+version: "1.3"
 status: "approved"
 workflow: "core-business-concepts"
 category: "brand-context-master"
@@ -68,8 +68,8 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md|concept-dual-entity-compliance]]
 - **Custodio:** `compliance-officer`
 - **One-Liner Canónico:**
-  > *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente en Delaware."*
-- **Tesis de Reutilización:** Permite justificar ante reguladores, inversores institucionales y socios por qué BRIDS Inc. opera como un proveedor de tecnología pura (Delaware C-Corp) protegido bajo la Sección 15(a)(1) del Exchange Act, delegando la titularidad de los inmuebles a Delaware Series LLCs independientes.
+  > *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente constituido en la jurisdicción del inmueble."*
+- **Tesis de Reutilización:** Permite justificar ante reguladores, inversores institucionales y socios por qué BRIDS Inc. opera como un proveedor de tecnología pura (Delaware C-Corp) protegido bajo la Sección 15(a)(1) del Exchange Act, delegando la titularidad de los inmuebles a SPVs (LLCs) independientes en sus respectivas jurisdicciones.
 
 ### C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-wallet-recovery-protocol.md|concept-wallet-recovery-protocol]]
@@ -161,9 +161,12 @@ Cuando inicialices cualquier tarea o generes un nuevo spec con `bash BRIDS-Engin
 ---
 
 ## Historial de Revisiones
-- **v1.2 (2026-09-13):** Sincronización de C4 a fees de transacción de software (/fracción, tiers de setup y dispersión trimestral) y C7
+- **v1.3 (2026-09-13):** Desacoplamiento de jurisdicción de SPVs en C1 (BRIDS Delaware C-Corp vs SPVs LLCs locales por inmueble) y sincronización de One-Liners.
+- **v1.2 (2026-09-13):** Sincronización de C4 a fees de transacción de software ($4/fracción, tiers de setup y dispersión trimestral) y C7.
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.3.0** | 2026-09-13 | `compliance-officer`, `business-consultant` | Desacoplamiento de jurisdicción de SPVs inmobiliarios en C1 (BRIDS Inc. como Delaware C-Corp y SPVs independientes según la ubicación física del inmueble). |
+| **1.2.0** | 2026-09-13 | `business-consultant`, `pitch-deck-architect` | Actualización de unit economics de C4 y modelos de retorno de C7. |
 | **1.1.0** | 2026-09-13 | `pitch-deck-architect`, `founder-ghostwriter` | Integración del Concepto C9: Identidad RWA vs Trampa Cripto (Tesis VCs & Múltiplos SaaS). |
 | **1.0.0** | 2026-09-11 | Squad de Arquitectura de Negocio & SDD Loop | Creación del Documento Maestro de Conceptos e Ideas Fundacionales de BRIDS.io. |

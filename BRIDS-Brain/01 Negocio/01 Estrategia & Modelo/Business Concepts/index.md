@@ -1,6 +1,6 @@
 ---
 title: "Índice Maestro: Conceptos Clave del Negocio (Business Concepts Index)"
-version: "1.0.0"
+version: "1.1.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "01 Negocio/01 Estrategia & Modelo/Business Concepts"
@@ -65,7 +65,7 @@ graph TD
 
 | ID | Concepto Maestro | Archivo Canónico | Sub-Agentes Custodios | One-Liner / Insight Clave |
 |:---|:---|:---|:---|:---|
-| **C1** | **Estructuración Dual-Entity y Blindaje Non-Broker-Dealer** | [[concept-dual-entity-compliance\|concept-dual-entity-compliance.md]] | `compliance-officer`, `business-consultant` | Desacoplamiento estricto entre BRIDS Inc. (Delaware C-Corp, puro SaaS) y Delaware Series LLCs (SPVs propietarias de inmuebles), blindando contra la Sec. 15(a) del Exchange Act. |
+| **C1** | **Estructuración Dual-Entity y Blindaje Non-Broker-Dealer** | [[concept-dual-entity-compliance\|concept-dual-entity-compliance.md]] | `compliance-officer`, `business-consultant` | Desacoplamiento estricto entre BRIDS Inc. (Delaware C-Corp, software SaaS) y SPVs independientes por desarrollo (LLCs en Florida, Texas, Delaware, etc.), blindando contra la Sec. 15(a) del Exchange Act. |
 | **C2** | **Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)** | [[concept-wallet-recovery-protocol\|concept-wallet-recovery-protocol.md]] | `compliance-officer`, `pitch-deck-architect` | Inversión inmobiliaria con blindaje institucional: tu derecho está respaldado en el mundo real, donde perder una billetera jamás pondrá en riesgo tu patrimonio. |
 | **C3** | **Solana RWA Advantage y Estándar Metaplex Core** | [[concept-solana-rwa-infrastructure\|concept-solana-rwa-infrastructure.md]] | `compliance-officer`, `pitch-deck-architect` | Aprovechamiento del estándar Metaplex Core de cuenta única (~0.0029 SOL rent exemption) y transacciones sub-céntricas (<$0.001) para viabilizar dispersiones y micro-fraccionamiento. |
 | **C4** | **Arquitectura de Monetización, Estructura de Tarifas y Unit Economics** | [[concept-fee-architecture-unit-economics\|concept-fee-architecture-unit-economics.md]] | `business-consultant`, `pitch-deck-architect` | Monetización 100% transaccional SaaS: $4 USD por NFT de $200 emitido, setup fees escalonados ($1,000–$2,500) y fees de dispersión tecnológica sin cobro de comisiones porcentuales de corretaje. |
@@ -96,4 +96,5 @@ graph TD
 
 | Fecha | Versión | Autor / Responsable | Resumen del Cambio |
 |:---|:---|:---|:---|
+| 2026-09-13 | 1.1.0 | `compliance-officer`, `business-consultant` | Ajuste en C1: Desacoplamiento de jurisdicción de SPVs (BRIDS Inc. como Delaware C-Corp y SPVs independientes según ubicación del inmueble). |
 | 2026-09-13 | 1.0.0 | BRIDS Core Architecture | Creación del archivo barrel e indexación exhaustiva de los conceptos C1 a C9 con nomenclatura canónica. |

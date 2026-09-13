@@ -1,7 +1,7 @@
 ---
 title: "C1: Estructuración Dual-Entity y Blindaje Non-Broker-Dealer"
 concept_id: "concept-dual-entity-compliance"
-version: "1.1.0"
+version: "1.2.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "compliance-legal"
@@ -14,20 +14,21 @@ tags:
   - "sdd-concept"
   - "compliance"
   - "dual-entity"
-  - "delaware-spv"
+  - "delaware-c-corp"
+  - "spv-llc"
   - "non-broker-dealer"
 ---
 
 # C1: Estructuración Dual-Entity y Blindaje Non-Broker-Dealer
 
 > [!NOTE] Resumen Ejecutivo
-> BRIDS.io opera bajo una estricta separación institucional de entidades: **BRIDS Inc. (Delaware C-Corp)** actúa exclusivamente como proveedor de software e infraestructura tecnológica, mientras que cada propiedad inmobiliaria es adquirida y administrada por una **Sociedad de Propósito Especial independiente (Delaware Series LLC / SPV)**. Este diseño garantiza que BRIDS no califique como broker-dealer, portal de financiamiento fiduciario ni asesor de inversión bajo la Sección 15(a)(1) del Securities Exchange Act de 1934, blindando la escalabilidad del negocio frente a contingencias regulatorias.
+> BRIDS.io opera bajo una estricta separación institucional de entidades: **BRIDS Inc. (Delaware C-Corp)** actúa exclusivamente como proveedor de software e infraestructura tecnológica, mientras que cada proyecto inmobiliario es adquirido y administrado por una **Sociedad de Propósito Especial independiente (LLC constituida en la jurisdicción correspondiente a cada inmueble, ej. Florida, Texas, Delaware, etc.)**. Este diseño garantiza que BRIDS no califique como broker-dealer, portal de financiamiento fiduciario ni asesor de inversión bajo la Sección 15(a)(1) del Securities Exchange Act de 1934, blindando la escalabilidad del negocio frente a contingencias regulatorias.
 
 ---
 
 ## 1. One-Liner Canónico (Pitch & Website)
 
-> *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente en Delaware."*
+> *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente constituido en la jurisdicción del inmueble."*
 
 ---
 
@@ -50,7 +51,7 @@ flowchart TD
     end
 
     subgraph Capa_Inmobiliaria["Capa Legal e Inmobiliaria (Activo Real)"]
-        SPV["Issuer / SPV Dedicado<br/>(Delaware Series LLC)"]
+        SPV["Issuer / SPV Dedicado<br/>(LLC Local: Florida, Texas, Delaware, etc.)"]
         OP["Operador Inmobiliario<br/>(Blue Brick Capital)"]
         PROP[("Inmueble Físico en EE.UU.")]
         
@@ -70,10 +71,10 @@ flowchart TD
    - BRIDS no recibe compensación basada en transacciones de valores (*transaction-based compensation* que constituya comisión de éxito por colocación de valores). Su modelo de cobro es por uso de infraestructura de software (SaaS y procesamiento técnico de datos fijas).  
    🔗 [SEC Broker-Dealers Division of Trading and Markets](https://www.sec.gov/about/divisions-offices/division-trading-markets/broker-dealers)
 2. **Criterios de la SEC sobre Valores Tokenizados y Master Securityholder File:**
-   - La titularidad jurídica del socio emana del libro legal de socios de la LLC de Delaware. Conforme al criterio oficial de la SEC, **el NFT representa digitalmente una posición, pero no es el registro legal**: el registro legal lo lleva el actor legal correspondiente en el SPV.  
+   - La titularidad jurídica del socio emana del libro legal de socios de la LLC correspondiente a cada activo. Conforme al criterio oficial de la SEC, **el NFT representa digitalmente una posición, pero no es el registro legal**: el registro legal lo lleva el actor legal correspondiente en el SPV.  
    🔗 [SEC Corp Fin Statement on Tokenized Securities](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities)
-3. **Delaware Limited Liability Company Act (Section 18-215 / Series LLC & DGCL § 224):**
-   - Cada inmueble cuenta con contabilidad, activos y pasivos jurídicamente segregados. La insolvencia eventual de un SPV no afecta a los demás ni a la empresa de software matriz.
+3. **Estructura Jurídica de SPVs Segregados (Leyes Estatales de LLC & DGCL § 224 / Delaware C-Corp):**
+   - BRIDS Inc. opera constituida como Delaware C-Corp conforme a la DGCL para su estructura corporativa y gobernanza de software. Cada inmueble cuenta con contabilidad, activos y pasivos jurídicamente segregados en un SPV independiente (LLC) constituido en la jurisdicción donde se ubica y licencia la construcción o propiedad (Florida, Texas, Delaware u otros estados). La insolvencia eventual de un SPV no afecta a los demás proyectos ni a la empresa de software matriz.
 4. **Reglas AML/CIP y No Intermediación Bancaria (FinCEN & 31 CFR 1023.220):**
    - BRIDS no toca dinero y no hace KYC por sí mismo: la verificación de identidad se delega en partners especializados como Stripe Identity conforme a [31 CFR 1023.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220) y la [Guía de FinCEN sobre Monedas Virtuales Convertibles](https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf).
 5. **No Recomendación de Inversiones (Investment Advisers Act of 1940):**
@@ -89,9 +90,9 @@ flowchart TD
 
 | Dimensión | Plataformas Cripto Sin Regulación | Crowdfunding Tradicional Web2 | Estructuración Dual-Entity BRIDS |
 | :--- | :--- | :--- | :--- |
-| **Entidad Emisora** | DAO anónima o token sin respaldo legal | Plataforma centralizada con licencias locales rígidas | **SPV LLC dedicada en Delaware por propiedad** |
+| **Entidad Emisora** | DAO anónima o token sin respaldo legal | Plataforma centralizada con licencias locales rígidas | **SPV LLC dedicada en la jurisdicción del activo** |
 | **Rol de la Plataforma** | Especulación sin registro de socios | Intermediario financiero fiduciario | **Proveedor de software SaaS e infraestructura** |
-| **Libro de Socios** | Ledger on-chain sin personería jurídica | Base de datos privada analógica | **Master Securityholder File respaldado en Delaware** |
+| **Libro de Socios** | Ledger on-chain sin personería jurídica | Base de datos privada analógica | **Master Securityholder File respaldado por la LLC del SPV** |
 | **Riesgo Regulatorio** | Alto (Sanciones SEC, freeze de tokens) | Alto costo operativo y licencias por país | **Protegido por separación de funciones y software puro** |
 
 ---
@@ -99,7 +100,7 @@ flowchart TD
 ## 5. Snippets Reutilizables (Ready-to-Cite)
 
 ### Snippet 5.1: Para Pitch Decks y Preguntas de Inversionistas (YC Q&A)
-> *"BRIDS.io opera bajo un modelo puro de infraestructura de software constituido como Delaware C-Corp. Cada activo inmobiliario reside en un SPV independiente bajo la legislación de Delaware, operado por desarrolladores calificados. Nosotros no somos broker-dealers ni ejercemos custodia fiduciaria: cobramos licenciamiento SaaS y tarifas de infraestructura técnica por habilitar la sindicación automatizada en Solana."*
+> *"BRIDS.io opera bajo un modelo puro de infraestructura de software constituido como Delaware C-Corp. Cada activo inmobiliario reside en un SPV independiente constituido en la jurisdicción correspondiente a cada desarrollo inmobiliario (Florida, Texas, Delaware, etc.), operado por desarrolladores calificados. Nosotros no somos broker-dealers ni ejercemos custodia fiduciaria: cobramos licenciamiento SaaS y tarifas de infraestructura técnica por habilitar la sindicación automatizada en Solana."*
 
 ### Snippet 5.2: Para Términos Legales, Footer y Documentos Públicos
 > *"BRIDS.io es una plataforma de software e infraestructura tecnológica desarrollada en la red de Solana. BRIDS.io no es un corredor de bolsa (broker-dealer), portal de financiamiento regulado ni asesor de inversiones. Los activos inmobiliarios fraccionados son emitidos por Sociedades de Propósito Especial (SPVs) independientes bajo las leyes aplicables de EE.UU."*
@@ -108,7 +109,7 @@ flowchart TD
 
 ## 6. Directrices Léxicas (Do's & Don'ts)
 
-- **Obligatorio Usar:** Infraestructura de software, plataforma tecnológica, SPV dedicado en Delaware, representación digital de participaciones, Master Securityholder File, proveedor tecnológico independiente.
+- **Obligatorio Usar:** Infraestructura de software, plataforma tecnológica, SPV independiente por inmueble (LLC local), representación digital de participaciones, Master Securityholder File, proveedor tecnológico independiente, Delaware C-Corp (BRIDS Inc.).
 - **Prohibido Terminantemente:** Broker-dealer, captación de ahorros, custodia de fondos de clientes, comisión de venta de acciones, fondo de inversión colectivo propio.
 
 ---
@@ -155,5 +156,6 @@ flowchart TD
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.2.0** | 2026-09-13 | `compliance-officer`, `business-consultant` | Desacoplamiento de jurisdicción de los SPVs inmobiliarios: BRIDS Inc. opera como Delaware C-Corp (SaaS tech), mientras que cada SPV se constituye como LLC independiente en la jurisdicción local donde se ubica y licencia el inmueble (Florida, Texas, Delaware, etc.). |
 | **1.1.0** | 2026-09-13 | `compliance-officer`, `business-consultant` | Integración de los 7 principios institucionales de BRIDS, enlaces oficiales (SEC, FinCEN, eCFR, FTC) y Apéndices 16 y 17 para counsel legal. |
 | **1.0.0** | 2026-09-11 | `compliance-officer` & SDD Loop | Creación inicial de la nota conceptual atómica bajo estándares de gobernanza. |

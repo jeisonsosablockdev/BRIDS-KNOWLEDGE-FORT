@@ -2,7 +2,7 @@
 
 Este directorio constituye el repositorio institucional de **estructuración societaria, contratos de SPVs, políticas de cumplimiento y Data Room** de **BRIDS.io**.
 
-> ⚖️ **Principio de Blindaje:** *"Desacoplamiento estricto entre BRIDS Inc. (Delaware C-Corp tecnológica) y las Delaware Series LLCs independientes titulares de cada activo inmobiliario."*
+> ⚖️ **Principio de Blindaje:** *"Desacoplamiento estricto entre BRIDS Inc. (Delaware C-Corp tecnológica) y las SPVs (LLCs independientes en la jurisdicción de cada inmueble) titulares de cada activo inmobiliario."*
 
 ---
 
