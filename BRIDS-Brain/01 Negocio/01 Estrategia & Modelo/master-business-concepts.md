@@ -87,7 +87,7 @@ graph TD
 - **Custodio:** `founder-ghostwriter`, `pitch-deck-architect`
 - **One-Liner Canónico:**
   > *"BRIDS corre sobre Solana porque es la única red donde liquidar una inversión inmobiliaria de $200 USD o dispersar dividendos a miles de usuarios cuesta fracciones de centavo y toma menos de un segundo."*
-- **Tesis de Reutilización:** Sustenta el análisis de "Why Solana?" en pitch decks de YC y whitepapers técnicos. Explica la reducción del 85% en costos de almacenamiento lograda por la arquitectura de cuenta única de Metaplex Core y el uso de Permanent Delegates (PermanentFreezeDelegate y PermanentTransferDelegate) para la gobernanza institucional y recuperación de activos.
+- **Tesis de Reutilización:** Sustenta el análisis de "Why Solana?" en pitch decks de YC y whitepapers técnicos. Explica la reducción del 85% en costos de almacenamiento lograda por la arquitectura de cuenta única de Metaplex Core, el uso de Permanent Delegates (PermanentFreezeDelegate y PermanentTransferDelegate) para la gobernanza institucional y recuperación de activos (C2), y el rol de la dirección de la colección (`collection_address`) como perímetro criptográfico y filtro de admisión en el motor de distribución y cobro de rentas (BRI-8).
 
 ### C8: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-multisig-treasury-governance.md|concept-multisig-treasury-governance]]

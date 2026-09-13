@@ -1,7 +1,7 @@
 ---
 title: "C3: Solana RWA Advantage y Estándar Metaplex Core"
 concept_id: "concept-solana-rwa-infrastructure"
-version: "1.3.0"
+version: "1.4.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "technology-blockchain"
@@ -18,6 +18,8 @@ tags:
   - "blockchain-efficiency"
   - "usdc-solana"
   - "squads-multisig"
+  - "yield-distribution"
+  - "epic-014"
 ---
 
 # C3: Solana RWA Advantage y Estándar Metaplex Core
@@ -136,7 +138,67 @@ graph TD
 
 ---
 
-### 3.2. Ventajas Integrales de Metaplex Core en la Arquitectura de BRIDS
+### 3.2. Perímetro Criptográfico y Control de Distribución (BRI-8): La Dirección de la Colección (`collection_address`)
+
+Para que la dispersión periódica de rendimientos (dividendos por rentas en USDC) funcione de manera automatizada y matemáticamente verificable, el sistema delimita con precisión qué activos tienen derecho a participar en cada ciclo de cobro. En la arquitectura de BRIDS, la **dirección de la colección en Metaplex Core (`collection_address`)** actúa como el perímetro criptográfico inmutable que gobierna el motor de distribución de rentas (**BRI-8** / [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-014-stake-distribution-traceability.md|EPIC-014]]).
+
+```mermaid
+graph TD
+    subgraph OnChain["1. Capa On-Chain (Solana & Metaplex Core)"]
+        CA["Colección Core: collection_address (SPV Inmobiliario)"]
+        NFT1["NFT Fracción #001 (collection == collection_address)"]
+        NFT2["NFT Fracción #002 (collection == collection_address)"]
+        Rogue["NFT Externo / No Autorizado (collection != collection_address)"]
+        CA --- NFT1
+        CA --- NFT2
+    end
+
+    subgraph Engine["2. Motor de Distribución (BRI-8 / DAS Indexer)"]
+        DAS["DAS RPC: getAssetsByGroup(collection_address)"]
+        Filter["Filtro de Admisión Criptográfica"]
+        DAS --> Filter
+        Filter -->|Aceptado| EligiblePool["Universo Elegible del SPV"]
+        Filter -.->|Rechazo Inmediato (Spoofing Prevented)| Rogue
+    end
+
+    subgraph Execution["3. Liquidación & Tesorería (Squads Multi-Sig)"]
+        Snap["Snapshot Temporal + Cálculo Hamilton (BigInt)"]
+        Vault["Bóveda de Tesorería SPV (USDC Nativo)"]
+        Batch["Dispersión por Lotes (Squads v4)"]
+        EligiblePool --> Snap
+        Vault --> Batch
+        Snap --> Batch
+    end
+
+    NFT1 --> DAS
+    NFT2 --> DAS
+    Rogue -.-> DAS
+
+    style OnChain fill:#eef2ff,stroke:#4f46e5,stroke-width:1.5px
+    style Engine fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px
+    style Execution fill:#fefce8,stroke:#ca8a04,stroke-width:1.5px
+```
+
+#### 1. La Colección como Frontera Financiera del SPV
+Cada inmueble fraccionado está respaldado por una sociedad vehículo (SPV) propietaria del activo real. A nivel técnico, dicho SPV se materializa en una cuenta de colección canónica en Solana (`collection_address`). Todas las fracciones emitidas para financiar y representar los derechos económicos de esa propiedad quedan vinculadas criptográficamente a esa cuenta desde el momento de su acuñación (*minting*).
+
+#### 2. Indexación y Blindaje Anti-Suplantación vía DAS RPC
+Al cierre de cada periodo contable, el motor de cálculo de rendimientos ejecuta una consulta indexada mediante el estándar Digital Asset Standard (DAS RPC / Helius `getAssetsByGroup`) especificando la `collection_address` canónica:
+- **Exclusión de Activos No Autorizados:** Cualquier token que no apunte a la `collection_address` oficial del proyecto es descartado de forma automática e irrevocable antes de iniciar los cálculos de balance.
+- **Prevención de Spoofing:** Este control a nivel de runtime impide que atacantes o contratos de terceros intenten suplantar participaciones o exigir derechos de cobro contra la tesorería del inmueble.
+
+#### 3. Criterio Tridimensional de Elegibilidad para el Reparto de Dividendos
+La pertenencia a la colección es la condición indispensable, pero la liquidación efectiva exige tres validaciones simultáneas en el protocolo:
+1. **Pertenencia Criptográfica (`collection_address`):** El certificado digital reside de manera verificable dentro de la colección oficial del SPV.
+2. **Compromiso de Permanencia (`FreezeDelegate`):** El titular ha ejercido voluntariamente su delegado de congelamiento (`Owner`) durante la ventana temporal estipulada para el cómputo de dividendos (*non-custodial staking*).
+3. **Validación Regulatoria Activa (`compliance_status`):** La billetera beneficiaria cuenta con verificación de identidad y filtrado AML vigentes en el registro central de cumplimiento (`approved`).
+
+#### 4. Asignación Determinista y Dispersión sin Polvo Contable
+Con el universo de tokens elegibles delimitado por la `collection_address`, el motor de cálculo reconstruye los intervalos de permanencia temporal y aplica el método de mayor residuo de Hamilton con enteros exactos (`BigInt`), garantizando una distribución sin remanentes o polvo contable (*zero dust*). Finalmente, el comité de gobernanza del SPV aprueba y ejecuta la dispersión desde la cuenta bóveda en **Squads Multi-Sig**, enviando los fondos en lotes masivos de USDC nativo directamente a las billeteras de los inversionistas legítimos.
+
+---
+
+### 3.3. Ventajas Integrales de Metaplex Core en la Arquitectura de BRIDS
 
 1. **Reducción del 85% en Costos de Almacenamiento (Single PDA):**
    - Todos los identificadores, balance, atributos y referencias contractuales residen en una única cuenta (*Program Derived Address*).
@@ -190,6 +252,7 @@ graph TD
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.4.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Incorporación formal de la dirección de la colección (`collection_address`) como perímetro criptográfico y filtro de admisión en el motor de distribución de rentas (BRI-8 / EPIC-014), detallando la indexación DAS RPC, la prevención de suplantación y la triple validación de elegibilidad para la dispersión de dividendos en USDC desde Squads Multi-Sig. |
 | **1.3.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Profundización técnica en la arquitectura de plugins y delegados de Metaplex Core: especificación detallada de FreezeDelegate (nivel activo/Owner para staking), PermanentFreezeDelegate (nivel colección/Squads para bloqueo preventivo y regulatorio) y PermanentTransferDelegate (nivel colección/Squads para ejecución de transferencia directa en el protocolo de recuperación C2 sin quema de tokens). |
 | **1.2.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Reestructuración integral: profundización en los pilares positivos de Solana (velocidad subsegundo, comisiones subcéntimo, estado unificado, USDC nativo de Circle y paralelismo Sealevel), síntesis concisa de la comparativa frente a Ethereum y L2s, y sincronización del Authority Plugin de Metaplex Core con el flujo de recuperación de C2 (descongelamiento y transferencia sin quema obligatoria). |
 | **1.1.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Actualización de ticket nominal a $200 USD y sincronización de dispersión trimestral. |
