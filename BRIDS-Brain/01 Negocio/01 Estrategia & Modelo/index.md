@@ -23,9 +23,18 @@ Este directorio alberga la **tesis fundacional, los conceptos nucleares de token
 6. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-retail-fractionalization-thesis.md|C6: Retail Fractionalization Thesis]] — Desbloqueo del ticket de $100 USD.
 7. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-real-estate-investment-models.md|C7: Investment Models]] — Deuda privada vs Equity participativo.
 8. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-multisig-treasury-governance.md|C8: Squads Multi-Sig Governance]] — Tesorería y custodia descentralizada.
+9. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-rwa-identity-vc-thesis.md|C9: RWA Identity vs Crypto Trap]] — Tesis para VCs, múltiplos SaaS (15x–30x) y superación de RWA 1.0.
+
+---
+
+## 📊 Investigación de Mercado & Benchmarks (Market Research)
+
+- [[01 Negocio/01 Estrategia & Modelo/market-research/research-uae-dubai-tokenization-benchmarks.md|Investigación de Mercado: Tokenización en Dubai, Regulación EAU y Ventaja de Solana (TLP Advisors)]]
+- [[01 Negocio/01 Estrategia & Modelo/market-research/raw-sources/transcript-solana-is-global-alex-scott-harshil-agarwal-tlp.md|Transcripción Original: Solana is Global Podcast (Harshil Agarwal / Alex Scott)]]
 
 ---
 
 ## 🎯 Custodios Asignados
 - `business-consultant` (Business Model & Unit Economics Architect)
 - `market-research-analyst` (Market Research & TAM/SAM/SOM Analyst)
+- `pitch-deck-architect` (VC Pitch & Institutional Storytelling)

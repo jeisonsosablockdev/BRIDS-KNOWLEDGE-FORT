@@ -2,8 +2,8 @@
 *.tmp
 *.log
 node_modules/
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
+**/.obsidian/workspace.json
+**/.obsidian/workspace-mobile.json
 __pycache__/
 *.pyc
 BRIDS-Engine/context/technical-okf/

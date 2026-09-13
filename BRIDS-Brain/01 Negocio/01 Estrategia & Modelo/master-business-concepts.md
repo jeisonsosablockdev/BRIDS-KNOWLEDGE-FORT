@@ -1,11 +1,11 @@
 ---
 title: "Documento Maestro de Conceptos e Ideas Fundacionales de Negocio"
 document_id: "master-business-concepts"
-version: 1.0.0
+version: 1.1.0
 status: "approved"
 workflow: "core-business-concepts"
 category: "brand-context-master"
-last_updated: "2026-09-11"
+last_updated: "2026-09-13"
 tags:
   - "sdd-concept"
   - "master-concept"
@@ -22,7 +22,7 @@ tags:
 
 ---
 
-## 📌 Índice y Mapa de los 8 Conceptos Maestros
+## 📌 Índice y Mapa de los 9 Conceptos Maestros
 
 ```mermaid
 graph TD
@@ -48,10 +48,15 @@ graph TD
         C6["C6: Retail Fractionalization Thesis<br/>(Inclusión desde $100 USD)"]
     end
 
+    subgraph VC_Thesis["Tesis Institucional & VCs"]
+        C9["C9: RWA Identity vs Crypto Trap<br/>(VC Thesis & SaaS Valuation Multiples)"]
+    end
+
     Master --> Legal_Compliance
     Master --> Tech_Infra
     Master --> Business_Economics
     Master --> Market_GTM
+    Master --> VC_Thesis
 ```
 
 ---
@@ -128,7 +133,18 @@ graph TD
 
 ---
 
-## 5. Protocolo de Consumo para Sub-Agentes en Nuevas Tareas
+## 5. Módulo Institucional & Tesis para VCs
+
+### C9: Identidad RWA vs. Trampa Cripto (Tesis para VCs e Inversores)
+- **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-rwa-identity-vc-thesis.md|concept-rwa-identity-vc-thesis]]
+- **Custodio:** `pitch-deck-architect`, `founder-ghostwriter`, `business-consultant`
+- **One-Liner Canónico:**
+  > *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $100 USD con títulos recuperables y respaldo legal en Delaware."*
+- **Tesis de Reutilización:** Pilar de pitch decks para Y Combinator y firmas de Venture Capital. Desmonta la trampa de valoración de "gestora inmobiliaria" (1x–3x EBITDA) frente a "infraestructura SaaS" (15x–30x ARR), fundamenta el modelo asset-light con 80%+ de margen bruto, y explica por qué superamos las tres fallas de RWA 1.0 (gas fees de Ethereum, dogma de code-is-law y limbo regulatorio).
+
+---
+
+## 6. Protocolo de Consumo para Sub-Agentes en Nuevas Tareas
 
 Cuando inicialices cualquier tarea o generes un nuevo spec con `bash BRIDS-Engine/scripts/task-init.sh <slug>`, sigue este protocolo para garantizar la coherencia absoluta:
 
@@ -136,7 +152,7 @@ Cuando inicialices cualquier tarea o generes un nuevo spec con `bash BRIDS-Engin
    ```markdown
    reusable_concepts:
      - "[[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]"
-     - "[[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-wallet-recovery-protocol.md]]"
+     - "[[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-rwa-identity-vc-thesis.md]]"
    ```
 2. **Cita Directa:** Utiliza los One-Liners o los Snippets autorizados de la sección 5 de cada archivo conceptual.
 3. **Auditoría Anti-Drift:** El agente revisor (`sdd-reviewer`) comprobará que las afirmaciones legales, métricas financieras y detalles de contratos coincidan exactamente con estas notas canónicas.
@@ -147,4 +163,5 @@ Cuando inicialices cualquier tarea o generes un nuevo spec con `bash BRIDS-Engin
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.1.0** | 2026-09-13 | `pitch-deck-architect`, `founder-ghostwriter` | Integración del Concepto C9: Identidad RWA vs Trampa Cripto (Tesis VCs & Múltiplos SaaS). |
 | **1.0.0** | 2026-09-11 | Squad de Arquitectura de Negocio & SDD Loop | Creación del Documento Maestro de Conceptos e Ideas Fundacionales de BRIDS.io. |
