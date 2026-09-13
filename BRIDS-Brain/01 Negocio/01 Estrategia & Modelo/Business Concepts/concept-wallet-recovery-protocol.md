@@ -32,7 +32,7 @@ tags:
 
 ## 1. One-Liner Canónico (Pitch, FAQs & Legal Brief)
 
-> *"En BRIDS, perder tu billetera no significa perder tu propiedad: tu derecho legal está respaldado por su SPV y recuperas tu título digital mediante verificación biométrica en Stripe Identity, timelock de seguridad y reasignación en Squads y Metaplex Core."*
+> *"Inversión inmobiliaria con blindaje institucional: tu derecho está respaldado en el mundo real, donde perder una billetera jamás pondrá en riesgo tu patrimonio."*
 
 ---
 
