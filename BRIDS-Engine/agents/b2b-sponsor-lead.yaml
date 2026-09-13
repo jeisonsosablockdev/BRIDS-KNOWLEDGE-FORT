@@ -5,7 +5,7 @@ description: "Architects Real Estate Sponsor/Developer acquisition collateral, i
 tools:
   write: true
   subagents: false
-  mcp: false
+  mcp: true
 
 skills:
   - mas-sales-enablement

@@ -3,6 +3,7 @@ title: "Investigación de Mercado: Tokenización en Dubai, Regulación EAU y Ven
 document_id: "research-uae-dubai-tokenization-benchmarks"
 version: 1.0.0
 status: "approved"
+workflow: "market-research-analyst"
 category: "market-research"
 source: "Podcast: Solana is Global with Alex Scott"
 episode: "The Future of Stablecoins in the UAE - TLP Advisors"

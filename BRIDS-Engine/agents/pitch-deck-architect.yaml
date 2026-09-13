@@ -5,7 +5,7 @@ description: "Crafts high-conversion YC & Sequoia pitch decks, generates native 
 tools:
   write: true
   subagents: false
-  mcp: false
+  mcp: true
 
 skills:
   - pitch-deck-creator

@@ -5,7 +5,7 @@ description: "Amplifies founder narrative, YC application essays, thought leader
 tools:
   write: true
   subagents: false
-  mcp: false
+  mcp: true
 
 skills:
   - founder-content-writer

@@ -5,7 +5,7 @@ description: "Defines BRIDS.io business model, unit economics (SaaS listing fees
 tools:
   write: true
   subagents: false
-  mcp: false
+  mcp: true
 
 skills:
   - yc-insight-driven-bp

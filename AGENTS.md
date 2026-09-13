@@ -107,4 +107,12 @@ The workspace includes 6 specialized sub-agents defined in `BRIDS-Engine/agents/
 - Definitions: Individual autonomous YAML files in `BRIDS-Engine/agents/*.yaml`
 - Verification: `bash BRIDS-Engine/scripts/inspect-squad.sh`
 
+## Solana Developer MCP Integration (mcp.solana.com)
+The workspace integrates the canonical **Solana Developer MCP** (`https://mcp.solana.com/mcp`):
+- **Active Server Identifiers:** `solana-mcp-server` (HTTP) and `solana-mcp-sse` (SSE).
+- **Core MCP Tools:** `list_sections`, `get_documentation`, `Solana_Documentation_Search`, `Solana_Expert__Ask_For_Help`, `program_autofixer`.
+- **Enforcement Rule:** All sub-agents (`compliance-officer`, `pitch-deck-architect`, `business-consultant`) must prioritize live Solana MCP queries over outdated model training weights when reasoning about Metaplex Core, Solana Kit, Anchor, and on-chain governance.
+- **Reference Guide:** `BRIDS-Engine/docs/solana-mcp-integration.md`
+
+
 

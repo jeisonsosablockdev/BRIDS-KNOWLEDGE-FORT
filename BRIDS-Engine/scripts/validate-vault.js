@@ -27,7 +27,7 @@ function getAllMarkdownFiles(dir, fileList = []) {
     const stat = fs.statSync(fullPath);
 
     if (stat.isDirectory()) {
-      if (item === 'Archive' || item === 'Assets') continue; // skip archive snapshots and asset folders from strict linting
+      if (item === 'Archive' || item === 'Assets' || item === 'Specs' || item === 'raw-sources') continue; // skip archive snapshots, asset folders, in-flight specs, and raw research transcripts from strict deliverable linting
       getAllMarkdownFiles(fullPath, fileList);
     } else if (item.endsWith('.md')) {
       fileList.push(fullPath);

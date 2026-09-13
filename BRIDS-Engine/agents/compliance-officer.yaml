@@ -5,7 +5,7 @@ description: "Architects legal decoupling (Sponsor Delaware LLC SPV vs BRIDS Tec
 tools:
   write: true
   subagents: false
-  mcp: false
+  mcp: true
 
 skills:
   - investor-due-diligence

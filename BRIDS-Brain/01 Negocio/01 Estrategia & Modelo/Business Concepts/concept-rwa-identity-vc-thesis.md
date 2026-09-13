@@ -13,6 +13,7 @@ hitl_1_approved_at: "2026-09-13T03:19:52.299Z"
 hitl_2_approved_at: "2026-09-13T03:21:13.159Z"
 status: approved
 version: "1.0"
+workflow: sdd-orchestrator
 created_at: 2026-09-13
 updated_at: 2026-09-13
 tags:
