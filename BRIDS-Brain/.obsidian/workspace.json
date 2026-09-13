@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-fee-architecture-unit-economics.md",
+                "file": "01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "concept-fee-architecture-unit-economics"
+              "title": "concept-dual-entity-compliance"
             }
           }
         ]
@@ -187,6 +187,11 @@
   "active": "fe11c1869dd7657e",
   "lastOpenFiles": [
     "00 Inbox/Specs/smoke-test-demo-work",
+    "00 Inbox/Specs/smoke-test-demo.spec.json",
+    "00 Inbox/Specs/smoke-test-demo.spec.md",
+    "00 Inbox/Specs/smoke-test-demo-work/draft_cycle_1.md",
+    "00 Inbox/Specs/smoke-test-demo-work/criticism_cycle_1.json",
+    "01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-fee-architecture-unit-economics.md",
     "01 Negocio/01 Estrategia & Modelo/Business Concepts/index.md",
     "00 Inbox/Archive/epic-015-rwa-yield-bearing-margin-collateral.md.2026-09-13T06-58-52-833Z.bak.md",
     "00 Inbox/Archive/crypto-market-intelligence-and-data-sources.md.2026-09-13T06-58-36-614Z.bak.md",
@@ -216,11 +221,7 @@
     "00 Inbox/Specs/rwa-real-estate-competitor-benchmark-work/criticism_cycle_1.json",
     "00 Inbox/Specs/rwa-real-estate-competitor-benchmark-work/draft_cycle_1.md",
     "00 Inbox/Specs/rwa-real-estate-competitor-benchmark.spec.json",
-    "00 Inbox/Specs/rwa-real-estate-competitor-benchmark.spec.md",
     "00 Inbox/Specs/rwa-real-estate-competitor-benchmark-work",
-    "01 Negocio/01 Estrategia & Modelo/market-research/raw-sources/transcript-solana-is-global-alex-scott-harshil-agarwal-tlp.md",
-    "01 Negocio/01 Estrategia & Modelo/market-research/raw-sources",
-    "01 Negocio/01 Estrategia & Modelo/market-research/research-uae-dubai-tokenization-benchmarks.md",
     "02 Marketing/01 Contexto de Marca/Assets/brids-mark.svg",
     "02 Marketing/01 Contexto de Marca/Assets/brids-mark.png",
     "02 Marketing/01 Contexto de Marca/Assets/brids-logo.svg",
