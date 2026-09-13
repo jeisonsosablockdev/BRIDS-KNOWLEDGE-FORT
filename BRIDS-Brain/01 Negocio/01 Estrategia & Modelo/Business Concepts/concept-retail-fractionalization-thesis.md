@@ -2,7 +2,7 @@
 updated_at: 2026-09-13
 title: "C6: Tesis de Democratización y Fraccionamiento Retail ($200 USD)"
 concept_id: "concept-retail-fractionalization-thesis"
-version: "1.2.0"
+version: "1.3.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "market-strategy-retail"
@@ -93,7 +93,7 @@ graph TD
 > *"Por primera vez, no necesitas $100,000 dólares ni visa estadounidense para ser dueño de una fracción de un inmueble en EE.UU. En BRIDS.io, inviertes desde $200 USD por NFT, recibes rendimientos trimestrales en dólares digitales (USDC) y monitoreas tu inversión con total transparencia on-chain."*
 
 ### Snippet 5.2: Para Discurso de Visión del Fundador (YC Why Now?)
-> *"El sueño de invertir en bienes raíces ha estado roto para nuestra generación: los precios de la vivienda se han disparado y los vehículos tradicionales están diseñados solo para millonarios. En BRIDS usamos la velocidad y los costos casi nulos de Solana para hacer económicamente viable lo que antes era imposible: que cualquier persona en el mundo pueda construir patrimonio inmobiliario dolarizado dólar a dólar, comenzando con solo $200 USD."*
+> *"**¿Por qué ahora?** Porque antes la infraestructura destruía la economía unitaria: en redes lentas y caras, dispersar dividendos a micro-inversores costaba más que la propia renta. Hoy el panorama cambió radicalmente: el mercado DeFi maduró hacia rendimientos reales respaldados por bienes raíces (RWA), Solana liquida en 400 milisegundos por fracciones de centavo, y los plugins de Metaplex Core nos permiten recuperar participaciones ante billeteras extraviadas mediante verificación biométrica. Por primera vez, un ticket inmobiliario de $200 USD es económicamente viable y escalable a nivel global."*
 
 ---
 
@@ -108,6 +108,7 @@ graph TD
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.3.0** | 2026-09-13 | `founder-ghostwriter`, `pitch-deck-architect` | Reformulación del Snippet 5.2 (YC Why Now?) con enfoque ultra-compacto de cuatro pilares: economía unitaria frente a redes heredadas, madurez de DeFi hacia RWA, rendimiento y costos subcéntimo de Solana, y plugins de recuperación de Metaplex Core con verificación biométrica. |
 | **1.2.0** | 2026-09-13 | `founder-ghostwriter`, `copy-editing` | Refinamiento de copy-editing en el One-Liner canónico eliminando jerga técnica ('Web3'), generalización de la jurisdicción del SPV en buyer personas y consolidación de la propuesta de valor centrada en rentas en dólares y respaldo en el mundo real. |
 | **1.1.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Actualización del ticket mínimo y costo del NFT a $200 USD con fee de transacción tecnológica de $4 USD ($196 SPV / $4 BRIDS). |
 | **1.0.0** | 2026-09-11 | `founder-ghostwriter` & SDD Loop | Creación y fundamentación de la tesis de democratización retail. |
