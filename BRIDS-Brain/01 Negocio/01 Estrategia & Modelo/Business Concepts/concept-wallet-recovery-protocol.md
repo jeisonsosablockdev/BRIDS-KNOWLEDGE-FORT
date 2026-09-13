@@ -16,7 +16,7 @@ tags:
   - "stripe-identity"
   - "metaplex-core"
   - "squads-multisig"
-  - "delaware-spv"
+  - "spv"
   - "sec-compliance"
   - "fincen"
   - "rwa-security"
@@ -25,7 +25,7 @@ tags:
 # C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)
 
 > [!NOTE] Resumen Ejecutivo
-> El mayor obstáculo para la adopción masiva de la inversión inmobiliaria en Web3 es el dogma cripto de que *"la pérdida de la llave privada equivale a la pérdida irreversible del patrimonio"*. En BRIDS.io, la propiedad jurídica del inmueble emana del registro societario del SPV de Delaware, no de la posesión efímera de una clave criptográfica. Siguiendo el criterio de la **SEC sobre valores tokenizados** (*Division of Corporation Finance Statement on Tokenized Securities*), **el NFT representa digitalmente una posición pero no es el registro legal**: el registro legal lo lleva el actor legal correspondiente en el *Master Securityholder File*.
+> El mayor obstáculo para la adopción masiva de la inversión inmobiliaria en Web3 es el dogma cripto de que *"la pérdida de la llave privada equivale a la pérdida irreversible del patrimonio"*. En BRIDS.io, la propiedad jurídica del inmueble emana del registro societario del SPV del proyecto, no de la posesión efímera de una clave criptográfica. Siguiendo el criterio de la **SEC sobre valores tokenizados** (*Division of Corporation Finance Statement on Tokenized Securities*), **el NFT representa digitalmente una posición pero no es el registro legal**: el registro legal lo lleva el actor legal correspondiente en el *Master Securityholder File*.
 > BRIDS opera como **infraestructura tecnológica pura**: no toca dinero, no hace KYC por sí mismo (delegado en partners certificados como Stripe Identity), no recomienda inversiones y no ejecuta la parte inmobiliaria ni reemplaza documentos legales. Ante el reporte de una billetera perdida, se ejecuta un protocolo institucional de 6 etapas con **re-verificación biométrica activa en Stripe Identity (3D Liveness), autenticación multi-canal (llamada telefónica Voice 2FA, SMS OTP y correo), período de enfriamiento (Timelock de 72 horas), sobre-escritura de beneficiarios en Squads Protocol y reasignación en Metaplex Core**. **Solo cambia el NFT y la wallet de cobro; el SPV, la titularidad del socio y la escritura del inmueble en el condado permanecen 100% inmutables**.
 
 ---
@@ -59,9 +59,9 @@ graph TD
         Inmueble --- Deed
     end
 
-    subgraph Capa_Societaria["2. Capa Societaria (Delaware SPV)"]
+    subgraph Capa_Societaria["2. Capa Societaria (SPV del Proyecto)"]
         GP["Desarrollador Inmobiliario (Sponsor / GP)"]
-        SPV["Delaware Series LLC (SPV Independiente)"]
+        SPV["SPV Independiente (Sociedad Vehículo del Proyecto)"]
         CapTable["Libro de Socios Oficial (Master Securityholder File)"]
         GP -->|Constituye y Gestiona| SPV
         SPV -->|Titular Única de la Escritura| Deed
@@ -83,7 +83,7 @@ graph TD
 ```
 
 ### 2.1. ¿Qué Adquiere Realmente el Inversionista?
-1. **El Desarrollador (Sponsor/GP) constituye un SPV:** Para cada proyecto específico, el desarrollador crea una Sociedad de Propósito Especial independiente en Delaware (ej. `BRIDS 123 Pine St Series LLC`).
+1. **El Desarrollador (Sponsor/GP) constituye un SPV:** Para cada proyecto específico, el desarrollador constituye una Sociedad de Propósito Especial (SPV) independiente adaptada a la estructuración jurídica del proyecto (ej. `BRIDS 123 Pine St LLC`).
 2. **El SPV adquiere el inmueble:** El SPV es el titular exclusivo registrado en la escritura pública (*Deed*) en el condado correspondiente.
 3. **El Inversor compra participación en el SPV:** Al fondear su inversión mediante BRIDS.io (desde $200 USD), el usuario suscribe el contrato de operación (*Operating Agreement*) y adquiere **unidades de membresía (*Membership Interests*) en el SPV**.
 4. **El Rol del NFT:** El NFT emitido bajo el estándar **Metaplex Core en Solana** no es el inmueble ni una escritura paralela; es el **sistema operativo programable del activo**:
@@ -171,9 +171,9 @@ El factor crítico para neutralizar el secuestro de cuentas (*account takeover*)
   > *"ALERTA DE SEGURIDAD: Se ha solicitado el reemplazo de su billetera en BRIDS.io. La transferencia del título a su nueva dirección se ejecutará en 72 horas. Si usted solicitó este cambio, no requiere hacer nada. Si USTED NO REALIZÓ ESTA SOLICITUD, pulse de inmediato este enlace de emergencia para cancelar la operación y bloquear su cuenta."*
 - Si en cualquier momento dentro de las 72 horas el usuario legítimo activa el botón de pánico, la operación se cancela de inmediato y el caso escala a arbitraje legal y revisión manual con compliance.
 
-### Fase 4: Conciliación Estatutaria en Delaware
+### Fase 4: Conciliación Estatutaria en el SPV
 - Finalizado el timelock de 72 horas sin disputas, el oficial de cumplimiento (`compliance-officer`) o el agente administrativo del SPV valida el expediente generado.
-- Se actualiza el **Master Securityholder File** de la Delaware Series LLC: se sustituye la dirección criptográfica asociada al socio por la nueva clave pública verificada.
+- Se actualiza el **Master Securityholder File** del SPV: se sustituye la dirección criptográfica asociada al socio por la nueva clave pública verificada.
 - **Principio Invariable:** La titularidad de las participaciones del SPV nunca cambia de manos; únicamente se actualiza el identificador de su interfaz de cobro y tenencia digital.
 
 ### Fase 5: Ejecución On-Chain (Squads Multi-Sig + Metaplex Core)
@@ -201,7 +201,7 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 | **5. Desafío SMS OTP** | Código temporal de 8 dígitos al móvil verificado | Entrada exacta dentro de los 10 minutos de validez | Expiración de sesión; reintento tras 1 hora. |
 | **6. Confirmación por Correo** | Enlace firmado con token SHA-256 de un solo uso | Clic de confirmación desde el buzón registrado | No se inicia la cuenta regresiva del Timelock. |
 | **7. Timelock de Enfriamiento** | Motor cronometrado autónomo de 72 horas hábiles | 72 horas transcurridas sin reporte de fraude o pánico | Cancelación inmediata si el usuario presiona el botón de pánico. |
-| **8. Registro Societario** | Actualización en el *Master Securityholder File* (Delaware) | Firma del Administrador Legal del SPV | Retención hasta aclaración documental. |
+| **8. Registro Societario** | Actualización en el *Master Securityholder File* del SPV | Firma del Administrador Legal del SPV | Retención hasta aclaración documental. |
 | **9. Sobre-escritura en Squads** | Modificación de pubkey receptora en contrato Squads | Firma multi-sig de autoridades del SPV | Dividendos retenidos en escrow hasta completar firma. |
 | **10. Re-emisión Metaplex Core** | *Burn* de token antiguo y emisión a nueva wallet | Transacción final confirmada en mainnet Solana | Título digital restaurado y auditado on-chain. |
 
@@ -217,7 +217,7 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 > *"Eliminamos la mayor fricción de entrada para el inversor tradicional: el terror a perder la clave privada. En BRIDS, el NFT es únicamente el software de comportamiento y liquidación sobre Solana; el activo real está blindado por su SPV dedicado. Gracias a Metaplex Core y Squads Protocol, podemos revocar y reemitir activos con verificación biométrica en Stripe Identity y timelocks auditables, combinando la liquidez instantánea de Web3 con la seguridad jurídica del derecho corporativo estadounidense."*
 
 ### Snippet 5.3: Para el Memorando de Cumplimiento y Legal Data Room
-> *"Conforme a la doctrina de la SEC ('Substance over Form') y las disposiciones de la Delaware General Corporation Law § 224, la titularidad de los títulos de inversión reside en el Master Securityholder File del SPV. Los NFTs de Metaplex Core operan como certificados digitales de participación. En caso de extravío o vulneración de llaves criptográficas, el emisor ejerce su derecho estatutario de conciliación registral, sustituyendo la clave pública en el registro societario y en el protocolo multifirma de Squads, sin alterar la titularidad legal del inmueble inscrito en el County Recorder."*
+> *"Conforme a la doctrina de la SEC ('Substance over Form') y las disposiciones aplicables al registro societario y mercantil de entidades comerciales, la titularidad de los títulos de inversión reside en el Master Securityholder File del SPV. Los NFTs de Metaplex Core operan como certificados digitales de participación. En caso de extravío o vulneración de llaves criptográficas, el emisor ejerce su derecho estatutario de conciliación registral, sustituyendo la clave pública en el registro societario y en el protocolo multifirma de Squads, sin alterar la titularidad legal del inmueble inscrito en el County Recorder."*
 
 ---
 
@@ -261,7 +261,7 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 ## 8. Directrices Léxicas (Do's & Don'ts)
 
-- **Obligatorio Usar:** Certificado digital programable, membresía en Delaware Series LLC, titularidad societaria inalienable, re-verificación biométrica activa en Stripe Identity, llamada automatizada Voice 2FA, timelock de enfriamiento de 72 horas, sobre-escritura en Squads Protocol, Master Securityholder File, doctrina SEC de sustancia sobre forma.
+- **Obligatorio Usar:** Certificado digital programable, membresía en el SPV, titularidad societaria inalienable, re-verificación biométrica activa en Stripe Identity, llamada automatizada Voice 2FA, timelock de enfriamiento de 72 horas, sobre-escritura en Squads Protocol, Master Securityholder File, doctrina SEC de sustancia sobre forma.
 - **Prohibido Terminantemente:** "El NFT es la escritura de la casa", "pérdida irreversible", "wallet irrecuperable", "code-is-law absoluto", "bypassear la ley estatal", "rescate manual discrecional sin timelock", "título de propiedad en la blockchain".
 
 ---
@@ -270,6 +270,7 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.5.0** | 2026-09-13 | `compliance-officer` | Generalización de la jurisdicción del SPV: eliminación de referencias rígidas a Delaware para reflejar que la sociedad vehículo se constituye conforme a la estructuración jurídica específica de cada proyecto inmobiliario. |
 | **1.4.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Simplificación estructural: sustitución del marco legal inicial por una nota ejecutiva destacada con la cita textual de la SEC ('El NFT representa digitalmente una posición, pero no es el registro legal') y enlace oficial, agilizando la lectura directa hacia la arquitectura y el protocolo de recuperación. |
 | **1.3.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Integración de los 7 principios institucionales de BRIDS, enlaces reales y oficiales de SEC (Corp Fin Statement on Tokenized Securities), FinCEN CVC Guidance, eCFR 31 CFR 1023.220, FTC Safeguards Rule, y adición de los Apéndices 16 y 17 para revisión con counsel. |
 | **1.2.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Integración de doctrina regulatoria de la SEC, diferenciación SPV vs NFT como software programable, y formalización del protocolo institucional de 6 fases con Re-KYC Stripe Identity (3D Liveness), Voice 2FA, Timelock de 72 horas y sobre-escritura en Squads Multi-Sig. |
