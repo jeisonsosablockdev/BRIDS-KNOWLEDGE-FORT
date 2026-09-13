@@ -30,7 +30,7 @@
 ## Commit Attribution
 - AI commits MUST include:
 ```text
-Co-Authored-By: OpenAI Codex <noreply@openai.com>
+Co-Authored-By: Google Gemini <gemini@google.com>
 ```
 
 ## Non-Destructive Content Refinement Rule (CRITICAL)
