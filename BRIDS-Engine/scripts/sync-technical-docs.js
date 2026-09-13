@@ -89,19 +89,19 @@ function fetchTechnicalRepo(forceClone = false) {
   }
 
   if (!fs.existsSync(gitDir)) {
-    console.log('   🚀 Clonando repositorio técnico (sparse-checkout en knowledge/)...');
+    console.log('   🚀 Clonando repositorio técnico (sparse-checkout en knowledge/ y apps/web/public/brand/)...');
     execSync(`git clone --depth 1 --filter=blob:none --sparse -b ${TARGET_BRANCH} ${REPO_URL} "${CACHE_DIR}"`, {
       stdio: 'inherit'
     });
-    execSync(`git -C "${CACHE_DIR}" sparse-checkout set knowledge`, { stdio: 'inherit' });
-    console.log('   ✅ Paquete OKF clonado con éxito en caché local.');
+    execSync(`git -C "${CACHE_DIR}" sparse-checkout set knowledge apps/web/public/brand`, { stdio: 'inherit' });
+    console.log('   ✅ Paquete OKF y assets de marca clonados con éxito en caché local.');
   } else {
-    console.log('   🔄 Actualizando paquete OKF desde origin/develop...');
+    console.log('   🔄 Actualizando paquete OKF y assets de marca desde origin/develop...');
     try {
       execSync(`git -C "${CACHE_DIR}" fetch --depth 1 origin ${TARGET_BRANCH}`, { stdio: 'inherit' });
       execSync(`git -C "${CACHE_DIR}" reset --hard origin/${TARGET_BRANCH}`, { stdio: 'inherit' });
-      execSync(`git -C "${CACHE_DIR}" sparse-checkout set knowledge`, { stdio: 'inherit' });
-      console.log('   ✅ Paquete OKF actualizado correctamente.');
+      execSync(`git -C "${CACHE_DIR}" sparse-checkout set knowledge apps/web/public/brand`, { stdio: 'inherit' });
+      console.log('   ✅ Paquete OKF y assets de marca actualizados correctamente.');
     } catch (err) {
       console.warn('   ⚠️ Advertencia: No se pudo conectar con el remoto. Usando copia en caché local.', err.message);
     }
@@ -1227,12 +1227,82 @@ function runAudit() {
   }
 }
 
+function syncBrandAssets() {
+  console.log('\n' + '═'.repeat(75));
+  console.log('🎨 SINCRONIZANDO ASSETS OFICIALES DE BRANDING (apps/web/public/brand)');
+  console.log('═'.repeat(75));
+
+  const brandSrcDir = path.join(CACHE_DIR, 'apps', 'web', 'public', 'brand');
+  const brandEngineDir = path.join(ENGINE_DIR, 'brand');
+  const brandVaultDir = path.join(BRAIN_DIR, '02 Marketing', '01 Contexto de Marca', 'Assets');
+
+  if (!fs.existsSync(brandSrcDir)) {
+    console.warn('   ⚠️ No se encontró la carpeta apps/web/public/brand en el repositorio técnico.');
+    return;
+  }
+
+  ensureDir(brandEngineDir);
+  ensureDir(brandVaultDir);
+
+  const files = fs.readdirSync(brandSrcDir).filter(f => f.endsWith('.svg'));
+  for (const file of files) {
+    const srcPath = path.join(brandSrcDir, file);
+    const destPath = path.join(brandEngineDir, file);
+    fs.copyFileSync(srcPath, destPath);
+    console.log(`   📦 Asset copiado: ${file}`);
+  }
+
+  // Generar variante dark de brids-logo para fondos claros/papel LaTeX
+  const logoSvgPath = path.join(brandEngineDir, 'brids-logo.svg');
+  const logoDarkSvgPath = path.join(brandEngineDir, 'brids-logo-dark.svg');
+  if (fs.existsSync(logoSvgPath)) {
+    const svgContent = fs.readFileSync(logoSvgPath, 'utf8');
+    const darkSvg = svgContent.replace(/fill:\s*#fff;/g, 'fill: #0B192C;');
+    fs.writeFileSync(logoDarkSvgPath, darkSvg, 'utf8');
+    console.log('   🌓 Variante creada: brids-logo-dark.svg (Texto Azul Institucional #0B192C)');
+  }
+
+  // Convertir a PDF vectorial y PNG de alta resolución si rsvg-convert está disponible
+  let hasRsvg = false;
+  try {
+    execSync('rsvg-convert --version', { stdio: 'ignore' });
+    hasRsvg = true;
+  } catch {}
+
+  if (hasRsvg) {
+    console.log('   ⚙️ Generando artefactos vectoriales (PDF) y raster (PNG) con rsvg-convert...');
+    const svgFiles = fs.readdirSync(brandEngineDir).filter(f => f.endsWith('.svg'));
+    for (const svgFile of svgFiles) {
+      const base = path.basename(svgFile, '.svg');
+      const svgPath = path.join(brandEngineDir, svgFile);
+      const pdfPath = path.join(brandEngineDir, `${base}.pdf`);
+      const pngPath = path.join(brandEngineDir, `${base}.png`);
+      const width = base.includes('logo') ? 1024 : 512;
+
+      try {
+        execSync(`rsvg-convert -f pdf -o "${pdfPath}" "${svgPath}"`);
+        execSync(`rsvg-convert -f png -w ${width} -o "${pngPath}" "${svgPath}"`);
+      } catch (err) {
+        console.warn(`   ⚠️ Error convirtiendo ${svgFile}:`, err.message);
+      }
+    }
+  }
+
+  // Copiar todo al vault en 02 Marketing/01 Contexto de Marca/Assets
+  const engineFiles = fs.readdirSync(brandEngineDir);
+  for (const ef of engineFiles) {
+    fs.copyFileSync(path.join(brandEngineDir, ef), path.join(brandVaultDir, ef));
+  }
+  console.log(`   ✅ Sincronizados ${engineFiles.length} assets de branding en BRIDS-Engine/brand y Vault.`);
+}
+
 function main() {
   const args = process.argv.slice(2);
   const forceClone = args.includes('--force') || args.includes('-f');
   
   try {
     const knowledgeDir = fetchTechnicalRepo(forceClone);
+    syncBrandAssets();
     syncDeliverables(knowledgeDir);
     runAudit();
     console.log('✨ Ingesta y sincronización técnica completada con éxito y 100% en conformidad con la bóveda.');
