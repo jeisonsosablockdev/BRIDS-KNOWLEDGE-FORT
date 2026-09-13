@@ -1,5 +1,5 @@
 ---
-title: "Concepto Maestro: Estructuración Dual-Entity y Blindaje Regulatorio Non-Broker-Dealer"
+title: "C1: Estructuración Dual-Entity y Blindaje Non-Broker-Dealer"
 concept_id: "concept-dual-entity-compliance"
 version: 1.0.0
 status: "approved"
@@ -9,7 +9,7 @@ subagents:
   - "compliance-officer"
   - "business-consultant"
   - "pitch-deck-architect"
-last_updated: "2026-09-11"
+last_updated: "2026-09-13"
 tags:
   - "sdd-concept"
   - "compliance"
@@ -18,7 +18,7 @@ tags:
   - "non-broker-dealer"
 ---
 
-# Concepto Maestro: Estructuración Dual-Entity y Blindaje Regulatorio Non-Broker-Dealer
+# C1: Estructuración Dual-Entity y Blindaje Non-Broker-Dealer
 
 > [!NOTE] Resumen Ejecutivo
 > BRIDS.io opera bajo una estricta separación institucional de entidades: **BRIDS Inc. (Delaware C-Corp)** actúa exclusivamente como proveedor de software e infraestructura tecnológica, mientras que cada propiedad inmobiliaria es adquirida y administrada por una **Sociedad de Propósito Especial independiente (Delaware Series LLC / SPV)**. Este diseño garantiza que BRIDS no califique como broker-dealer, portal de financiamiento fiduciario ni asesor de inversión bajo la Sección 15(a)(1) del Securities Exchange Act de 1934, blindando la escalabilidad del negocio frente a contingencias regulatorias.

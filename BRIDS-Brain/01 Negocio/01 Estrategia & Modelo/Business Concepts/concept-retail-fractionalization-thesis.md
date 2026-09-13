@@ -1,6 +1,6 @@
 ---
 updated_at: 2026-09-13
-title: "Concepto Maestro: Tesis de Democratización y Fraccionamiento Retail ($200 USD)"
+title: "C6: Tesis de Democratización y Fraccionamiento Retail ($200 USD)"
 concept_id: "concept-retail-fractionalization-thesis"
 version: "1.1"
 status: "approved"
@@ -19,7 +19,7 @@ tags:
   - "financial-inclusion"
 ---
 
-# Concepto Maestro: Tesis de Democratización y Fraccionamiento Retail ($200 USD)
+# C6: Tesis de Democratización y Fraccionamiento Retail ($200 USD)
 
 > [!NOTE] Resumen Ejecutivo
 > Históricamente, el acceso a la inversión inmobiliaria en los Estados Unidos ha estado restringido a individuos de ultra alto patrimonio neto (UHNWI) e instituciones debido a tickets mínimos de entrada prohibitivos ($50,000 a $100,000 USD) y complejas barreras burocráticas bancarias internacionales. BRIDS.io derriba esta asimetría histórica al permitir la **participación fraccionada desde $200 USD por NFT** (con un split transparente de **$196 USD para el SPV inmobiliario y $4 USD de fee de transacción tecnológica**). Mediante la infraestructura de Solana y stablecoins (USDC), ofrecemos a la clase media global y a la comunidad nativa Web3 la oportunidad de dolarizar su patrimonio en activos tangibles que generan flujo de caja real, protegidos contra la inflación y desvinculados de la volatilidad especulativa de las criptomonedas.

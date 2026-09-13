@@ -1,6 +1,6 @@
 ---
 updated_at: 2026-09-13
-title: "Concepto Maestro: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia"
+title: "C8: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia"
 concept_id: "concept-multisig-treasury-governance"
 version: "1.1"
 status: "approved"
@@ -19,7 +19,7 @@ tags:
   - "on-chain-auditing"
 ---
 
-# Concepto Maestro: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia
+# C8: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia
 
 > [!NOTE] Resumen Ejecutivo
 > Uno de los mayores riesgos en la sindicación inmobiliaria tradicional es la falta de transparencia en la administración de los fondos ("cajas negras" de promotores que desvían capital hacia otros proyectos) y, en el mundo Web3, el peligro de la custodia centralizada o llaves privadas individuales vulnerables. BRIDS.io resuelve ambos problemas mediante la integración del protocolo **Squads Multi-Sig en Solana**. Cada SPV opera una bóveda multifirma no custodial con un esquema de firmas conjuntas (Desarrollador Inmobiliario + Verificación Técnica de Hitos). Esto asegura que los fondos de obra solo se liberen contra avance certificado y que las rentas se dispersen de manera automática y auditable directamente a los inversionistas, sin que BRIDS ejerza custodia fiduciaria discrecional en ningún momento.

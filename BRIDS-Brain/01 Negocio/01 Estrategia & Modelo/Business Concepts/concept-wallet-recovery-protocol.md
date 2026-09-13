@@ -1,5 +1,5 @@
 ---
-title: "Concepto Maestro: Protocolo Institucional de Recuperación de Llaves Privadas (Lost-Key Recovery)"
+title: "C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)"
 concept_id: "concept-wallet-recovery-protocol"
 version: 1.0.0
 status: "approved"
@@ -9,7 +9,7 @@ subagents:
   - "compliance-officer"
   - "founder-ghostwriter"
   - "pitch-deck-architect"
-last_updated: "2026-09-11"
+last_updated: "2026-09-13"
 tags:
   - "sdd-concept"
   - "wallet-recovery"
@@ -18,7 +18,7 @@ tags:
   - "rwa-security"
 ---
 
-# Concepto Maestro: Protocolo Institucional de Recuperación de Llaves Privadas (Lost-Key Recovery)
+# C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)
 
 > [!NOTE] Resumen Ejecutivo
 > El mayor obstáculo para la adopción masiva de la inversión inmobiliaria en Web3 es el dogma cripto de que *"la pérdida de la llave privada equivale a la pérdida irreversible del patrimonio"*. En BRIDS.io, la propiedad jurídica del inmueble emana del registro societario del SPV de Delaware, no de la posesión efímera de una clave privada. Mediante la integración de **Stripe Identity** (biometría y pasaporte oficial) y los plugins de autoridad y congelamiento de **Metaplex Core en Solana**, BRIDS implementa un flujo institucional de 4 pasos para revalidar la identidad del inversor y reemitir/transferir su título digital a una nueva billetera, eliminando el riesgo de pérdida patrimonial.

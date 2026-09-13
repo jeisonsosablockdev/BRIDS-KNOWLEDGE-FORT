@@ -1,5 +1,5 @@
 ---
-title: "Concepto Maestro: Identidad RWA vs Trampa Cripto (Tesis VCs)"
+title: "C9: Identidad RWA vs. Trampa Cripto (Tesis para VCs e Inversores)"
 spec_id: "SPEC-CONCEPT-RWA-IDENTITY-VC-THESIS"
 category: "01 Negocio/01 Estrategia & Modelo/Business Concepts"
 author_agents:
@@ -23,7 +23,7 @@ tags:
   - deliverable
 ---
 
-# Concepto Maestro: Identidad RWA vs. Trampa Cripto (Tesis para VCs e Inversores)
+# C9: Identidad RWA vs. Trampa Cripto (Tesis para VCs e Inversores)
 
 > [!NOTE]
 > **Aprobación Integral SDD + HITL:** Validado por el motor Evaluador-Optimizador (**9.0/9.0**) con doble aprobación humana (**HITL-1 Spec** y **HITL-2 Deliverable**).

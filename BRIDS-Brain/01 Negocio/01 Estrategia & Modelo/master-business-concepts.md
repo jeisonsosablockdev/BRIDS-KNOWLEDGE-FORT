@@ -40,7 +40,7 @@ graph TD
     end
 
     subgraph Business_Economics["Economía y Monetización"]
-        C4["C4: Fee Architecture & Economics<br/>(SaaS Setup + $2/Fracción Fee)"]
+        C4["C4: Fee Architecture & Economics<br/>(SaaS Setup + $4/Fracción Fee)"]
         C7["C7: Real Estate Investment Models<br/>(Fix&Flip, Fix&Hold, Greenfield)"]
     end
 
@@ -71,7 +71,7 @@ graph TD
   > *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente en Delaware."*
 - **Tesis de Reutilización:** Permite justificar ante reguladores, inversores institucionales y socios por qué BRIDS Inc. opera como un proveedor de tecnología pura (Delaware C-Corp) protegido bajo la Sección 15(a)(1) del Exchange Act, delegando la titularidad de los inmuebles a Delaware Series LLCs independientes.
 
-### C2: Protocolo Institucional de Recuperación de Llaves Privadas (Lost-Key Recovery)
+### C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-wallet-recovery-protocol.md|concept-wallet-recovery-protocol]]
 - **Custodio:** `compliance-officer`, `founder-ghostwriter`
 - **One-Liner Canónico:**
@@ -82,7 +82,7 @@ graph TD
 
 ## 2. Módulo de Infraestructura Tecnológica
 
-### C3: Infraestructura RWA en Solana y Estándar Metaplex Core
+### C3: Solana RWA Advantage y Estándar Metaplex Core
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md|concept-solana-rwa-infrastructure]]
 - **Custodio:** `founder-ghostwriter`, `pitch-deck-architect`
 - **One-Liner Canónico:**

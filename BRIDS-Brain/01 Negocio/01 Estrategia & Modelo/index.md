@@ -15,15 +15,17 @@ Este directorio alberga la **tesis fundacional, los conceptos nucleares de token
 
 ## 🧩 Conceptos Atómicos de Negocio (RWA)
 
-1. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md|C1: Dual-Entity Compliance]] — Desacoplamiento BRIDS Inc. (Tech) vs SPV LLC (Inmueble).
-2. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-wallet-recovery-protocol.md|C2: Lost-Key Recovery Protocol]] — Recuperación de títulos verificada por Stripe Identity.
-3. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md|C3: Solana RWA Advantage]] — Rentas de cuenta de 0.0029 SOL y transacciones sub-céntricas.
-4. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-fee-architecture-unit-economics.md|C4: Fee Architecture & Economics]] — SaaS setup, $4 fee de transacción por fracción y dispersión.
-5. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md|C5: B2B Sponsor Value Prop]] — Ahorro de $30k-$60k en structuring para promotores.
-6. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-retail-fractionalization-thesis.md|C6: Retail Fractionalization Thesis]] — Desbloqueo del ticket de $200 USD ($4 fee).
-7. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-real-estate-investment-models.md|C7: Investment Models]] — Deuda privada vs Equity participativo.
-8. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-multisig-treasury-governance.md|C8: Squads Multi-Sig Governance]] — Tesorería y custodia descentralizada.
-9. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-rwa-identity-vc-thesis.md|C9: RWA Identity vs Crypto Trap]] — Tesis para VCs, múltiplos SaaS (15x–30x) y superación de RWA 1.0.
+> 📖 **Barrel Index:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/index.md|Índice Maestro: Conceptos Clave del Negocio (Business Concepts Index)]]
+
+1. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md|C1: Estructuración Dual-Entity y Blindaje Non-Broker-Dealer]] — Desacoplamiento BRIDS Inc. (Tech) vs SPV LLC (Inmueble).
+2. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-wallet-recovery-protocol.md|C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)]] — Recuperación de títulos verificada por Stripe Identity.
+3. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md|C3: Solana RWA Advantage y Estándar Metaplex Core]] — Rentas de cuenta de ~0.0029 SOL y transacciones sub-céntricas.
+4. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-fee-architecture-unit-economics.md|C4: Arquitectura de Monetización, Estructura de Tarifas y Unit Economics]] — SaaS setup, $4 fee por fracción y dispersión tecnológica.
+5. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md|C5: Propuesta de Valor para Desarrolladores Inmobiliarios (B2B Sponsors & GPs)]] — Ahorro de $30k-$60k en structuring para promotores.
+6. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-retail-fractionalization-thesis.md|C6: Tesis de Democratización y Fraccionamiento Retail ($200 USD)]] — Desbloqueo del ticket de $200 USD ($196 SPV / $4 Fee).
+7. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-real-estate-investment-models.md|C7: Modelos de Inversión Inmobiliaria y Estrategias de Retorno]] — Fix & Flip, Fix & Hold (dispersión trimestral) y Greenfield.
+8. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-multisig-treasury-governance.md|C8: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia]] — Tesorería multifirma y dispersión sin custodia.
+9. [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-rwa-identity-vc-thesis.md|C9: Identidad RWA vs. Trampa Cripto (Tesis para VCs e Inversores)]] — Tesis para VCs, múltiplos SaaS (15x–30x) y superación de RWA 1.0.
 
 ---
 

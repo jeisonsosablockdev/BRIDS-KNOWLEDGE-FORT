@@ -1,6 +1,6 @@
 ---
 updated_at: 2026-09-13
-title: "Concepto Maestro: Arquitectura de Monetización, Estructura de Tarifas y Unit Economics"
+title: "C4: Arquitectura de Monetización, Estructura de Tarifas y Unit Economics"
 concept_id: "concept-fee-architecture-unit-economics"
 version: "1.1"
 status: "approved"
@@ -23,7 +23,7 @@ tags:
   - "non-broker-dealer"
 ---
 
-# Concepto Maestro: Arquitectura de Monetización, Estructura de Tarifas y Unit Economics
+# C4: Arquitectura de Monetización, Estructura de Tarifas y Unit Economics
 
 > [!NOTE] Resumen Ejecutivo
 > El modelo de negocio de BRIDS.io opera bajo un modelo de **SaaS puro e infraestructura tecnológica**, estructurado exclusivamente sobre **fees de transacción fijos** por el uso y cómputo de la plataforma, eliminando por completo cualquier cobro porcentual de intermediación o corretaje de valores. Este enfoque garantiza un blindaje legal absoluto frente a la regulación de Broker-Dealer de la SEC (Securities Exchange Act Sec. 15(a)) y justifica múltiplos de valoración de Venture Capital de **15x a 25x ARR**. Los ingresos se dividen en un trípode de fees transaccionales: **(1) Fee de Procesamiento y Emisión de $4 USD por fracción de $200** (al usuario en la compra, deducido de la transacción), **(2) SaaS Listing & Setup Fee escalonado por tiers** (al desarrollador al desplegar su proyecto), **(3) Fee de Transacción de Dispersión Tecnológica** (al desarrollador al distribuir rendimientos: trimestral en Fix & Hold vs al cierre en Fix & Flip y Greenfield), y **(4) Fee de Recuperación Administrativa** ante extravío de llaves privadas.

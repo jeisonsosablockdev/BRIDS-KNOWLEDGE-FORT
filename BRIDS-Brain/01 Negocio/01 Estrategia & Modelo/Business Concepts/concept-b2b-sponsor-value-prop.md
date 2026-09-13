@@ -1,5 +1,5 @@
 ---
-title: "Concepto Maestro: Propuesta de Valor para Desarrolladores Inmobiliarios (B2B Sponsors & GPs)"
+title: "C5: Propuesta de Valor para Desarrolladores Inmobiliarios (B2B Sponsors & GPs)"
 concept_id: "concept-b2b-sponsor-value-prop"
 version: 1.0.0
 status: "approved"
@@ -18,7 +18,7 @@ tags:
   - "cost-of-capital"
 ---
 
-# Concepto Maestro: Propuesta de Valor para Desarrolladores Inmobiliarios (B2B Sponsors & GPs)
+# C5: Propuesta de Valor para Desarrolladores Inmobiliarios (B2B Sponsors & GPs)
 
 > [!NOTE] Resumen Ejecutivo
 > Para los desarrolladores inmobiliarios (*Sponsors* y *General Partners / GPs*), levantar capital privado mediante sindicación tradicional es un proceso analógico, costoso ($40k-$80k en abogados y estructuración) y lento (3 a 6 meses de colocación con decenas de llamadas individuales). BRIDS.io se posiciona como su **software institucional de distribución y administración de sindicaciones**. Al estandarizar el despliegue técnico sobre SPVs de Delaware y automatizar la gestión de inversionistas en Solana, BRIDS reduce el tiempo de cierre a semanas, disminuye el costo de capital y elimina la carga operativa manual de contabilidad, reportes y dispersión de dividendos.

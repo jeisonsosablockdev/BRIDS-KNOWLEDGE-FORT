@@ -1,6 +1,6 @@
 ---
 updated_at: 2026-09-13
-title: "Concepto Maestro: Modelos de Inversión Inmobiliaria y Estrategias de Retorno"
+title: "C7: Modelos de Inversión Inmobiliaria y Estrategias de Retorno"
 concept_id: "concept-real-estate-investment-models"
 version: "1.1"
 status: "approved"
@@ -20,7 +20,7 @@ tags:
   - "blue-brick-capital"
 ---
 
-# Concepto Maestro: Modelos de Inversión Inmobiliaria y Estrategias de Retorno
+# C7: Modelos de Inversión Inmobiliaria y Estrategias de Retorno
 
 > [!NOTE] Resumen Ejecutivo
 > BRIDS.io estandariza y parametrizan tres arquetipos de inversión inmobiliaria de alto rendimiento en el mercado de EE.UU., operados en el terreno por socios profesionales como **Blue Brick Capital**: **(1) Fix & Flip** para rotación rápida de capital y apreciación en el corto plazo (6 a 12 meses); **(2) Fix & Hold** para generación de flujo de caja pasivo recurrente por rentas en el mediano/largo plazo (3 a 5+ años); y **(3) Desarrollo Integral (Greenfield)** para capturar el máximo margen sobre el suelo y la construcción desde cero. Cada modelo cuenta con una parametrización de smart contracts, calendarios de dispersión y métricas de riesgo adaptadas a su perfil de retorno.
