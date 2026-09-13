@@ -1,7 +1,8 @@
 ---
+updated_at: 2026-09-13
 title: "Concepto Maestro: Modelos de Inversión Inmobiliaria y Estrategias de Retorno"
 concept_id: "concept-real-estate-investment-models"
-version: 1.0.0
+version: "1.1"
 status: "approved"
 workflow: "core-business-concepts"
 category: "real-estate-strategy"
@@ -52,20 +53,22 @@ graph TD
 ### Modelo 1: Fix & Flip (Rotación Rápida de Capital)
 - **Horizonte de Inversión:** 6 a 12 meses.
 - **Estrategia Operativa:** Adquisición de inmuebles residenciales con descuento por debajo del valor de mercado (distressed properties), remodelación integral rápida (arquitectura, acabados, climatización) y venta en el mercado abierto al mayor valor tasado (After Repair Value / ARV).
-- **Perfil de Retorno:** Retorno sobre capital único al momento de la venta y liquidación final del SPV.
+- **Perfil de Retorno:** Retorno sobre capital único al momento de la venta y liquidación final del SPV (bullet payout: capital inicial + plusvalía neta).
+- **Cadencia de Dispersión:** **Única al término del proyecto** tras la venta formal del inmueble.
 - **Perfil de Riesgo:** Moderado (riesgo de desfase temporal en ventas o sobrecostos de obra).
-- **Monetización BRIDS:** SaaS de despliegue + Processing Fee inicial y fee de liquidación final.
+- **Monetización BRIDS:** SaaS Setup Fee por tiers + Fee de transacción de $2 USD por fracción emitida ($98/$2) y fee fijo de liquidación final.
 
 ---
 
-### Modelo 2: Fix & Hold (Renta Pasiva y Flujo de Caja Mensual)
+### Modelo 2: Fix & Hold (Renta Pasiva y Flujo de Caja Trimestral)
 - **Horizonte de Inversión:** Mediano a largo plazo (3 a 5+ años).
 - **Estrategia Operativa:** Compra de unidades residenciales o multifamiliares, adecuación para maximizar el valor de arrendamiento, colocación de inquilinos calificados y administración profesional continuada.
 - **Perfil de Retorno:** 
-  1. Flujo de caja recurrente: dividendos mensuales o trimestrales distribuidos directamente en USDC a las wallets titulares vía **Squads Multi-Sig**.
+  1. Flujo de caja recurrente: dividendos trimestrales distribuidos directamente en USDC a las wallets titulares vía **Squads Multi-Sig**.
   2. Apreciación patrimonial acumulada del inmueble en el tiempo.
+- **Cadencia de Dispersión:** **Trimestral (cada 3 meses)**. Permite consolidar ingresos por alquileres, amortiguar fluctuaciones de mantenimiento y entregar flujos predecibles.
 - **Perfil de Riesgo:** Bajo a moderado (protegido por contratos de arrendamiento y diversificación multi-unidad).
-- **Monetización BRIDS:** SaaS de configuración + Processing Fee en la emisión y micro-fees en dispersiones periódicas.
+- **Monetización BRIDS:** SaaS Setup Fee por tiers + Fee de transacción de $2 USD por fracción emitida ($98/$2) y fee fijo de transacción por cada corrida batch trimestral de dispersión.
 
 ---
 
@@ -73,8 +76,9 @@ graph TD
 - **Horizonte de Inversión:** 18 a 36 meses.
 - **Estrategia Operativa:** Adquisición de lote/terreno, tramitación de licencias urbanísticas, desarrollo arquitectónico, construcción y comercialización por etapas.
 - **Perfil de Retorno:** Máximo multiplicador de capital (Equity Multiple) al capturar el margen de transformación del suelo urbano en producto inmobiliario terminado.
+- **Cadencia de Dispersión:** **Al término del desarrollo o por fases de venta de unidades concluidas** (no trimestral continuo).
 - **Perfil de Riesgo:** Alto / Especializado (sensible a plazos de licencias y costos de materiales).
-- **Monetización BRIDS:** SaaS Listing Fee institucional escalonado + Processing Fees liberados por hitos de construcción verificados.
+- **Monetización BRIDS:** SaaS Setup Fee institucional por tiers + Fee de transacción de $2 USD por fracción emitida ($98/$2) y fees por corrida de liquidación de fase.
 
 ---
 
@@ -83,9 +87,9 @@ graph TD
 | Dimensión | Fix & Flip (Remodelación) | Fix & Hold (Renta Pasiva) | Greenfield (Desarrollo) |
 | :--- | :--- | :--- | :--- |
 | **Horizonte Temporal** | 6 a 12 meses | 3 a 5+ años | 18 a 36 meses |
-| **Frecuencia de Retorno** | Pago único al cierre de venta | **Mensual / Trimestral en USDC** | Por fases o hito de liquidación |
-| **Objetivo Principal** | Multiplicar capital rápido | **Generar sueldo/renta pasiva** | Máxima plusvalía patrimonial |
-| **Dispersión Squads** | Liquidación total final | Dispersión programada de rentas | Liberación por hitos de obra |
+| **Frecuencia de Dispersión** | **Única al cierre de venta** | **Trimestral (cada 3 meses) en USDC** | **Al cierre o por fase entregada** |
+| **Objetivo Principal** | Multiplicar capital rápido | **Generar renta pasiva trimestral** | Máxima plusvalía patrimonial |
+| **Dispersión Squads** | Liquidación total final | Dispersión trimestral automatizada | Liquidación por hitos de entrega |
 | **Perfil de Inversor Ideal** | Perfil dinámico / Reinversor | Ahorrador patrimonial / Retiro | Inversionista estratégico de largo plazo |
 
 ---
@@ -118,6 +122,7 @@ La ejecución física de las obras y la gestión de propiedades no la realiza el
 ---
 
 ## Historial de Revisiones
+- **v1.1 (2026-09-13):** Sincronización de cadencia de dispersión (trimestral en Fix&Hold vs cierre en Fix&Flip/Greenfield) y fees de transacción de infraestructura
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |

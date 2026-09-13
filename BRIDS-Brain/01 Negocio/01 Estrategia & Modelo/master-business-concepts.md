@@ -1,7 +1,8 @@
 ---
+updated_at: 2026-09-13
 title: "Documento Maestro de Conceptos e Ideas Fundacionales de Negocio"
 document_id: "master-business-concepts"
-version: 1.1.0
+version: "1.2"
 status: "approved"
 workflow: "core-business-concepts"
 category: "brand-context-master"
@@ -39,7 +40,7 @@ graph TD
     end
 
     subgraph Business_Economics["Economía y Monetización"]
-        C4["C4: Fee Architecture & Economics<br/>(SaaS + 1% Processing Fee)"]
+        C4["C4: Fee Architecture & Economics<br/>(SaaS Setup + $2/Fracción Fee)"]
         C7["C7: Real Estate Investment Models<br/>(Fix&Flip, Fix&Hold, Greenfield)"]
     end
 
@@ -101,17 +102,17 @@ graph TD
 
 ### C4: Arquitectura de Monetización, Estructura de Tarifas y Unit Economics
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-fee-architecture-unit-economics.md|concept-fee-architecture-unit-economics]]
-- **Custodio:** `business-consultant`, `pitch-deck-architect`
+- **Custodio:** `business-consultant`, `pitch-deck-architect`, `compliance-officer`
 - **One-Liner Canónico:**
-  > *"Monetizamos como el Shopify de la sindicación inmobiliaria: cobramos una tarifa de software al desarrollador por desplegar su proyecto y una tasa de procesamiento tecnológico sobre el volumen liquidado en Solana."*
-- **Tesis de Reutilización:** Desglosa el modelo de ingresos híbrido (SaaS Listing Fee de $5k–$25k + Processing Fee de 0.5%–1.5% + Recovery Fees + Royalties secundarias), proyectando márgenes brutos superiores al 80% y un ratio LTV/CAC > 12x en B2B.
+  > *"Monetizamos como infraestructura SaaS: cobramos un setup de software fijo al desarrollador por desplegar su proyecto, un fee de transacción de $2 USD por fracción emitida y tarifas de procesamiento por ejecución de dispersión en Solana."*
+- **Tesis de Reutilización:** Desglosa el modelo de ingresos SaaS puro sin porcentajes (SaaS Setup Fee por tiers de $1,000–$2,500+ USD + Fee de transacción de $2 USD por fracción de $100 + Fees por corrida de dispersión tecnológica + Recovery Fees), blindando a BRIDS contra la regulación de broker-dealer y sustentando márgenes brutos >90% con múltiplos SaaS (15x–25x ARR).
 
 ### C7: Modelos de Inversión Inmobiliaria y Estrategias de Retorno
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-real-estate-investment-models.md|concept-real-estate-investment-models]]
 - **Custodio:** `business-consultant`, `b2b-sponsor-lead`
 - **One-Liner Canónico:**
-  > *"Desde rentas pasivas mensuales en USDC hasta proyectos de remodelación rápida: BRIDS ofrece tres modelos de inversión estructurados para ajustarse al horizonte y perfil de cada inversor."*
-- **Tesis de Reutilización:** Estandariza la oferta de producto para marketplaces y catálogo: Fix & Flip (6-12 meses), Fix & Hold (3-5+ años con dividendos mensuales) y Greenfield (18-36 meses), operados por el partner experto Blue Brick Capital.
+  > *"Desde rentas pasivas trimestrales en USDC hasta proyectos de remodelación rápida: BRIDS ofrece tres modelos de inversión estructurados para ajustarse al horizonte y perfil de cada inversor."*
+- **Tesis de Reutilización:** Estandariza la oferta de producto para marketplaces y catálogo: Fix & Flip (6-12 meses, dispersión única al cierre), Fix & Hold (3-5+ años con dividendos trimestrales cada 3 meses) y Greenfield (18-36 meses, dispersión al cierre o por fase entregada), operados por el partner experto Blue Brick Capital.
 
 ---
 
@@ -160,6 +161,7 @@ Cuando inicialices cualquier tarea o generes un nuevo spec con `bash BRIDS-Engin
 ---
 
 ## Historial de Revisiones
+- **v1.2 (2026-09-13):** Sincronización de C4 a fees de transacción de software (/fracción, tiers de setup y dispersión trimestral) y C7
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
