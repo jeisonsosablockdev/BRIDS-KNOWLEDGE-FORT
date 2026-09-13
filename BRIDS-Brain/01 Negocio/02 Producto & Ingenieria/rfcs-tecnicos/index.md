@@ -23,6 +23,7 @@ Especificaciones formales de epics técnicos, procedimientos operativos estánda
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-012-referral-marketing-system.md|EPIC-012: Sistema de Mercadeo de Referidos en Panel de Usuario]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-013-pwa-push-notifications.md|EPIC-013: Aplicación Progresiva (PWA) y Notificaciones Web Push]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-014-stake-distribution-traceability.md|EPIC-014: Trazabilidad y Motor de Distribución de Rentas de Staking]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-015-rwa-yield-bearing-margin-collateral.md|EPIC-015: Colateral de Margen RWA Fix & Flip, Casos Límite y Desacoplamiento de Liquidez AMM]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/devnet-authority-lifecycle.md|Procedimiento Operativo: Ciclo de Vida de Autoridades Devnet]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/candy-machine-deploy-validation.md|Procedimiento Operativo: Validación de Despliegues de Candy Machine]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/health-checks-monitoring.md|Procedimiento Operativo: Monitoreo de Salud y Disponibilidad]]
