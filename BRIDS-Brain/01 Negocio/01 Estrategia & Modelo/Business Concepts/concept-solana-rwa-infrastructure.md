@@ -1,7 +1,7 @@
 ---
 title: "C3: Solana RWA Advantage y Estándar Metaplex Core"
 concept_id: "concept-solana-rwa-infrastructure"
-version: "1.2.0"
+version: "1.3.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "technology-blockchain"
@@ -76,38 +76,74 @@ Para dimensionar la elección de ingeniería de BRIDS, conviene examinar de form
 
 ---
 
-## 3. Innovación Técnica: El Estándar Metaplex Core
+## 3. Innovación Técnica: El Estándar Metaplex Core y su Sistema de Delegados
 
 El estándar histórico de NFTs en Solana (Token Metadata Legacy) requería crear entre 4 y 5 cuentas separadas en la blockchain para representar un solo activo (Mint, Token Account, Metadata Account, Master Edition y Edition Records), encareciendo la renta on-chain y complicando la programabilidad.
 
-BRIDS adopta **Metaplex Core**, la especificación de última generación diseñada específicamente para activos de alto rendimiento:
+BRIDS adopta **Metaplex Core**, la especificación de última generación diseñada específicamente para activos digitales de alto rendimiento con arquitectura de cuenta única (*Single Account Architecture*).
+
+### 3.1. Arquitectura de Plugins: FreezeDelegate, PermanentFreezeDelegate y PermanentTransferDelegate
+
+A diferencia de los contratos inteligentes en EVM (como ERC-721 o ERC-3643), donde implementar roles de congelamiento y transferencia forzada exige desplegar múltiples contratos proxy, storage layouts complejos y altos costos computacionales, **Metaplex Core integra un sistema nativo de plugins y delegados gestionados directamente por el runtime de Solana**.
+
+En la arquitectura de BRIDS, los permisos y controles estatutarios se estructuran en dos niveles complementarios:
 
 ```mermaid
-graph LR
-    subgraph Legacy_Approach["Enfoque Legacy (4-5 Cuentas Separadas)"]
-        Mint["Mint Account"] --- Token["Token Account"]
-        Token --- Meta["Metadata Account"]
-        Meta --- Master["Master Edition"]
-        Master --- Rec["Record Accounts"]
+graph TD
+    subgraph Collection_Level["1. Nivel Colección (Gobernanza Institucional / Squads Multi-Sig)"]
+        Col["Colección Inmobiliaria SPV (Core Collection)"]
+        PFD["PermanentFreezeDelegate (Autoridad: SQUADS_FREEZE_AUTHORITY)"]
+        PTD["PermanentTransferDelegate (Autoridad: SQUADS_TRANSFER_AUTHORITY)"]
+        Col --- PFD
+        Col --- PTD
     end
 
-    subgraph Metaplex_Core["Metaplex Core en BRIDS (1 Sola Cuenta)"]
-        Asset["Core Asset Account (Single PDA)"]
-        Asset --- Plugin1["Freeze Plugin (Bloqueo Preventivo)"]
-        Asset --- Plugin2["Authority Plugin (Recuperación y Transferencia)"]
-        Asset --- Data["On-Chain Asset Metadata (SPV, Lote, Derechos)"]
+    subgraph Asset_Level["2. Nivel Activo (Participación Fraccionada / Inversor)"]
+        Asset["Core Asset Account (Single PDA: 1 Sola Cuenta)"]
+        FD["FreezeDelegate (Autoridad: Owner / Inversionista)"]
+        Meta["Metadatos On-Chain (SPV ID, Cuotas, Lote, Documentos)"]
+        Asset --- FD
+        Asset --- Meta
     end
+
+    Col -->|Hereda Delegados Permanentes a| Asset
+    PFD -.->|Congelamiento Administrativo Preventivo| Asset
+    PTD -.->|Transferencia Delegada en Recuperación C2| Asset
+    FD -.->|Autogestión de Staking / Lock-up Voluntario| Asset
+
+    style Collection_Level fill:#eef2ff,stroke:#4f46e5,stroke-width:1.5px
+    style Asset_Level fill:#f0fdf4,stroke:#16a34a,stroke-width:1.5px
 ```
 
-### Ventajas de Metaplex Core en la Arquitectura de BRIDS:
+#### 1. `FreezeDelegate` (Nivel Activo / Autoridad: `Owner`)
+- **Instalación:** Se adjunta a cada activo individual en el momento de la emisión (*marketplace mint*).
+- **Autoridad:** Asignada estrictamente a la billetera del comprador (`Owner`).
+- **Propósito en BRIDS:** Permite al propio inversionista autogestionar el congelamiento y descongelamiento (*freeze / thaw*) de su certificado digital. Es el mecanismo técnico que habilita módulos de *staking* voluntario o bloqueo de permanencia para maximizar rendimiento, sin ceder la custodia ni transferir el activo a bovedas de terceros (*non-custodial staking*).
+
+#### 2. `PermanentFreezeDelegate` (Nivel Colección / Autoridad: `SQUADS_FREEZE_AUTHORITY`)
+- **Instalación:** Se configura permanentemente en la colección durante su despliegue y se hereda a todas las fracciones emitidas bajo ella.
+- **Autoridad:** Vinculada exclusivamente a la dirección multifirma institucional de **Squads Protocol** administrada por el SPV.
+- **Propósito en BRIDS:** Confiere la autoridad administrativa para congelar o descongelar cualquier activo de la colección en casos normativos o de seguridad:
+  - **Fase 1 del Protocolo de Recuperación (C2):** Al recibir el reporte de una billetera extraviada o comprometida, los administradores invocan de inmediato el `PermanentFreezeDelegate` sobre el NFT afectado, inmovilizándolo en la mempool y bloqueando transferencias, ventas en marketplaces o drenados ilícitos.
+  - **Cumplimiento Estatutario:** Ejecución de medidas cautelares o ventanas de permanencia obligatoria (*lock-up periods* bajo Reg CF / Reg D de la SEC).
+
+#### 3. `PermanentTransferDelegate` (Nivel Colección / Autoridad: `SQUADS_TRANSFER_AUTHORITY`)
+- **Instalación:** Se adjunta a nivel de colección on-chain durante la creación inicial.
+- **Autoridad:** Reservada para la tesorería multi-sig de Squads de los administradores del proyecto.
+- **Propósito en BRIDS:** Otorga la facultad delegada de **transferir el activo directamente sin requerir la firma de la clave privada de la billetera origen**.
+  - **Mecanismo Operativo de Restitución (C2, Fase 5):** Este plugin es la pieza determinante que resuelve el problema de las billeteras extraviadas. Una vez que el usuario completa su re-verificación biométrica en Stripe Identity (prueba de vida y coincidencia facial 1:1), confirma por canal secundario y transcurre la ventana de seguridad de 72 horas, la administración descongela el activo con el `PermanentFreezeDelegate` y ejecuta la transferencia inmediata hacia la nueva wallet verificada del inversionista mediante el `PermanentTransferDelegate`.
+  - **Preservación Total del Activo (Sin Burn & Remint):** Elimina la necesidad de quemar y reemitir un nuevo token. El título digital mantiene intactos su identificador de activo, correlativo histórico, antigüedad de emisión y metadatos contractuales.
+
+---
+
+### 3.2. Ventajas Integrales de Metaplex Core en la Arquitectura de BRIDS
 
 1. **Reducción del 85% en Costos de Almacenamiento (Single PDA):**
    - Todos los identificadores, balance, atributos y referencias contractuales residen en una única cuenta (*Program Derived Address*).
    - Esta optimización reduce en un 85% el depósito de renta en SOL requerido para registrar cada fracción inmobiliaria, permitiendo que los sponsors emitan miles de títulos fraccionados a una fracción mínima del costo tradicional.
 
-2. **Plugins de Ciclo de Vida Nativos (Sin Contratos Externos Complejos):**
-   - **Freeze Plugin (Congelamiento Administrativo):** Permite inmovilizar instantáneamente un activo ante el reporte de extravío de llaves (C2) o aplicar restricciones estatutarias temporales (*lock-up periods* bajo Reg CF / Reg D de la SEC) sin requerir lógica personalizada propensa a vulnerabilidades.
-   - **Authority Plugin (Descongelamiento y Transferencia Delegada):** Facilita la resolución de incidentes de llaves perdidas: una vez que el inversionista re-verifica su identidad biométrica en Stripe Identity y concluye el timelock de 72 horas, la autoridad administrativa descongela el activo y lo transfiere directamente a su nueva billetera verificada, sin necesidad de quemar (*burn*) ni reemitir un nuevo token.
+2. **Seguridad Nativa sin Proxies Vulnerables:**
+   - En EVM, estándares como ERC-3643 dependen de árboles de llamadas entre contratos externos para validar transferencias con identidad. En Metaplex Core sobre Solana, los delegados permanentes se evalúan a nivel de instrucción nativa en el runtime, garantizando costo computacional mínimo, ejecución atómica y cero riesgo de reentrancia.
 
 3. **Lectura e Indexación Directa:**
    - La estructura de datos plana de Metaplex Core agiliza las consultas en tiempo real desde exploradores de bloques y dashboards de inversionistas, sin depender de intermediarios de indexación lentos o centralizados.
@@ -123,6 +159,7 @@ graph LR
 | **Viabilidad Ticket Retail ($200)** | Inviable (Gas devora el capital) | Parcial (Fricción de depósitos) | **100% Viable y Rentable** |
 | **Dispersión de Micro-Dividendos** | Prohibitivo ($10+ de gas por pago) | Costoso a escala masiva | **Masivo por centavos (Vía Squads Multi-Sig)** |
 | **Arquitectura de Cuentas NFT** | Contrato ERC-721 / ERC-3643 | Contratos proxy complejos | **Single PDA (Metaplex Core, -85% renta)** |
+| **Control Administrativo / Recuperación** | Funciones manuales en smart contract | Proxies dependientes de multi-sig EVM | **PermanentFreezeDelegate y PermanentTransferDelegate nativos** |
 | **Riesgo de Puentes (Bridges)** | Nulo (L1 directa) | Alto (Dependencia de bridges) | **Nulo (Estado unificado global sin puentes)** |
 | **Moneda de Liquidación** | USDC en Ethereum | USDC puenteado en L2 | **USDC nativo directo de Circle en Solana** |
 
@@ -131,20 +168,20 @@ graph LR
 ## 5. Snippets Reutilizables (Ready-to-Cite)
 
 ### Snippet 5.1: Para Pitch Decks y Presentaciones a Inversores (YC / VCs)
-> *"Construir inversión inmobiliaria para el retail requiere micro-liquidaciones económicamente viables. En Solana, distribuir dividendos a 5,000 inversionistas cuesta menos de $2.50 USD en total, mientras que en Ethereum superaría los miles de dólares. Con el estándar Metaplex Core reducimos en 85% los costos de almacenamiento on-chain y dotamos a cada activo de plugins nativos de congelamiento administrativo y transferencia segura, logrando la agilidad de una fintech con el rigor del derecho societario."*
+> *"Construir inversión inmobiliaria para el retail requiere micro-liquidaciones económicamente viables. En Solana, distribuir dividendos a 5,000 inversionistas cuesta menos de $2.50 USD en total, mientras que en Ethereum superaría los miles de dólares. Con el estándar Metaplex Core reducimos en 85% los costos de almacenamiento on-chain y dotamos a cada activo de delegados permanentes (PermanentFreezeDelegate y PermanentTransferDelegate), permitiendo congelar administrativamente ante extravíos y transferir a nuevas billeteras verificadas sin quemar activos, logrando la agilidad de una fintech con el rigor del derecho societario."*
 
 ### Snippet 5.2: Para Artículos de Liderazgo de Pensamiento (Founder Voice)
-> *"Muchos proyectos de RWA eligen redes blockchain por inercia o prestigio de marca, sin evaluar los números elementales del negocio. Si tu misión es democratizar bienes raíces con tickets accesibles desde $200 dólares, no puedes permitir que una comisión de red de $15 dólares devore la rentabilidad trimestral de un inversionista. Elegimos Solana y Metaplex Core por pura ingeniería: confirmación en 400 milisegundos, costo casi nulo, estado unificado sin puentes vulnerables y contratos diseñados para proteger la titularidad del usuario."*
+> *"Muchos proyectos de RWA eligen redes blockchain por inercia o prestigio de marca, sin evaluar los números elementales del negocio. Si tu misión es democratizar bienes raíces con tickets accesibles desde $200 dólares, no puedes permitir que una comisión de red de $15 dólares devore la rentabilidad trimestral de un inversionista. Elegimos Solana y Metaplex Core por pura ingeniería: confirmación en 400 milisegundos, costo casi nulo, estado unificado sin puentes vulnerables y plugins nativos de delegación permanente que permiten descongelar y transferir activos con seguridad institucional."*
 
 ### Snippet 5.3: Para Preguntas Frecuentes de Desarrolladores y Sponsors B2B
 > *"**¿Por qué BRIDS emite sobre Solana y no sobre Ethereum?**  
-> Porque Solana permite a los desarrolladores inmobiliarios operar a escala masiva sin transferir costos abusivos a los compradores. Con Metaplex Core, los costos de estructurar miles de participaciones fraccionadas se reducen un 85%, los rendimientos se dispersan automáticamente en USDC nativo por fracciones de centavo y la administración cuenta con plugins nativos de congelamiento y recuperación institucional respaldados por la sociedad vehículo (SPV) del proyecto."*
+> Porque Solana permite a los desarrolladores inmobiliarios operar a escala masiva sin transferir costos abusivos a los compradores. Con Metaplex Core, los costos de estructurar miles de participaciones fraccionadas se reducen un 85%, los rendimientos se dispersan automáticamente en USDC nativo por fracciones de centavo y la administración cuenta con PermanentFreezeDelegate y PermanentTransferDelegate respaldados por la sociedad vehículo (SPV) para congelar y transferir títulos en caso de pérdida de llaves sin destruir el activo."*
 
 ---
 
 ## 6. Directrices Léxicas (Do's & Don'ts)
 
-- **Obligatorio Usar:** Red Solana, estándar Metaplex Core, arquitectura de cuenta única (Single PDA), tarifas subcéntimo (<$0.0005 USD), finalidad subsegundo (~400 ms), estado global unificado, plugins nativos de ciclo de vida (Freeze y Authority Plugin), USDC nativo de Circle, tesorería Squads Multi-Sig.
+- **Obligatorio Usar:** Red Solana, estándar Metaplex Core, arquitectura de cuenta única (Single PDA), tarifas subcéntimo (<$0.0005 USD), finalidad subsegundo (~400 ms), estado global unificado, plugins de ciclo de vida, FreezeDelegate (Owner), PermanentFreezeDelegate (SPV/Squads), PermanentTransferDelegate (SPV/Squads), transferencia delegada sin quema, USDC nativo de Circle, tesorería Squads Multi-Sig.
 - **Prohibido Terminantemente:** "Red barata" (usar siempre *eficiente, escalable o de micro-comisiones*), "criptomoneda volátil", "gas descontrolado", "quema y reemisión forzosa", "puentes inseguros", "el NFT reemplaza la escritura pública".
 
 ---
@@ -153,6 +190,7 @@ graph LR
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.3.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Profundización técnica en la arquitectura de plugins y delegados de Metaplex Core: especificación detallada de FreezeDelegate (nivel activo/Owner para staking), PermanentFreezeDelegate (nivel colección/Squads para bloqueo preventivo y regulatorio) y PermanentTransferDelegate (nivel colección/Squads para ejecución de transferencia directa en el protocolo de recuperación C2 sin quema de tokens). |
 | **1.2.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Reestructuración integral: profundización en los pilares positivos de Solana (velocidad subsegundo, comisiones subcéntimo, estado unificado, USDC nativo de Circle y paralelismo Sealevel), síntesis concisa de la comparativa frente a Ethereum y L2s, y sincronización del Authority Plugin de Metaplex Core con el flujo de recuperación de C2 (descongelamiento y transferencia sin quema obligatoria). |
 | **1.1.0** | 2026-09-13 | `founder-ghostwriter`, `compliance-officer` | Actualización de ticket nominal a $200 USD y sincronización de dispersión trimestral. |
 | **1.0.0** | 2026-09-11 | `founder-ghostwriter` & SDD Loop | Creación y fundamentación técnica de la ventaja de infraestructura Solana. |
