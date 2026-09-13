@@ -76,7 +76,7 @@ graph TD
 - **Custodio:** `compliance-officer`, `founder-ghostwriter`
 - **One-Liner Canónico:**
   > *"Inversión inmobiliaria con blindaje institucional: tu derecho está respaldado en el mundo real, donde perder una billetera jamás pondrá en riesgo tu patrimonio."*
-- **Tesis de Reutilización:** Resuelve la mayor objeción del inversor tradicional y retail. Demuestra cómo la conciliación entre el *Master Securityholder File* y los plugins programáticos de Metaplex Core restaura el patrimonio del usuario sin romper la descentralización.
+- **Tesis de Reutilización:** Resuelve la mayor objeción del inversor tradicional y retail. Demuestra cómo la arquitectura legal del SPV, la sobre-escritura en Squads Protocol y el plugin de autoridad de Metaplex Core restauran el acceso del usuario sin alterar el SPV ni romper la seguridad jurídica.
 
 ---
 

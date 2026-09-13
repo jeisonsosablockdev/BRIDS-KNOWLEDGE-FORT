@@ -1,7 +1,7 @@
 ---
 title: "C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)"
 concept_id: "concept-wallet-recovery-protocol"
-version: "1.4.0"
+version: "1.6.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "technology-security-compliance"
@@ -26,7 +26,7 @@ tags:
 
 > [!NOTE] Resumen Ejecutivo
 > El mayor obstáculo para la adopción masiva de la inversión inmobiliaria en Web3 es el dogma cripto de que *"la pérdida de la llave privada equivale a la pérdida irreversible del patrimonio"*. En BRIDS.io, la propiedad jurídica del inmueble emana del registro societario del SPV del proyecto, no de la posesión efímera de una clave criptográfica. Siguiendo el criterio de la **SEC sobre valores tokenizados** (*Division of Corporation Finance Statement on Tokenized Securities*), **el NFT representa digitalmente una posición pero no es el registro legal**: el registro legal lo lleva el actor legal correspondiente en el *Master Securityholder File*.
-> BRIDS opera como **infraestructura tecnológica pura**: no toca dinero, no hace KYC por sí mismo (delegado en partners certificados como Stripe Identity), no recomienda inversiones y no ejecuta la parte inmobiliaria ni reemplaza documentos legales. Ante el reporte de una billetera perdida, se ejecuta un protocolo institucional de 6 etapas con **re-verificación biométrica activa en Stripe Identity (3D Liveness), autenticación multi-canal (llamada telefónica Voice 2FA, SMS OTP y correo), período de enfriamiento (Timelock de 72 horas), sobre-escritura de beneficiarios en Squads Protocol y reasignación en Metaplex Core**. **Solo cambia el NFT y la wallet de cobro; el SPV, la titularidad del socio y la escritura del inmueble en el condado permanecen 100% inmutables**.
+> BRIDS opera como **infraestructura tecnológica pura**: no toca dinero, no hace KYC por sí mismo (delegado en partners certificados como Stripe Identity), no recomienda inversiones y no ejecuta la parte inmobiliaria ni reemplaza documentos legales. Ante el reporte de una billetera perdida, se ejecuta un protocolo institucional de 6 etapas: **congelamiento preventivo ejecutado exclusivamente por administradores mediante Metaplex Core, re-verificación biométrica en tiempo real con Stripe Identity (VerificationSession con re-escaneo de ID físico vigente y selfie con prueba de vida), validación secundaria (llamada telefónica, correo u OTP), período de enfriamiento (Timelock de 72 horas), sobre-escritura en Squads Protocol (sin alterar la estructura societaria del SPV) y descongelamiento/transferencia a la nueva wallet mediante el plugin de autoridad de Metaplex Core**. **Solo cambia la interfaz transaccional y la wallet de cobro; el SPV, la titularidad societaria y la escritura del inmueble en el condado permanecen 100% inmutables**.
 
 ---
 
@@ -105,88 +105,81 @@ Cuando un inversionista pierde el acceso a su billetera, olvida su frase semilla
 sequenceDiagram
     autonumber
     actor Inv as Inversor (Wallet Extraviada)
-    participant Web as Portal BRIDS (Auth)
-    participant Auth as Auth Multi-Canal (Voice/SMS/Email)
-    participant Stripe as Stripe Identity (3D Liveness)
+    participant Web as Portal BRIDS (Frontend / Auth)
+    participant Stripe as Stripe Identity (VerificationSession)
+    participant Auth as Canales Secundarios (Llamada/Email/OTP)
     participant Time as Motor de Timelock (72h Cooldown)
-    participant SPV as Administrador del SPV / Compliance
+    participant Admin as Administradores BRIDS / Compliance
     participant Squads as Squads Multi-Sig (Solana)
     participant Sol as Metaplex Core (Solana)
 
-    Note over Inv,Web: FASE 1: Notificación de Incidencia
-    Inv->>Web: Formulario de Pérdida + Firma Criptográfica de Nueva Wallet
-    Web->>Sol: Invocación Preventiva de Freeze Plugin (NFT Antiguo Bloqueado)
+    Note over Inv,Web: FASE 1: Notificación de Incidencia y Congelamiento
+    Inv->>Web: Reporte de Incidencia (somete wallet a congelar si la tiene) + Firma Criptográfica de Nueva Wallet
+    Web->>Admin: Notificación de solicitud de congelamiento preventivo
+    Admin->>Sol: Invocación del Freeze Plugin (Administradores congelan el NFT preventivamente)
 
-    Note over Inv,Stripe: FASE 2: Re-autenticación Multi-Factor Mandatoria
-    Web->>Auth: Envío de SMS OTP + Disparo de Llamada Telefónica (Voice 2FA)
-    Inv->>Auth: Ingreso de PIN por Voz/Teclado + Código SMS + Clic en Email
-    Web->>Stripe: Inicio de Sesión Biométrica Activa
-    Inv->>Stripe: Selfie 3D Liveness Check + Re-escaneo Documental
-    Stripe-->>Web: Match Biométrico Exitoso (>99% vs KYC Base)
+    Note over Inv,Stripe: FASE 2: Re-KYC Biométrico en Tiempo Real y Validación Secundaria
+    Web->>Stripe: Frontend levanta nueva sesión KYC (VerificationSession)
+    Inv->>Stripe: Re-escaneo de Documento Físico Vigente + Selfie en Vivo
+    Stripe-->>Web: Validación en Tiempo Real (Prueba de Vida 3D + Match Facial con Documento)
+    Web->>Auth: Disparo de Validación Secundaria (Llamada Telefónica / Correo / OTP)
+    Inv->>Auth: Confirmación por Canal Secundario
 
-    Note over Web,Time: FASE 3: Período de Enfriamiento (Timelock 72h)
-    Web->>Time: Inicio de Timelock de 72 Horas Hábiles
+    Note over Web,Time: FASE 3: Período Preventivo de Enfriamiento (Timelock 72h)
+    Web->>Time: Inicio de Timelock Mandatorio de 72 Horas Hábiles
     Time-->>Auth: Notificaciones Masivas de Alerta a Todos los Canales
-    Note over Time: Ventana de Pánico: Si no fue el usuario, puede abortar la operación
+    Note over Time: Ventana de Pánico: Si no fue el usuario legítimo, puede abortar la operación
 
-    Note over Time,SPV: FASE 4: Vencimiento de Timelock y Aprobación
-    Time->>SPV: Conclusión de 72h sin alerta. Expediente habilitado
-    SPV->>SPV: Actualización del Libro de Socios (Master Securityholder File)
+    Note over Time,Squads: FASE 4: Sobre-escritura en SQUADS Protocol
+    Time->>Squads: Timelock concluido sin incidencias. Validación de expediente
+    Note over Squads: No se cambia nada en el SPV; se actualiza la tesorería multi-sig
+    Squads->>Squads: Propuesta Multi-Sig y sobre-escritura de Pubkey Receptora de Rentas
 
-    Note over SPV,Sol: FASE 5: Ejecución On-Chain (Squads + Metaplex Core)
-    SPV->>Squads: Propuesta Multi-Sig: Reemplazar Pubkey de Pago en Bóveda
-    Squads->>Squads: Aprobación y Sobre-escritura de Wallet Receptora
-    SPV->>Sol: Revocación/Burn de NFT antiguo + Emisión/Transfer a Nueva Wallet
+    Note over Admin,Sol: FASE 5: Descongelamiento y Transferencia (Plugin de Autoridad)
+    Admin->>Sol: Plugin de Autoridad Metaplex Core: Descongelar NFT y Transferir a Nueva Wallet Autenticada
 
     Note over Sol,Inv: FASE 6: Cierre y Restauración Completa
-    Sol-->>Inv: Nuevo NFT en nueva wallet. Dividendos reconectados en Squads.
+    Sol-->>Inv: NFT transferido a nueva wallet. Cobro de dividendos restablecido en Squads.
 ```
 
 ### Fase 1: Solicitud Criptográfica y Reporte de Incidencia
 - El inversionista accede al portal institucional de BRIDS.io e inicia el flujo de *"Reporte de Billetera Extraviada o Comprometida"*.
-- **Conexión de la Nueva Billetera:** El usuario debe conectar su nueva billetera de reemplazo (Phantom, Solflare, etc.) y firmar un mensaje criptográfico *off-chain* no custodial:
-  ```text
-  "BRIDS-RECOVERY-REQUEST | SPV_ID: [DE-LLC-UUID] | OLD_WALLET: [PUBKEY_A] | NEW_WALLET: [PUBKEY_B] | TIMESTAMP: [ISO_DATE]"
-  ```
-- **Pre-congelamiento On-Chain Inmediato:** De forma automática, el sistema invoca el plugin `Freeze` de Metaplex Core sobre el NFT ubicado en la wallet antigua. A partir de este segundo, el activo no puede ser transferido, listado en marketplaces ni drenado por terceros.
+- **Declaración de la Dirección Afectada:** El usuario somete en el formulario la dirección pública de la billetera que desea congelar, en caso de tenerla disponible o recordarla.
+- **Conexión y Firma Criptográfica de la Nueva Billetera:** El usuario conecta su nueva billetera de reemplazo (Phantom, Solflare, etc.) y firma criptográficamente (`SignMessage`) una declaración formal y estructurada emitida por el sistema para vincular su nueva clave pública con el expediente de recuperación, acreditando el control de la nueva wallet sin exponer claves privadas.
+- **Congelamiento Administrativo On-Chain:** **El usuario no ejecuta ninguna acción de congelamiento.** El congelamiento del activo es potestad y ejecución exclusiva de los **administradores de la plataforma**, quienes, al recibir y validar preliminarmente el reporte de incidencia, invocan administrativamente el *Freeze Plugin* del estándar Metaplex Core sobre el NFT ubicado en la dirección comprometida. A partir de ese instante, el activo digital queda bloqueado contra cualquier intento de transferencia, venta en marketplaces o drenado de fondos mientras se procesa la verificación.
 
-### Fase 2: Re-autenticación Multi-Factor Mandatoria (4 Capas de Verificación)
-Considerando que el usuario ya aprobó su KYC inicial al registrarse, el protocolo exige acreditar que quien solicita la recuperación es indiscutiblemente la misma persona natural:
-1. **Verificación Biométrica Activa en Stripe Identity (3D Liveness Match):**
-   - El solicitante debe completar una sesión biométrica en vivo con análisis de profundidad (*3D Liveness Detection*) para evitar ataques de *deepfakes* o fotografías estáticas.
-   - El motor de Stripe Identity ejecuta una comparación facial biométrica (*1:1 Face Match*) contra el documento oficial (pasaporte o ID estatal) almacenado de forma encriptada en su registro KYC original.
-   - **Criterio de Aprobación:** Coincidencia biométrica de alta confianza (>99%). Cualquier discrepancia cancela el proceso y congela la cuenta.
-2. **Autenticación por Llamada Telefónica Automatizada (Voice Call 2FA):**
-   - El sistema realiza una llamada telefónica automatizada al número celular registrado y verificado en la apertura de cuenta.
-   - Una voz interactiva encriptada dicta un código de seguridad efímero o solicita al usuario ingresar su PIN de seguridad previamente configurado.
-3. **Desafío SMS OTP Out-of-Band:**
-   - Envío simultáneo de un código OTP de 8 caracteres alfanuméricos vía SMS.
-4. **Validación de Correo Electrónico Registrado:**
-   - Confirmación explícita mediante un enlace criptográfico de un solo uso enviado a la dirección de correo oficial del titular.
+### Fase 2: Re-KYC Biométrico en Tiempo Real y Canales Secundarios
+Considerando que el usuario ya aprobó su KYC inicial al registrarse, el protocolo exige autenticar que quien solicita la recuperación es indiscutiblemente la misma persona natural:
+1. **Apertura de Sesión KYC (`VerificationSession`):** El usuario solicita recuperar su cuenta y el frontend de BRIDS.io levanta de inmediato una nueva sesión de verificación dedicada (`VerificationSession` mediante el SDK de Stripe Identity).
+2. **Re-escaneo de Documento Físico Vigente y Captura de Selfie:** El usuario debe volver a escanear su documento de identidad físico vigente (pasaporte, licencia o ID gubernamental) y tomarse una selfie en vivo a través de la cámara del dispositivo.
+3. **Biometría en Tiempo Real vía Stripe Identity:** La biometría la ejecuta Stripe en tiempo real: valida la prueba de vida (*3D Liveness Detection*) de la nueva selfie para descartar deepfakes o fotografías estáticas, y confirma que el rostro coincide tanto con el documento físico presentado como con el registro histórico validado de la cuenta.
+4. **Validación Secundaria (Llamada Telefónica, Correo o Código OTP):** Tras la confirmación biométrica exitosa por parte de Stripe, el sistema activa una comprobación adicional por canales externos:
+   - Llamada telefónica automatizada con voz interactiva (Voice 2FA / PIN).
+   - O enlace de confirmación criptográfico enviado al correo electrónico registrado.
+   - O código OTP temporal de 8 dígitos vía SMS al número móvil registrado.
 
 ### Fase 3: Período Preventivo de Enfriamiento y Timelock (72 Horas Hábiles)
 El factor crítico para neutralizar el secuestro de cuentas (*account takeover*) y el fraude de identidad es el **factor tiempo**:
-- Una vez aprobada la biometría y los factores 2FA, el sistema activa un **Timelock Mandatorio de 72 horas hábiles (3 días calendario)**.
+- Una vez aprobada la biometría en Stripe y los factores secundarios, el sistema activa un **Timelock Mandatorio de 72 horas hábiles (3 días calendario)**.
 - **Alertas de Pánico Redundantes:** Durante el transcurso de las 72 horas, se disparan alertas continuas por SMS, correo electrónico y notificaciones *push*:
   > *"ALERTA DE SEGURIDAD: Se ha solicitado el reemplazo de su billetera en BRIDS.io. La transferencia del título a su nueva dirección se ejecutará en 72 horas. Si usted solicitó este cambio, no requiere hacer nada. Si USTED NO REALIZÓ ESTA SOLICITUD, pulse de inmediato este enlace de emergencia para cancelar la operación y bloquear su cuenta."*
 - Si en cualquier momento dentro de las 72 horas el usuario legítimo activa el botón de pánico, la operación se cancela de inmediato y el caso escala a arbitraje legal y revisión manual con compliance.
 
-### Fase 4: Conciliación Estatutaria en el SPV
-- Finalizado el timelock de 72 horas sin disputas, el oficial de cumplimiento (`compliance-officer`) o el agente administrativo del SPV valida el expediente generado.
-- Se actualiza el **Master Securityholder File** del SPV: se sustituye la dirección criptográfica asociada al socio por la nueva clave pública verificada.
-- **Principio Invariable:** La titularidad de las participaciones del SPV nunca cambia de manos; únicamente se actualiza el identificador de su interfaz de cobro y tenencia digital.
+### Fase 4: Sobre-escritura en SQUADS Protocol (Bóveda de Dispersión)
+- **Sin Alteraciones en el SPV:** Concluido el timelock de 72 horas sin disputas, **no se cambia nada en el SPV**. La condición societaria del inversionista, sus unidades de membresía y la titularidad del inmueble permanecen inmutables; no se requiere trámite registral societario ni reforma estatutaria.
+- **Actualización On-Chain en Squads Multi-Sig:** El cambio se ejecuta de forma operativa en la tesorería multifirma de **Squads Protocol en Solana**. Los administradores autorizados aprueban una propuesta multi-sig para sobre-escribir la tabla de beneficiarios de rendimientos de la bóveda de dispersión del proyecto: se sustituye la dirección pública antigua por la nueva wallet verificada del usuario, garantizando que los futuros dividendos en USDC fluyan directamente a la nueva dirección.
 
-### Fase 5: Ejecución On-Chain (Squads Multi-Sig + Metaplex Core)
-La culminación del proceso ocurre a nivel técnico sin custodia manual:
-1. **Sobre-escritura en SQUADS Protocol (Bóveda de Dispersión):**  
-   El SPV opera su dispersión de rentas trimestrales a través de una tesorería multifirma de **Squads Protocol en Solana**. Se genera una propuesta interna para sobre-escribir la tabla de beneficiarios de rendimientos: la dirección de pago antigua es revocada y se registra la nueva wallet verificada. De esta forma, los futuros dividendos en USDC llegarán automáticamente a la nueva dirección.
-2. **Revocación y Re-emisión en Metaplex Core:**  
-   Mediante la autoridad delegada administrativa del contrato de la colección, se ejecuta la instrucción de quemado o invalidación permanente (*Burn / Revoke*) del NFT congelado en la billetera perdida y se transfiere/reemite un NFT con el mismo identificador de serie, metadatos y derechos a la nueva billetera del inversionista.
+### Fase 5: Descongelamiento y Transferencia con Plugin de Autoridad de Metaplex Core
+Una vez que el usuario se ha autenticado con éxito y se ha superado el timelock de seguridad:
+1. **Invocación del Plugin de Autoridad:** Los administradores hacen uso del plugin de autoridad (*Authority Plugin / Freeze Plugin*) del estándar **Metaplex Core**.
+2. **Descongelamiento del Activo:** Se levanta la restricción de congelamiento (*Unfreeze*) que mantenía inmovilizado el NFT en la billetera extraviada.
+3. **Transferencia Directa a la Nueva Billetera:** Mediante la instrucción de autoridad delegada del estándar, los administradores ejecutan la transferencia del NFT hacia la nueva wallet verificada del inversionista.
+- **Preservación del Activo:** No se requiere destruir (*burn*) ni reemitir un nuevo token; Metaplex Core permite transferir el mismo activo de manera atómica, manteniendo su historial on-chain, metadatos, correlativo de serie y derechos intactos.
 
 ### Fase 6: Cierre y Restauración Completa
 - El inversionista recibe la confirmación formal por correo y en su dashboard de BRIDS.io.
-- Su nuevo NFT aparece visible en su billetera y en el portafolio de la plataforma.
-- Los derechos de voto (si aplican) y el flujo de caja trimestral quedan perfectamente restablecidos.
+- Su NFT aparece visible en su nueva billetera y en el portafolio de la plataforma.
+- Los derechos de voto (si aplican) y el flujo de rentas trimestrales en Squads quedan plenamente restablecidos.
 
 ---
 
@@ -194,16 +187,13 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 | Requisito / Protocolo | Mecanismo Operativo | Criterio de Aprobación | Acción ante Discrepancia o Fallo |
 | :--- | :--- | :--- | :--- |
-| **1. Reporte de Incidencia** | Formulario en portal autenticado de BRIDS.io | Firma criptográfica de la nueva wallet (`SignMessage`) | Solicitud rechazada; no se inicia el proceso. |
-| **2. Pre-congelamiento On-Chain** | Invocación del *Freeze Plugin* de Metaplex Core | Confirmación de transacción en Solana sub-segundo | Reintento automático en RPC de respaldo. |
-| **3. Re-KYC Biométrico** | Stripe Identity SDK (Captura facial 3D Liveness) | Coincidencia biométrica >99% vs. KYC base original | Bloqueo preventivo de cuenta por sospecha de usurpación. |
-| **4. Llamada Telefónica (Voice 2FA)** | Gateway telefónico automatizado con IVR interactivo | Ingreso correcto de PIN de seguridad del inversor | Fallo registrado; máximo 3 llamadas de reintento. |
-| **5. Desafío SMS OTP** | Código temporal de 8 dígitos al móvil verificado | Entrada exacta dentro de los 10 minutos de validez | Expiración de sesión; reintento tras 1 hora. |
-| **6. Confirmación por Correo** | Enlace firmado con token SHA-256 de un solo uso | Clic de confirmación desde el buzón registrado | No se inicia la cuenta regresiva del Timelock. |
-| **7. Timelock de Enfriamiento** | Motor cronometrado autónomo de 72 horas hábiles | 72 horas transcurridas sin reporte de fraude o pánico | Cancelación inmediata si el usuario presiona el botón de pánico. |
-| **8. Registro Societario** | Actualización en el *Master Securityholder File* del SPV | Firma del Administrador Legal del SPV | Retención hasta aclaración documental. |
-| **9. Sobre-escritura en Squads** | Modificación de pubkey receptora en contrato Squads | Firma multi-sig de autoridades del SPV | Dividendos retenidos en escrow hasta completar firma. |
-| **10. Re-emisión Metaplex Core** | *Burn* de token antiguo y emisión a nueva wallet | Transacción final confirmada en mainnet Solana | Título digital restaurado y auditado on-chain. |
+| **1. Reporte de Incidencia** | Formulario en portal BRIDS.io; el usuario somete la wallet a congelar (si la tiene) | Firma criptográfica de la nueva wallet (`SignMessage`) sobre la declaración formal | Solicitud rechazada; no se inicia el proceso. |
+| **2. Congelamiento On-Chain** | Ejecutado **exclusivamente por administradores** mediante el *Freeze Plugin* de Metaplex Core | Confirmación de transacción en Solana sub-segundo | Reintento en RPC de respaldo; el usuario no congela. |
+| **3. Re-KYC Biométrico** | Frontend levanta nueva `VerificationSession` en Stripe Identity | Re-escaneo de ID físico vigente + selfie; validación 3D Liveness y match facial en tiempo real | Bloqueo preventivo de cuenta por sospecha de usurpación. |
+| **4. Validación Secundaria** | Canal externo registrado: llamada automatizada (Voice 2FA), correo o código OTP | Confirmación satisfactoria del desafío por el canal seleccionado | Fallo registrado; no avanza a timelock. |
+| **5. Timelock de Enfriamiento** | Motor cronometrado autónomo de 72 horas hábiles | 72 horas transcurridas sin reporte de fraude o activación del botón de pánico | Cancelación inmediata si el usuario presiona el botón de pánico. |
+| **6. Sobre-escritura en Squads** | Modificación de pubkey receptora en contrato Squads Multi-Sig (sin alterar el SPV) | Firma multi-sig de administradores del proyecto | Retención temporal de dispersiones en escrow. |
+| **7. Descongelamiento y Transferencia** | Invocación del Plugin de Autoridad de Metaplex Core para descongelar y transferir a nueva wallet | Transacción de transferencia confirmada en Solana mainnet | Título digital restaurado y auditado on-chain. |
 
 ---
 
@@ -211,13 +201,13 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 ### Snippet 5.1: Para Preguntas Frecuentes (FAQ / Help Center)
 > *"**¿Si pierdo el acceso a mi billetera Web3, pierdo mi inversión en el inmueble?**  
-> No. En BRIDS.io tu derecho de propiedad no depende de una clave privada, sino de tu condición de socio en el SPV propietario del inmueble. Si pierdes tu billetera, activas nuestro Protocolo Institucional de Recuperación: verificas tu identidad mediante biometría facial en Stripe Identity, confirmas la llamada de seguridad, se activa una ventana de protección de 72 horas para blindar tu cuenta, y reasignamos tu título digital y tu dirección de cobro en Squads Protocol a tu nueva billetera. Tu participación en el SPV nunca se ve alterada."*
+> No. En BRIDS.io tu derecho de propiedad no depende de una clave privada, sino de tu condición de socio en el SPV propietario del inmueble. Si pierdes tu billetera, activas nuestro Protocolo Institucional de Recuperación: nuestros administradores congelan preventivamente el activo on-chain, re-verificas tu identidad en tiempo real con Stripe Identity re-escaneando tu documento físico y tomándote una selfie con prueba de vida, confirmas por canal de seguridad secundario (llamada, correo u OTP), y tras un período de protección de 72 horas, sobre-escribimos tu dirección de cobro en Squads Protocol y usamos el plugin de autoridad de Metaplex Core para descongelar y transferir tu certificado digital a tu nueva billetera. Tu participación en el SPV nunca se altera."*
 
 ### Snippet 5.2: Para Pitch Decks de Y Combinator y Fondos de Venture Capital
-> *"Eliminamos la mayor fricción de entrada para el inversor tradicional: el terror a perder la clave privada. En BRIDS, el NFT es únicamente el software de comportamiento y liquidación sobre Solana; el activo real está blindado por su SPV dedicado. Gracias a Metaplex Core y Squads Protocol, podemos revocar y reemitir activos con verificación biométrica en Stripe Identity y timelocks auditables, combinando la liquidez instantánea de Web3 con la seguridad jurídica del derecho corporativo estadounidense."*
+> *"Eliminamos la mayor fricción de entrada para el inversor tradicional: el terror a perder la clave privada. En BRIDS, el NFT es únicamente el software de comportamiento y liquidación sobre Solana; el activo real está blindado por su SPV dedicado. Gracias al plugin de autoridad de Metaplex Core y a Squads Protocol, los administradores pueden descongelar y transferir activos a nuevas billeteras verificadas tras una re-verificación biométrica en Stripe Identity (VerificationSession en tiempo real) y un timelock de 72 horas, combinando la liquidez instantánea de Web3 con la seguridad jurídica del derecho corporativo."*
 
 ### Snippet 5.3: Para el Memorando de Cumplimiento y Legal Data Room
-> *"Conforme a la doctrina de la SEC ('Substance over Form') y las disposiciones aplicables al registro societario y mercantil de entidades comerciales, la titularidad de los títulos de inversión reside en el Master Securityholder File del SPV. Los NFTs de Metaplex Core operan como certificados digitales de participación. En caso de extravío o vulneración de llaves criptográficas, el emisor ejerce su derecho estatutario de conciliación registral, sustituyendo la clave pública en el registro societario y en el protocolo multifirma de Squads, sin alterar la titularidad legal del inmueble inscrito en el County Recorder."*
+> *"Conforme a la doctrina de la SEC ('Substance over Form') y las disposiciones aplicables al registro societario y mercantil de entidades comerciales, la titularidad de los títulos de inversión reside en el Master Securityholder File del SPV. Los NFTs de Metaplex Core operan como certificados digitales de participación. En caso de extravío o vulneración de llaves criptográficas, el SPV no requiere alteración estatutaria; la administración actualiza la clave pública receptora de rentas en el protocolo multifirma de Squads y ejerce el plugin de autoridad de Metaplex Core para descongelar y transferir el activo digital a la nueva billetera autenticada del titular, sin alterar la titularidad legal del inmueble inscrito en el County Recorder."*
 
 ---
 
@@ -261,8 +251,8 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 ## 8. Directrices Léxicas (Do's & Don'ts)
 
-- **Obligatorio Usar:** Certificado digital programable, membresía en el SPV, titularidad societaria inalienable, re-verificación biométrica activa en Stripe Identity, llamada automatizada Voice 2FA, timelock de enfriamiento de 72 horas, sobre-escritura en Squads Protocol, Master Securityholder File, doctrina SEC de sustancia sobre forma.
-- **Prohibido Terminantemente:** "El NFT es la escritura de la casa", "pérdida irreversible", "wallet irrecuperable", "code-is-law absoluto", "bypassear la ley estatal", "rescate manual discrecional sin timelock", "título de propiedad en la blockchain".
+- **Obligatorio Usar:** Certificado digital programable, membresía en el SPV, congelamiento preventivo exclusivo por administradores, plugin de autoridad de Metaplex Core para descongelar y transferir, re-verificación biométrica activa en Stripe Identity (VerificationSession con re-escaneo de ID físico y selfie en tiempo real), canales secundarios (llamada telefónica, correo u OTP), timelock de enfriamiento de 72 horas con alertas de pánico, sobre-escritura de tesorería en Squads Protocol, doctrina SEC de sustancia sobre forma.
+- **Prohibido Terminantemente:** "El usuario congela su propia billetera", "se altera la estructura societaria del SPV para cambiar la wallet", "burn and remint innecesario cuando existe plugin de autoridad", "El NFT es la escritura de la casa", "pérdida irreversible", "wallet irrecuperable", "code-is-law absoluto", "bypassear la ley estatal", "rescate manual discrecional sin timelock", "título de propiedad en la blockchain".
 
 ---
 
@@ -270,6 +260,7 @@ La culminación del proceso ocurre a nivel técnico sin custodia manual:
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.6.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Actualización integral de flujo y responsabilidades: congelamiento preventivo atribuido exclusivamente a administradores tras someter dirección afectada, inicio de VerificationSession en frontend con re-escaneo de documento físico vigente y selfie en tiempo real evaluada por Stripe Identity seguida de confirmación secundaria (llamada, correo u OTP), confirmación de que no se altera el SPV (cambio acotado a tesorería en Squads Protocol), y ejecución de descongelamiento y transferencia directa a nueva wallet autenticada mediante el plugin de autoridad de Metaplex Core sin destrucción/reemisión. |
 | **1.5.0** | 2026-09-13 | `compliance-officer` | Generalización de la jurisdicción del SPV: eliminación de referencias rígidas a Delaware para reflejar que la sociedad vehículo se constituye conforme a la estructuración jurídica específica de cada proyecto inmobiliario. |
 | **1.4.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Simplificación estructural: sustitución del marco legal inicial por una nota ejecutiva destacada con la cita textual de la SEC ('El NFT representa digitalmente una posición, pero no es el registro legal') y enlace oficial, agilizando la lectura directa hacia la arquitectura y el protocolo de recuperación. |
 | **1.3.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Integración de los 7 principios institucionales de BRIDS, enlaces reales y oficiales de SEC (Corp Fin Statement on Tokenized Securities), FinCEN CVC Guidance, eCFR 31 CFR 1023.220, FTC Safeguards Rule, y adición de los Apéndices 16 y 17 para revisión con counsel. |
