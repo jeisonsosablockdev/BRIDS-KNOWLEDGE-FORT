@@ -12,7 +12,8 @@ quality_threshold: 8.5
 hitl_1_approved_at: "2026-09-13T05:46:03.470Z"
 hitl_2_approved_at: "2026-09-13T06:09:48.426Z"
 status: approved
-version: "1.0"
+workflow: "production"
+version: "1.1"
 created_at: 2026-09-13
 updated_at: 2026-09-13
 tags:
@@ -45,7 +46,7 @@ tags:
 ## 2. Definición del Problema Financiero (El Capital Ocioso)
 
 En los modelos inmobiliarios tradicionales y en plataformas RWA de primera generación (RealT, Lofty AI), el capital del inversionista permanece completamente congelado durante el ciclo de vida de la obra:
-1. Un inversionista adquiere una fracción de \$100 a \$5,000 USD en un proyecto de compra, renovación y venta (*Fix & Flip*).
+1. Un inversionista adquiere una fracción de \$200 a \$5,000 USD en un proyecto de compra, renovación y venta (*Fix & Flip*).
 2. La remodelación y comercialización toma entre 6 y 12 meses.
 3. Durante ese período, el inversionista no puede disponer de su liquidez ni aprovechar oportunidades del mercado sin malvender su título en mercados secundarios ilíquidos con descuentos predatorios del 15% al 25%.
 
@@ -64,34 +65,34 @@ sequenceDiagram
     participant SPV as Delaware Series LLC (Inmueble)
 
     Note over Alice,SPV: Caso Alice: Trade Exitoso (Doble Retorno)
-    Alice->>Vault: Deposita NFT Fix & Flip ($100 USD nominal)
-    Vault->>Alice: Asigna margen de trading (LTV 75% = $75 USDC)
+    Alice->>Vault: Deposita NFT Fix & Flip ($200 USD nominal)
+    Vault->>Alice: Asigna margen de trading (LTV 75% = $150 USDC)
     Alice->>AMM: Abre posición apalancada USDC/SOL
     AMM->>Alice: Cierra con ganancia (+$20 USDC netos)
     Alice->>Vault: Salda posición de margen
     Vault->>Alice: Desbloquea NFT Fix & Flip intacto
-    SPV->>Alice: Liquidación final de obra: $112 USDC al vender el inmueble
+    SPV->>Alice: Liquidación final de obra: $224 USDC al vender el inmueble
 
     Note over Alice,SPV: Caso Bob: Trade Fallido y Liquidación Backstop
     actor Bob as Trader (Bob)
-    Bob->>Vault: Deposita NFT Fix & Flip ($100 USD nominal)
-    Vault->>Bob: Asigna margen ($75 USDC)
+    Bob->>Vault: Deposita NFT Fix & Flip ($200 USD nominal)
+    Vault->>Bob: Asigna margen ($150 USDC)
     Bob->>AMM: Trade en pérdidas (Supera umbral de liquidación)
     Vault->>Bob: Confiscación programática del NFT vía Authority Hook
     participant BRIDS as Bóveda Backstop / Warehouse Facility
     Vault->>BRIDS: Transfiere NFT a la tesorería de crédito
-    BRIDS->>AMM: Inyecta $75 USDC inmediatos en 400ms (Cero Hold para el AMM)
-    SPV->>BRIDS: Al cerrar obra física (mes 8), SPV paga $112 USDC a la tesorería
+    BRIDS->>AMM: Inyecta $150 USDC inmediatos en 400ms (Cero Hold para el AMM)
+    SPV->>BRIDS: Al cerrar obra física (mes 8), SPV paga $224 USDC a la tesorería
 ```
 
 ### 3.1. Caso Alice (El Trader Exitoso)
-* Alice posee un NFT de Fix & Flip con valor nominal de **\$100 USD**.
+* Alice posee un NFT de Fix & Flip con valor nominal de **\$200 USD**.
 * Deposita el activo en la bóveda de margen de BRIDS.
-* El protocolo aplica un *haircut* de riesgo prudente del 25% (LTV máximo del 75%), otorgándole **\$75 USDC de margen**.
+* El protocolo aplica un *haircut* de riesgo prudente del 25% (LTV máximo del 75%), otorgándole **\$150 USDC de margen**.
 * Alice abre una posición de compra en el par SOL/USDC.
 * Obtiene un beneficio neto de **+\$20 USDC**.
 * Cierra su posición de trading, retira sus \$20 USDC de ganancia líquida a su billetera de Solana y libera su NFT.
-* **Resultado:** Alice generó \$20 hoy y mantiene su derecho societario en el SPV para cobrar \$112 USDC cuando la casa se venda.
+* **Resultado:** Alice generó \$20 hoy y mantiene su derecho societario en el SPV para cobrar \$224 USDC cuando la casa se venda.
 
 ### 3.2. Caso Bob (El Trader Liquidado)
 * Bob abre la misma posición pero el mercado se mueve en su contra y consume su margen de garantía.
@@ -103,47 +104,47 @@ sequenceDiagram
 
 ## 4. El Problema de la Pérdida Parcial: ¿Qué pasa si el trader no pierde todo?
 
-Un error fatal en sistemas de colateralización rígidos es la **confiscación desproporcionada**: si Bob deposita un NFT de \$100 USD, toma un margen de \$75 USDC y cierra su trade con una pérdida de solo \$15 USDC (conservando \$60 de saldo libre), **sería confiscatorio e ineficiente quitarle el inmueble completo de \$100 por una deuda de \$15**.
+Un error fatal en sistemas de colateralización rígidos es la **confiscación desproporcionada**: si Bob deposita un NFT de \$200 USD, toma un margen de \$150 USDC y cierra su trade con una pérdida de solo \$30 USDC (conservando \$120 de saldo libre), **sería confiscatorio e ineficiente quitarle el inmueble completo de \$200 por una deuda de \$30**.
 
 EPIC-015 implementa una **Arquitectura de Liquidación Parcial en Tres Niveles**:
 
 ```mermaid
 flowchart TD
-    TradeLoss["Bob pierde $15 de su margen de $75"] --> Check{"¿El trader repone el margen en efectivo?"}
+    TradeLoss["Bob pierde $30 de su margen de $150"] --> Check{"¿El trader repone el margen en efectivo?"}
     
-    Check -- "SÍ (Ventana 24h)" --> Restitution["Restaura los $15 USDC en billetera"]
+    Check -- "SÍ (Ventana 24h)" --> Restitution["Restaura los $30 USDC en billetera"]
     Restitution --> NFTFree["NFT desbloqueado sin penalización"]
     
     Check -- "NO (Vence Gracia)" --> Route{"¿El trader cierra voluntariamente?"}
     
     Route -- "Cierra posición" --> Waterfall["Liquidación en Cascada (Waterfall Lien)"]
     Waterfall --> Hook["Hook de Gravamen en SPV Delaware"]
-    Hook --> Settlement["Al venderse la casa física ($112):<br/>- Protocolo cobra $15 deuda + $2 fee<br/>- Bob recibe $95 USDC en su billetera"]
+    Hook --> Settlement["Al venderse la casa física ($224):<br/>- Protocolo cobra $30 deuda + $4 fee<br/>- Bob recibe $190 USDC en su billetera"]
     
     Route -- "Pérdida catastrófica (> 80%)" --> ForcedConfiscation["Liquidación Forzosa Total"]
-    ForcedConfiscation --> Backstop["Fondo Backstop compra NFT a $92"]
-    Backstop --> PoolRefund["Pool AMM recupera $75 de deuda en 400ms"]
-    Backstop --> ExcessRefund["Excedente de $17 USDC devuelto a Bob"]
+    ForcedConfiscation --> Backstop["Fondo Backstop compra NFT a $184"]
+    Backstop --> PoolRefund["Pool AMM recupera $150 de deuda en 400ms"]
+    Backstop --> ExcessRefund["Excedente de $34 USDC devuelto a Bob"]
 ```
 
 ### Nivel 1: Ventana de Gracia y Reintegro en Efectivo (*Margin Cure Window*)
-* Si Bob cierra un trade con pérdida parcial (-\$15 USDC), su NFT permanece bloqueado temporalmente en la bóveda escrow.
-* Bob dispone de un período de gracia (ej. 24 a 48 horas) para depositar \$15 USDC desde su billetera.
+* Si Bob cierra un trade con pérdida parcial (-\$30 USDC), su NFT permanece bloqueado temporalmente en la bóveda escrow.
+* Bob dispone de un período de gracia (ej. 24 a 48 horas) para depositar \$30 USDC desde su billetera.
 * Al reponer el efectivo, la deuda se cancela inmediatamente y el NFT de Metaplex Core se desbloquea al 100%.
 
 ### Nivel 2: Gravamen sobre la Liquidación Final (*Waterfall Lien Settlement*)
-* Si Bob no cuenta con liquidez para cubrir los \$15 USDC de pérdida, **no pierde el inmueble**.
+* Si Bob no cuenta con liquidez para cubrir los \$30 USDC de pérdida, **no pierde el inmueble**.
 * El contrato de la bóveda anota un gravamen de deuda on-chain (*Encumbrance Hook*) sobre el NFT.
-* Al concluir la obra física del Fix & Flip (mes 8) y vender la propiedad por \$112 USDC por título:
-  1. El contrato inteligente de dispersión de Squads deduce automáticamente los \$15 USDC de deuda + una tasa de penalización del 2% (\$0.30 USDC) a favor del pool del AMM.
-  2. Los **\$96.70 USDC restantes se transfieren automáticamente a la billetera de Bob**.
+* Al concluir la obra física del Fix & Flip (mes 8) y vender la propiedad por \$224 USDC por título:
+  1. El contrato inteligente de dispersión de Squads deduce automáticamente los \$30 USDC de deuda + una tasa de penalización del 2% (\$0.60 USDC) a favor del pool del AMM.
+  2. Los **\$193.40 USDC restantes se transfieren automáticamente a la billetera de Bob**.
 * **Resultado:** Bob absorbió su pérdida de trading sin perder su plusvalía inmobiliaria remanente.
 
 ### Nivel 3: Reembolso del Excedente de Equidad (*Excess Equity Refund*) en Liquidación Forzosa
-* Si la pérdida supera el ratio crítico de mantenimiento (pérdida > \$70 USDC) y Bob no responde al margin call:
-* La bóveda confisca el NFT de \$100 y lo transfiere a la Línea de Almacén / Fondo Backstop con un descuento preacordado de \$92 USDC.
-* La deuda de \$75 USDC con el AMM se salda al instante.
-* **El remanente de equidad:** \$92 (valor de venta rápida) menos \$75 (deuda saldada) = **\$17 USDC se acreditan inmediatamente a la billetera de Bob**.
+* Si la pérdida supera el ratio crítico de mantenimiento (pérdida > \$140 USDC) y Bob no responde al margin call:
+* La bóveda confisca el NFT de \$200 y lo transfiere a la Línea de Almacén / Fondo Backstop con un descuento preacordado de \$184 USDC.
+* La deuda de \$150 USDC con el AMM se salda al instante.
+* **El remanente de equidad:** \$184 (valor de venta rápida) menos \$150 (deuda saldada) = **\$34 USDC se acreditan inmediatamente a la billetera de Bob**.
 * El protocolo nunca retiene injustamente el capital no endeudado del usuario.
 
 ---
@@ -166,13 +167,13 @@ flowchart LR
     end
 
     subgraph Capa_Enlace["2. El Enlace Atómico (Solana Block: 400ms)"]
-        AMM_Engine -->|Entrega NFT de $100| Warehouse["Warehouse Facility / Backstop Vault"]
-        Warehouse -->|Inyecta $92 USDC líquidos| AMM_Engine
+        AMM_Engine -->|Entrega NFT de $200| Warehouse["Warehouse Facility / Backstop Vault"]
+        Warehouse -->|Inyecta $184 USDC líquidos| AMM_Engine
     end
 
     subgraph Capa_Capital_Paciente["3. Capa de Capital Paciente (6 a 12 Meses)"]
         Warehouse --> CreditFunds["Fondos de Crédito Privado & Family Offices"]
-        CreditFunds -->|Espera conclusión de obra| SaleEvent["Venta de Inmueble Físico ($112 USDC)"]
+        CreditFunds -->|Espera conclusión de obra| SaleEvent["Venta de Inmueble Físico ($224 USDC)"]
         SaleEvent -->|Rendimiento Anualizado > 25%| CreditFunds
     end
 ```
@@ -187,7 +188,7 @@ flowchart LR
 ### La Tesis del "Capital Paciente": ¿Quién asume el *hold* y por qué?
 El *hold* de 6 a 12 meses es asumido por **Fondos de Crédito Privado Institucional (tipo Maple Finance, Clearpool) y Family Offices**:
 * Estos actores **no buscan hacer trading diario**: buscan rentabilidad predecible y segura en dólares.
-* Al comprar el NFT liquidado de Bob a **\$92 USDC** y esperar 6 meses a que la propiedad se liquide en **\$112 USDC**, obtienen un **rendimiento bruto del 21.7% en 6 meses (equivalente a más de un 40% APY anualizado)** respaldado por una hipoteca real en Delaware.
+* Al comprar el NFT liquidado de Bob a **\$184 USDC** y esperar 6 meses a que la propiedad se liquide en **\$224 USDC**, obtienen un **rendimiento bruto del 21.7% en 6 meses (equivalente a más de un 40% APY anualizado)** respaldado por una hipoteca real en Delaware.
 * Es una operación de arbitraje de liquidez donde todos ganan: el AMM queda solvente en 400 milisegundos, Bob recupera su excedente y el capital paciente maximiza su rendimiento.
 
 ---
@@ -200,7 +201,7 @@ Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen ca
 | :--- | :--- | :--- |
 | **1. Ataque de Inflación de Tasación (*Appraisal Inflation Attack*)** | Un promotor o usuario coludido con un perito infla artificialmente la valuación de una casa en ruinas a \$500,000 USD, mintea NFTs, extrae \$375,000 USDC en margen de trading y abandona las posiciones para quedarse con el dinero prestado. | **Anclaje en Costo Real de Adquisición + Doble Oráculo:** El LTV de margen **NUNCA** se calcula sobre la plusvalía proyectada futura, sino estrictamente sobre el **precio de compra real escriturado en la escritura pública de compraventa en Delaware**. Además, se exige doble certificación pericial independiente auditada por el Sponsor B2B antes de habilitar el activo en la bóveda de margen. |
 | **2. Ataque de Retraso de Obra y Costo de Acarreo (*Duration Extension Exploit*)** | La obra de remodelación se estanca o retrasa 18 meses adicionales. El trader mantiene su margen abierto a costo cero mientras el AMM sufre iliquidez prolongada. | **Tasa de Acarreo Flotante (*Dynamic Carry Interest Rate*):** El uso del NFT como margen devenga una tasa de interés continua amortizable contra las rentas o plusvalías del SPV. Si el proyecto supera el cronograma estipulado en el prospecto de Delaware, la tasa de penalización escala dinámicamente, incentivando al trader a liquidar o reponer el margen. |
-| **3. Cisne Negro Inmobiliario (*Underlying Physical Asset Destruction*)** | La casa sufre un incendio total, defecto estructural oculto o siniestro no previsto, reduciendo el valor del inmueble de \$100 a \$40 USD mientras el usuario tiene \$75 USDC de margen abierto. | **Póliza *Builder's Risk* Obligatoria + Tramo de Primera Pérdida (*First-Loss Capital*):** Cada SPV de Delaware tiene como requisito estatutario una póliza de seguro de construcción a todo riesgo con beneficiario preferente al SPV. Además, los Sponsors B2B deben aportar un tramo de capital subordinado (10%-15%) que absorbe las primeras pérdidas antes de que el valor del NFT retail se degrade. |
+| **3. Cisne Negro Inmobiliario (*Underlying Physical Asset Destruction*)** | La casa sufre un incendio total, defecto estructural oculto o siniestro no previsto, reduciendo el valor del inmueble de \$200 a \$80 USD mientras el usuario tiene \$150 USDC de margen abierto. | **Póliza *Builder's Risk* Obligatoria + Tramo de Primera Pérdida (*First-Loss Capital*):** Cada SPV de Delaware tiene como requisito estatutario una póliza de seguro de construcción a todo riesgo con beneficiario preferente al SPV. Además, los Sponsors B2B deben aportar un tramo de capital subordinado (10%-15%) que absorbe las primeras pérdidas antes de que el valor del NFT retail se degrade. |
 | **4. Colusión de Liquidación en Pares Ilíquidos (*Wash Liquidation Attack*)** | El atacante usa una cuenta A (con el NFT) y una cuenta B (con USDC en un par sin liquidez). Manipula el precio artificialmente en un bloque para que la cuenta B gane y la cuenta A sea liquidada intencionalmente, extrayendo USDC del fondo Backstop. | **Confinamiento de Pares de Margen a Alta Liquidez:** El margen respaldado por NFTs de BRIDS **SOLO** se puede utilizar para operar contra pares institucionales ultra-líquidos (SOL/USDC, BTC/USDC) con oráculos de precios de baja latencia con tolerancia de desvío (*Pyth Confidence Intervals*). Queda estrictamente prohibido usar el margen en tokens de baja capitalización o pools internos manipulables. |
 
 ---
@@ -244,3 +245,7 @@ Esta propuesta ampliada constituye la base de modelado de riesgo para el Roadmap
 ## 🔗 Trazabilidad
 - Artefacto de Especificación: [[00 Inbox/Specs/epic-015-rwa-yield-bearing-margin-collateral.spec.md]]
 - Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
+
+
+## 🔄 Historial de Revisiones (Changelog)
+- **v1.1 (2026-09-13):** Escalar casos de estudio y ejemplos numéricos al ticket nominal canónico de  USD

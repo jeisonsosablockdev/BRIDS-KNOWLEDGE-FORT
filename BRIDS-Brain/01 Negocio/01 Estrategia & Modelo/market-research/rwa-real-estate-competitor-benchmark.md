@@ -12,7 +12,8 @@ quality_threshold: 8.5
 hitl_1_approved_at: "2026-09-13T03:57:03.969Z"
 hitl_2_approved_at: "2026-09-13T03:58:40.330Z"
 status: approved
-version: "1.0"
+workflow: "production"
+version: "1.1"
 created_at: 2026-09-13
 updated_at: 2026-09-13
 tags:
@@ -29,7 +30,7 @@ tags:
 > **Sub-Agentes Autores:** `market-research-analyst`, `business-consultant`, `pitch-deck-architect` | **Revisor:** `sdd-reviewer`
 
 > [!NOTE] Resumen Ejecutivo
-> El mercado de tokenización de bienes raíces (Real Estate RWA) ha transitado por tres generaciones tecnológicas y regulatorias. Mientras que los pioneros de la primera ola (RealT, Lofty AI, Blocksquare) quedaron limitados por los altos costos de gas en redes EVM, fragmentación de liquidez y la ausencia de salvaguardas legales ante pérdida de llaves privadas, los actores institucionales (Securitize, Roofstock) se enfocaron exclusivamente en grandes transacciones mayoristas o compras de viviendas completas. BRIDS.io consolida la categoría **Infraestructura de Software RWA en Solana**, combinando fraccionamiento retail desde $100 USD, costos transaccionales subcéntimo con Metaplex Core, estricta separación corporativa en Delaware y un protocolo nativo de recuperación mediante verificación de identidad.
+> El mercado de tokenización de bienes raíces (Real Estate RWA) ha transitado por tres generaciones tecnológicas y regulatorias. Mientras que los pioneros de la primera ola (RealT, Lofty AI, Blocksquare) quedaron limitados por los altos costos de gas en redes EVM, fragmentación de liquidez y la ausencia de salvaguardas legales ante pérdida de llaves privadas, los actores institucionales (Securitize, Roofstock) se enfocaron exclusivamente en grandes transacciones mayoristas o compras de viviendas completas. BRIDS.io consolida la categoría **Infraestructura de Software RWA en Solana**, combinando fraccionamiento retail desde $200 USD, costos transaccionales subcéntimo con Metaplex Core, estricta separación corporativa en Delaware y un protocolo nativo de recuperación mediante verificación de identidad.
 
 ---
 
@@ -101,7 +102,7 @@ graph TD
 * **Estructura Legal:** Transfer Agent registrado ante la SEC y Broker-Dealer con sistema de negociación alternativa (ATS).
 * **Mecánica Financiera:** Tokenización de grandes fondos de crédito privado e instrumentos institucionales (ejemplo: fondo BUIDL de BlackRock).
 * **Puntos Fuertes:** Respaldo institucional de primer orden mundial; alianza directa con BlackRock y KKR.
-* **Limitaciones Críticas:** No atiende el mercado minorista de real estate. Exige acreditación de inversionista estricta y tickets mínimos de $10,000 a $100,000+ USD. Su infraestructura no está optimizada para la dispersión de micro-dividendos de $100 USD.
+* **Limitaciones Críticas:** No atiende el mercado minorista de real estate. Exige acreditación de inversionista estricta y tickets mínimos de $10,000 a $100,000+ USD. Su infraestructura no está optimizada para la dispersión de micro-dividendos de $200 USD.
 
 ### 2.5. Roofstock onChain (EE.UU.)
 * **Año de Fundación:** 2022 (división Web3 de Roofstock).
@@ -138,7 +139,7 @@ graph TD
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Red Blockchain** | Gnosis / ETH | Algorand | Ethereum / Polygon | Polygon / BNB | Permisionada VARA | **Solana (Metaplex Core)** |
 | **Costo por Transacción** | $0.05 – $2.50 USD | ~$0.001 USD | $5.00 – $35.00 USD | $0.03 – $0.15 USD | N/A (Interno) | **<$0.0005 USD (Subcéntimo)** |
-| **Ticket Mínimo** | ~$50 USD | $50 USD | $10,000 – $100,000+ | $100 EUR | Variable (~$1k+) | **$100 USD** |
+| **Ticket Mínimo** | ~$50 USD | $50 USD | $10,000 – $100,000+ | $100 EUR | Variable (~$1k+) | **$200 USD** |
 | **Vehículo Legal** | Delaware LLC | Delaware LLC | Delaware SPV / Reg D | Préstamo Participativo | VARA ARVA Cat. 1 | **Delaware Series LLC** |
 | **Modelo Societario** | Copropiedad accionaria | Copropiedad accionaria | Fondo Institucional | Deuda subordinada | Título Catastral | **Master Securityholder File** |
 | **Protocolo de Recuperación** | Inexistente | Soporte Web2 manual | KYC Tradicional | Base de datos privada | Proceso notarial local | **Stripe Identity + Freeze/Authority Hook** |
@@ -154,7 +155,7 @@ BRIDS no intenta competir en el mismo terreno desgastado de la primera ola. Cons
 ```mermaid
 flowchart TD
     subgraph Deficiencias_Mercado["El Vacío del Mercado Actual"]
-        D1["Ethereum/EVM: Gas fees destruyen rentas de $100"]
+        D1["Ethereum/EVM: Gas fees destruyen rentas de $200"]
         D2["Code is Law ciego: Si te hackean, pierdes tu propiedad"]
         D3["Préstamos Participativos: Riesgo de quiebra de la plataforma"]
         D4["Silos Gubernamentales: Activos sin liquidez secundaria"]
@@ -173,7 +174,7 @@ flowchart TD
     D4 -.->|Superado por| B4
 ```
 
-1. **Ingeniería de Micro-Liquidaciones en Solana:** Una dispersión mensual de dividendos a 5,000 inversionistas cuesta miles de dólares en gas en Ethereum y decenas de dólares en Polygon. En Solana, liquidamos la misma nómina de rentas por menos de $2.50 USD en total, haciendo rentable el ticket de $100 USD.
+1. **Ingeniería de Micro-Liquidaciones en Solana:** Una dispersión mensual de dividendos a 5,000 inversionistas cuesta miles de dólares en gas en Ethereum y decenas de dólares en Polygon. En Solana, liquidamos la misma nómina de rentas por menos de $2.50 USD en total, haciendo rentable el ticket de $200 USD.
 2. **Superación del Dogma "Code is Law":** Ninguna familia ni inversor sensato tolerará que un click equivocado o una frase semilla extraviada borre un patrimonio de bienes raíces. Mediante Metaplex Core y Stripe Identity, la ley de Delaware respalda el activo: quemamos la participación comprometida y reemitimos el título al nuevo wallet verificado.
 3. **Segregación Patrimonial Real:** A diferencia de plataformas que usan notas de deuda o préstamos participativos donde el inversor asume el riesgo de crédito de la empresa emisora, cada propiedad en BRIDS pertenece a un SPV independiente. Si BRIDS Inc. dejara de operar, el inmueble y los derechos de los socios permanecen intactos en Delaware.
 4. **Modelo B2B SaaS Bilateral:** No operamos como una correduría tradicional que compra propiedades para su propio balance. Proveemos la infraestructura tecnológica a promotores inmobiliarios (Sponsors B2B) que ya poseen los inmuebles y necesitan acelerar su levantamiento de capital, asegurando un inventario constante sin riesgo de balance.
@@ -195,3 +196,7 @@ Para fondos de Venture Capital, promotores inmobiliarios y socios institucionale
 ## 🔗 Trazabilidad
 - Artefacto de Especificación: [[00 Inbox/Specs/rwa-real-estate-competitor-benchmark.spec.md]]
 - Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
+
+
+## 🔄 Historial de Revisiones (Changelog)
+- **v1.1 (2026-09-13):** Actualización del ticket mínimo de BRIDS a  USD en benchmark de competidores

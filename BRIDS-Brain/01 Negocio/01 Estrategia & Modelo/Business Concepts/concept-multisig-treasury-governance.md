@@ -1,7 +1,8 @@
 ---
+updated_at: 2026-09-13
 title: "Concepto Maestro: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia"
 concept_id: "concept-multisig-treasury-governance"
-version: 1.0.0
+version: "1.1"
 status: "approved"
 workflow: "core-business-concepts"
 category: "technology-governance"
@@ -47,7 +48,7 @@ flowchart TD
     subgraph Recaudacion["1. Recaudación Transparente"]
         Inv1["Inversor A ($500 USDC)"] --> Boveda
         Inv2["Inversor B ($1,000 USDC)"] --> Boveda
-        Inv3["Inversor N ($100 USDC)"] --> Boveda
+        Inv3["Inversor N ($200 USDC)"] --> Boveda
         Boveda[("Bóveda Squads Multi-Sig<br/>(SPV Delaware en Solana)")]
     end
 
@@ -114,4 +115,5 @@ BRIDS utiliza la infraestructura estándar de la industria en Solana:
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.1.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Actualización del ticket de inversor a $200 USDC en diagrama de gobernanza. |
 | **1.0.0** | 2026-09-11 | `compliance-officer` & SDD Loop | Creación inicial de la nota conceptual sobre gobernanza y Squads Multi-Sig. |

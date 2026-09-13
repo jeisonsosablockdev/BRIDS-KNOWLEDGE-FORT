@@ -56,7 +56,7 @@ graph TD
 - **Perfil de Retorno:** Retorno sobre capital único al momento de la venta y liquidación final del SPV (bullet payout: capital inicial + plusvalía neta).
 - **Cadencia de Dispersión:** **Única al término del proyecto** tras la venta formal del inmueble.
 - **Perfil de Riesgo:** Moderado (riesgo de desfase temporal en ventas o sobrecostos de obra).
-- **Monetización BRIDS:** SaaS Setup Fee por tiers + Fee de transacción de $2 USD por fracción emitida ($98/$2) y fee fijo de liquidación final.
+- **Monetización BRIDS:** SaaS Setup Fee por tiers + Fee de transacción de $4 USD por fracción emitida ($196/$4) y fee fijo de liquidación final.
 
 ---
 
@@ -68,7 +68,7 @@ graph TD
   2. Apreciación patrimonial acumulada del inmueble en el tiempo.
 - **Cadencia de Dispersión:** **Trimestral (cada 3 meses)**. Permite consolidar ingresos por alquileres, amortiguar fluctuaciones de mantenimiento y entregar flujos predecibles.
 - **Perfil de Riesgo:** Bajo a moderado (protegido por contratos de arrendamiento y diversificación multi-unidad).
-- **Monetización BRIDS:** SaaS Setup Fee por tiers + Fee de transacción de $2 USD por fracción emitida ($98/$2) y fee fijo de transacción por cada corrida batch trimestral de dispersión.
+- **Monetización BRIDS:** SaaS Setup Fee por tiers + Fee de transacción de $4 USD por fracción emitida ($196/$4) y fee fijo de transacción por cada corrida batch trimestral de dispersión.
 
 ---
 
@@ -78,7 +78,7 @@ graph TD
 - **Perfil de Retorno:** Máximo multiplicador de capital (Equity Multiple) al capturar el margen de transformación del suelo urbano en producto inmobiliario terminado.
 - **Cadencia de Dispersión:** **Al término del desarrollo o por fases de venta de unidades concluidas** (no trimestral continuo).
 - **Perfil de Riesgo:** Alto / Especializado (sensible a plazos de licencias y costos de materiales).
-- **Monetización BRIDS:** SaaS Setup Fee institucional por tiers + Fee de transacción de $2 USD por fracción emitida ($98/$2) y fees por corrida de liquidación de fase.
+- **Monetización BRIDS:** SaaS Setup Fee institucional por tiers + Fee de transacción de $4 USD por fracción emitida ($196/$4) y fees por corrida de liquidación de fase.
 
 ---
 

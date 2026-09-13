@@ -10,7 +10,7 @@ platform: "instagram"
 content_type: "carrusel-4-slides"
 aspect_ratio: "4:5"
 technical_reference: "Democratización Financiera en Solana"
-asset_class: "Inversión Inmobiliaria desde $100 USD"
+asset_class: "Inversión Inmobiliaria desde $200 USD"
 status: draft
 version: "1.0"
 created_at: 2026-09-07
@@ -27,14 +27,14 @@ tags:
 # [SOCIAL CARRUSEL] RETAIL FRACTIONALIZATION THESIS 100 USD
 
 > [!NOTE]
-> **Resumen Ejecutivo:** Carrusel institucional de 4 slides en formato 4:5 enfocado en Inversión Inmobiliaria desde $100 USD con referencia técnica a *Democratización Financiera en Solana*. Diseñado para traccionar inversores acreditados y sponsors inmobiliarios destacando rendimiento, liquidez on-chain y estructura legal dual SPV.
+> **Resumen Ejecutivo:** Carrusel institucional de 4 slides en formato 4:5 enfocado en Inversión Inmobiliaria desde $200 USD con referencia técnica a *Democratización Financiera en Solana*. Diseñado para traccionar inversores acreditados y sponsors inmobiliarios destacando rendimiento, liquidez on-chain y estructura legal dual SPV.
 
 ---
 
 ## 🎯 Resumen de la Publicación
 - **Plataforma:** instagram (`@brids_io`)
 - **Formato:** 4 Slides Verticales 4:5 (`1080x1350 px`)
-- **Activo / Tesis:** Inversión Inmobiliaria desde $100 USD
+- **Activo / Tesis:** Inversión Inmobiliaria desde $200 USD
 - **Ancla Técnica:** *Democratización Financiera en Solana*
 - **Carpeta de Activos:** `02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-07-carrusel-retail-fractionalization-thesis-100-usd/`
 
@@ -45,7 +45,7 @@ tags:
 ### Slide 1: Portada Hero (Atracción Institucional)
 ![[02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-07-carrusel-retail-fractionalization-thesis-100-usd/01-portada-hero.png]]
 *Titular en Imagen:* **"Real Estate Tokenization on Solana."**  
-*Micro-copy:* Inversión Inmobiliaria desde $100 USD • Rendimiento On-Chain Institucional
+*Micro-copy:* Inversión Inmobiliaria desde $200 USD • Rendimiento On-Chain Institucional
 
 ---
 

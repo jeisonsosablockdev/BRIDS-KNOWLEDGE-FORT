@@ -46,7 +46,7 @@ graph TD
 
     subgraph Market_GTM["Mercado y Clientes (ICPs)"]
         C5["C5: B2B Sponsor Value Prop<br/>(Sindicación rápida para desarrolladores)"]
-        C6["C6: Retail Fractionalization Thesis<br/>(Inclusión desde $100 USD)"]
+        C6["C6: Retail Fractionalization Thesis<br/>(Inclusión desde $200 USD)"]
     end
 
     subgraph VC_Thesis["Tesis Institucional & VCs"]
@@ -86,7 +86,7 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md|concept-solana-rwa-infrastructure]]
 - **Custodio:** `founder-ghostwriter`, `pitch-deck-architect`
 - **One-Liner Canónico:**
-  > *"BRIDS corre sobre Solana porque es la única red donde liquidar una inversión inmobiliaria de $100 USD o dispersar dividendos a miles de usuarios cuesta fracciones de centavo y toma menos de un segundo."*
+  > *"BRIDS corre sobre Solana porque es la única red donde liquidar una inversión inmobiliaria de $200 USD o dispersar dividendos a miles de usuarios cuesta fracciones de centavo y toma menos de un segundo."*
 - **Tesis de Reutilización:** Sustenta el análisis de "Why Solana?" en pitch decks de YC y whitepapers técnicos. Explica la reducción del 85% en costos de almacenamiento lograda por la arquitectura de cuenta única de Metaplex Core frente a estándares legacy.
 
 ### C8: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia
@@ -104,8 +104,8 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-fee-architecture-unit-economics.md|concept-fee-architecture-unit-economics]]
 - **Custodio:** `business-consultant`, `pitch-deck-architect`, `compliance-officer`
 - **One-Liner Canónico:**
-  > *"Monetizamos como infraestructura SaaS: cobramos un setup de software fijo al desarrollador por desplegar su proyecto, un fee de transacción de $2 USD por fracción emitida y tarifas de procesamiento por ejecución de dispersión en Solana."*
-- **Tesis de Reutilización:** Desglosa el modelo de ingresos SaaS puro sin porcentajes (SaaS Setup Fee por tiers de $1,000–$2,500+ USD + Fee de transacción de $2 USD por fracción de $100 + Fees por corrida de dispersión tecnológica + Recovery Fees), blindando a BRIDS contra la regulación de broker-dealer y sustentando márgenes brutos >90% con múltiplos SaaS (15x–25x ARR).
+  > *"Monetizamos como infraestructura SaaS: cobramos un setup de software fijo al desarrollador por desplegar su proyecto, un fee de transacción de $4 USD por fracción emitida y tarifas de procesamiento por ejecución de dispersión en Solana."*
+- **Tesis de Reutilización:** Desglosa el modelo de ingresos SaaS puro sin porcentajes (SaaS Setup Fee por tiers de $1,000–$2,500+ USD + Fee de transacción de $4 USD por fracción de $200 + Fees por corrida de dispersión tecnológica + Recovery Fees), blindando a BRIDS contra la regulación de broker-dealer y sustentando márgenes brutos >90% con múltiplos SaaS (15x–25x ARR).
 
 ### C7: Modelos de Inversión Inmobiliaria y Estrategias de Retorno
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-real-estate-investment-models.md|concept-real-estate-investment-models]]
@@ -125,12 +125,12 @@ graph TD
   > *"BRIDS es la infraestructura de software que permite a los desarrolladores inmobiliarios sindicar capital hasta 5 veces más rápido, reduciendo sus costos de colocación y automatizando su cap table en Solana."*
 - **Tesis de Reutilización:** Pilar del discurso de ventas outbound y prospección institucional B2B. Demuestra cómo el promotor ahorra hasta $55,000 USD en estructuración y reduce semanas de cobranza manual a transacciones con un click.
 
-### C6: Tesis de Democratización y Fraccionamiento Retail ($100 USD)
+### C6: Tesis de Democratización y Fraccionamiento Retail ($200 USD)
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-retail-fractionalization-thesis.md|concept-retail-fractionalization-thesis]]
 - **Custodio:** `founder-ghostwriter`, `pitch-deck-architect`
 - **One-Liner Canónico:**
-  > *"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados en EE.UU. desde $100 USD."*
-- **Tesis de Reutilización:** El núcleo de la narrativa del fundador y de captación de usuarios retail: dolarización de ahorros protegida contra la inflación, colateral físico verificable y desvinculación total de memecoins especulativas.
+  > *"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados en EE.UU. desde $200 USD."*
+- **Tesis de Reutilización:** El núcleo de la narrativa del fundador y de captación de usuarios retail: dolarización de ahorros protegida contra la inflación, colateral físico verificable y desvinculación total de memecoins especulativas con fracciones accesibles de $200 USD ($4 de fee).
 
 ---
 
@@ -140,7 +140,7 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-rwa-identity-vc-thesis.md|concept-rwa-identity-vc-thesis]]
 - **Custodio:** `pitch-deck-architect`, `founder-ghostwriter`, `business-consultant`
 - **One-Liner Canónico:**
-  > *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $100 USD con títulos recuperables y respaldo legal en Delaware."*
+  > *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $200 USD con títulos recuperables y respaldo legal en Delaware."*
 - **Tesis de Reutilización:** Pilar de pitch decks para Y Combinator y firmas de Venture Capital. Desmonta la trampa de valoración de "gestora inmobiliaria" (1x–3x EBITDA) frente a "infraestructura SaaS" (15x–30x ARR), fundamenta el modelo asset-light con 80%+ de margen bruto, y explica por qué superamos las tres fallas de RWA 1.0 (gas fees de Ethereum, dogma de code-is-law y limbo regulatorio).
 
 ---

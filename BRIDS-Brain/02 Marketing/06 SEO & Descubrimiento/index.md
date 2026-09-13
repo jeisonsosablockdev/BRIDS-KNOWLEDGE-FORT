@@ -2,7 +2,7 @@
 
 Estrategias de **visibilidad orgánica en motores de búsqueda, indexación de oportunidades de sindicación inmobiliaria y optimización de palabras clave clave**.
 
-> 🔍 **Enfoque:** *"Capturar la intención de búsqueda de inversores retail que buscan alternativas de inversión inmobiliaria de bajo ticket ($100 USD) y promotores buscando capital privado ágil."*
+> 🔍 **Enfoque:** *"Capturar la intención de búsqueda de inversores retail que buscan alternativas de inversión inmobiliaria de bajo ticket ($200 USD) y promotores buscando capital privado ágil."*
 
 ---
 

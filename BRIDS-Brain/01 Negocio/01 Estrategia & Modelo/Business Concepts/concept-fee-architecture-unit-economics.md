@@ -26,13 +26,13 @@ tags:
 # Concepto Maestro: Arquitectura de Monetización, Estructura de Tarifas y Unit Economics
 
 > [!NOTE] Resumen Ejecutivo
-> El modelo de negocio de BRIDS.io opera bajo un modelo de **SaaS puro e infraestructura tecnológica**, estructurado exclusivamente sobre **fees de transacción fijos** por el uso y cómputo de la plataforma, eliminando por completo cualquier cobro porcentual de intermediación o corretaje de valores. Este enfoque garantiza un blindaje legal absoluto frente a la regulación de Broker-Dealer de la SEC (Securities Exchange Act Sec. 15(a)) y justifica múltiplos de valoración de Venture Capital de **15x a 25x ARR**. Los ingresos se dividen en un trípode de fees transaccionales: **(1) Fee de Procesamiento y Emisión de $2 USD por fracción de $100** (al usuario en la compra, deducido de la transacción), **(2) SaaS Listing & Setup Fee escalonado por tiers** (al desarrollador al desplegar su proyecto), **(3) Fee de Transacción de Dispersión Tecnológica** (al desarrollador al distribuir rendimientos: trimestral en Fix & Hold vs al cierre en Fix & Flip y Greenfield), y **(4) Fee de Recuperación Administrativa** ante extravío de llaves privadas.
+> El modelo de negocio de BRIDS.io opera bajo un modelo de **SaaS puro e infraestructura tecnológica**, estructurado exclusivamente sobre **fees de transacción fijos** por el uso y cómputo de la plataforma, eliminando por completo cualquier cobro porcentual de intermediación o corretaje de valores. Este enfoque garantiza un blindaje legal absoluto frente a la regulación de Broker-Dealer de la SEC (Securities Exchange Act Sec. 15(a)) y justifica múltiplos de valoración de Venture Capital de **15x a 25x ARR**. Los ingresos se dividen en un trípode de fees transaccionales: **(1) Fee de Procesamiento y Emisión de $4 USD por fracción de $200** (al usuario en la compra, deducido de la transacción), **(2) SaaS Listing & Setup Fee escalonado por tiers** (al desarrollador al desplegar su proyecto), **(3) Fee de Transacción de Dispersión Tecnológica** (al desarrollador al distribuir rendimientos: trimestral en Fix & Hold vs al cierre en Fix & Flip y Greenfield), y **(4) Fee de Recuperación Administrativa** ante extravío de llaves privadas.
 
 ---
 
 ## 1. One-Liner Canónico (Business Model Slide & YC Memo)
 
-> *"Monetizamos como infraestructura SaaS: cobramos un setup de software fijo al desarrollador por desplegar su proyecto, un fee de transacción de $2 USD por fracción emitida y tarifas de procesamiento por ejecución de dispersión en Solana."*
+> *"Monetizamos como infraestructura SaaS: cobramos un setup de software fijo al desarrollador por desplegar su proyecto, un fee de transacción de $4 USD por fracción emitida y tarifas de procesamiento por ejecución de dispersión en Solana."*
 
 ---
 
@@ -45,9 +45,9 @@ graph TD
     BRIDS["BRIDS.io (Infraestructura SaaS)"]
     SPV["Bóveda SPV (Proyecto)"]
 
-    User -->|"Compra $100 USD (1 Fracción)"| Split{"Procesador Tecnológico"}
-    Split -->|"$98 USD (Capital/Equity)"| SPV
-    Split -->|"$2 USD (Transaction Fee)"| BRIDS
+    User -->|"Compra $200 USD (1 Fracción)"| Split{"Procesador Tecnológico"}
+    Split -->|"$196 USD (Capital/Equity)"| SPV
+    Split -->|"$4 USD (Transaction Fee)"| BRIDS
 
     Dev -->|"(1) SaaS Setup Fee por Tiers"| BRIDS
     Dev -->|"(2) Fee por Ejecución de Dispersión"| BRIDS
@@ -56,14 +56,14 @@ graph TD
 
 ### 1. Fee de Transacción de Procesamiento y Emisión (Al Usuario Retail)
 - **A quién se cobra:** Al inversionista en el momento de la adquisición / minteo.
-- **Monto y Mecánica:** **$2.00 USD por cada fracción de $100 USD**. En el checkout digital, el usuario aporta $100 USD; **$98 USD** se depositan en la bóveda del SPV para el activo inmobiliario y **$2 USD** se retienen como tarifa de uso de la infraestructura digital y emisión on-chain de BRIDS.
-- **Análisis de Pros y Contras del Split $98 / $2:**
+- **Monto y Mecánica:** **$4.00 USD por cada fracción de $200 USD**. En el checkout digital, el usuario aporta $200 USD; **$196 USD** se depositan en la bóveda del SPV para el activo inmobiliario y **$4 USD** se retienen como tarifa de uso de la infraestructura digital y emisión on-chain de BRIDS.
+- **Análisis de Pros y Contras del Split $196 / $4:**
   - **Pros:**
-    1. *Conversión Psicológica y Cero Fricción:* El usuario paga un número redondo y limpio ($100 USD), eliminando el abandono de carrito generado por recargos sorpresa (como pagar $102 USD).
-    2. *Veracidad Literal de Marketing:* El reclamo *"Invierte en bienes raíces desde $100 USD"* es exacto, sin letras chicas ni asteriscos.
+    1. *Conversión Psicológica y Cero Fricción:* El usuario paga un número redondo y limpio ($200 USD), eliminando el abandono de carrito generado por recargos sorpresa (como pagar $204 USD).
+    2. *Veracidad Literal de Marketing:* El reclamo *"Invierte en bienes raíces desde $200 USD"* es exacto, sin letras chicas ni asteriscos.
     3. *Paridad con Comercio Electrónico / Tarjetas:* Replica la mecánica donde el comprador paga el valor facial y el comercio absorbe la tasa de procesamiento tecnológico.
   - **Contras y Mitigación:**
-    1. *Neto para el Desarrollador:* Por cada fracción de $100, el SPV recibe $98 USD de capital neto. 
+    1. *Neto para el Desarrollador:* Por cada fracción de $200, el SPV recibe $196 USD de capital neto. 
     2. *Solución:* El desarrollador incorpora esta tasa dentro de sus costos suaves de estructuración (*soft costs*), emitiendo la cantidad proporcional de fracciones para cubrir la meta neta del inmueble.
 - **Naturaleza:** Tarifa tecnológica de procesamiento y cómputo de contrato Metaplex Core en Solana.
 
@@ -99,25 +99,25 @@ graph TD
 
 ### A. Sponsor / Desarrollador Inmobiliario (B2B):
 - **Sponsor CAC (Costo de Adquisición):** ~$2,500 – $4,500 USD (mediante canal B2B outbound y alianzas estratégicas como Blue Brick Capital).
-- **Tamaño de Proyecto Típico:** $1,000,000 USD (10,000 fracciones de $100 USD).
+- **Tamaño de Proyecto Típico:** $1,000,000 USD (5,000 fracciones de $200 USD).
 - **Ingreso Bruto de BRIDS por Proyecto de $1,000,000 USD:**
   - **SaaS Setup & Listing Fee (Tier Scale):** **$1,500 USD**.
-  - **Minting & Processing Transaction Fee:** $2.00 USD × 10,000 fracciones = **$20,000 USD**.
+  - **Minting & Processing Transaction Fee:** $4.00 USD × 5,000 fracciones = **$20,000 USD**.
   - **Fee de Transacción de Dispersión:**
     - En *Fix & Hold* (trimestral): $200 USD × 4 corridas/año = **$800 USD / año**.
     - En *Fix & Flip* (cierre único a 9 meses): **$300 USD** al liquidar.
   - **Total Ingresos Año 1:** **$21,800 – $22,300 USD por emisión**.
 - **Costo Tecnológico Directo (COGS en Solana):**
   - Despliegue de contratos y bóveda: < $5 USD.
-  - Minteo de 10,000 NFTs en Metaplex Core: < $10 USD.
+  - Minteo de 5,000 NFTs en Metaplex Core: < $5 USD.
   - Corridas de dispersión batch en Solana: < $2 USD.
 - **Margen Bruto de la Plataforma:** **> 95%** (Modelo de infraestructura pura de software).
 - **LTV del Sponsor (Promedio 3 proyectos en 24 meses):** **~$65,000 USD**.
 - **Ratio LTV / CAC Institucional:** **> 15x** (Economía unitaria excepcional).
 
 ### B. Inversionista Retail:
-- **Ticket Promedio Inicial:** $200 – $300 USD (2 a 3 fracciones nominales de $100 USD).
-- **Mecánica de Cobro:** Paga $100 USD por fracción ($98 van al inmueble, $2 a BRIDS). Cero fricción en el checkout.
+- **Ticket Promedio Inicial:** $200 – $400 USD (1 a 2 fracciones nominales de $200 USD).
+- **Mecánica de Cobro:** Paga $200 USD por fracción ($196 van al inmueble, $4 a BRIDS). Cero fricción en el checkout.
 - **Tasa de Reinversión Proyectada:** > 45% del capital liberado o rentas trimestrales es reinvertido en nuevos SPVs del catálogo.
 - **Retail CAC:** ~$20 – $35 USD (tráfico orgánico, SEO institucional, ecosistema Solana).
 - **Retail LTV:** ~$150 USD a 24 meses por volumen transaccionado recurrente.
@@ -128,9 +128,9 @@ graph TD
 
 > [!NOTE] Nota 4.1: Perspectiva de Blue Brick Capital (Juan Pablo) y Apalancamiento en Producto
 > **Cómo lo evalúa el operador inmobiliario (Juan Pablo):**
-> 1. **Ahorro Radical frente a Intermediarios:** En la sindicación tradicional estadounidense, los colocadores privados o broker-dealers cobran entre **5% y 8% de comisión**, más $30,000–$50,000 USD en gastos legales y contables. Con BRIDS, pagar únicamente un setup de software de $1,000–$1,500 USD y un fee de $2 por fracción representa para Blue Brick un **ahorro superior al 60% en costos de colocación**.
+> 1. **Ahorro Radical frente a Intermediarios:** En la sindicación tradicional estadounidense, los colocadores privados o broker-dealers cobran entre **5% y 8% de comisión**, más $30,000–$50,000 USD en gastos legales y contables. Con BRIDS, pagar únicamente un setup de software de $1,000–$1,500 USD y un fee de $4 por fracción de $200 representa para Blue Brick un **ahorro superior al 60% en costos de colocación**.
 > 2. **Apalancamiento en Fix & Flip y Fix & Hold:**
->    - En **Fix & Flip (6 a 12 meses):** Blue Brick incorpora el fee de $2 como un costo suave de software en el presupuesto de obra, ganando velocidad crítica de fondeo (cerrar rondas en 10-15 días en lugar de meses). La dispersión única al final del proyecto simplifica la administración.
+>    - En **Fix & Flip (6 a 12 meses):** Blue Brick incorpora el fee de $4 como un costo suave de software en el presupuesto de obra, ganando velocidad crítica de fondeo (cerrar rondas en 10-15 días en lugar de meses). La dispersión única al final del proyecto simplifica la administración.
 >    - En **Fix & Hold (3 a 5+ años):** Blue Brick automatiza el cap table de cientos de pequeños inversionistas y distribuye dividendos cada 3 meses de manera transparente, eliminando la pesadilla operativa de procesar transferencias bancarias manuales.
 
 > [!IMPORTANT] Nota 4.2: Blindaje Legal: Por qué NUNCA Cobrar Porcentajes y las Ventajas del Fee de Transacción
@@ -158,7 +158,7 @@ graph TD
 | :--- | :--- | :--- | :--- |
 | **Esquema de Cobro** | 6.0% – 10.0% (Comisión de corretaje) | 3.0% – 7.0% comisión sobre fondos | **Fees fijos de transacción tecnológica** |
 | **Costo al Desarrollador** | $40,000 – $80,000 USD analógicos | $15,000 – $30,000 USD | **$1,000 – $2,500 USD (Setup SaaS)** |
-| **Fee por Fracción Retail** | N/A (Mínimos de $25k–$50k USD) | 2% – 5% recargo de plataforma | **$2 USD por fracción de $100 (deducido)** |
+| **Fee por Fracción Retail** | N/A (Mínimos de $25k–$50k USD) | 2% – 5% recargo de plataforma | **$4 USD por fracción de $200 (deducido)** |
 | **Margen Bruto** | 30% – 45% (Alta carga de personal) | 50% – 60% (Soporte manual) | **> 90% (Cómputo en Solana)** |
 | **Riesgo Regulatorio** | Requiere licencia Broker-Dealer FINRA | Estructuras complejas Reg CF/A+ | **Blindaje SaaS Non-Broker-Dealer** |
 
@@ -167,10 +167,10 @@ graph TD
 ## 6. Snippets Reutilizables (Ready-to-Cite)
 
 ### Snippet 6.1: Para Slide de Modelo de Negocio en Investor Decks (YC)
-> *"BRIDS opera como una infraestructura SaaS pura para Real World Assets: cobramos a los desarrolladores una tarifa fija de setup de software ($1k–$2.5k) por parametrizar su emisión, sumada a un fee de transacción tecnológico de $2 USD por cada fracción emitida y tarifas por ejecución de dispersión en Solana. Este modelo de fees por transacción elimina riesgos de broker-dealer, protege márgenes brutos superiores al 90% y escala de forma exponencial."*
+> *"BRIDS opera como una infraestructura SaaS pura para Real World Assets: cobramos a los desarrolladores una tarifa fija de setup de software ($1k–$2.5k) por parametrizar su emisión, sumada a un fee de transacción tecnológico de $4 USD por cada fracción emitida de $200 USD y tarifas por ejecución de dispersión en Solana. Este modelo de fees por transacción elimina riesgos de broker-dealer, protege márgenes brutos superiores al 90% y escala de forma exponencial."*
 
 ### Snippet 6.2: Para One-Pagers B2B Dirigidos a Desarrolladores Inmobiliarios
-> *"Digitaliza tu sindicación inmobiliaria sin pagar honorarios leoninos a intermediarios. Con BRIDS, accedes a infraestructura institucional en Solana con un setup SaaS desde $1,000 USD y un fee transparente de solo $2 USD por fracción emitida, manteniendo el 100% de la gobernanza de tu activo y automatizando tus pagos de dividendos."*
+> *"Digitaliza tu sindicación inmobiliaria sin pagar honorarios leoninos a intermediarios. Con BRIDS, accedes a infraestructura institucional en Solana con un setup SaaS desde $1,000 USD y un fee transparente de solo $4 USD por fracción emitida ($200 nominal), manteniendo el 100% de la gobernanza de tu activo y automatizando tus pagos de dividendos."*
 
 ---
 

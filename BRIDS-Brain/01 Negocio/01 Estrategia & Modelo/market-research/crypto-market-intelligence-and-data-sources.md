@@ -9,9 +9,9 @@ author_agents:
   - "market-research-analyst"
   - "research"
 status: "approved"
-version: "1.1"
+version: "1.2"
 created_at: 2026-09-12
-updated_at: 2026-09-12
+updated_at: 2026-09-13
 tags:
   - crypto-data
   - market-intelligence
@@ -239,7 +239,7 @@ A partir de la inteligencia extraída de **RWA.xyz**, **DefiLlama**, **RootData*
 #### 11. [HoneyBricks](https://www.honeybricks.com)
 * **Link:** [https://www.honeybricks.com](https://www.honeybricks.com)
 * **Descripción:** Plataforma estadounidense que conecta a promotores inmobiliarios comerciales (multifamiliares clase A y B) con inversores acreditados en Polygon, emitiendo participaciones tokenizadas en Delaware LLCs.
-* **Por qué es relevante para BRIDS:** Excelente benchmark en calidad de empaquetado y selección de promotores B2B. Sin embargo, su foco estricto en inversores acreditados deja fuera el 90% de la demanda retail que BRIDS canaliza con tickets desde $100 USD.
+* **Por qué es relevante para BRIDS:** Excelente benchmark en calidad de empaquetado y selección de promotores B2B. Sin embargo, su foco estricto en inversores acreditados deja fuera el 90% de la demanda retail que BRIDS canaliza con tickets desde $200 USD.
 
 #### 12. [T-RIZE Group](https://t-rize.com)
 * **Link:** [https://t-rize.com](https://t-rize.com)
@@ -310,6 +310,7 @@ A partir de la inteligencia extraída de **RWA.xyz**, **DefiLlama**, **RootData*
 ---
 
 ## 🔄 Historial de Revisiones (Changelog)
+- **v1.2 (2026-09-13):** Actualizar ticket retail de BRIDS a  USD
 - **v1.1 (2026-09-12):** Integración del directorio exhaustivo de 20 competidores globales de Real Estate RWA clasificados por modelo operativo (Retail B2C, B2B SaaS, Institucional, Derivados/DeFi) con enlaces, descripción y análisis de relevancia para el benchmarking de BRIDS.io, auditado por `market-research-analyst` y `research`.
 - **v1.0 (2026-09-12):** Creación inicial del catálogo maestro de plataformas de inteligencia y datos cripto/RWA.
 

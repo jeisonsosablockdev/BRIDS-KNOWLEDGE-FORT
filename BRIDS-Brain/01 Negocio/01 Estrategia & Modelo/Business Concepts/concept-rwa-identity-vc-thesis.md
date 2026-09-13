@@ -12,7 +12,7 @@ quality_threshold: 8.5
 hitl_1_approved_at: "2026-09-13T03:19:52.299Z"
 hitl_2_approved_at: "2026-09-13T03:21:13.159Z"
 status: approved
-version: "1.0"
+version: "1.1"
 workflow: sdd-orchestrator
 created_at: 2026-09-13
 updated_at: 2026-09-13
@@ -36,7 +36,7 @@ tags:
 
 ## 1. One-Liner Canónico (Elevator Pitch para VCs)
 
-> *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $100 USD con títulos recuperables y respaldo legal en Delaware."*
+> *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $200 USD con títulos recuperables y respaldo legal en Delaware."*
 
 ---
 
@@ -66,7 +66,7 @@ graph TD
 | **Categoría VC** | Real Estate Private Equity | Cripto Especulativo / Tokenomics | **Fintech Infrastructure / B2B SaaS** |
 | **Múltiplo de Valuación** | 1x – 3x EBITDA | Cero tracción institucional / Volátil | **15x – 30x ARR (Software recurrente)** |
 | **Uso de Balance** | Capital intensivo (compra directa de activos) | Fondos de tesorería opacos | **Asset-Light (Los inmuebles son de los SPVs)** |
-| **Flujos de Ingreso** | Rentas inmobiliarias tradicionales | Especulación con token nativo | **SaaS Listing Fees + 1% Processing Fee** |
+| **Flujos de Ingreso** | Rentas inmobiliarias tradicionales | Especulación con token nativo | **SaaS Listing Fees + $4 Transaction Fee por Fracción ($200 nominal)** |
 | **Riesgo Regulatorio** | Pesado, local y no escalable | Demanda inminente de la SEC | **Protegido: Dual-Entity y Non-Broker-Dealer** |
 
 ---
@@ -76,7 +76,7 @@ graph TD
 La primera ola de tokenización inmobiliaria (2018–2021) falló en escalar institucionalmente por tres barreras de arquitectura. BRIDS fue concebido desde el día uno para superar cada una de ellas:
 
 ### 3.1. Paradoja de los Costos de Transacción (Gas Fees)
-* **El fallo de RWA 1.0:** Desplegar contratos inteligentes en Ethereum L1 donde una transferencia cuesta entre $5 y $40 USD. Si un usuario invierte $100 USD y genera $0.80 USD mensuales de renta, una sola transacción devora un año entero de rendimiento.
+* **El fallo de RWA 1.0:** Desplegar contratos inteligentes en Ethereum L1 donde una transferencia cuesta entre $5 y $40 USD. Si un usuario invierte $200 USD, una sola transacción en Ethereum devora gran parte del rendimiento.
 * **La solución BRIDS:** **Red Solana + Estándar Metaplex Core.** Con tarifas promedio de $0.0005 USD y finalización en 400 milisegundos, dispersamos dividendos en USDC a miles de billeteras simultáneamente mediante tesorerías Squads por fracciones de centavo. La micro-inversión retail es económicamente viable por primera vez.
 
 ### 3.2. Dogma Inviable de "Code is Law" vs. Propiedad Real
@@ -93,9 +93,9 @@ La primera ola de tokenización inmobiliaria (2018–2021) falló en escalar ins
 
 Cuando presentamos BRIDS a socios de fondos de inversión, estructuramos la oportunidad sobre tres pilares de convicción:
 
-1. **Tesis de Mercado (El mayor TAM del planeta):** El sector inmobiliario global supera los $300 billones de dólares ($300T USD), pero permanece atrapado en procesos analógicos, ilíquidos y excluyentes con barreras de entrada de $25,000 a $100,000 USD. BRIDS abre este mercado al 99% restante de la población global mediante tickets de $100 USD.
+1. **Tesis de Mercado (El mayor TAM del planeta):** El sector inmobiliario global supera los $300 billones de dólares ($300T USD), pero permanece atrapado en procesos analógicos, ilíquidos y excluyentes con barreras de entrada de $25,000 a $100,000 USD. BRIDS abre este mercado al 99% restante de la población global mediante tickets de $200 USD.
 2. **Tesis de Infraestructura (La ventaja de red de Solana):** Solana se ha consolidado como la red predilecta para la actividad financiera de alta frecuencia y pagos en el mundo real. BRIDS capitaliza este riel institucional para ofrecer una experiencia idéntica a una aplicación fintech Web2 de última generación.
-3. **Tesis de Monetización (Doble Flywheel de Software):** Monetizamos con ingresos recurrentes de software B2B para desarrolladores inmobiliarios (licenciamiento SaaS por administración y sindicación) combinados con tarifas de procesamiento del 1% sobre flujos transaccionales y dispersiones de rentas.
+3. **Tesis de Monetización (Doble Flywheel de Software):** Monetizamos con ingresos de software SaaS para desarrolladores inmobiliarios (setup por tiers de $1,000 a $2,500+ USD) combinados con fees de transacción fijos de $4 USD por fracción de $200 emitida y tarifas por corrida de dispersión tecnológica en Solana.
 
 ---
 
@@ -114,7 +114,7 @@ Cuando presentamos BRIDS a socios de fondos de inversión, estructuramos la opor
 
 ## 6. Directrices Léxicas para Reuniones con Inversores
 
-* **Términos Obligatorios:** Infraestructura de software RWA, plataforma SaaS de sindicación, riel de liquidación en Solana, estándar Metaplex Core, tickets desde $100 USD, Delaware Series LLC, Master Securityholder File, protocolo de recuperación con Stripe Identity, modelo asset-light.
+* **Términos Obligatorios:** Infraestructura de software RWA, plataforma SaaS de sindicación, riel de liquidación en Solana, estándar Metaplex Core, tickets desde $200 USD ($4 fee de infraestructura), Delaware Series LLC, Master Securityholder File, protocolo de recuperación con Stripe Identity, modelo asset-light.
 * **Términos Prohibidos:** Empresa de bienes raíces, gestora tradicional, tokenomics especulativo, criptomoneda de inversión, rendimientos 100% garantizados, custodia de dinero de usuarios, broker-dealer.
 
 ---
@@ -128,9 +128,10 @@ Los fondos de inversión y socios interesados en revisar nuestro Data Room, proy
 * **Acción sugerida:** Agendar sesión técnica de estructuración y demostración de arquitectura en devnet.
 
 
-## 🔄 Historial de Revisiones SDD (Changelog)
-- **v1.0 (2026-09-13):** Aprobado por el usuario e integrado en el vault tras 1 ciclos de optimización con nota de 9/9.0.
+## 🔄 Historial de Revisiones (Changelog)
+- **v1.1 (2026-09-13):** Actualización del ticket mínimo a $200 USD ($4 de fee de transacción tecnológica) en la tesis VC e institucional.
+- **v1.0 (2026-09-13):** Aprobado por el usuario e integrado en el vault tras ciclo de optimización con nota de 9/9.0.
 
 ## 🔗 Trazabilidad
 - Artefacto de Especificación: [[00 Inbox/Specs/concept-rwa-identity-vc-thesis.spec.md]]
-- Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
+- Contexto de Marca: [[02 Marketing/01 Contexto de Marca/product-marketing-context.md]]

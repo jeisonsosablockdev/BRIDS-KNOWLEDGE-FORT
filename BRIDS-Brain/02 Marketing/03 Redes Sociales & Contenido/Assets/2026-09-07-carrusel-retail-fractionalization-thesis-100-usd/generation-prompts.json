@@ -2,7 +2,7 @@
   "system_version": "2.0-brids-rwa",
   "carousel_id": "2026-09-07-carrusel-retail-fractionalization-thesis-100-usd",
   "aspect_ratio": "4:5 (1080x1350 px)",
-  "asset_class": "Inversión Inmobiliaria desde $100 USD",
+  "asset_class": "Inversión Inmobiliaria desde $200 USD",
   "technical_reference": "Democratización Financiera en Solana",
   "brand_visual_identity": {
     "palette": {
@@ -19,8 +19,8 @@
     "slide_1_hero": {
       "file": "01-portada-hero.png",
       "type": "Fotografía Arquitectónica / Hero",
-      "description": "Fotografía arquitectónica vertical 4:5 de activo inmobiliario institucional tokenizado. Inversión Inmobiliaria desde $100 USD con iluminación natural, fachada contemporánea, líneas limpias y atmósfera fintech premium (#0F172A, acento #14F195).",
-      "prompt": "Architectural photography vertical 4:5 of premier modern commercial real estate, Inversión Inmobiliaria desde $100 USD, BRIDS brand style, dramatic natural lighting, clean deep slate facade (#0F172A) with subtle glowing Solana green accents (#14F195), ultra-clean glass reflection, sharp focus, institutional institutional asset quality."
+      "description": "Fotografía arquitectónica vertical 4:5 de activo inmobiliario institucional tokenizado. Inversión Inmobiliaria desde $200 USD con iluminación natural, fachada contemporánea, líneas limpias y atmósfera fintech premium (#0F172A, acento #14F195).",
+      "prompt": "Architectural photography vertical 4:5 of premier modern commercial real estate, Inversión Inmobiliaria desde $200 USD, BRIDS brand style, dramatic natural lighting, clean deep slate facade (#0F172A) with subtle glowing Solana green accents (#14F195), ultra-clean glass reflection, sharp focus, institutional institutional asset quality."
     },
     "slide_2_technical_architecture": {
       "file": "02-arquitectura-tecnica.png",

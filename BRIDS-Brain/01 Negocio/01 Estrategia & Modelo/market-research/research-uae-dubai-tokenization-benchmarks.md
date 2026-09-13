@@ -1,7 +1,8 @@
 ---
+updated_at: 2026-09-13
 title: "Investigación de Mercado: Tokenización en Dubai, Regulación EAU y Ventaja de Solana"
 document_id: "research-uae-dubai-tokenization-benchmarks"
-version: 1.0.0
+version: "1.1"
 status: "approved"
 workflow: "market-research-analyst"
 category: "market-research"
@@ -210,7 +211,7 @@ El marco del CBUAE establece una clara bifurcación de rieles:
 | **El dolor de la pérdida de claves:** El regulador teme que un hackeo deje al inversor sin propiedad. | BRIDS diseñó el **Protocolo de Recuperación** con Stripe Identity + Freeze/Authority Plugin. | **Respaldo legal directo:** La propiedad emana del *Master Securityholder File* de Delaware; no dejamos a nadie desamparado por perder su clave. |
 | **Costos regulatorios exorbitantes en EAU:** 5 reguladores, licencias SVF lentas y requisitos de capital masivos. | BRIDS opera bajo **Delaware C-Corp (Software SaaS)** + Delaware Series LLC por propiedad bajo Reg D 506(c) / Reg S. | **Velocidad y eficiencia de capital:** Estructura dual-entity que evita licencias bancarias pesadas sin eludir el cumplimiento normativo. |
 | **Validación de Solana para RWA institucional:** EAU valida que las Token Extensions de Solana son el estándar superior para *asset-level compliance*. | BRIDS escogió Solana y Metaplex Core precisamente por esta arquitectura de cuenta única y plugins de autoridad. | **Validación de terceros de primer nivel:** Corrobora la tesis fundacional de BRIDS ante VCs de que Solana es la red definitiva para RWA regulado. |
-| **Atracción de Capital del Golfo (LPs de EAU hacia Real Estate en EE.UU.):** Inversores de Oriente Medio buscan dolarizar capital en inmuebles estadounidenses estructurados. | BRIDS permite participación desde $100 USD en bienes raíces de EE.UU. con onboarding KYC global vía Stripe Identity. | **Corredor de inversión natural:** Captar capital retail e institucional en EAU para fondear inmuebles en EE.UU. vía USDC en Solana. |
+| **Atracción de Capital del Golfo (LPs de EAU hacia Real Estate en EE.UU.):** Inversores de Oriente Medio buscan dolarizar capital en inmuebles estadounidenses estructurados. | BRIDS permite participación desde $200 USD en bienes raíces de EE.UU. con onboarding KYC global vía Stripe Identity. | **Corredor de inversión natural:** Captar capital retail e institucional en EAU para fondear inmuebles en EE.UU. vía USDC en Solana. |
 
 ---
 
@@ -231,6 +232,7 @@ El marco del CBUAE establece una clara bifurcación de rieles:
 ---
 
 ## Historial de Revisiones
+- **v1.1 (2026-09-13):** Actualizar ticket mínimo de entrada retail a  USD
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
