@@ -8,7 +8,7 @@ Este directorio constituye el repositorio institucional de **estructuración soc
 
 ## 📌 Estructura de Subdirectorios
 
-- 📜 **`spvs/`**: Contratos constitutivos de las Sociedades de Propósito Especial en Delaware (Operating Agreements, PPMs, Subscription Agreements, Series Designations).
+- 📜 **`spvs/`**: Contratos constitutivos de las Sociedades de Propósito Especial en sus estados de origen (Florida, Texas, Delaware, etc.: Operating Agreements, PPMs, Subscription Agreements).
 - 🏛️ **`delaware-corp/`**: Estatutos corporativos de BRIDS Inc. (Certificate of Incorporation, Bylaws, resoluciones de junta y libros de accionistas).
 - 📂 **`data-room/`**: Repositorio estructurado para procesos de Due Diligence con fondos de Venture Capital, entidades bancarias y reguladores.
 - 🛡️ **`kyc-aml/`**: Manuales de prevención de lavado de activos, políticas OFAC, procedimientos CIP y documentación de integración con Stripe Identity.
@@ -29,6 +29,6 @@ Este directorio constituye el repositorio institucional de **estructuración soc
 ## 🔗 Vinculación con Arquitectura Técnica e Ingeniería (OKF)
 
 Los aspectos legales de recuperación de llaves, cumplimiento normativo y custodia se sustentan directamente en las especificaciones técnicas sincronizadas en:
-- [[01 Negocio/02 Producto & Ingenieria/metaplex-core/freeze-and-recovery-plugins.md|Freeze & Recovery Plugins]]: Justificación on-chain de retención legal y recuperación de títulos para SPVs Delaware.
+- [[01 Negocio/02 Producto & Ingenieria/metaplex-core/freeze-and-recovery-plugins.md|Freeze & Recovery Plugins]]: Justificación on-chain de retención legal y recuperación de títulos para los SPVs en su estado de origen.
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/threat-model-and-quality-policy.md|Threat Model & Security Policy]]: Cumplimiento normativo y controles de ciberseguridad para Data Room institucional.
 - [[01 Negocio/02 Producto & Ingenieria/current-product-status-matrix.md|Matriz de Estado del Producto]]: Verificación de estado real (live devnet vs mock) para representaciones legales en PPMs y contratos de suscripción.

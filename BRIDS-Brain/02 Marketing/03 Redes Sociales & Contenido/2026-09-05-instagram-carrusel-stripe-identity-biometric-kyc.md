@@ -52,7 +52,7 @@ tags:
 ### Slide 2: Arquitectura Técnica & Legal (Dual Entity SPV)
 ![[02 Marketing/03 Redes Sociales & Contenido/Assets/2026-09-05-carrusel-stripe-identity-biometric-kyc/02-arquitectura-tecnica.png]]
 *Titular en Imagen:* **"Infraestructura RWA de Alto Desempeño"**  
-*Micro-copy:* Metaplex Core Freeze/Recovery Plugins • Delaware SPV Non-Broker-Dealer
+*Micro-copy:* Metaplex Core Freeze/Recovery Plugins • Dual-Entity SPV Non-Broker-Dealer (Delaware C-Corp)
 
 ---
 
@@ -99,5 +99,5 @@ Descubre cómo la infraestructura de BRIDS en Solana permite tokenizar activos i
 
 ## 🔗 Referencias Cruzadas
 - Infraestructura RWA: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md]]
-- Cumplimiento Dual Delaware SPV: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]
+- Cumplimiento Dual-Entity (Delaware C-Corp vs SPVs Locales): [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]
 - Propuesta de Valor Sponsors: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md]]

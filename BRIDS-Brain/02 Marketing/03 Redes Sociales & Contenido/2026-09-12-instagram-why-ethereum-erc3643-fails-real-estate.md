@@ -55,7 +55,7 @@ tags:
 | Tiempo | Escena | Ángulo & Tomas | Acción en Pantalla | Audio / Voz en Off |
 |---|---|---|---|---|
 | **00:00 - 00:03** | **Escena 1 (Hook)** | Pantalla dividida / Tipografía cinética | Comparación visual de fricción tradicional vs solución on-chain. | *"Distribuir $5 USD de dividendos en Ethereum cuesta $15 USD de gas. En Solana cuesta $0.00025 USD."* |
-| **00:03 - 00:12** | **Escena 2 (Arquitectura)** | Screen recording de UI / B-roll inmobiliario | Demostración de trazabilidad en Solana y Delaware SPVs dedicados. | *"Cada propiedad vive en un SPV independiente, garantizando segregación de riesgos y titularidad jurídica."* |
+| **00:03 - 00:12** | **Escena 2 (Arquitectura)** | Screen recording de UI / B-roll inmobiliario | Demostración de trazabilidad en Solana y SPVs dedicados en el estado de origen. | *"Cada propiedad vive en un SPV independiente, garantizando segregación de riesgos y titularidad jurídica."* |
 | **00:12 - 00:22** | **Escena 3 (Rendimiento)** | Motion graphic de flujo financiero USDC | Distribución automática de rentas y plugins de recuperación Metaplex Core. | *"Liquidación instantánea en USDC, auditoría pública on-chain y custodia sin intermediarios bancarios lentos."* |
 | **00:22 - 00:30** | **Escena 4 (Cierre CTA)** | Tarjeta de activo + URL brids.io | Logo BRIDS con llamado a la acción comercial. | *"👉 Descubre por qué el futuro de los RWA es en Solana en brids.io/why-solana."* |
 
@@ -68,7 +68,7 @@ Distribuir $5 USD de dividendos en Ethereum cuesta $15 USD de gas. En Solana cue
 
 Ethereum vs Solana en Sindicación Masiva: Infraestructura Web3 de software para la sindicación e inversión inmobiliaria estructurada en EE.UU.
 
-Respaldado por Delaware SPVs segregadas, verificación KYC biométrica con Stripe Identity y plugins nativos de Metaplex Core en la red de Solana.
+Respaldado por SPVs segregados en el estado de origen de cada desarrollo, verificación KYC biométrica con Stripe Identity y plugins nativos de Metaplex Core en la red de Solana.
 
 👉 Descubre por qué el futuro de los RWA es en Solana en brids.io/why-solana.
 

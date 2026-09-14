@@ -58,7 +58,7 @@ sequenceDiagram
     actor Alice as Inversora (Alice)
     participant Vault as Bóveda B2B / Protocolo Margen
     participant AMM as Motor de Trading / AMM
-    participant SPV as Delaware Series LLC (Inmueble)
+    participant SPV as SPV LLC (Estado de Origen)
 
     Note over Alice,SPV: Caso Alice: Trade Exitoso (Doble Retorno)
     Alice->>Vault: Deposita NFT Fix & Flip ($100 USD nominal)

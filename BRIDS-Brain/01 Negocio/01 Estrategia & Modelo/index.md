@@ -2,7 +2,7 @@
 
 Este directorio alberga la **tesis fundacional, los conceptos nucleares de tokenización y los modelos estratégicos** de **BRIDS.io**.
 
-> 💡 **Tesis de Negocio:** *"BRIDS.io democratiza la inversión inmobiliaria institucional en Solana, permitiendo a promotores captar capital retail ágil desde $200 USD mediante SPVs de Delaware y liquidación automatizada sin fricción legal ni financiera."*
+> 💡 **Tesis de Negocio:** *"BRIDS.io democratiza la inversión inmobiliaria institucional en Solana, permitiendo a promotores captar capital retail ágil desde $200 USD mediante SPVs constituidos en el estado de origen de cada desarrollo y liquidación automatizada sin fricción legal ni financiera."*
 
 ---
 

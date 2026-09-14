@@ -29,7 +29,7 @@ Bienvenido al núcleo de **negocio, tecnología, estructura jurídica y finanzas
 - APIs, Esquemas de Base de Datos y RFCs técnicos sincronizados vía OKF.
 
 ### ⚖️ [3. Legal & Cumplimiento](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20&%20Cumplimiento/index.md)
-- Estructuración dual: BRIDS Inc. (Delaware C-Corp tecnológica) vs Delaware LLC SPVs independientes por activo.
+- Estructuración dual: BRIDS Inc. (Delaware C-Corp tecnológica) vs SPVs independientes (LLCs en el estado de origen de cada desarrollo).
 - Verificación de identidad y prevención KYC/AML integrada con Stripe Identity.
 - Data Room institucional para inversores calificados y contratos de sindicación.
 

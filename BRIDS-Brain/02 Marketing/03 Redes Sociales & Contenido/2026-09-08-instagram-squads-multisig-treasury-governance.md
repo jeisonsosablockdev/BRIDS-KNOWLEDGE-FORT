@@ -55,7 +55,7 @@ tags:
 | Tiempo | Escena | Ángulo & Tomas | Acción en Pantalla | Audio / Voz en Off |
 |---|---|---|---|---|
 | **00:00 - 00:03** | **Escena 1 (Hook)** | Pantalla dividida / Tipografía cinética | Comparación visual de fricción tradicional vs solución on-chain. | *"Cero puntos únicos de falla: cómo protegemos los fondos de los SPVs con smart contracts multisig en Solana."* |
-| **00:03 - 00:12** | **Escena 2 (Arquitectura)** | Screen recording de UI / B-roll inmobiliario | Demostración de trazabilidad en Solana y Delaware SPVs dedicados. | *"Cada propiedad vive en un SPV independiente, garantizando segregación de riesgos y titularidad jurídica."* |
+| **00:03 - 00:12** | **Escena 2 (Arquitectura)** | Screen recording de UI / B-roll inmobiliario | Demostración de trazabilidad en Solana y SPVs dedicados en el estado de origen. | *"Cada propiedad vive en un SPV independiente, garantizando segregación de riesgos y titularidad jurídica."* |
 | **00:12 - 00:22** | **Escena 3 (Rendimiento)** | Motion graphic de flujo financiero USDC | Distribución automática de rentas y plugins de recuperación Metaplex Core. | *"Liquidación instantánea en USDC, auditoría pública on-chain y custodia sin intermediarios bancarios lentos."* |
 | **00:22 - 00:30** | **Escena 4 (Cierre CTA)** | Tarjeta de activo + URL brids.io | Logo BRIDS con llamado a la acción comercial. | *"👉 Lee la arquitectura de seguridad on-chain en brids.io/security."* |
 
@@ -68,7 +68,7 @@ Cero puntos únicos de falla: cómo protegemos los fondos de los SPVs con smart 
 
 Gobernanza de Tesorería con Squads Multi-Sig: Infraestructura Web3 de software para la sindicación e inversión inmobiliaria estructurada en EE.UU.
 
-Respaldado por Delaware SPVs segregadas, verificación KYC biométrica con Stripe Identity y plugins nativos de Metaplex Core en la red de Solana.
+Respaldado por SPVs segregados en el estado de origen de cada desarrollo, verificación KYC biométrica con Stripe Identity y plugins nativos de Metaplex Core en la red de Solana.
 
 👉 Lee la arquitectura de seguridad on-chain en brids.io/security.
 

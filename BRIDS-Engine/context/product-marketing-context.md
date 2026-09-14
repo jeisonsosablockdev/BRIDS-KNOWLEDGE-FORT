@@ -62,7 +62,7 @@ tags:
 
 ## Arquitectura de Ecosistema & Separación de Roles
 
-BRIDS opera bajo un desacoplamiento estricto de funciones para garantizar el cumplimiento normativo (Delaware, EE.UU.):
+BRIDS opera bajo un desacoplamiento estricto de funciones para garantizar el cumplimiento normativo en EE.UU. (Delaware C-Corp tecnológica vs SPVs locales):
 
 1. **BRIDS.io (Capa de Software e Infraestructura):**
    - Provee la interfaz de usuario (UI/UX), arquitectura de smart contracts en Solana, integración con Metaplex Core (Freeze y Recovery plugins) y dashboards de trazabilidad.
@@ -72,7 +72,7 @@ BRIDS opera bajo un desacoplamiento estricto de funciones para garantizar el cum
    - Responsable de la originación, valuación, desarrollo de obra, remodelación, administración de inmuebles y gestión operativa en el mundo real.
 
 3. **Issuer / SPV Dedicado (Entidad Legal Emisora):**
-   - Sociedad de Propósito Especial (LLC / SPV) titular jurídica de la propiedad en EE.UU.
+   - Sociedad de Propósito Especial (LLC / SPV) constituida en el estado de origen del inmueble (Florida, Texas, Delaware, etc.), titular jurídica de la propiedad en EE.UU.
    - Emisor exclusivo de los títulos legales y responsable único del *Master Securityholder File* (Libro oficial de socios).
 
 4. **Proveedores Externos Regulados:**
@@ -162,7 +162,7 @@ BRIDS opera bajo un desacoplamiento estricto de funciones para garantizar el cum
 | Competidor / Alternativa | Modelo de Operación | Limitaciones | Diferenciación Superior de BRIDS.io |
 | :--- | :--- | :--- | :--- |
 | **Crowdfunding Tradicional** | Plataformas Web2 centralizadas | Mínimos de $1,000–$10,000 USD, iliquidez total, transferencias lentas. | Entrada desde $100 USD, liquidación rápida en Solana, transparencia on-chain. |
-| **Protocolos RWA Cripto Tradicionales** | Tokens en Ethereum / EVM | Tarifas de gas elevadas, pérdida de wallet irreversible, vacíos legales. | Red Solana ultra-eficiente, Metaplex Core Freeze & Recovery, respaldo en SPV de Delaware. |
+| **Protocolos RWA Cripto Tradicionales** | Tokens en Ethereum / EVM | Tarifas de gas elevadas, pérdida de wallet irreversible, vacíos legales. | Red Solana ultra-eficiente, Metaplex Core Freeze & Recovery, respaldo en SPV constituido en el estado de origen de la propiedad. |
 | **Plataformas Broker-Dealer** | Intermediación fiduciaria directa | Riesgos de licencias de corretaje, altas comisiones de intermediación. | Modelo puro de software (SaaS), sin cobro de comisiones de corretaje. |
 
 ---
@@ -183,7 +183,7 @@ BRIDS opera bajo un desacoplamiento estricto de funciones para garantizar el cum
 | :--- | :--- |
 | * "¿Si pierdo mi billetera cripto, pierdo mi inversión inmobiliaria?"* | **No.** En BRIDS la llave privada no extingue tus derechos legales. Tras verificar tu identidad en Stripe Identity y validar con el SPV, recuperas tu título mediante quema y reemisión del NFT. |
 | * "¿BRIDS es un broker financiero o gestiona mi dinero?"* | **No.** BRIDS es exclusivamente un proveedor de software e infraestructura digital. El activo inmobiliario es del SPV y los fondos se fondean en Squads Multi-Sig. |
-| * "¿Dónde está respaldada legalmente la propiedad?"* | En una Sociedad de Propósito Especial (LLC / SPV) dedicada en Delaware, EE.UU., que posee el inmueble y mantiene el registro legal autoritativo de socios. |
+| * "¿Dónde está respaldada legalmente la propiedad?"* | En una Sociedad de Propósito Especial (LLC / SPV) constituida en el estado de origen del inmueble en EE.UU. (Florida, Texas, etc.), que posee la propiedad y mantiene el registro legal autoritativo de socios. |
 
 ---
 

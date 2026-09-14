@@ -2,7 +2,7 @@
 updated_at: 2026-09-13
 title: "C8: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia"
 concept_id: "concept-multisig-treasury-governance"
-version: "1.1"
+version: "1.2.0"
 status: "approved"
 workflow: "core-business-concepts"
 category: "technology-governance"
@@ -10,7 +10,7 @@ subagents:
   - "compliance-officer"
   - "founder-ghostwriter"
   - "pitch-deck-architect"
-last_updated: "2026-09-11"
+last_updated: "2026-09-13"
 tags:
   - "sdd-concept"
   - "squads-multisig"
@@ -39,7 +39,7 @@ En la sindicación tradicional, una vez que el inversionista transfiere su diner
 - ¿Por qué se retrasaron las rentas 45 días mientras el dinero estuvo estancado en la cuenta del operador?
 
 En BRIDS.io, la relación financiera se vuelve **criptográficamente auditable**:
-1. **Recaudación No Custodial:** El capital sindicado ingresa a una bóveda programada en **Squads Protocol (v4 Smart Contract en Solana)** a nombre exclusivo del SPV de Delaware.
+1. **Recaudación No Custodial:** El capital sindicado ingresa a una bóveda programada en **Squads Protocol (v4 Smart Contract en Solana)** a nombre exclusivo del SPV constituido en el estado de origen de la construcción.
 2. **Firmas de Seguridad (M-of-N Multisig):** Ninguna transacción puede ejecutarse unilateralmente por una sola persona.
 3. **Dispersión Automática de Dividendos (Rentas):** Al llegar el día de corte (*Snapshot Date*), el smart contract calcula matemáticamente la participación de cada wallet titular de los NFTs de Metaplex Core y dispersa los fondos en una sola transacción concurrente en Solana.
 
@@ -49,7 +49,7 @@ flowchart TD
         Inv1["Inversor A ($500 USDC)"] --> Boveda
         Inv2["Inversor B ($1,000 USDC)"] --> Boveda
         Inv3["Inversor N ($200 USDC)"] --> Boveda
-        Boveda[("Bóveda Squads Multi-Sig<br/>(SPV Delaware en Solana)")]
+        Boveda[("Bóveda Squads Multi-Sig<br/>(SPV en Estado de Origen)")]
     end
 
     subgraph Gobernanza["2. Gobernanza de Firmas (M-of-N)"]
@@ -115,5 +115,6 @@ BRIDS utiliza la infraestructura estándar de la industria en Solana:
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.2.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Desacoplamiento de jurisdicción: la bóveda Squads Multi-Sig opera a nombre exclusivo del SPV constituido en el estado de origen de la construcción. |
 | **1.1.0** | 2026-09-13 | `compliance-officer`, `founder-ghostwriter` | Actualización del ticket de inversor a $200 USDC en diagrama de gobernanza. |
 | **1.0.0** | 2026-09-11 | `compliance-officer` & SDD Loop | Creación inicial de la nota conceptual sobre gobernanza y Squads Multi-Sig. |

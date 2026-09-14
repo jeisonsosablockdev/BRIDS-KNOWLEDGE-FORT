@@ -140,7 +140,7 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-rwa-identity-vc-thesis.md|concept-rwa-identity-vc-thesis]]
 - **Custodio:** `pitch-deck-architect`, `founder-ghostwriter`, `business-consultant`
 - **One-Liner Canónico:**
-  > *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $200 USD con títulos recuperables y respaldo legal en Delaware."*
+  > *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $200 USD con títulos recuperables y respaldo societario formal en EE.UU. (Delaware C-Corp tecnológica y SPVs locales)."*
 - **Tesis de Reutilización:** Pilar de pitch decks para Y Combinator y firmas de Venture Capital. Desmonta la trampa de valoración de "gestora inmobiliaria" (1x–3x EBITDA) frente a "infraestructura SaaS" (15x–30x ARR), fundamenta el modelo asset-light con 80%+ de margen bruto, y explica por qué superamos las tres fallas de RWA 1.0 (gas fees de Ethereum, dogma de code-is-law y limbo regulatorio).
 
 ---

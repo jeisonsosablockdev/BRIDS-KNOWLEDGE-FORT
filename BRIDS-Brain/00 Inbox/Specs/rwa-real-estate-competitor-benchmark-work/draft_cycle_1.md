@@ -23,7 +23,7 @@ tags:
 # Benchmark Competitivo Global: Ecosistema Real Estate RWA y Foso Defensivo de BRIDS
 
 > [!NOTE] Resumen Ejecutivo
-> El mercado de tokenización de bienes raíces (Real Estate RWA) ha transitado por tres generaciones tecnológicas y regulatorias. Mientras que los pioneros de la primera ola (RealT, Lofty AI, Blocksquare) quedaron limitados por los altos costos de gas en redes EVM, fragmentación de liquidez y la ausencia de salvaguardas legales ante pérdida de llaves privadas, los actores institucionales (Securitize, Roofstock) se enfocaron exclusivamente en grandes transacciones mayoristas o compras de viviendas completas. BRIDS.io consolida la categoría **Infraestructura de Software RWA en Solana**, combinando fraccionamiento retail desde $100 USD, costos transaccionales subcéntimo con Metaplex Core, estricta separación corporativa en Delaware y un protocolo nativo de recuperación mediante verificación de identidad.
+> El mercado de tokenización de bienes raíces (Real Estate RWA) ha transitado por tres generaciones tecnológicas y regulatorias. Mientras que los pioneros de la primera ola (RealT, Lofty AI, Blocksquare) quedaron limitados por los altos costos de gas en redes EVM, fragmentación de liquidez y la ausencia de salvaguardas legales ante pérdida de llaves privadas, los actores institucionales (Securitize, Roofstock) se enfocaron exclusivamente en grandes transacciones mayoristas o compras de viviendas completas. BRIDS.io consolida la categoría **Infraestructura de Software RWA en Solana**, combinando fraccionamiento retail desde $100 USD, costos transaccionales subcéntimo con Metaplex Core, estricta separación corporativa (Delaware C-Corp tecnológica vs SPVs locales) y un protocolo nativo de recuperación mediante verificación de identidad.
 
 ---
 
@@ -133,7 +133,7 @@ graph TD
 | **Red Blockchain** | Gnosis / ETH | Algorand | Ethereum / Polygon | Polygon / BNB | Permisionada VARA | **Solana (Metaplex Core)** |
 | **Costo por Transacción** | $0.05 – $2.50 USD | ~$0.001 USD | $5.00 – $35.00 USD | $0.03 – $0.15 USD | N/A (Interno) | **<$0.0005 USD (Subcéntimo)** |
 | **Ticket Mínimo** | ~$50 USD | $50 USD | $10,000 – $100,000+ | $100 EUR | Variable (~$1k+) | **$100 USD** |
-| **Vehículo Legal** | Delaware LLC | Delaware LLC | Delaware SPV / Reg D | Préstamo Participativo | VARA ARVA Cat. 1 | **Delaware Series LLC** |
+| **Vehículo Legal** | Delaware LLC | Delaware LLC | Delaware SPV / Reg D | Préstamo Participativo | VARA ARVA Cat. 1 | **SPV LLC (Estado de Origen)** |
 | **Modelo Societario** | Copropiedad accionaria | Copropiedad accionaria | Fondo Institucional | Deuda subordinada | Título Catastral | **Master Securityholder File** |
 | **Protocolo de Recuperación** | Inexistente | Soporte Web2 manual | KYC Tradicional | Base de datos privada | Proceso notarial local | **Stripe Identity + Freeze/Authority Hook** |
 | **Composabilidad / Mercado** | Uniswap v2 / Gnosis | Silo Algorand | ATS permisionado | Plataforma cerrada | Silo cerrado | **Liquidación programática en Solana** |
@@ -157,7 +157,7 @@ flowchart TD
     subgraph Foso_BRIDS["Arquitectura Superior de BRIDS.io"]
         B1["Solana + Metaplex Core: Micro-dividendos por $0.0005 USD"]
         B2["Master Securityholder File + Stripe Identity: Títulos 100% recuperables"]
-        B3["Delaware Series LLC Segregada: Patrimonio blindado contra quiebra matriz"]
+        B3["SPV LLC Segregada en Estado de Origen: Patrimonio blindado contra quiebra matriz"]
         B4["B2B SaaS para Desarrolladores: Motor de originación rápida de capital"]
     end
 
@@ -168,8 +168,8 @@ flowchart TD
 ```
 
 1. **Ingeniería de Micro-Liquidaciones en Solana:** Una dispersión mensual de dividendos a 5,000 inversionistas cuesta miles de dólares en gas en Ethereum y decenas de dólares en Polygon. En Solana, liquidamos la misma nómina de rentas por menos de $2.50 USD en total, haciendo rentable el ticket de $100 USD.
-2. **Superación del Dogma "Code is Law":** Ninguna familia ni inversor sensato tolerará que un click equivocado o una frase semilla extraviada borre un patrimonio de bienes raíces. Mediante Metaplex Core y Stripe Identity, la ley de Delaware respalda el activo: quemamos la participación comprometida y reemitimos el título al nuevo wallet verificado.
-3. **Segregación Patrimonial Real:** A diferencia de plataformas que usan notas de deuda o préstamos participativos donde el inversor asume el riesgo de crédito de la empresa emisora, cada propiedad en BRIDS pertenece a un SPV independiente. Si BRIDS Inc. dejara de operar, el inmueble y los derechos de los socios permanecen intactos en Delaware.
+2. **Superación del Dogma "Code is Law":** Ninguna familia ni inversor sensato tolerará que un click equivocado o una frase semilla extraviada borre un patrimonio de bienes raíces. Mediante Metaplex Core y Stripe Identity, el marco jurídico societario y estatutos del SPV respaldan el activo: quemamos la participación comprometida y reemitimos el título al nuevo wallet verificado.
+3. **Segregación Patrimonial Real:** A diferencia de plataformas que usan notas de deuda o préstamos participativos donde el inversor asume el riesgo de crédito de la empresa emisora, cada propiedad en BRIDS pertenece a un SPV independiente. Si BRIDS Inc. dejara de operar, el inmueble y los derechos de los socios permanecen intactos en la jurisdicción del SPV.
 4. **Modelo B2B SaaS Bilateral:** No operamos como una correduría tradicional que compra propiedades para su propio balance. Proveemos la infraestructura tecnológica a promotores inmobiliarios (Sponsors B2B) que ya poseen los inmuebles y necesitan acelerar su levantamiento de capital, asegurando un inventario constante sin riesgo de balance.
 
 ---

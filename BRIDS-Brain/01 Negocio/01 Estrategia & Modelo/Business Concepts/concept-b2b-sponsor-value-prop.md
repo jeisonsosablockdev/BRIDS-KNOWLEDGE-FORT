@@ -1,15 +1,14 @@
 ---
 title: "C5: Propuesta de Valor para Desarrolladores Inmobiliarios (B2B Sponsors & GPs)"
 concept_id: "concept-b2b-sponsor-value-prop"
-version: 1.0.0
+version: "1.2.0"
 status: "approved"
 workflow: "core-business-concepts"
-category: "sales-revops-b2b"
+category: "market-gtm"
 subagents:
   - "b2b-sponsor-lead"
   - "business-consultant"
-  - "pitch-deck-architect"
-last_updated: "2026-09-11"
+last_updated: "2026-09-13"
 tags:
   - "sdd-concept"
   - "b2b-sponsors"
@@ -21,7 +20,7 @@ tags:
 # C5: Propuesta de Valor para Desarrolladores Inmobiliarios (B2B Sponsors & GPs)
 
 > [!NOTE] Resumen Ejecutivo
-> Para los desarrolladores inmobiliarios (*Sponsors* y *General Partners / GPs*), levantar capital privado mediante sindicación tradicional es un proceso analógico, costoso ($40k-$80k en abogados y estructuración) y lento (3 a 6 meses de colocación con decenas de llamadas individuales). BRIDS.io se posiciona como su **software institucional de distribución y administración de sindicaciones**. Al estandarizar el despliegue técnico sobre SPVs de Delaware y automatizar la gestión de inversionistas en Solana, BRIDS reduce el tiempo de cierre a semanas, disminuye el costo de capital y elimina la carga operativa manual de contabilidad, reportes y dispersión de dividendos.
+> Para los desarrolladores inmobiliarios (*Sponsors* y *General Partners / GPs*), levantar capital privado mediante sindicación tradicional es un proceso analógico, costoso ($40k-$80k en abogados y estructuración) y lento (3 a 6 meses de colocación con decenas de llamadas individuales). BRIDS.io se posiciona como su **software institucional de distribución y administración de sindicaciones**. Al estandarizar el despliegue técnico sobre SPVs en el estado de origen de cada construcción y automatizar la gestión de inversionistas en Solana, BRIDS reduce el tiempo de cierre a semanas, disminuye el costo de capital y elimina la carga operativa manual de contabilidad, reportes y dispersión de dividendos.
 
 ---
 
@@ -57,7 +56,7 @@ flowchart LR
 
 ### 1. Fricción y Costos Legales de Estructuración
 - **Realidad Tradicional:** Cada sindicación requiere redactar *Private Placement Memorandums (PPM)* desde cero, contratos de suscripción manuales y coordinación notarial costosa ($40,000 a $80,000 USD).
-- **Solución BRIDS:** Plantillas societarias estandarizadas para SPVs de Delaware e integración de smart contracts llave en mano con tarifa fija de software.
+- **Solución BRIDS:** Plantillas societarias estandarizadas para SPVs en el estado de origen de la obra e integración de smart contracts llave en mano con tarifa fija de software.
 
 ### 2. Ciclos Extensos de Captación de Capital
 - **Realidad Tradicional:** Los desarrolladores pasan meses persiguiendo cheques individuales de $50,000 o negociando condiciones leoninas con fondos de deuda privada.
@@ -69,7 +68,7 @@ flowchart LR
 
 ### 4. Preservación del Control del Proyecto
 - **Realidad Tradicional:** Los fondos institucionales imponen cláusulas agresivas de control operativo o penalizaciones de retornos preferentes.
-- **Solución BRIDS:** Los inversores sindicados son socios pasivos de la LLC de Delaware administrada por el Sponsor. El desarrollador mantiene el 100% de la gestión operativa de la obra y la toma de decisiones.
+- **Solución BRIDS:** Los inversores sindicados son socios pasivos de la LLC en el estado de origen administrada por el Sponsor. El desarrollador mantiene el 100% de la gestión operativa de la obra y la toma de decisiones.
 
 ---
 
@@ -97,7 +96,7 @@ Para demostrar la robustez del modelo y proveer un historial comprobable (*track
 ## 5. Snippets Reutilizables (Ready-to-Cite)
 
 ### Snippet 5.1: Para Cold Email y Prospección Outbound a Desarrolladores
-> *"Hola [Nombre], vemos que están desarrollando [Nombre del Proyecto]. Muchos promotores pierden entre 3 y 5 meses y más de $50,000 dólares en estructuración legal persiguiendo inversionistas privados. En BRIDS les proporcionamos la infraestructura de software para digitalizar su sindicación en SPVs de Delaware, automatizar su cap table y cerrar rondas en semanas con un fee tecnológico de solo el 1.0%. ¿Tendrías 15 minutos este jueves para ver cómo funciona el dashboard?"*
+> *"Hola [Nombre], vemos que están desarrollando [Nombre del Proyecto]. Muchos promotores pierden entre 3 y 5 meses y más de $50,000 dólares en estructuración legal persiguiendo inversionistas privados. En BRIDS les proporcionamos la infraestructura de software para digitalizar su sindicación en SPVs constituidos en la jurisdicción del inmueble, automatizar su cap table y cerrar rondas en semanas con tarifas de software transparentes. ¿Tendrías 15 minutos este jueves para ver cómo funciona el dashboard?"*
 
 ### Snippet 5.2: Para One-Pager Institucional (Executive Summary B2B)
 > *"BRIDS.io no es un intermediario financiero ni compite con los desarrolladores inmobiliarios. Somos la capa de software que automatiza la sindicación privada: convertimos procesos burocráticos de meses en flujos digitales transparentes sobre la red de Solana, permitiendo a los promotores concentrarse en lo que mejor saben hacer: construir y generar valor inmobiliario."*
@@ -115,4 +114,5 @@ Para demostrar la robustez del modelo y proveer un historial comprobable (*track
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.2.0** | 2026-09-13 | `b2b-sponsor-lead`, `compliance-officer` | Desacoplamiento de jurisdicción: SPVs de sindicación constituidos en el estado de origen del desarrollo inmobiliario. |
 | **1.0.0** | 2026-09-11 | `b2b-sponsor-lead` & SDD Loop | Formulación inicial de la propuesta de valor para desarrolladores B2B. |

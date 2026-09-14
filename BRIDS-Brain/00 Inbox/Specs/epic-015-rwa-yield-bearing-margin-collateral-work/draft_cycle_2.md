@@ -56,7 +56,7 @@ flowchart TD
     Check -- "NO (Vence Gracia)" --> Route{"¿El trader cierra voluntariamente?"}
     
     Route -- "Cierra posición" --> Waterfall["Liquidación en Cascada (Waterfall Lien)"]
-    Waterfall --> Hook["Hook de Gravamen en SPV Delaware"]
+    Waterfall --> Hook["Hook de Gravamen en SPV del Estado de Origen"]
     Hook --> Settlement["Al venderse la casa física ($112):<br/>- Protocolo cobra $15 deuda + $2 fee<br/>- Bob recibe $95 USDC en su billetera"]
     
     Route -- "Pérdida catastrófica (> 80%)" --> ForcedConfiscation["Liquidación Forzosa Total"]
@@ -94,8 +94,8 @@ Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen ca
 | Vector de Ataque | Mecánica del Exploit Intentado | Contramedida Técnica y Legal de BRIDS |
 | :--- | :--- | :--- |
 | **1. Ataque de Inflación de Tasación (*Appraisal Inflation Attack*)** | Un promotor o usuario coludido con un perito infla artificialmente la valuación de una casa en ruinas a \$500,000 USD, mintea NFTs, extrae \$375,000 USDC en margen de trading y abandona las posiciones para quedarse con el dinero prestado. | **Anclaje en Costo Real de Adquisición + Doble Oráculo:** El LTV de margen **NUNCA** se calcula sobre la plusvalía proyectada futura, sino estrictamente sobre el **precio de compra real escriturado en la escritura pública de compraventa en Delaware**. Además, se exige doble certificación pericial independiente auditada por el Sponsor B2B antes de habilitar el activo en la bóveda de margen. |
-| **2. Ataque de Retraso de Obra y Costo de Acarreo (*Duration Extension Exploit*)** | La obra de remodelación se estanca o retrasa 18 meses adicionales. El trader mantiene su margen abierto a costo cero mientras el AMM sufre iliquidez prolongada. | **Tasa de Acarreo Flotante (*Dynamic Carry Interest Rate*):** El uso del NFT como margen devenga una tasa de interés continua amortizable contra las rentas o plusvalías del SPV. Si el proyecto supera el cronograma estipulado en el prospecto de Delaware, la tasa de penalización escala dinámicamente, incentivando al trader a liquidar o reponer el margen. |
-| **3. Cisne Negro Inmobiliario (*Underlying Physical Asset Destruction*)** | La casa sufre un incendio total, defecto estructural oculto o siniestro no previsto, reduciendo el valor del inmueble de \$100 a \$40 USD mientras el usuario tiene \$75 USDC de margen abierto. | **Póliza *Builder's Risk* Obligatoria + Tramo de Primera Pérdida (*First-Loss Capital*):** Cada SPV de Delaware tiene como requisito estatutario una póliza de seguro de construcción a todo riesgo con beneficiario preferente al SPV. Además, los Sponsors B2B deben aportar un tramo de capital subordinado (10%-15%) que absorbe las primeras pérdidas antes de que el valor del NFT retail se degrade. |
+| **2. Ataque de Retraso de Obra y Costo de Acarreo (*Duration Extension Exploit*)** | La obra de remodelación se estanca o retrasa 18 meses adicionales. El trader mantiene su margen abierto a costo cero mientras el AMM sufre iliquidez prolongada. | **Tasa de Acarreo Flotante (*Dynamic Carry Interest Rate*):** El uso del NFT como margen devenga una tasa de interés continua amortizable contra las rentas o plusvalías del SPV. Si el proyecto supera el cronograma estipulado en el prospecto estatutario del SPV, la tasa de penalización escala dinámicamente, incentivando al trader a liquidar o reponer el margen. |
+| **3. Cisne Negro Inmobiliario (*Underlying Physical Asset Destruction*)** | La casa sufre un incendio total, defecto estructural oculto o siniestro no previsto, reduciendo el valor del inmueble de \$100 a \$40 USD mientras el usuario tiene \$75 USDC de margen abierto. | **Póliza *Builder's Risk* Obligatoria + Tramo de Primera Pérdida (*First-Loss Capital*):** Cada SPV en su estado de origen tiene como requisito estatutario una póliza de seguro de construcción a todo riesgo con beneficiario preferente al SPV. Además, los Sponsors B2B deben aportar un tramo de capital subordinado (10%-15%) que absorbe las primeras pérdidas antes de que el valor del NFT retail se degrade. |
 | **4. Colusión de Liquidación en Pares Ilíquidos (*Wash Liquidation Attack*)** | El atacante usa una cuenta A (con el NFT) y una cuenta B (con USDC en un par sin liquidez). Manipula el precio artificialmente en un bloque para que la cuenta B gane y la cuenta A sea liquidada intencionalmente, extrayendo USDC del fondo Backstop. | **Confinamiento de Pares de Margen a Alta Liquidez:** El margen respaldado por NFTs de BRIDS **SOLO** se puede utilizar para operar contra pares institucionales ultra-líquidos (SOL/USDC, BTC/USDC) con oráculos de precios de baja latencia con tolerancia de desvío (*Pyth Confidence Intervals*). Queda estrictamente prohibido usar el margen en tokens de baja capitalización o pools internos manipulables. |
 
 ---
@@ -119,7 +119,7 @@ graph LR
     subgraph Liquidacion_Respaldo["Resolución Financiera"]
         BackstopVault["BRIDS Backstop Vault (Squads Multi-Sig)"]
         StripeID["Filtro KYC Stripe Identity (Whitelist)"]
-        SPV_Distribution["Dispersión Notarial Delaware LLC"]
+        SPV_Distribution["Dispersión Notarial SPV LLC"]
     end
 
     Oraculo_Riesgo --> Motor_Margen

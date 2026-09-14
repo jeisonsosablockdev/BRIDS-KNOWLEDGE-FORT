@@ -1,5 +1,5 @@
 ---
-title: "[INSTAGRAM REEL] delaware spv dual entity compliance"
+title: "[INSTAGRAM REEL] Delaware C-Corp & SPV Local Dual Entity Compliance"
 category: "02 Marketing"
 workflow: "W5_CONTENT_SOCIAL"
 skills_used:
@@ -9,12 +9,12 @@ skills_used:
 platform: "instagram"
 content_type: "reel-vertical"
 pillar: "Pilar 2: Cumplimiento Regulatorio"
-cultural_reference: "Delaware Series LLC"
+cultural_reference: "SPV en Estado de Origen (LLC Local)"
 topic: "Estructuración Dual SPV"
 status: draft
-version: "1.0"
+version: "1.1"
 created_at: 2026-09-02
-updated_at: 2026-09-02
+updated_at: 2026-09-13
 tags:
   - marketing
   - social-content
@@ -22,13 +22,13 @@ tags:
   - instagram
   - rwa
   - solana
-  - delaware-spv-dual-entity-compliance
+  - dual-entity-spv-compliance
 ---
 
-# [INSTAGRAM REEL] DELAWARE SPV DUAL ENTITY COMPLIANCE
+# [INSTAGRAM REEL] DELAWARE C-CORP & SPV LOCAL DUAL ENTITY COMPLIANCE
 
 > [!NOTE]
-> **Resumen Ejecutivo:** Video vertical Reel 9:16 para Instagram enfocado en Estructuración Dual SPV (Delaware Series LLC). Formato institucional de 15-30s con desglose técnico de infraestructura y propuesta de valor RWA en Solana.
+> **Resumen Ejecutivo:** Video vertical Reel 9:16 para Instagram enfocado en Estructuración Dual SPV (LLC en Estado de Origen vs Delaware C-Corp). Formato institucional de 15-30s con desglose técnico de infraestructura y propuesta de valor RWA en Solana.
 
 ---
 
@@ -36,7 +36,7 @@ tags:
 - **Plataforma:** Instagram Reels (`@brids_io`)
 - **Pilar de Contenido:** Pilar 2: Cumplimiento Regulatorio
 - **Concepto / Tesis:** Estructuración Dual SPV
-- **Referencia Técnica:** *Delaware Series LLC*
+- **Referencia Técnica:** *SPV en Estado de Origen (LLC Local)*
 - **Gancho Visual / Hook:** *"Cómo proteger a los inversores fraccionales mediante SPVs segregadas sin ser un broker-dealer."*
 - **Llamado a la Acción (CTA):** *👉 Descarga el Whitepaper de Cumplimiento Legal en brids.io/legal.*
 
@@ -55,7 +55,7 @@ tags:
 | Tiempo | Escena | Ángulo & Tomas | Acción en Pantalla | Audio / Voz en Off |
 |---|---|---|---|---|
 | **00:00 - 00:03** | **Escena 1 (Hook)** | Pantalla dividida / Tipografía cinética | Comparación visual de fricción tradicional vs solución on-chain. | *"Cómo proteger a los inversores fraccionales mediante SPVs segregadas sin ser un broker-dealer."* |
-| **00:03 - 00:12** | **Escena 2 (Arquitectura)** | Screen recording de UI / B-roll inmobiliario | Demostración de trazabilidad en Solana y Delaware SPVs dedicados. | *"Cada propiedad vive en un SPV independiente, garantizando segregación de riesgos y titularidad jurídica."* |
+| **00:03 - 00:12** | **Escena 2 (Arquitectura)** | Screen recording de UI / B-roll inmobiliario | Demostración de trazabilidad en Solana y SPVs dedicados en el estado de origen. | *"Cada propiedad vive en un SPV independiente, garantizando segregación de riesgos y titularidad jurídica."* |
 | **00:12 - 00:22** | **Escena 3 (Rendimiento)** | Motion graphic de flujo financiero USDC | Distribución automática de rentas y plugins de recuperación Metaplex Core. | *"Liquidación instantánea en USDC, auditoría pública on-chain y custodia sin intermediarios bancarios lentos."* |
 | **00:22 - 00:30** | **Escena 4 (Cierre CTA)** | Tarjeta de activo + URL brids.io | Logo BRIDS con llamado a la acción comercial. | *"👉 Descarga el Whitepaper de Cumplimiento Legal en brids.io/legal."* |
 
@@ -68,11 +68,11 @@ Cómo proteger a los inversores fraccionales mediante SPVs segregadas sin ser un
 
 Estructuración Dual SPV: Infraestructura Web3 de software para la sindicación e inversión inmobiliaria estructurada en EE.UU.
 
-Respaldado por Delaware SPVs segregadas, verificación KYC biométrica con Stripe Identity y plugins nativos de Metaplex Core en la red de Solana.
+Respaldado por SPVs segregados en el estado de origen de cada desarrollo, verificación KYC biométrica con Stripe Identity y plugins nativos de Metaplex Core en la red de Solana.
 
 👉 Descarga el Whitepaper de Cumplimiento Legal en brids.io/legal.
 
-#BRIDS #Compliance #DelawareLLC #FintechLaw #RWA
+#BRIDS #Compliance #SPV #FintechLaw #RWA
 ```
 
 ---
