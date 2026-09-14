@@ -1,8 +1,8 @@
 ---
-spec_id: "SPEC-epic-015-rwa-yield-bearing-margin-collateral"
-title: "RFC EPIC-015: Colateral de Margen RWA Fix & Flip y Motor de Liquidación"
+spec_id: "SPEC-epic-016-rwa-yield-bearing-margin-collateral"
+title: "RFC EPIC-016: Colateral de Margen RWA Fix & Flip y Motor de Liquidación"
 target_vault_folder: "BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/"
-target_file: "BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-015-rwa-yield-bearing-margin-collateral.md"
+target_file: "BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-016-rwa-yield-bearing-margin-collateral.md"
 subagents_involved:
   - "business-consultant"
   - "pitch-deck-architect"
@@ -27,10 +27,10 @@ evaluation:
   criticism_history: []
 ---
 
-# Spec: RFC EPIC-015: Colateral de Margen RWA Fix & Flip y Motor de Liquidación
+# Spec: RFC EPIC-016: Colateral de Margen RWA Fix & Flip y Motor de Liquidación
 
 > [!NOTE]
-> **Resumen Ejecutivo:** Diseñar la propuesta técnica y financiera de EPIC-015 para habilitar el uso de NFTs de Fix & Flip como colateral de margen en protocolos de trading sobre Solana, con ratios LTV conservadores, absorción de liquidaciones por el AMM y fondo de recompra de tesorería BRIDS
+> **Resumen Ejecutivo:** Diseñar la propuesta técnica y financiera de EPIC-016 para habilitar el uso de NFTs de Fix & Flip como colateral de margen en protocolos de trading sobre Solana, con ratios LTV conservadores, absorción de liquidaciones por el AMM y fondo de recompra de tesorería BRIDS
 > Este artefacto define de manera formal e inmutable los requisitos, el destino canónico en `BRIDS-Brain/`, los subagentes responsables y las restricciones de calidad para el entregable antes de iniciar cualquier redacción o desarrollo.
 > Cuenta con dos puntos de parada humana obligatorios: **HITL-1 (Aprobación del Spec)** y **HITL-2 (Aprobación del Entregable)**.
 
@@ -38,7 +38,7 @@ evaluation:
 
 ## 1. Destino Canónico en el Vault
 - **Carpeta de Destino:** `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/`
-- **Archivo de Salida:** `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-015-rwa-yield-bearing-margin-collateral.md`
+- **Archivo de Salida:** `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-016-rwa-yield-bearing-margin-collateral.md`
 - **Taxonomía:** Cumple con la estructura numerada estándar de `BRIDS-Brain/` (00 a 10).
 - **Regla de Promoción:** El documento final solo se escribirá en esta ruta cuando el Agente Revisor otorgue una calificación $\ge 8.5 / 9.0$ **Y** el usuario otorgue su confirmación formal en el guardrail **HITL-2** (`approve-deliverable`).
 
@@ -54,7 +54,7 @@ evaluation:
 ---
 
 ## 3. Propósito Comercial y Audiencia (ICP)
-- **Objetivo de Negocio:** Diseñar la propuesta técnica y financiera de EPIC-015 para habilitar el uso de NFTs de Fix & Flip como colateral de margen en protocolos de trading sobre Solana, con ratios LTV conservadores, absorción de liquidaciones por el AMM y fondo de recompra de tesorería BRIDS
+- **Objetivo de Negocio:** Diseñar la propuesta técnica y financiera de EPIC-016 para habilitar el uso de NFTs de Fix & Flip como colateral de margen en protocolos de trading sobre Solana, con ratios LTV conservadores, absorción de liquidaciones por el AMM y fondo de recompra de tesorería BRIDS
 - **Público Objetivo (ICP):** Traders Web3, DeFi AMMs, Real Estate Investors, Risk Officers
 - **Acción Deseada (CTA):** Agendar sesión técnica de estructuración / Revisar Data Room
 - **KPI Primario de Éxito:** Tasa de respuesta calificada >= 20%
@@ -99,11 +99,11 @@ Estructura obligatoria del documento final:
 ---
 
 ## 7. Pasos Atómicos de Ejecución (Checklist con Doble HITL)
-- [x] **STEP-01 (HITL-1 Spec Review & Approval):** Inspección humana del spec (`sdd-manager.sh preview epic-015-rwa-yield-bearing-margin-collateral`), refinamiento opcional con `refine-spec` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-spec epic-015-rwa-yield-bearing-margin-collateral`.
+- [x] **STEP-01 (HITL-1 Spec Review & Approval):** Inspección humana del spec (`sdd-manager.sh preview epic-016-rwa-yield-bearing-margin-collateral`), refinamiento opcional con `refine-spec` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-spec epic-016-rwa-yield-bearing-margin-collateral`.
 - [x] **STEP-02 (Initial Draft Generation):** Redacción inicial del borrador por `business-consultant` respetando el outline y las anclas técnicas.
 - [x] **STEP-03 (Evaluator-Optimizer Autonomous Loop):** Bucle Creador vs Revisor hasta calificar con nota $\ge 8.5 / 9.0$ y cero clichés (máximo 5 ciclos).
-- [x] **STEP-04 (HITL-2 Deliverable Review & Approval):** Inspección humana del texto pulido (`sdd-manager.sh review-deliverable epic-015-rwa-yield-bearing-margin-collateral`), ajustes con `refine-deliverable` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-deliverable epic-015-rwa-yield-bearing-margin-collateral`.
-- [x] **STEP-05 (Vault Integration):** Promoción atómica e idempotente del documento aceptado a `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/epic-015-rwa-yield-bearing-margin-collateral.md`.
+- [x] **STEP-04 (HITL-2 Deliverable Review & Approval):** Inspección humana del texto pulido (`sdd-manager.sh review-deliverable epic-016-rwa-yield-bearing-margin-collateral`), ajustes con `refine-deliverable` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-deliverable epic-016-rwa-yield-bearing-margin-collateral`.
+- [x] **STEP-05 (Vault Integration):** Promoción atómica e idempotente del documento aceptado a `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/epic-016-rwa-yield-bearing-margin-collateral.md`.
 
 ---
 

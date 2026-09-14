@@ -1,9 +1,9 @@
 {
-  "spec_id": "SPEC-EPIC-015-RWA-YIELD-BEARING-MARGIN-COLLATERAL",
-  "slug": "epic-015-rwa-yield-bearing-margin-collateral",
-  "title": "RFC EPIC-015: Colateral de Margen RWA Fix & Flip y Motor de Liquidación",
+  "spec_id": "SPEC-EPIC-016-RWA-YIELD-BEARING-MARGIN-COLLATERAL",
+  "slug": "epic-016-rwa-yield-bearing-margin-collateral",
+  "title": "RFC EPIC-016: Colateral de Margen RWA Fix & Flip y Motor de Liquidación",
   "target_vault_folder": "01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos",
-  "target_file": "01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-015-rwa-yield-bearing-margin-collateral.md",
+  "target_file": "01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-016-rwa-yield-bearing-margin-collateral.md",
   "subagents_involved": [
     "business-consultant",
     "pitch-deck-architect",
@@ -25,7 +25,7 @@
     }
   },
   "intent": {
-    "business_goal": "Diseñar la propuesta técnica y financiera de EPIC-015 para habilitar el uso de NFTs de Fix & Flip como colateral de margen en protocolos de trading sobre Solana, con ratios LTV conservadores, absorción de liquidaciones por el AMM y fondo de recompra de tesorería BRIDS",
+    "business_goal": "Diseñar la propuesta técnica y financiera de EPIC-016 para habilitar el uso de NFTs de Fix & Flip como colateral de margen en protocolos de trading sobre Solana, con ratios LTV conservadores, absorción de liquidaciones por el AMM y fondo de recompra de tesorería BRIDS",
     "target_icp": "Traders Web3, DeFi AMMs, Real Estate Investors, Risk Officers",
     "constraints": [
       "Cero clichés de IA",
@@ -46,7 +46,7 @@
         "passed": true,
         "timestamp": "2026-09-13T05:46:19.896Z",
         "banned_phrases_count": 0,
-        "report_file": "BRIDS-Brain/00 Inbox/Specs/epic-015-rwa-yield-bearing-margin-collateral-work/criticism_cycle_1.json"
+        "report_file": "BRIDS-Brain/00 Inbox/Specs/epic-016-rwa-yield-bearing-margin-collateral-work/criticism_cycle_1.json"
       },
       {
         "cycle": 2,
@@ -54,7 +54,7 @@
         "passed": true,
         "timestamp": "2026-09-13T05:49:55.576Z",
         "banned_phrases_count": 0,
-        "report_file": "BRIDS-Brain/00 Inbox/Specs/epic-015-rwa-yield-bearing-margin-collateral-work/criticism_cycle_2.json"
+        "report_file": "BRIDS-Brain/00 Inbox/Specs/epic-016-rwa-yield-bearing-margin-collateral-work/criticism_cycle_2.json"
       },
       {
         "cycle": 3,
@@ -62,7 +62,7 @@
         "passed": true,
         "timestamp": "2026-09-13T06:09:44.404Z",
         "banned_phrases_count": 0,
-        "report_file": "BRIDS-Brain/00 Inbox/Specs/epic-015-rwa-yield-bearing-margin-collateral-work/criticism_cycle_3.json"
+        "report_file": "BRIDS-Brain/00 Inbox/Specs/epic-016-rwa-yield-bearing-margin-collateral-work/criticism_cycle_3.json"
       }
     ]
   },

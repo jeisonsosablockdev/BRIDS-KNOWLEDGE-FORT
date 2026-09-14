@@ -1,7 +1,7 @@
 ---
-title: "RFC EPIC-015: Colateral de Margen RWA Fix & Flip y Motor de Liquidación Backstop"
-document_id: "epic-015-rwa-yield-bearing-margin-collateral"
-epic_id: "EPIC-015"
+title: "RFC EPIC-016: Colateral de Margen RWA Fix & Flip y Motor de Liquidación Backstop"
+document_id: "epic-016-rwa-yield-bearing-margin-collateral"
+epic_id: "EPIC-016"
 version: 1.0.0
 status: "proposed"
 category: "Technical RFCs"
@@ -15,7 +15,7 @@ last_updated: "2026-09-13"
 tags:
   - rfc
   - epic
-  - epic-015
+  - epic-016
   - rwa-margin
   - fix-and-flip
   - defi-composability
@@ -23,7 +23,7 @@ tags:
   - backstop-liquidity
 ---
 
-# RFC EPIC-015: Colateral de Margen RWA Fix & Flip y Motor de Liquidación Backstop
+# RFC EPIC-016: Colateral de Margen RWA Fix & Flip y Motor de Liquidación Backstop
 
 > [!NOTE] Resumen Ejecutivo & Estado de Propuesta
 > **Estado de Implementación:** Propuesta técnica para la fase futura de expansión DeFi institucional (Roadmap v2.0).  
@@ -100,7 +100,7 @@ sequenceDiagram
 
 ## 4. Arquitectura de Mitigación de Riesgos y "Duration Mismatch"
 
-El mayor obstáculo en la colateralización inmobiliaria es que el trader ganador exige retirar sus ganancias en USDC hoy, mientras que la casa se liquida en 6 meses. EPIC-015 resuelve este desfase con dos mecanismos complementarios:
+El mayor obstáculo en la colateralización inmobiliaria es que el trader ganador exige retirar sus ganancias en USDC hoy, mientras que la casa se liquida en 6 meses. EPIC-016 resuelve este desfase con dos mecanismos complementarios:
 
 ### 4.1. Ratio de Préstamo-Valor (LTV) y Colchón de Sobrecolateralización
 * **LTV Máximo:** 70% a 75%.
@@ -117,7 +117,7 @@ Para evitar que los proveedores de liquidez del AMM queden atrapados con activos
 
 ## 5. Especificaciones Técnicas en la Red de Solana
 
-| Componente Técnico | Implementación Propuesta | Función en EPIC-015 |
+| Componente Técnico | Implementación Propuesta | Función en EPIC-016 |
 | :--- | :--- | :--- |
 | **Estándar de Token** | Metaplex Core (`MPL-Core`) | Registro del activo en cuenta única (Single PDA) con costo mínimo de renta. |
 | **Plugin de Autoridad** | `Authority / Lifecycle Hook` | Habilita la transferencia o quema forzosa del NFT en caso de liquidación sin intervención manual. |

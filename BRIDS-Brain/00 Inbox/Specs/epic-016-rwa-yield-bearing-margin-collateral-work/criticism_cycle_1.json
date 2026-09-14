@@ -36,8 +36,8 @@
   },
   "banned_phrases_detected": [],
   "remediation_directives": [],
-  "spec_id": "SPEC-EPIC-015-RWA-YIELD-BEARING-MARGIN-COLLATERAL",
-  "cycle": 3,
-  "target_file": "01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-015-rwa-yield-bearing-margin-collateral.md",
-  "timestamp": "2026-09-13T06:09:44.404Z"
+  "spec_id": "SPEC-EPIC-016-RWA-YIELD-BEARING-MARGIN-COLLATERAL",
+  "cycle": 1,
+  "target_file": "01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-016-rwa-yield-bearing-margin-collateral.md",
+  "timestamp": "2026-09-13T05:46:19.896Z"
 }

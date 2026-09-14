@@ -1,7 +1,7 @@
 ---
-title: "RFC EPIC-015: Colateral de Margen RWA Fix & Flip, Casos Límite y Modelado de Amenazas"
-document_id: "epic-015-rwa-yield-bearing-margin-collateral"
-epic_id: "EPIC-015"
+title: "RFC EPIC-016: Colateral de Margen RWA Fix & Flip, Casos Límite y Modelado de Amenazas"
+document_id: "epic-016-rwa-yield-bearing-margin-collateral"
+epic_id: "EPIC-016"
 version: 1.1.0
 status: "proposed"
 category: "Technical RFCs"
@@ -15,7 +15,7 @@ last_updated: "2026-09-13"
 tags:
   - rfc
   - epic
-  - epic-015
+  - epic-016
   - edge-cases
   - partial-liquidation
   - threat-modeling
@@ -24,7 +24,7 @@ tags:
   - solana
 ---
 
-# RFC EPIC-015: Colateral de Margen RWA Fix & Flip, Casos Límite y Modelado de Amenazas
+# RFC EPIC-016: Colateral de Margen RWA Fix & Flip, Casos Límite y Modelado de Amenazas
 
 > [!NOTE] Resumen Ejecutivo & Estado de Propuesta (v1.1.0)
 > **Estado de Implementación:** Propuesta técnica avanzada para la fase futura de expansión DeFi institucional (Roadmap v2.0).  
@@ -44,7 +44,7 @@ tags:
 
 Un error fatal en sistemas de colateralización rígidos es la **confiscación desproporcionada**: si Bob deposita un NFT de \$100 USD, toma un margen de \$75 USDC y cierra su trade con una pérdida de solo \$15 USDC (conservando \$60 de saldo libre), **sería confiscatorio e ineficiente quitarle el inmueble completo de \$100 por una deuda de \$15**.
 
-EPIC-015 implementa una **Arquitectura de Liquidación Parcial en Tres Niveles**:
+EPIC-016 implementa una **Arquitectura de Liquidación Parcial en Tres Niveles**:
 
 ```mermaid
 flowchart TD
@@ -89,7 +89,7 @@ flowchart TD
 
 ## 3. Modelado de Amenazas y Vectores de Manipulación (*Threat Model*)
 
-Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen capital en este sistema, EPIC-015 analiza y neutraliza cuatro vectores de ataque malicioso:
+Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen capital en este sistema, EPIC-016 analiza y neutraliza cuatro vectores de ataque malicioso:
 
 | Vector de Ataque | Mecánica del Exploit Intentado | Contramedida Técnica y Legal de BRIDS |
 | :--- | :--- | :--- |
@@ -110,7 +110,7 @@ graph LR
         Inspection["Hito Certificado de Remodelación"]
     end
 
-    subgraph Motor_Margen["Motor de Margen en Solana (EPIC-015)"]
+    subgraph Motor_Margen["Motor de Margen en Solana (EPIC-016)"]
         Vault["Bóveda Escrow Metaplex Core"]
         LienEngine["Motor de Gravámenes Parciales"]
         RiskEngine["Monitor de Ratio de Liquidación (LTV 75%)"]

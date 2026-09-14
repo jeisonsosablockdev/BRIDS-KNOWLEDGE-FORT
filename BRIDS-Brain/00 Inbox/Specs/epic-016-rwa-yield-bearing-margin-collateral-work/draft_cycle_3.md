@@ -1,7 +1,7 @@
 ---
-title: "RFC EPIC-015: Colateral de Margen RWA Fix & Flip, Casos Límite y Desacoplamiento de Liquidez AMM"
-document_id: "epic-015-rwa-yield-bearing-margin-collateral"
-epic_id: "EPIC-015"
+title: "RFC EPIC-016: Colateral de Margen RWA Fix & Flip, Casos Límite y Desacoplamiento de Liquidez AMM"
+document_id: "epic-016-rwa-yield-bearing-margin-collateral"
+epic_id: "EPIC-016"
 version: 1.2.0
 status: "proposed"
 category: "Technical RFCs"
@@ -15,7 +15,7 @@ last_updated: "2026-09-13"
 tags:
   - rfc
   - epic
-  - epic-015
+  - epic-016
   - rwa-margin
   - fix-and-flip
   - partial-liquidation
@@ -25,7 +25,7 @@ tags:
   - solana
 ---
 
-# RFC EPIC-015: Colateral de Margen RWA Fix & Flip, Casos Límite y Desacoplamiento de Liquidez AMM
+# RFC EPIC-016: Colateral de Margen RWA Fix & Flip, Casos Límite y Desacoplamiento de Liquidez AMM
 
 > [!NOTE] Resumen Ejecutivo & Estado de Propuesta (v1.2.0)
 > **Estado de Implementación:** Propuesta técnica de vanguardia para la fase futura de expansión DeFi institucional (Roadmap v2.0).  
@@ -104,7 +104,7 @@ sequenceDiagram
 
 Un error fatal en sistemas de colateralización rígidos es la **confiscación desproporcionada**: si Bob deposita un NFT de \$100 USD, toma un margen de \$75 USDC y cierra su trade con una pérdida de solo \$15 USDC (conservando \$60 de saldo libre), **sería confiscatorio e ineficiente quitarle el inmueble completo de \$100 por una deuda de \$15**.
 
-EPIC-015 implementa una **Arquitectura de Liquidación Parcial en Tres Niveles**:
+EPIC-016 implementa una **Arquitectura de Liquidación Parcial en Tres Niveles**:
 
 ```mermaid
 flowchart TD
@@ -193,7 +193,7 @@ El *hold* de 6 a 12 meses es asumido por **Fondos de Crédito Privado Institucio
 
 ## 6. Modelado de Amenazas y Vectores de Manipulación (*Threat Model*)
 
-Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen capital en este sistema, EPIC-015 analiza y neutraliza cuatro vectores de ataque malicioso:
+Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen capital en este sistema, EPIC-016 analiza y neutraliza cuatro vectores de ataque malicioso:
 
 | Vector de Ataque | Mecánica del Exploit Intentado | Contramedida Técnica y Legal de BRIDS |
 | :--- | :--- | :--- |
@@ -206,7 +206,7 @@ Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen ca
 
 ## 7. Arquitectura de Gobernanza y Especificaciones Técnicas
 
-| Componente Técnico | Implementación Propuesta | Función en EPIC-015 |
+| Componente Técnico | Implementación Propuesta | Función en EPIC-016 |
 | :--- | :--- | :--- |
 | **Estándar de Token** | Metaplex Core (`MPL-Core`) | Registro del activo en cuenta única (Single PDA) con costo mínimo de renta. |
 | **Plugin de Autoridad** | `Authority / Lifecycle Hook` | Habilita la transferencia forzosa del NFT en caso de liquidación sin intervención manual. |
