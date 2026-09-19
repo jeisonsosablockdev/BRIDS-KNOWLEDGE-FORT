@@ -15,6 +15,7 @@ Este directorio constituye el centro neurálgico de **adquisición, habilitació
 ---
 
 ## 🔗 Conceptos de Referencia
+- [[01 Negocio/02 Producto & Ingenieria/modulo-desarrollador-spv-engine.md|Módulo del Desarrollador Inmobiliario y SPV Engine]]
 - [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md|C5: B2B Sponsor Value Prop]]
 - [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md|C1: Dual-Entity Compliance]]
 - [[01 Negocio/02 Producto & Ingenieria/current-product-status-matrix.md|Matriz de Estado del Producto (Capacidades Reales de Onboarding)]]

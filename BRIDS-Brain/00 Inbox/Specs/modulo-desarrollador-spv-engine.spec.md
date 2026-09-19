@@ -6,7 +6,7 @@ target_file: "BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/modulo-desarrollad
 subagents_involved:
   - "business-consultant"
   - "b2b-sponsor-lead"
-status: deliverable_review # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration
+status: completed # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration
 created_at: "2026-09-18"
 updated_at: "2026-09-18"
 hitl_checkpoints:
@@ -131,8 +131,8 @@ Estructura obligatoria del documento final:
 - [x] **STEP-01 (HITL-1 Spec Review & Approval):** Inspección humana del spec (`sdd-manager.sh preview modulo-desarrollador-spv-engine`), refinamiento opcional con `refine-spec` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-spec modulo-desarrollador-spv-engine`.
 - [x] **STEP-02 (Initial Draft Generation):** Redacción inicial del borrador por `business-consultant` respetando el outline y las anclas técnicas.
 - [x] **STEP-03 (Evaluator-Optimizer Autonomous Loop):** Bucle Creador vs Revisor hasta calificar con nota $\ge 8.5 / 9.0$ y cero clichés (máximo 5 ciclos).
-- [ ] **STEP-04 (HITL-2 Deliverable Review & Approval):** Inspección humana del texto pulido (`sdd-manager.sh review-deliverable modulo-desarrollador-spv-engine`), ajustes con `refine-deliverable` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-deliverable modulo-desarrollador-spv-engine`.
-- [ ] **STEP-05 (Vault Integration):** Promoción atómica e idempotente del documento aceptado a `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/modulo-desarrollador-spv-engine.md`.
+- [x] **STEP-04 (HITL-2 Deliverable Review & Approval):** Inspección humana del texto pulido (`sdd-manager.sh review-deliverable modulo-desarrollador-spv-engine`), ajustes con `refine-deliverable` y aprobación formal mediante `bash BRIDS-Engine/scripts/sdd-manager.sh approve-deliverable modulo-desarrollador-spv-engine`.
+- [x] **STEP-05 (Vault Integration):** Promoción atómica e idempotente del documento aceptado a `BRIDS-Brain/01 Negocio/02 Producto & Ingenieria/modulo-desarrollador-spv-engine.md`.
 
 ---
 

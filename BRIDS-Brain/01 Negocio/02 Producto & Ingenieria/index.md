@@ -16,6 +16,7 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 ## 🧭 Mapa Canónico de Ingeniería (Estructura de Dominios)
 
 ### 🗺️ 1. Roadmap y Madurez de Producto (`product-roadmap/`)
+- [[01 Negocio/02 Producto & Ingenieria/modulo-desarrollador-spv-engine.md|Módulo del Desarrollador Inmobiliario y SPV Engine (Especificación Funcional)]]
 - [[01 Negocio/02 Producto & Ingenieria/current-product-status-matrix.md|Matriz Viva de Estado y Madurez de Producto]]
 - [[01 Negocio/02 Producto & Ingenieria/app-technical-roadmap-investor-brief.md|Roadmap Técnico e Investor Brief de Producto]]
 - [[01 Negocio/02 Producto & Ingenieria/product-roadmap/index.md|Sub-Índice de Roadmap de Producto]]
