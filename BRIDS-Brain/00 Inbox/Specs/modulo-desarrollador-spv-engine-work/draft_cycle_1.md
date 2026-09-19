@@ -25,10 +25,10 @@ tags:
 # Módulo del Desarrollador Inmobiliario y SPV Engine
 
 > [!NOTE]
-> **Arquitectura Funcional y Técnica de Originación B2B**  
+> **Arquitectura Funcional y Estratégica de Originación B2B (Explicación de Alto Nivel)**  
 > **Subagentes Autores:** `business-consultant`, `b2b-sponsor-lead`, `compliance-officer` | **Revisión:** `sdd-reviewer`  
 > **Destinatarios:** Real Estate Sponsors, Developers Inmobiliarios, General Partners (GPs) y Operadores de Capital.  
-> **Alcance:** Modela la integración integral entre el onboarding societario (KYB Concierge), el control de acceso RBAC (`re_developer`), la ingesta ágil de proyectos (wizard de 5 pasos sincronizado al marketplace con tickets de $200 USD), la estructuración celular sobre Master Series LLC y la gobernanza on-chain con Bóvedas Squads Protocol v4 y guardrail multisig de co-firma para minting en Metaplex Core.
+> **Alcance:** Modela la integración integral entre el onboarding societario (KYB Concierge), la creación del Perfil Tipo Promotora, el control de acceso RBAC, la ingesta ágil de proyectos (wizard de 5 pasos sincronizado al marketplace con tickets de $200 USD), la estructuración celular sobre Master Series LLC y la gobernanza on-chain con Bóvedas Squads Protocol v4 y guardrail multisig de co-firma para minting en Metaplex Core.
 
 ---
 
@@ -43,291 +43,270 @@ En BRIDS resolvemos este cuello de botella consolidando la infraestructura de so
 
 ---
 
-## 2. Módulo 1: Onboarding KYB Concierge & Control de Acceso RBAC
+## 2. Módulo 1: Creación del Perfil Tipo Promotora (Developer Corporate Profile & KYB Concierge)
 
-Para erradicar la fricción burocrática y blindar la integridad del marketplace, desacoplamos la verificación corporativa de la carga recurrente de proyectos. La identidad de la empresa promotora se valida una sola vez mediante un proceso asistido de guante blanco (*white-glove concierge*) operado por nuestro equipo de Customer Success y Compliance.
+Actualmente, el sistema de BRIDS dispone de perfiles individuales de usuario enfocados en inversionistas y autenticación personal vía wallet o email con verificación de identidad individual. **La pieza estratégica que debemos crear en la plataforma es la entidad corporativa de la Promotora Inmobiliaria.**
+
+Este nuevo perfil desacopla a la persona física (Manager, Representante Legal o CFO) de la persona jurídica (empresa constructora o promotora) y centraliza toda la gobernanza B2B.
 
 ```mermaid
-flowchart LR
-    A["1. Contacto Comercial Sponsor"] --> B["2. Concierge KYB (EIN + Sunbiz + ID)"]
-    B --> C["3. Setup Asistido de Wallet Institucional"]
-    C --> D["4. Asignación Rol RBAC 're_developer'"]
-    D --> E["5. Acceso Habilitado al Portal (/developer)"]
+flowchart TD
+    subgraph Individual["Capa Individual (Persona Física)"]
+        UP["Perfil de Usuario Administrador
+• Billetera de Acceso
+• KYC Biométrico con Stripe Identity
+• Datos Personales de Contacto"]
+    end
+
+    subgraph Promotora["Perfil Tipo Promotora (Persona Jurídica - NUEVA)"]
+        DE["Perfil Promotora Inmobiliaria
+• Razón Social y Nombre Comercial
+• Identificación Fiscal (EIN) y Registro Estatal (Sunbiz/SOS)
+• Contratos Constitutivos y Operating Agreement
+• Billetera Institucional de Firma Multifirma
+• Historial de Proyectos, Biografía y Especialidad"]
+    end
+
+    subgraph Proyectos["Capa de Activos (Catálogo Inmobiliario)"]
+        ME1["Proyecto A: Oak Street Duplex"]
+        ME2["Proyecto B: Pine Avenue Residences"]
+    end
+
+    UP -->|Representa y Administra| DE
+    DE -->|Origina y Lanza| ME1
+    DE -->|Origina y Lanza| ME2
 ```
 
-### A. Protocolo de Verificación Societaria (One-Time KYB)
-1. **Validación de Entidad:** Customer Success audita la inscripción de la empresa promotora ante la división corporativa estatal correspondiente (ej. División de Corporaciones de Florida - Sunbiz, o Secretaría de Estado de Texas/Delaware).
-2. **Registro Fiscal:** Verificación directa del Employer Identification Number (EIN) emitido por el IRS.
-3. **KYC del Representante Legal:** Verificación biométrica de identidad del Manager o firmante autorizado mediante Stripe Identity.
-4. **Documentos Constitutivos:** Custodia y revisión del Operating Agreement de la empresa desarrolladora y certificados de cumplimiento (*Certificate of Good Standing*).
+### A. Los 5 Bloques Funcionales del Perfil Promotora
 
-### B. Playbook de Customer Success para Onboarding de Wallets
-Los desarrolladores inmobiliarios operan en el mundo de las finanzas tradicionales y la construcción; someterlos a la gestión empírica de frases de recuperación genera fricción y riesgos de custodia. El especialista de Customer Success ejecuta un protocolo guiado:
-1. **Configuración de Custodia Segura:** Asistencia técnica para configurar un dispositivo físico (Ledger) o una wallet institucional compatible con Solana.
-2. **Registro de Clave Pública:** Asociación de la clave pública verificada del desarrollador a su registro en la base de datos corporativa (`developers.wallet_address`).
-3. **Simulación de Firma (*Dry-Run*):** Prueba guiada en entorno de pruebas (devnet/staging) donde el desarrollador firma una transacción simulada para familiarizarse con el flujo de gobernanza de Squads.
+| Bloque Funcional | Descripción de Negocio | Propósito Operativo | Nivel de Visibilidad |
+| :--- | :--- | :--- | :--- |
+| **1. Identidad Mercantil** | Razón social legal, nombre comercial de marca, estado de incorporación (Florida, Texas, Delaware) y número EIN. | Valida la existencia legal de la empresa promotora y su idoneidad tributaria ante el IRS. | Nombre público en marketplace; EIN y registros sensibles bajo estricta privacidad. |
+| **2. Representación Legal** | Nombre del Administrador General, correo corporativo, estatutos constitutivos y certificado de vigencia (*Good Standing*). | Vincula a la persona física autorizada para obligar a la empresa y firmar contratos de sindicación. | Datos del manager visibles; documentos corporativos auditados solo por BRIDS. |
+| **3. Credencial Institucional On-Chain** | Clave pública institucional de la promotora para co-firmas de tesorería y gobernanza en Squads Protocol. | Permite a la empresa autorizar transacciones de desembolso de obra y dispersión de rentas con firma segura. | Registro técnico auditable en exploradores de Solana. |
+| **4. Reputación y Track Record** | Logotipo de empresa, biografía institucional, años de experiencia, especialidad (*Fix & Flip, Multifamily*) y volumen histórico de obra. | Construye credibilidad ante los inversionistas retail mostrando experiencia real y obras previas concluidas. | Público en la pestaña de desarrollador de cada ficha de propiedad. |
+| **5. Validación KYB & Badges** | Estado de aprobación (*En Revisión*, *Verificado*, *Suspendido*), fecha de certificación y oficial de cumplimiento asignado. | Otorga los sellos oficiales de verificación que certifican que la empresa superó la auditoría de BRIDS. | Badges públicos visibles en el marketplace (*"Promotora Verificada por BRIDS"*). |
 
-### C. Arquitectura de Control de Acceso RBAC y Variables de Estado
-El sistema incorpora un nuevo rol específico dentro de la matriz de permisos de BRIDS: `re_developer`.
+### B. Doble Superficie Operativa del Perfil Promotora
 
-* **Identificador de Rol:** `re_developer` (asociado a `developer_entity_id`).
-* **Variables de Estado en Sesión:**
-  * `session.role = 're_developer'`
-  * `is_developer_verified: true`
-  * `developer_entity_id: UUID`
-* **Políticas de Protección de Rutas (*Defense-in-Depth*):**
-  * **Proxy / Middleware Gate:** Las rutas bajo `/developer/**` interceptan la petición en el borde; si el usuario no cuenta con una sesión activa con rol `re_developer` y verificación aprobada, se genera una redirección inmediata a `/403`.
-  * **Page-Level Verification:** Cada Server Component en el portal valida las variables de estado en base de datos antes de renderizar la interfaz.
-  * **API Handlers:** Los endpoints bajo `/api/developer/*` exigen el rol `re_developer` a nivel de controlador, respondiendo con código HTTP `403 Forbidden` en formato JSON ante cualquier discrepancia.
+#### 1. Panel de Backoffice (Customer Success & Compliance)
+- Superficie administrativa operada exclusivamente por el equipo interno de BRIDS.
+- Permite dar de alta a una nueva promotora, auditar su documentación mercantil en registros estatales (Sunbiz, SOS), verificar antecedentes legales y aprobar su estado KYB.
+- Asigna formalmente los privilegios de desarrollador a la cuenta del representante legal y emite la invitación de acceso al portal.
+
+#### 2. Portal del Desarrollador (Sponsor Dashboard)
+- Interfaz de autoservicio para el equipo de la promotora.
+- Permite gestionar la presencia de marca pública (logotipo, descripción de la firma, proyectos terminados destacados).
+- Muestra los certificados legales verificados en modo de solo lectura (inmutables una vez validados por cumplimiento).
+- Centraliza la visión global de todos los proyectos activos de la promotora y los balances de sus tesorerías.
+
+### C. Protocolo de Incorporación Asistida (Concierge KYB & Setup de Billetera)
+Los promotores inmobiliarios tradicionales son expertos en construcción y finanzas, no en tecnología criptográfica. Para evitar errores operativos o pérdida de claves, Customer Success brinda un acompañamiento personalizado:
+1. **Configuración de Custodia Institucional:** Guía paso a paso para configurar un entorno de firma segura institucional o dispositivo físico de hardware.
+2. **Vinculación Oficial de Firma:** Registro formal de la dirección pública de la empresa en su perfil corporativo.
+3. **Simulación de Firma de Prueba:** Práctica asistida en entorno de pruebas donde el promotor aprueba una transacción simulada para familiarizarse con la gobernanza multifirma.
+
+### D. Control de Acceso RBAC y Variables de Estado de Alto Nivel
+El perfil de promotora habilita un control de acceso estricto basado en roles (RBAC):
+- **Rol Especializado:** Rol dedicado para promotores inmobiliarios verificados.
+- **Variables de Estado en Sesión:** El sistema comprueba en cada solicitud que el usuario cuente con el rol activo de desarrollador y con la verificación corporativa aprobada.
+- **Protección Multicapa:**
+  - **Filtro de Borde:** Las rutas del portal del desarrollador impiden el acceso a usuarios no autorizados o sin verificación previa de Customer Success.
+  - **Validación en Servidor:** Las pantallas de creación de proyectos confirman que la promotora vinculada se encuentre en estado activo antes de permitir cualquier operación.
 
 ---
 
 ## 3. Módulo 2: Portal del Desarrollador e Ingesta de Proyectos (Wizard de 5 Pasos)
 
-Una vez autenticado bajo el rol `re_developer`, el promotor accede a su panel de control para originar oportunidades de inversión. Toda la información corporativa de su empresa (antigua Sección 5) queda completamente excluida de la carga manual, inyectándose automáticamente desde su perfil verificado.
+Una vez habilitada la promotora, el desarrollador accede a su panel para originar oportunidades de inversión. Toda la información corporativa de su empresa queda completamente excluida de la carga manual recurrente, inyectándose automáticamente desde su perfil verificado.
 
-El formulario de ingesta se estructura en **5 pasos especializados orientados exclusivamente al activo inmobiliario**:
+El proceso de ingesta se organiza en **5 pasos secuenciales orientados exclusivamente al activo inmobiliario**:
 
 ```mermaid
 flowchart TD
-    P1["Paso 1: Identidad & Modelo (Ubicación, Fix&Flip, Rent)"] --> P2["Paso 2: Galería de Obra (Antes vs Renders Después)"]
+    P1["Paso 1: Identidad & Modelo (Ubicación, Fix&Flip, Rent)"] --> P2["Paso 2: Galería de Obra (Fotos Antes vs Renders Después)"]
     P2 --> P3["Paso 3: Parámetros Financieros (Compra, Rehab, ROI, Plazo)"]
     P3 --> P4["Paso 4: Respaldo Legal Inmueble (Warranty Deed, Title Policy)"]
-    P4 --> P5["Paso 5: Estructuración SPV (Sub-Serie Master Series LLC)"]
+    P4 --> P5["Paso 5: Términos de Inversión y Constitución SPV (Sub-Serie Master LLC)"]
 ```
 
 ### Paso 1: Identidad del Inmueble y Modelo de Negocio
-- Nombre comercial del proyecto.
+- Nombre comercial del desarrollo.
 - Dirección física completa (calle, ciudad, estado, código postal).
-- Clasificación del inmueble: Residencial (subtipos: *Single Family, Multifamily, Duplex, Fourplex*) o Comercial.
-- Modelo de negocio operativo: *Fix & Flip*, *New Construction*, *Fix & Hold*, o *Rent*.
+- Clasificación de la propiedad: Residencial (vivienda unifamiliar, multifamiliar, dúplex, cuatro apartamentos) o Comercial.
+- Modelo operativo: Compra, remodelación y venta rápida (*Fix & Flip*), Construcción nueva (*New Construction*), Remodelación y alquiler (*Fix & Hold*), o Renta estabilizada (*Rent*).
 
 ### Paso 2: Galería de Obra (Trazabilidad Visual)
-- Carga de fotografías de estado actual: imágenes del lote o de la propiedad deteriorada previa a intervención (*Antes*).
-- Carga de renders arquitectónicos profesionales: visualización técnica del proyecto terminado y remodelado (*Después*).
+- Fotografías del estado inicial: lote de terreno o inmueble deteriorado previo a los trabajos de obra (*Antes*).
+- Renders arquitectónicos profesionales: visualización terminada de la propiedad una vez concluida la remodelación o construcción (*Después*).
 
-### Paso 3: Parámetros Financieros y Motor de Fórmulas Automáticas
-El desarrollador introduce únicamente cuatro variables de entrada financieras del proyecto. El sistema computa y fija de forma determinista la estructura de capital, el fondo de activación y la emisión de participaciones en tickets de **$200 USD**:
+### Paso 3: Parámetros Financieros y Motor de Cálculo Automático
+El promotor introduce únicamente cuatro variables financieras básicas. La plataforma calcula y fija de forma automática la estructura de capital, el fondo de activación y la cantidad de tickets fraccionales de **$200 USD**:
 
-```
-[ Inputs del Desarrollador ]
- ├── Precio de compra del inmueble ($)
- ├── Valor de rehab / presupuesto de obra ($)
- ├── ROI anualizado ofrecido al inversionista (%)
- └── Timing del ciclo de ejecución (6, 7, 8 o 9 meses)
-              │
-              ▼ [ Motor de Cálculo BRIDS ]
- ├── Valor Total del Proyecto   = Compra + Rehab
- ├── Capital de Activación (30%) = Valor Total × 0.30 (Redondeado a múltiplos de $200)
- ├── Valor por Ticket            = $200 USD (Constante)
- ├── Cantidad Total de Tickets   = Capital de Activación / $200
- └── Desglose Unitario Ticket    = $196 Capital Serie SPV + $4 Fee Infraestructura BRIDS (2%)
+```mermaid
+flowchart LR
+    subgraph Inputs["1. Datos Ingresados por el Promotor"]
+        I1["Precio de Compra ($)"]
+        I2["Presupuesto de Rehab / Obra ($)"]
+        I3["ROI Anualizado Ofrecido (%)"]
+        I4["Ciclo de Ejecución (6 a 9 meses)"]
+    end
+
+    subgraph Calculos["2. Fórmulas Automáticas del Sistema"]
+        C1["Valor Total = Compra + Rehab"]
+        C2["Capital de Activación = 30% del Total"]
+        C3["Tickets Totales = Capital / $200 (Redondeo Techo)"]
+        C4["Desglose por Ticket = $196 Serie + $4 Software"]
+    end
+
+    Inputs --> Calculos
 ```
 
 #### Regla de Redondeo Canónica
-Si el 30% del valor del proyecto no arroja un múltiplo exacto de $200 USD, el sistema aplica la función techo matemático:
-$$\text{Cantidad de Tickets} = \left\lceil \frac{\text{Valor Total} \times 0.30}{200} \right\rceil$$
-$$\text{Capital Real a Recaudar} = \text{Cantidad de Tickets} \times 200$$
+Para asegurar que cada participación tenga un valor exacto de $200 USD, si el 30% del valor total no resulta en un múltiplo exacto, el sistema redondea la cantidad de tickets hacia arriba al siguiente entero:
+$$\text{Cantidad de Tickets} = \left\lceil \frac{\text{Valor Total del Proyecto} \times 0.30}{200} \right\rceil$$
+$$\text{Capital Real Recaudado} = \text{Cantidad de Tickets} \times 200$$
 
-*Ejemplo de Referencia:*
-- Precio de Compra: $185,000 USD.
-- Valor de Rehab: $95,000 USD.
-- Valor Total del Proyecto: $280,000 USD.
-- Capital de Activación Requerido (30%): $84,000 USD.
-- Valor por Ticket: $200 USD.
-- Cantidad Total de Tickets: 420 tickets.
+*Ejemplo Operativo:*
+- Precio de compra: $185,000 USD.
+- Presupuesto de rehabilitación: $95,000 USD.
+- Valor total del proyecto: $280,000 USD.
+- Capital de activación requerido (30%): $84,000 USD.
+- Precio por ticket: $200 USD.
+- Emisión total de participaciones: 420 tickets ($196 USD para la obra y adquisición / $4 USD de tarifa de infraestructura tecnológica BRIDS).
 
 ### Paso 4: Respaldo Legal de la Propiedad
-- Escritura traslativa de dominio (*Warranty Deed* o contrato ejecutado de compraventa).
-- Compromiso de póliza de seguro de título (*Title Commitment / Title Insurance* emitido por Title Company autorizada).
+- Escritura pública o contrato vinculante de compraventa (*Warranty Deed* o *Purchase Agreement*).
+- Compromiso de póliza de título emitido por una compañía de títulos autorizada (*Title Insurance Commitment*).
 - Licencias municipales y permisos de construcción vigentes.
 
 ### Paso 5: Términos de Inversión y Constitución del SPV
-- Confirmación de las condiciones de liquidación de rendimientos.
-- Generación automática del paquete de adhesión: *Joint Venture Agreement*, *Promissory Note*, *Project Summary* y *Memorando de Joint Venture*.
-- Firma electrónica del desarrollador como Administrador Operativo (*Operating Manager*) de la sub-serie.
+- Confirmación de las condiciones de retorno y calendario estimado de liquidación.
+- Generación automática del paquete de contratos de sindicación: Acuerdo de Co-inversión (*Joint Venture Agreement*), Pagaré (*Promissory Note*), Resumen de Proyecto y Memorando de Sindicación.
+- Firma electrónica del desarrollador como Administrador Operativo de la sub-serie.
 
 ---
 
 ## 4. Módulo 3: La Máquina de SPVs y Gobernanza On-Chain (Solana & Squads v4)
 
-La estructuración societaria y la gobernanza criptográfica operan de forma simbiótica y sin intermediarios fiduciarios centralizados.
+La estructuración jurídica y la tesorería digital operan de forma sincronizada sin intermediarios bancarios tradicionales ni riesgos de mezcla de fondos.
 
 ```mermaid
 flowchart TD
-    subgraph Legal["Capa Societaria Celular"]
-        MASTER["BRIDS Assets Master LLC (Delaware / Florida UPSA)"]
-        SERIE["Sub-Serie Independiente (1 Inmueble = 1 Célula)"]
+    subgraph Juridica["Estructura Jurídica Celular"]
+        MASTER["BRIDS Assets Master LLC (Florida UPSA / Texas / Delaware)"]
+        SERIE["Sub-Serie Protegida e Independiente (1 Proyecto = 1 SPV)"]
         MASTER --> SERIE
     end
 
-    subgraph OnChain["Gobernanza On-Chain (Solana)"]
-        VAULT["Bóveda Squads Protocol v4 (1 SPV = 1 Bóveda)"]
-        GATE["Multisig Gate (2-de-2 Co-Firma)"]
-        CORE["Colección Metaplex Core (Tickets $200)"]
-        PLUGINS["Plugins: Freeze & Recovery"]
-        
+    subgraph Tesoreria["Gobernanza On-Chain (Solana)"]
+        VAULT["Bóveda Squads Protocol v4 (Aprovisionada en Día 1)"]
+        GATE["Guardrail Multisig (Co-Firma 2-de-2)"]
+        CORE["Contrato Digital Metaplex Core (Tickets de $200 USD)"]
+        PLUGINS["Plugins Nativos: Freeze y Recovery"]
+
         VAULT --> GATE
         GATE --> CORE
         CORE --> PLUGINS
     end
 
-    SERIE -.->|Vinculación Directa en Día 1| VAULT
+    SERIE -.->|Vinculación Inmutable| VAULT
 ```
 
-### A. Despliegue de la Serie bajo Master Series LLC
-En lugar de constituir una LLC tradicional desde cero para cada obra, el motor legal de BRIDS genera una nueva **Serie Protegida** bajo nuestra estructura paraguas (*Master Series LLC*), aprovechando las legislaciones avanzadas de Florida (Uniform Protected Series Act - CS/SB 316), Texas (TBOC Capítulo 101 Subcapítulo M) o Delaware:
-- **Aislamiento Horizontal:** Los activos y pasivos de la Serie A quedan blindados estatutariamente frente a litigios, deudas o reclamaciones de contratistas que afecten a la Serie B o a la Master LLC.
-- **Reducción de Costes:** Despliegue legal y formal en cuestión de segundos, reduciendo el coste de estructuración a una fracción marginal.
+### A. Despliegue de Sub-Series bajo Master Series LLC
+En lugar de constituir una entidad jurídica independiente desde cero con semanas de burocracia, el motor societario de BRIDS crea una nueva **Serie Protegida** bajo nuestra estructura paraguas (*Master Series LLC*), aprovechando legislaciones modernas como la Ley Uniforme de Series Protegidas de Florida (CS/SB 316), Texas o Delaware:
+- **Blindaje de Pasivos:** Cada sub-serie posee personalidad operativa y aislamiento de responsabilidad. Cualquier litigio o reclamación que afecte a un proyecto no puede alcanzar los activos de otros proyectos ni de la matriz.
+- **Eficiencia de Costes:** Generación formal en minutos, reduciendo los costes legales en más de un 80%.
 
 ### B. Aprovisionamiento de Bóveda Squads v4 en Día 1
-En el instante en que el desarrollador inicia el borrador del proyecto (`status: 'borrador'`), el backend interactúa con **Squads Protocol v4** en Solana y aprovisiona una bóveda multifirma dedicada:
-- La dirección on-chain de la bóveda queda anclada como atributo inmutable del SPV en el contrato de designación de la serie (*Series Designation*).
-- **Estructura de Sub-Cuentas Internas:**
-  1. *Sub-cuenta 0 (Construcción & Adquisición):* Custodia el 90% del capital para liberación contra hitos de obra certificados.
-  2. *Sub-cuenta 1 (Statutory Retainage):* Fondo del 10% de retención legal obligatoria hasta la firma de finiquito de gravámenes (*Final Lien Waiver*).
-  3. *Sub-cuenta 2 (Dispersión de Rentas):* Recibe el flujo generado para distribución a los titulares de tickets.
+Desde el momento en que el promotor crea el borrador del proyecto, la plataforma aprovisiona una **Bóveda multifirma dedicada en Squads Protocol v4** en la red de Solana:
+- La dirección pública de la bóveda queda asentada formalmente en los contratos de la serie como la cuenta oficial de tesorería del proyecto.
+- **Estructura Interna de Tres Sub-Cuentas:**
+  1. *Sub-cuenta de Construcción y Adquisición:* Custodia los fondos destinados a compra y obra, liberados por hitos certificados.
+  2. *Sub-cuenta de Retención Legal (Statutory Retainage):* Reserva el 10% obligatorio por ley de obra hasta la recepción final de finiquito de gravámenes (*Final Lien Waiver*).
+  3. *Sub-cuenta de Dispersión de Rentas:* Recibe los flujos generados por alquiler o venta para reparto directo a los titulares de tickets.
 
 ### C. Guardrail Multisig de Co-Firma para Minting (Gate de Seguridad)
-La autoridad para inicializar la colección en **Metaplex Core** y abrir la venta pública de tickets no reside en una clave privada individual ni en un proceso automático sin supervisión:
-1. **Autoridad en la Bóveda:** La Bóveda Squads es la propietaria exclusiva de la *Update Authority* y *Mint Authority* del contrato de la colección.
-2. **Co-Firma Mandatoria:** Para transicionar el proyecto del estado `en_revision` al estado `publicado`, se emite una propuesta multifirma en Squads:
-   - **Firma 1:** Desarrollador Inmobiliario (solicita apertura de ronda y valida sus datos).
-   - **Firma 2:** BRIDS Compliance Officer (audita previamente la validez del título, la póliza de la Title Company y la consistencia financiera).
-3. **Inyección de Plugins Metaplex Core:**
-   - **Freeze Plugin:** Permite congelar transferencias ante requerimientos judiciales o revocación de KYC.
-   - **Recovery Plugin:** Habilita la reasignación segura del título si un inversionista acreditado pierde el control de su clave privada, previa verificación biométrica en Stripe Identity.
+La autorización para habilitar la compra de tickets en el marketplace no depende de una decisión unilateral:
+1. **Control en la Bóveda:** La autoridad de emisión reside en la Bóveda Squads del proyecto.
+2. **Co-Firma Obligatoria:** Para pasar del estado de revisión a venta pública, se requiere una propuesta de co-firma multifirma en Squads:
+   - **Firma del Desarrollador:** Confirma la exactitud del presupuesto y calendario de obra.
+   - **Firma de BRIDS Compliance:** Certifica que los títulos de propiedad, seguros de título y permisos están limpios y en orden.
+3. **Plugins de Metaplex Core:**
+   - **Plugin de Congelamiento (Freeze):** Habilita la retención judicial de activos ante sospechas fundadas de fraude o revocación de KYC.
+   - **Plugin de Recuperación (Recovery):** Permite reasignar el título digital a un inversionista legítimo que haya extraviado el acceso a su billetera, previa verificación biométrica con Stripe Identity.
 
 ---
 
 ## 5. Módulo 4: Trazabilidad y Reglas de Visibilidad en el Marketplace
 
-Cada campo capturado a lo largo del flujo se proyecta con precisión en la interfaz del inversionista según las reglas definidas en las especificaciones de diseño:
+Cada dato ingresado a lo largo del proceso alimenta una sección específica de la experiencia del inversionista:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      MAPEO DE VISIBILIDAD MARKETPLACE                       │
-├─────────────────────────────────────────────────────────────────────────────┤
-│ 1. Card de Listado (Grid):                                                  │
-│    • Portada: Render arquitectónico (Paso 2).                               │
-│    • Identidad: Nombre del proyecto, Ciudad y Estado (Paso 1).              │
-│    • Modelo: Etiqueta de negocio (Fix & Flip / Rent) (Paso 1).              │
-│    • Métricas: Valor total, ROI ofrecido, ciclo en meses (Paso 3).          │
-│    • Barra de Fondeo: Tickets vendidos vs. tickets totales ($200 USD).      │
-│                                                                             │
-│ 2. Ficha Técnica (Pestaña Resumen):                                         │
-│    • Galería: Comparador interactivo Foto Antes vs. Render Después.         │
-│    • Presupuesto: Desglose Precio de Compra vs. Rehab y 30% de Activación.  │
-│    • Disponibilidad: Tickets totales emitidos y saldo disponible en vivo.   │
-│                                                                             │
-│ 3. Tab "Desarrollador" (Ficha de Empresa):                                  │
-│    • Nombre del Manager y Estado de Registro Societario.                    │
-│    • Badges Públicos: "Registro Sunbiz Verificado", "EIN Activo", "KYC OK". │
-│    • Regla de Seguridad: Documentos personales e identificaciones no se     │
-│      exponen al público abierto para resguardar privacidad corporativa.     │
-│                                                                             │
-│ 4. Tab "Propiedad" (Respaldo Inmobiliario):                                 │
-│    • Badges de Verificación: "Título Registrado", "Contrato Validado",       │
-│      "Póliza Title Company Confirmada". Documentos descargables post-compra.│
-│                                                                             │
-│ 5. Tab "Documentación de Inversión":                                        │
-│    • Pre-Inversión: Lista informativa de contratos que recibe el socio.    │
-│    • Post-Inversión: Acceso a descarga directa de contratos ejecutados     │
-│      (Operating Agreement de la Serie, Promissory Note y Seguro de Obra).   │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+### A. Elementos Públicos de Libre Consulta
+- **Tarjeta de Listado (Grid):** Render de portada, nombre del proyecto, ciudad/estado, modelo de negocio, valor total, ROI anualizado ofrecido, plazo estimado en meses, ticket fijo de $200 USD y barra de porcentaje fondeado.
+- **Pestaña Resumen (Ficha de Proyecto):** Galería interactiva con comparador de imágenes *Antes vs. Después*, desglose financiero de compra frente a rehabilitación, y disponibilidad de tickets en tiempo real.
+- **Pestaña Desarrollador (Ficha de Empresa):** Nombre de la promotora, estado de registro, trayectoria, y **sellos oficiales de verificación** (*Registro Estatal Verificado*, *Manager Aprobado con Stripe Identity*). Por seguridad y privacidad corporativa, no se exponen al público general documentos personales ni números fiscales completos.
+
+### B. Elementos de Acceso Protegido y Post-Inversión
+- **Pestaña Propiedad:** Sellos de respaldo legal (*Título Registrado*, *Póliza de Título Vigente*). Los contratos completos se habilitan para consulta del inversionista una vez registrado.
+- **Pestaña Documentación de Inversión:** Antes de invertir funciona como lista informativa explicativa de los contratos que respaldan la inversión; una vez completada la compra de tickets y validado el KYC, se desbloquea la descarga de los documentos ejecutados y personalizados.
 
 ---
 
 ## 6. Módulo 5: Operación Diaria Post-Fondeo
 
-El portal del desarrollador provee herramientas continuas de administración de activos y tesorería:
+El valor de largo plazo para el desarrollador radica en la simplificación de la gestión operativa continua:
 
-1. **Gestión de Cap Table en Tiempo Real:** Visualización transparente de la nómina de inversionistas, número de tickets adquiridos, porcentaje de participación pasiva en la serie y estado KYC.
+1. **Cap Table Automatizado en Tiempo Real:** Supervisión transparente de la nómina de inversionistas, cantidad de tickets por titular, porcentaje de participación pasiva en la serie y estado de cumplimiento.
 2. **Solicitudes de Desembolso de Obra (*Draw Requests*):**
-   - El desarrollador sube los certificados de avance físico firmados por el arquitecto inspector (formulario estándar AIA G702 / G703) junto con las facturas de contratistas y renuncias de gravámenes (*Lien Waivers*).
-   - Se crea automáticamente la propuesta de desembolso en la Bóveda Squads.
-   - Tras la aprobación del comité de supervisión, los fondos se transfieren en USDC desde la sub-cuenta de construcción a la cuenta operativa de obra.
-3. **Dispersión Automatizada de Dividendos y Rentas:**
-   - El desarrollador ingresa el importe neto a distribuir en la sub-cuenta de rentas.
-   - Con un único clic, la transacción de Squads dispersa los fondos de forma proporcional a las billeteras titulares de los tickets en Solana.
-4. **Automatización Fiscal (K-1 Ready):** El sistema genera reportes estandarizados de ingresos y gastos de la serie para que el contador del SPV emita los formularios fiscales IRS Schedule K-1 a los socios con mínimo esfuerzo administrativo.
+   - El promotor presenta los certificados de avance físico avalados por el arquitecto inspector (formularios estándar AIA G702 / G703) junto con facturas de contratistas y renuncias de gravámenes.
+   - El sistema formula la propuesta de desembolso en la Bóveda Squads.
+   - Tras la aprobación del comité supervisor, los fondos se transfieren en stablecoins hacia la cuenta operativa de obra.
+3. **Dispersión de Rendimientos en 1 Clic:**
+   - El promotor deposita el flujo neto a distribuir en la sub-cuenta de rentas.
+   - Mediante una única confirmación en Squads, los fondos se dispersan simultánea y proporcionalmente a todas las billeteras titulares registradas en Solana.
+4. **Reportes Contables y Fiscales (K-1 Ready):** Generación de balances periódicos estandarizados del SPV para facilitar a los contadores la emisión de los formularios fiscales IRS Schedule K-1 para los socios.
 
 ---
 
-## 7. Modelo de Datos y Máquina de Estados
+## 7. Arquitectura de Integración y Ciclo de Estados
 
-### Esquema Relacional de Base de Datos
+### A. Integración Conceptual con los Componentes Existentes de la Plataforma
 
-```sql
--- Entidades Promotoras (Gestionadas exclusivamente por Customer Success)
-CREATE TABLE developers (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    business_name VARCHAR(255) NOT NULL,
-    manager_name VARCHAR(255) NOT NULL,
-    state_of_registration VARCHAR(50) NOT NULL,
-    ein_encrypted BYTEA NOT NULL,
-    wallet_address VARCHAR(44) NOT NULL, -- Clave pública Solana de firma
-    sunbiz_verified_at TIMESTAMPTZ,
-    operating_agreement_url TEXT,
-    manager_id_document_url TEXT,
-    verification_status VARCHAR(30) DEFAULT 'verified' -- verified | pending | suspended
-);
+| Componente de Plataforma | Rol en el Flujo del Desarrollador | Estado de Integración |
+| :--- | :--- | :--- |
+| **Perfil de Usuario (`user_profiles`)** | Administrador físico que inicia sesión, completa KYC individual y representa a la promotora. | Componente existente en la plataforma. |
+| **Perfil Tipo Promotora (`developer_entities`)** | Entidad jurídica que agrupa el historial corporativo, verificación mercantil y wallet institucional. | **Nueva entidad que se crea para este módulo.** |
+| **Catálogo de Activos (`marketplace_entries`)** | Registro central donde se publican las oportunidades inmobiliarias tras la ingesta. | Componente existente que se vincula a la promotora. |
+| **Gobernanza On-Chain (Squads v4)** | Tesorería multifirma y custodia descentralizada por proyecto desde el día uno. | Infraestructura estándar de gobernanza en Solana. |
+| **Emisión Digital (Metaplex Core)** | Contratos inteligentes que emiten las participaciones fraccionales en tickets de $200 USD. | Estándar de emisión y recuperación digital. |
 
--- Proyectos Inmobiliarios (Originados por el Desarrollador en el Wizard)
-CREATE TABLE projects (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    developer_entity_id UUID REFERENCES developers(id),
-    name VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    city VARCHAR(100) NOT NULL,
-    state VARCHAR(50) NOT NULL,
-    zip VARCHAR(20) NOT NULL,
-    property_category VARCHAR(50) NOT NULL, -- commercial | residential
-    residential_subtype VARCHAR(50),        -- single_family | multifamily | duplex | fourplex
-    business_model VARCHAR(50) NOT NULL,    -- fix_flip | new_construction | fix_hold | rent
-    purchase_price NUMERIC(12,2) NOT NULL,
-    rehab_value NUMERIC(12,2) NOT NULL,
-    total_project_value NUMERIC(12,2) GENERATED ALWAYS AS (purchase_price + rehab_value) STORED,
-    activation_capital NUMERIC(12,2) NOT NULL, -- 30% redondeado a múltiplos de 200
-    ticket_price NUMERIC(8,2) DEFAULT 200.00,  -- Constante canónica BRIDS
-    ticket_count INTEGER NOT NULL,             -- activation_capital / 200
-    roi_offered NUMERIC(5,2) NOT NULL,
-    cycle_months INTEGER NOT NULL CHECK (cycle_months IN (6, 7, 8, 9)),
-    squads_vault_address VARCHAR(44) NOT NULL, -- Bóveda Squads v4 creada en Día 1
-    metaplex_collection_mint VARCHAR(44),      -- Mint de la colección Metaplex Core
-    status VARCHAR(30) DEFAULT 'borrador'      -- Ciclo de vida del proyecto
-);
+### B. Ciclo de Vida y Estados del Proyecto
 
--- Tickets Fraccionales
-CREATE TABLE tickets (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    project_id UUID REFERENCES projects(id),
-    ticket_index INTEGER NOT NULL,
-    unit_price NUMERIC(8,2) DEFAULT 200.00,
-    status VARCHAR(20) DEFAULT 'available', -- available | reserved | sold
-    owner_wallet VARCHAR(44),
-    nft_core_asset_address VARCHAR(44)
-);
+```mermaid
+stateDiagram-v2
+    [*] --> Borrador: Desarrollador inicia wizard
+    Borrador --> EnRevision: Envío tras completar 5 pasos
+    EnRevision --> Publicado: Co-Firma Multisig (Sponsor + BRIDS Compliance)
+    Publicado --> Fondeado: 100% de tickets vendidos ($200 c/u)
+    Fondeado --> EnEjecucion: Desembolsos por hitos de obra (AIA G702)
+    EnEjecucion --> Cerrado: Venta o refinanciamiento concluido y liquidación
+    Cerrado --> [*]
 ```
 
-### Ciclo de Estados del Proyecto
-
-| Estado | Evento Desencadenante | Operación en Solana / Squads | Guardrail de Validación |
-| :--- | :--- | :--- | :--- |
-| `borrador` | El desarrollador crea el proyecto en el portal. | Despliegue de Bóveda Squads v4 dedicada. | Verificación de rol `re_developer`. |
-| `en_revision` | El desarrollador completa los 5 pasos y envía a revisión. | Creación de propuesta de apertura de colección en Squads. | Auditoría legal y técnica por BRIDS Compliance. |
-| `publicado` | Co-firma completada en Squads. | Habilitación de minting en Metaplex Core. | **Multisig Gate:** Firma conjunta Sponsor + BRIDS. |
-| `fondeado` | 100% de tickets vendidos. | Fondos en custodia en la sub-cuenta de obra. | Conciliación de tesorería y cierre de ronda. |
-| `en_ejecucion` | Inicio de trabajos de obra / remodelación. | Liberación de fondos contra hitos (2-de-3). | Certificación física con formulario AIA G702. |
-| `cerrado` | Venta o refinanciamiento completado. | Dispersión de capital final y rendimientos. | Liquidación de la serie y emisión de K-1. |
+1. **Borrador:** El desarrollador completa las etapas del proyecto; la Bóveda Squads se despliega tempranamente en la red.
+2. **En Revisión:** La información y documentos se envían al equipo de BRIDS Compliance para auditoría de títulos, seguros y presupuestos.
+3. **Publicado:** Se activa el guardrail de co-firma multifirma en Squads; el proyecto abre su ronda en el marketplace y habilita la adquisición de tickets.
+4. **Fondeado:** Se alcanza el 100% de colocación del capital de activación; cierre formal de la ronda y conciliación de fondos.
+5. **En Ejecución:** Se ejecutan los trabajos de construcción; desembolsos escalonados contra avance de obra certificado.
+6. **Cerrado:** Se vende o refinancia el inmueble; retorno del capital y beneficios a los inversionistas, liquidación de la serie y reporte fiscal.
 
 ---
 
 ## 8. Próximos Pasos y Llamado a la Acción
 
-La estandarización de este módulo proporciona a BRIDS una ventaja competitiva decisiva en la captación de promotores inmobiliarios. Convertimos un proceso burocrático y costoso en una experiencia ágil, segura y plenamente transparente sobre la red de Solana.
+La implementación de este módulo dota a BRIDS de una ventaja competitiva decisiva en el ecosistema inmobiliario institucional. Transformamos semanas de trámites analógicos costosos en un flujo estructurado, seguro y transparente sobre la red de Solana.
 
-Invitamos a sponsors inmobiliarios, desarrolladores y operadores de capital a sumarse a nuestra infraestructura:
-- **Desarrolladores y Sponsors Inmobiliarios:** Agenda una sesión técnica de estructuración para evaluar tu próximo desarrollo, configurar tu bóveda de tesorería y acelerar tu captación de capital.
-- **Inversionistas y Fondos:** Accede a nuestro Data Room técnico para consultar los modelos de Master Series LLC, los contratos inteligentes de Metaplex Core y los registros de auditoría de Squads Protocol.
+Invitamos a los actores del sector a sumarse a nuestra infraestructura:
+- **Desarrolladores y Promotores Inmobiliarios:** Agenda una sesión técnica de estructuración para evaluar tu próximo desarrollo, configurar tu perfil corporativo de promotora y acelerar tu captación de capital privado.
+- **Inversionistas y Fondos Institucionales:** Solicita acceso a nuestro Data Room técnico para examinar el marco legal de Master Series LLC, la gobernanza de Bóvedas Squads Protocol v4 y los modelos de contratos inteligentes sobre Metaplex Core.
