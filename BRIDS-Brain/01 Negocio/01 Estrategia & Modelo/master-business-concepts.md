@@ -1,12 +1,12 @@
 ---
-updated_at: 2026-09-13
+updated_at: 2026-09-18
 title: "Documento Maestro de Conceptos e Ideas Fundacionales de Negocio"
 document_id: "master-business-concepts"
-version: "1.3"
+version: "1.4"
 status: "approved"
 workflow: "core-business-concepts"
 category: "brand-context-master"
-last_updated: "2026-09-13"
+last_updated: "2026-09-18"
 tags:
   - "sdd-concept"
   - "master-concept"
@@ -23,7 +23,7 @@ tags:
 
 ---
 
-## 📌 Índice y Mapa de los 9 Conceptos Maestros
+## 📌 Índice y Mapa de los 10 Conceptos Maestros
 
 ```mermaid
 graph TD
@@ -32,6 +32,7 @@ graph TD
     subgraph Legal_Compliance["Legal & Blindaje Regulatorio"]
         C1["C1: Dual-Entity Compliance<br/>(Delaware C-Corp vs SPVs)"]
         C2["C2: Lost-Key Recovery Protocol<br/>(Stripe Identity + Metaplex Core)"]
+        C10["C10: Cross-Border Regulatory Moat<br/>(Reg S/D, BD Shell Rule 1017, ATS)"]
     end
 
     subgraph Tech_Infra["Infraestructura Tecnológica"]
@@ -69,7 +70,7 @@ graph TD
 - **Custodio:** `compliance-officer`
 - **One-Liner Canónico:**
   > *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente constituido en la jurisdicción del inmueble."*
-- **Tesis de Reutilización:** Permite justificar ante reguladores, inversores institucionales y socios por qué BRIDS Inc. opera como un proveedor de tecnología pura (Delaware C-Corp) protegido bajo la Sección 15(a)(1) del Exchange Act, delegando la titularidad de los inmuebles a SPVs (LLCs) independientes en sus respectivas jurisdicciones.
+- **Tesis de Reutilización:** Permite justificar ante reguladores, inversores institucionales y socios por qué BRIDS Inc. opera como un proveedor de tecnología pura (Delaware C-Corp) protegido bajo la Sección 15(a)(1) del Exchange Act, delegando la titularidad de los inmuebles a SPVs (LLCs) independientes en sus respectivas jurisdicciones. Se articula con [[concept-cross-border-regulatory-roadmap|C10]] para la transición hacia licenciamiento institucional propio.
 
 ### C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-wallet-recovery-protocol.md|concept-wallet-recovery-protocol]]
@@ -77,6 +78,13 @@ graph TD
 - **One-Liner Canónico:**
   > *"Inversión inmobiliaria con blindaje institucional: tu derecho está respaldado en el mundo real, donde perder una billetera jamás pondrá en riesgo tu patrimonio."*
 - **Tesis de Reutilización:** Resuelve la mayor objeción del inversor tradicional y retail. Demuestra cómo la arquitectura legal del SPV, la sobre-escritura en Squads Protocol y el plugin de autoridad de Metaplex Core restauran el acceso del usuario sin alterar el SPV ni romper la seguridad jurídica.
+
+### C10: Marco Regulatorio Transfronterizo y Licenciamiento en 3 Fases (Reg S/D, BD Shell y ATS)
+- **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-cross-border-regulatory-roadmap.md|concept-cross-border-regulatory-roadmap]]
+- **Custodio:** `compliance-officer`, `business-consultant`, `pitch-deck-architect`
+- **One-Liner Canónico:**
+  > *"BRIDS escala su distribución en tres horizontes regulados: inicia monetizando retail en América Latina bajo Regulation S y capital acreditado en EE.UU. bajo Regulation D, adquiere un Broker-Dealer shell mediante FINRA Rule 1017 para abrir Regulation Crowdfunding en territorio estadounidense, y culmina operando un ATS institucional sobre Solana para dotar de liquidez 24/7 a los bienes raíces."*
+- **Tesis de Reutilización:** Sustenta la narrativa del *regulatory moat* y la estrategia de comercialización en pitch decks de Y Combinator y comités de Venture Capital. Detalla la mitigación penal de captación en Colombia (Art. 316 C.P.), la dolarización en Ecuador, la oferta privada en Chile (NCG 336 CMF) y la libertad contractual en Argentina (DNU 70/2023), articulando la remuneración legal de redes comerciales locales bajo la figura de Foreign Finders (FINRA Rule 2040(c)). Vinculado al documento maestro [[01 Negocio/03 Legal & Cumplimiento/hoja-ruta-regulatoria-3-fases-broker-dealer-ats.md]].
 
 ---
 
@@ -161,11 +169,13 @@ Cuando inicialices cualquier tarea o generes un nuevo spec con `bash BRIDS-Engin
 ---
 
 ## Historial de Revisiones
+- **v1.4 (2026-09-18):** Incorporación del Concepto Maestro C10 (Marco Regulatorio Transfronterizo y Licenciamiento en 3 Fases: Reg S/D, BD Shell y ATS) en el clúster Legal & Blindaje Institucional.
 - **v1.3 (2026-09-13):** Desacoplamiento de jurisdicción de SPVs en C1 (BRIDS Delaware C-Corp vs SPVs LLCs locales por inmueble) y sincronización de One-Liners.
 - **v1.2 (2026-09-13):** Sincronización de C4 a fees de transacción de software ($4/fracción, tiers de setup y dispersión trimestral) y C7.
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.4.0** | 2026-09-18 | `compliance-officer`, `business-consultant` | Integración del Concepto C10: Marco Regulatorio Transfronterizo y Licenciamiento en 3 Fases (Reg S/D, FINRA BD Shell y ATS en Solana). |
 | **1.3.0** | 2026-09-13 | `compliance-officer`, `business-consultant` | Desacoplamiento de jurisdicción de SPVs inmobiliarios en C1 (BRIDS Inc. como Delaware C-Corp y SPVs independientes según la ubicación física del inmueble). |
 | **1.2.0** | 2026-09-13 | `business-consultant`, `pitch-deck-architect` | Actualización de unit economics de C4 y modelos de retorno de C7. |
 | **1.1.0** | 2026-09-13 | `pitch-deck-architect`, `founder-ghostwriter` | Integración del Concepto C9: Identidad RWA vs Trampa Cripto (Tesis VCs & Múltiplos SaaS). |

@@ -1,7 +1,8 @@
 ---
+updated_at: 2026-09-18
 title: "C1: Estructuración Dual-Entity y Blindaje Non-Broker-Dealer"
 concept_id: "concept-dual-entity-compliance"
-version: "1.2.0"
+version: "1.4"
 status: "approved"
 workflow: "core-business-concepts"
 category: "compliance-legal"
@@ -50,11 +51,13 @@ flowchart TD
         B -->|Verificación Técnica| ID["Integración Stripe Identity"]
     end
 
-    subgraph Capa_Inmobiliaria["Capa Legal e Inmobiliaria (Activo Real)"]
-        SPV["Issuer / SPV Dedicado<br/>(LLC Local: Florida, Texas, Delaware, etc.)"]
+    subgraph Capa_Inmobiliaria["Capa Legal e Inmobiliaria (Master Series LLC & Células)"]
+        MASTER["Master Series LLC<br/>(Delaware, Texas o Wyoming)"]
+        SPV["Sub-SPV / Célula Segregada<br/>(Series A, Series B: Bankruptcy-Remote)"]
         OP["Operador Inmobiliario<br/>(Blue Brick Capital)"]
         PROP[("Inmueble Físico en EE.UU.")]
         
+        MASTER -->|Emisión Celular| SPV
         OP -->|Adquisición & Gestión| SPV
         SPV -->|Título de Propiedad| PROP
         SPV -->|Master Securityholder File| LEGAL["Registro Legal Oficial de Socios"]
@@ -73,8 +76,9 @@ flowchart TD
 2. **Criterios de la SEC sobre Valores Tokenizados y Master Securityholder File:**
    - La titularidad jurídica del socio emana del libro legal de socios de la LLC correspondiente a cada activo. Conforme al criterio oficial de la SEC, **el NFT representa digitalmente una posición, pero no es el registro legal**: el registro legal lo lleva el actor legal correspondiente en el SPV.  
    🔗 [SEC Corp Fin Statement on Tokenized Securities](https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826-statement-tokenized-securities)
-3. **Estructura Jurídica de SPVs Segregados (Leyes Estatales de LLC & DGCL § 224 / Delaware C-Corp):**
-   - BRIDS Inc. opera constituida como Delaware C-Corp conforme a la DGCL para su estructura corporativa y gobernanza de software. Cada inmueble cuenta con contabilidad, activos y pasivos jurídicamente segregados en un SPV independiente (LLC) constituido en la jurisdicción donde se ubica y licencia la construcción o propiedad (Florida, Texas, Delaware u otros estados). La insolvencia eventual de un SPV no afecta a los demás proyectos ni a la empresa de software matriz.
+3. **Estructura Jurídica de Master Series LLC y Sub-SPVs Celulares (Delaware, Texas, Wyoming):**
+   - BRIDS Inc. opera constituida como Delaware C-Corp conforme a la DGCL para su estructura corporativa y gobernanza de software. Los activos inmobiliarios se estructuran a través de una **Master Series LLC** constituida en estados amigables (*friendly states* como Delaware 6 Del. C. § 18-215 / § 18-218, Texas TBOC Cap. 101 Subcap. M, o Wyoming Wyo. Stat. § 17-29-211). Cada inmueble se aloja en una **Serie individual (Sub-SPV)** con contabilidad, activos, pasivos y socios jurídicamente segregados (*internal liability shield* y *bankruptcy-remote*).
+   - Para inmuebles en estados sin estatuto de Series LLC (ej. Florida), la Serie se inscribe como entidad foránea (*foreign qualification*) o constituye una LLC tradicional subsidiaria poseída al 100% por la Serie. La insolvencia eventual de una serie no afecta a las demás células ni a la C-Corp tecnológica.
 4. **Reglas AML/CIP y No Intermediación Bancaria (FinCEN & 31 CFR 1023.220):**
    - BRIDS no toca dinero y no hace KYC por sí mismo: la verificación de identidad se delega en partners especializados como Stripe Identity conforme a [31 CFR 1023.220](https://www.ecfr.gov/current/title-31/subtitle-B/chapter-X/part-1023/subpart-B/section-1023.220) y la [Guía de FinCEN sobre Monedas Virtuales Convertibles](https://www.fincen.gov/sites/default/files/2019-05/FinCEN%20Guidance%20CVC%20FINAL%20508.pdf).
 5. **No Recomendación de Inversiones (Investment Advisers Act of 1940):**
@@ -126,6 +130,11 @@ flowchart TD
 - **BRIDS no debe cobrar como intermediario financiero por funciones que no asume.**
 - **BRIDS debe comunicar siempre su rol real como plataforma tecnológica.**
 
+### 7.1. Articulación con la Hoja de Ruta Regulatoria en 3 Fases y Venta Internacional
+- La separación dual-entity es la base estructural que habilita la **Fase 1 (Regulation S en LatAm y Regulation D en EE.UU.)** sin requerir licencia de broker-dealer.
+- Para el escalamiento hacia la adquisición de un Broker-Dealer shell (Fase 2) y el despliegue de un ATS secundario sobre Solana (Fase 3), consultar el concepto maestro complementario:
+  👉 **[[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-cross-border-regulatory-roadmap.md|C10: Marco Regulatorio Transfronterizo y Licenciamiento en 3 Fases (Reg S/D, BD Shell y ATS)]]** y el documento rector **[[01 Negocio/03 Legal & Cumplimiento/hoja-ruta-regulatoria-3-fases-broker-dealer-ats.md|Hoja de Ruta Regulatoria y Comercial en 3 Fases]]**.
+
 ---
 
 ## 8. Apéndice Orientativo de Normas y Referencias a Revisar con Counsel
@@ -153,9 +162,13 @@ flowchart TD
 ---
 
 ## Historial de Revisiones
+- **v1.4 (2026-09-18):** Vinculación bidireccional con el Concepto Maestro C10 (Marco Regulatorio Transfronterizo y Licenciamiento en 3 Fases: Reg S/D, BD Shell y ATS) y la hoja de ruta regulatoria.
+- **v1.3 (2026-09-16):** Integración de la arquitectura de Master Series LLC con sub-SPVs celulares y gobernanza en estados friendly (Delaware, Texas, Wyoming) vs no-friendly.
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
+| **1.4.0** | 2026-09-18 | `compliance-officer` | Vinculación y articulación bidireccional con el nuevo Concepto C10 y la hoja de ruta comercial en 3 fases. |
+| **1.3.0** | 2026-09-16 | `compliance-officer` | Integración de la arquitectura de Master Series LLC con sub-SPVs celulares y gobernanza en estados friendly. |
 | **1.2.0** | 2026-09-13 | `compliance-officer`, `business-consultant` | Desacoplamiento de jurisdicción de los SPVs inmobiliarios: BRIDS Inc. opera como Delaware C-Corp (SaaS tech), mientras que cada SPV se constituye como LLC independiente en la jurisdicción local donde se ubica y licencia el inmueble (Florida, Texas, Delaware, etc.). |
 | **1.1.0** | 2026-09-13 | `compliance-officer`, `business-consultant` | Integración de los 7 principios institucionales de BRIDS, enlaces oficiales (SEC, FinCEN, eCFR, FTC) y Apéndices 16 y 17 para counsel legal. |
 | **1.0.0** | 2026-09-11 | `compliance-officer` & SDD Loop | Creación inicial de la nota conceptual atómica bajo estándares de gobernanza. |

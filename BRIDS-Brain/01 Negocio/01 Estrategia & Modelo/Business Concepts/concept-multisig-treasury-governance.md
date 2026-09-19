@@ -1,8 +1,8 @@
 ---
-updated_at: 2026-09-13
+updated_at: 2026-09-16
 title: "C8: Tesorería Descentralizada, Squads Multi-Sig y Dispersión sin Custodia"
 concept_id: "concept-multisig-treasury-governance"
-version: "1.2.0"
+version: "1.3"
 status: "approved"
 workflow: "core-business-concepts"
 category: "technology-governance"
@@ -39,46 +39,50 @@ En la sindicación tradicional, una vez que el inversionista transfiere su diner
 - ¿Por qué se retrasaron las rentas 45 días mientras el dinero estuvo estancado en la cuenta del operador?
 
 En BRIDS.io, la relación financiera se vuelve **criptográficamente auditable**:
-1. **Recaudación No Custodial:** El capital sindicado ingresa a una bóveda programada en **Squads Protocol (v4 Smart Contract en Solana)** a nombre exclusivo del SPV constituido en el estado de origen de la construcción.
-2. **Firmas de Seguridad (M-of-N Multisig):** Ninguna transacción puede ejecutarse unilateralmente por una sola persona.
-3. **Dispersión Automática de Dividendos (Rentas):** Al llegar el día de corte (*Snapshot Date*), el smart contract calcula matemáticamente la participación de cada wallet titular de los NFTs de Metaplex Core y dispersa los fondos en una sola transacción concurrente en Solana.
+1. **Recaudación No Custodial y Aislamiento Celular (1 SPV = 1 Squad):** El capital sindicado ingresa a una cuenta multifirma programada en **Squads Protocol (v4 Smart Contract en Solana)** a nombre exclusivo de la Serie LLC independiente titular del inmueble. Ningún firmante u operación de la Serie A tiene acceso o visibilidad sobre los fondos de la Serie B.
+2. **Firmas de Seguridad (M-of-N Multisig 2-de-3):**
+   - **Firma 1 (Sponsor / Desarrollador Inmobiliario):** Valida la ejecución y facturación del proyecto.
+   - **Firma 2 (Inspector Técnico Independiente):** Certifica el avance físico de obra según planilla estándar AIA Document G702/G703 o agente fiduciario.
+   - **Firma 3 (Gobernanza y Cumplimiento BRIDS):** Verificación técnica de cumplimiento de hitos y validación anti-fraude.
+3. **Sub-Bóvedas Especializadas por Proyecto:**
+   - `Vault Index 0` (Construcción / Operaciones): Desembolso del 90% de fondos por hito certificado.
+   - `Vault Index 1` (Statutory Retainage 10%): Reserva obligatoria de garantía para subcontratistas (Texas Chapter 53).
+   - `Vault Index 2` (Dispersión de Dividendos): Al llegar el día de corte (*Snapshot Date*), se dispersan las rentas en USDC directamente a las wallets titulares de los NFTs de Metaplex Core en una sola transacción concurrente.
 
 ```mermaid
 flowchart TD
-    subgraph Recaudacion["1. Recaudación Transparente"]
+    subgraph Recaudacion["1. Recaudación Transparente por Serie"]
         Inv1["Inversor A ($500 USDC)"] --> Boveda
         Inv2["Inversor B ($1,000 USDC)"] --> Boveda
         Inv3["Inversor N ($200 USDC)"] --> Boveda
-        Boveda[("Bóveda Squads Multi-Sig<br/>(SPV en Estado de Origen)")]
+        Boveda[("Bóveda Squads v4 Dedicada<br/>(Sub-SPV / Serie LLC en Solana)")]
     end
 
-    subgraph Gobernanza["2. Gobernanza de Firmas (M-of-N)"]
-        K1["Clave 1: Sponsor / Desarrollador Inmobiliario"] --> Auth{"Validación de Firmas Requeridas"}
-        K2["Clave 2: Certificación de Hito / Auditoría Técnica"] --> Auth
+    subgraph Gobernanza["2. Gobernanza Multifirma (2-de-3)"]
+        K1["Clave 1: Sponsor / Desarrollador"] --> Auth{"Umbral 2-de-3 Aprobado"}
+        K2["Clave 2: Inspector Técnico AIA G702"] --> Auth
+        K3["Clave 3: Gobernanza BRIDS"] --> Auth
         Auth --> Release["Ejecución Programática On-Chain"]
     end
 
-    subgraph Dispersion["3. Dispersión Proporcional sin Custodia"]
-        Release --> Out1["Wallet A: Renta USDC Proporcional"]
-        Release --> Out2["Wallet B: Renta USDC Proporcional"]
-        Release --> Out3["Wallet N: Renta USDC Proporcional"]
+    subgraph Subcuentas["3. Sub-Bóvedas Especializadas"]
+        Release --> V0["Vault 0: Obra (90% Factura)"]
+        Release --> V1["Vault 1: Retainage (10% Reserva)"]
+        Release --> V2["Vault 2: Rentas Netas en USDC"]
     end
 
     Boveda --> Gobernanza
-    Gobernanza --> Dispersion
+    Gobernanza --> Subcuentas
 ```
 
 ---
 
 ## 3. Arquitectura Técnica con Squads Protocol
 
-BRIDS utiliza la infraestructura estándar de la industria en Solana:
-- **Smart Contracts Auditados:** Squads Protocol es la solución de tesorería institucional que custodia miles de millones de dólares en el ecosistema Solana, con múltiples auditorías formales de seguridad (Neodyme, OtterSec).
-- **Esquema Multifirma (2-of-3 o 3-of-5):**
-  - **Firma 1 (Operador Inmobiliario):** Valida la necesidad del desembolso o la liquidación de rentas.
-  - **Firma 2 (Verificador Técnico / Agente de Escrow):** Confirma que el hito de obra (factura de contratista, avance fotográfico) fue cumplido.
-  - **Firma 3 (Respaldo de Gobernanza / Notarial):** Para resolución de contingencias o desbloqueos excepcionales autorizados por el SPV.
-- **Trazabilidad Pública:** Cualquier inversor puede comprobar en tiempo real el saldo exacto de la bóveda de su propiedad en un explorador público de bloques de Solana (Solscan/SolanaFM) o en el dashboard de BRIDS.
+BRIDS utiliza la infraestructura estándar institucional en Solana:
+- **Smart Contracts Auditados:** Squads Protocol es la solución de tesorería que custodia miles de millones de dólares en el ecosistema Solana, con múltiples auditorías formales de seguridad (Neodyme, OtterSec).
+- **Costo Marginal Mínimo:** Desplegar una cuenta Squads v4 cuesta únicamente la renta de almacenamiento de cuentas en Solana (~0.02 SOL, pago único de ~$4 USD), frente a comisiones bancarias mensuales elevadas.
+- **Trazabilidad Pública 24/7:** Cualquier inversor puede comprobar en tiempo real el saldo exacto de la bóveda de su propiedad en un explorador público de bloques de Solana (Solscan/SolanaFM) o en el dashboard de BRIDS.
 
 ---
 
@@ -112,6 +116,7 @@ BRIDS utiliza la infraestructura estándar de la industria en Solana:
 ---
 
 ## Historial de Revisiones
+- **v1.3 (2026-09-16):** Alineación de tesorerías de Squads v4 con la segregación celular de Series LLC (1 Serie = 1 Squad)
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |

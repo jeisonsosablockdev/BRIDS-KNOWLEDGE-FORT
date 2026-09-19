@@ -1,8 +1,8 @@
 ---
-updated_at: 2026-09-13
+updated_at: 2026-09-16
 title: "C4: Arquitectura de Monetización, Estructura de Tarifas y Unit Economics"
 concept_id: "concept-fee-architecture-unit-economics"
-version: "1.1"
+version: "1.2"
 status: "approved"
 workflow: "core-business-concepts"
 category: "business-model-pricing"
@@ -78,7 +78,7 @@ graph TD
 | **Tier Institutional** | $1,000,001 – $2,500,000 USD | **$2,500 USD** | Todo lo anterior + soporte prioritario de onboarding y arquitectura multi-tranche. |
 | **Tier Enterprise** | Más de $2,500,000 USD | **$3,500 USD** + $500 por cada $1M adicional | Despliegue personalizado, data room privado y auditoría técnica dedicada. |
 
-- **Ventaja Competitiva B2B:** Mientras las bancas de inversión y colocadores privados cobran entre $30,000 y $60,000 USD en estructuración y honorarios legales iniciales, BRIDS ofrece una entrada de software desde $1,000 USD.
+- **Ventaja Competitiva B2B y Eficiencia de Series LLCs:** Mientras las bancas de inversión tradicionales cobran entre $30,000 y $60,000 USD en estructuración y las LLCs individuales tradicionales exigen costos fijos de $7,000 a $20,000 USD por cada inmueble, el modelo de **Master Series LLC** permite a los sponsors añadir células (sub-SPVs) a una fracción del costo legal ($1,500 – $3,500 USD de setup total), reduciendo el costo de entrada en más del 70% y habilitando un margen bruto de software para BRIDS Inc. superior al 90%.
 
 ### 3. Fee de Transacción de Dispersión Tecnológica (Al Desarrollador)
 - **A quién se cobra:** Al desarrollador inmobiliario cada vez que ejecuta una distribución de fondos a los tenedores de tokens vía smart contract.
@@ -182,6 +182,7 @@ graph TD
 ---
 
 ## Historial de Revisiones
+- **v1.2 (2026-09-16):** Incorporación del ahorro por Series LLCs (Master vs Sub-SPVs) y cálculo de márgenes unitarios
 
 | Versión | Fecha | Autor / Agente | Resumen de Modificaciones |
 | :--- | :--- | :--- | :--- |
