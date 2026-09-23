@@ -11,7 +11,7 @@ Este módulo centraliza la **planificación financiera, economía unitaria, prep
 - 📊 **`modelos-financieros/`**: Modelos financieros pro forma a 3-5 años, análisis de CAC/LTV de promotores e inversores retail, proyecciones de volumen GMV y sensibilidad de take-rates.
 - 🔐 **`tesoreria-multisig/`**: Políticas de tesorería, gobernanza con Squads Protocol v4 (firmas m-de-n), runway operativo y gestión de cuentas USDC.
 - 🟧 **`yc-application/`**: Respuestas oficiales a la solicitud de Y Combinator, guiones para entrevistas de socios de 10 minutos, preparación de preguntas duras y tesis "Why Now?".
-- 📑 **`pitch-decks/`**: Presentaciones para inversores (Sequoia framework, YC Demo Day, Seed VCs), scripts de diapositivas, archivos fuente `.pptx` y el [[01 Negocio/04 Finanzas & YC Investors/pitch-decks/BRIDS.io - Executive One-Pager V2.docx|Executive One-Pager]].
+- 📑 **`pitch-decks/`**: Presentaciones para inversores (Sequoia framework, YC Demo Day, Seed VCs), scripts de diapositivas y el [[01 Negocio/04 Finanzas & YC Investors/pitch-decks/executive-one-pager-v3|✅ Executive One-Pager V3 (actual)]]. *(Versión anterior [[01 Negocio/04 Finanzas & YC Investors/pitch-decks/DEPRECATED-executive-one-pager-v2|⛔ V2 — deprecated]])*.
 - 📬 **`cartas-inversionistas/`**: Informes mensuales y trimestrales para inversores, advisors y business angels (métricas de tracción, GMV sindicado, hitos devnet/mainnet, runway y necesidades clave).
 - 🤝 **`vc-pipeline/`**: CRM de fondos de Venture Capital, notas de reuniones con socios, retroalimentación y seguimiento de term sheets.
 
