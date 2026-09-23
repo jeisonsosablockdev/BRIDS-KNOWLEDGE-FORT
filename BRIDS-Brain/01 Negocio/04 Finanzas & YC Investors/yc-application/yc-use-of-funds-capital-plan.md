@@ -1,8 +1,9 @@
 ---
+updated_at: 2026-09-23
 title: "Plan Maestro de Asignación de Capital — Use of Funds YC $500,000 USD"
 type: "yc-use-of-funds"
 status: "sdd-approved"
-version: "3.0"
+version: "3.2"
 spec_id: "yc-use-of-funds-capital-plan"
 workflow: "sdd-hitl-validated"
 last_updated: "2026-09-20"
@@ -59,8 +60,8 @@ tags:
 
 | Rol | Dedicación | Compensación | Justificación |
 | :--- | :--- | :--- | :--- |
-| **Cofundador Tech 1** (Ingeniería / Producto) | Full-time 24/7 post-YC | \$3,000 USD/mes | Renuncia a su empleo para dedicarse 100% a BRIDS |
-| **Cofundador Tech 2** (Smart Contracts / Infra) | Full-time 24/7 post-YC | \$3,000 USD/mes | Renuncia a su empleo para dedicarse 100% a BRIDS |
+| **Cofundador Tech 1** (Producto, UI/UX & iOS) | Full-time 24/7 post-YC | \$3,000 USD/mes | Lidera experiencia de producto, diseño UI/UX, frontend web y desarrollo móvil nativo en iOS para inversores retail |
+| **Cofundador Tech 2** (Smart Contracts / Infra) | Full-time 24/7 post-YC | \$3,000 USD/mes | Lidera arquitectura Solana, smart contracts en Rust (Metaplex Core) e infraestructura backend/RPC |
 | **Cofundador Inmobiliario** (Deals / Blue Brick Capital) | Full-time (ya opera en USA) | **\$0 USD/mes** | Alineado por equity + éxito en originación de deals |
 
 > [!NOTE]
@@ -70,7 +71,23 @@ tags:
 
 ## 3. A. Gastos Únicos de Estructuración (One-Time) — \$188,500 USD
 
-### Legal & Regulatorio (\$82,000)
+### 📊 Resumen Consolidado de Gastos Únicos por Categoría
+
+| # | Categoría de Estructuración | Subtotal USD | % del One-Time | % del Total YC ($500k) |
+| :---: | :--- | ---: | :---: | :---: |
+| **1** | Legal & Regulatorio | **\$82,500** | 43.77% | 16.50% |
+| **2** | Equipo Humano & Relocation (SFO + Visas) | **\$45,000** | 23.87% | 9.00% |
+| **3** | Seguridad & Compliance Técnico | **\$32,500** | 17.24% | 6.50% |
+| **4** | Infraestructura Financiera & Plataforma | **\$19,000** | 10.08% | 3.80% |
+| **5** | Seguros Corporativos Año 1 | **\$7,500** | 3.98% | 1.50% |
+| **6** | Due Diligence B2B (KYB) | **\$2,000** | 1.06% | 0.40% |
+| **—** | **TOTAL GASTOS ÚNICOS (ONE-TIME):** | **\$188,500** | **100.00%** | **37.70%** |
+
+> 📐 **Auditoría Matemática:** $\$82,500 + \$45,000 + \$32,500 + \$19,000 + \$7,500 + \$2,000 = \mathbf{\$188,500.00\text{ USD}}$ (Diferencia: \$0.00).
+
+---
+
+### 1. Legal & Regulatorio (\$82,500 USD)
 
 | # | Bloque | Detalle | USD |
 | :---: | :--- | :--- | ---: |
@@ -80,42 +97,48 @@ tags:
 | **23** | Verificaciones Bad Actor 506(d) | Reportes certificados de antecedentes para directivos y sponsors vía CrowdCheck (requisito SEC obligatorio para usar Reg D 506(b)) | **\$2,000** |
 | **10** | Registro de Marca USPTO | Marca "BRIDS" y "BRIDS.io" en 2 clases (software + servicios financieros) | **\$2,500** |
 | **22** | Cuenta de Escrow Independiente | Setup e integración API con proveedor de escrow regulado (North Capital / Fortress Trust) para segregar fondos de inversores de la cuenta operativa de BRIDS | **\$3,000** |
+| **∑** | **Subtotal Legal & Regulatorio:** | *(\$50,000 + \$10,000 + \$15,000 + \$2,000 + \$2,500 + \$3,000)* | **\$82,500** |
 
-### Seguridad & Compliance Técnico (\$15,000)
+### 2. Seguridad & Compliance Técnico (\$32,500 USD)
 
 | # | Bloque | Detalle | USD |
 | :---: | :--- | :--- | ---: |
 | **6** | Auditorías Smart Contracts Solana | Auditoría externa de contratos Metaplex Core (Freeze/Recovery plugins) y bóvedas Squads Multi-Sig | **\$25,000** |
 | **14** | Pen Testing Web + Programa AML/BSA | Penetration testing de la plataforma web (separado de smart contracts) + política formal AML/KYC/CIP, screening OFAC, procedimiento SAR | **\$7,500** |
+| **∑** | **Subtotal Seguridad & Compliance Técnico:** | *(\$25,000 + \$7,500)* | **\$32,500** |
 
-### Infraestructura Financiera & Plataforma (\$19,000)
+### 3. Infraestructura Financiera & Plataforma (\$19,000 USD)
 
 | # | Bloque | Detalle | USD |
 | :---: | :--- | :--- | ---: |
 | **25** | Funding Portal FINRA White-Label | Setup con Broker-Dealer o Funding Portal registrado en FINRA (DealMaker / Dalmore Group) para ofrecer Reg CF legalmente a inversores retail no acreditados | **\$12,500** |
 | **7** | Integración Sphere + Rampas Fiat | Setup con Sphere, Bridge y rampas fiat. Apertura de cuentas corporativas Mercury/Brex | **\$3,000** |
 | **24** | Cap Table Software + 409A | Carta/Pulley plan startup Año 1. Valuación 409A independiente (requisito IRS para precio de opciones post-SAFE de YC) | **\$3,500** |
+| **∑** | **Subtotal Infraestructura Financiera:** | *(\$12,500 + \$3,000 + \$3,500)* | **\$19,000** |
 
-### Seguros (\$7,500)
+### 4. Seguros Corporativos (\$7,500 USD)
 
 | # | Bloque | Detalle | USD |
 | :---: | :--- | :--- | ---: |
 | **13** | Seguros Corporativos Año 1 | Directors & Officers (D&O) + Errors & Omissions (E&O) + Cyber Liability | **\$7,500** |
+| **∑** | **Subtotal Seguros Corporativos:** | *(Póliza combinada Año 1)* | **\$7,500** |
 
-### Equipo Humano & Relocation (\$42,000)
+### 5. Equipo Humano & Relocation (\$45,000 USD)
 
 | # | Bloque | Detalle | USD |
 | :---: | :--- | :--- | ---: |
-| **15** | Residencia San Francisco (YC Batch) | Apartamento 2-bedroom (3 meses), vuelos internacionales LATAM↔SFO round-trip ×2, gastos de vida modo austero, networking, Demo Day prep | **\$25,000** |
-| **16** | Visas O-1/E-2 (2 Fundadores Tech) | Fees legales de inmigración + procesamiento premium para regularizar estatus laboral en EE.UU. post-YC batch | **\$20,000** |
+| **15** | Residencia San Francisco (YC Batch) | Apartamento 2-bedroom (3 meses @ ~\$5,500/mes = \$16,500), vuelos internacionales LATAM↔SFO round-trip ×2 (\$3,000), gastos de vida modo austero (\$5,500), networking, Demo Day prep | **\$25,000** |
+| **16** | Visas O-1/E-2 (2 Fundadores Tech) | Fees legales de inmigración (\$14,390) + procesamiento premium USCIS ×2 (\$5,610) para regularizar estatus laboral en EE.UU. post-YC batch | **\$20,000** |
+| **∑** | **Subtotal Equipo Humano & Relocation:** | *(\$25,000 + \$20,000)* | **\$45,000** |
 
-### Due Diligence B2B (\$2,000)
+### 6. Due Diligence B2B (\$2,000 USD)
 
 | # | Bloque | Detalle | USD |
 | :---: | :--- | :--- | ---: |
 | **18** | Setup KYB (Know Your Business) | Implementación Middesk para verificar legitimidad de sponsors B2B (propiedad real, sin sanciones OFAC, sin gravámenes) | **\$2,000** |
+| **∑** | **Subtotal Due Diligence B2B:** | *(Setup API Middesk)* | **\$2,000** |
 
-### ⬛ TOTAL ONE-TIME: **\$188,500 USD**
+### ⬛ TOTAL GASTOS ÚNICOS (ONE-TIME): **\$188,500 USD**
 
 ---
 
@@ -123,7 +146,7 @@ tags:
 
 | # | Bloque | Detalle | USD/mes |
 | :---: | :--- | :--- | ---: |
-| **1a** | Cofundador Tech 1 | Salario full-time 24/7 (ingeniería, producto, frontend) | **\$3,000** |
+| **1a** | Cofundador Tech 1 | Salario full-time 24/7 (producto, diseño UI/UX, frontend web y app nativa iOS) | **\$3,000** |
 | **1b** | Cofundador Tech 2 | Salario full-time 24/7 (smart contracts, blockchain, infra) | **\$3,000** |
 | **1c** | Cofundador Inmobiliario | \$0 — Alineado por equity y volumen originado (Blue Brick Capital) | **\$0** |
 | **2** | Fuerza de Ventas B2B + B2C | Célula comercial tercerizada: prospección de sponsors inmobiliarios + red de promotores de fracciones retail | **\$3,000** |
@@ -202,18 +225,19 @@ El auditor aprobó el plan con 4 notas operativas menores que no requieren bloqu
 ╔══════════════════════════════════════════════════════════════╗
 ║          RESUMEN FINANCIERO YC — BRIDS.IO                   ║
 ╠══════════════════════════════════════════════════════════════╣
-║ Revenue Actual:              $0 USD (Pre-revenue)           ║
+║ Inversión YC Solicitada:     $500,000 USD                   ║
+║ Gastos Únicos (One-Time):    $188,500 USD (37.7%)           ║
+║ Fondo de Contingencia:       $25,000 USD (5.0%)             ║
+║ Capital para Burn Mensual:   $286,500 USD (57.3%)           ║
 ║ Monthly Burn (actual):       $30-$50 USD (part-time)        ║
-║ Monthly Burn (post-YC):      $14,400 USD                    ║
-║ Cash in Bank:                $0-$500 USD                    ║
-║ Runway Post-YC:              ~20 meses                      ║
-║ Capital Levantado:           $0 (100% bootstrapped)         ║
-║ Skin in the Game:            Sweat equity + herramientas    ║
-║ Pipeline GMV:                $2M listo + $2-4M en pipeline  ║
+║ Monthly Burn (post-YC):      $14,400 USD/mes                ║
+║ Runway Post-YC (Cero Rev):   19.9 meses (~20 meses)         ║
+║ Revenue Actual:              $0 USD (Pre-revenue)           ║
+║ Capital Levantado a la fecha:$0 (100% bootstrapped)         ║
+║ Pipeline Inmobiliario Día 1: $2M listo + $2-4M en pipeline  ║
 ║ Revenue Proyectado Año 1:    $85,000 - $125,000 USD         ║
 ║ Cap Table:                   3 fundadores (vesting 4yr/1yr) ║
-║ Unit Economics:              Take-rate ~2.2%, Margen >95%   ║
-║ Sponsor LTV/CAC:             >15x                           ║
+║ Unit Economics:              Fee plano $4/fracción, >90% mg ║
 ║ Default Status:              Default Dead → Default Alive   ║
 ║                              en mes 7 con pipeline actual   ║
 ╚══════════════════════════════════════════════════════════════╝
@@ -228,3 +252,8 @@ El auditor aprobó el plan con 4 notas operativas menores que no requieren bloqu
 | **Ciclo 1** | 6 | Visas, Blue Sky, K-1 escala, KYB, EOR, Reg CF/GAAP | ❌ FAIL |
 | **Ciclo 2** | 4 | Escrow, Bad Actor 506(d), 409A/Cap Table, Funding Portal FINRA | ❌ FAIL |
 | **Ciclo 3** | 0 (+4 menores) | SOL buffer, SaaS operativo, Delaware maintenance, FinCEN BOI | ✅ **PASS** |
+
+
+## 🔄 Historial de Revisiones (Changelog)
+- **v3.2 (2026-09-23):** Actualizacion de perfil de Cofundador Tech 1: UI/UX, Frontend y desarrollo nativo iOS
+- **v3.1 (2026-09-23):** Correccion y reconciliacion matematica estricta de subtotales One-Time (Equipo k, Seguridad .5k, Legal .5k) y adicion de tabla resumen de categorias
