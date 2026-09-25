@@ -70,6 +70,20 @@ Para acciones emitidas con posterioridad al 4 de julio de 2025:
     Fundadores y VCs pueden vender sus acciones en un Exit con $0 USD de impuesto federal.
 ```
 
+### Citas Textuales Verificables sobre QSBS (§ 1202):
+
+> *"QSBS — Qualified Small Business Stock — is a federal tax break under Section 1202 of the Internal Revenue Code that can let founders and early investors pay $0 federal capital gains tax when they sell shares in a qualifying C-corporation... For stock issued after July 4, 2025, that cap is $15 million (or 10x your basis, if larger), and the full 100% exclusion kicks in at a 5-year hold."*  
+> — [Stablecorp QSBS Guide](https://mystablecorp.xyz/guides/qsbs-explained)
+
+> *"Section 1202 deliberately excludes service businesses — health, law, engineering, accounting, consulting, financial services, banking, insurance, brokerage, farming, hospitality, and extractive industries among them. A software or product startup generally clears this; a solo consulting practice dressed up as a C-corp generally does not."*  
+> — [Stablecorp QSBS Guide](https://mystablecorp.xyz/guides/qsbs-explained)
+
+> *"As of June 2026, the One Big Beautiful Bill Act (signed July 4, 2025) added a tiered version: 50% exclusion at 3 years, 75% at 4 years, 100% at 5 years — for stock issued after that date."*  
+> — [Stablecorp QSBS Guide](https://mystablecorp.xyz/guides/qsbs-explained)
+
+> *"An LLC saves you money every year. A C-Corp can save you millions once. Which one is right depends on whether a large equity exit is the plan."*  
+> — [Stablecorp QSBS Guide](https://mystablecorp.xyz/guides/qsbs-explained)
+
 ### Argumento de Venta Insuperable para Inversores Ángeles y VCs
 Al presentar a fondos de inversión en EE. UU., BRIDS no solo ofrece un negocio con >90% de margen bruto sobre sindicación inmobiliaria, sino un vehículo societario estructurado donde los primeros \$15M USD de plusvalía por inversionista están **completamente exentos del 20% federal de ganancias de capital y del 3.8% de Net Investment Income Tax (NIIT)**.
 
@@ -98,6 +112,10 @@ Cuando los cofundadores emiten sus acciones ordinarias con un calendario de adqu
     └─ 4. Archivar el comprobante de envío y acuse postal en el Data Room de BRIDS.
 ```
 
+### Cita Textual de Advertencia sobre la Elección 83(b):
+> *"An 83(b) election must be filed within 30 days of receiving restricted founder stock. Miss it and your tax bill explodes. Here is how to file it right."*  
+> — [Stablecorp 83(b) Election Guide](https://mystablecorp.xyz/guides/83b-election-guide)
+
 ---
 
 ## 3. Instrumentos de Capital: YC Post-Money SAFE vs. Notas vs. Rondas Preciadas
@@ -112,8 +130,15 @@ Cuando los cofundadores emiten sus acciones ordinarias con un calendario de adqu
 | **Impacto en Balance** | Capital contingente limpio | Pasivo exigible | Capital social emitido |
 | **Uso en BRIDS** | **Estándar mandatorio para Pre-Seed / YC** | Desaconsejado | Reservado para Serie A ($5M+) |
 
+### Citas Textuales Verificables sobre Instrumentos de Capital:
+> *"The three early-stage fundraising instruments, what each one is, and when founders actually use a SAFE, a convertible note, or a priced round."*  
+> — [Stablecorp Priced vs SAFE vs Note Guide](https://mystablecorp.xyz/guides/priced-vs-safe-vs-note)
+
+> *"How the standard YC post-money SAFE works: valuation caps, discounts, MFN, and exactly what dilution you're signing for as a first-time founder."*  
+> — [Stablecorp SAFEs Explained Guide](https://mystablecorp.xyz/guides/safe-notes-explained)
+
 ### Mecánica del Post-Money SAFE de Y Combinator
-BRIDS adopta la plantilla oficial de Y Combinator **Post-Money SAFE con Valuation Cap**:
+BRIDS adopta la plantilla oficial de Y Combinator [Post-Money SAFE con Valuation Cap](https://www.ycombinator.com/documents):
 $$\text{Dilución del Inversor} = \frac{\text{Monto Invertido}}{\text{Post-Money Valuation Cap}}$$
 - **Ventaja Fundamental:** El fundador sabe con certeza matemática exacta cuánta dilución asume por cada cheque que ingresa, sin sorpresas al momento de la conversión en la Serie A.
 - **Prevención de SAFE Overhang:** No apilar SAFEs indiscriminadamente sin registrar el impacto acumulado en la hoja de modelado del Cap Table.
@@ -138,6 +163,9 @@ Para mantener un Cap Table institucional limpio desde el día 1 que supere cualq
  └── TOTAL ASIGNADO:                              10,000,000 acciones (100.0%)
 ```
 
+> *"A cap table records who owns what in your company. Here is what it tracks, how dilution works, and the early mistakes that haunt later rounds."*  
+> — [Stablecorp Cap Tables for Founders Guide](https://mystablecorp.xyz/guides/cap-table-basics)
+
 ### Reglas de Higiene Accionaria:
 1. **Un solo tipo de acción inicial:** Exclusivamente *Common Stock* para fundadores y pool de opciones.
 2. **Pool de Opciones No Emitido (Unallocated Pool):** 10% a 15% reservado contractualmente para futuras contrataciones de ingenieros senior sin dilución inmediata entre fundadores.
@@ -146,6 +174,9 @@ Para mantener un Cap Table institucional limpio desde el día 1 que supere cualq
 ---
 
 ## 5. Términos Clave en Negociaciones de Term Sheets (Serie Seed y Futuras)
+
+> *"A founder's plain-English guide to the term sheet clauses that actually decide your outcome: liquidation preference, pro-rata rights, and board control."*  
+> — [Stablecorp Term Sheet Explained Guide](https://mystablecorp.xyz/guides/term-sheet-explained)
 
 Cuando los fondos institucionales extiendan un *Term Sheet*, los fundadores de BRIDS defenderán los siguientes estándares:
 
@@ -169,3 +200,19 @@ Cuando los fondos institucionales extiendan un *Term Sheet*, los fundadores de B
    - Implementar el protocolo de compra de acciones de fundadores a \$0.00001 de par value y radicar la 83(b) en el plazo de 30 días.
 3. **Estandarizar el Uso del YC Post-Money SAFE:**
    - Cerrar cualquier capital de aceleración o pre-seed exclusivamente con el modelo post-money sin notas de deuda.
+
+---
+
+## 7. Referencias Oficiales, Guías de Stablecorp y Enlaces Verificables
+
+- **Portal de Guías de Fundraising (Stablecorp):** [https://mystablecorp.xyz/guides/topic/fundraising](https://mystablecorp.xyz/guides/topic/fundraising)
+- **Guía QSBS — Exclusión Fiscal § 1202 en Acciones C-Corp:** [https://mystablecorp.xyz/guides/qsbs-explained](https://mystablecorp.xyz/guides/qsbs-explained)
+- **Guía de Elección Fiscal 83(b) (Plazo Fatal de 30 Días):** [https://mystablecorp.xyz/guides/83b-election-guide](https://mystablecorp.xyz/guides/83b-election-guide)
+- **Guía de YC Post-Money SAFEs para Fundadores:** [https://mystablecorp.xyz/guides/safe-notes-explained](https://mystablecorp.xyz/guides/safe-notes-explained)
+- **Comparativa Priced Round vs. SAFE vs. Nota Convertible:** [https://mystablecorp.xyz/guides/priced-vs-safe-vs-note](https://mystablecorp.xyz/guides/priced-vs-safe-vs-note)
+- **Guía de Negociación de Term Sheets (Liquidación y Control):** [https://mystablecorp.xyz/guides/term-sheet-explained](https://mystablecorp.xyz/guides/term-sheet-explained)
+- **Levantamiento con Inversores de EE. UU. para Fundadores No Residentes:** [https://mystablecorp.xyz/guides/raise-from-us-investors-non-resident](https://mystablecorp.xyz/guides/raise-from-us-investors-non-resident)
+- **Gestión de Cap Table desde el Día 1:** [https://mystablecorp.xyz/guides/cap-table-basics](https://mystablecorp.xyz/guides/cap-table-basics)
+- **Estatuto Federal — 26 U.S. Code § 1202 (QSBS):** [https://www.law.cornell.edu/uscode/text/26/1202](https://www.law.cornell.edu/uscode/text/26/1202)
+- **Estatuto Federal — 26 U.S. Code § 83 (Property Transferred in Connection with Performance of Services):** [https://www.law.cornell.edu/uscode/text/26/83](https://www.law.cornell.edu/uscode/text/26/83)
+- **Documentos Estándar de Y Combinator (Post-Money SAFE):** [https://www.ycombinator.com/documents](https://www.ycombinator.com/documents)

@@ -65,6 +65,10 @@ La C-Corporation tributa formalmente bajo el régimen federal de EE. UU. a una t
 - Las propiedades se alojan exclusivamente en **Series LLCs o SPVs celulares** (*pass-through entities*). Los rendimientos netos por alquiler fluyen directamente desde la cuenta de la propiedad (o su bóveda Squads en USDC) hacia los inversionistas fraccionales, protegiendo el *yield* inmobiliario del recorte corporativo del 21%.
 - **BRIDS Inc.** únicamente factura tarifas tecnológicas fijas (*SaaS setup fees*, comisiones de licenciamiento de software o procesamiento técnico plano) como ingresos operativos propios.
 
+### Cita Textual de Referencia sobre Impuestos Corporativos:
+> *"A C-Corp is a separate taxpayer that pays 21% US federal corporate income tax on its profits — unlike a pass-through LLC. That is the trade-off you accept for the structure investors want. There is also a potential second layer: when the corporation distributes profits to shareholders as dividends, those dividends can be taxed again at the shareholder level."*  
+> — [Stablecorp Delaware C-Corp Guide](https://mystablecorp.xyz/guides/delaware-c-corp-formation-guide)
+
 ---
 
 ## 2. Parámetros Técnicos de Constitución para Fundadores No Residentes
@@ -73,13 +77,21 @@ La formación corporativa de **BRIDS Inc.** se ejecuta 100% de manera remota sin
 
 | Parámetro | Configuración Estándar para BRIDS Inc. | Justificación Estratégica y Riesgo Mitigado |
 | :--- | :--- | :--- |
-| **Nombre de Entidad** | `BRIDS Inc.` (o `BRIDS Technology Inc.`) | Verificación de homonimia en la *Delaware Division of Corporations*. |
+| **Nombre de Entidad** | `BRIDS Inc.` (o `BRIDS Technology Inc.`) | Verificación de homonimia en la [Delaware Division of Corporations](https://corp.delaware.gov/howtoform/). |
 | **Capital Social Autorizado** | **10,000,000 de acciones ordinarias** (*Common Stock*). | Estándar de la industria VC: habilita distribución a fundadores (e.g. 8M), pool de opciones ESOP (1M a 1.5M) y margen para rondas SAFE. |
 | **Valor a la Par (*Par Value*)** | **\$0.00001 USD** por acción. | **CRÍTICO:** Evita valuaciones nominales artificiales y minimiza el costo fiscal inicial de adquisición de acciones de fundadores (\$100 USD para adquirir 10M de acciones). |
-| **Método de Franchise Tax** | **Assumed Par Value Capital Method**. | **LA TRAMPA DE DELAWARE:** Si se calcula bajo el método por defecto (*Authorized Shares*), el estado factura decenas de miles de dólares anuales por emitir 10M de acciones. Con el método de valor a la par asumido y activos iniciales acotados, el impuesto se fija en el **mínimo legal de ~$400 USD + $50 USD de Reporte Anual** (~$450 USD/año). |
-| **Vencimiento Delaware Franchise Tax** | **1 de Marzo** de cada año calendario. | Obligación legal improrrogable para mantener el *Good Standing* ante Delaware y evitar multas del estado. |
-| **Obtención de EIN sin SSN** | **Formulario IRS SS-4** (Línea 7b: `"Foreign"`). | Tramitación vía llamada directa a la línea internacional del IRS (+1 267-941-1099) o fax internacional (+1 304-707-9471). Tiempo estimado: ~4 días hábiles. |
+| **Método de Franchise Tax** | **Assumed Par Value Capital Method**. | **LA TRAMPA DE DELAWARE:** Si se calcula bajo el método por defecto (*Authorized Shares*), el estado factura decenas de miles de dólares anuales por emitir 10M de acciones. Con el método de valor a la par asumido y activos iniciales acotados, el impuesto se fija en el **mínimo legal de ~$400 USD + $50 USD de Reporte Anual** (~$450 USD/año). Ver [Calculadora de Franchise Tax de Delaware](https://corp.delaware.gov/frtaxcalc/). |
+| **Vencimiento Delaware Franchise Tax** | **1 de Marzo** de cada año calendario. | Obligación legal improrrogable para mantener el *Good Standing* ante Delaware y evitar multas del estado. Ver [Instrucciones de Reporte Anual](https://corp.delaware.gov/paytaxes/). |
+| **Obtención de EIN sin SSN** | **Formulario IRS SS-4** (Línea 7b: `"Foreign"`). | Tramitación vía llamada directa a la línea internacional del IRS (+1 267-941-1099) o fax internacional (+1 304-707-9471). Tiempo estimado: ~4 días hábiles. Ver [Instrucciones IRS Form SS-4](https://www.irs.gov/instructions/iss4). |
 | **Protección Fiscal Fundadores** | **IRC Section 83(b) Election**. | Presentación formal ante el IRS dentro de los **30 días improrrogables** posteriores a la compra de acciones con *vesting*, bloqueando impuestos futuros conforme la startup se revalorice. |
+
+### Citas Textuales Verificables sobre Parámetros y Trampas Críticas:
+
+> *"The classic mistake: founders authorize 10,000,000 shares but forget to use the assumed-par-value method, then receive a franchise-tax bill in the tens of thousands. The shares are fine — the calculation method is the fix."*  
+> — [Stablecorp Delaware C-Corp Guide](https://mystablecorp.xyz/guides/delaware-c-corp-formation-guide)
+
+> *"There is no requirement to be a US citizen, resident, or visa-holder to own or be a director of a Delaware corporation, and you do not need a Social Security Number to form one or to get its EIN. You file entirely remotely through a registered agent, and on Form SS-4 line 7b you enter 'Foreign' (or 'N/A') where a US tax ID would normally go."*  
+> — [Stablecorp Delaware C-Corp Guide](https://mystablecorp.xyz/guides/delaware-c-corp-formation-guide)
 
 ---
 
@@ -108,6 +120,9 @@ Para el plan financiero de capital (**Plan Maestro de Asignación de Capital YC 
    TOTAL RECURRENTE ANUAL ESTIMADO:                         ~$1,050 - $1,650 USD/año
 ```
 
+> *"Formation starts at $180 for the Certificate of Incorporation, and all-in annual upkeep typically runs $800-$1,500 (registered agent, franchise tax, and CPA filings), as of June 2026. The recurring cost includes a $50 Delaware annual report and roughly $400 franchise tax under the assumed-par-value minimum, both due March 1."*  
+> — [Stablecorp Delaware C-Corp Guide](https://mystablecorp.xyz/guides/delaware-c-corp-formation-guide)
+
 ---
 
 ## 4. Integración de Rieles Financieros y Bancarios en Solana
@@ -129,6 +144,9 @@ Stablecorp opera su infraestructura de pagos y cuentas corporativas sobre **Brid
    - Cuando un proyecto inmobiliario financiado cierra su ronda en BRIDS, el capital recaudado en USDC (depositado en la bóveda Squads v4 de la SPV) puede liquidarse hacia la cuenta bancaria de construcción del Sponsor.
    - Costo de off-ramp del **0.5%** (frente al ~2.9% + 2% de FX oculto del sistema bancario corresponsal internacional), preservando un rastro auditable con códigos de propósito cambiario y compliance bancario.
 
+> *"Stablecorp settles USDC/USDT on Solana, Ethereum, and Polygon... The pricing edge is concrete: for clients incorporated with Stablecorp it is 1.5% onramp and 0.5% offramp, or 1% on a direct off-ramp to INR — versus the market's ~2.9% headline plus ~2% hidden FX markup that lands near 5% effective."*  
+> — [Stablecorp Delaware C-Corp Guide](https://mystablecorp.xyz/guides/delaware-c-corp-formation-guide)
+
 ---
 
 ## 5. Aplicación Inmediata en el Roadmap de BRIDS
@@ -139,3 +157,16 @@ Stablecorp opera su infraestructura de pagos y cuentas corporativas sobre **Brid
    - Aprovechar los procesos estandarizados de registro (búsqueda de entidad, agente registrado y tramitación de EIN) para optimizar la creación de SPVs inmobiliarias en el [modulo-desarrollador-spv-engine.md](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/02%20Producto%20&%20Ingenieria/modulo-desarrollador-spv-engine.md).
 3. **Credibilidad de Ecosistema en Colosseum Hackathons y Aceleradoras:**
    - Citar la adopción de infraestructuras nativas de Solana (Squads Protocol para custodia multi-sig, Metaplex Core para emisión de derechos, y rieles Bridge/Stablecorp para bancarización de la C-Corp) consolida el posicionamiento de BRIDS como un proyecto institucional de primer nivel en el ecosistema Solana.
+
+---
+
+## 6. Referencias Oficiales y Enlaces de Trazabilidad
+
+- **Guía de Formación Delaware C-Corp (Stablecorp):** [https://mystablecorp.xyz/guides/delaware-c-corp-formation-guide](https://mystablecorp.xyz/guides/delaware-c-corp-formation-guide)
+- **Delaware Division of Corporations — Tabla Oficial de Tarifas:** [https://corp.delaware.gov/fee/](https://corp.delaware.gov/fee/)
+- **Delaware Division of Corporations — Cálculo Oficial de Franchise Tax:** [https://corp.delaware.gov/frtaxcalc/](https://corp.delaware.gov/frtaxcalc/)
+- **Delaware Division of Corporations — Instrucciones de Impuestos y Reporte Anual:** [https://corp.delaware.gov/paytaxes/](https://corp.delaware.gov/paytaxes/)
+- **IRS — Instrucciones Oficiales del Formulario SS-4 (Obtención de EIN sin SSN):** [https://www.irs.gov/instructions/iss4](https://www.irs.gov/instructions/iss4)
+- **IRS — Obtención de EIN para Solicitantes Internacionales:** [https://www.irs.gov/businesses/small-businesses-self-employed/get-an-employer-identification-number](https://www.irs.gov/businesses/small-businesses-self-employed/get-an-employer-identification-number)
+- **Colosseum (Aceleradora de Solana):** [https://www.colosseum.org](https://www.colosseum.org)
+
