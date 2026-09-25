@@ -14,6 +14,8 @@ Este directorio constituye el repositorio institucional de **estructuración soc
   - [[01 Negocio/03 Legal & Cumplimiento/delaware-corp/delaware-c-corp-incorporation-and-banking-architecture.md|Arquitectura Corporativa Delaware C-Corp y Rieles Financieros Solana]]: Formación remota, acciones (10M @ $0.00001), Assumed Par Value, EIN sin SSN, y rieles Bridge/Stripe.
 - 📑 **Cumplimiento Fiscal & Regulatorio (IRS / FinCEN / Delaware):**
   - [[01 Negocio/03 Legal & Cumplimiento/manual-cumplimiento-tributario-irs-calendario-fiscal.md|Manual de Cumplimiento Tributario IRS, Blindaje Form 5472 y Calendario Fiscal Maestro]]: Guía definitiva anti-sanciones ($25k penalty shield Form 5472 / Pro Forma 1120), Form 1120 C-Corp, FinCEN BOI, créditos I+D (IRC § 41) y cronograma anual unificado de vencimientos.
+- 🏢 **Plataforma Go-To de Incorporación & Banca:**
+  - [[01 Negocio/03 Legal & Cumplimiento/proveedor-oficial-incorporacion-banca-stablecorp.md|Ficha Institucional y Plataforma Go-To: Stablecorp]]: Designación oficial de Stablecorp (*Xelio Technologies Inc. / Colosseum*) como plataforma preferente para formación de LLC inicial, obtención remota de EIN sin SSN, banca US y rampa USDC en Solana (Bridge/Stripe), compliance anual Form 5472 y conversión estatutaria a C-Corp.
 - 📂 **`data-room/`**: Repositorio estructurado para procesos de Due Diligence con fondos de Venture Capital, entidades bancarias y reguladores.
 - 🛡️ **`kyc-aml/`**: Manuales de prevención de lavado de activos, políticas OFAC, procedimientos CIP y documentación de integración con Stripe Identity.
 - 🤝 **`partner-agreements/`**: Acuerdos marco de originación y operación inmobiliaria (ej. contrato maestro con Blue Brick Capital, convenios con contratistas y escrow).
