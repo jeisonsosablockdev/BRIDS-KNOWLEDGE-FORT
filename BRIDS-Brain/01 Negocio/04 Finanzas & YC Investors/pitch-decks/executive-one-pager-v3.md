@@ -114,10 +114,13 @@ BRIDS cobra exclusivamente tarifas fijas de procesamiento tecnológico. **Nunca 
 │  → Originación, valuación, obra, administración de rentas   │
 ├─────────────────────────────────────────────────────────────┤
 │  Proveedores Regulados Externos                             │
-│  → Stripe Identity (KYC/AML) · Sphere (Rampas Fiat)        │
+│  → Stripe Identity (KYC/AML) · Bridge / Stripe (Rampas Fiat)│
 │  → Funding Portal FINRA (Reg CF) · Escrow Independiente    │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+**Ventaja Fiscal Inversora (QSBS IRC § 1202):**
+> *100% de Exclusión Fiscal Federal en Exit (hasta \$15M USD).* Al operar estrictamente como empresa de software SaaS e infraestructura técnica sin posesión directa de inmuebles (los activos residen en SPVs independientes), las acciones de BRIDS Inc. son **100% elegibles para QSBS**. Inversionistas ángeles y fondos VC acceden a una salida con **\$0 USD en impuestos federales sobre ganancias de capital**.
 
 ---
 
