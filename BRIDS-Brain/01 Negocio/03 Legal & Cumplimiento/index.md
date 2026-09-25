@@ -9,7 +9,8 @@ Este directorio constituye el repositorio institucional de **estructuración soc
 ## 📌 Estructura de Subdirectorios
 
 - 📜 **`spvs/`**: Contratos constitutivos de las Sociedades de Propósito Especial en sus estados de origen (Florida, Texas, Delaware, etc.: Operating Agreements, PPMs, Subscription Agreements).
-- 🏛️ **`delaware-corp/`**: Estatutos y estructuración corporativa de BRIDS Inc.
+- 🏛️ **`delaware-corp/` y Estrategia Societaria:**
+  - [[01 Negocio/03 Legal & Cumplimiento/comparativa-llc-vs-c-corp-estrategia-bootstrap.md|Comparativa Estratégica LLC vs. Delaware C-Corp y Hoja de Ruta de Conversión]]: Decisión ejecutiva bootstrap (arrancar con LLC, retrasar C-Corp hasta Term Sheet de VC), comparativa Wyoming vs. Delaware, y protocolo de conversión estatutaria (DGCL § 265 / IRC § 351).
   - [[01 Negocio/03 Legal & Cumplimiento/delaware-corp/delaware-c-corp-incorporation-and-banking-architecture.md|Arquitectura Corporativa Delaware C-Corp y Rieles Financieros Solana]]: Formación remota, acciones (10M @ $0.00001), Assumed Par Value, EIN sin SSN, y rieles Bridge/Stripe.
 - 📑 **Cumplimiento Fiscal & Regulatorio (IRS / FinCEN / Delaware):**
   - [[01 Negocio/03 Legal & Cumplimiento/manual-cumplimiento-tributario-irs-calendario-fiscal.md|Manual de Cumplimiento Tributario IRS, Blindaje Form 5472 y Calendario Fiscal Maestro]]: Guía definitiva anti-sanciones ($25k penalty shield Form 5472 / Pro Forma 1120), Form 1120 C-Corp, FinCEN BOI, créditos I+D (IRC § 41) y cronograma anual unificado de vencimientos.

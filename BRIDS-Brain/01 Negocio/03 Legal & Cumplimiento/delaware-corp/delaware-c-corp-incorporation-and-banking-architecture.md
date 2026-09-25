@@ -33,6 +33,9 @@ tags:
 > **Sub-Agentes Autores:** `compliance-officer` (Legal & RWA Structuring) y `business-consultant` (Unit Economics & VC Strategy).
 > **Fuente de Inteligencia Base:** Stablecorp (*Xelio Technologies Inc.*, entidad acelerada por Colosseum).
 
+> [!IMPORTANT]
+> **Decisión de Secuenciación Corporativa:** Por decisión estratégica de los fundadores, **BRIDS arranca operativamente bajo una estructura LLC** para minimizar costos (~$300/año) y evitar el 21% de impuesto corporativo federal durante la fase *bootstrap* y validación de producto. Esta arquitectura de Delaware C-Corp se constituirá formalmente (o se ejecutará mediante conversión estatutaria bajo DGCL § 265 / IRC § 351) **únicamente en el momento en que se cuente con un Term Sheet formal de Venture Capital / Y Combinator**. Ver el análisis completo en [[01 Negocio/03 Legal & Cumplimiento/comparativa-llc-vs-c-corp-estrategia-bootstrap.md|Comparativa Estratégica LLC vs. C-Corp]].
+
 ---
 
 ## 1. Justificación y Tesis de la Delaware C-Corp para BRIDS
