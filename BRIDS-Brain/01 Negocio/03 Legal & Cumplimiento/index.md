@@ -9,7 +9,8 @@ Este directorio constituye el repositorio institucional de **estructuración soc
 ## 📌 Estructura de Subdirectorios
 
 - 📜 **`spvs/`**: Contratos constitutivos de las Sociedades de Propósito Especial en sus estados de origen (Florida, Texas, Delaware, etc.: Operating Agreements, PPMs, Subscription Agreements).
-- 🏛️ **`delaware-corp/`**: Estatutos corporativos de BRIDS Inc. (Certificate of Incorporation, Bylaws, resoluciones de junta y libros de accionistas).
+- 🏛️ **`delaware-corp/`**: Estatutos y estructuración corporativa de BRIDS Inc.
+  - [[01 Negocio/03 Legal & Cumplimiento/delaware-corp/delaware-c-corp-incorporation-and-banking-architecture.md|Arquitectura Corporativa Delaware C-Corp y Rieles Financieros Solana]]: Formación remota, acciones (10M @ $0.00001), Assumed Par Value, EIN sin SSN, y rieles Bridge/Stripe.
 - 📂 **`data-room/`**: Repositorio estructurado para procesos de Due Diligence con fondos de Venture Capital, entidades bancarias y reguladores.
 - 🛡️ **`kyc-aml/`**: Manuales de prevención de lavado de activos, políticas OFAC, procedimientos CIP y documentación de integración con Stripe Identity.
 - 🤝 **`partner-agreements/`**: Acuerdos marco de originación y operación inmobiliaria (ej. contrato maestro con Blue Brick Capital, convenios con contratistas y escrow).
