@@ -21,7 +21,7 @@ tags:
   - "real-estate"
 ---
 
-# Sindica Capital para tus Proyectos Inmobiliarios 5x Más Rápido y Escala tu Operación sin Fricción
+# The Operating System for Real Estate Syndication
 
 ### La infraestructura de software institucional que te permite estructurar, levantar equity y gestionar inversionistas en EE.UU. sin gastar \$40,000 USD en abogados, sin perseguir papeleo analógico y con la gestión fiscal 100% resuelta.
 
