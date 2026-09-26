@@ -1,5 +1,5 @@
 % ═══════════════════════════════════════════════════════════════════════════
-% 🏛️ BRIDS KNOWLEDGE FORT - INSTITUTIONAL LATEX TEMPLATE HEADER (v2.0)
+% 🏛️ BRIDS KNOWLEDGE FORT - INSTITUTIONAL LATEX TEMPLATE HEADER (v3.0)
 % ═══════════════════════════════════════════════════════════════════════════
 
 \usepackage{fontspec}
@@ -9,10 +9,10 @@
 \geometry{
   a4paper,
   margin=2.0cm,
-  top=2.7cm,
+  top=2.8cm,
   bottom=2.4cm,
   headheight=32pt,
-  headsep=14pt,
+  headsep=16pt,
   footskip=20pt
 }
 
@@ -31,16 +31,16 @@
 \usepackage{hyperref}
 
 % Paleta Oficial BRIDS (brand-visual-style-guide.md)
-\definecolor{bridsDeep}{HTML}{0B192C}      % Azul Institucional Deep
-\definecolor{bridsCyan}{HTML}{14F195}      % Verde Solana / Cian Neón
-\definecolor{bridsBlue}{HTML}{00B0F9}      % Acento Gradient Primario
+\definecolor{bridsDeep}{HTML}{0B192C}      % Azul Institucional Deep (Títulos y autoridad)
+\definecolor{bridsCyan}{HTML}{14F195}      % Verde Solana / Cian Neón (Acentos Web3, KPIs)
+\definecolor{bridsBlue}{HTML}{00B0F9}      % Azul Eléctrico (Líneas principales y bordes)
 \definecolor{bridsPurple}{HTML}{CF84F9}    % Acento Gradient Secundario
-\definecolor{bridsLight}{HTML}{F8F9FA}     % Fondo Gris Titanio
-\definecolor{bridsBorder}{HTML}{CBD5E1}    % Bordes y divisores
-\definecolor{bridsMuted}{HTML}{64748B}     % Texto secundario / Muted
-\definecolor{bridsDarkGreen}{HTML}{0E8345} % Éxito / Checked
-\definecolor{bridsDarkRed}{HTML}{C53030}   % Alerta / Cross
-\definecolor{bridsGold}{HTML}{D97706}      % Oro / Warning
+\definecolor{bridsLight}{HTML}{F8F9FA}     % Fondo Gris Titanio (Tarjetas y tablas)
+\definecolor{bridsBorder}{HTML}{CBD5E1}    % Bordes y divisores secundarios
+\definecolor{bridsMuted}{HTML}{64748B}     % Texto secundario / Metadatos
+\definecolor{bridsDarkGreen}{HTML}{0E8345} % Éxito / Checkmarks
+\definecolor{bridsDarkRed}{HTML}{C53030}   % Alerta / Crosses
+\definecolor{bridsGold}{HTML}{D97706}      % Oro / Badges
 
 % Configuración de Hipervínculos
 \hypersetup{
@@ -51,28 +51,65 @@
     citecolor=bridsDeep
 }
 
-% Formato de Secciones y Encabezados
+% Encabezados y Pies de Página Globales
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{30pt}
+
+% Header (Páginas 2+)
+\lhead{\footnotesize\textcolor{bridsMuted}{\textbf{BRIDS.io} \textbar\ Sindicación Inmobiliaria \& RWA}}
+\rhead{\includegraphics[height=0.55cm]{brids-logo-dark.pdf}}
+
+% Footer (Todas las páginas)
+\lfoot{\footnotesize\textcolor{bridsMuted}{\copyright\ 2026 BRIDS.io -- Todos los derechos reservados}}
+\rfoot{\footnotesize\textcolor{bridsMuted}{Página \thepage}}
+
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{bridsBlue}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{bridsBorder}\leaders\hrule height \footrulewidth\hfill}}
+
+% Banner Corporativo Hero en Portada (Página 1)
+\renewcommand{\maketitle}{%
+  \thispagestyle{plain}%
+  \noindent
+  \begin{minipage}[c]{0.42\textwidth}
+    \includegraphics[height=1.25cm]{brids-logo-dark.pdf}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[c]{0.55\textwidth}
+    \raggedleft
+    {\footnotesize\color{bridsDeep}\textbf{BRIDS.io} \textbar\ Institutional RWA Infrastructure\par}
+    {\scriptsize\color{bridsMuted}Delaware SPV \textbar\ Solana Metaplex Core \textbar\ Stripe Identity\par}
+    {\scriptsize\color{bridsBlue}\textbf{DOCUMENTO INSTITUCIONAL DE NEGOCIO \textbar\ CONFIDENCIAL}\par}
+  \end{minipage}
+  \vspace{0.4em}\par
+  \noindent{\color{bridsBlue}\rule{\textwidth}{2.5pt}}
+  \vspace{1.5em}\par
+}
+
+% Formato de Secciones con Líneas de Acento en Colores BRIDS
 \titleformat{\section}
   {\color{bridsDeep}\normalfont\Large\bfseries}
   {\thesection}{0.8em}{}
-  [{\color{bridsBlue}\titlerule[1.2pt]}]
+  [{\color{bridsBlue}\titlerule[1.5pt]}]
 
 \titleformat{\subsection}
   {\color{bridsDeep}\normalfont\large\bfseries}
   {\thesubsection}{0.8em}{}
 
 \titleformat{\subsubsection}
-  {\color{bridsDeep}\normalfont\normalsize\bfseries}
+  {\color{bridsBlue!80!bridsDeep}\normalfont\normalsize\bfseries}
   {\thesubsubsection}{0.8em}{}
 
-% Redefinición del entorno de citas de Pandoc (Callout Cards)
+% Redefinición del entorno de citas de Pandoc (Callout Cards con Estilo Neobanco)
 \renewenvironment{quote}{%
   \vspace{0.4em}
   \begin{tcolorbox}[
     colback=bridsLight,
-    colframe=bridsBlue!80!bridsDeep,
+    colframe=bridsBlue,
     arc=2mm,
-    boxrule=1pt,
+    boxrule=1.2pt,
     left=10pt,
     right=10pt,
     top=8pt,
@@ -83,6 +120,11 @@
 }{%
   \end{tcolorbox}%
 }
+
+% Estilo de Tablas Institucionales (Financial / McKinsey Style)
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\lightrulewidth}{0.8pt}
+\arrayrulecolor{bridsBlue!80!bridsDeep}
 
 % Mapeo de caracteres Unicode y Emojis a símbolos tipográficos limpios
 \newunicodechar{✅}{\textcolor{bridsDarkGreen}{\ding{52}}\space}
@@ -121,21 +163,3 @@
 \newunicodechar{┬}{+}
 \newunicodechar{┴}{+}
 \newunicodechar{┼}{+}
-
-% Configuración de Encabezados y Pies de Página
-\pagestyle{fancy}
-\fancyhf{}
-\setlength{\headheight}{30pt}
-
-% Header
-\lhead{\footnotesize\textcolor{bridsMuted}{\textbf{BRIDS} \textbar\ Sindicación Inmobiliaria \& RWA}}
-\rhead{\includegraphics[height=0.55cm]{brids-logo-dark.pdf}}
-
-% Footer
-\lfoot{\footnotesize\textcolor{bridsMuted}{\copyright\ 2026 BRIDS.io -- Todos los derechos reservados}}
-\rfoot{\footnotesize\textcolor{bridsMuted}{Página \thepage}}
-
-\renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\footrulewidth}{0.5pt}
-\renewcommand{\headrule}{\hbox to\headwidth{\color{bridsBorder}\leaders\hrule height \headrulewidth\hfill}}
-\renewcommand{\footrule}{\hbox to\headwidth{\color{bridsBorder}\leaders\hrule height \footrulewidth\hfill}}

@@ -132,7 +132,7 @@ Ejemplos:
       if (!isRaw && fs.existsSync(HEADER_TEMPLATE)) {
         const headerContent = fs.readFileSync(HEADER_TEMPLATE, 'utf8');
         const logoPath = path.join(BRAND_DIR, 'brids-logo-dark.pdf');
-        const resolvedHeader = headerContent.replace('brids-logo-dark.pdf', logoPath);
+        const resolvedHeader = headerContent.replaceAll('brids-logo-dark.pdf', logoPath);
         tmpHeader = path.join(ENGINE_DIR, 'templates', '.tmp-brids-header.tex');
         fs.writeFileSync(tmpHeader, resolvedHeader, 'utf8');
         headerArg = ` -H "${tmpHeader}"`;
