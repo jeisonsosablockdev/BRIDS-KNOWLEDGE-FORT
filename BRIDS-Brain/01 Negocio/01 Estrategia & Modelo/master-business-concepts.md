@@ -69,8 +69,8 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md|concept-dual-entity-compliance]]
 - **Custodio:** `compliance-officer`
 - **One-Liner Canónico:**
-  > *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente constituido en la jurisdicción del inmueble."*
-- **Tesis de Reutilización:** Permite justificar ante reguladores, inversores institucionales y socios por qué BRIDS Inc. opera como un proveedor de tecnología pura (Delaware C-Corp) protegido bajo la Sección 15(a)(1) del Exchange Act, delegando la titularidad de los inmuebles a SPVs (LLCs) independientes en sus respectivas jurisdicciones. Se articula con [[concept-cross-border-regulatory-roadmap|C10]] para la transición hacia licenciamiento institucional propio.
+  > *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente en Delaware."*
+- **Tesis de Reutilización:** Permite justificar ante reguladores, inversores institucionales y socios por qué BRIDS Inc. opera como un proveedor de tecnología pura (Delaware C-Corp) protegido bajo la Sección 15(a)(1) del Exchange Act, delegando la titularidad de los inmuebles a Delaware SPVs (LLCs) independientes. Se articula con [[concept-cross-border-regulatory-roadmap|C10]] para la transición hacia licenciamiento institucional propio.
 
 ### C2: Protocolo de Recuperación de Llaves Privadas (Lost-Key Recovery)
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-wallet-recovery-protocol.md|concept-wallet-recovery-protocol]]
@@ -148,7 +148,7 @@ graph TD
 - **Archivo Atómico:** [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-rwa-identity-vc-thesis.md|concept-rwa-identity-vc-thesis]]
 - **Custodio:** `pitch-deck-architect`, `founder-ghostwriter`, `business-consultant`
 - **One-Liner Canónico:**
-  > *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $200 USD con títulos recuperables y respaldo societario formal en EE.UU. (Delaware C-Corp tecnológica y SPVs locales)."*
+  > *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $200 USD con títulos recuperables y respaldo societario formal en EE.UU. (Delaware C-Corp tecnológica y Delaware SPVs)."*
 - **Tesis de Reutilización:** Pilar de pitch decks para Y Combinator y firmas de Venture Capital. Desmonta la trampa de valoración de "gestora inmobiliaria" (1x–3x EBITDA) frente a "infraestructura SaaS" (15x–30x ARR), fundamenta el modelo asset-light con 80%+ de margen bruto, y explica por qué superamos las tres fallas de RWA 1.0 (gas fees de Ethereum, dogma de code-is-law y limbo regulatorio).
 
 ---

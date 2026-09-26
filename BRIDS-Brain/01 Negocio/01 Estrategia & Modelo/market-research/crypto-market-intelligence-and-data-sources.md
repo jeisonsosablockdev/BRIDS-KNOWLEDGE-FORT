@@ -200,7 +200,7 @@ A partir de la inteligencia extraída de **RWA.xyz**, **DefiLlama**, **RootData*
 #### 4. [Reental](https://www.reental.co)
 * **Link:** [https://www.reental.co](https://www.reental.co)
 * **Descripción:** Plataforma líder de tokenización inmobiliaria en España y Latinoamérica, operando sobre Polygon y BNB Chain. Ofrece rendimientos mensuales en USDT provenientes de rentas y plusvalías de reformas residenciales y vacacionales mediante contratos de **préstamos participativos** regulados por la CNMV.
-* **Por qué es relevante para BRIDS:** Es el principal referente de mercado en el público hispanohablante. La debilidad estructural de Reental es jurídica: sus usuarios **no son copropietarios del inmueble ni accionistas de una SPV**, sino simples prestamistas acreedores de la sociedad emisora. Si Reental quebrara, los usuarios entran en concurso de acreedores. BRIDS ofrece seguridad institucional real: cada inmueble está blindado en un SPV independiente (LLC segregada constituida en el estado de origen del activo) donde el inversor es dueño de su cuota societaria (*equity real*).
+* **Por qué es relevante para BRIDS:** Es el principal referente de mercado en el público hispanohablante. La debilidad estructural de Reental es jurídica: sus usuarios **no son copropietarios del inmueble ni accionistas de una SPV**, sino simples prestamistas acreedores de la sociedad emisora. Si Reental quebrara, los usuarios entran en concurso de acreedores. BRIDS ofrece seguridad institucional real: cada inmueble está blindado en un SPV independiente (Delaware Series LLC segregada) donde el inversor es dueño de su cuota societaria (*equity real*).
 
 #### 5. [MetaWealth](https://www.metawealth.co)
 * **Link:** [https://www.metawealth.co](https://www.metawealth.co)
@@ -210,7 +210,7 @@ A partir de la inteligencia extraída de **RWA.xyz**, **DefiLlama**, **RootData*
 #### 6. [Estate Protocol](https://estateprotocol.com)
 * **Link:** [https://estateprotocol.com](https://estateprotocol.com)
 * **Descripción:** Protocolo de tokenización inmobiliaria fraccionada enfocado en propiedades residenciales y comerciales en Dubai y mercados globales, permitiendo a usuarios internacionales recibir alquileres netos en stablecoins.
-* **Por qué es relevante para BRIDS:** Representa el auge de la tokenización de activos de alto rendimiento en Oriente Medio. Al igual que otros operadores en Dubai, carece del blindaje societario institucional bajo legislación corporativa estadounidense y SPVs locales que exigen los inversores de EE.UU. y globales.
+* **Por qué es relevante para BRIDS:** Representa el auge de la tokenización de activos de alto rendimiento en Oriente Medio. Al igual que otros operadores en Dubai, carece del blindaje societario institucional bajo legislación corporativa de Delaware (C-Corp + Delaware SPVs) que exigen los inversores de EE.UU. y globales.
 
 #### 7. [Subunit](https://www.subunit.xyz)
 * **Link:** [https://www.subunit.xyz](https://www.subunit.xyz)
@@ -272,7 +272,7 @@ A partir de la inteligencia extraída de **RWA.xyz**, **DefiLlama**, **RootData*
 #### 16. [Parcl](https://www.parcl.co)
 * **Link:** [https://www.parcl.co](https://www.parcl.co)
 * **Descripción:** Protocolo descentralizado construido en **Solana** que permite negociar índices sintéticos de precios inmobiliarios basados en el valor por pie cuadrado/metro cuadrado de ciudades globales (Nueva York, Miami, Londres, etc.).
-* **Por qué es relevante para BRIDS:** Parcl demostró la tremenda tracción y apetito que existe en la comunidad de Solana por la temática inmobiliaria (llegó a mover cientos de millones en TVL y volumen). La diferencia fundamental: **Parcl es un derivado sintético especulativo** (no posee casas ni paga dividendos por alquiler); **BRIDS es propiedad de activos físicos reales (equity & rentas en USDC)** respaldados por SPVs constituidos en el estado de origen de la propiedad. Parcl educa a los usuarios de Solana sobre bienes raíces y BRIDS les entrega el activo real subyacente.
+* **Por qué es relevante para BRIDS:** Parcl demostró la tremenda tracción y apetito que existe en la comunidad de Solana por la temática inmobiliaria (llegó a mover cientos de millones en TVL y volumen). La diferencia fundamental: **Parcl es un derivado sintético especulativo** (no posee casas ni paga dividendos por alquiler); **BRIDS es propiedad de activos físicos reales (equity & rentas en USDC)** respaldados por Delaware SPVs (Delaware Series LLC). Parcl educa a los usuarios de Solana sobre bienes raíces y BRIDS les entrega el activo real subyacente.
 
 #### 17. [Propy](https://propy.com)
 * **Link:** [https://propy.com](https://propy.com)

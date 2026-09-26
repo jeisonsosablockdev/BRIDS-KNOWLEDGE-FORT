@@ -71,7 +71,7 @@ En lugar de compartir un único multisig con subcuentas para todas las obras del
 
 ## 3. Cumplimiento de Texas Chapter 53: Doble Paso de Lien Waivers y 10% Retainage
 
-El sistema parametriza la lógica contractual según la jurisdicción del inmueble. Para proyectos en Texas, el protocolo aplica de forma no negociable el Capítulo 53 del Código de Propiedad de Texas (*Texas Property Code*).
+El sistema parametriza la lógica contractual de construcción según la ubicación física y leyes locales del inmueble. Para proyectos en Texas, el protocolo aplica de forma no negociable el Capítulo 53 del Código de Propiedad de Texas (*Texas Property Code*).
 
 ### A. Protocolo de Renuncia de Gravamen en Doble Paso (§ 53.284)
 * **Paso 1 - Conditional Waiver and Release on Progress Payment:**  

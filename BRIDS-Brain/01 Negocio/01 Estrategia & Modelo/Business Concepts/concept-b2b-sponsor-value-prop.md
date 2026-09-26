@@ -96,7 +96,7 @@ Para demostrar la robustez del modelo y proveer un historial comprobable (*track
 ## 5. Snippets Reutilizables (Ready-to-Cite)
 
 ### Snippet 5.1: Para Cold Email y Prospección Outbound a Desarrolladores
-> *"Hola [Nombre], vemos que están desarrollando [Nombre del Proyecto]. Muchos promotores pierden entre 3 y 5 meses y más de $50,000 dólares en estructuración legal persiguiendo inversionistas privados. En BRIDS les proporcionamos la infraestructura de software para digitalizar su sindicación en SPVs constituidos en la jurisdicción del inmueble, automatizar su cap table y cerrar rondas en semanas con tarifas de software transparentes. ¿Tendrías 15 minutos este jueves para ver cómo funciona el dashboard?"*
+> *"Hola [Nombre], vemos que están desarrollando [Nombre del Proyecto]. Muchos promotores pierden entre 3 y 5 meses y más de $50,000 dólares en estructuración legal persiguiendo inversionistas privados. En BRIDS les proporcionamos la infraestructura de software para digitalizar su sindicación en Delaware SPVs dedicados, automatizar su cap table y cerrar rondas en semanas con tarifas de software transparentes. ¿Tendrías 15 minutos este jueves para ver cómo funciona el dashboard?"*
 
 ### Snippet 5.2: Para One-Pager Institucional (Executive Summary B2B)
 > *"BRIDS.io no es un intermediario financiero ni compite con los desarrolladores inmobiliarios. Somos la capa de software que automatiza la sindicación privada: convertimos procesos burocráticos de meses en flujos digitales transparentes sobre la red de Solana, permitiendo a los promotores concentrarse en lo que mejor saben hacer: construir y generar valor inmobiliario."*

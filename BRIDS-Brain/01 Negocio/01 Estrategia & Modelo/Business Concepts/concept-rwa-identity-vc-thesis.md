@@ -36,7 +36,7 @@ tags:
 
 ## 1. One-Liner Canónico (Elevator Pitch para VCs)
 
-> *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $200 USD con títulos recuperables y respaldo societario formal en EE.UU. (Delaware C-Corp tecnológica y SPVs locales)."*
+> *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $200 USD con títulos recuperables y respaldo societario formal en EE.UU. (Delaware C-Corp tecnológica y Delaware SPVs)."*
 
 ---
 
@@ -81,11 +81,11 @@ La primera ola de tokenización inmobiliaria (2018–2021) falló en escalar ins
 
 ### 3.2. Dogma Inviable de "Code is Law" vs. Propiedad Real
 * **El fallo de RWA 1.0:** Si el inversor perdía su frase semilla o sufría un drenaje de billetera, perdía su derecho de propiedad de forma irreversible. Ningún inversor sensato ni regulador tolera que un patrimonio inmobiliario se esfume por un error tipográfico o pérdida de dispositivo.
-* **La solución BRIDS:** **Primatía del Master Securityholder File y Protocolo de Recuperación.** La titularidad jurídica reside en el registro legal de socios del SPV constituido en el estado de origen del inmueble. El NFT de Metaplex Core es la representación digital transferible. Si una billetera se compromete, el inversor revalida su identidad mediante Stripe Identity, el SPV ejecuta el plugin de autoridad on-chain, congela el activo vulnerado, lo quema y reemite el título al nuevo wallet autorizado.
+* **La solución BRIDS:** **Primatía del Master Securityholder File y Protocolo de Recuperación.** La titularidad jurídica reside en el registro legal de socios del Delaware SPV correspondiente al inmueble. El NFT de Metaplex Core es la representación digital transferible. Si una billetera se compromete, el inversor revalida su identidad mediante Stripe Identity, el SPV ejecuta el plugin de autoridad on-chain, congela el activo vulnerado, lo quema y reemite el título al nuevo wallet autorizado.
 
 ### 3.3. Confusión y Contagio Regulatorio
 * **El fallo de RWA 1.0:** Crear estructuras donde la plataforma capturaba dinero, custodiaba claves privadas o prometía rendimientos especulativos sin licenciamiento, catalogándose como broker-dealer no registrado.
-* **La solución BRIDS:** **Arquitectura Dual-Entity.** BRIDS Inc. (Delaware C-Corp) desarrolla y licencia software tecnológico sin custodia de fondos. Cada activo inmobiliario pertenece a un SPV independiente (LLC constituida en el estado de origen de la construcción: Florida, Texas, etc.) gestionado por sponsors inmobiliarios profesionales bajo exenciones Reg D 506(c) y Reg S.
+* **La solución BRIDS:** **Arquitectura Dual-Entity.** BRIDS Inc. (Delaware C-Corp) desarrolla y licencia software tecnológico sin custodia de fondos. Cada activo inmobiliario pertenece a un Delaware SPV independiente (Delaware Series LLC) gestionado por sponsors inmobiliarios profesionales bajo exenciones Reg D 506(c) y Reg S.
 
 ---
 
@@ -102,13 +102,13 @@ Cuando presentamos BRIDS a socios de fondos de inversión, estructuramos la opor
 ## 5. Snippets Reutilizables (Ready-to-Cite)
 
 ### Snippet 5.1: Para Slide de Categoría y Tesis en Pitch Decks (YC / VCs)
-> *"BRIDS no es una empresa inmobiliaria que compra casas: somos la infraestructura de software RWA en Solana que digitaliza la sindicación inmobiliaria institucional. Resolvemos la ecuación imposible de RWA 1.0 combinando costos subcéntimo en Solana, separación legal con Delaware C-Corp y SPVs en el estado de origen, y recuperación de títulos respaldada por verificación de identidad."*
+> *"BRIDS no es una empresa inmobiliaria que compra casas: somos la infraestructura de software RWA en Solana que digitaliza la sindicación inmobiliaria institucional. Resolvemos la ecuación imposible de RWA 1.0 combinando costos subcéntimo en Solana, separación legal con Delaware C-Corp y Delaware SPVs, y recuperación de títulos respaldada por verificación de identidad."*
 
 ### Snippet 5.2: Para Due Diligence Memo y Q&A con Inversionistas
-> *"¿Somos un producto cripto? Crypto es nuestro riel de compensación y liquidación, no nuestro modelo de negocio. Nuestro activo subyacente es finca raíz comercial y residencial en EE.UU. constituida en SPVs independientes en su estado de origen; nuestro negocio es software SaaS con márgenes brutos superiores al 80%. Operamos con la velocidad de Solana y el blindaje normativo de una Delaware C-Corp tecnológica y SPVs locales."*
+> *"¿Somos un producto cripto? Crypto es nuestro riel de compensación y liquidación, no nuestro modelo de negocio. Nuestro activo subyacente es finca raíz comercial y residencial en EE.UU. estructurada en Delaware SPVs independientes; nuestro negocio es software SaaS con márgenes brutos superiores al 80%. Operamos con la velocidad de Solana y el blindaje normativo de una Delaware C-Corp tecnológica y Delaware SPVs."*
 
 ### Snippet 5.3: Para Liderazgo de Pensamiento del Fundador (Founder Voice)
-> *"El error de la primera ola de tokenización inmobiliaria fue confundir la ideología libertaria con la ingeniería financiera práctica. No puedes construir el futuro de las inversiones sobre redes lentas de $30 dólares por transacción ni exigirle a una familia que acepte perder su patrimonio si olvida 12 palabras. En BRIDS usamos Solana y Metaplex Core para abaratar costos a centavos, y anclamos cada título digital al registro societario del SPV en su estado de origen para que la ley del mundo real proteja tu capital."*
+> *"El error de la primera ola de tokenización inmobiliaria fue confundir la ideología libertaria con la ingeniería financiera práctica. No puedes construir el futuro de las inversiones sobre redes lentas de $30 dólares por transacción ni exigirle a una familia que acepte perder su patrimonio si olvida 12 palabras. En BRIDS usamos Solana y Metaplex Core para abaratar costos a centavos, y anclamos cada título digital al registro societario del Delaware SPV para que la ley del mundo real proteja tu capital."*
 
 ---
 

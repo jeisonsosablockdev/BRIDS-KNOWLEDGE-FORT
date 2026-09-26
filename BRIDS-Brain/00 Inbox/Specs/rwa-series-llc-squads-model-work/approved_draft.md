@@ -105,7 +105,7 @@ Para optimizar costos de registro, protección de pasivos y reconocimiento judic
 
 ### Estrategia de Activos en Estados Sin Legislación de Series LLC (ej. Florida)
 Cuando un sponsor adquiere un inmueble en estados como Florida o Georgia (donde no existe estatuto propio de Series LLC):
-1. **Ruta A (Foreign Qualification de la Serie):** Se registra la Serie específica (ej. *BRIDS Assets Master LLC - Series FL-101*) como entidad foránea autorizada para hacer negocios en el estado donde radica el inmueble.
+1. **Ruta A (Foreign Qualification de la Serie):** Se registra la Serie específica (ej. *BRIDS Assets Master LLC - Series FL-101*) como entidad foránea autorizada para hacer negocios en el estado de ubicación física del inmueble.
 2. **Ruta B (Subsidiaria de Propósito Específico 100%):** La Serie específica constituye una LLC tradicional local de Florida, de la cual la Serie es propietaria del 100% de las participaciones. Esto traslada el título de propiedad a la LLC local mientras los derechos económicos y la gobernanza de inversionistas se mantienen bajo el escudo de la Serie LLC.
 
 ---

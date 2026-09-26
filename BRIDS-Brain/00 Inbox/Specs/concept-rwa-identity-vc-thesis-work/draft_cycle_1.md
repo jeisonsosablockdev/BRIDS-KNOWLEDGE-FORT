@@ -28,7 +28,7 @@ tags:
 
 ## 1. One-Liner Canónico (Elevator Pitch para VCs)
 
-> *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $100 USD con títulos recuperables y respaldo societario formal en EE.UU. (Delaware C-Corp tecnológica y SPVs locales)."*
+> *"BRIDS es el Stripe + Carta para Real World Assets: la infraestructura de software sobre Solana que permite a desarrolladores sindicar capital y a inversores retail adquirir participaciones inmobiliarias en EE.UU. desde $100 USD con títulos recuperables y respaldo societario formal en EE.UU. (Delaware C-Corp tecnológica y Delaware SPVs)."*
 
 ---
 
