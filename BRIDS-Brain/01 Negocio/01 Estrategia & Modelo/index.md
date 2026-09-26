@@ -31,6 +31,7 @@ Este directorio alberga la **tesis fundacional, los conceptos nucleares de token
 
 ## 📊 Investigación de Mercado & Benchmarks (Market Research)
 
+- [[01 Negocio/01 Estrategia & Modelo/market-research/research-costos-sindicacion-y-plataformas-benchmark.md|Market Research: Costos Reales de Sindicación Inmobiliaria & Benchmark de Plataformas (SaaS, Marketplaces y Tokenización)]]
 - [[01 Negocio/01 Estrategia & Modelo/market-research/rwa-real-estate-competitor-benchmark.md|Benchmark Competitivo Global: Ecosistema Real Estate RWA y Foso Defensivo de BRIDS]]
 - [[01 Negocio/01 Estrategia & Modelo/market-research/crypto-market-intelligence-and-data-sources.md|Índice Maestro de Fuentes y Analítica Cripto (Market Intelligence & Data Sources)]]
 - [[01 Negocio/01 Estrategia & Modelo/market-research/research-uae-dubai-tokenization-benchmarks.md|Investigación de Mercado: Tokenización en Dubai, Regulación EAU y Ventaja de Solana (TLP Advisors)]]
