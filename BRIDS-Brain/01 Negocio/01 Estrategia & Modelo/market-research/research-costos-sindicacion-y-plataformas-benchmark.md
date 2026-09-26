@@ -19,6 +19,9 @@ tags:
 
 > [!NOTE] Propósito del Documento
 > Investigación de mercado exhaustiva sobre los **costos reales y tarifas** que asume un promotor o desarrollador inmobiliario (Sponsor / GP) para sindicar capital en Estados Unidos, junto con un **benchmark comparativo de tarifas y plataformas** (software de gestión de inversionistas, marketplaces de capital y plataformas de tokenización digital), con enlaces y fuentes verificables a blogs legales y páginas comerciales.
+>
+> 🔗 **Documento Específico de Tarifas a Promotores (B2B):** Para la comparativa detallada y la matriz exhaustiva de cuánto le cobran todos los competidores al sponsor inmobiliario, consulta:  
+> 📄 [[01 Negocio/01 Estrategia & Modelo/market-research/b2b-sponsor-fee-benchmark.md|B2B Sponsor Fee Benchmark: Comparativa de Tarifas a Promotores Inmobiliarios]]
 
 ---
 
