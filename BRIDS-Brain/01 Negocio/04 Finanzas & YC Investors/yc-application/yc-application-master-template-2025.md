@@ -50,18 +50,18 @@ tags:
 
 Antes de enviar el formulario a Y Combinator Partners, validamos el cumplimiento de los 10 criterios de preparación identificados por la guía de admisiones:
 
-| Criterio de Preparación | Estado BRIDS | Justificación Verificable & Estado de Seguimiento |
-| :--- | :---: | :--- |
-| **1. One-liner claro y directo** | ⏳ EN REVISIÓN | *"Shopify for real estate syndication on Solana."* En revisión para asegurar contundencia máxima y cero clichés antes del envío final. |
-| **2. Prototipo funcional testeable** | 🛠️ EN AJUSTE (UI/UX) | Contratos inteligentes y backend desplegados en Solana Devnet; actualmente en ciclo de ajuste de UI/UX para optimizar el flujo de usuario y checkout. |
-| **3. Tracción o validación real** | ⏳ PENDIENTE (LOIs) | Pipeline de \$2,000,000 USD identificado para Día 1 (Blue Brick Capital); **falta conseguir y formalizar las cartas de entendimiento (LOIs)** firmadas. |
-| **4. Conversaciones con usuarios** | ⏳ PENDIENTE (DOCS) | 3 promotores inmobiliarios externos entrevistados evaluando costos de capital; **falta adjuntar y consolidar los documentos y minutas de las conversaciones**. |
-| **5. Conocimiento de competidores** | 🔍 EN PROFUNDIZACIÓN | Mapeo preliminar listo (Lofty, RealT, Blocksquare); **en proceso de profundizar en la matriz comparativa** de comisiones, fricciones y modelo regulatorio. |
-| **6. Compromiso de dedicación** | ✅ SÍ | Compromiso confirmado del equipo para transición 100% full-time al momento de recibir la admisión al batch de YC. |
-| **7. Articulación clara de roles** | ✅ SÍ (LEGAL TERCERIZADO) | Roles complementarios: Tech 1 (Producto, UI/UX & iOS Nativo), Tech 2 (Solana, Rust & Backend Infra), Inmobiliario (Deals & Sponsors Blue Brick Capital). Cumplimiento legal/regulatorio formalmente tercerizado con firma especializada en EE.UU. |
-| **8. Insight de iteraciones previas** | 🏗️ POR CONSTRUIRSE | Validado que el inversor retail rechaza el riesgo de perder fondos por llaves privadas; **el módulo técnico de Freeze/Recovery asistido está diseñado y por construirse**. |
-| **9. Claridad de "Why Now"** | ✅ SÍ (APETITO RWA) | Respaldado por el **apetito y crecimiento explosivo del mercado de RWAs** (proyección a \$16T para 2030), sumado a tarifas sub-centavo de Solana y tasas de interés hipotecarias al 7%. |
-| **10. Video de 1 minuto auténtico** | ⏳ POR HACERSE | Guion de 60 segundos estructurado y medido; **grabación pendiente por realizarse** entre los cofundadores. |
+| Criterio de Preparación               |       Estado BRIDS       | Justificación Verificable & Estado de Seguimiento                                                                                                                                                                                                 |
+| :------------------------------------ | :----------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. One-liner claro y directo**      |      ⏳ EN REVISIÓN       | Shortlist de 4 finalistas seleccionadas (sin jerga cripto ni mención a Solana) guardadas para decisión final del equipo.                                                                                                                          |
+| **2. Prototipo funcional testeable**  |  🛠️ EN AJUSTE (UI/UX)   | Contratos inteligentes y backend desplegados en Solana Devnet; actualmente en ciclo de ajuste de UI/UX para optimizar el flujo de usuario y checkout.                                                                                             |
+| **3. Tracción o validación real**     |    ⏳ PENDIENTE (LOIs)    | Pipeline de \$2,000,000 USD identificado para Día 1 (Blue Brick Capital); **falta conseguir y formalizar las cartas de entendimiento (LOIs)** firmadas.                                                                                           |
+| **4. Conversaciones con usuarios**    |    ⏳ PENDIENTE (DOCS)    | 3 promotores inmobiliarios externos entrevistados evaluando costos de capital; **falta adjuntar y consolidar los documentos y minutas de las conversaciones**.                                                                                    |
+| **5. Conocimiento de competidores**   |   🔍 EN PROFUNDIZACIÓN   | Mapeo preliminar listo (Lofty, RealT, Blocksquare); **en proceso de profundizar en la matriz comparativa** de comisiones, fricciones y modelo regulatorio.                                                                                        |
+| **6. Compromiso de dedicación**       |           ✅ SÍ           | Compromiso confirmado del equipo para transición 100% full-time al momento de recibir la admisión al batch de YC.                                                                                                                                 |
+| **7. Articulación clara de roles**    | ✅ SÍ (LEGAL TERCERIZADO) | Roles complementarios: Tech 1 (Producto, UI/UX & iOS Nativo), Tech 2 (Solana, Rust & Backend Infra), Inmobiliario (Deals & Sponsors Blue Brick Capital). Cumplimiento legal/regulatorio formalmente tercerizado con firma especializada en EE.UU. |
+| **8. Insight de iteraciones previas** |   🏗️ POR CONSTRUIRSE    | Validado que el inversor retail rechaza el riesgo de perder fondos por llaves privadas; **el módulo técnico de Freeze/Recovery asistido está diseñado y por construirse**.                                                                        |
+| **9. Claridad de "Why Now"**          |    ✅ SÍ (APETITO RWA)    | Respaldado por el **apetito y crecimiento explosivo del mercado de RWAs** (proyección a \$16T para 2030), sumado a tarifas sub-centavo de Solana y tasas de interés hipotecarias al 7%.                                                           |
+| **10. Video de 1 minuto auténtico**   |      ⏳ POR HACERSE       | Guion de 60 segundos estructurado y medido; **grabación pendiente por realizarse** entre los cofundadores.                                                                                                                                        |
 
 ---
 
@@ -72,9 +72,12 @@ Antes de enviar el formulario a Y Combinator Partners, validamos el cumplimiento
 * **Company URL:** https://brids.io
 
 ### Describe what your company does in 50 characters or less (English)
-> `[ESTADO: EN REVISIÓN — Propuesta base]`
-> `Shopify for real estate syndication on Solana.`
-*(47 caracteres con espacios — En iteración para evaluar variantes: ej. "Real estate syndication software on Solana" vs "Shopify for real estate syndication on Solana")*
+> `[ESTADO: ⏳ EN REVISIÓN — 4 Finalistas preseleccionadas sin jerga cripto para decisión del equipo]`
+>
+> 1. `"The operating system for real estate syndication."` *(49 caracteres)* — Posicionamiento de plataforma integral end-to-end.
+> 2. `"Infrastructure for real estate syndication."` *(43 caracteres)* — Enfoque B2B institucional, sobrio y minimalista.
+> 3. `"The modern rail for real estate syndication."` *(43 caracteres)* — Tono de infraestructura FinTech ágil (estilo Stripe / Plaid).
+> 4. `"Shopify for real estate syndication."` *(37 caracteres)* — Analogía de distribución y software llave en mano para sponsors.
 
 ### What is your company going to make? (1-2 sentences)
 > We build SaaS infrastructure on Solana that allows real estate developers to syndicate residential properties directly to retail investors from \$200 USD per fraction, legally anchored by Delaware SPVs and protected against private key loss via Stripe Identity and Metaplex Core.
