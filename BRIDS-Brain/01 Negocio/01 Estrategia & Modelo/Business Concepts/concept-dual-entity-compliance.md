@@ -23,13 +23,13 @@ tags:
 # C1: Estructuración Dual-Entity y Blindaje Non-Broker-Dealer
 
 > [!NOTE] Resumen Ejecutivo
-> BRIDS.io opera bajo una estricta separación institucional de entidades: **BRIDS Inc. (Delaware C-Corp)** actúa exclusivamente como proveedor de software e infraestructura tecnológica, mientras que cada proyecto inmobiliario es adquirido y administrado por una **Sociedad de Propósito Especial independiente (LLC constituida en la jurisdicción correspondiente a cada inmueble, ej. Florida, Texas, Delaware, etc.)**. Este diseño garantiza que BRIDS no califique como broker-dealer, portal de financiamiento fiduciario ni asesor de inversión bajo la Sección 15(a)(1) del Securities Exchange Act de 1934, blindando la escalabilidad del negocio frente a contingencias regulatorias.
+> BRIDS.io opera bajo una estricta separación institucional de entidades: **BRIDS Inc. (Delaware C-Corp)** actúa exclusivamente como proveedor de software e infraestructura tecnológica, mientras que cada proyecto inmobiliario es adquirido y administrado por una **Sociedad de Propósito Especial independiente (Delaware Series LLC / SPV)**. Este diseño garantiza que BRIDS no califique como broker-dealer, portal de financiamiento fiduciario ni asesor de inversión bajo la Sección 15(a)(1) del Securities Exchange Act de 1934, blindando la escalabilidad del negocio frente a contingencias regulatorias.
 
 ---
 
 ## 1. One-Liner Canónico (Pitch & Website)
 
-> *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente constituido en la jurisdicción del inmueble."*
+> *"BRIDS es el proveedor de software e infraestructura en Solana que digitaliza la sindicación inmobiliaria; no custodiamos fondos ni intermediamos valores, cada propiedad pertenece a un SPV legal independiente en Delaware."*
 
 ---
 
@@ -94,9 +94,9 @@ flowchart TD
 
 | Dimensión | Plataformas Cripto Sin Regulación | Crowdfunding Tradicional Web2 | Estructuración Dual-Entity BRIDS |
 | :--- | :--- | :--- | :--- |
-| **Entidad Emisora** | DAO anónima o token sin respaldo legal | Plataforma centralizada con licencias locales rígidas | **SPV LLC dedicada en la jurisdicción del activo** |
+| **Entidad Emisora** | DAO anónima o token sin respaldo legal | Plataforma centralizada con licencias locales rígidas | **Delaware SPV LLC dedicada por propiedad** |
 | **Rol de la Plataforma** | Especulación sin registro de socios | Intermediario financiero fiduciario | **Proveedor de software SaaS e infraestructura** |
-| **Libro de Socios** | Ledger on-chain sin personería jurídica | Base de datos privada analógica | **Master Securityholder File respaldado por la LLC del SPV** |
+| **Libro de Socios** | Ledger on-chain sin personería jurídica | Base de datos privada analógica | **Master Securityholder File respaldado por la LLC del SPV en Delaware** |
 | **Riesgo Regulatorio** | Alto (Sanciones SEC, freeze de tokens) | Alto costo operativo y licencias por país | **Protegido por separación de funciones y software puro** |
 
 ---
@@ -104,16 +104,16 @@ flowchart TD
 ## 5. Snippets Reutilizables (Ready-to-Cite)
 
 ### Snippet 5.1: Para Pitch Decks y Preguntas de Inversionistas (YC Q&A)
-> *"BRIDS.io opera bajo un modelo puro de infraestructura de software constituido como Delaware C-Corp. Cada activo inmobiliario reside en un SPV independiente constituido en la jurisdicción correspondiente a cada desarrollo inmobiliario (Florida, Texas, Delaware, etc.), operado por desarrolladores calificados. Nosotros no somos broker-dealers ni ejercemos custodia fiduciaria: cobramos licenciamiento SaaS y tarifas de infraestructura técnica por habilitar la sindicación automatizada en Solana."*
+> *"BRIDS.io opera bajo un modelo puro de infraestructura de software constituido como Delaware C-Corp. Cada activo inmobiliario reside en un SPV independiente bajo la legislación de Delaware (Delaware Series LLC), operado por desarrolladores calificados. Nosotros no somos broker-dealers ni ejercemos custodia fiduciaria: cobramos licenciamiento SaaS y tarifas de infraestructura técnica por habilitar la sindicación automatizada en Solana."*
 
 ### Snippet 5.2: Para Términos Legales, Footer y Documentos Públicos
-> *"BRIDS.io es una plataforma de software e infraestructura tecnológica desarrollada en la red de Solana. BRIDS.io no es un corredor de bolsa (broker-dealer), portal de financiamiento regulado ni asesor de inversiones. Los activos inmobiliarios fraccionados son emitidos por Sociedades de Propósito Especial (SPVs) independientes bajo las leyes aplicables de EE.UU."*
+> *"BRIDS.io es una plataforma de software e infraestructura tecnológica desarrollada en la red de Solana. BRIDS.io no es un corredor de bolsa (broker-dealer), portal de financiamiento regulado ni asesor de inversiones. Los activos inmobiliarios fraccionados son emitidos por Sociedades de Propósito Especial (SPVs) independientes bajo las leyes aplicables de Delaware, EE.UU."*
 
 ---
 
 ## 6. Directrices Léxicas (Do's & Don'ts)
 
-- **Obligatorio Usar:** Infraestructura de software, plataforma tecnológica, SPV independiente por inmueble (LLC local), representación digital de participaciones, Master Securityholder File, proveedor tecnológico independiente, Delaware C-Corp (BRIDS Inc.).
+- **Obligatorio Usar:** Infraestructura de software, plataforma tecnológica, Delaware SPV dedicado, Delaware Series LLC, representación digital de participaciones, Master Securityholder File, proveedor tecnológico independiente, Delaware C-Corp (BRIDS Inc.).
 - **Prohibido Terminantemente:** Broker-dealer, captación de ahorros, custodia de fondos de clientes, comisión de venta de acciones, fondo de inversión colectivo propio.
 
 ---

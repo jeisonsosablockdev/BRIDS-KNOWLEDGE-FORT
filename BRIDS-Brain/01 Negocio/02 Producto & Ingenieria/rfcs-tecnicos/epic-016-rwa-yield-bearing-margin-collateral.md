@@ -62,7 +62,7 @@ sequenceDiagram
     actor Alice as Inversora (Alice)
     participant Vault as Bóveda B2B / Protocolo Margen
     participant AMM as Motor de Trading / AMM
-    participant SPV as SPV LLC (Estado de Origen)
+    participant SPV as Delaware SPV (Delaware Series LLC)
 
     Note over Alice,SPV: Caso Alice: Trade Exitoso (Doble Retorno)
     Alice->>Vault: Deposita NFT Fix & Flip ($200 USD nominal)
@@ -118,7 +118,7 @@ flowchart TD
     Check -- "NO (Vence Gracia)" --> Route{"¿El trader cierra voluntariamente?"}
     
     Route -- "Cierra posición" --> Waterfall["Liquidación en Cascada (Waterfall Lien)"]
-    Waterfall --> Hook["Hook de Gravamen en SPV (Estado de Origen)"]
+    Waterfall --> Hook["Hook de Gravamen en Delaware SPV"]
     Hook --> Settlement["Al venderse la casa física ($224):<br/>- Protocolo cobra $30 deuda + $4 fee<br/>- Bob recibe $190 USDC en su billetera"]
     
     Route -- "Pérdida catastrófica (> 80%)" --> ForcedConfiscation["Liquidación Forzosa Total"]
@@ -188,7 +188,7 @@ flowchart LR
 ### La Tesis del "Capital Paciente": ¿Quién asume el *hold* y por qué?
 El *hold* de 6 a 12 meses es asumido por **Fondos de Crédito Privado Institucional (tipo Maple Finance, Clearpool) y Family Offices**:
 * Estos actores **no buscan hacer trading diario**: buscan rentabilidad predecible y segura en dólares.
-* Al comprar el NFT liquidado de Bob a **\$184 USDC** y esperar 6 meses a que la propiedad se liquide en **\$224 USDC**, obtienen un **rendimiento bruto del 21.7% en 6 meses (equivalente a más de un 40% APY anualizado)** respaldado por una hipoteca real en el estado de origen del inmueble.
+* Al comprar el NFT liquidado de Bob a **\$184 USDC** y esperar 6 meses a que la propiedad se liquide en **\$224 USDC**, obtienen un **rendimiento bruto del 21.7% en 6 meses (equivalente a más de un 40% APY anualizado)** respaldado por una hipoteca real a nombre del Delaware SPV titular del inmueble.
 * Es una operación de arbitraje de liquidez donde todos ganan: el AMM queda solvente en 400 milisegundos, Bob recupera su excedente y el capital paciente maximiza su rendimiento.
 
 ---
@@ -199,9 +199,9 @@ Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen ca
 
 | Vector de Ataque | Mecánica del Exploit Intentado | Contramedida Técnica y Legal de BRIDS |
 | :--- | :--- | :--- |
-| **1. Ataque de Inflación de Tasación (*Appraisal Inflation Attack*)** | Un promotor o usuario coludido con un perito infla artificialmente la valuación de una casa en ruinas a \$500,000 USD, mintea NFTs, extrae \$375,000 USDC en margen de trading y abandona las posiciones para quedarse con el dinero prestado. | **Anclaje en Costo Real de Adquisición + Doble Oráculo:** El LTV de margen **NUNCA** se calcula sobre la plusvalía proyectada futura, sino estrictamente sobre el **precio de compra real escriturado en la escritura pública de compraventa registrada en el estado de origen de la propiedad**. Además, se exige doble certificación pericial independiente auditada por el Sponsor B2B antes de habilitar el activo en la bóveda de margen. |
-| **2. Ataque de Retraso de Obra y Costo de Acarreo (*Duration Extension Exploit*)** | La obra de remodelación se estanca o retrasa 18 meses adicionales. El trader mantiene su margen abierto a costo cero mientras el AMM sufre iliquidez prolongada. | **Tasa de Acarreo Flotante (*Dynamic Carry Interest Rate*):** El uso del NFT como margen devenga una tasa de interés continua amortizable contra las rentas o plusvalías del SPV. Si el proyecto supera el cronograma estipulado en el prospecto del SPV en su estado de origen, la tasa de penalización escala dinámicamente, incentivando al trader a liquidar o reponer el margen. |
-| **3. Cisne Negro Inmobiliario (*Underlying Physical Asset Destruction*)** | La casa sufre un incendio total, defecto estructural oculto o siniestro no previsto, reduciendo el valor del inmueble de \$200 a \$80 USD mientras el usuario tiene \$150 USDC de margen abierto. | **Póliza *Builder's Risk* Obligatoria + Tramo de Primera Pérdida (*First-Loss Capital*):** Cada SPV en su estado de origen tiene como requisito estatutario una póliza de seguro de construcción a todo riesgo con beneficiario preferente al SPV. Además, los Sponsors B2B deben aportar un tramo de capital subordinado (10%-15%) que absorbe las primeras pérdidas antes de que el valor del NFT retail se degrade. |
+| **1. Ataque de Inflación de Tasación (*Appraisal Inflation Attack*)** | Un promotor o usuario coludido con un perito infla artificialmente la valuación de una casa en ruinas a \$500,000 USD, mintea NFTs, extrae \$375,000 USDC en margen de trading y abandona las posiciones para quedarse con el dinero prestado. | **Anclaje en Costo Real de Adquisición + Doble Oráculo:** El LTV de margen **NUNCA** se calcula sobre la plusvalía proyectada futura, sino estrictamente sobre el **precio de compra real escriturado en la escritura pública de compraventa registrada ante el condado (County Deed Records)**. Además, se exige doble certificación pericial independiente auditada por el Sponsor B2B antes de habilitar el activo en la bóveda de margen. |
+| **2. Ataque de Retraso de Obra y Costo de Acarreo (*Duration Extension Exploit*)** | La obra de remodelación se estanca o retrasa 18 meses adicionales. El trader mantiene su margen abierto a costo cero mientras el AMM sufre iliquidez prolongada. | **Tasa de Acarreo Flotante (*Dynamic Carry Interest Rate*):** El uso del NFT como margen devenga una tasa de interés continua amortizable contra las rentas o plusvalías del SPV. Si el proyecto supera el cronograma estipulado en el acuerdo operativo del Delaware SPV, la tasa de penalización escala dinámicamente, incentivando al trader a liquidar o reponer el margen. |
+| **3. Cisne Negro Inmobiliario (*Underlying Physical Asset Destruction*)** | La casa sufre un incendio total, defecto estructural oculto o siniestro no previsto, reduciendo el valor del inmueble de \$200 a \$80 USD mientras el usuario tiene \$150 USDC de margen abierto. | **Póliza *Builder's Risk* Obligatoria + Tramo de Primera Pérdida (*First-Loss Capital*):** Cada Delaware SPV tiene como requisito estatutario una póliza de seguro de construcción a todo riesgo con beneficiario preferente al SPV. Además, los Sponsors B2B deben aportar un tramo de capital subordinado (10%-15%) que absorbe las primeras pérdidas antes de que el valor del NFT retail se degrade. |
 | **4. Colusión de Liquidación en Pares Ilíquidos (*Wash Liquidation Attack*)** | El atacante usa una cuenta A (con el NFT) y una cuenta B (con USDC en un par sin liquidez). Manipula el precio artificialmente en un bloque para que la cuenta B gane y la cuenta A sea liquidada intencionalmente, extrayendo USDC del fondo Backstop. | **Confinamiento de Pares de Margen a Alta Liquidez:** El margen respaldado por NFTs de BRIDS **SOLO** se puede utilizar para operar contra pares institucionales ultra-líquidos (SOL/USDC, BTC/USDC) con oráculos de precios de baja latencia con tolerancia de desvío (*Pyth Confidence Intervals*). Queda estrictamente prohibido usar el margen en tokens de baja capitalización o pools internos manipulables. |
 
 ---
@@ -214,7 +214,7 @@ Para que los proveedores de liquidez (LPs) y los oficiales de riesgo confíen ca
 | **Plugin de Autoridad** | `Authority / Lifecycle Hook` | Habilita la transferencia forzosa del NFT en caso de liquidación sin intervención manual. |
 | **Plugin de Transferencia** | `Transfer Hook` | Restringe el traspaso del colateral exclusivamente a billeteras con KYC validado por Stripe Identity. |
 | **Bóveda de Almacén** | *Warehouse Facility Escrow* | Contrato que provisiona liquidez instantánea en USDC al AMM al recibir un NFT confiscado. |
-| **Oráculo de Tasación** | Oráculo Registral del Estado de Origen | Lee el precio de adquisición de la escritura pública legalmente registrada en EE.UU. |
+| **Oráculo de Tasación** | Oráculo Registral Inmobiliario (County Deed Records) | Lee el precio de adquisición de la escritura pública legalmente registrada en EE.UU. |
 | **Gobernanza de Tesorería** | Squads Multi-Sig v4 | Administra los desembolsos de la Warehouse Facility y la custodia de títulos en hold largo. |
 
 ---
@@ -240,6 +240,6 @@ Esta propuesta ampliada constituye la base de modelado de riesgo para el Roadmap
 
 
 ## 🔄 Historial de Revisiones (Changelog)
-- **v1.2 (2026-09-13):** Desacoplamiento de jurisdicción de SPVs: el gravamen y liquidación hipotecaria operan sobre el SPV LLC en el estado de origen de la propiedad.
+- **v1.2 (2026-09-13):** Alineación Dual-Entity canónica: el gravamen y liquidación hipotecaria operan sobre el Delaware SPV (Delaware Series LLC) titular del inmueble.
 - **v1.1 (2026-09-13):** Escalar casos de estudio y ejemplos numéricos al ticket nominal canónico de $200 USD.
 - **v1.0 (2026-09-13):** Aprobado por el usuario e integrado en el vault tras 3 ciclos de optimización con nota de 9/9.0.

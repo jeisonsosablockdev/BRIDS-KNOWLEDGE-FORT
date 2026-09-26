@@ -250,7 +250,7 @@ tags:
 #### 2. Sweeps de Refinamiento (`/copy-editing`):
 - **Sweep 1 (Clarity):** Corregido el vocabulario impreciso: no es "contraseña", es "llave privada"; no "devolvemos tokens", se trata de un protocolo de reemisión y conciliación contra el libro legal de socios del SPV.
 - **Sweep 2 (Voice & Tone):** Elevar el estándar de seguridad: de "no tengas miedo" a "arquitectura institucional con respaldo jurídico".
-- **Sweep 3 (So What?):** El inversor duerme tranquilo sabiendo que su inversión está registrada legalmente en el estado de origen del inmueble (Florida, Texas, etc.), no solo en un ledger anónimo.
+- **Sweep 3 (So What?):** El inversor duerme tranquilo sabiendo que su inversión está registrada legalmente en un Delaware SPV dedicado, no solo en un ledger anónimo.
 - **Sweep 4 (Prove It):** Especificación técnica del protocolo: Stripe Identity (re-verificación biométrica) + Metaplex Core (Freeze & Recovery plugins) + Master Securityholder File del SPV.
 - **Sweep 5 (Specificity):** Entrada accesible (\$100 USD) combinada con protocolo institucional de nivel corporativo.
 - **Sweep 6 (Heightened Emotion):** De la ansiedad a la certeza jurídica total.
@@ -342,7 +342,7 @@ tags:
 - **Sweep 1 (Clarity):** Reemplazada la retórica vacía ("somos pioneros", "revoluciona") por la definición operativa: infraestructura de software que liquida activos tangibles en segundos.
 - **Sweep 2 (Voice & Tone):** Estilo YC Founder: sobrio, hiper-enfocado en unit economics, velocidad y reducción drástica de fricción.
 - **Sweep 3 (So What?):** ¿Qué gana el usuario? Eliminar semanas de fricción para entrar a bienes raíces en EE.UU. en menos de 3 minutos con $100 USD.
-- **Sweep 4 (Prove It):** Destacar el modelo SaaS puro (sin comisiones fiduciarias ocultas), dashboards on-chain públicos y cumplimiento Delaware C-Corp vs SPVs locales.
+- **Sweep 4 (Prove It):** Destacar el modelo SaaS puro (sin comisiones fiduciarias ocultas), dashboards on-chain públicos y cumplimiento Delaware C-Corp vs Delaware SPVs.
 - **Sweep 5 (Specificity):** Inversión desde $100 USD, costo de red <$0.001, proceso 100% digital.
 - **Sweep 6 (Heightened Emotion):** Sensación de participar en la vanguardia de la infraestructura financiera global.
 - **Sweep 7 (Zero Risk):** Declaración explícita de separación técnica: BRIDS es software, el SPV es el emisor legal.

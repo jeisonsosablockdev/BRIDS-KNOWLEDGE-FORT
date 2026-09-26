@@ -30,7 +30,7 @@ tags:
 > **Sub-Agentes Autores:** `market-research-analyst`, `business-consultant`, `pitch-deck-architect` | **Revisor:** `sdd-reviewer`
 
 > [!NOTE] Resumen Ejecutivo
-> El mercado de tokenización de bienes raíces (Real Estate RWA) ha transitado por tres generaciones tecnológicas y regulatorias. Mientras que los pioneros de la primera ola (RealT, Lofty AI, Blocksquare) quedaron limitados por los altos costos de gas en redes EVM, fragmentación de liquidez y la ausencia de salvaguardas legales ante pérdida de llaves privadas, los actores institucionales (Securitize, Roofstock) se enfocaron exclusivamente en grandes transacciones mayoristas o compras de viviendas completas. BRIDS.io consolida la categoría **Infraestructura de Software RWA en Solana**, combinando fraccionamiento retail desde $200 USD, costos transaccionales subcéntimo con Metaplex Core, estricta separación dual-entity (Delaware C-Corp tecnológica vs SPVs en su estado de origen) y un protocolo nativo de recuperación mediante verificación de identidad.
+> El mercado de tokenización de bienes raíces (Real Estate RWA) ha transitado por tres generaciones tecnológicas y regulatorias. Mientras que los pioneros de la primera ola (RealT, Lofty AI, Blocksquare) quedaron limitados por los altos costos de gas en redes EVM, fragmentación de liquidez y la ausencia de salvaguardas legales ante pérdida de llaves privadas, los actores institucionales (Securitize, Roofstock) se enfocaron exclusivamente en grandes transacciones mayoristas o compras de viviendas completas. BRIDS.io consolida la categoría **Infraestructura de Software RWA en Solana**, combinando fraccionamiento retail desde $200 USD, costos transaccionales subcéntimo con Metaplex Core, estricta separación dual-entity (Delaware C-Corp tecnológica vs Delaware SPVs) y un protocolo nativo de recuperación mediante verificación de identidad.
 
 ---
 
@@ -140,7 +140,7 @@ graph TD
 | **Red Blockchain** | Gnosis / ETH | Algorand | Ethereum / Polygon | Polygon / BNB | Permisionada VARA | **Solana (Metaplex Core)** |
 | **Costo por Transacción** | $0.05 – $2.50 USD | ~$0.001 USD | $5.00 – $35.00 USD | $0.03 – $0.15 USD | N/A (Interno) | **<$0.0005 USD (Subcéntimo)** |
 | **Ticket Mínimo** | ~$50 USD | $50 USD | $10,000 – $100,000+ | $100 EUR | Variable (~$1k+) | **$200 USD** |
-| **Vehículo Legal** | Delaware LLC | Delaware LLC | Delaware SPV / Reg D | Préstamo Participativo | VARA ARVA Cat. 1 | **SPV LLC (Estado de Origen)** |
+| **Vehículo Legal** | Delaware LLC | Delaware LLC | Delaware SPV / Reg D | Préstamo Participativo | VARA ARVA Cat. 1 | **Delaware SPV LLC** |
 | **Modelo Societario** | Copropiedad accionaria | Copropiedad accionaria | Fondo Institucional | Deuda subordinada | Título Catastral | **Master Securityholder File** |
 | **Protocolo de Recuperación** | Inexistente | Soporte Web2 manual | KYC Tradicional | Base de datos privada | Proceso notarial local | **Stripe Identity + Freeze/Authority Hook** |
 | **Composabilidad / Mercado** | Uniswap v2 / Gnosis | Silo Algorand | ATS permisionado | Plataforma cerrada | Silo cerrado | **Liquidación programática en Solana** |

@@ -99,5 +99,5 @@ Descubre cómo la infraestructura de BRIDS en Solana permite tokenizar activos i
 
 ## 🔗 Referencias Cruzadas
 - Infraestructura RWA: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md]]
-- Cumplimiento Dual-Entity (Delaware C-Corp vs SPVs Locales): [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]
+- Cumplimiento Dual Delaware SPV: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]
 - Propuesta de Valor Sponsors: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md]]
