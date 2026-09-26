@@ -1,0 +1,653 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% ═══════════════════════════════════════════════════════════════════════════
+% 🏛️ BRIDS KNOWLEDGE FORT - INSTITUTIONAL LATEX TEMPLATE HEADER (v2.0)
+% ═══════════════════════════════════════════════════════════════════════════
+
+\usepackage{fontspec}
+\setmainfont{Helvetica}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  margin=2.0cm,
+  top=2.7cm,
+  bottom=2.4cm,
+  headheight=32pt,
+  headsep=14pt,
+  footskip=20pt
+}
+
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{amsmath,amssymb}
+\usepackage{pifont}
+\usepackage{newunicodechar}
+\usepackage{tcolorbox}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+% Paleta Oficial BRIDS (brand-visual-style-guide.md)
+\definecolor{bridsDeep}{HTML}{0B192C}      % Azul Institucional Deep
+\definecolor{bridsCyan}{HTML}{14F195}      % Verde Solana / Cian Neón
+\definecolor{bridsBlue}{HTML}{00B0F9}      % Acento Gradient Primario
+\definecolor{bridsPurple}{HTML}{CF84F9}    % Acento Gradient Secundario
+\definecolor{bridsLight}{HTML}{F8F9FA}     % Fondo Gris Titanio
+\definecolor{bridsBorder}{HTML}{CBD5E1}    % Bordes y divisores
+\definecolor{bridsMuted}{HTML}{64748B}     % Texto secundario / Muted
+\definecolor{bridsDarkGreen}{HTML}{0E8345} % Éxito / Checked
+\definecolor{bridsDarkRed}{HTML}{C53030}   % Alerta / Cross
+\definecolor{bridsGold}{HTML}{D97706}      % Oro / Warning
+
+% Configuración de Hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=bridsBlue,
+    filecolor=bridsBlue,
+    urlcolor=bridsBlue,
+    citecolor=bridsDeep
+}
+
+% Formato de Secciones y Encabezados
+\titleformat{\section}
+  {\color{bridsDeep}\normalfont\Large\bfseries}
+  {\thesection}{0.8em}{}
+  [{\color{bridsBlue}\titlerule[1.2pt]}]
+
+\titleformat{\subsection}
+  {\color{bridsDeep}\normalfont\large\bfseries}
+  {\thesubsection}{0.8em}{}
+
+\titleformat{\subsubsection}
+  {\color{bridsDeep}\normalfont\normalsize\bfseries}
+  {\thesubsubsection}{0.8em}{}
+
+% Redefinición del entorno de citas de Pandoc (Callout Cards)
+\renewenvironment{quote}{%
+  \vspace{0.4em}
+  \begin{tcolorbox}[
+    colback=bridsLight,
+    colframe=bridsBlue!80!bridsDeep,
+    arc=2mm,
+    boxrule=1pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    before skip=6pt,
+    after skip=8pt
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+% Mapeo de caracteres Unicode y Emojis a símbolos tipográficos limpios
+\newunicodechar{✅}{\textcolor{bridsDarkGreen}{\ding{52}}\space}
+\newunicodechar{❌}{\textcolor{bridsDarkRed}{\ding{56}}\space}
+\newunicodechar{👉}{\textcolor{bridsBlue}{\ding{222}}\space}
+\newunicodechar{📌}{\textcolor{bridsBlue}{\ding{228}}\space}
+\newunicodechar{⚡}{\textcolor{bridsGold}{\textbf{[!]}}\space}
+\newunicodechar{❓}{\textcolor{bridsBlue}{\textbf{[?]}}\space}
+\newunicodechar{💡}{\textcolor{bridsGold}{\textbf{[i]}}\space}
+\newunicodechar{💬}{\textcolor{bridsBlue}{\textbf{[NOTA]}}\space}
+\newunicodechar{📊}{\textcolor{bridsBlue}{\textbf{[DATA]}}\space}
+\newunicodechar{🏢}{\textcolor{bridsDeep}{\textbf{[SPV]}}\space}
+\newunicodechar{🏡}{\textcolor{bridsDeep}{\textbf{[ASSET]}}\space}
+\newunicodechar{📄}{\textcolor{bridsDeep}{\textbf{[DOC]}}\space}
+\newunicodechar{💰}{\textcolor{bridsDarkGreen}{\textbf{[\$]}}\space}
+\newunicodechar{🚀}{\textcolor{bridsBlue}{\textbf{[GTM]}}\space}
+\newunicodechar{🏆}{\textcolor{bridsGold}{\textbf{[TOP]}}\space}
+\newunicodechar{📞}{\textcolor{bridsBlue}{\textbf{[TEL]}}\space}
+\newunicodechar{🌐}{\textcolor{bridsBlue}{\textbf{[WEB]}}\space}
+\newunicodechar{📩}{\textcolor{bridsBlue}{\textbf{[EMAIL]}}\space}
+\newunicodechar{🎯}{\textcolor{bridsGold}{\textbf{[OBJ]}}\space}
+\newunicodechar{📈}{\textcolor{bridsDarkGreen}{\textbf{[GROWTH]}}\space}
+\newunicodechar{🔄}{\textcolor{bridsBlue}{\textbf{[CYCLE]}}\space}
+\newunicodechar{🧭}{\textcolor{bridsBlue}{\textbf{[MAP]}}\space}
+\newunicodechar{•}{\textbullet\space}
+
+% Mapeo de caracteres de dibujo de cajas ASCII
+\newunicodechar{┌}{+}
+\newunicodechar{┐}{+}
+\newunicodechar{└}{+}
+\newunicodechar{┘}{+}
+\newunicodechar{─}{-}
+\newunicodechar{│}{|}
+\newunicodechar{├}{+}
+\newunicodechar{┤}{+}
+\newunicodechar{┬}{+}
+\newunicodechar{┴}{+}
+\newunicodechar{┼}{+}
+
+% Configuración de Encabezados y Pies de Página
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{30pt}
+
+% Header
+\lhead{\footnotesize\textcolor{bridsMuted}{\textbf{BRIDS} \textbar\ Sindicación Inmobiliaria \& RWA}}
+\rhead{\includegraphics[height=0.55cm]{brids-logo-dark.pdf}}
+
+% Footer
+\lfoot{\footnotesize\textcolor{bridsMuted}{\copyright\ 2026 BRIDS.io -- Todos los derechos reservados}}
+\rfoot{\footnotesize\textcolor{bridsMuted}{Página \thepage}}
+
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{bridsBorder}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{bridsBorder}\leaders\hrule height \footrulewidth\hfill}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Benchmark Competitivo de Sindicación Inmobiliaria: Análisis de Tarifas para Partners},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Benchmark Competitivo de Sindicación Inmobiliaria: Análisis de
+Tarifas para Partners}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Benchmark Competitivo de Sindicación
+Inmobiliaria}\label{benchmark-competitivo-de-sindicaciuxf3n-inmobiliaria}
+
+\subsection{Qué Cobra el Mercado Hoy, Análisis de Alternativas RWA y
+Nuestra
+Ventaja}\label{quuxe9-cobra-el-mercado-hoy-anuxe1lisis-de-alternativas-rwa-y-nuestra-ventaja}
+
+\begin{quote}
+📌 \textbf{Nota para el Socio Desarrollador:}\\
+Este documento recopila los números reales y verificables del mercado
+estadounidense: tanto de la vía legal tradicional como de las
+plataformas SaaS y los marketplaces Web3 conocidos (\textbf{RealT, Lofty
+AI, Securitize, Reental, Blocksquare}). El propósito es que tengamos
+total certeza de los costos del sector antes de sentarnos con otros
+desarrolladores.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. La Vía Tradicional con Abogados: Desglose Real de
+Costos}\label{la-vuxeda-tradicional-con-abogados-desglose-real-de-costos}
+
+\begin{quote}
+💬 \emph{Aclaración sobre la precisión de estos datos:}\\
+En el sector existen dos formas de sindicar:\\
+1. El desarrollador novato que levanta ``amigos y familia'' con un
+simple acuerdo operativo bajado de internet (riesgo legal extremo ante
+la SEC).\\
+2. El promotor institucional que levanta capital bajo \textbf{Regulation
+D (Regla 506b o 506c)} con bufetes especializados de valores.
+
+Las cifras abajo corresponden a \textbf{tarifas estándar de mercado de
+firmas especializadas en sindicación inmobiliaria} (como \emph{Moschetti
+Law Group}, \emph{Syndication Attorneys PLLC / Kim Lisa Taylor},
+\emph{Crowdfunding Lawyers / Jillian Sidoti} y \emph{Trowbridge Law
+Group}):
+\end{quote}
+
+\subsubsection{A. Paquete Legal de Estructuración (PPM): \$15,000 --
+\$35,000
+USD}\label{a.-paquete-legal-de-estructuraciuxf3n-ppm-15000-35000-usd}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Qué incluye:} Redacción del \textbf{Private Placement
+  Memorandum (PPM)} de 60 a 100 páginas, el \textbf{Operating Agreement}
+  de la entidad emisora (SPV), el \textbf{Subscription Agreement}
+  (acuerdo de inversión) y el cuestionario de inversionista acreditado.
+\item
+  \textbf{Rango:} Las firmas boutique de sindicación cobran tarifas
+  planas entre \textbf{\$12,500 y \$25,000 USD} para un deal estándar.
+  Si el proyecto tiene deuda estructurada compleja o se contrata una
+  firma corporativa (\emph{BigLaw}), el costo supera fácilmente los
+  \textbf{\$40,000 -- \$60,000 USD}.
+\end{itemize}
+
+\subsubsection{B. Radicación Estatal ``Blue Sky Filings'': \$3,000 --
+\$8,000
+USD}\label{b.-radicaciuxf3n-estatal-blue-sky-filings-3000-8000-usd}
+
+\begin{itemize}
+\tightlist
+\item
+  Aunque el Formulario D ante la SEC a nivel federal es gratuito,
+  \textbf{cada estado donde reside un inversionista exige su propia
+  notificación y tasa de registro}.
+\item
+  \textbf{Ejemplos de tasas estatales:} Nueva York cobra hasta
+  \textbf{\$1,200 USD}, Texas \textbf{\$500 USD}, California
+  \textbf{\$300 USD}, Florida \textbf{\$300 USD}.
+\item
+  Si un promotor tiene inversionistas distribuidos en 8 a 12 estados,
+  solo en tasas oficiales del estado se van \textbf{\$2,500 a \$5,000
+  USD}, más los honorarios del abogado por radicar cada una
+  (\$250--\$400 por estado).
+\end{itemize}
+
+\subsubsection{C. Constitución Societaria (Dual-Entity): \$1,500 --
+\$2,500
+USD}\label{c.-constituciuxf3n-societaria-dual-entity-1500-2500-usd}
+
+\begin{itemize}
+\tightlist
+\item
+  Creación de las 2 LLCs canónicas: la \textbf{Issuer SPV} (dueña del
+  inmueble) y la \textbf{Manager LLC} (administradora del sponsor) en
+  Delaware, Texas o Wyoming, con sus tasas de secretaría de estado y
+  agente registrado.
+\end{itemize}
+
+\subsubsection{D. Contabilidad y Emisión Anual de Schedule K-1s: \$150
+-- \$300 USD por Inversor /
+Año}\label{d.-contabilidad-y-emisiuxf3n-anual-de-schedule-k-1s-150-300-usd-por-inversor-auxf1o}
+
+\begin{itemize}
+\tightlist
+\item
+  Cualquier contador (CPA) especializado en real estate cobra una base
+  de \textbf{\$1,500 -- \$3,000 USD} por preparar la declaración de la
+  sociedad (\emph{Form 1065}), más \textbf{\$150 a \$300 USD por cada
+  socio individual}.
+\item
+  \textbf{El impacto:} Un proyecto mediano con 40 inversionistas gasta
+  entre \textbf{\$7,500 y \$12,000 USD cada año} únicamente en emitir
+  K-1s.
+\end{itemize}
+
+\begin{quote}
+💰 \textbf{Total Desembolso Tradicional:} Entre \textbf{\$25,000 y
+\$45,000 USD en efectivo} antes de recibir el primer cheque, más el
+costo recurrente de contabilidad de socios.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. Benchmark de Plataformas: SaaS, Marketplaces y Proyectos
+RWA}\label{benchmark-de-plataformas-saas-marketplaces-y-proyectos-rwa}
+
+Para entender el panorama completo, dividimos a los competidores en sus
+3 modelos de negocio:
+
+\begin{quote}
+\mbox{}%
+\subsubsection{🧭 Mapa de Alternativas en el
+Mercado}\label{mapa-de-alternativas-en-el-mercado}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{1. Portales SaaS Web2 Tradicionales:} InvestNext,
+  SyndicationPro, Juniper Square.
+\item
+  \textbf{2. Marketplaces RWA / Cripto:} RealT, Lofty AI, Reental,
+  Homebase.
+\item
+  \textbf{3. Infraestructura \& Transfer Agents:} Blocksquare,
+  Securitize, DigiShares.
+\end{itemize}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Categoría 1: Portales de Inversionistas \& Software SaaS
+(Web2)}\label{categoruxeda-1-portales-de-inversionistas-software-saas-web2}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{InvestNext:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Costo:} \textbf{\$499 USD/mes (\$5,988 USD/año)} en su plan
+    \emph{Core Tier} (\textless\$10M de capital), con \textbf{contrato
+    obligatorio de 12 meses}. Sube a \textbf{\$699 USD/mes (\$8,388
+    USD/año)} en \emph{Firm Tier}.
+  \item
+    \textbf{Limitación para el desarrollador:} Es un portal Web2 puro.
+    \textbf{NO crea la entidad SPV, NO abre la cuenta bancaria y NO
+    redacta contratos legales.} El desarrollador sigue teniendo que
+    pagar \$25,000+ USD a sus propios abogados. Si el proyecto se
+    retrasa 6 meses, igual pagó \$3,000 USD de software sin levantar
+    nada.
+  \end{itemize}
+\item
+  \textbf{SyndicationPro:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Costo:} \textbf{\$400 -- \$600 USD/mes} según AUM +
+    \textbf{\$500 USD de setup} de acreditación + \textbf{\$59 USD por
+    cada inversionista verificado} + \$50/mes por dispersiones bancarias
+    ACH.
+  \item
+    \textbf{Limitación:} Modelo costoso y lleno de add-ons. Para 40 LPs,
+    el costo real del primer año supera los \textbf{\$8,000 USD} solo en
+    software.
+  \end{itemize}
+\item
+  \textbf{Juniper Square (El líder institucional):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Costo:} Piso mínimo de entrada de \textbf{\$18,000 USD/año
+    (\$1,500/mes)}, escalando a \textbf{\$30,000 -- \$100,000+ USD
+    anuales} con contratos plurianuales.
+  \item
+    \textbf{Limitación:} Exclusivo para grandes fondos institucionales
+    (\$50M+ AUM). Proceso de onboarding de 2 a 4 meses.
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Categoría 2: Marketplaces RWA / Cripto Existentes (RealT,
+Lofty AI,
+Reental)}\label{categoruxeda-2-marketplaces-rwa-cripto-existentes-realt-lofty-ai-reental}
+
+Es fundamental distinguir estos proyectos porque \textbf{no son software
+para desarrolladores; son tiendas cerradas B2C}:
+
+\paragraph{A. RealT (Gnosis Chain /
+Ethereum)}\label{a.-realt-gnosis-chain-ethereum}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cómo opera:} RealT compra viviendas unifamiliares
+  (principalmente en Detroit, Cleveland y Florida) y las vende
+  fraccionadas a su propia comunidad de inversionistas minoristas en
+  Europa y EE.UU.
+\item
+  \textbf{Qué le cobran al propietario/promotor:} RealT opera como
+  \textbf{comprador o colocador exclusivo con un descuento / comisión
+  del 8\% al 10\%} sobre el valor de la propiedad, además de retener el
+  control total del activo.
+\item
+  \textbf{Por qué no sirve a un desarrollador independiente:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{No es una solución de marca blanca:} El desarrollador no
+    puede tener su propio portal. Tiene que venderle la casa a RealT o
+    depender de que la comunidad de RealT la acepte.
+  \item
+    \textbf{Tecnología compleja:} Obliga a los inversionistas a operar
+    en Gnosis Chain y lidiar con swaps y puentes cripto.
+  \item
+    \textbf{Sin protocolo de recuperación:} Si un inversionista pierde
+    sus llaves o le hackean la billetera, pierde sus acciones de la LLC
+    de forma irreversible.
+  \end{itemize}
+\end{itemize}
+
+\paragraph{B. Lofty AI (Algorand)}\label{b.-lofty-ai-algorand}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cómo opera:} Plataforma centrada en viviendas de alquiler
+  fraccionadas desde \$50 USD en Algorand.
+\item
+  \textbf{Qué cobran:} Retienen entre el \textbf{5\% y el 8\% de
+  comisión de listado} sobre el capital colocado.
+\item
+  \textbf{Por qué no sirve a un desarrollador independiente:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Gobernanza caótica:} Todos los micro-inversionistas votan si
+    se cambia la alfombra o si se repara la tubería del inquilino. Para
+    un promotor serio, esto genera parálisis operativa absoluta.
+  \item
+    \textbf{Aislamiento en Algorand:} Red desconectada de la liquidez
+    institucional de Solana y el ecosistema fintech en dólares (USDC).
+  \end{itemize}
+\end{itemize}
+
+\paragraph{C. Reental (España / LatAm - BNB Chain /
+Polygon)}\label{c.-reental-espauxf1a-latam---bnb-chain-polygon}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cómo opera:} Emite tokens respaldados por \textbf{préstamos
+  participativos} (deuda), no por titularidad societaria de un SPV
+  inmobiliario en EE.UU.
+\item
+  \textbf{Qué cobran:} Comisiones de originación del \textbf{5\% al
+  10\%} sobre el volumen financiado.
+\item
+  \textbf{Por qué no sirve a un desarrollador independiente:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    No opera bajo la legislación de valores de EE.UU. (SEC Reg D).
+  \item
+    Los inversionistas son acreedores quirografarios de una empresa
+    española, no copropietarios de un inmueble en EE.UU. Si la empresa
+    quiebra, el inversor pierde su dinero.
+  \end{itemize}
+\end{itemize}
+
+\paragraph{D. Homebase (Solana - Reg
+CF)}\label{d.-homebase-solana---reg-cf}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cómo opera:} Tokenizó una vivienda unifamiliar en McAllen,
+  Texas, bajo Regulation Crowdfunding en Solana en 2023.
+\item
+  \textbf{Qué pasó:} Fue un experimento histórico pionero de una sola
+  propiedad, pero \textbf{los costos regulatorios de Reg CF (auditorías
+  CPA obligatorias, broker-dealer fees de 5-7\%) hicieron inviable la
+  originación recurrente para promotores}. No construyeron software B2B
+  para que otros desarrolladores pudieran replicarlo.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Categoría 3: Infraestructura B2B y Tokenización
+Institucional (Blocksquare,
+Securitize)}\label{categoruxeda-3-infraestructura-b2b-y-tokenizaciuxf3n-institucional-blocksquare-securitize}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Blocksquare:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Qué cobran:} \textbf{\$5,990 USD fijos por cada propiedad}
+    que se sube al sistema + \textbf{\$69 USD al mes de mantenimiento
+    por inmueble}, además de exigir comprar y bloquear su token cripto
+    (BST).
+  \item
+    \textbf{Limitación:} Es solo software. \textbf{NO crean la entidad
+    legal en EE.UU., NO tramitan el EIN con el IRS y NO abren cuentas
+    bancarias.}
+  \end{itemize}
+\item
+  \textbf{Securitize:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Qué cobran:} Setup institucional de \textbf{\$50,000 a
+    \$150,000+ USD}.
+  \item
+    \textbf{Limitación:} Diseñado para gigantes como BlackRock (fondo
+    BUIDL) y KKR. Exige cheques mínimos de \$25,000 a \$100,000 USD y
+    procesos de acreditación institucionales. Totalmente fuera de escala
+    para el promotor residencial mediano.
+  \end{itemize}
+\item
+  \textbf{Roofstock onChain:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Qué cobran:} Venden la casa completa en un solo NFT de
+    \$200,000 a \$400,000 USD en OpenSea. No es sindicación fraccionada;
+    es compraventa de casa entera.
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. Matriz Comparativa Maestra: BRIDS vs.~Todas las
+Opciones}\label{matriz-comparativa-maestra-brids-vs.-todas-las-opciones}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1081}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1081}}
+  >{\centering\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1351}}
+  >{\centering\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1351}}
+  >{\centering\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1351}}
+  >{\centering\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1351}}
+  >{\centering\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1351}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 14\tabcolsep) * \real{0.1081}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Proveedor / Plataforma
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Modelo de Negocio
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Setup Inicial al Promotor
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Costo Recurrente
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+¿Crea la LLC SPV en EE.UU.?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+¿Abre Cuenta Bancaria US?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+¿Es Marca Blanca para el Sponsor?
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Enlace Oficial
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Vía Tradicional Legal} & Bufete de Abogados & \textbf{\$20k --
+\$45k USD} & \$7k--\$12k/año en K-1s & Requiere gestor & ❌ No & ✅ Sí
+(Analógico) &
+\href{https://moschettilaw.com/syndication-attorney-fees/}{Moschetti
+Law} \\
+\textbf{InvestNext} & SaaS Web2 & Incluido & \textbf{\$5,988 USD/año} &
+❌ No & ❌ No & ✅ Sí (Portal Web2) &
+\href{https://investnext.com}{investnext.com} \\
+\textbf{SyndicationPro} & SaaS Web2 & \$500 + \$59/LP & \textbf{\$5k --
+\$8k USD/año} & ❌ No & ❌ No & ✅ Sí (Portal Web2) &
+\href{https://syndicationpro.com}{syndicationpro.com} \\
+\textbf{Juniper Square} & Enterprise SaaS & \$5k -- \$15k &
+\textbf{\$18k -- \$100k/año} & ❌ No & ❌ No & ✅ Sí (Enterprise) &
+\href{https://junipersquare.com}{junipersquare.com} \\
+\textbf{RealT} & Marketplace B2C & Descuento del deal & \textbf{8\% --
+10\% del activo} & Venden a su balance & No aplicable & ❌ No (Marca
+RealT) & \href{https://realt.co}{realt.co} \\
+\textbf{Lofty AI} & Marketplace B2C & Tarifa de listado & \textbf{5\% --
+8\% de comisión} & Su propia LLC & No aplicable & ❌ No (Marca Lofty) &
+\href{https://lofty.ai}{lofty.ai} \\
+\textbf{Blocksquare} & SaaS Web3 & \textbf{\$5,990 USD/deal} &
+\textbf{\$828 USD/año/deal} & ❌ No & ❌ No & Parcial (Staking) &
+\href{https://blocksquare.io}{blocksquare.io} \\
+\textbf{Securitize} & Transfer Agent & \textbf{\$50,000 -- \$150k} &
+Cotización enterprise & ❌ No & ❌ No & Institucional &
+\href{https://securitize.io}{securitize.io} \\
+\textbf{BRIDS.io} & \textbf{Infraestructura RWA} & \textbf{\$0 Piloto /
+\$3.5k--\$8.5k} & \textbf{\$0 mensual obligatorio} & ✅ \textbf{SÍ
+(Stablecorp)} & ✅ \textbf{SÍ (USD \& USDC)} & ✅ \textbf{SÍ (Tu marca)}
+& \href{https://brids.io}{brids.io} \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Por Qué Esta Información le da Tranquilidad Total a tu
+Partner}\label{por-quuxe9-esta-informaciuxf3n-le-da-tranquilidad-total-a-tu-partner}
+
+Cuando tu socio revise estos datos, confirmará de inmediato tres cosas:
+1. \textbf{Los costos legales son reales:} Nadie que sindique de verdad
+en EE.UU. baja de \$15k--\$25k en un paquete de PPM con abogados
+reputados. 2. \textbf{RealT y Lofty no son nuestros competidores
+directos, son tiendas B2C:} Se quedan con el 8\%-10\% del valor del
+inmueble y le quitan la marca al promotor. Nosotros somos el
+\textbf{software para que el promotor tenga su propio portal}. 3.
+\textbf{Nadie más entrega la solución ``Llave en Mano'':} Las SaaS Web2
+cobran \$6,000 al año solo por la pantalla; Blocksquare cobra \$6,000
+por contrato. \textbf{BRIDS es la única que constituye el SPV en
+Delaware, abre la cuenta bancaria en dólares y entrega el portal listo
+para captar capital.}
+
+\end{document}

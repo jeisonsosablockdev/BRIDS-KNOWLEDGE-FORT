@@ -50,11 +50,15 @@ Como desarrollador inmobiliario, tu mayor talento es identificar buenas oportuni
 
 **BRIDS** no es una plataforma de crowdfunding que te quita tu marca ni una consultora legal que te cobra por horas. **Es tu propia infraestructura tecnológica de sindicación llave en mano.**
 
-```mermaid
-flowchart LR
-    A["Tú aportas el Inmueble y la Obra<br/>(Terreno, Licencias y Construcción)"] --> B["BRIDS entrega la Infraestructura<br/>• LLC SPV en Delaware / Texas<br/>• Cuenta bancaria US (USD & USDC)<br/>• Portal con tu marca y contratos"]
-    B --> C["Tus Inversionistas entran en 3 Minutos<br/>• Aportes desde $200 USD<br/>• Identidad y firma W-8BEN en segundos<br/>• Dashboard en vivo de rentas y obra"]
-```
+> ### 🔄 El Flujo Operativo en 3 Pasos
+> 
+> 1. **Paso 1: Tú Aportas el Inmueble y la Obra**  
+>    Terreno, licencias de construcción y dirección del proyecto inmobiliario.
+> 2. **Paso 2: BRIDS Entrega la Infraestructura Llave en Mano**  
+>    Constitución de la LLC SPV en EE.UU., cuenta bancaria comercial en USD y portal de inversión de marca blanca con tus contratos.
+> 3. **Paso 3: Tus Inversionistas Entran en 3 Minutos**  
+>    Tickets desde \$200 USD, verificación biométrica de identidad, firma de W-8BEN y reportes de obra en vivo.
+
 
 ### Lo que Hacemos por Ti (Para que tú solo te concentres en construir):
 1. **Constituimos la Entidad Legal del Proyecto (SPV):** Creamos la Sociedad de Responsabilidad Limitada en EE.UU. propietaria del inmueble, con agente registrado y contratos de operación aprobados.
@@ -82,13 +86,13 @@ Compara lo que significa levantar capital a la antigua frente a tener tu propia 
 
 El verdadero retorno de inversión no es solo levantar capital más rápido en tu próximo deal; es **desbloquear la velocidad de rotación de capital para multiplicar los ingresos de tu empresa desarrolladora**:
 
-```mermaid
-flowchart LR
-    P1["Proyecto 1 (Piloto)<br/>Fondeas $500K de Equity"] --> Flywheel["Efecto Rueda de Inversionistas<br/>Base cautiva, educada y verificada"]
-    Flywheel --> P2["Proyecto 2<br/>Re-invierten en 24h con 1 Clic"]
-    Flywheel --> P3["Proyecto 3<br/>Fondeo paralelo"]
-    P2 & P3 --> Fees["Multiplicas tus Honorarios de GP:<br/>• Acquisition Fee (1-2%)<br/>• Development Fee (3-5%)<br/>• Promote / Carry (20%)"]
-```
+> ### 📈 El Ciclo de Expansión del Promotor (Flywheel)
+> 
+> * **Proyecto 1 (Piloto):** Fondeas \$500K de equity y creas una base de 250+ inversionistas verificados.
+> * **Efecto Rueda:** Tus inversionistas ya tienen perfil, billetera y contrato aprobado en el sistema.
+> * **Proyectos 2 y 3 en Paralelo:** Re-invierten en 24 horas con 1 solo clic sin salir a prospectar desde cero.
+> * **Multiplicación de Ganancias:** Cuadruplicas tus honorarios como GP (*Development Fee* 3-5%, *Acquisition Fee* 1-2% y *Promote* del 20%).
+
 
 ### 1. Pasa de un Ciclo Lineal a Desarrollar en Paralelo
 * El promotor promedio construye una obra cada 18 meses porque su capital propio y su tiempo están atrapados hasta liquidar el proyecto anterior.
@@ -140,19 +144,16 @@ Sabemos las preguntas que te estás haciendo. Aquí tienes las respuestas claras
 
 Para que experimentes la velocidad de nuestra infraestructura sin arriesgar capital propio, creamos una oferta sin precedentes en la industria:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                    GENESIS SPONSOR PROGRAM (PILOTO GÉNESIS)                 │
-└─────────────────────────────────────────────────────────────────────────────┘
-  
-  ✅ SETUP DE SOFTWARE BONIFICADO AL 100%: $0 USD.
-  ✅ CONSTITUCIÓN DE LA ENTIDAD SPV EN EE.UU.: ABSORBIDA POR BRIDS.
-  ✅ CUENTA BANCARIA COMERCIAL EN DÓLARES: INCLUIDA SIN COSTO.
-  ✅ DESPLIEGUE DE TU PORTAL DE INVERSIONISTAS: LISTO EN DÍAS.
-  ✅ CAPACIDAD DE RECAUDO CUBIERTA: HASTA $500,000 USD DE EQUITY.
-  
-  👉 TU RIESGO FINANCIERO DE ENTRADA: EXACTAMENTE $0 USD.
-```
+> ### 🏆 GENESIS SPONSOR PROGRAM (PILOTO GÉNESIS)
+> 
+> * ✅ **Setup de Software Bonificado al 100%:** \$0 USD.
+> * ✅ **Constitución de la Entidad SPV en EE.UU.:** Absorbida por BRIDS.
+> * ✅ **Cuenta Bancaria Comercial en Dólares:** Incluida sin costo.
+> * ✅ **Despliegue de tu Portal de Inversionistas:** Listo en días.
+> * ✅ **Capacidad de Recaudo Cubierta:** Hasta \$500,000 USD de equity.
+> 
+> 👉 **Tu Riesgo Financiero de Entrada:** **EXACTAMENTE \$0 USD.**
+
 
 ### ¿Cómo Gana BRIDS?
 Nosotros solo cobramos si tú ganas: la plataforma percibe una **tarifa fija de software de \$4 USD por cada fracción de \$200 USD emitida** en el momento en que tus inversionistas aportan el capital. Si tú no fondeas, nosotros no ganamos.

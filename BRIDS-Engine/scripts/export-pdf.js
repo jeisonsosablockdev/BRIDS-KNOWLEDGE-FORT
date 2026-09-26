@@ -108,9 +108,14 @@ Ejemplos:
 
   try {
     if (ext === '.tex') {
-      console.log('   🚀 Compilando archivo LaTeX nativo con Tectonic...');
       const workDir = path.dirname(inputPath);
-      execSync(`tectonic "${inputPath}" -o "${path.dirname(outputPath)}"`, {
+      const searchPaths = [
+        workDir,
+        BRAND_DIR,
+        TEMPLATES_DIR,
+        ROOT_DIR
+      ].map(p => `-Z search-path="${p}"`).join(' ');
+      execSync(`tectonic ${searchPaths} "${inputPath}" -o "${path.dirname(outputPath)}"`, {
         cwd: workDir,
         stdio: 'inherit'
       });

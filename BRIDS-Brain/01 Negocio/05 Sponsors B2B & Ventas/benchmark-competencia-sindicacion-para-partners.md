@@ -61,13 +61,12 @@ tags:
 
 Para entender el panorama completo, dividimos a los competidores en sus 3 modelos de negocio:
 
-```mermaid
-flowchart TD
-    Comp["Alternativas para el Desarrollador"]
-    Comp --> C1["1. Software SaaS Tradicional<br/>(InvestNext, SyndicationPro, Juniper)"]
-    Comp --> C2["2. Marketplaces RWA / Cripto<br/>(RealT, Lofty AI, Reental)"]
-    Comp --> C3["3. Infraestructura / Transfer Agents<br/>(Blocksquare, Securitize, DigiShares)"]
-```
+> ### 🧭 Mapa de Alternativas en el Mercado
+> 
+> * **1. Portales SaaS Web2 Tradicionales:** InvestNext, SyndicationPro, Juniper Square.
+> * **2. Marketplaces RWA / Cripto:** RealT, Lofty AI, Reental, Homebase.
+> * **3. Infraestructura & Transfer Agents:** Blocksquare, Securitize, DigiShares.
+
 
 ---
 

@@ -1,0 +1,765 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+% ═══════════════════════════════════════════════════════════════════════════
+% 🏛️ BRIDS KNOWLEDGE FORT - INSTITUTIONAL LATEX TEMPLATE HEADER (v2.0)
+% ═══════════════════════════════════════════════════════════════════════════
+
+\usepackage{fontspec}
+\setmainfont{Helvetica}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  margin=2.0cm,
+  top=2.7cm,
+  bottom=2.4cm,
+  headheight=32pt,
+  headsep=14pt,
+  footskip=20pt
+}
+
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{amsmath,amssymb}
+\usepackage{pifont}
+\usepackage{newunicodechar}
+\usepackage{tcolorbox}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+% Paleta Oficial BRIDS (brand-visual-style-guide.md)
+\definecolor{bridsDeep}{HTML}{0B192C}      % Azul Institucional Deep
+\definecolor{bridsCyan}{HTML}{14F195}      % Verde Solana / Cian Neón
+\definecolor{bridsBlue}{HTML}{00B0F9}      % Acento Gradient Primario
+\definecolor{bridsPurple}{HTML}{CF84F9}    % Acento Gradient Secundario
+\definecolor{bridsLight}{HTML}{F8F9FA}     % Fondo Gris Titanio
+\definecolor{bridsBorder}{HTML}{CBD5E1}    % Bordes y divisores
+\definecolor{bridsMuted}{HTML}{64748B}     % Texto secundario / Muted
+\definecolor{bridsDarkGreen}{HTML}{0E8345} % Éxito / Checked
+\definecolor{bridsDarkRed}{HTML}{C53030}   % Alerta / Cross
+\definecolor{bridsGold}{HTML}{D97706}      % Oro / Warning
+
+% Configuración de Hipervínculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=bridsBlue,
+    filecolor=bridsBlue,
+    urlcolor=bridsBlue,
+    citecolor=bridsDeep
+}
+
+% Formato de Secciones y Encabezados
+\titleformat{\section}
+  {\color{bridsDeep}\normalfont\Large\bfseries}
+  {\thesection}{0.8em}{}
+  [{\color{bridsBlue}\titlerule[1.2pt]}]
+
+\titleformat{\subsection}
+  {\color{bridsDeep}\normalfont\large\bfseries}
+  {\thesubsection}{0.8em}{}
+
+\titleformat{\subsubsection}
+  {\color{bridsDeep}\normalfont\normalsize\bfseries}
+  {\thesubsubsection}{0.8em}{}
+
+% Redefinición del entorno de citas de Pandoc (Callout Cards)
+\renewenvironment{quote}{%
+  \vspace{0.4em}
+  \begin{tcolorbox}[
+    colback=bridsLight,
+    colframe=bridsBlue!80!bridsDeep,
+    arc=2mm,
+    boxrule=1pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    before skip=6pt,
+    after skip=8pt
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+% Mapeo de caracteres Unicode y Emojis a símbolos tipográficos limpios
+\newunicodechar{✅}{\textcolor{bridsDarkGreen}{\ding{52}}\space}
+\newunicodechar{❌}{\textcolor{bridsDarkRed}{\ding{56}}\space}
+\newunicodechar{👉}{\textcolor{bridsBlue}{\ding{222}}\space}
+\newunicodechar{📌}{\textcolor{bridsBlue}{\ding{228}}\space}
+\newunicodechar{⚡}{\textcolor{bridsGold}{\textbf{[!]}}\space}
+\newunicodechar{❓}{\textcolor{bridsBlue}{\textbf{[?]}}\space}
+\newunicodechar{💡}{\textcolor{bridsGold}{\textbf{[i]}}\space}
+\newunicodechar{💬}{\textcolor{bridsBlue}{\textbf{[NOTA]}}\space}
+\newunicodechar{📊}{\textcolor{bridsBlue}{\textbf{[DATA]}}\space}
+\newunicodechar{🏢}{\textcolor{bridsDeep}{\textbf{[SPV]}}\space}
+\newunicodechar{🏡}{\textcolor{bridsDeep}{\textbf{[ASSET]}}\space}
+\newunicodechar{📄}{\textcolor{bridsDeep}{\textbf{[DOC]}}\space}
+\newunicodechar{💰}{\textcolor{bridsDarkGreen}{\textbf{[\$]}}\space}
+\newunicodechar{🚀}{\textcolor{bridsBlue}{\textbf{[GTM]}}\space}
+\newunicodechar{🏆}{\textcolor{bridsGold}{\textbf{[TOP]}}\space}
+\newunicodechar{📞}{\textcolor{bridsBlue}{\textbf{[TEL]}}\space}
+\newunicodechar{🌐}{\textcolor{bridsBlue}{\textbf{[WEB]}}\space}
+\newunicodechar{📩}{\textcolor{bridsBlue}{\textbf{[EMAIL]}}\space}
+\newunicodechar{🎯}{\textcolor{bridsGold}{\textbf{[OBJ]}}\space}
+\newunicodechar{📈}{\textcolor{bridsDarkGreen}{\textbf{[GROWTH]}}\space}
+\newunicodechar{🔄}{\textcolor{bridsBlue}{\textbf{[CYCLE]}}\space}
+\newunicodechar{🧭}{\textcolor{bridsBlue}{\textbf{[MAP]}}\space}
+\newunicodechar{•}{\textbullet\space}
+
+% Mapeo de caracteres de dibujo de cajas ASCII
+\newunicodechar{┌}{+}
+\newunicodechar{┐}{+}
+\newunicodechar{└}{+}
+\newunicodechar{┘}{+}
+\newunicodechar{─}{-}
+\newunicodechar{│}{|}
+\newunicodechar{├}{+}
+\newunicodechar{┤}{+}
+\newunicodechar{┬}{+}
+\newunicodechar{┴}{+}
+\newunicodechar{┼}{+}
+
+% Configuración de Encabezados y Pies de Página
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{30pt}
+
+% Header
+\lhead{\footnotesize\textcolor{bridsMuted}{\textbf{BRIDS} \textbar\ Sindicación Inmobiliaria \& RWA}}
+\rhead{\includegraphics[height=0.55cm]{brids-logo-dark.pdf}}
+
+% Footer
+\lfoot{\footnotesize\textcolor{bridsMuted}{\copyright\ 2026 BRIDS.io -- Todos los derechos reservados}}
+\rfoot{\footnotesize\textcolor{bridsMuted}{Página \thepage}}
+
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{bridsBorder}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\footrule}{\hbox to\headwidth{\color{bridsBorder}\leaders\hrule height \footrulewidth\hfill}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Propuesta Comercial para Desarrolladores: Sindicación Digital Llave en Mano},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Propuesta Comercial para Desarrolladores: Sindicación Digital
+Llave en Mano}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Sindica Capital para tus Proyectos Inmobiliarios 5x Más Rápido
+y Escala tu Operación sin
+Fricción}\label{sindica-capital-para-tus-proyectos-inmobiliarios-5x-muxe1s-ruxe1pido-y-escala-tu-operaciuxf3n-sin-fricciuxf3n}
+
+\subsubsection{La infraestructura de software institucional que te
+permite estructurar, levantar equity y gestionar inversionistas en
+EE.UU. sin gastar \$40,000 USD en abogados, sin perseguir papeleo
+analógico y con la gestión fiscal 100\%
+resuelta.}\label{la-infraestructura-de-software-institucional-que-te-permite-estructurar-levantar-equity-y-gestionar-inversionistas-en-ee.uu.-sin-gastar-40000-usd-en-abogados-sin-perseguir-papeleo-analuxf3gico-y-con-la-gestiuxf3n-fiscal-100-resuelta.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\mbox{}%
+\subsubsection{⚡ Alternativas de Titular para Pruebas
+A/B}\label{alternativas-de-titular-para-pruebas-ab}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Opción A (Enfocada en Velocidad \& Costos):} \emph{``Cierra el
+  30\% de Equity de tu Próximo Edificio en 10 Días y con Cero Costo
+  Legal de Entrada.''}
+\item
+  \textbf{Opción B (Enfocada en Escala Operativa):} \emph{``Deja de
+  Actuar como Gestor de Inversionistas: La Infraestructura Llave en Mano
+  para Desarrollar 4 Obras al Año en Vez de 1.''}
+\item
+  \textbf{Opción C (Enfocada en el Dolor Financiero):} \emph{``El 70\%
+  te lo Presta el Banco. El 30\% de Equity te lo Resuelve BRIDS sin
+  Papeleo ni Abogados de \$35k.''}
+\end{itemize}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. El Problema Real: El Capital Tradicional es Lento,
+Costoso y Frena tu
+Escala}\label{el-problema-real-el-capital-tradicional-es-lento-costoso-y-frena-tu-escala}
+
+Como desarrollador inmobiliario, tu mayor talento es identificar buenas
+oportunidades de suelo, licitar eficientemente y construir. Sin embargo,
+\textbf{tu capacidad de crecimiento está secuestrada por la fricción de
+levantar capital}:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Gasto ciego antes de recibir un dólar:} Desembolsas entre
+  \textbf{\$25,000 y \$45,000 USD} en abogados de valores para redactar
+  el PPM, acuerdos operativos y radicaciones estatales (\emph{Blue Sky})
+  antes de saber si el deal cerrará.
+\item
+  \textbf{El costo de oportunidad de los 90 días:} Perseguir firmas en
+  PDFs de 80 páginas, atender reuniones personales y coordinar
+  transferencias bancarias te toma entre 2 y 3 meses. En ese tiempo,
+  pierdes terrenos con descuento frente a compradores con efectivo
+  inmediato.
+\item
+  \textbf{El ``Techo de Cristal'' de los mismos 15 inversionistas:}
+  Dependes de tu círculo cercano o de pequeños \emph{family offices}.
+  Cuando ellos tienen su liquidez comprometida en otros negocios, tu
+  pipeline de obras se congela.
+\item
+  \textbf{La barrera contable de los K-1s:} Como los contadores cobran
+  \$200 USD por cada Formulario K-1 anual, te ves obligado a exigir
+  tickets mínimos de \$50,000 USD, dejando fuera a cientos de clientes y
+  conocidos que quieren invertir contigo cheques de \$5,000 a \$15,000
+  USD.
+\item
+  \textbf{Drenaje de tiempo en tu equipo:} Pasas el 35\% de tu semana
+  atendiendo llamadas de socios que preguntan \emph{``cómo va la
+  obra''}, enviando extractos y gestionando pagos manuales.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. La Solución: BRIDS.io (Tu Propio Canal Institucional de
+Sindicación)}\label{la-soluciuxf3n-brids.io-tu-propio-canal-institucional-de-sindicaciuxf3n}
+
+\textbf{BRIDS} no es una plataforma de crowdfunding que te quita tu
+marca ni una consultora legal que te cobra por horas. \textbf{Es tu
+propia infraestructura tecnológica de sindicación llave en mano.}
+
+\begin{quote}
+\mbox{}%
+\subsubsection{🔄 El Flujo Operativo en 3
+Pasos}\label{el-flujo-operativo-en-3-pasos}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Paso 1: Tú Aportas el Inmueble y la Obra}\\
+  Terreno, licencias de construcción y dirección del proyecto
+  inmobiliario.
+\item
+  \textbf{Paso 2: BRIDS Entrega la Infraestructura Llave en Mano}\\
+  Constitución de la LLC SPV en EE.UU., cuenta bancaria comercial en USD
+  y portal de inversión de marca blanca con tus contratos.
+\item
+  \textbf{Paso 3: Tus Inversionistas Entran en 3 Minutos}\\
+  Tickets desde \$200 USD, verificación biométrica de identidad, firma
+  de W-8BEN y reportes de obra en vivo.
+\end{enumerate}
+\end{quote}
+
+\subsubsection{Lo que Hacemos por Ti (Para que tú solo te concentres en
+construir):}\label{lo-que-hacemos-por-ti-para-que-tuxfa-solo-te-concentres-en-construir}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Constituimos la Entidad Legal del Proyecto (SPV):} Creamos la
+  Sociedad de Responsabilidad Limitada en EE.UU. propietaria del
+  inmueble, con agente registrado y contratos de operación aprobados.
+\item
+  \textbf{Abrimos la Cuenta Bancaria Comercial en EE.UU.:} Cuenta
+  bancaria corporativa con rieles de cobro en dólares fiduciarios
+  (transferencias bancarias ACH/Wire) y dólares digitales (USDC).
+\item
+  \textbf{Desplegamos tu Portal de Inversionistas de Marca Blanca:} Tus
+  inversionistas entran a un entorno profesional con tu logotipo, firman
+  digitalmente, pasan verificación biométrica de identidad en 30
+  segundos y completan su inversión desde su teléfono móvil.
+\item
+  \textbf{Automatizamos la Dispersión y los Reportes de Obra:}
+  Distribuyes rentas trimestrales o utilidades de venta con un solo
+  clic, sin hacer cheques manuales ni transferencias individuales.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. Cómo Simplificamos Radicalmente tu Vida al Levantar
+Capital}\label{cuxf3mo-simplificamos-radicalmente-tu-vida-al-levantar-capital}
+
+Compara lo que significa levantar capital a la antigua frente a tener tu
+propia infraestructura digital:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Fase del Proceso
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Sindicación Analógica Tradicional
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Con tu Portal BRIDS.io
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Lo que Significa para Ti
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{1. Estructuración Legal} & 3 a 5 semanas pagando \$35,000 USD a
+abogados por un PPM en PDF. & \textbf{Listo en 5 a 10 días hábiles} con
+contratos y SPV estandarizados. & \textbf{Ahorras \$30,000 USD} y sales
+al mercado 2 meses antes. \\
+\textbf{2. Proceso de Inversión} & Imprimir 80 páginas, firmar en
+notaría y transferir por ventanilla bancaria. & \textbf{Checkout digital
+en 3 minutos} desde cualquier móvil o computadora. & \textbf{Cero
+fricción de cierre:} el inversor entra en caliente. \\
+\textbf{3. Negociación de Términos} & Cada socio de \$50k exige cambiar
+cláusulas del Operating Agreement. & \textbf{Emisión fraccionada
+estandarizada (\$200 USD):} Todos bajo las mismas reglas. & \textbf{Cero
+desgaste contractual:} No renegocias términos con nadie. \\
+\textbf{4. Atención al Inversionista} & Docenas de correos y llamadas
+semanales preguntando \emph{``cómo va mi dinero''}. & \textbf{Dashboard
+interactivo:} Avances de obra, fotos y certificaciones en 1 clic. &
+\textbf{Recuperas 15 horas semanales} de tu equipo directivo. \\
+\textbf{5. Cierre Fiscal (Taxes)} & Perseguir contadores y pagar \$200
+por cada K-1 (\$8,000/año). & \textbf{Retención en origen + Formulario
+1042-S / 1065 vía API por \$1 USD.} & \textbf{Cero pesadillas contables}
+ni sustos con el IRS. \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Cómo BRIDS Facilita la Expansión de tus Operaciones
+(Escalar de 1 a 4 Obras al
+Año)}\label{cuxf3mo-brids-facilita-la-expansiuxf3n-de-tus-operaciones-escalar-de-1-a-4-obras-al-auxf1o}
+
+El verdadero retorno de inversión no es solo levantar capital más rápido
+en tu próximo deal; es \textbf{desbloquear la velocidad de rotación de
+capital para multiplicar los ingresos de tu empresa desarrolladora}:
+
+\begin{quote}
+\mbox{}%
+\subsubsection{📈 El Ciclo de Expansión del Promotor
+(Flywheel)}\label{el-ciclo-de-expansiuxf3n-del-promotor-flywheel}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Proyecto 1 (Piloto):} Fondeas \$500K de equity y creas una
+  base de 250+ inversionistas verificados.
+\item
+  \textbf{Efecto Rueda:} Tus inversionistas ya tienen perfil, billetera
+  y contrato aprobado en el sistema.
+\item
+  \textbf{Proyectos 2 y 3 en Paralelo:} Re-invierten en 24 horas con 1
+  solo clic sin salir a prospectar desde cero.
+\item
+  \textbf{Multiplicación de Ganancias:} Cuadruplicas tus honorarios como
+  GP (\emph{Development Fee} 3-5\%, \emph{Acquisition Fee} 1-2\% y
+  \emph{Promote} del 20\%).
+\end{itemize}
+\end{quote}
+
+\subsubsection{1. Pasa de un Ciclo Lineal a Desarrollar en
+Paralelo}\label{pasa-de-un-ciclo-lineal-a-desarrollar-en-paralelo}
+
+\begin{itemize}
+\tightlist
+\item
+  El promotor promedio construye una obra cada 18 meses porque su
+  capital propio y su tiempo están atrapados hasta liquidar el proyecto
+  anterior.
+\item
+  Al digitalizar el levantamiento de equity y el back-office, puedes
+  correr \textbf{3 o 4 obras simultáneas} porque el tiempo de
+  estructuración y gestión ya no depende de tu capacidad humana.
+\end{itemize}
+
+\subsubsection{\texorpdfstring{2. El Efecto Rueda de Inversionistas
+(\emph{Reusable Investor
+Flywheel})}{2. El Efecto Rueda de Inversionistas (Reusable Investor Flywheel)}}\label{el-efecto-rueda-de-inversionistas-reusable-investor-flywheel}
+
+\begin{itemize}
+\tightlist
+\item
+  Los 200 o 400 inversionistas que fondearon tu primer proyecto ya
+  tienen su perfil creado, su pasaporte validado y su cuenta lista.
+\item
+  Cuando firmas la promesa de tu siguiente terreno, \textbf{no sales a
+  prospectar desde cero}: envías una notificación a tu base activa y
+  ellos reinvierten sus dividendos o nuevo capital en 24 horas. El costo
+  y tiempo de levantar tu segundo proyecto cae un 80\%.
+\end{itemize}
+
+\subsubsection{3. Multiplica tus Honorarios como Desarrollador
+(GP)}\label{multiplica-tus-honorarios-como-desarrollador-gp}
+
+Tus ganancias crecen directamente con el volumen de obra que
+administras: * Si gracias a la velocidad de BRIDS pasas de construir
+\textbf{\$2,000,000 USD a \$8,000,000 USD anuales}: * Tus
+\textbf{Honorarios de Desarrollo (\emph{Development Fee} del 4\%)} pasan
+de \$80,000 a \textbf{\$320,000 USD}. * Tus \textbf{Honorarios de
+Adquisición (1.5\%)} pasan de \$30,000 a \textbf{\$120,000 USD}. *
+\textbf{Cuadruplicas la rentabilidad neta de tu empresa desarrolladora
+sin inflar la nómina de tu oficina.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{5. Destruyendo las 5 Mayores Dudas y Objeciones del
+Promotor}\label{destruyendo-las-5-mayores-dudas-y-objeciones-del-promotor}
+
+Sabemos las preguntas que te estás haciendo. Aquí tienes las respuestas
+claras y sin rodeos:
+
+\subsubsection{❓ 1. ``¿Pierdo el control de mi obra o de la
+propiedad?''}\label{pierdo-el-control-de-mi-obra-o-de-la-propiedad}
+
+\begin{quote}
+\textbf{ABSOLUTAMENTE NO.}\\
+Tú eres el \textbf{General Partner (GP) / Administrador} del SPV y
+mantienes el \textbf{100\% del control operativo, técnico y comercial}:
+decides qué contratista contratas, cómo ejecutas la obra, a qué precio
+vendes y cuándo liquidas. Los inversionistas retail entran como socios
+comanditarios pasivos (\emph{Limited Partners}); tienen derecho a sus
+rendimientos económicos, pero \textbf{no tienen voto sobre las
+decisiones del día a día}.
+\end{quote}
+
+\subsubsection{❓ 2. ``¿Qué pasa con el crédito de mi banco? ¿Me cobran
+por todo el
+edificio?''}\label{quuxe9-pasa-con-el-cruxe9dito-de-mi-banco-me-cobran-por-todo-el-edificio}
+
+\begin{quote}
+\textbf{NO.} Respetamos al 100\% tu estructura de financiamiento
+(\emph{Capital Stack}):\\
+Si tu edificio cuesta \textbf{\$2,000,000 USD} y el banco te financia el
+70\% (\$1.4M), solo necesitas levantar \textbf{\$600,000 USD de equity
+propio}.\\
+\textbf{Solo contabilizamos los \$600,000 USD que colocas en la
+plataforma.} La hipoteca bancaria mantiene su gravamen de primer grado
+(\emph{1st Lien}) intacto sobre el inmueble, y jamás te cobramos un
+centavo sobre la deuda que te otorgó el banco.
+\end{quote}
+
+\subsubsection{❓ 3. ``¿Qué pasa si entran 500 personas? ¿Me volveré
+loco con los impuestos y
+K-1s?''}\label{quuxe9-pasa-si-entran-500-personas-me-volveruxe9-loco-con-los-impuestos-y-k-1s}
+
+\begin{quote}
+\textbf{CERO TRABAJO PARA TI.}\\
+* \textbf{Inversionistas Internacionales (la gran mayoría):} Firman su
+\textbf{Formulario W-8BEN en 30 segundos} en la web. No presentan
+declaración en EE.UU. ni reciben K-1. La plataforma retiene el impuesto
+en cada pago de renta y en enero les emite automáticamente su
+\textbf{Formulario 1042-S oficial vía API por \$1 USD}. *
+\textbf{Compras Grandes (un inversor que mete \$100,000 USD / 500
+fracciones):} Firma \textbf{un solo W-8BEN} (válido por 3 años) y recibe
+\textbf{un solo Formulario 1042-S anual}. Cero papeleo repetitivo. *
+\textbf{Inversionistas de EE.UU.:} La declaración de la sociedad y los
+K-1s se emiten con software masivo homologado ante el IRS (TaxZerone)
+por una tarifa plana de \textbf{\$180 USD por proyecto}, eliminando las
+facturas de miles de dólares de contadores tradicionales.
+\end{quote}
+
+\subsubsection{❓ 4. ``¿Mis inversionistas necesitan saber de
+criptomonedas o tener billeteras
+complejas?''}\label{mis-inversionistas-necesitan-saber-de-criptomonedas-o-tener-billeteras-complejas}
+
+\begin{quote}
+\textbf{NO.} La experiencia de usuario es \textbf{100\% Web2
+tradicional}:\\
+Tus inversionistas inician sesión con su correo electrónico o cuenta de
+Google. Pagan mediante \textbf{transferencia bancaria tradicional (Wire
+/ ACH), tarjeta o dólares digitales (USDC)} si así lo prefieren. La
+tecnología blockchain corre por debajo como un motor silencioso de
+contabilidad; tus clientes solo ven una plataforma moderna de inversión
+inmobiliaria.
+\end{quote}
+
+\subsubsection{❓ 5. ``¿Y si el proyecto no se fondea por completo en
+los 90
+días?''}\label{y-si-el-proyecto-no-se-fondea-por-completo-en-los-90-duxedas}
+
+\begin{quote}
+\textbf{RIESGO CERO.}\\
+La plataforma opera con cuentas de depósito en garantía (\emph{escrow}
+condicional). Si por alguna razón de mercado no se alcanza el capital
+mínimo necesario para arrancar la obra, los fondos se reintegran
+automáticamente a los inversionistas con un solo clic. No hay demandas,
+no hay fondos mezclados y tu empresa no asume pasivos.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{6. La Oferta Irresistible de Entrada: ``Genesis Sponsor
+Program''}\label{la-oferta-irresistible-de-entrada-genesis-sponsor-program}
+
+Para que experimentes la velocidad de nuestra infraestructura sin
+arriesgar capital propio, creamos una oferta sin precedentes en la
+industria:
+
+\begin{quote}
+\mbox{}%
+\subsubsection{🏆 GENESIS SPONSOR PROGRAM (PILOTO
+GÉNESIS)}\label{genesis-sponsor-program-piloto-guxe9nesis}
+
+\begin{itemize}
+\tightlist
+\item
+  ✅ \textbf{Setup de Software Bonificado al 100\%:} \$0 USD.
+\item
+  ✅ \textbf{Constitución de la Entidad SPV en EE.UU.:} Absorbida por
+  BRIDS.
+\item
+  ✅ \textbf{Cuenta Bancaria Comercial en Dólares:} Incluida sin costo.
+\item
+  ✅ \textbf{Despliegue de tu Portal de Inversionistas:} Listo en días.
+\item
+  ✅ \textbf{Capacidad de Recaudo Cubierta:} Hasta \$500,000 USD de
+  equity.
+\end{itemize}
+
+👉 \textbf{Tu Riesgo Financiero de Entrada:} \textbf{EXACTAMENTE \$0
+USD.}
+\end{quote}
+
+\subsubsection{¿Cómo Gana BRIDS?}\label{cuxf3mo-gana-brids}
+
+Nosotros solo cobramos si tú ganas: la plataforma percibe una
+\textbf{tarifa fija de software de \$4 USD por cada fracción de \$200
+USD emitida} en el momento en que tus inversionistas aportan el capital.
+Si tú no fondeas, nosotros no ganamos.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{7. Comparativa Transparente: BRIDS vs.~Tus Opciones de
+Mercado}\label{comparativa-transparente-brids-vs.-tus-opciones-de-mercado}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Dimensión de Decisión
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Vía Tradicional con Abogados
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Portales SaaS Web2 (InvestNext / Juniper)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Marketplaces Cripto (RealT / Lofty)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\textbf{BRIDS.io (Genesis Sponsor)}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Costo Inicial (Día 1)} & \$25,000 -- \$45,000 USD & \$6,000 --
+\$18,000 USD/año & 5\% -- 10\% del activo & \textbf{\$0 USD (100\%
+Bonificado)} \\
+\textbf{¿Crea el SPV y la Cuenta Bancaria?} & No (contratas gestores) &
+❌ No (solo software) & Compran tu casa con descuento & ✅ \textbf{SÍ
+(Todo incluido)} \\
+\textbf{¿Conserva tu Marca y Reputación?} & ✅ Sí (Analógico) & ✅ Sí &
+❌ No (Marca de ellos) & ✅ \textbf{SÍ (Tu propio portal)} \\
+\textbf{Tiempo para Salir al Mercado} & 60 a 90 días & 30 a 60 días & 30
+a 60 días & \textbf{Menos de 10 días hábiles} \\
+\textbf{Gestión Fiscal de Inversores} & \$200/K-1 manual & Manual o
+módulo costoso & Sin soporte formal & \textbf{Automatizada por API (\$1
+USD)} \\
+\textbf{Re-inversión en tus Siguientes Deals} & Manual caso por caso &
+Manual por email & No aplicable & \textbf{1 Clic en tu base cautiva} \\
+\textbf{Riesgo Financiero de Prueba} & Muy Alto & Alto & Pérdida de
+control & \textbf{CERO ABSOLUTO} \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{8. Tarifas Transparentes Post-Piloto: Crece a tu
+Ritmo}\label{tarifas-transparentes-post-piloto-crece-a-tu-ritmo}
+
+Una vez que completes tu primer levantamiento y valides la eficiencia
+del sistema, tienes acceso a tarifas comerciales fijas basadas en tu
+\textbf{cupo acumulado de equity sindicado}:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2083}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Nivel de Suscripción
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Cupo de Recaudo de Equity
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Proyectos Típicos
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Cuota de Capacidad
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Tarifa por Fracción
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Proyecto Piloto (Génesis)} & \textbf{Hasta \$500,000 USD} & 1 a
+2 proyectos & \textbf{\$0 USD (100\% Bonificado)} & \$4 USD /
+fracción \\
+\textbf{Tier 1 (Renovación)} & \textbf{Hasta \$500,000 USD} & 1 a 2
+proyectos & \textbf{\$3,500 USD} & \$4 USD / fracción \\
+\textbf{Tier 2} & \textbf{Hasta \$1,000,000 USD} & 1 a 3 proyectos &
+\textbf{\$5,500 USD} & \$4 USD / fracción \\
+\textbf{Tier 3} & \textbf{\$1,000,000 a \$3,000,000 USD} & 2 a 5
+proyectos & \textbf{\$8,500 USD} & \$4 USD / fracción \\
+\textbf{Tier 4 (Institucional)} & \textbf{Más de \$3,000,000 USD} &
+Cartera Ilimitada & \textbf{\$12,500 USD} & \$4 USD / fracción \\
+\end{longtable}
+}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Sin mensualidades forzadas:} No pagas mensualidades cuando
+  estés esperando una licencia municipal o en diseño arquitectónico.
+\item
+  \textbf{Flexibilidad Total de Cartera:} Un solo cupo de \$1,000,000
+  USD se puede consumir en un proyecto grande o repartir en \textbf{dos
+  o tres proyectos simultáneos}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{9. Requisitos de Elegibilidad para el Piloto
+Gratuito}\label{requisitos-de-elegibilidad-para-el-piloto-gratuito}
+
+Para activar la bonificación de \$0 en tu primer proyecto, únicamente
+solicitamos:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Inmueble Calificado:} Título de propiedad, promesa de
+  compraventa con arras consignadas o contrato de opción de compra sobre
+  un activo en EE.UU.
+\item
+  \textbf{Brecha de Equity Definida:} Necesidad de levantamiento de
+  capital propio de hasta \textbf{\$500,000 USD} para el deal piloto.
+\item
+  \textbf{Exclusividad Digital de 90 Días:} Compromiso mutuo de 90 días
+  para colocar la oferta a través de la infraestructura de BRIDS.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{10. Próximo Paso: Agenda una Sesión de Estructuración de 20
+Minutos}\label{pruxf3ximo-paso-agenda-una-sesiuxf3n-de-estructuraciuxf3n-de-20-minutos}
+
+Si tienes un proyecto en cartera o en proceso de adquisición, no sigas
+quemando semanas ni pagando miles de dólares en abogados antes de
+tiempo.
+
+Corramos juntos los números de tu estructura de capital (\emph{capital
+stack}) y te mostraremos exactamente cómo se verá tu portal de
+sindicación activo la próxima semana.
+
+\begin{quote}
+\mbox{}%
+\subsubsection{📞 Llamados a la Acción
+Disponibles}\label{llamados-a-la-acciuxf3n-disponibles}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Llamado Primario:} \emph{``Agenda una sesión de estructuración
+  de 20 minutos con el equipo fundador y revisemos la viabilidad de tu
+  próximo inmueble.''}
+\item
+  \textbf{Llamado Secundario (Solicitud Rápida de Análisis):}
+  \emph{``Envíanos el resumen ejecutivo o pro-forma de tu proyecto a
+  \texttt{founders@brids.io} y te devolvemos la simulación de fondeo en
+  24 horas.''}
+\end{itemize}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+👉 \textbf{Canales Institucionales Directos:}\\
+* 🌐 \textbf{Sitio Web Oficial:} \url{https://brids.io}\\
+* 📩 \textbf{Email Directo de Alianzas:} \texttt{founders@brids.io} /
+\texttt{partners@brids.io}\\
+* 🏢 \textbf{Data Room \& Demostración de Portal:} Disponible para
+promotores calificados previa solicitud.
+
+\end{document}

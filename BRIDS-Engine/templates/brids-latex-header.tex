@@ -1,6 +1,20 @@
 % ═══════════════════════════════════════════════════════════════════════════
-% 🏛️ BRIDS KNOWLEDGE FORT - INSTITUTIONAL LATEX TEMPLATE HEADER (v1.0)
+% 🏛️ BRIDS KNOWLEDGE FORT - INSTITUTIONAL LATEX TEMPLATE HEADER (v2.0)
 % ═══════════════════════════════════════════════════════════════════════════
+
+\usepackage{fontspec}
+\setmainfont{Helvetica}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  margin=2.0cm,
+  top=2.7cm,
+  bottom=2.4cm,
+  headheight=32pt,
+  headsep=14pt,
+  footskip=20pt
+}
 
 \usepackage{xcolor}
 \usepackage{fancyhdr}
@@ -8,7 +22,12 @@
 \usepackage{titlesec}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{colortbl}
 \usepackage{amsmath,amssymb}
+\usepackage{pifont}
+\usepackage{newunicodechar}
+\usepackage{tcolorbox}
+\usepackage{microtype}
 \usepackage{hyperref}
 
 % Paleta Oficial BRIDS (brand-visual-style-guide.md)
@@ -17,8 +36,11 @@
 \definecolor{bridsBlue}{HTML}{00B0F9}      % Acento Gradient Primario
 \definecolor{bridsPurple}{HTML}{CF84F9}    % Acento Gradient Secundario
 \definecolor{bridsLight}{HTML}{F8F9FA}     % Fondo Gris Titanio
-\definecolor{bridsBorder}{HTML}{E2E8F0}    % Bordes y divisores
+\definecolor{bridsBorder}{HTML}{CBD5E1}    % Bordes y divisores
 \definecolor{bridsMuted}{HTML}{64748B}     % Texto secundario / Muted
+\definecolor{bridsDarkGreen}{HTML}{0E8345} % Éxito / Checked
+\definecolor{bridsDarkRed}{HTML}{C53030}   % Alerta / Cross
+\definecolor{bridsGold}{HTML}{D97706}      % Oro / Warning
 
 % Configuración de Hipervínculos
 \hypersetup{
@@ -32,28 +54,85 @@
 % Formato de Secciones y Encabezados
 \titleformat{\section}
   {\color{bridsDeep}\normalfont\Large\bfseries}
-  {\thesection}{1em}{}
+  {\thesection}{0.8em}{}
   [{\color{bridsBlue}\titlerule[1.2pt]}]
 
 \titleformat{\subsection}
   {\color{bridsDeep}\normalfont\large\bfseries}
-  {\thesubsection}{1em}{}
+  {\thesubsection}{0.8em}{}
 
 \titleformat{\subsubsection}
   {\color{bridsDeep}\normalfont\normalsize\bfseries}
-  {\thesubsubsection}{1em}{}
+  {\thesubsubsection}{0.8em}{}
 
-% Encabezados y Pies de Página
+% Redefinición del entorno de citas de Pandoc (Callout Cards)
+\renewenvironment{quote}{%
+  \vspace{0.4em}
+  \begin{tcolorbox}[
+    colback=bridsLight,
+    colframe=bridsBlue!80!bridsDeep,
+    arc=2mm,
+    boxrule=1pt,
+    left=10pt,
+    right=10pt,
+    top=8pt,
+    bottom=8pt,
+    before skip=6pt,
+    after skip=8pt
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+% Mapeo de caracteres Unicode y Emojis a símbolos tipográficos limpios
+\newunicodechar{✅}{\textcolor{bridsDarkGreen}{\ding{52}}\space}
+\newunicodechar{❌}{\textcolor{bridsDarkRed}{\ding{56}}\space}
+\newunicodechar{👉}{\textcolor{bridsBlue}{\ding{222}}\space}
+\newunicodechar{📌}{\textcolor{bridsBlue}{\ding{228}}\space}
+\newunicodechar{⚡}{\textcolor{bridsGold}{\textbf{[!]}}\space}
+\newunicodechar{❓}{\textcolor{bridsBlue}{\textbf{[?]}}\space}
+\newunicodechar{💡}{\textcolor{bridsGold}{\textbf{[i]}}\space}
+\newunicodechar{💬}{\textcolor{bridsBlue}{\textbf{[NOTA]}}\space}
+\newunicodechar{📊}{\textcolor{bridsBlue}{\textbf{[DATA]}}\space}
+\newunicodechar{🏢}{\textcolor{bridsDeep}{\textbf{[SPV]}}\space}
+\newunicodechar{🏡}{\textcolor{bridsDeep}{\textbf{[ASSET]}}\space}
+\newunicodechar{📄}{\textcolor{bridsDeep}{\textbf{[DOC]}}\space}
+\newunicodechar{💰}{\textcolor{bridsDarkGreen}{\textbf{[\$]}}\space}
+\newunicodechar{🚀}{\textcolor{bridsBlue}{\textbf{[GTM]}}\space}
+\newunicodechar{🏆}{\textcolor{bridsGold}{\textbf{[TOP]}}\space}
+\newunicodechar{📞}{\textcolor{bridsBlue}{\textbf{[TEL]}}\space}
+\newunicodechar{🌐}{\textcolor{bridsBlue}{\textbf{[WEB]}}\space}
+\newunicodechar{📩}{\textcolor{bridsBlue}{\textbf{[EMAIL]}}\space}
+\newunicodechar{🎯}{\textcolor{bridsGold}{\textbf{[OBJ]}}\space}
+\newunicodechar{📈}{\textcolor{bridsDarkGreen}{\textbf{[GROWTH]}}\space}
+\newunicodechar{🔄}{\textcolor{bridsBlue}{\textbf{[CYCLE]}}\space}
+\newunicodechar{🧭}{\textcolor{bridsBlue}{\textbf{[MAP]}}\space}
+\newunicodechar{•}{\textbullet\space}
+
+% Mapeo de caracteres de dibujo de cajas ASCII
+\newunicodechar{┌}{+}
+\newunicodechar{┐}{+}
+\newunicodechar{└}{+}
+\newunicodechar{┘}{+}
+\newunicodechar{─}{-}
+\newunicodechar{│}{|}
+\newunicodechar{├}{+}
+\newunicodechar{┤}{+}
+\newunicodechar{┬}{+}
+\newunicodechar{┴}{+}
+\newunicodechar{┼}{+}
+
+% Configuración de Encabezados y Pies de Página
 \pagestyle{fancy}
 \fancyhf{}
-\setlength{\headheight}{28pt}
+\setlength{\headheight}{30pt}
 
 % Header
-\lhead{\footnotesize\textcolor{bridsMuted}{\textbf{BRIDS} \textbar\ Infrastructure \& Real World Assets}}
+\lhead{\footnotesize\textcolor{bridsMuted}{\textbf{BRIDS} \textbar\ Sindicación Inmobiliaria \& RWA}}
 \rhead{\includegraphics[height=0.55cm]{brids-logo-dark.pdf}}
 
 % Footer
-\lfoot{\footnotesize\textcolor{bridsMuted}{\copyright\ 2026 BRIDS.io -- All Rights Reserved}}
+\lfoot{\footnotesize\textcolor{bridsMuted}{\copyright\ 2026 BRIDS.io -- Todos los derechos reservados}}
 \rfoot{\footnotesize\textcolor{bridsMuted}{Página \thepage}}
 
 \renewcommand{\headrulewidth}{0.5pt}

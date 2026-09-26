@@ -77,13 +77,13 @@ BRIDS cobra una **tarifa fija de software de \$4 USD por cada fracción de \$200
 
 El promotor compra una **Capacidad de Recaudo de Equity (Equity Allowance)** que puede consumir en **un solo proyecto grande o repartir en varios proyectos simultáneos**:
 
-```mermaid
-flowchart LR
-    Cupo["Suscripción Tier 2: $1,000,000 USD de Cupo de Equity ($5,500 USD)"]
-    Cupo --> P1["Proyecto A: Edificio de $2M USD<br/>Banco presta $1.4M (70%)<br/>Consume $600K de Equity en BRIDS"]
-    Cupo --> P2["Proyecto B: Fix & Flip de $500K USD<br/>Banco presta $300K (60%)<br/>Consume $200K de Equity en BRIDS"]
-    Cupo --> Saldo["Saldo Remanente de Cupo: $200K USD<br/>(Listo para un 3er Proyecto sin pagar nuevo setup)"]
-```
+> ### 💡 Dinámica de Consumo del Cupo de Equity (Ejemplo Tier 2)
+> 
+> * **Suscripción Tier 2 (\$5,500 USD):** Otorga un cupo acumulado de **\$1,000,000 USD de equity**.
+> * **Proyecto A (Edificio de \$2M USD):** Banco presta \$1.4M (70%). Consume **\$600,000 USD de equity** en BRIDS.
+> * **Proyecto B (Fix \& Flip de \$500K USD):** Banco presta \$300K (60%). Consume **\$200,000 USD de equity** en BRIDS.
+> * **Saldo Remanente:** Le quedan **\$200,000 USD de cupo** listos para un 3er proyecto sin pagar nuevo fee de setup.
+
 
 ### Tabla Maestra de Precios y Márgenes de BRIDS
 
