@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <i>"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados desde $200 USD."</i>
+  <i>"Secure, accessible, and traceable Web3 infrastructure for investing in structured real estate from $200 USD."</i>
 </p>
 
 <p align="center">
@@ -24,25 +24,25 @@
 </p>
 
 <p align="center">
-  <a href="#-executive-summary-english"><b>Executive Summary</b></a> •
+  <a href="#-executive-summary"><b>Executive Summary</b></a> •
   <a href="#-fast-track-due-diligence-index-3-minute-evaluation"><b>Due Diligence Index</b></a> •
-  <a href="#️-pilares-de-negocio--arquitectura-bridsio"><b>Business & Tech Pillars</b></a> •
-  <a href="#️-taxonomía-oficial-de-la-bóveda-brids-brain"><b>Knowledge Vault</b></a> •
-  <a href="#-motor-autónomo-sdd--squad-de-sub-agentes-brids-engine"><b>Autonomous Engine</b></a> •
-  <a href="#-equipo-fundador--contacto-institucional"><b>Founders & Contact</b></a>
+  <a href="#️-business--technology-pillars"><b>Business & Tech Pillars</b></a> •
+  <a href="#️-official-vault-taxonomy-brids-brain"><b>Knowledge Vault</b></a> •
+  <a href="#-autonomous-sdd-engine--sub-agent-squad-brids-engine"><b>Autonomous Engine</b></a> •
+  <a href="#-founding-team--institutional-contact"><b>Founders & Contact</b></a>
 </p>
 
 ---
 
 ### 📊 Quick Facts & Core Unit Economics
 
-| 🏷️ Ticket Mínimo | ⚡ Costo por Transacción | 🛡️ Estructura Societaria | 📈 Margen de Software |
+| 🏷️ Minimum Investment | ⚡ Network Transaction Cost | 🛡️ Corporate Legal Moat | 📈 Software Gross Margin |
 | :---: | :---: | :---: | :---: |
-| **\$200 USD**<br><sub>Acceso Retail Global</sub> | **< \$0.001 USD**<br><sub>Rendimientos mensuales en Solana</sub> | **Dual-Entity Delaware**<br><sub>No Broker-Dealer (Sec. 15a1)</sub> | **> 85% SaaS**<br><sub>Tarifa plana \$4 USD/fracción</sub> |
+| **\$200 USD**<br><sub>Global Retail Access</sub> | **< \$0.001 USD**<br><sub>Automated monthly yield in USDC</sub> | **Dual-Entity Delaware**<br><sub>Non-Broker-Dealer (Sec. 15a1)</sub> | **> 85% SaaS**<br><sub>Flat fee \$4 USD/fraction</sub> |
 
 ---
 
-## 🌐 Executive Summary (English)
+## 🌐 Executive Summary
 
 > [!NOTE]
 > **One-Liner:** **"Shopify + Carta for Real Estate Syndication on Solana."**  
@@ -56,7 +56,7 @@
 
 > [!WARNING]
 > **The 4 Structural Traps of Traditional & First-Generation Web3 Syndication:**
-> 1. **Capital Illiquidity & High Interest Rates (~7%):** Mid-sized real estate developers face prolonged funding cycles (6–12 months) and high debt costs. Traditional syndication costs between \$30,000 and \$50,000 USD in legal overhead alone, requiring minimum tickets of \$25,000–\$50,000 USD that exclude 90%+ of retail investors.
+> 1. **Capital Illiquidity & High Interest Rates (~7%):** Mid-sized real estate developers face prolonged funding cycles (6–12 months) and heavy debt costs. Traditional syndication costs between \$30,000 and \$50,000 USD in legal overhead alone, requiring minimum tickets of \$25,000–\$50,000 USD that exclude 90%+ of retail investors.
 > 2. **The "Seed Phrase Trap" in Web3:** Traditional ERC-20/ERC-3643 tokens cause complete asset forfeiture if a retail user loses their private keys or seed phrase, creating unacceptable fiduciary friction for real estate equity.
 > 3. **Prohibitive Ethereum Gas Fees:** Executing dividend payouts and fractional transfers on EVM chains costs \$10–\$50 USD per transaction, mathematically destroying the unit economics of a \$200 USD micro-investment.
 > 4. **Regulatory Risk (Illegal Broker-Dealer Status):** Many first-generation RWA platforms charged percentage-based take-rates on raised capital without a FINRA/SEC broker-dealer license, exposing their platforms to regulatory shutdown.
@@ -86,158 +86,158 @@
 
 ## ⚡ Fast-Track Due Diligence Index (3-Minute Evaluation)
 
-Para analistas de Venture Capital, jurados de hackathons (Colosseum, Solana Foundation), comités de aceleradoras (Y Combinator, Techstars) y promotores inmobiliarios, este repositorio constituye el **Data Room Institucional** y fuente de verdad de BRIDS.io.
+For Venture Capital analysts, hackathon judges (Colosseum, Solana Foundation), accelerator selection committees (Y Combinator, Techstars), and institutional real estate sponsors, this repository serves as the **Institutional Data Room** and single source of truth for BRIDS.io.
 
-Haz clic en los enlaces para acceder directamente a la documentación viva en la bóveda [`BRIDS-Brain/`](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/):
+Click the links below to navigate directly to the canonical source documents inside the persistent vault [`BRIDS-Brain/`](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/):
 
-| Eje de Due Diligence | Pregunta Clave del Evaluador | Documento de Verificación Canónico | Ubicación en Bóveda |
+| Due Diligence Axis | Evaluator Core Question | Canonical Verification Document | Vault Destination |
 | :--- | :--- | :--- | :--- |
-| <img src="https://img.shields.io/badge/EJE%201-TESIS%20%26%20PITCH-00B0F9?style=flat-square" alt="Tesis"> | *¿Cuál es la tesis RWA, la ventaja asimétrica y la visión de escala de BRIDS?* | 📄 [Master Business Concepts (C1–C10)](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/01%20Estrategia%20%26%20Modelo/master-business-concepts.md)<br>• [YC Master Application Brief](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/00%20Inbox/Specs/yc-application-master-template-2025.spec.md)<br>• [Tesis de Sindicación y Rieles de Hitos](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/01%20Estrategia%20%26%20Modelo/rwa-milestone-disbursement-rail.md) | `01 Negocio/01 Estrategia & Modelo/` |
-| <img src="https://img.shields.io/badge/EJE%202-FINANZAS%20%26%20SAAS-14F195?style=flat-square&logoColor=black" alt="Finanzas"> | *¿Cómo genera ingresos BRIDS, cuáles son los unit economics y cómo se estructura el Cap Table?* | 📄 [Estructura de Tarifas SaaS ($4/fracción)](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/01%20Estrategia%20%26%20Modelo/master-business-concepts.md#concepto-5--arquitectura-de-tarifas-fijas-y-economía-unitaria-saas-c5)<br>• [Guía Fundraising SAFE, QSBS & Cap Table](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/04%20Finanzas%20%26%20YC%20Investors/guia-fundraising-safe-qsbs-cap-table.md)<br>• [YC Use of Funds & Capital Plan](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/00%20Inbox/Specs/yc-use-of-funds-capital-plan.spec.md) | `01 Negocio/04 Finanzas & YC Investors/` |
-| <img src="https://img.shields.io/badge/EJE%203-LEGAL%20%26%20CUMPLIMIENTO-0A2540?style=flat-square" alt="Legal"> | *¿Por qué BRIDS no es un Broker-Dealer no regulado y cómo opera el marco tributario/KYC?* | 📄 [Hoja de Ruta Regulatoria 3 Fases SEC/ATS](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20%26%20Cumplimiento/hoja-ruta-regulatoria-3-fases-broker-dealer-ats.md)<br>• [Comparativa LLC vs Delaware C-Corp](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20%26%20Cumplimiento/comparativa-llc-vs-c-corp-estrategia-bootstrap.md)<br>• [Manual Fiscal IRS & Calendario Tributario](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20%26%20Cumplimiento/manual-cumplimiento-tributario-irs-calendario-fiscal.md)<br>• [Partner Bancario & Societario (Stablecorp)](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20%26%20Cumplimiento/proveedor-oficial-incorporacion-banca-stablecorp.md) | `01 Negocio/03 Legal & Cumplimiento/` |
-| <img src="https://img.shields.io/badge/EJE%204-TECNOLOGÍA%20SOLANA-9945FF?style=flat-square" alt="Tech"> | *¿Cómo funcionan los contratos Metaplex Core, la dispersión con Squads y el status del MVP?* | 📄 [App Technical Roadmap & Investor Brief](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/02%20Producto%20%26%20Ingenieria/app-technical-roadmap-investor-brief.md)<br>• [Current Product Status Matrix](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/02%20Producto%20%26%20Ingenieria/current-product-status-matrix.md)<br>• [Módulo Desarrollador & SPV Engine](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/02%20Producto%20%26%20Ingenieria/modulo-desarrollador-spv-engine.md) | `01 Negocio/02 Producto & Ingenieria/` |
-| <img src="https://img.shields.io/badge/EJE%205-TRACCIÓN%20%26%20GTM-FF6600?style=flat-square" alt="GTM"> | *¿Cómo atrae BRIDS a los promotores y cuál es la estrategia de marketing y distribución?* | 📄 [Parrilla Editorial Maestra RWA (15 Posts)](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/02%20Marketing/02%20Estrategia%20%26%20Parrilla/parrilla-publicaciones-redes-sociales.md)<br>• [Contexto Maestro de Producto & Marketing](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/02%20Marketing/01%20Contexto%20de%20Marca/product-marketing-context.md)<br>• [Publicaciones Multicanal & Carruseles Educativos](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/02%20Marketing/03%20Redes%20Sociales%20%26%20Contenido/) | `02 Marketing/` |
+| <img src="https://img.shields.io/badge/AXIS%201-THESIS%20%26%20PITCH-00B0F9?style=flat-square" alt="Thesis"> | *What is the RWA thesis, asymmetric moat, and scalability vision of BRIDS?* | 📄 [Master Business Concepts (C1–C10)](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/01%20Estrategia%20%26%20Modelo/master-business-concepts.md)<br>• [YC Master Application Brief](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/00%20Inbox/Specs/yc-application-master-template-2025.spec.md)<br>• [Syndication Thesis & Milestone Disbursement Rails](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/01%20Estrategia%20%26%20Modelo/rwa-milestone-disbursement-rail.md) | `01 Negocio/01 Estrategia & Modelo/` |
+| <img src="https://img.shields.io/badge/AXIS%202-FINANCE%20%26%20SAAS-14F195?style=flat-square&logoColor=black" alt="Finance"> | *How does BRIDS generate revenue, what are the unit economics, and how is the Cap Table structured?* | 📄 [SaaS Fee Architecture ($4/fraction)](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/01%20Estrategia%20%26%20Modelo/master-business-concepts.md#concepto-5--arquitectura-de-tarifas-fijas-y-economía-unitaria-saas-c5)<br>• [Fundraising Guide: SAFE, QSBS & Cap Table](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/04%20Finanzas%20%26%20YC%20Investors/guia-fundraising-safe-qsbs-cap-table.md)<br>• [YC Use of Funds & Capital Plan](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/00%20Inbox/Specs/yc-use-of-funds-capital-plan.spec.md) | `01 Negocio/04 Finanzas & YC Investors/` |
+| <img src="https://img.shields.io/badge/AXIS%203-LEGAL%20%26%20COMPLIANCE-0A2540?style=flat-square" alt="Legal"> | *Why is BRIDS protected from Broker-Dealer status, and how does tax/KYC compliance work?* | 📄 [3-Phase Regulatory Roadmap: SEC & ATS](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20%26%20Cumplimiento/hoja-ruta-regulatoria-3-fases-broker-dealer-ats.md)<br>• [Comparative Analysis: LLC vs Delaware C-Corp](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20%26%20Cumplimiento/comparativa-llc-vs-c-corp-estrategia-bootstrap.md)<br>• [IRS Tax Compliance Manual & Fiscal Calendar](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20%26%20Cumplimiento/manual-cumplimiento-tributario-irs-calendario-fiscal.md)<br>• [Official Banking & Incorporation Partner (Stablecorp)](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/03%20Legal%20%26%20Cumplimiento/proveedor-oficial-incorporacion-banca-stablecorp.md) | `01 Negocio/03 Legal & Cumplimiento/` |
+| <img src="https://img.shields.io/badge/AXIS%204-SOLANA%20TECH%20STACK-9945FF?style=flat-square" alt="Tech"> | *How do Metaplex Core contracts, Squads distributions, and the Devnet MVP work?* | 📄 [App Technical Roadmap & Investor Brief](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/02%20Producto%20%26%20Ingenieria/app-technical-roadmap-investor-brief.md)<br>• [Current Product Status Matrix](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/02%20Producto%20%26%20Ingenieria/current-product-status-matrix.md)<br>• [Developer Module & SPV Engine](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/02%20Producto%20%26%20Ingenieria/modulo-desarrollador-spv-engine.md) | `01 Negocio/02 Producto & Ingenieria/` |
+| <img src="https://img.shields.io/badge/AXIS%205-TRACTION%20%26%20GTM-FF6600?style=flat-square" alt="GTM"> | *How does BRIDS acquire developers and execute distribution and content strategy?* | 📄 [Master Editorial Content Grid (15 RWA Posts)](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/02%20Marketing/02%20Estrategia%20%26%20Parrilla/parrilla-publicaciones-redes-sociales.md)<br>• [Master Product & Marketing Context](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/02%20Marketing/01%20Contexto%20de%20Marca/product-marketing-context.md)<br>• [Multichannel Posts & 4-Slide Educational Carousels](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/02%20Marketing/03%20Redes%20Sociales%20%26%20Contenido/) | `02 Marketing/` |
 
 ---
 
-## 🏛️ Pilares de Negocio & Arquitectura BRIDS.io
+## 🏛️ Business & Technology Pillars
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0B192C', 'primaryTextColor': '#F8F9FA', 'primaryBorderColor': '#14F195', 'lineColor': '#00B0F9', 'secondaryColor': '#1E293B', 'tertiaryColor': '#0F172A', 'fontSize': '14px'}}}%%
 flowchart TD
-    subgraph Legal_Ecosystem["🏛️ Ecosistema Legal & Estructuración (Dual-Entity)"]
-        A["🏢 BRIDS Inc.<br/><b>Delaware C-Corp</b><br/><i>Software SaaS / Sin Custodia</i>"] ---|Contrato SaaS| B["📑 Delaware SPVs (Series LLCs)<br/><i>Emisoras de Títulos Legales</i>"]
-        B ---|Propiedad Real Fee-Simple| C["🏡 Activo Inmobiliario en EE.UU.<br/><i>Residencial / Multifamily</i>"]
+    subgraph Legal_Ecosystem["🏛️ Legal & Structuring Ecosystem (Dual-Entity)"]
+        A["🏢 BRIDS Inc.<br/><b>Delaware C-Corp</b><br/><i>SaaS Software / Non-Custodial</i>"] ---|SaaS Technology Agreement| B["📑 Dedicated Delaware SPVs (Series LLCs)<br/><i>Legal Title Issuers</i>"]
+        B ---|Fee-Simple Real Property Deed| C["🏡 US Real Estate Assets<br/><i>Residential / Multifamily</i>"]
     end
 
-    subgraph Tech_Ecosystem["⚡ Capa Tecnológica & Liquidación en Solana"]
-        D["👤 Inversionista Global / Retail<br/><b>Ticket mín. $200 USD</b>"] -->|KYC Biométrico| E["🛡️ Stripe Identity<br/><i>Verificación Off-chain</i>"]
-        D -->|USDC / Gas <$0.001| F["💎 Metaplex Core Asset<br/><b>Plugins: Freeze & Recovery</b>"]
-        F ---|Dispersión de Rentas| G["🔐 Squads Protocol v4 Multi-Sig<br/><i>Custodia Segura No Fiduciaria</i>"]
+    subgraph Tech_Ecosystem["⚡ Technology & Solana Settlement Layer"]
+        D["👤 Global / Retail Investor<br/><b>Min. Ticket $200 USD</b>"] -->|Biometric KYC| E["🛡️ Stripe Identity<br/><i>Off-chain Identity Verification</i>"]
+        D -->|USDC / Gas <$0.001| F["💎 Metaplex Core Digital Asset<br/><b>Plugins: Freeze & Recovery</b>"]
+        F ---|Automated Yield Distributions| G["🔐 Squads Protocol v4 Multi-Sig<br/><i>Secure Non-Custodial Treasury</i>"]
     end
 
-    B -.->|Representación Digital On-chain| F
+    B -.->|On-Chain Digital Representation| F
 ```
 
-### 1. Desacoplamiento Dual-Entity
-- **BRIDS Inc. (Delaware C-Corp):** Exclusivamente proveedora de software. No custodia fondos fiduciarios ni activos físicos, amparada en los criterios de exención bajo la Sección 15(a)(1) del Securities Exchange Act de 1934.
-- **SPV Emisora (Delaware Series LLC):** Cada propiedad se aísla jurídicamente en una subsidiaria SPV independiente que ostenta el título de propiedad (*fee-simple*) y mantiene el *Master Securityholder File* oficial.
+### 1. Dual-Entity Structural Decoupling
+- **BRIDS Inc. (Delaware C-Corp):** Exclusively a software and technology vendor. It never exercises discretionary custody over client funds or holds real property titles, operating strictly within the safe-harbor parameters of Section 15(a)(1) of the Securities Exchange Act of 1934.
+- **Dedicated Issuer SPVs (Delaware Series LLCs):** Each physical property is ring-fenced inside an independent Delaware SPV subsidiary holding fee-simple legal deed title and maintaining the official *Master Securityholder File*.
 
-### 2. Recuperación Asistida de Títulos (Lost-Key Recovery)
-Los tokens representativos se emiten bajo el estándar **Metaplex Core** con plugins de delegación permanente gestionados por la SPV. Ante el extravío o robo de llaves privadas:
-1. El usuario realiza una re-verificación biométrica y documental a través de **Stripe Identity**.
-2. Al validarse la coincidencia con el registro original de la SPV, el administrador ejecuta el plugin de **Freeze** sobre el NFT extraviado.
-3. Se quema o transfiere técnicamente el activo y se reemite una nueva fracción a la nueva wallet del titular legítimo, garantizando cero pérdida de capital sin alterar el libro oficial de socios.
+### 2. Assisted Title Recovery Protocol (Lost-Key Recovery)
+Representative fractional titles are issued using the **Metaplex Core** standard equipped with permanent delegation plugins managed by the SPV. In the event of a lost private key or compromised wallet:
+1. The investor undergoes identity re-verification via **Stripe Identity**.
+2. Upon confirmed off-chain identity verification against the SPV's records, the administrator triggers the on-chain **Freeze Plugin** on the orphaned NFT.
+3. The asset is burned or transferred technically, and a new fractional title is reissued to the investor's verified replacement wallet, ensuring zero loss of equity without altering the company's cap table.
 
-### 3. Modelo de Monetización SaaS
-- **Tarifa plana de emisión:** \$4 USD fijos por cada fracción de \$200 USD emitida (sin cobro porcentual sobre el capital levantado).
-- **Setup de software:** \$1,000 a \$3,500 USD por proyecto para despliegue de dashboards, contratos e infraestructura.
-- **Fee de dispersión tecnológica:** Tarifa por corrida batch de dispersión mensual de dividendos vía Squads v4.
+### 3. Pure SaaS Flat-Fee Monetization Model
+- **Flat Minting Fee:** \$4 USD fixed fee per \$200 USD fraction minted (no percentage take-rates on raised capital, shielding BRIDS from broker-dealer classification).
+- **SaaS Setup Fee:** \$1,000 to \$3,500 USD per syndicated project for smart contract deployment, project dashboards, and investor onboarding infrastructure.
+- **Batch Disbursement Processing Fee:** Fixed tech fee per automated monthly dividend distribution run executed via Squads v4.
 
 ---
 
-## 🗂️ Taxonomía Oficial de la Bóveda (`BRIDS-Brain/`)
+## 🗂️ Official Vault Taxonomy (`BRIDS-Brain/`)
 
-La base de conocimiento persistente reside en `BRIDS-Brain/`, dividida en dos macrodominios funcionales:
+The persistent knowledge base resides in `BRIDS-Brain/`, organized into two primary macro-domains:
 
 ```text
 BRIDS KNOWLEDGE FORT/
-├── README.md                                 # Portada institucional & Data Room de Due Diligence
-├── AGENTS.md                                 # Protocolos de agentes, scripts y guardrails HITL
-├── BRIDS-Engine/                             # Motor de ejecución, agentes, scripts y prompts
-└── BRIDS-Brain/                              # Bóveda de conocimiento persistente (Obsidian Vault)
-    ├── 00 Inbox/                             # Capturas rápidas, borradores, sesiones SDD y backups
-    │   ├── Specs/                            # Especificaciones formales activas bajo protocolo SDD
-    │   └── Archive/                          # Snapshots inmutables de versiones previas
-    ├── 01 Negocio/                           # Dominio Corporativo, Técnico, Legal y Financiero
-    │   ├── 01 Estrategia & Modelo/           # Conceptos Maestros (C1-C10), modelos de inversión y tesis
-    │   ├── 02 Producto & Ingenieria/         # Arquitectura Solana, Metaplex Core, matrices y roadmap
-    │   ├── 03 Legal & Cumplimiento/          # Dual-Entity, Data Room, Safe Harbors SEC y manual fiscal IRS
-    │   ├── 04 Finanzas & YC Investors/       # Modelos pro forma, Cap Table, SAFE, QSBS y material YC
-    │   ├── 05 Sponsors B2B & Ventas/         # Colateral para promotores, battlecards y onboarding
-    │   └── 06 Operaciones & Gobernanza/      # SOPs operativos, gobernanza de junta y acuerdos
-    └── 02 Marketing/                         # Dominio de Marca, Adquisición, Redes y Crecimiento
-        ├── 01 Contexto de Marca/             # Contexto persistente (product-marketing-context.md)
-        ├── 02 Estrategia & Parrilla/         # Parrilla maestra de 15 días y lanzamientos RWA
-        ├── 03 Redes Sociales & Contenido/    # Publicaciones LinkedIn/X, carruseles 4:5 y social cards
-        ├── 04 Copywriting & Web/             # Textos de landing page, micro-copy y CRO
-        ├── 05 Email Marketing/               # Secuencias outbound B2B y nutrición retail
-        ├── 06 SEO & Descubrimiento/          # GEO (AI SEO), arquitectura de búsqueda y comparativas
-        └── 07 Analitica & Crecimiento/       # Planes de medición on/off-chain, embudos y retención
+├── README.md                                 # Institutional overview & Due Diligence Data Room
+├── AGENTS.md                                 # Agent execution protocols, CLI scripts & HITL guardrails
+├── BRIDS-Engine/                             # Execution engine, squad definitions, scripts & prompt templates
+└── BRIDS-Brain/                              # Persistent Knowledge Vault (Obsidian Vault)
+    ├── 00 Inbox/                             # Quick captures, drafts, SDD sessions & safety snapshots
+    │   ├── Specs/                            # Active formal specifications under the SDD engine
+    │   └── Archive/                          # Immutable safety snapshots and past version backups
+    ├── 01 Negocio/                           # Corporate, Technical, Legal & Financial Domain
+    │   ├── 01 Estrategia & Modelo/           # Master Business Concepts (C1-C10), models & syndication rails
+    │   ├── 02 Producto & Ingenieria/         # Solana architecture, Metaplex Core specs, matrices & roadmap
+    │   ├── 03 Legal & Cumplimiento/          # Dual-Entity, Data Room, SEC Safe Harbors & IRS tax manuals
+    │   ├── 04 Finanzas & YC Investors/       # Pro forma models, Cap Table, SAFE, QSBS & YC application briefs
+    │   ├── 05 Sponsors B2B & Ventas/         # Real Estate Sponsor collateral, battlecards & onboarding kits
+    │   └── 06 Operaciones & Gobernanza/      # Standard Operating Procedures (SOPs), board minutes & agreements
+    └── 02 Marketing/                         # Brand, Demand Generation, Content & Growth Domain
+        ├── 01 Contexto de Marca/             # Persistent Brand Context (product-marketing-context.md)
+        ├── 02 Estrategia & Parrilla/         # Master 15-Day Editorial Content Grid & RWA launch plans
+        ├── 03 Redes Sociales & Contenido/    # Multi-channel posts (LinkedIn/X), 4-slide carousels & social cards
+        ├── 04 Copywriting & Web/             # High-conversion landing page copy, micro-copy & CRO
+        ├── 05 Email Marketing/               # Outbound cold sequences (B2B sponsors) & retail nurture flows
+        ├── 06 SEO & Descubrimiento/          # Generative Engine Optimization (GEO/AI SEO) & search matrix
+        └── 07 Analitica & Crecimiento/       # On-chain / off-chain measurement plans, funnels & retention loops
 ```
 
 ---
 
-## 🤖 Motor Autónomo SDD & Squad de Sub-Agentes (`BRIDS-Engine/`)
+## 🤖 Autonomous SDD Engine & Sub-Agent Squad (`BRIDS-Engine/`)
 
-Para asegurar rigor técnico, cero clichés de IA y exactitud jurídica, cada documento de negocio o activo de marketing se produce bajo el protocolo **Spec-Driven Development (SDD)** con **Doble Guardrail Humano (HITL)**:
+To guarantee technical accuracy, eliminate AI clichés, and maintain strict legal fidelity, every strategic deliverable is generated through the **Spec-Driven Development (SDD)** protocol featuring a **Double Human-in-the-Loop Guardrail (HITL)**:
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#0B192C', 'primaryTextColor': '#F8F9FA', 'primaryBorderColor': '#14F195', 'lineColor': '#00B0F9', 'secondaryColor': '#1E293B', 'tertiaryColor': '#0F172A', 'fontSize': '14px'}}}%%
 sequenceDiagram
     autonumber
-    actor Founder as 👤 Fundador / Evaluador
+    actor Founder as 👤 Founder / Evaluator
     participant Engine as ⚙️ SDD Engine (task-init)
-    participant Squad as 🤖 Sub-Agent Squad (Creadores)
-    participant Reviewer as 🔍 sdd-reviewer (Auditor Autónomo)
-    participant Vault as 📚 BRIDS-Brain (Vault Producción)
+    participant Squad as 🤖 Sub-Agent Squad (Creators)
+    participant Reviewer as 🔍 sdd-reviewer (Autonomous Auditor)
+    participant Vault as 📚 BRIDS-Brain (Production Vault)
 
-    Founder->>Engine: Requerimiento comercial o estratégico
-    Engine->>Founder: 🛑 HITL-1: Presenta SPEC formal en 00 Inbox/Specs/
-    Note over Founder,Engine: Bloqueo Mandatorio: Aprobación Humana (approve-spec)
-    Founder-->>Engine: Spec Aprobado
-    Engine->>Squad: Generación de borrador según rol
-    loop Bucle Autónomo de Calidad (Máx. 5 ciclos hasta score >= 8.5/9.0)
-        Squad->>Reviewer: Entrega borrador
-        Reviewer-->>Squad: Auditoría en 4 dimensiones (Objetivo, Fuentes, Voz, Cero Clichés)
+    Founder->>Engine: Commercial requirement or strategic initiative
+    Engine->>Founder: 🛑 HITL-1: Formal SPEC generated in 00 Inbox/Specs/
+    Note over Founder,Engine: Mandatory Gate: Human Spec Approval (approve-spec)
+    Founder-->>Engine: Spec Formally Approved
+    Engine->>Squad: Draft generation based on assigned role
+    loop Autonomous Evaluation Loop (Max 5 cycles until score >= 8.5/9.0)
+        Squad->>Reviewer: Submit draft for audit
+        Reviewer-->>Squad: 4-dimension audit (Objective/ICP, Sources, Voice, Zero Clichés)
     end
-    Reviewer->>Founder: 🛑 HITL-2: Presenta Entregable Pulido (review-deliverable)
-    Note over Founder,Reviewer: Bloqueo Mandatorio: Aprobación Humana (approve-deliverable)
-    Founder-->>Engine: Entregable Validado
-    Engine->>Vault: Promoción Atómica a Carpeta Canónica con metadatos y changelog
+    Reviewer->>Founder: 🛑 HITL-2: Polished deliverable ready (review-deliverable)
+    Note over Founder,Reviewer: Mandatory Gate: Human Deliverable Approval (approve-deliverable)
+    Founder-->>Engine: Deliverable Validated
+    Engine->>Vault: Atomic promotion to canonical folder with metadata & changelog
 ```
 
-### El Squad Especializado YC & RWA
-Los agentes autónomos están configurados en `BRIDS-Engine/agents/*.yaml`:
+### The Specialized YC & RWA Agent Squad
+Autonomous sub-agents are defined in `BRIDS-Engine/agents/*.yaml`:
 
-| Identificador | Rol Principal | Misión en el Negocio |
+| Agent Identifier | Assigned Role | Core Business Mission |
 | :--- | :--- | :--- |
-| `business-consultant` | Unit Economics & Fee Architect | Modela la economía unitaria, fees de \$4 USD, proyecciones pro forma a 3-5 años y análisis CAC/LTV. |
-| `market-research-analyst` | TAM/SAM/SOM & Competitive Intelligence | Investiga el mercado RWA, dimensionamiento cuantitativo y benchmarks (Lofty, RealT, Blocksquare). |
-| `pitch-deck-architect` | Investor Decks Architect | Estructura presentaciones institucionales de 10-12 diapositivas (estilo Sequoia/YC) y guiones de pitch. |
-| `compliance-officer` | Legal Structuring & Regulatory Moat | Supervisa la separación Dual-Entity, opiniones de No-Broker-Dealer, Stripe KYC y Data Room. |
-| `b2b-sponsor-lead` | Real Estate Sponsor Acquisition | Redacta propuestas de valor institucionales para desarrolladores inmobiliarios (GPs) y secuencias outbound. |
-| `founder-ghostwriter` | Founder Voice & Thought Leadership | Redacta aplicaciones YC, ensayos estratégicos ("Why now?", "The Seed Phrase Trap") y contenido multicanal. |
+| `business-consultant` | Unit Economics & Fee Architect | Models unit economics, \$4 USD fee structures, 3-5 year pro forma projections, and CAC/LTV dynamics. |
+| `market-research-analyst` | TAM/SAM/SOM & Competitive Intelligence | Performs quantitative RWA market sizing and competitive benchmarks (Lofty, RealT, Blocksquare). |
+| `pitch-deck-architect` | Investor Decks Architect | Structures institutional 10-12 slide pitch presentations (Sequoia/YC style) and slide scripts. |
+| `compliance-officer` | Legal Structuring & Regulatory Moat | Audits Dual-Entity separation, Non-Broker-Dealer legal memos, Stripe KYC workflows, and Data Room assets. |
+| `b2b-sponsor-lead` | Real Estate Sponsor Acquisition | Crafts institutional value propositions for real estate developers (GPs) and cold outbound campaigns. |
+| `founder-ghostwriter` | Founder Voice & Thought Leadership | Authors YC application essays ("Why now?", "The Seed Phrase Trap"), thought leadership, and multiformat content. |
 
 ---
 
-## 🛠️ Herramientas de Automatización & Scripts CLI
+## 🛠️ Automation Tools & CLI Scripts
 
-El directorio `BRIDS-Engine/scripts/` ofrece comandos atómicos para operar la infraestructura:
+The `BRIDS-Engine/scripts/` directory provides atomic CLI commands to operate the workspace:
 
-| Comando | Función y Propósito |
+| Script Command | Purpose & Description |
 | :--- | :--- |
-| `bash BRIDS-Engine/scripts/task-init.sh <slug> [args]` | **Task Init & SDD Engine:** Inicializa especificaciones formales con Doble Guardrail HITL. |
-| `bash BRIDS-Engine/scripts/sdd-manager.sh <cmd>` | **Gestor de Ciclo SDD:** Comandos `preview`, `approve-spec`, `refine-spec`, `review-deliverable` y `approve-deliverable`. |
-| `bash BRIDS-Engine/scripts/refine-note.sh <inspect\|backup\|refine\|rollback>` | **Refinamiento No Destructivo:** Actualiza notas existentes con versionado y changelog sin sobrescritura ciega. |
-| `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img]` | **Pipeline de Carruseles:** Genera carruseles educativos 4:5 con assets dedicados. |
-| `bash BRIDS-Engine/scripts/create-social-post.sh <red> "<idea>"` | **Generador de Publicaciones:** Instancia notas de contenido social listas para producción. |
-| `bash BRIDS-Engine/scripts/sync-technical-docs.sh [--force]` | **Sync Técnico OKF:** Sincroniza la arquitectura técnica desde el repositorio `jeisonsosablockdev/brids:knowledge`. |
-| `bash BRIDS-Engine/tests/smoke-test.sh` | **End-to-End System Smoke Test:** Valida la taxonomía, squad de agentes y suites de idempotencia. |
-| `bash BRIDS-Engine/scripts/enforce-compliance.sh` | **Auditoría Anti-Drift:** Ejecuta validaciones completas de contexto de marca, linters y skills. |
+| `bash BRIDS-Engine/scripts/task-init.sh <slug> [args]` | **Task Init & SDD Engine:** Initializes formal specifications enforced with Double HITL guardrails. |
+| `bash BRIDS-Engine/scripts/sdd-manager.sh <cmd>` | **SDD Lifecycle Manager:** Commands `preview`, `approve-spec`, `refine-spec`, `review-deliverable`, and `approve-deliverable`. |
+| `bash BRIDS-Engine/scripts/refine-note.sh <inspect\|backup\|refine\|rollback>` | **Non-Destructive Content Refinement:** Updates existing notes with version bumping and safety snapshots. |
+| `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img]` | **Social Carousel Pipeline:** Generates 4-slide 4:5 educational carousels with dedicated assets. |
+| `bash BRIDS-Engine/scripts/create-social-post.sh <red> "<idea>"` | **Social Post Generator:** Instantiates production-ready social media posts following canonical SOPs. |
+| `bash BRIDS-Engine/scripts/sync-technical-docs.sh [--force]` | **Technical OKF Sync:** Incrementally synchronizes technical architecture from `jeisonsosablockdev/brids:knowledge`. |
+| `bash BRIDS-Engine/tests/smoke-test.sh` | **End-to-End System Smoke Test:** Audits taxonomy compliance, agent squad validity, and idempotency suites. |
+| `bash BRIDS-Engine/scripts/enforce-compliance.sh` | **Anti-Drift Compliance Audit:** Executes full checks across brand context, vault linters, and skill sets. |
 
 ---
 
-## 👥 Equipo Fundador & Contacto Institucional
+## 👥 Founding Team & Institutional Contact
 
-BRIDS.io está liderado por un equipo multidisciplinario que combina desarrollo de infraestructura en Solana, estructuración inmobiliaria en EE.UU. y operaciones corporativas:
+BRIDS.io is led by a multidisciplinary team combining native Solana infrastructure development, US real estate structuring, and enterprise operations:
 
-- **CTO & Solana Architect:** **Jeison Sosa** ([@jeisonsosablockdev](https://github.com/jeisonsosablockdev)) — Arquitectura de contratos en Solana, integración Metaplex Core y protocolos de identidad.
-  - 📩 **Email:** `jeisonsosablockdev@gmail.com`
-- **Head of Real Estate & Sponsor Operations:** Co-fundador y socio en [Blue Brick Capital](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/05%20Sponsors%20B2B%20%26%20Ventas/) — Originación de activos residenciales, estructuración de obra y gestión de SPVs.
-- **CEO & Corporate Operations Lead:** Relación con inversionistas, coordinación de Due Diligence y asesoría legal externa en EE.UU.
+- **CTO & Solana Architect:** **Jeison Sosa** ([@jeisonsosablockdev](https://github.com/jeisonsosablockdev)) — Smart contract architecture on Solana, Metaplex Core integration, and biometric identity rails.
+  - 📩 **Direct Email:** `jeisonsosablockdev@gmail.com`
+- **Head of Real Estate & Sponsor Operations:** Co-founder and partner at [Blue Brick Capital](file:///Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My%20Drive/01%20Primal%20Code%20Lab/BRIDS/Business/BRIDS%20KNOWLEDGE%20FORT/BRIDS-Brain/01%20Negocio/05%20Sponsors%20B2B%20%26%20Ventas/) — Residential asset origination, rehab development management, and Delaware SPV administration.
+- **CEO & Corporate Operations Lead:** Investor relations, Due Diligence coordination, and US securities legal oversight.
 
-### Canales Institucionales & Due Diligence Requests
-- 🌐 **Sitio Web Oficial:** [https://brids.io](https://brids.io)
+### Institutional Channels & Due Diligence Requests
+- 🌐 **Official Website:** [https://brids.io](https://brids.io)
 - 🏢 **Data Room & Inquiries:** `founders@brids.io`
-- 💬 **Reuniones con Inversionistas / Comités:** Para solicitar acceso al Data Room completo, demostración técnica en Solana Devnet o sesión de estructuración con promotores inmobiliarios, contactar directamente vía correo o a través del portal institucional.
+- 💬 **Investor & Committee Meetings:** To request full Data Room access, a technical demonstration on Solana Devnet, or an institutional real estate sponsor structuring session, contact the founders directly via email or through the official portal.
