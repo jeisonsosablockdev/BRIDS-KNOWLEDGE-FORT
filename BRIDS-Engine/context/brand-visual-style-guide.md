@@ -1,7 +1,8 @@
 # Manual de Identidad Visual & Fuente de Estilo: BRIDS.io
 
-*Guía Oficial de Estilo Visual y Dirección Arte*
-*Last updated: 2026-08-20*
+*Guía Oficial de Estilo Visual y Dirección Arte*  
+**One-Liner Canónico:** *"The modern rail for real estate syndication."* (43 caracteres — Estilo Stripe / Plaid)  
+*Last updated: 2026-09-27*
 
 ---
 

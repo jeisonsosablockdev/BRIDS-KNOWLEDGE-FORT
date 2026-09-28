@@ -53,6 +53,7 @@ A diferencia de protocolos cripto especulativos o plataformas inmobiliarias ilí
 
 ## 5. ESLOGANES Y COPY CLAVE
 
+- **One-Liner Institucional (B2B Sponsors & Infraestructura FinTech):** *"The modern rail for real estate syndication."* (43 caracteres — Enfoque de infraestructura ágil estilo Stripe / Plaid)
 - **Eslogan Principal:** *"Infraestructura Web3 segura, accesible y trazable para invertir en bienes raíces estructurados desde $100 USD"*
 - **Tagline Secundario:** *"El estándar de software para Real World Assets en Solana."*
 - **Call to Action (CTA):** `[ Explorar Oportunidades en BRIDS.io ]`

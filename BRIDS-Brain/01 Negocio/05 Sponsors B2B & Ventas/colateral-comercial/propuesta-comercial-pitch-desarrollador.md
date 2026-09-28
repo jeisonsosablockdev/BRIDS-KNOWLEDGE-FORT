@@ -21,7 +21,7 @@ tags:
   - "real-estate"
 ---
 
-# The Operating System for Real Estate Syndication
+# The Modern Rail for Real Estate Syndication
 
 ### El 70% te lo Presta el Banco. El 30% de Equity te lo Resuelve BRIDS sin Papeleo ni Abogados de \$35k.
 
