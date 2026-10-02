@@ -79,11 +79,23 @@ def parse_agent_yaml(filepath):
 
 print(f"Total Configured Sub-Agents: {len(yaml_files)}\n")
 
+expected_roster = [
+    "b2b-sponsor-lead",
+    "business-consultant",
+    "compliance-officer",
+    "founder-ghostwriter",
+    "market-research-analyst",
+    "narrative-intelligence-analyst",
+    "pitch-deck-architect",
+]
+
+found_names = []
 for i, yf in enumerate(yaml_files, 1):
     fname = os.path.basename(yf)
     ag = parse_agent_yaml(yf)
     
     name = ag.get("name", "UNNAMED")
+    found_names.append(name)
     role = ag.get("role", "NO_ROLE")
     skills = ", ".join(ag.get("skills", []))
     tools = ag.get("tools", {})
@@ -99,5 +111,11 @@ for i, yf in enumerate(yaml_files, 1):
     print(f"    Description: {ag.get('description', '')}")
     print(f"    Outputs: {ag.get('outputs', [])}\n")
 
-print("All individual agent YAML definitions validated successfully.")
+missing = [exp for exp in expected_roster if exp not in found_names]
+if missing:
+    print(f"ERROR: Missing expected squad agents: {missing}")
+    sys.exit(1)
+
+print("All 7 specialized squad agent YAML definitions validated successfully.")
 EOF
+

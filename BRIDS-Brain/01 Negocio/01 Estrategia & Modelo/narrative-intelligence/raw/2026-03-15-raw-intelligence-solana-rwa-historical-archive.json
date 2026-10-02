@@ -1,0 +1,99 @@
+{
+  "collected_at": "2026-10-02 13:45:34",
+  "search_queries": [
+    "opencli twitter search \"Solana RWA\" -f yaml",
+    "opencli reddit search \"real estate tokenization\" -f yaml",
+    "mcporter call exa.web_search_exa"
+  ],
+  "total_records": 8,
+  "records": [
+    {
+      "id": 1,
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "Cointelegraph",
+      "title": "@Cointelegraph: - 🔥 NEW: Solana RWA holders hit an all-time high above 300,000, ranking first among blockchains.",
+      "url": "https://x.com/Cointelegraph/status/2077599127739765127",
+      "content": "- 🔥 NEW: Solana RWA holders hit an all-time high above 300,000, ranking first among blockchains. https://t.co/xd2UgwgI5R",
+      "likes": 496,
+      "views": 38200,
+      "extracted_at": "2026-10-02 13:45:34"
+    },
+    {
+      "id": 2,
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "SolanaFndn",
+      "title": "@SolanaFndn: - Solana accounts for ~45% of adjusted stablecoin volume this year. On House of Sol...",
+      "url": "https://x.com/SolanaFndn/status/2105974943343317364",
+      "content": "- Solana accounts for ~45% of adjusted stablecoin volume this year. On House of Sol, Ben Brophy and William Lai, Head of Institutions at @AlliumLabs, talk about what institutions are asking about stablecoins, tokenized assets, and DeFi.",
+      "likes": 182,
+      "views": 15400,
+      "extracted_at": "2026-10-02 13:45:34"
+    },
+    {
+      "id": 3,
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "RWAFoundation_",
+      "title": "@RWAFoundation_: - BNB Chain leads tokenized stock growth across chains so far this year, adding $1.0B in market cap...",
+      "url": "https://x.com/RWAFoundation_/status/2104855534369128926",
+      "content": "- BNB Chain leads tokenized stock growth across chains so far this year, adding $1.0B in market cap, almost double Solana's $541.3M. @BNBCHAIN +$1.0B @solana +$541.3M @ethereum +$429.3M @avax +$410.7M @XLayerOfficial +$181.0M @arbitrum +$173.2M",
+      "likes": 68,
+      "views": 6792,
+      "extracted_at": "2026-10-02 13:45:34"
+    },
+    {
+      "id": 4,
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "Rwa_Token_Dev",
+      "title": "@Rwa_Token_Dev: - Coming soon on Solana 🔥 tokenized real world assets...",
+      "url": "https://x.com/Rwa_Token_Dev/status/2087243544045981723",
+      "content": "- Coming soon on Solana 🔥 https://t.co/tD4f5zflJh — tokenized real world assets. Gold. Real estate. Stocks. Commodities. The Nasdaq of RWA is almost here. Launch soon. Don’t fade this. #RWA #Solana #PumpFun #Crypto #ComingSoon #LaunchSoon",
+      "likes": 45,
+      "views": 3200,
+      "extracted_at": "2026-10-02 13:45:34"
+    },
+    {
+      "id": 5,
+      "platform": "Reddit (r/Realestatefinance)",
+      "author": "anon",
+      "title": "Anyone tokenized real estate or looked into it seriously? (r/Realestatefinance)",
+      "url": "https://www.reddit.com/r/Realestatefinance/comments/1s2p5a3/anyone_tokenized_real_estate_or_looked_into_it/",
+      "content": "# Anyone tokenized real estate or looked into it seriously? What killed the project for you? Seriously exploring tokenizing a real estate portfolio. The technology side is straightforward. The legal structuring side is where I keep hitting walls. Jurisdiction selection, SPV setup costs ($50k in legal fees quoted), broker-dealer compliance.",
+      "likes": 34,
+      "views": 1800,
+      "extracted_at": "2026-10-02 13:45:34"
+    },
+    {
+      "id": 6,
+      "platform": "Reddit (r/Realestatefinance)",
+      "author": "anon",
+      "title": "REITs vs Real Estate Tokenization (RealDeed) (r/Realestatefinance)",
+      "url": "https://www.reddit.com/r/Realestatefinance/comments/1s3fdb0/reits_vs_real_estate_tokenization_realdeed_need/",
+      "content": "# REITs vs Real Estate Tokenization (RealDeed) – Need Advice. Im 27M, Salaried Employee i just came to know about a platform named RealDeed Proppass where i can buy a token of the property and i will get a title deed and spv share certificate as i m working in a bank i know the operational friction.",
+      "likes": 28,
+      "views": 1400,
+      "extracted_at": "2026-10-02 13:45:34"
+    },
+    {
+      "id": 7,
+      "platform": "Ecosistema Solana & Web",
+      "author": "anon",
+      "title": "RWA Tokens — Real-World Asset Tokenization Infrastructure on Solana",
+      "url": "https://rwatokens.net/",
+      "content": "RWA Tokens — Real-World Asset Tokenization Infrastructure on Solana # Real-World Assets, tokenized with DISCIPLINE. One compliant infrastructure layer for tokenized equities, hemispheric CORECM Tokens, and institutional real estate. Built on Solana. Custodied by SEC-registered custodians.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-02 13:45:34"
+    },
+    {
+      "id": 8,
+      "platform": "Ecosistema Solana & Web",
+      "author": "anon",
+      "title": "Anchora — RWA Trust Infrastructure on Solana",
+      "url": "https://anchora.markets/",
+      "content": "Anchora — RWA Trust Infrastructure on Solana Live Solana proof rail for RWA verification # The trust layer between RWA tokens and the registries that make them real. Issuing a token can be fast. Proving the building exists, is not double-pledged, matches official records, and title ownership.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-02 13:45:34"
+    }
+  ]
+}

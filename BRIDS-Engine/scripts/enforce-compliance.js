@@ -72,7 +72,7 @@ if (fs.existsSync(VAULT_INBOX)) {
 console.log('─'.repeat(75));
 
 // 4. SKILLS AUDIT
-console.log('\n[4/4] Validando Habilidades de Marketing contra Especificación...');
+console.log('\n[4/5] Validando Habilidades de Marketing contra Especificación...');
 try {
   const validateSkillsPath = path.join(ROOT_DIR, 'BRIDS-Engine', 'scripts', 'validate-skills.sh');
   if (fs.existsSync(validateSkillsPath)) {
@@ -80,6 +80,17 @@ try {
   }
 } catch (e) {
   // warnings in skills do not necessarily break build
+}
+
+// 5. NARRATIVE INTELLIGENCE & RAW DATA AUDIT (REQ-AR-304, REQ-AR-306, REQ-AR-307, REQ-AR-308)
+console.log('\n[5/5] Auditando Inteligencia Narrativa & Procedencia (Zero-Judgments, Raw Archival, 100% Links)...');
+try {
+  const auditNarrativePath = path.join(SCRIPTS_DIR, 'audit-narrative-intelligence.js');
+  if (fs.existsSync(auditNarrativePath)) {
+    execSync(`node "${auditNarrativePath}"`, { stdio: 'inherit' });
+  }
+} catch (e) {
+  failures++;
 }
 
 console.log('\n' + '█'.repeat(80));

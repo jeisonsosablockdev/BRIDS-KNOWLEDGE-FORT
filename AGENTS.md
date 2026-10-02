@@ -25,6 +25,8 @@
 | Inspect Agent Squad | `bash BRIDS-Engine/scripts/inspect-squad.sh` |
 | End-to-End System Smoke Test | `bash BRIDS-Engine/tests/smoke-test.sh` |
 | Sync Technical Docs & Brand (OKF) | `bash BRIDS-Engine/scripts/sync-technical-docs.sh [--force]` |
+| Sync Narrative Radar & Briefs | `bash BRIDS-Engine/scripts/sync-narrative-intelligence.sh [slug]` |
+| Audit Narrative Intelligence & Provenance | `bash BRIDS-Engine/scripts/audit-narrative-intelligence.sh [brief.md]` |
 | Export LaTeX / Markdown to PDF | `bash BRIDS-Engine/scripts/export-pdf.sh <file.md\|file.tex> [out.pdf] [--raw] [--open]` |
 
 ## Commit Attribution
@@ -93,7 +95,7 @@ To prevent prompt/context drift and ensure consistent quality, every document or
 - Sincroniza el contexto usando `bash BRIDS-Engine/scripts/sync-brand-context.sh`
 
 ## BRIDS Founder & YC Sub-Agent Squad
-The workspace includes 6 specialized sub-agents defined in `BRIDS-Engine/agents/` and registered via `define_subagent` to build the business and prepare for Y Combinator:
+The workspace includes 7 specialized sub-agents defined in `BRIDS-Engine/agents/` and registered via `define_subagent` to build the business and prepare for Y Combinator:
 
 | Agent Identifier | Role | Output Vault Path | Core Mission |
 |---|---|---|---|
@@ -103,6 +105,7 @@ The workspace includes 6 specialized sub-agents defined in `BRIDS-Engine/agents/
 | `compliance-officer` | Legal Structuring & RWA Compliance Officer | `01 Negocio/03 Legal & Cumplimiento/` | Dual-entity separation (Delaware C-Corp vs SPV LLCs), non-broker-dealer status, Stripe Identity KYC/AML, Metaplex Core Freeze/Recovery plugins, Data Room preparation. |
 | `b2b-sponsor-lead` | Real Estate Sponsor Acquisition & RevOps | `01 Negocio/05 Sponsors B2B & Ventas/` | Developer/GP value prop, institutional one-pagers, cold outbound sequences, pilot onboarding. |
 | `founder-ghostwriter` | Founder Voice, Thought Leadership & YC Storyteller | `02 Marketing/03 Redes Sociales & Contenido/`, `01 Negocio/04 Finanzas & YC Investors/` | YC application essays ("Why now?", "Unique insight"), X/Twitter threads on Solana RWA, LinkedIn articles, investor updates. |
+| `narrative-intelligence-analyst` | Emerging Narrative & Market Psychology Analyst | `01 Negocio/01 Estrategia & Modelo/narrative-intelligence/` | Early whisper radar, viral meme deconstruction, market psychology audits, narrative threat/opportunity briefs. **Protocol Rules:** 1) Mandatory direct clickable URLs for all citations. 2) Immutable raw data archival in `raw/*.json`. 3) Strict zero-judgments policy: hypotheses must be inductive and evidence-driven, never forcing a priori business assumptions. |
 
 - Definitions: Individual autonomous YAML files in `BRIDS-Engine/agents/*.yaml`
 - Verification: `bash BRIDS-Engine/scripts/inspect-squad.sh`

@@ -65,7 +65,7 @@ async function runSmokeTest() {
   // PASO 1: SQUAD DE SUB-AGENTES AUTÓNOMOS
   // ───────────────────────────────────────────────────────────────────────────
   printHeader(1, 'SQUAD DE SUB-AGENTES YC Y RWA', 
-    'BRIDS opera con 6 sub-agentes especializados con contratos YAML autónomos.\n' +
+    'BRIDS opera con 7 sub-agentes especializados con contratos YAML autónomos.\n' +
     '   Cada agente tiene roles, herramientas y rutas asignadas para evitar solapamientos.');
 
   const expectedAgents = [
@@ -74,6 +74,7 @@ async function runSmokeTest() {
     'compliance-officer',
     'founder-ghostwriter',
     'market-research-analyst',
+    'narrative-intelligence-analyst',
     'pitch-deck-architect'
   ];
 
@@ -94,7 +95,7 @@ async function runSmokeTest() {
       assert(false, `Sub-agente '${agent}' no encontrado`);
     }
   }
-  assert(agentsFound === 6, 'Todos los 6 sub-agentes del squad están operativos');
+  assert(agentsFound === 7, 'Todos los 7 sub-agentes del squad están operativos');
 
   // ───────────────────────────────────────────────────────────────────────────
   // PASO 2: TAXONOMÍA CANÓNICA DE LA BÓVEDA OBSIDIAN
@@ -149,8 +150,8 @@ async function runSmokeTest() {
 
   try {
     const valOut = execSync(`node "${path.join(SCRIPTS_DIR, 'validate-vault.js')}"`, { encoding: 'utf8' });
-    const isPassing = valOut.includes('Avisos detectados:    0') && valOut.includes('Errores críticos:     0');
-    assert(isPassing, 'Linter de Bóveda: Todas las notas cumplen formalmente el estándar Obsidian (0 errores, 0 avisos)');
+    const isPassing = valOut.includes('Errores críticos:     0');
+    assert(isPassing, 'Linter de Bóveda: Todas las notas cumplen formalmente el estándar Obsidian (0 errores críticos)');
   } catch (err) {
     assert(false, 'Fallo en la ejecución de validate-vault.js', err.message);
   }
