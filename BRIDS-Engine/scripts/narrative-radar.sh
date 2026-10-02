@@ -194,6 +194,7 @@ show_help() {
 narrative-radar.sh - BRIDS Narrative & Rumor Intelligence CLI
 
 Uso:
+  bash narrative-radar.sh --all-in-one [slug]     # Flujo completo: Scan + Guardar en Cuenta + Raw JSON + Brief + Audit
   bash narrative-radar.sh --rumor-scan "<query>"
   bash narrative-radar.sh --extract-url "<url>"
   bash narrative-radar.sh --bookmark-tweet "<url>" ["<nota>"]
@@ -213,6 +214,10 @@ if [[ $# -eq 0 ]]; then
 fi
 
 case "$1" in
+  --all-in-one|--sync)
+    shift
+    bash "${SCRIPT_DIR}/sync-narrative-intelligence.sh" "$@"
+    ;;
   --rumor-scan)
     shift
     build_rumor_query "$*"

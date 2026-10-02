@@ -232,6 +232,40 @@ console.log(JSON.stringify(all));
 ')
 
 # ─────────────────────────────────────────────────────────────────────────────
+# 1.5. GUARDADO AUTOMÁTICO EN CUENTAS SOCIALES (BOOKMARKS EN TWITTER/IG)
+# ─────────────────────────────────────────────────────────────────────────────
+echo "🔖 Guardando automáticamente las señales y posts detectados en la cuenta de Twitter y catálogo social..."
+BOOKMARKS_LOG="${DEST_DIR}/social-bookmarks-log.md"
+node -e '
+const { execSync } = require("child_process");
+const fs = require("fs");
+
+const sources = JSON.parse(process.argv[1]);
+const logPath = process.argv[2];
+const ts = process.argv[3];
+
+const twitterSources = sources.filter(s => s.platform && s.platform.includes("Twitter") && s.url && s.url.startsWith("https://x.com/"));
+for (const s of twitterSources) {
+  try {
+    execSync(`opencli twitter bookmark "${s.url}"`, { timeout: 12000, stdio: "ignore" });
+    console.log(`   ✅ Tweet guardado en marcadores de Twitter: ${s.url}`);
+  } catch (e) {}
+
+  try {
+    if (fs.existsSync(logPath)) {
+      const content = fs.readFileSync(logPath, "utf8");
+      if (!content.includes(s.url)) {
+        const cleanTitle = s.title.replace(/[\[\]]/g, "").replace(/\|/g, "/").trim();
+        const row = `| ${ts} | Twitter/X | [${s.url}](${s.url}) | ${cleanTitle} |`;
+        const updated = content.replace("## 🔄 Historial de Revisiones", `${row}\n\n## 🔄 Historial de Revisiones`);
+        fs.writeFileSync(logPath, updated, "utf8");
+      }
+    }
+  } catch (e) {}
+}
+' "$SEARCH_JSON" "$BOOKMARKS_LOG" "$TIMESTAMP"
+
+# ─────────────────────────────────────────────────────────────────────────────
 # 2. ARCHIVADO PERSISTENTE DE DATOS CRUDOS EXTRAÍDOS (RAW DATA ARCHIVE)
 # ─────────────────────────────────────────────────────────────────────────────
 echo "🗄️ Archivando dataset crudo persistente en: $RAW_PATH..."
