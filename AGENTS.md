@@ -28,6 +28,8 @@
 | Sync Narrative Radar & Briefs | `bash BRIDS-Engine/scripts/sync-narrative-intelligence.sh [slug]` |
 | Audit Narrative Intelligence & Provenance | `bash BRIDS-Engine/scripts/audit-narrative-intelligence.sh [brief.md]` |
 | Export LaTeX / Markdown to PDF | `bash BRIDS-Engine/scripts/export-pdf.sh <file.md\|file.tex> [out.pdf] [--raw] [--open]` |
+| Unified Engine CLI & Lifecycle | `node BRIDS-Engine/bin/engine.ts <task\|skills\|vault\|help>` |
+| In-Memory Vault Search | `bash BRIDS-Engine/scripts/vault-search.sh "<query>" [--limit 5]` |
 
 ## Commit Attribution
 - AI commits MUST include:
