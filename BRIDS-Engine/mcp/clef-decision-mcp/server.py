@@ -1,6 +1,6 @@
 # /// script
 # dependencies = [
-#   "mcp",
+#   "mcp<2",
 #   "httpx",
 # ]
 # ///
