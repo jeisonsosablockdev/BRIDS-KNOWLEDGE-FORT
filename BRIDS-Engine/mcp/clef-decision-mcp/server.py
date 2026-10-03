@@ -27,14 +27,21 @@ async def _execute_systemone(payload: dict) -> dict:
     """
     Executes a System One request against Ollama's /v1/systemone endpoint,
     with an automatic structured fallback to /api/generate if System One endpoint
-    is unavailable or if a non-Clef model is queried.
+    is unavailable (404) or if a non-Clef model is queried.
     """
     url = f"{OLLAMA_BASE_URL.rstrip('/')}/v1/systemone"
-    async with httpx.AsyncClient(timeout=30.0) as client:
+    # Timeout of 120s to allow model cold-start into GPU memory
+    async with httpx.AsyncClient(timeout=120.0) as client:
         try:
             resp = await client.post(url, json=payload)
             if resp.status_code == 200:
                 return resp.json()
+            elif resp.status_code != 404:
+                # If /v1/systemone returned an actual error (e.g. 400 bad schema), raise it directly
+                sys.stderr.write(f"[clef-decision-mcp] /v1/systemone error {resp.status_code}: {resp.text}\n")
+                resp.raise_for_status()
+        except httpx.HTTPStatusError:
+            raise
         except Exception as e:
             sys.stderr.write(f"[clef-decision-mcp] /v1/systemone direct request failed: {e}\n")
 
