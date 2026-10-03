@@ -166,7 +166,8 @@ async def clef_guardrail_check(
 async def clef_score_rubric(
     target_content: str,
     instructions: str,
-    rubric_levels: Dict[str, str],
+    rubric_levels: Optional[Dict[str, str]] = None,
+    criteria: Optional[list[str]] = None,
     model: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
@@ -176,10 +177,19 @@ async def clef_score_rubric(
     Args:
         target_content: The text, code, or data to evaluate.
         instructions: Scoring question (e.g. 'Rate the architectural stability of this implementation').
-        rubric_levels: Ordered rubric map (e.g. {'1': 'Poor', '2': 'Adequate', '3': 'Good', '4': 'Exemplary'}).
+        rubric_levels: Optional ordered rubric map (e.g. {'1': 'Poor', '2': 'Adequate', '3': 'Good', '4': 'Exemplary'}).
+        criteria: Optional ordered list of rubric criteria strings from lowest to highest level.
         model: Optional model name. Defaults to clef-flash.
     """
     chosen_model = model or DEFAULT_MODEL
+    # Support both list and dict formats seamlessly
+    if criteria is None and rubric_levels is not None:
+        final_criteria = list(rubric_levels.values())
+    elif criteria is not None:
+        final_criteria = criteria
+    else:
+        final_criteria = ["Low", "Medium", "High"]
+
     payload = {
         "model": chosen_model,
         "state": target_content,
@@ -187,7 +197,7 @@ async def clef_score_rubric(
             "score_eval": {
                 "type": "score",
                 "instructions": instructions,
-                "rubric": rubric_levels,
+                "criteria": final_criteria,
             }
         },
     }
