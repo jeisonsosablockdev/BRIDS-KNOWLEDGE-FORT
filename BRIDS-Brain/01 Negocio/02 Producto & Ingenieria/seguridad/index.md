@@ -3,7 +3,7 @@
 Modelos de amenazas de minteo y marketplace, guías de auditoría de smart contracts, políticas de manejo de datos privados y blindaje PCI.
 
 > [!NOTE]
-> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `6a40b30`).
+> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `b818558`).
 
 ---
 

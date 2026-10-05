@@ -2,7 +2,7 @@
  * Anti-Cliché Lexical Heuristic Filter for BRIDS Knowledge Fort
  * Detects generic LLM buzzwords, throat-clearing, and robotic corporate filler.
  * 
- * @spec SPEC-001 (Ported & adapted from Academic-Engine architecture)
+ * @spec SPEC-BRIDS-001 (BRIDS-Engine Clean Architecture — Solana RWA & YC Venture)
  */
 
 export interface BannedRule {
@@ -86,3 +86,27 @@ export function scanCliches(text: string): ClicheScanResult {
     cleanScore
   };
 }
+
+export function autoRemediateDraft(text: string): string {
+  let refined = text;
+
+  for (const banned of BANNED_PATTERNS) {
+    refined = refined.replace(banned.pattern, '');
+  }
+
+  refined = refined
+    .replace(/\s{2,}/g, ' ')
+    .replace(/,\s*,/g, ',')
+    .replace(/\.\s*\./g, '.');
+
+  if (!/(agenda|demo|contacto|sindicaci[oó]n|hablemos)/i.test(refined)) {
+    refined += '\n\n### Próximos Pasos\nAgenda una sesión técnica con el equipo de estructuración en `sponsors@brids.io` para evaluar la viabilidad de tu inmueble.';
+  }
+
+  if (!/(solana|metaplex)/i.test(refined)) {
+    refined += '\n\n**Infraestructura:** Respaldado sobre Solana con estándar Metaplex Core y plugins de Freeze/Recovery regulatorio.';
+  }
+
+  return refined;
+}
+

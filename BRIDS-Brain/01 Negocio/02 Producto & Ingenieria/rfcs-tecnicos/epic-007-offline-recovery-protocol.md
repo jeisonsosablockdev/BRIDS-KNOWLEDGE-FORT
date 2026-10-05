@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Technical RFCs"
 source_okf: "knowledge/rfcs/EPIC-007-offline-recovery-protocol/README.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "4757cffccc9308f764919f24730919c45b8210c623eed6622ea9acca7603a8c3"
 tags: [rfc, epic, epic-007, solana, architecture]
-updated_at: "2026-09-12T02:07:49.391Z"
+updated_at: "2026-10-03T02:51:18.576Z"
 ---
 
 # RFC EPIC-007: Protocolo de Recuperación Institucional ante Pérdida de Llaves
 
 > [!NOTE]
 > **Resumen Técnico:** Mecanismo legal y técnico para quemar y reemitir activos tras validación biométrica.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -87,3 +87,4 @@ updated_at: "2026-09-12T02:07:49.391Z"
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/rfcs/EPIC-007-offline-recovery-protocol/README.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

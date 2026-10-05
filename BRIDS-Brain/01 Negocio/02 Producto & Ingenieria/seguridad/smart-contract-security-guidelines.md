@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Security & Audits"
 source_okf: "knowledge/security/compliance/smart-contract-security.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "8fd69e80fd13e999f71764414c9cf34f809aff54a7868ae6774ff12f6e8e5aea"
 tags: [security, smart-contracts, audits, solana-security]
-updated_at: "2026-09-12T02:07:49.369Z"
+updated_at: "2026-10-03T02:51:18.321Z"
 ---
 
 # Guía y Políticas de Seguridad para Smart Contracts
 
 > [!NOTE]
 > **Resumen Técnico:** Requisitos de validación de cuentas Solana, prevención de reentrancy, checks de autoridad y lineamientos para auditorías externas.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -190,3 +190,4 @@ guards: [
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/security/compliance/smart-contract-security.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Operations & Runbooks"
 source_okf: "knowledge/operations/procedures/health-checks-monitoring.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "6841137c21391e46a39693c546162f82672653d4f18ba30ba41e604e57097c5c"
 tags: [operations, monitoring, health-check, reliability]
-updated_at: "2026-09-12T02:07:49.385Z"
+updated_at: "2026-10-03T02:51:18.519Z"
 ---
 
 # Procedimiento Operativo: Monitoreo de Salud y Disponibilidad
 
 > [!NOTE]
 > **Resumen Técnico:** Métricas de disponibilidad del nodo RPC, estado de conexiones a bases de datos y endpoints de health check.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -163,3 +163,4 @@ Returns:
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/operations/procedures/health-checks-monitoring.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

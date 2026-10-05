@@ -1,0 +1,91 @@
+{
+  "collected_at": "2026-10-03 09:19:35",
+  "search_queries": [
+    "opencli twitter search \"Solana RWA\" -f yaml",
+    "opencli twitter search \"Solana tokenization\" -f yaml",
+    "opencli twitter search \"real estate tokenization\" -f yaml",
+    "opencli reddit search \"RWA\" --subreddit solana -f yaml",
+    "opencli reddit search \"tokenization\" --subreddit solana -f yaml",
+    "opencli reddit search \"real estate\" --subreddit solana -f yaml"
+  ],
+  "total_records": 7,
+  "records": [
+    {
+      "id": "2106388695808962943",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "Reckoning180651",
+      "title": "@Reckoning180651: - look like solana:6d82cCtC1LktWWgjUz5h3vMenFj5EDHLMBFvcpmvrRi will be the...",
+      "url": "https://x.com/Reckoning180651/status/2106388695808962943",
+      "content": "- look like solana:6d82cCtC1LktWWgjUz5h3vMenFj5EDHLMBFvcpmvrRi will be the main runner on solana:7VertkgF9KLhxxJXHX6uaWuoYZTP9LdGj2bWmVXVpump",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-03 09:19:35"
+    },
+    {
+      "id": "2106387546905464846",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "tokens",
+      "title": "@tokens: - INSIGHT: @Backpack built what @vibhu calls an equity bridge: shares can m...",
+      "url": "https://x.com/tokens/status/2106387546905464846",
+      "content": "- INSIGHT: @Backpack built what @vibhu calls an equity bridge: shares can move from a brokerage account onto Solana and back. \"It remains equity the entire time.\" https://t.co/UuiUDYxhhl",
+      "likes": 0,
+      "views": 456,
+      "extracted_at": "2026-10-03 09:19:35"
+    },
+    {
+      "id": "2106383779895951847",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "SolanaHub_",
+      "title": "@SolanaHub_: - Trending tokens on Solana last 24h! Which one's your favorite pick? 👇 $D...",
+      "url": "https://x.com/SolanaHub_/status/2106383779895951847",
+      "content": "- Trending tokens on Solana last 24h! Which one's your favorite pick? 👇 $DARK @DarkSwapApp $Agency @tryagency $swordcat @catwifswordsoll $SI @SuperInuMemes $MASK @NullMaskio $Pumpoween @Pumpoweenonpump $CARDS @Collector_Crypt $HOOKED @Hoookedpad https://t.co/k14rtZvUz4",
+      "likes": 12,
+      "views": 734,
+      "extracted_at": "2026-10-03 09:19:35"
+    },
+    {
+      "id": "1wwm03d",
+      "platform": "Reddit (r/solana)",
+      "author": "doug3465",
+      "title": "See how much SOL you’re owed for dead token accounts (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1wwm03d/see_how_much_sol_youre_owed_for_dead_token/",
+      "content": "- If you've been active on Solana, it's likely you're owed SOL and don't even know it... Every token you've ever touched (memecoins, airdrops, spam that lands in your wallet) opened a token account that locks up \\~0.002 SOL and when the token's gone, that SOL just sits there. So far, a total of 6.7 SOL has been reclaimed through this tool! Check how much you're owed: [owedsol.app](https://owedsol.app) (there's a 1.5% charge) How it works: \\- Only closes accounts with zero balance. your tokens and NFTs are never touched \\- You approve every tx in your own wallet, the site never sees your keys \\- Also shows your wallet card: win rate, fumbles, rugs, and when you trade worst",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-03 09:19:35"
+    },
+    {
+      "id": "1wvwmpb",
+      "platform": "Reddit (r/solana)",
+      "author": "ansi09",
+      "title": "Arrakis Report - Who Actually Holds Tokenised Equities? · Arrakis Research (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1wvwmpb/arrakis_report_who_actually_holds_tokenised/",
+      "content": "- **Source:** [https://x.com/ArrakisFinance/status/2105689903258653110](https://x.com/ArrakisFinance/status/2105689903258653110) After months of research, we have published the most comprehensive report on tokenised equities, indexing over 1.5m addresses across five issuers on four chains. [https://arrakis.finance/tokenized-equities](https://t.co/lAeLez7k0m) In this report, you will learn who is actually buying tokenised equities, how fast this market is growing, what the latest innovations are, and projections for what's ahead in 2027. Special thanks to the issuers covered in this research: [@Ondo](https://x.com/Ondo), [@Backpack](https://x.com/Backpack), [@xStocksFi](https://x.com/xStocksFi), [@bstocksfinance](https://x.com/bstocksfinance) and [@RobinhoodCrypto](https://x.com/RobinhoodCrypto). And to all the contributors to this research [@RWA\\_xyz](https://x.com/RWA_xyz), [@CoinList](https://x.com/CoinList), [@Dune](https://x.com/Dune), [@AlliumLabs](https://x.com/AlliumLabs), [@coingecko](https://x.com/coingecko), [@RWAFoundation\\_](https://x.com/RWAFoundation_), [@ZeusRWA](https://x.com/ZeusRWA), [@stacy\\_muur](https://x.com/stacy_muur), and [@GREEND0TS](https://x.com/GREEND0TS). Shout out to all the innovators driving the tokenised equities ecosystem forward. **Memecoin launchpads** [](https://x.com/JupiterExchange)[@flapdotsh](https://x.com/flapdotsh), [@ponsdotfamily](https://x.com/ponsdotfamily), [@longdotxyz](https://x.com/longdotxyz), [@fourdotmemezh](https://x.com/fourdotmemezh) **Lending and yield** [](https://x.com/JupiterExchange)[@kamino](https://x.com/kamino), [@pendle\\_fi](https://x.com/pendle_fi), [u/@eulerfinance](https://x.com/eulerfinance), [@Morpho](https://x.com/Morpho), [@VenusProtocol](https://x.com/VenusProtocol), [@aave](https://x.com/aave) **Trading venues** [](https://x.com/JupiterExchange)[@JupiterExchange](https://x.com/JupiterExchange), [@Uniswap](https://x.com/Uniswap), [@arcus\\_xyz](https://x.com/arcus_xyz), [@rialto\\_xyz](https://x.com/rialto_xyz), [@native\\_fi](https://x.com/native_fi), [@KyberNetwork](https://x.com/KyberNetwork), [@PancakeSwap](https://x.com/PancakeSwap) **Perps and derivatives** [@Lighter\\_xyz](https://x.com/Lighter_xyz), [@Aster\\_DEX](https://x.com/Aster_DEX), [@Bybit\\_Official](https://x.com/Bybit_Official) **Pre-IPO and new issuance** [@DinariGlobal](https://x.com/DinariGlobal), [@PreStocks](https://x.com/PreStocks), [@cityprotocolHQ](https://x.com/cityprotocolHQ), [@ShiftRWA](https://x.com/ShiftRWA), [@SuperstateInc](https://x.com/SuperstateInc), [@JarsyInc](https://x.com/JarsyInc), [@Tessera\\_PE](https://x.com/Tessera_PE), [@openstocks\\_hq](https://x.com/openstocks_hq) **Self-Custody and distribution** [@safe](https://x.com/safe), [@sunrise](https://x.com/sunrise) **Issuers** [@Ondo](https://x.com/Ondo), [@xStocksFi](https://x.com/xStocksFi), [@bstocksfinance](https://x.com/bstocksfinance), [@RobinhoodCrypto](https://x.com/RobinhoodCrypto), [@Backpack](https://x.com/Backpack), [@BackedFi](https://x.com/BackedFi), [@krakenfx](https://x.com/krakenfx) **Chains** [@solana](https://x.com/solana), [@ethereum](https://x.com/ethereum), [@BNBCHAIN](https://x.com/BNBCHAIN), [@RobinhoodCrypto](https://x.com/RobinhoodCrypto)",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-03 09:19:35"
+    },
+    {
+      "id": 6,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Arrakis Research: Tokenized Equities on Solana Report",
+      "url": "https://arrakis.finance/tokenized-equities",
+      "content": "Reporte de investigación sobre más de 1.5M de direcciones en Solana y EVM para activos tokenizados y tesorería institucional.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-03 09:19:35"
+    },
+    {
+      "id": 7,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Solana Official: Real World Assets Infrastructure & Solutions",
+      "url": "https://solana.com/solutions/real-world-assets",
+      "content": "Portal oficial de infraestructura RWA de Solana Foundation con casos de uso de tesoros tokenizados y bienes raíces.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-03 09:19:35"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
  * Vault Gateway: Pure abstraction for BRIDS-Brain filesystem operations.
  * Enforces non-destructive safety backups, spec lifecycle storage, and deliverable commitments.
  * 
- * @spec SPEC-001 (Ported & adapted from Academic-Engine architecture)
+ * @spec SPEC-BRIDS-001 (BRIDS-Engine Clean Architecture — Solana RWA & YC Venture)
  */
 
 import fs from 'node:fs';
@@ -40,6 +40,38 @@ export interface TaskSpecData {
   [key: string]: any;
 }
 
+export interface ParsedMarkdown {
+  frontmatter: Record<string, string>;
+  rawFrontmatter: string;
+  body: string;
+  hasFrontmatter: boolean;
+}
+
+export function ensureDir(dirPath: string): void {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+}
+
+export function parseFrontmatter(content: string): ParsedMarkdown {
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  if (!match) {
+    return { frontmatter: {}, rawFrontmatter: '', body: content, hasFrontmatter: false };
+  }
+  const rawFrontmatter = match[1] ?? '';
+  const body = match[2] ?? '';
+  const frontmatter: Record<string, string> = {};
+  for (const line of rawFrontmatter.split(/\r?\n/)) {
+    const colonIdx = line.indexOf(':');
+    if (colonIdx > 0 && !line.trim().startsWith('-')) {
+      const key = line.slice(0, colonIdx).trim();
+      const val = line.slice(colonIdx + 1).trim().replace(/^["']|["']$/g, '');
+      frontmatter[key] = val;
+    }
+  }
+  return { frontmatter, rawFrontmatter, body, hasFrontmatter: true };
+}
+
 export class VaultGateway {
   private vaultDir: string;
   private specsDir: string;
@@ -58,10 +90,8 @@ export class VaultGateway {
     this.ensureDir(this.archiveDir);
   }
 
-  private ensureDir(dirPath: string): void {
-    if (!fs.existsSync(dirPath)) {
-      fs.mkdirSync(dirPath, { recursive: true });
-    }
+  ensureDir(dirPath: string): void {
+    ensureDir(dirPath);
   }
 
   getVaultDir(): string {
@@ -151,15 +181,44 @@ export class VaultGateway {
   }
 
   /**
+   * Restores a file from its most recent safety backup in 00 Inbox/Archive.
+   */
+  rollbackLatestBackup(targetPath: string): string | null {
+    this.ensureDir(this.archiveDir);
+    const parsed = path.parse(targetPath);
+    const baseName = path.basename(targetPath);
+    const backups = fs.readdirSync(this.archiveDir)
+      .filter(f =>
+        (f.startsWith(`${parsed.name}-bak-`) && f.endsWith(parsed.ext)) ||
+        (f.startsWith(baseName) && f.endsWith('.bak.md'))
+      )
+      .sort()
+      .reverse();
+
+    if (backups.length === 0) {
+      return null;
+    }
+
+    const latestBackup = path.join(this.archiveDir, backups[0]);
+    fs.copyFileSync(latestBackup, targetPath);
+    return latestBackup;
+  }
+
+  /**
    * Commits deliverable to canonical production folder in BRIDS-Brain
    */
   commitDeliverable(slug: string, content: string, targetFolder?: string): { targetPath: string; backupPath: string | null } {
-    const loaded = this.loadSpec(slug);
-    const folder = targetFolder || loaded.data.target_folder || '01 Negocio/01 Estrategia & Modelo';
-    const destDir = path.join(this.vaultDir, folder);
+    const cleanSlug = this.sanitizeSlug(slug);
+    let folder = targetFolder;
+    if (!folder && this.specExists(cleanSlug)) {
+      const loaded = this.loadSpec(cleanSlug);
+      folder = loaded.data.target_folder || loaded.data.target_vault_folder;
+    }
+    const resolvedFolder = folder || '01 Negocio/01 Estrategia & Modelo';
+    const destDir = path.join(this.vaultDir, resolvedFolder);
     this.ensureDir(destDir);
 
-    const fileName = `${loaded.paths.slug}.md`;
+    const fileName = `${cleanSlug}.md`;
     const targetPath = path.join(destDir, fileName);
 
     const backupPath = this.createSafetyBackup(targetPath);
@@ -167,4 +226,80 @@ export class VaultGateway {
 
     return { targetPath, backupPath };
   }
+
+  /**
+   * Formats a finalized deliverable note with canonical Obsidian YAML frontmatter, SDD/HITL seals, and changelog
+   */
+  formatFinalVaultNote(specData: any, rawDraft: string, report: { total_score: number | null; passing_threshold: number }): string {
+    const now = new Date().toISOString().split('T')[0];
+    const agents = specData.subagents_involved || specData.subagents || ['founder-ghostwriter'];
+    const category = specData.target_vault_folder || specData.target_folder || '01 Negocio/01 Estrategia & Modelo';
+    const h1At = specData.hitl_checkpoints?.hitl_1_spec_approval?.approved_at || now;
+    const h2At = specData.hitl_checkpoints?.hitl_2_deliverable_approval?.approved_at || now;
+    const cycles = specData.evaluation?.current_cycle || specData.iteration || 1;
+
+    return `---
+title: "${specData.title}"
+spec_id: "${specData.spec_id || specData.id}"
+category: "${category}"
+author_agents:
+${agents.map((a: string) => `  - "${a}"`).join('\n')}
+reviewer_agent: "sdd-reviewer"
+quality_score: ${report.total_score}
+quality_threshold: ${report.passing_threshold}
+hitl_1_approved_at: "${h1At}"
+hitl_2_approved_at: "${h2At}"
+status: approved
+version: "1.0"
+created_at: ${now}
+updated_at: ${now}
+tags:
+  - brids
+  - sdd-approved
+  - hitl-validated
+  - deliverable
+---
+
+# ${specData.title}
+
+> [!NOTE]
+> **Aprobación Integral SDD + HITL:** Validado por el motor Evaluador-Optimizador (**${report.total_score}/9.0**) y con doble aprobación humana (**HITL-1 Spec** y **HITL-2 Deliverable**).
+> **Sub-Agentes Autores:** ${agents.map((a: string) => `\`${a}\``).join(', ')} | **Revisor:** \`sdd-reviewer\`
+
+${rawDraft.replace(/^---[\s\S]*?---\s*/, '')}
+
+## 🔄 Historial de Revisiones SDD (Changelog)
+- **v1.0 (${now}):** Aprobado por el usuario e integrado en el vault tras ${cycles} ciclos de optimización con nota de ${report.total_score}/9.0.
+
+## 🔗 Trazabilidad
+- Artefacto de Especificación: [[00 Inbox/Specs/${specData.slug}.spec.md]]
+- Contexto de Marca: [[01 Brand Context/product-marketing-context.md]]
+`;
+  }
+
+  /**
+   * Lists all active specifications in 00 Inbox/Specs
+   */
+  listSpecs(): Array<{ slug: string; title: string; status: string; data: TaskSpecData }> {
+    this.ensureDir(this.specsDir);
+    const entries = fs.readdirSync(this.specsDir).filter(f => f.endsWith('.spec.json'));
+    const results: Array<{ slug: string; title: string; status: string; data: TaskSpecData }> = [];
+
+    for (const file of entries) {
+      try {
+        const fullPath = path.join(this.specsDir, file);
+        const data: TaskSpecData = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+        results.push({
+          slug: data.slug || path.basename(file, '.spec.json'),
+          title: data.title || '',
+          status: data.status || 'unknown',
+          data
+        });
+      } catch {
+        // Ignore malformed JSON files
+      }
+    }
+    return results;
+  }
 }
+

@@ -15,7 +15,6 @@ skills:
 outputs:
   - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/pitch-decks/"
   - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/yc-application/"
-  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/pitch-decks/"
   - "BRIDS-Engine/outputs/decks/"
 
 system_prompt: |

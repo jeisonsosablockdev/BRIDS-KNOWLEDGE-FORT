@@ -3,7 +3,7 @@
 Especificaciones del estándar de NFTs de cuenta única de Metaplex Core en Solana, control de plugins de Freeze y protocolo de recuperación.
 
 > [!NOTE]
-> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `6a40b30`).
+> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `b818558`).
 
 ---
 

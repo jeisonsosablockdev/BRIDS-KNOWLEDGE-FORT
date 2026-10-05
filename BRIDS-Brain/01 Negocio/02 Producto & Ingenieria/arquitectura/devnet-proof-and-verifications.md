@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/devnet-proof.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "05e817695764c7375cbe4eed58acddac589dc052714b90f554121b704ff85d73"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "ba196d48e2c2a1bcd5ec5f09357b869d5c4393264846a3650f9d1d33cc66d1aa"
 tags: [devnet, proof, candy-machine, verification, solana]
-updated_at: "2026-09-12T02:07:49.363Z"
+updated_at: "2026-10-03T02:51:18.300Z"
 ---
 
 # Evidencia Verificable y Despliegues en Devnet
 
 > [!NOTE]
 > **Resumen Técnico:** Registro de direcciones on-chain, transacciones de prueba de concepto, Candy Machines desplegadas y firmas verificables.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -45,6 +45,8 @@ updated_at: "2026-09-12T02:07:49.363Z"
 | --- | --- | --- | --- | --- | --- | --- |
 | Create Core collection | `31iKqrqa7cFn3z2b8Q2oVbD2tazBLUBQ1t1ahgTSeadXxHrjXVSt4zXu3QTzWvXEN77rCXEdV6dhC673SNUxhrDR` | `447194800` | `2026-03-09 03:14:41 UTC` | `finalized` | `null` | `https://explorer.solana.com/tx/31iKqrqa7cFn3z2b8Q2oVbD2tazBLUBQ1t1ahgTSeadXxHrjXVSt4zXu3QTzWvXEN77rCXEdV6dhC673SNUxhrDR?cluster=devnet` |
 | Mint Core asset in collection | `2nsk2m6QaWjYipQFcZqN7ZbbnBgAbDYjMisFM4yXgqQ2911deiRZxavon457z8i8wLRHjJSjxfVVH3tDwH3CjNtD` | `447194802` | `2026-03-09 03:14:41 UTC` | `finalized` | `null` | `https://explorer.solana.com/tx/2nsk2m6QaWjYipQFcZqN7ZbbnBgAbDYjMisFM4yXgqQ2911deiRZxavon457z8i8wLRHjJSjxfVVH3tDwH3CjNtD?cluster=devnet` |
+| Deploy Payout Settlement Anchor Program (`HLp7YXKZZ8...`) | `spygfgaiCNA9DMtyPfkhuYuX9FyPY6nZeqG9ZWPDtUCRnAqyxw6BC6CTZXvrkoUYTJUwhp58t3xA7tryKz8oE7R` | `486049609` | `2026-08-21 00:00:00 UTC` | `finalized` | `null` | `https://explorer.solana.com/tx/spygfgaiCNA9DMtyPfkhuYuX9FyPY6nZeqG9ZWPDtUCRnAqyxw6BC6CTZXvrkoUYTJUwhp58t3xA7tryKz8oE7R?cluster=devnet` |
+| Upgrade Payout Settlement Program (`settle_claim`) | `3yyqJKc73VaFHX45wAH9vuo2eX7LX1eGNTsY2f4LNwzVXX5t6eVeoz9iN29r8AEzwyySLbTB1de5pweWXgx3SEgu` | `486180563` | `2026-08-21 12:00:00 UTC` | `finalized` | `null` | `https://explorer.solana.com/tx/3yyqJKc73VaFHX45wAH9vuo2eX7LX1eGNTsY2f4LNwzVXX5t6eVeoz9iN29r8AEzwyySLbTB1de5pweWXgx3SEgu?cluster=devnet` |
 
 ## Core Candy Machine Deploy Proof (Pinata Flow)
 - Verification run date: 2026-03-18 00:46:30 UTC
@@ -242,3 +244,4 @@ Last Updated: 2026-04-01 16:05:30 UTC
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/architecture/devnet-proof.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/session-model.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "b1fcff4c364e518f1fce4069efa044c381de034a2bbaf7c888031a1a296bf705"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "11c659f577f76bc37ff74b9311bb54fb64f94e1d4daa1bd1ee6c50c1e5b80627"
 tags: [session, jwt, security, persistence, workos]
-updated_at: "2026-09-12T02:07:49.362Z"
+updated_at: "2026-10-03T02:51:18.293Z"
 ---
 
 # Modelo de Sesión y Persistencia Stateless vs Stateful
 
 > [!NOTE]
 > **Resumen Técnico:** Arquitectura de manejo de tokens JWT, almacenamiento seguro de cookies de sesión, expiración y revocación.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -29,7 +29,45 @@ updated_at: "2026-09-12T02:07:49.362Z"
 
 ---
 
-Last Updated: 2026-07-22
+Last Updated: 2026-09-14
+
+## FEATURE-CREATE-ROBOTS-TXT Robots Policy & SEO Crawler Session Boundary
+- The `/robots.txt` endpoint (`app/robots.ts`, `apps/web/src/app/robots.ts`) and policy builders do not access, create, or alter cookies, tokens, or session state.
+- Purely public metadata route configuration with zero statefulness or authentication dependencies.
+- Disallows indexing of session-bearing and sensitive routes (`/profile`, `/checkout`, `/admin`, `/protected`, `/api`) across all web crawlers and AI search agents.
+
+## FIX-SOCIAL-GRAPH-CARD OpenGraph Social Card & Metadata Session Boundary
+- The `/opengraph-image` endpoint and page metadata builders do not access, create, or alter cookies, tokens, or session state.
+- Purely presentation and SEO document head configuration with zero statefulness or authentication dependencies.
+- Crawlers (WhatsApp, Twitter/X, Facebook, LinkedIn) query static metadata without establishing or affecting any user session.
+
+## FIX-DARKREADER-LOCK Dark Reader Lock & Root Layout Session Boundary
+- The `/layout.tsx` `<meta name="darkreader-lock" />` tag and root metadata builders do not access, create, or alter cookies, tokens, or session state.
+- Purely presentation and SEO document head configuration with zero statefulness or authentication dependencies.
+- No session lifecycle, cookie TTL, or authentication contexts are affected.
+
+## FIX-PWA-ROUTES PWA Service Worker & Favicon Route Session Boundary
+- The `/sw.js` and `/favicon.svg` route handlers do not read, create, or modify any cookies, tokens, or session state.
+- Both endpoints are entirely public, stateless, and cache-friendly static distribution endpoints.
+- No session lifecycle, cookie TTL, or authentication contexts are affected.
+
+## EPIC-015 Squads v4 Treasury Claims & Admin UI Session Boundary
+- Admin routes for payout exceptions and governance (`/api/admin/payout-runs/[id]/*`, `/api/admin/collections/[id]/date-change-request`) require server-verified admin SIWS sessions via `getRequestRole(request)`.
+- No new session cookies, nonces, or tokens are introduced.
+- Date change requests create auditable `PENDING_MULTISIG` intent records without mutating session state or database timestamps directly.
+- All on-chain execution for treasury disbursements, claim cancellations, and date updates requires real Squads v4 multisig CPI on Solana Devnet.
+
+## FIX-SOCIAL-GRAPH Social Graph Redesign Session Boundary
+- The social graph card redesign and root metadata updates do not introduce or touch any session cookies, storage keys, or authentication contexts.
+- Open Graph and Twitter Card dynamic generation routes operate completely unauthenticated and stateless.
+- No cookie names, TTLs, nonce behavior, SIWS verification flow, WorkOS session behavior, or role derivation were modified.
+
+## BRI-188 BRIDS Brain Knowledge Vault Session Boundary
+- The `/brain` interface reuses the canonical cryptographic SIWS cookie session (`siws_session`) and does not introduce any new session cookies, browser tokens, or secondary session stores.
+- **Session Verification**: `BrainLayout` (`apps/web/src/app/brain/layout.tsx`) and Server Actions enforce `assertAdminSession()`.
+- **Role Elevation**: Non-admin user sessions cannot view or probe notes; unauthorized requests redirect to `/403`.
+- **Lifecycle & Cache Revalidation**: On document modification, `saveBrainDocumentAction` invalidates Next.js cache tags (`vault-tree` and `vault-doc-[path]`) without persisting user session state into the Markdown repository.
+- **Webhook Stateless Execution**: The GitHub push event webhook (`/api/webhooks/brain-sync`) is completely stateless with respect to user sessions. It verifies origin authenticity through HMAC SHA-256 signatures (`X-Hub-Signature-256`) and mutates cache storage in Vercel Blob without interacting with cookie or JWT session stores.
 
 ## BRI-182 4-Layer Architecture Alignment
 - Re-located auth session state store to Layer 2 (`/lib/state/auth-store.ts`) and updated all session route imports to canonical 4-layer paths.
@@ -883,3 +921,4 @@ Last Updated: 2026-04-14 14:20:00 UTC
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/architecture/session-model.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

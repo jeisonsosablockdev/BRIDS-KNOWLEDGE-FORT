@@ -13,8 +13,8 @@ skills:
   - mas-copywriting
 
 outputs:
-  - "BRIDS-Brain/01 Negocio/05 Sponsors B2B & Ventas/colateral-comercial/"
-  - "BRIDS-Brain/01 Negocio/05 Sponsors B2B & Ventas/prospeccion-outbound/"
+  - "BRIDS-Brain/01 Negocio/05 Sponsors B2B & Ventas/"
+  - "BRIDS-Engine/outputs/pdfs/"
 
 system_prompt: |
   You are the B2B Sponsor Lead & Sales Enablement Specialist for BRIDS.io (Web3 Real Estate Syndication Platform on Solana).

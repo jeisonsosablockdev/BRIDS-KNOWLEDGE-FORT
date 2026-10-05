@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Security & Audits"
 source_okf: "knowledge/architecture/threat-model.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "816cf1027b20552fa7704a701e62833f41aaac25bf7fe75b2ad5e6325eee4cdf"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "025bdc5030c9b32abe9b4edf964fca4e963c1d4a35dbc43230f964a5c4a4f55f"
 tags: [security, threat-model, audit, compliance, solana-safety]
-updated_at: "2026-09-12T01:26:18.856Z"
+updated_at: "2026-10-03T02:51:18.316Z"
 ---
 
 # Modelo de Amenazas y Política de Seguridad Técnica
 
 > [!NOTE]
 > **Resumen Técnico:** Auditoría de vectores de ataque en smart contracts, seguridad de llaves privadas, validación de endpoints y devnet proof.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -88,19 +88,16 @@ updated_at: "2026-09-12T01:26:18.856Z"
 | Invalid economic mode injection | Strict catalog (`cap`, `linear`) | `validateAppDataEconomicV1` | Unit test: invalid mode rejected |
 | Unauthorized economic update attempt | Server-side admin gate + signer-based on-chain authority | `/api/admin/core-candy-machine/mint/prepare` + `writeData` with `UpdateAuthority` | Devnet evidence: only authorized signer writes accepted |
 
-## Compliance Admin Operations Addendum (EPIC-004 STORY-005)
-- New threat vectors:
-  - Unauthorized admin mutations on compliance cases.
-  - Missing justification on reject/override decisions.
-  - Loss of incident context due to missing notes/audit linkage.
-  - Financial actions executed by wallets marked as `restricted_aml` or `suspended`.
-- Mitigations:
-  - Admin-only guards on every `/api/admin/compliance/cases/*` mutation route.
-  - Service-level validation for mandatory reasons in rejected KYC and AML override decisions.
-  - Dedicated `compliance_notes` table + `compliance_audit_events` trail per mutation.
-  - Runtime compliance gate in purchase flows (`challenge`, `prepare`, `submit`) for blocked statuses.
+## EPIC-015 STORY-015-01 Addendum (Squads v4 Treasury Claims & Settlement)
+### Additional Threat Vectors & Mitigations
+| Threat | Entry Point | Mitigation | Where Implemented |
+| --- | --- | --- | --- |
+| Double Claim / Replay Attack | `settle_claim` instruction | `ClaimReceipt` PDA (`[b"claim_receipt", run_id, claim_id]`) initialized atomically; second attempt reverts | `programs/payout_settlement/src/instructions/settle_claim.rs` |
+| Sybil / Collusion Snapshot Attack | Run creation | Double Attestation (independent Attester A & B public keys verified) | `programs/payout_settlement/src/instructions/initialize_run.rs` |
+| Fake Multisig Authority Impersonation | `initialize_policy` | 3-Layer Squads v4 verification (Signer + Vault PDA re-derivation + Multisig ownership) | `programs/payout_settlement/src/instructions/initialize_policy.rs` |
+| Malformed / Adulterated Merkle Proof | `settle_claim` | 191-byte exact leaf reconstruction + Helium directional Keccak-256 hash | `programs/payout_settlement/src/instructions/settle_claim.rs` |
 
-Last Updated: 2026-04-01 08:20:33 UTC
+Last Updated: 2026-08-21 12:00:00 UTC
 
 ---
 
@@ -110,3 +107,4 @@ Last Updated: 2026-04-01 08:20:33 UTC
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde knowledge/architecture/threat-model.md |
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización automática de cambios desde rama develop |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

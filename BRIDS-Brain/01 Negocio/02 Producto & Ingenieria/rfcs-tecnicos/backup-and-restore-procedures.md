@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Operations & Runbooks"
 source_okf: "knowledge/operations/procedures/backup-restore.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "2b0cb3bf4670f61073098829160ef045a270ef00237fa99bbfbe63cf1079d89f"
 tags: [operations, backup, drp, postgres, recovery]
-updated_at: "2026-09-12T02:07:49.386Z"
+updated_at: "2026-10-03T02:51:18.525Z"
 ---
 
 # Procedimiento Operativo: Respaldo y Restauración de Datos
 
 > [!NOTE]
 > **Resumen Técnico:** Políticas de respaldos continuos de Postgres, retención de snapshots y plan de recuperación ante desastres (DRP).
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -220,3 +220,4 @@ WHERE wallet_public_key NOT IN (SELECT wallet_public_key FROM user_profiles);
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/operations/procedures/backup-restore.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

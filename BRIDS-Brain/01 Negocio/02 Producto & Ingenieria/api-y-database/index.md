@@ -3,7 +3,7 @@
 Contratos de endpoints REST, manejadores de webhooks externos, llamadas RPC y esquemas de datos relacionales.
 
 > [!NOTE]
-> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `6a40b30`).
+> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `b818558`).
 
 ---
 

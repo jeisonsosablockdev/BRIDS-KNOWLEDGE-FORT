@@ -2,7 +2,7 @@
  * State Machine & Invariants for BRIDS-Engine Task Lifecycle
  * Pure domain logic: deterministic state transitions with Double HITL guardrails.
  * 
- * @spec SPEC-001 (Ported & adapted from Academic-Engine architecture)
+ * @spec SPEC-BRIDS-001 (BRIDS-Engine Clean Architecture — Solana RWA & YC Venture)
  */
 
 export type TaskLifecycleState = 
@@ -10,7 +10,9 @@ export type TaskLifecycleState =
   | 'spec_review'
   | 'spec_approved'
   | 'task_loop'
+  | 'draft_optimizing'
   | 'deliverable_review'
+  | 'deliverable_refining'
   | 'completed'
   | 'frozen_for_arbitration';
 
@@ -109,7 +111,7 @@ export function approveSpec(context: TaskContext): TransitionResult {
  */
 export function evaluateCycle(context: TaskContext, score: number): TransitionResult {
   // 1. Guardrail HITL-1 check: Must have approved spec
-  if (context.state !== 'spec_approved' && context.state !== 'task_loop') {
+  if (context.state === 'initialized' || context.state === 'spec_review') {
     return {
       success: false,
       context: { ...context },

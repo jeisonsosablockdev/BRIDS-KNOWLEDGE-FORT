@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Technical RFCs"
 source_okf: "knowledge/rfcs/EPIC-012-referral-marketing-system-in-user-dashboard/README.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "ff9d8ff0178360313560ae2b7787fc6511e4a4159d0961ea3b1910a96f9e4e1a"
 tags: [rfc, epic, epic-012, solana, architecture]
-updated_at: "2026-09-12T02:07:49.395Z"
+updated_at: "2026-10-03T02:51:18.605Z"
 ---
 
 # RFC EPIC-012: Sistema de Mercadeo de Referidos en Panel de Usuario
 
 > [!NOTE]
 > **Resumen Técnico:** Generación de links de referidos, tracking de atribución y bonificaciones en billetera.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -129,3 +129,4 @@ updated_at: "2026-09-12T02:07:49.395Z"
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/rfcs/EPIC-012-referral-marketing-system-in-user-dashboard/README.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

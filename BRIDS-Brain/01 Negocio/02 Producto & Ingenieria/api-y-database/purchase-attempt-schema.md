@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Database Architecture"
 source_okf: "knowledge/database/models/purchase-attempt.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "9cf40f260684247eee3127e357589cfa79e936cd5984c5a220f1a059e85072d5"
 tags: [database, purchase-attempt, checkout, inventory, postgres]
-updated_at: "2026-09-12T02:07:49.376Z"
+updated_at: "2026-10-03T02:51:18.378Z"
 ---
 
 # Modelo de Datos: Intentos de Compra y Registro de Órdenes
 
 > [!NOTE]
 > **Resumen Técnico:** Esquema de seguimiento de órdenes de compra, locking de inventario, tiempos de expiración y estado de pago.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -120,3 +120,4 @@ Post-submit verification checks:
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/database/models/purchase-attempt.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "API Specifications"
 source_okf: "knowledge/api/endpoints/stake-distribution.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "1c9c3e4e46f937f0da56f261e56c5038f4552dd5f97e363ceb85ff1f48de9e14"
 tags: [api, staking, yields, claims, endpoints]
-updated_at: "2026-09-12T02:07:49.381Z"
+updated_at: "2026-10-03T02:51:18.492Z"
 ---
 
 # Especificación de API: Staking y Distribución de Rendimientos
 
 > [!NOTE]
 > **Resumen Técnico:** Endpoints para consultar rentas devengadas, solicitar retiros de dividendos acumulados y verificar estado de claim.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -83,3 +83,4 @@ Derived server-side from:
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/api/endpoints/stake-distribution.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

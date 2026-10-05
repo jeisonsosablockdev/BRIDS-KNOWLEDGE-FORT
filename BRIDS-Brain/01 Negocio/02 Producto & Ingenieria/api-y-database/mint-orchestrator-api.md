@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "API Specifications"
 source_okf: "knowledge/api/endpoints/mint-orchestrator.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "7ba4100909a2704ffe412f15da7fdcf5c2a4256cee0cba197953746243968be6"
 tags: [api, minting, orchestration, endpoints]
-updated_at: "2026-09-12T02:07:49.379Z"
+updated_at: "2026-10-03T02:51:18.479Z"
 ---
 
 # Especificación de API: Orquestador de Minteo y Emisión
 
 > [!NOTE]
 > **Resumen Técnico:** Endpoints internos y de webhook para coordinar la emisión on-chain tras confirmación de fondos en custodia.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -121,3 +121,4 @@ Returns `nextPage` token for continuation.
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/api/endpoints/mint-orchestrator.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -7,8 +7,8 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 > Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, rama `develop`) mediante `sync-technical-docs.sh`.
 > 
 > **Estado del Catálogo Técnico:**
-> - 📌 **Último Commit Sincronizado:** `6a40b30` (2026-08-22)
-> - 📦 **Total de Artefactos OKF en Repositorio:** 595 documentos (Arquitectura, RFCs, APIs, DB, Seguridad, Operaciones).
+> - 📌 **Último Commit Sincronizado:** `b818558` (2026-09-24)
+> - 📦 **Total de Artefactos OKF en Repositorio:** 641 documentos (Arquitectura, RFCs, APIs, DB, Seguridad, Operaciones).
 > - 🛡️ **Garantía Anti-Drift:** Versionado continuo con respaldos automáticos en `00 Inbox/Archive/` y validación estricta de bóveda.
 
 ---
@@ -16,7 +16,6 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 ## 🧭 Mapa Canónico de Ingeniería (Estructura de Dominios)
 
 ### 🗺️ 1. Roadmap y Madurez de Producto (`product-roadmap/`)
-- [[01 Negocio/02 Producto & Ingenieria/modulo-desarrollador-spv-engine.md|Módulo del Desarrollador Inmobiliario y SPV Engine (Especificación Funcional)]]
 - [[01 Negocio/02 Producto & Ingenieria/current-product-status-matrix.md|Matriz Viva de Estado y Madurez de Producto]]
 - [[01 Negocio/02 Producto & Ingenieria/app-technical-roadmap-investor-brief.md|Roadmap Técnico e Investor Brief de Producto]]
 - [[01 Negocio/02 Producto & Ingenieria/product-roadmap/index.md|Sub-Índice de Roadmap de Producto]]

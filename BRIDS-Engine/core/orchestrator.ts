@@ -2,7 +2,7 @@
  * SDD Task Orchestrator: High-Level Application Coordinator for BRIDS Knowledge Fort
  * Integrates TaskStateMachine, VaultGateway, and SDD 4D Evaluators.
  * 
- * @spec SPEC-001 (Ported & adapted from Academic-Engine architecture)
+ * @spec SPEC-BRIDS-001 (BRIDS-Engine Clean Architecture — Solana RWA & YC Venture)
  */
 
 import fs from 'node:fs';
@@ -19,9 +19,9 @@ import {
 import type { TaskContext, TransitionResult } from './state-machine.ts';
 import { VaultGateway } from './vault-gateway.ts';
 import type { TaskSpecData } from './vault-gateway.ts';
-import { evaluateDeliverable } from '../evaluators/sdd-4d-rubric.ts';
-import type { RubricDimensions, EvaluationReport } from '../evaluators/sdd-4d-rubric.ts';
-import { scanCliches } from '../evaluators/anti-cliche-filter.ts';
+import { evaluateDeliverable, auditDeliverableText } from '../evaluators/sdd-4d-rubric.ts';
+import type { RubricDimensions, EvaluationReport, FullAuditReport } from '../evaluators/sdd-4d-rubric.ts';
+import { scanCliches, autoRemediateDraft } from '../evaluators/anti-cliche-filter.ts';
 
 export class TaskOrchestrator {
   private vault: VaultGateway;
@@ -184,9 +184,53 @@ export class TaskOrchestrator {
   }
 
   /**
+   * Runs the autonomous Evaluator-Optimizer loop (up to maxCycles) until >= 8.5/9.0 or frozen_for_arbitration
+   */
+  runTaskLoop(
+    slug: string,
+    initialDraftContent: string,
+    maxCycles: number = MAX_OPTIMIZATION_CYCLES
+  ): { passed: boolean; cyclesRun: number; finalScore: number; finalStatus: string; lastAudit: FullAuditReport } {
+    let currentDraft = initialDraftContent;
+    let cyclesRun = 0;
+    let lastAudit: FullAuditReport = auditDeliverableText(currentDraft);
+    let finalStatus = 'in_optimization';
+
+    for (let i = 0; i < maxCycles; i++) {
+      cyclesRun++;
+      const loaded = this.vault.loadSpec(slug);
+      lastAudit = auditDeliverableText(currentDraft, loaded.data as any);
+
+      const dims: RubricDimensions = {
+        goalIcp: lastAudit.scoring_dimensions['1_goal_and_icp'].score,
+        techRigor: lastAudit.scoring_dimensions['2_technical_veracity'].score,
+        founderVoice: lastAudit.scoring_dimensions['3_founder_voice'].score,
+        originalityLexicon: 2.0
+      };
+
+      const { transition, report } = this.evaluateDraft(slug, currentDraft, dims, lastAudit.remediation_directives);
+      finalStatus = transition.context.state;
+
+      if (report.passed || finalStatus === 'deliverable_review' || finalStatus === 'frozen_for_arbitration') {
+        break;
+      }
+
+      currentDraft = autoRemediateDraft(currentDraft);
+    }
+
+    return {
+      passed: lastAudit.passed,
+      cyclesRun,
+      finalScore: lastAudit.total_score,
+      finalStatus,
+      lastAudit
+    };
+  }
+
+  /**
    * Human approves deliverable and commits to BRIDS-Brain (HITL-2 Guardrail)
    */
-  approveDeliverable(slug: string, finalContent?: string): TransitionResult {
+  approveDeliverable(slug: string, finalContent?: string): TransitionResult & { deliverablePath?: string } {
     const loaded = this.vault.loadSpec(slug);
     const ctx = this.buildContextFromSpec(loaded.data);
     const res = smApproveDeliverable(ctx);
@@ -217,12 +261,15 @@ export class TaskOrchestrator {
     }
 
     // Commit deliverable to production vault
-    this.vault.commitDeliverable(slug, contentToCommit);
+    const { targetPath } = this.vault.commitDeliverable(slug, contentToCommit);
 
     // Update spec status
     loaded.data.status = res.context.state;
     this.vault.saveSpec(slug, loaded.data);
 
-    return res;
+    return {
+      ...res,
+      deliverablePath: targetPath
+    };
   }
 }

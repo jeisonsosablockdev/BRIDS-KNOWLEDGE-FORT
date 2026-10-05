@@ -3,7 +3,7 @@
 Especificaciones técnicas de alto nivel, autenticación dual SIWS/WorkOS, trazabilidad de transacciones on-chain y gobernanza de autoridades.
 
 > [!NOTE]
-> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `6a40b30`).
+> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `b818558`).
 
 ---
 

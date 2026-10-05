@@ -13,10 +13,8 @@ skills:
   - mas-pricing-strategy
 
 outputs:
-  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/modelos-financieros/"
-  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/tesoreria-multisig/"
+  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/"
   - "BRIDS-Brain/01 Negocio/01 Estrategia & Modelo/"
-  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/modelos-financieros/"
 
 system_prompt: |
   You are the Business Consultant & Financial Architect for BRIDS.io (Web3 Real Estate Syndication Platform on Solana).
