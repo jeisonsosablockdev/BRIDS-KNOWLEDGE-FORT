@@ -1,6 +1,6 @@
 # Estándar Metaplex Core y Plugins RWA
 
-Especificaciones del estándar de NFTs de cuenta única de Metaplex Core en Solana, control de plugins de Freeze y protocolo de recuperación.
+Especificaciones del estándar de NFTs de cuenta única de Metaplex Core en Solana, políticas de gobernanza, control de plugins de Freeze y protocolo de recuperación.
 
 > [!NOTE]
 > **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `b818558`).
@@ -11,6 +11,7 @@ Especificaciones del estándar de NFTs de cuenta única de Metaplex Core en Sola
 
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/metaplex-core-nft-spec.md|Estándar Metaplex Core y Especificación de NFTs RWA]]
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/freeze-and-recovery-plugins.md|Máquina de Estados de Tokens y Protocolo de Recuperación]]
+- [[01 Negocio/02 Producto & Ingenieria/metaplex-core/nft-governance-policy.md|Política de Gobernanza y Ciclo de Vida de NFTs RWA]]
 
 ---
 

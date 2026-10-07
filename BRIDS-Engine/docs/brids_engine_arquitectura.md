@@ -70,7 +70,7 @@ flowchart TB
         end
 
         subgraph ContextLayer["9. Contexto & Estándares (context/)"]
-            CTX["product-marketing-context.md<br/>technical-okf/ (Solana, RFCS, Security)<br/>positioning.md & icp-and-personas.md<br/>brand-visual-style-guide.md"]
+            CTX["product-marketing-context.md<br/>brids-core-repo-import/ (Solana, RFCS, Security)<br/>positioning.md & icp-and-personas.md<br/>brand-visual-style-guide.md"]
         end
 
         subgraph TestLayer["10. Suites de Verificación en TypeScript (tests/)"]

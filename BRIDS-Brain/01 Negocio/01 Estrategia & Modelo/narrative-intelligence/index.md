@@ -16,6 +16,8 @@ Este directorio alberga los **informes de inteligencia de narrativas, susurros d
 
 ## 🧩 Informes y Briefs de Narrativa
 
+- [[01 Negocio/01 Estrategia & Modelo/narrative-intelligence/2026-10-06-narrative-radar-solana-rwa-weekly-radar.md|Narrative Radar (2026-10-06): solana-rwa-weekly-radar]]
+
 - [[01 Negocio/01 Estrategia & Modelo/narrative-intelligence/2026-10-04-narrative-radar-solana-rwa-weekly-radar.md|Narrative Radar (2026-10-04): solana-rwa-weekly-radar]]
 
 - [[01 Negocio/01 Estrategia & Modelo/narrative-intelligence/2026-10-03-narrative-radar-solana-rwa-weekly-radar.md|Narrative Radar (2026-10-03): solana-rwa-weekly-radar]]

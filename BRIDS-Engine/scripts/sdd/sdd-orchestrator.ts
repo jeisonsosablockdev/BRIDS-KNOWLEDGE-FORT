@@ -14,7 +14,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BANNED_PATTERNS, scanCliches, autoRemediateDraft as evalAutoRemediateDraft } from '../../evaluators/anti-cliche-filter.ts';
-import { SDD_THRESHOLD, evaluateDeliverable, auditDeliverableText } from '../../evaluators/sdd-4d-rubric.ts';
+import {
+  SDD_THRESHOLD,
+  evaluateDeliverable,
+  auditDeliverableText,
+  evaluateWithClefSync,
+  computeClefCacheKey,
+} from '../../evaluators/sdd-4d-rubric.ts';
 import {
   createInitialContext,
   startSpecReview,
@@ -79,6 +85,8 @@ export {
   TaskOrchestrator,
   scanCliches,
   evaluateDeliverable,
+  evaluateWithClefSync,
+  computeClefCacheKey,
 };
 
 export const sanitizeSlug = (str = '') => vaultGateway.sanitizeSlug(str);
@@ -371,17 +379,20 @@ export function evaluateDraft(slug: string, draftContent: string, cycleOverride:
     passed: report.passed,
     timestamp: report.timestamp,
     banned_phrases_count: report.banned_phrases_detected.length,
+    clef_engine: report.clef_decision.engine,
+    clef_cache_key: report.clef_decision.cache_key,
     report_file: path.relative(ROOT_DIR, reportFile),
   });
 
   data.evaluation.final_score = report.total_score;
 
   console.log(`\n🔍 AUDITORÍA DE CICLO ${cycle}/${data.evaluation.max_cycles}: ${data.spec_id}`);
+  console.log(`   Motor Decisión:  ${report.clef_decision.engine} (SHA256: ${report.clef_decision.cache_key.slice(0, 12)})`);
   console.log(`   Puntaje Total:   ${report.total_score} / ${report.scale_max} (Umbral: ${report.passing_threshold})`);
-  console.log(`   Objetivo & ICP:  ${report.scoring_dimensions['1_goal_and_icp'].score} / 2.5`);
-  console.log(`   Técnica/Fuentes: ${report.scoring_dimensions['2_technical_veracity'].score} / 2.5`);
-  console.log(`   Voz Fundadora:   ${report.scoring_dimensions['3_founder_voice'].score} / 2.0`);
-  console.log(`   Originalidad:    ${report.scoring_dimensions['4_lexical_originality'].score} / 2.0`);
+  console.log(`   Objetivo & ICP:  ${report.scoring_dimensions['1_goal_and_icp'].score} / 2.5 (Clef P=${report.scoring_dimensions['1_goal_and_icp'].clef_probability})`);
+  console.log(`   Técnica/Fuentes: ${report.scoring_dimensions['2_technical_veracity'].score} / 2.5 (Clef P=${report.scoring_dimensions['2_technical_veracity'].clef_probability})`);
+  console.log(`   Voz Fundadora:   ${report.scoring_dimensions['3_founder_voice'].score} / 2.0 (Clef P=${report.scoring_dimensions['3_founder_voice'].clef_probability})`);
+  console.log(`   Originalidad:    ${report.scoring_dimensions['4_lexical_originality'].score} / 2.0 (Clef P=${report.scoring_dimensions['4_lexical_originality'].clef_probability})`);
 
   if (report.passed) {
     console.log(`   🎉 ¡APROBADO POR EL REVISOR TÉCNICO! Nota >= ${report.passing_threshold}`);

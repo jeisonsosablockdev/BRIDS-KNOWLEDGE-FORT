@@ -10,7 +10,7 @@ status: in_progress
 version: "2.0"
 protected: true
 created_at: 2026-08-08
-updated_at: 2026-10-05
+updated_at: 2026-10-06
 tags:
   - marketing
   - social-content
@@ -23,7 +23,7 @@ tags:
 
 *Matriz Maestra Intercalada y Sincronizada para @brids_io*  
 *Folder: 02 Marketing / 03 Redes Sociales & Contenido*  
-*Last updated: 2026-10-05*
+*Last updated: 2026-10-06*
 
 > [!NOTE]
 > **Resumen Ejecutivo:** Matriz maestra de sincronización editorial de BRIDS para LinkedIn, X y Telegram. Mantiene alineación 1-a-1 entre la planificación estratégica, las tesis RWA, las notas entregables en Obsidian y los activos visuales.
@@ -54,4 +54,4 @@ tags:
 
 ## 🔄 Historial de Revisiones (Changelog)
 - **v1.0 (2026-08-08):** Creación inicial de la matriz editorial.
-- **v2.0 (2026-10-05):** Migración a formato kebab-case institucional alineado con la arquitectura BRIDS.
+- **v2.0 (2026-10-06):** Migración a formato kebab-case institucional alineado con la arquitectura BRIDS.

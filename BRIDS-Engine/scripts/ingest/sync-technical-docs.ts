@@ -38,7 +38,7 @@ const BRAIN_DIR = path.join(ROOT_DIR, 'BRIDS-Brain');
 const ENGINE_DIR = path.join(ROOT_DIR, 'BRIDS-Engine');
 const SCRIPTS_DIR = path.join(ENGINE_DIR, 'scripts');
 const CONTEXT_DIR = path.join(ENGINE_DIR, 'context');
-const CACHE_DIR = path.join(CONTEXT_DIR, 'technical-okf');
+const CACHE_DIR = path.join(CONTEXT_DIR, 'brids-core-repo-import');
 const VAULT_13_DIR = path.join(BRAIN_DIR, '01 Negocio', '02 Producto & Ingenieria');
 const ARCHIVE_DIR = path.join(BRAIN_DIR, '00 Inbox', 'Archive');
 
@@ -93,16 +93,16 @@ function fetchTechnicalRepo(forceClone = false) {
     execSync(`git clone --depth 1 --filter=blob:none --sparse -b ${TARGET_BRANCH} ${REPO_URL} "${CACHE_DIR}"`, {
       stdio: 'inherit'
     });
-    execSync(`git -C "${CACHE_DIR}" sparse-checkout set knowledge apps/web/public/brand`, { stdio: 'inherit' });
+    execSync(`git -C "${CACHE_DIR}" sparse-checkout set --no-cone "/knowledge/*" "/apps/web/public/brand/*"`, { stdio: 'inherit' });
     console.log('   ✅ Paquete OKF y assets de marca clonados con éxito en caché local.');
   } else {
     console.log('   🔄 Actualizando paquete OKF y assets de marca desde origin/develop...');
     try {
       execSync(`git -C "${CACHE_DIR}" fetch --depth 1 origin ${TARGET_BRANCH}`, { stdio: 'inherit' });
       execSync(`git -C "${CACHE_DIR}" reset --hard origin/${TARGET_BRANCH}`, { stdio: 'inherit' });
-      execSync(`git -C "${CACHE_DIR}" sparse-checkout set knowledge apps/web/public/brand`, { stdio: 'inherit' });
+      execSync(`git -C "${CACHE_DIR}" sparse-checkout set --no-cone "/knowledge/*" "/apps/web/public/brand/*"`, { stdio: 'inherit' });
       console.log('   ✅ Paquete OKF y assets de marca actualizados correctamente.');
-    } catch (err) {
+    } catch (err: any) {
       console.warn('   ⚠️ Advertencia: No se pudo conectar con el remoto. Usando copia en caché local.', err.message);
     }
   }
@@ -198,6 +198,7 @@ const CANONICAL_MAPPINGS_DATA = [
   ['architecture/solana-stack.md', 'arquitectura/solana-stack-spec.md', 'Especificación Técnica de Infraestructura Solana', 'Detalle de integración con devnet/mainnet, Umi, Solana Kit, priorización de fees y manejo de transacciones.', ['solana', 'smart-contracts', 'umi', 'solana-kit', 'tps'], 'Solana Architecture'],
   ['architecture/auth-flow.md', 'arquitectura/auth-flow-workos-siws.md', 'Flujo de Autenticación Híbrida WorkOS y SIWS', 'Especificación del modelo de autenticación dual: Web2 social via WorkOS y Web3 nativo via Sign-In with Solana.', ['auth', 'siws', 'workos', 'security', 'session'], 'Solana Architecture'],
   ['architecture/authority-model.md', 'arquitectura/authority-model-and-multisig.md', 'Modelo de Autoridades On-Chain y Gobernanza Multi-Sig', 'Definición de roles on-chain, jerarquía de autoridades de colección, delegates y multisig institucional en Squads.', ['authority', 'squads', 'multisig', 'governance', 'solana'], 'Solana Architecture'],
+  ['architecture/squads-treasury-security-design.md', 'arquitectura/squads-treasury-security-design.md', 'Diseño de Seguridad de Tesorería Multi-Sig con Squads v4', 'Arquitectura de custodia institucional, umbrales de firmas, bóvedas segregadas y control de reclamos en Squads Protocol.', ['squads', 'treasury', 'multisig', 'security', 'solana'], 'Solana Architecture'],
   ['architecture/rotation-spec.md', 'arquitectura/key-rotation-and-emergency-spec.md', 'Protocolo de Rotación de Llaves y Procedimientos de Emergencia', 'Procedimiento de rotación programada de llaves maestras, congelamiento preventivo y traspaso ante contingencias.', ['key-rotation', 'emergency', 'freeze', 'security', 'operations'], 'Solana Architecture'],
   ['architecture/session-model.md', 'arquitectura/session-model-and-persistence.md', 'Modelo de Sesión y Persistencia Stateless vs Stateful', 'Arquitectura de manejo de tokens JWT, almacenamiento seguro de cookies de sesión, expiración y revocación.', ['session', 'jwt', 'security', 'persistence', 'workos'], 'Solana Architecture'],
   ['architecture/purchase-tracing.md', 'arquitectura/purchase-tracing-infrastructure.md', 'Infraestructura de Trazabilidad y Reconciliación de Compras', 'Pipeline de seguimiento end-to-end de órdenes de compra, pagos en USDC, emisión de NFTs y reconciliación off-chain.', ['purchase-tracing', 'usdc', 'reconciliation', 'checkout', 'solana'], 'Solana Architecture'],
@@ -206,13 +207,17 @@ const CANONICAL_MAPPINGS_DATA = [
   ['architecture/third-party-integrations.md', 'arquitectura/third-party-integrations-registry.md', 'Registro de Integraciones y Servicios de Terceros', 'Catálogo de APIs y servicios externos: Stripe Identity, Sphere Ramp, Littio, Mapbox, Supabase, QuickNode y Helius.', ['integrations', 'stripe', 'sphere', 'mapbox', 'infrastructure'], 'Solana Architecture'],
   ['architecture/toolchain-policy.md', 'arquitectura/toolchain-maintenance-policy.md', 'Política de Mantenimiento y Estándares de Toolchain', 'Reglas de actualización de dependencias, bloqueo de versiones de Solana Kit/Umi y políticas de calidad de código.', ['toolchain', 'ci-cd', 'dependencies', 'standards', 'engineering'], 'Solana Architecture'],
   ['architecture/rbac.md', 'arquitectura/rbac-permissions-model.md', 'Modelo de Control de Acceso Basado en Roles (RBAC)', 'Matriz de permisos para administradores, operadores, sponsors inmobiliarios, compliance officers e inversores.', ['rbac', 'permissions', 'roles', 'security', 'compliance'], 'Solana Architecture'],
+  ['guides/ai-readable-endpoints-contracts.md', 'arquitectura/ai-readable-endpoints-contracts.md', 'Contratos de Endpoints Legibles por IA y Descubrimiento GEO', 'Especificación de rutas estructuradas para agentes de IA, LLMs y motores de búsqueda generativa.', ['geo', 'ai-discovery', 'seo', 'endpoints', 'architecture'], 'Solana Architecture'],
+  ['guides/json-ld-contracts.md', 'arquitectura/json-ld-contracts.md', 'Contratos Semánticos JSON-LD para Activos Inmobiliarios', 'Esquemas de datos estructurados Schema.org y JSON-LD para indexación semántica del catálogo RWA.', ['json-ld', 'seo', 'schema', 'geo', 'marketplace'], 'Solana Architecture'],
 
   // 🧩 3. Metaplex Core
   ['architecture/nft-spec.md', 'metaplex-core/metaplex-core-nft-spec.md', 'Estándar Metaplex Core y Especificación de NFTs RWA', 'Ciclo de vida de tokens de participación inmobiliaria, Core Candy Machine, plugins de Freeze y metadata on-chain.', ['metaplex-core', 'rwa-nft', 'candy-machine', 'freeze-plugin', 'solana'], 'Metaplex Core'],
   ['architecture/state-machine.md', 'metaplex-core/freeze-and-recovery-plugins.md', 'Máquina de Estados de Tokens y Protocolo de Recuperación', 'Definición formal de estados on-chain/off-chain, rotación de autoridad, lock-ups por staking y protocolo de freeze/recovery.', ['state-machine', 'freeze-plugin', 'recovery-protocol', 'lost-key', 'compliance'], 'Metaplex Core'],
+  ['governance/nft-policy.md', 'metaplex-core/nft-governance-policy.md', 'Política de Gobernanza y Ciclo de Vida de NFTs RWA', 'Reglas institucionales de emisión, metadatos inmutables, delegación de autoridad y control de suministro en Metaplex Core.', ['nft-policy', 'governance', 'metaplex-core', 'rwa', 'compliance'], 'Metaplex Core'],
 
   // 🛡️ 4. Seguridad, Compliance & Auditorías
   ['architecture/threat-model.md', 'seguridad/threat-model-and-quality-policy.md', 'Modelo de Amenazas y Política de Seguridad Técnica', 'Auditoría de vectores de ataque en smart contracts, seguridad de llaves privadas, validación de endpoints y devnet proof.', ['security', 'threat-model', 'audit', 'compliance', 'solana-safety'], 'Security & Audits'],
+  ['governance/security-quality-policy.md', 'seguridad/security-and-quality-governance-policy.md', 'Política Institucional de Seguridad y Calidad de Software', 'Estándares obligatorios de revisión de código, pruebas automatizadas, controles criptográficos y gates de despliegue.', ['security-policy', 'quality-assurance', 'governance', 'compliance'], 'Security & Audits'],
   ['security/compliance/smart-contract-security.md', 'seguridad/smart-contract-security-guidelines.md', 'Guía y Políticas de Seguridad para Smart Contracts', 'Requisitos de validación de cuentas Solana, prevención de reentrancy, checks de autoridad y lineamientos para auditorías externas.', ['security', 'smart-contracts', 'audits', 'solana-security'], 'Security & Audits'],
   ['security/compliance/data-handling-privacy.md', 'seguridad/data-handling-and-privacy-compliance.md', 'Políticas de Manejo de Datos y Privacidad (KYC/AML)', 'Políticas de almacenamiento segregado de PII, integración no custodiar con Stripe Identity y cumplimiento de privacidad.', ['privacy', 'kyc-aml', 'gdpr', 'pii', 'compliance'], 'Security & Audits'],
   ['security/compliance/pci-compliance.md', 'seguridad/pci-compliance-and-fiat-ramps.md', 'Cumplimiento PCI y Seguridad de Pasarelas Fiat', 'Blindaje y delimitación de alcance PCI para procesadores de tarjetas de crédito y rampas fiat hacia USDC.', ['pci-compliance', 'fiat-ramp', 'payments', 'security'], 'Security & Audits'],
@@ -237,19 +242,37 @@ const CANONICAL_MAPPINGS_DATA = [
   ['api/endpoints/purchase-flow.md', 'api-y-database/purchase-flow-api.md', 'Especificación de API: Flujo de Compra y Checkout Unificado', 'Endpoints para inicio de orden, verificación de balance en USDC, cotización de comisiones y confirmación de pago.', ['api', 'checkout', 'purchase', 'usdc', 'endpoints'], 'API Specifications'],
   ['api/endpoints/stake-distribution.md', 'api-y-database/stake-distribution-api.md', 'Especificación de API: Staking y Distribución de Rendimientos', 'Endpoints para consultar rentas devengadas, solicitar retiros de dividendos acumulados y verificar estado de claim.', ['api', 'staking', 'yields', 'claims', 'endpoints'], 'API Specifications'],
   ['api/endpoints/webhooks.md', 'api-y-database/webhooks-api.md', 'Especificación de API: Receptores de Webhooks Externos', 'Manejadores de eventos asíncronos provenientes de Stripe Identity, pasarelas de pago y monitoreo de blockchain.', ['api', 'webhooks', 'stripe', 'helius', 'async'], 'API Specifications'],
+  ['api/schemas/purchase-webhook-events.md', 'api-y-database/purchase-webhook-events-schema.md', 'Esquema de Eventos de Webhook de Compras y Pagos', 'Contratos de payload, validación de firmas criptográficas e idempotencia para eventos de compra y liquidación.', ['api', 'webhooks', 'schemas', 'checkout', 'events'], 'API Specifications'],
+  ['api/ios-integration-guide.md', 'api-y-database/ios-mobile-integration-guide.md', 'Guía de Integración de API y Autenticación para Cliente iOS', 'Especificación técnica para consumo de endpoints REST, manejo de sesiones y firma de transacciones desde aplicaciones móviles iOS.', ['api', 'ios', 'mobile', 'integration', 'auth'], 'API Specifications'],
   ['api/rpc/metaplex-core.md', 'api-y-database/metaplex-core-rpc.md', 'Especificación de RPC: Métodos On-Chain de Metaplex Core', 'Detalle de llamadas RPC para lectura directa de assets, plugins, atributos y registros de autoridad en Solana.', ['rpc', 'metaplex-core', 'solana', 'read-methods'], 'API Specifications'],
   ['api/rpc/solana-methods.md', 'api-y-database/solana-rpc-methods.md', 'Especificación de RPC: Métodos Nativos de Solana y Priorización', 'Llamadas RPC esenciales para simulación de transacciones, cálculo de priority fees y confirmación con compromiso finalized.', ['rpc', 'solana', 'priority-fees', 'helius'], 'API Specifications'],
 
-  // 🛠️ 7. Operaciones, Procedimientos & Runbooks
+  // 🛠️ 7. Operaciones, Procedimientos, Playbooks & Runbooks
+  ['operations/squads-devnet-multisig.md', 'rfcs-tecnicos/squads-devnet-multisig-ops.md', 'Operaciones Multi-Sig de Squads en Devnet', 'Configuración operativa, direcciones verificadas y flujo de aprobación de propuestas en la bóveda Squads v4 de devnet.', ['operations', 'squads', 'multisig', 'devnet', 'treasury'], 'Operations & Runbooks'],
+  ['operations/procedures/squads-v4-treasury-claims-operation.md', 'rfcs-tecnicos/squads-v4-treasury-claims-operation.md', 'Procedimiento Operativo: Reclamos de Tesorería con Squads v4', 'Flujo paso a paso para generación de Merkle roots, notarización on-chain y liquidación verificable de reclamos de tesorería.', ['operations', 'squads-v4', 'treasury-claims', 'merkle', 'settlement'], 'Operations & Runbooks'],
+  ['guides/EPIC-014-distribution-system-sop.md', 'rfcs-tecnicos/epic-014-distribution-system-sop.md', 'SOP Operativo: Sistema de Distribución de Rentas (EPIC-014)', 'Procedimiento operativo estándar para ejecución de cortes de renta, fondeo de bóvedas y auditoría de distribuciones.', ['operations', 'sop', 'epic-014', 'yield-distribution', 'staking'], 'Operations & Runbooks'],
   ['operations/procedures/devnet-authority-lifecycle.md', 'rfcs-tecnicos/devnet-authority-lifecycle.md', 'Procedimiento Operativo: Ciclo de Vida de Autoridades Devnet', 'Protocolo paso a paso para la inicialización, rotación y delegación de autoridades en entornos de prueba devnet.', ['operations', 'runbook', 'devnet', 'authority-lifecycle'], 'Operations & Runbooks'],
   ['operations/procedures/candy-machine-deploy-validation.md', 'rfcs-tecnicos/candy-machine-deploy-validation.md', 'Procedimiento Operativo: Validación de Despliegues de Candy Machine', 'Lista de verificación técnica y pruebas de sanidad antes de abrir minteo público en colecciones inmobiliarias.', ['operations', 'checklist', 'candy-machine', 'qa-validation'], 'Operations & Runbooks'],
   ['operations/procedures/health-checks-monitoring.md', 'rfcs-tecnicos/health-checks-monitoring.md', 'Procedimiento Operativo: Monitoreo de Salud y Disponibilidad', 'Métricas de disponibilidad del nodo RPC, estado de conexiones a bases de datos y endpoints de health check.', ['operations', 'monitoring', 'health-check', 'reliability'], 'Operations & Runbooks'],
   ['operations/procedures/purchase-trace-verification.md', 'rfcs-tecnicos/purchase-trace-verification.md', 'Procedimiento Operativo: Verificación de Trazabilidad de Compras', 'Guía operativa para auditar órdenes atascadas, reconciliación manual y resolución de discrepancias en pagos.', ['operations', 'support', 'purchase-tracing', 'reconciliation'], 'Operations & Runbooks'],
-  ['operations/procedures/backup-restore.md', 'rfcs-tecnicos/backup-and-restore-procedures.md', 'Procedimiento Operativo: Respaldo y Restauración de Datos', 'Políticas de respaldos continuos de Postgres, retención de snapshots y plan de recuperación ante desastres (DRP).', ['operations', 'backup', 'drp', 'postgres', 'recovery'], 'Operations & Runbooks']
+  ['operations/procedures/backup-restore.md', 'rfcs-tecnicos/backup-and-restore-procedures.md', 'Procedimiento Operativo: Respaldo y Restauración de Datos', 'Políticas de respaldos continuos de Postgres, retención de snapshots y plan de recuperación ante desastres (DRP).', ['operations', 'backup', 'drp', 'postgres', 'recovery'], 'Operations & Runbooks'],
+  ['operations/playbooks/admin-asset-creation.md', 'rfcs-tecnicos/playbook-admin-asset-creation.md', 'Playbook Operativo: Creación y Alta de Activos Inmobiliarios', 'Guía operativa para originación, carga de metadatos y validación de nuevos activos en la consola administrativa.', ['operations', 'playbook', 'asset-creation', 'admin'], 'Operations & Runbooks'],
+  ['operations/playbooks/asset-minting-deployment.md', 'rfcs-tecnicos/playbook-asset-minting-deployment.md', 'Playbook Operativo: Despliegue y Minteo de Activos On-Chain', 'Procedimiento operativo para despliegue de activos individuales, validación de metadatos y emisión en Solana.', ['operations', 'playbook', 'asset-minting', 'solana'], 'Operations & Runbooks'],
+  ['operations/playbooks/collection-creation-minting.md', 'rfcs-tecnicos/playbook-collection-creation-minting.md', 'Playbook Operativo: Creación y Minteo de Colecciones Core', 'Procedimiento para creación de colecciones Metaplex Core, configuración de guards y apertura de minteo.', ['operations', 'playbook', 'collection-minting', 'metaplex-core'], 'Operations & Runbooks'],
+  ['operations/playbooks/marketplace-listing-management.md', 'rfcs-tecnicos/playbook-marketplace-listing-management.md', 'Playbook Operativo: Gestión y Publicación en Marketplace', 'Checklist operativo para activación comercial y gestión de proyectos inmobiliarios en el catálogo público.', ['operations', 'playbook', 'marketplace', 'publishing'], 'Operations & Runbooks'],
+  ['operations/playbooks/stake-event-reconciliation.md', 'rfcs-tecnicos/playbook-stake-event-reconciliation.md', 'Playbook Operativo: Reconciliación de Eventos de Staking', 'Protocolo operativo para verificar consistencia entre eventos de staking on-chain y registros contables.', ['operations', 'playbook', 'staking', 'reconciliation'], 'Operations & Runbooks'],
+  ['operations/playbooks/treasury-claims-and-notary-governance.md', 'rfcs-tecnicos/playbook-treasury-claims-and-notary-governance.md', 'Playbook Operativo: Reclamos de Tesorería y Gobernanza del PDA Notario', 'Guía de ejecución para operadores de tesorería sobre publicación de raíces Merkle y gobernanza con PDA Notario.', ['operations', 'playbook', 'treasury-claims', 'notary-pda'], 'Operations & Runbooks'],
+  ['operations/runbooks/incident-solana-deployment.md', 'rfcs-tecnicos/runbook-incident-solana-deployment.md', 'Runbook de Incidentes: Fallos de Despliegue y Transacciones en Solana', 'Diagnóstico y remediación ante congestión de red, expiración de blockhash o errores de autoridad en Solana.', ['operations', 'runbook', 'incident-response', 'solana'], 'Operations & Runbooks'],
+  ['operations/runbooks/incident-wallet-connection.md', 'rfcs-tecnicos/runbook-incident-wallet-connection.md', 'Runbook de Incidentes: Recuperación de Conexión de Wallet y SIWS', 'Resolución de problemas de firma SIWS, sesiones desincronizadas y adaptadores de billetera.', ['operations', 'runbook', 'wallet', 'siws'], 'Operations & Runbooks'],
+  ['operations/runbooks/incident-data-freshness-alert.md', 'rfcs-tecnicos/runbook-incident-data-freshness-alert.md', 'Runbook de Incidentes: Alerta de Frescura de Datos e Indexación', 'Acciones correctivas ante desfase de cachés, webhooks retrasados o estado on-chain desactualizado.', ['operations', 'runbook', 'data-freshness', 'cache'], 'Operations & Runbooks'],
+  ['operations/runbooks/db-migration-rollback.md', 'rfcs-tecnicos/runbook-db-migration-rollback.md', 'Runbook de Incidentes: Rollback de Migraciones de Base de Datos', 'Procedimiento de emergencia para revertir migraciones fallidas en PostgreSQL/Prisma sin pérdida de datos.', ['operations', 'runbook', 'database', 'rollback'], 'Operations & Runbooks'],
+  ['operations/runbooks/vercel-deployment-rollback.md', 'rfcs-tecnicos/runbook-vercel-deployment-rollback.md', 'Runbook de Incidentes: Rollback de Despliegues en Vercel', 'Protocolo rápido de reversión de releases en producción y verificación de variables de entorno.', ['operations', 'runbook', 'vercel', 'rollback'], 'Operations & Runbooks']
 ];
 
 function getCanonicalMappings(knowledgeDir) {
   return CANONICAL_MAPPINGS_DATA.map(([srcRel, destRel, title, description, tags, category]) => ({
+    srcRel,
+    destRel,
     src: path.join(knowledgeDir, ...srcRel.split('/')),
     dest: path.join(VAULT_13_DIR, ...destRel.split('/')),
     title,
@@ -280,24 +303,7 @@ function generateDynamicStatusMatrix(knowledgeDir, gitInfo) {
     investorClaimsMarkdown = extractSectionFromMarkdown(briefRaw, 'Claims Recomendados para Inversionistas');
   }
 
-  const defaultMatrix = `| Dominio | Madurez | Lectura para inversionistas | Siguiente paso principal |
-| --- | --- | --- | --- |
-| Marketplace discovery | Construido | Existe una superficie real de producto. | Animacion inicial con Motion, bugs de mapa, performance mobile. |
-| Detalle de propiedad | Construido | Los assets pueden presentarse con inversion, documentos y gobernanza. | Completar datos finales y copy de compliance. |
-| Wallet auth | Construido | Existe un modelo fuerte de autoridad wallet. | Persistent production session store. |
-| Federated auth | Foundation construida | Existe ruta de onboarding de menor friccion. | Completar operaciones WorkOS productivas y recovery flows. |
-| Checkout | Parcial | Existe modelo de orden; falta Sphere ramp para tarjeta. | Implementar Sphere ramp completo y unificar tarjeta + crypto. |
-| Crypto purchase mint | Construido | Flujo crypto implementado y configurado para recibir USDC. | Hardening productivo, treasury policy, evidencia final. |
-| Admin asset ops | Construido | El equipo interno puede administrar inventario y metadata. | Playbooks operativos y hardening productivo. |
-| Admin dashboard | Parcial | Existe shell admin; faltan modulos operativos clave. | Tesoreria Squads, distribuciones freeze/unfreeze, notificaciones CRM. |
-| NFT/admin minting | Construido en devnet | Existe lifecycle Core asset. | Authority UI y endpoints de lectura. |
-| Compliance | Foundation construida | Los compliance gates estan codificados en rutas de transaccion. | Persistencia Stripe Identity, vista admin KYC y rol RBAC. |
-| Investor dashboard | Superficie construida | Existe UX de cuenta y holdings. | Resumen, portafolio, rentas/claim e historial con datos reales. |
-| Staking | Base construida en devnet | Existe asset action path; faltan distribuciones y auditoria. | Reconciliacion on-chain, claim state, distribuciones. |
-| Notifications | Foundation construida | Existe infraestructura de re-engagement. | Integracion CRM para campanas y seguimiento de leads. |
-| Observability/QA | Foundation fuerte | Hay disciplina de ingenieria visible. | SLOs productivos, alerting y deployment smoke gates. |`;
-
-  const matrixBody = maturityMatrixMarkdown || defaultMatrix;
+  const matrixBody = maturityMatrixMarkdown || '_Matriz no disponible en el archivo fuente._';
   const gapsBody = keyGapsMarkdown ? `## ⚠️ Brechas Técnicas Clave y Desafíos de Ingeniería\n\n${keyGapsMarkdown}\n` : '';
   const claimsBody = investorClaimsMarkdown ? `## 🗣️ Claims Verificados para Inversores y YC\n\n${investorClaimsMarkdown}\n` : '';
 
@@ -391,20 +397,50 @@ const RFC_METADATA_CONFIG = [
   ['EPIC-011-admin-collections-console', 'epic-011-admin-collections-console.md', 'EPIC-011', 'RFC EPIC-011: Consola Administrativa de Colecciones y Proyectos', 'Panel administrativo con geolocalización Maps, editor de galería y revisión de salud.', 'Implemented'],
   ['EPIC-012-referral-marketing-system-in-user-dashboard', 'epic-012-referral-marketing-system.md', 'EPIC-012', 'RFC EPIC-012: Sistema de Mercadeo de Referidos en Panel de Usuario', 'Generación de links de referidos, tracking de atribución y bonificaciones en billetera.', 'Implemented'],
   ['EPIC-013-pwa-installability-and-web-push-notifications', 'epic-013-pwa-push-notifications.md', 'EPIC-013', 'RFC EPIC-013: Aplicación Progresiva (PWA) y Notificaciones Web Push', 'Instalabilidad móvil tipo app nativa y entrega de notificaciones push transaccionales.', 'Implemented'],
-  ['EPIC-014-stake-distribution-traceability', 'epic-014-stake-distribution-traceability.md', 'EPIC-014', 'RFC EPIC-014: Trazabilidad y Motor de Distribución de Rentas de Staking', 'Infraestructura de cálculo de rendimientos inmobiliarios, tesorería y reclamos trazables.', 'Draft / Implemented Base']
+  ['EPIC-014-stake-distribution-traceability', 'epic-014-stake-distribution-traceability.md', 'EPIC-014', 'RFC EPIC-014: Trazabilidad y Motor de Distribución de Rentas de Staking', 'Infraestructura de cálculo de rendimientos inmobiliarios, tesorería y reclamos trazables.', 'Draft / Implemented Base'],
+  ['EPIC-015-squads-v4-treasury-claims', 'epic-015-squads-v4-treasury-claims.md', 'EPIC-015', 'RFC EPIC-015: Reclamos de Tesorería y Liquidación Verificable con Squads v4', 'Arquitectura de custodia multi-sig en Squads v4, notarización on-chain con PDA y liquidación verificable por Merkle Root.', 'Implemented / Active'],
+  ['EPIC-016-rwa-yield-bearing-margin-collateral', 'epic-016-rwa-yield-bearing-margin-collateral.md', 'EPIC-016', 'RFC EPIC-016: Colateral de Margen con Rendimiento RWA (Yield-Bearing Collateral)', 'Integración de participaciones inmobiliarias tokenizadas con rendimiento como colateral verificable en protocolos de margen y liquidez.', 'Draft / Specification']
 ].map(([folder, fileName, id, title, scope, status]) => ({ folder, fileName, id, title, scope, status }));
+
+function discoverAllRfcs(knowledgeDir) {
+  const rfcsSourceDir = path.join(knowledgeDir, 'rfcs');
+  const knownByFolder = new Map(RFC_METADATA_CONFIG.map(item => [item.folder, item]));
+  if (fs.existsSync(rfcsSourceDir)) {
+    const dirs = fs.readdirSync(rfcsSourceDir, { withFileTypes: true })
+      .filter(d => d.isDirectory() && d.name.startsWith('EPIC-'))
+      .map(d => d.name)
+      .sort();
+    for (const folder of dirs) {
+      if (!knownByFolder.has(folder)) {
+        const match = folder.match(/^(EPIC-\d+)/i);
+        const id = match ? match[1].toUpperCase() : folder;
+        const fileName = `${folder.toLowerCase()}.md`;
+        knownByFolder.set(folder, {
+          folder,
+          fileName,
+          id,
+          title: `RFC ${id}: ${folder.replace(/^EPIC-\d+-/i, '').replace(/-/g, ' ')}`,
+          scope: `Especificación técnica sincronizada automáticamente desde knowledge/rfcs/${folder}.`,
+          status: 'Active'
+        });
+      }
+    }
+  }
+  return Array.from(knownByFolder.values());
+}
 
 function syncRfcsCatalog(knowledgeDir, gitInfo) {
   const rfcsTargetDir = path.join(VAULT_13_DIR, 'rfcs-tecnicos');
   ensureDir(rfcsTargetDir);
 
   const rfcsSourceDir = path.join(knowledgeDir, 'rfcs');
+  const allRfcs = discoverAllRfcs(knowledgeDir);
   let generatedCount = 0;
   let unchangedCount = 0;
 
   const catalogRows = [];
 
-  for (const item of RFC_METADATA_CONFIG) {
+  for (const item of allRfcs) {
     const epicDir = path.join(rfcsSourceDir, item.folder);
     let srcFile = path.join(epicDir, 'README.md');
     if (!fs.existsSync(srcFile)) {
@@ -456,15 +492,15 @@ function syncRfcsCatalog(knowledgeDir, gitInfo) {
     catalogRows.push(`| \`${item.id}\` | [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/${item.fileName}\\|${item.title.replace(/^RFC\s+[A-Z0-9-]+:\s*/, '')}]] | \`${item.status}\` | ${item.scope} |`);
   }
 
-  // Generar el índice maestro de RFCs
+  const lastEpicId = allRfcs[allRfcs.length - 1]?.id || 'EPIC-015';
   const indexDest = path.join(rfcsTargetDir, 'index.md');
-  const indexContent = `# Catálogo Maestro de RFCs Técnicos de BRIDS (EPIC-001 al EPIC-014)
+  const indexContent = `# Catálogo Maestro de RFCs Técnicos de BRIDS (EPIC-001 al ${lastEpicId})
 
 Este directorio contiene las especificaciones formales de arquitectura de software (**Request for Comments**) que definen cada uno de los grandes hitos de ingeniería y producto de **BRIDS.io**.
 
 > [!NOTE]
-> **Resumen del Catálogo:** Catálogo consolidado de los 14 Epics técnicos de la plataforma, sincronizados desde \`develop/knowledge/rfcs/\` (Commit: \`${gitInfo.sha}\`).
-> Define desde la captura administrativa de activos, pasando por Candy Machine en Metaplex Core y checkout en USDC, hasta el motor de staking y distribución de rentas.
+> **Resumen del Catálogo:** Catálogo consolidado de los ${allRfcs.length} Epics técnicos de la plataforma, sincronizados desde \`develop/knowledge/rfcs/\` (Commit: \`${gitInfo.sha}\`).
+> Define desde la captura administrativa de activos, pasando por Candy Machine en Metaplex Core y checkout en USDC, hasta el motor de staking, distribución de rentas y liquidación verificable con Squads v4.
 
 ---
 
@@ -488,104 +524,60 @@ ${catalogRows.join('\n')}
   return { generatedCount, unchangedCount };
 }
 
-function generateSubfolderIndices(gitInfo) {
+function buildWikiLinksForPrefix(folderPrefix, knowledgeDir) {
+  const links = CANONICAL_MAPPINGS_DATA
+    .filter(([, destRel]) => destRel.startsWith(`${folderPrefix}/`))
+    .map(([, destRel, title]) => `[[01 Negocio/02 Producto & Ingenieria/${destRel}|${title}]]`);
+  if (folderPrefix === 'rfcs-tecnicos') {
+    const rfcLinks = discoverAllRfcs(knowledgeDir).map(
+      r => `[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/${r.fileName}|${r.title.replace(/^RFC\s+/, '')}]]`
+    );
+    return [...rfcLinks, ...links];
+  }
+  return links;
+}
+
+function buildWikiLinksForCategory(category) {
+  return CANONICAL_MAPPINGS_DATA
+    .filter(([, , , , , cat]) => cat === category)
+    .map(([, destRel, title]) => `- [[01 Negocio/02 Producto & Ingenieria/${destRel}|${title}]]`)
+    .join('\n');
+}
+
+function generateSubfolderIndices(knowledgeDir, gitInfo) {
   const subfolders = [
     {
-      dir: path.join(VAULT_13_DIR, "arquitectura"),
+      prefix: "arquitectura",
       title: "Arquitectura Solana & Infraestructura Web3",
-      description: "Especificaciones técnicas de alto nivel, autenticación dual SIWS/WorkOS, trazabilidad de transacciones on-chain y gobernanza de autoridades.",
-      notes: [
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/architecture-overview.md|Arquitectura General del Sistema y Stack Tecnológico]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/solana-stack-spec.md|Especificación Técnica de Infraestructura Solana]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/auth-flow-workos-siws.md|Flujo de Autenticación Híbrida WorkOS y SIWS]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/authority-model-and-multisig.md|Modelo de Autoridades On-Chain y Gobernanza Multi-Sig]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/purchase-tracing-infrastructure.md|Infraestructura de Trazabilidad y Reconciliación de Compras]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/key-rotation-and-emergency-spec.md|Protocolo de Rotación de Llaves y Procedimientos de Emergencia]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/session-model-and-persistence.md|Modelo de Sesión y Persistencia Stateless vs Stateful]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/devnet-proof-and-verifications.md|Evidencia Verificable y Despliegues en Devnet]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/stake-audit-and-traceability.md|Auditoría y Trazabilidad del Mecanismo de Staking de Rentas]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/third-party-integrations-registry.md|Registro de Integraciones y Servicios de Terceros]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/toolchain-maintenance-policy.md|Política de Mantenimiento y Estándares de Toolchain]]",
-        "[[01 Negocio/02 Producto & Ingenieria/arquitectura/rbac-permissions-model.md|Modelo de Control de Acceso Basado en Roles (RBAC)]]"
-      ]
+      description: "Especificaciones técnicas de alto nivel, autenticación dual SIWS/WorkOS, trazabilidad de transacciones on-chain, contratos GEO/JSON-LD y gobernanza de autoridades."
     },
     {
-      dir: path.join(VAULT_13_DIR, "metaplex-core"),
+      prefix: "metaplex-core",
       title: "Estándar Metaplex Core y Plugins RWA",
-      description: "Especificaciones del estándar de NFTs de cuenta única de Metaplex Core en Solana, control de plugins de Freeze y protocolo de recuperación.",
-      notes: [
-        "[[01 Negocio/02 Producto & Ingenieria/metaplex-core/metaplex-core-nft-spec.md|Estándar Metaplex Core y Especificación de NFTs RWA]]",
-        "[[01 Negocio/02 Producto & Ingenieria/metaplex-core/freeze-and-recovery-plugins.md|Máquina de Estados de Tokens y Protocolo de Recuperación]]"
-      ]
+      description: "Especificaciones del estándar de NFTs de cuenta única de Metaplex Core en Solana, políticas de gobernanza, control de plugins de Freeze y protocolo de recuperación."
     },
     {
-      dir: path.join(VAULT_13_DIR, "seguridad"),
+      prefix: "seguridad",
       title: "Seguridad, Modelos de Amenazas y Cumplimiento",
-      description: "Modelos de amenazas de minteo y marketplace, guías de auditoría de smart contracts, políticas de manejo de datos privados y blindaje PCI.",
-      notes: [
-        "[[01 Negocio/02 Producto & Ingenieria/seguridad/threat-model-and-quality-policy.md|Modelo de Amenazas y Política de Seguridad Técnica]]",
-        "[[01 Negocio/02 Producto & Ingenieria/seguridad/smart-contract-security-guidelines.md|Guía y Políticas de Seguridad para Smart Contracts]]",
-        "[[01 Negocio/02 Producto & Ingenieria/seguridad/data-handling-and-privacy-compliance.md|Políticas de Manejo de Datos y Privacidad (KYC/AML)]]",
-        "[[01 Negocio/02 Producto & Ingenieria/seguridad/pci-compliance-and-fiat-ramps.md|Cumplimiento PCI y Seguridad de Pasarelas Fiat]]",
-        "[[01 Negocio/02 Producto & Ingenieria/seguridad/marketplace-threat-model.md|Modelo de Amenazas del Marketplace Inmobiliario]]",
-        "[[01 Negocio/02 Producto & Ingenieria/seguridad/mint-orchestrator-threat-model.md|Modelo de Amenazas del Orquestador de Minteo]]",
-        "[[01 Negocio/02 Producto & Ingenieria/seguridad/marketplace-security-audit-plan.md|Plan de Auditoría de Seguridad del Marketplace (BRI-164)]]"
-      ]
+      description: "Modelos de amenazas de minteo y marketplace, guías de auditoría de smart contracts, políticas de calidad, manejo de datos privados y blindaje PCI."
     },
     {
-      dir: path.join(VAULT_13_DIR, "api-y-database"),
+      prefix: "api-y-database",
       title: "APIs, Base de Datos y Modelos Prisma/Postgres",
-      description: "Contratos de endpoints REST, manejadores de webhooks externos, llamadas RPC y esquemas de datos relacionales.",
-      notes: [
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-api.md|Especificación de API: Catálogo Público y Detalle de Inversión]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/purchase-flow-api.md|Especificación de API: Flujo de Compra y Checkout Unificado]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/auth-api.md|Especificación de API: Autenticación, Nonce y Sesión]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/admin-assets-api.md|Especificación de API: Administración de Activos Inmobiliarios]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/collections-api.md|Especificación de API: Gestión de Colecciones Metaplex Core]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/mint-orchestrator-api.md|Especificación de API: Orquestador de Minteo y Emisión]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/stake-distribution-api.md|Especificación de API: Staking y Distribución de Rendimientos]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/webhooks-api.md|Especificación de API: Receptores de Webhooks Externos]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/metaplex-core-rpc.md|Especificación de RPC: Métodos On-Chain de Metaplex Core]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/solana-rpc-methods.md|Especificación de RPC: Métodos Nativos de Solana y Priorización]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/user-profile-schema.md|Modelo de Datos: Perfil de Usuario y Estado KYC]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-entry-schema.md|Modelo de Datos: Catálogo Inmobiliario y Metadatos de Activos]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/mint-job-schema.md|Modelo de Datos: Cola de Trabajos de Minteo Asíncrono]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/purchase-attempt-schema.md|Modelo de Datos: Intentos de Compra y Registro de Órdenes]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/stake-action-schema.md|Modelo de Datos: Registro de Acciones de Staking y Rentas]]",
-        "[[01 Negocio/02 Producto & Ingenieria/api-y-database/authority-registry-schema.md|Modelo de Datos: Registro de Autoridades y Permisos Off-Chain]]"
-      ]
+      description: "Contratos de endpoints REST, integración móvil iOS, manejadores de webhooks externos, llamadas RPC y esquemas de datos relacionales."
     },
     {
-      dir: path.join(VAULT_13_DIR, "rfcs-tecnicos"),
-      title: "Catálogo de RFCs y Runbooks de Ingeniería",
-      description: "Especificaciones formales de epics técnicos, procedimientos operativos estándar y runbooks de despliegue.",
-      notes: [
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-001-admin-asset-create-form.md|EPIC-001: Formulario Administrativo de Creación de Activos]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-002-core-candy-machine-mint-module.md|EPIC-002: Módulo de Minteo con Metaplex Core Candy Machine]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-003-nft-store-purchase-flow.md|EPIC-003: Flujo de Tienda y Compra de NFTs en USDC]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-004-user-profile-kyc-aml.md|EPIC-004: Perfil de Usuario y Cumplimiento KYC/AML Stripe Identity]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-005-migration-solana-kit.md|EPIC-005: Migración Completa de Solana Web3.js a Solana Kit]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-006-freeze-delegate-inheritance.md|EPIC-006: Despliegue de Delegación de Freeze y Gobernanza]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-007-offline-recovery-protocol.md|EPIC-007: Protocolo de Recuperación Institucional ante Pérdida de Llaves]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-008-recarga-recurrente-sphere-solana.md|EPIC-008: Recargas y On-Ramp Fiat Recurrente con Sphere y Littio]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-009-integracion-pasarela-pagos-web2.md|EPIC-009: Integración de Pasarela de Pagos Web2 y Tarjeta]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-010-ai-discovery-seo.md|EPIC-010: Infraestructura de Descubrimiento por IA y SEO Técnico]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-011-admin-collections-console.md|EPIC-011: Consola Administrativa de Colecciones y Proyectos]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-012-referral-marketing-system.md|EPIC-012: Sistema de Mercadeo de Referidos en Panel de Usuario]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-013-pwa-push-notifications.md|EPIC-013: Aplicación Progresiva (PWA) y Notificaciones Web Push]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-014-stake-distribution-traceability.md|EPIC-014: Trazabilidad y Motor de Distribución de Rentas de Staking]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/devnet-authority-lifecycle.md|Procedimiento Operativo: Ciclo de Vida de Autoridades Devnet]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/candy-machine-deploy-validation.md|Procedimiento Operativo: Validación de Despliegues de Candy Machine]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/health-checks-monitoring.md|Procedimiento Operativo: Monitoreo de Salud y Disponibilidad]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/purchase-trace-verification.md|Procedimiento Operativo: Verificación de Trazabilidad de Compras]]",
-        "[[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/backup-and-restore-procedures.md|Procedimiento Operativo: Respaldo y Restauración de Datos]]"
-      ]
+      prefix: "rfcs-tecnicos",
+      title: "Catálogo de RFCs, Playbooks y Runbooks de Ingeniería",
+      description: "Especificaciones formales de epics técnicos, procedimientos operativos estándar, playbooks de tesorería Squads v4 y runbooks de incidentes."
     }
   ];
 
   for (const sub of subfolders) {
-    ensureDir(sub.dir);
-    const indexPath = path.join(sub.dir, "index.md");
+    const subDir = path.join(VAULT_13_DIR, sub.prefix);
+    ensureDir(subDir);
+    const notes = buildWikiLinksForPrefix(sub.prefix, knowledgeDir);
+    const indexPath = path.join(subDir, "index.md");
     const content = `# ${sub.title}
 
 ${sub.description}
@@ -597,7 +589,7 @@ ${sub.description}
 
 ## 📌 Documentos Clave de este Dominio
 
-${sub.notes.map(n => `- ${n}`).join("\n")}
+${notes.map(n => `- ${n}`).join("\n")}
 
 ---
 
@@ -666,15 +658,15 @@ function syncDeliverables(knowledgeDir) {
   const matrixUpdated = generateDynamicStatusMatrix(knowledgeDir, gitInfo);
   if (matrixUpdated) updatedCount++; else unchangedCount++;
 
-  // 2. Catálogo Maestro de RFCs (14 Epics)
+  // 2. Catálogo Maestro de RFCs
   const rfcResult = syncRfcsCatalog(knowledgeDir, gitInfo);
   updatedCount += rfcResult.generatedCount;
   unchangedCount += rfcResult.unchangedCount;
 
-  // 3. Sub-índices de carpetas
-  generateSubfolderIndices(gitInfo);
+  // 3. Sub-índices de carpetas (derivados dinámicamente)
+  generateSubfolderIndices(knowledgeDir, gitInfo);
 
-  // 4. Índice Maestro de la Sección 13
+  // 4. Índice Maestro de la Sección
   updateSectionIndex(knowledgeDir, gitInfo);
 
   console.log(`\n📊 Balance de Sincronización Canónica:`);
@@ -691,6 +683,10 @@ function countKnowledgeArtifacts(knowledgeDir) {
 function updateSectionIndex(knowledgeDir, gitInfo) {
   const indexPath = path.join(VAULT_13_DIR, 'index.md');
   const totalArtifacts = countKnowledgeArtifacts(knowledgeDir);
+  const allRfcs = discoverAllRfcs(knowledgeDir);
+  const rfcLinksMarkdown = allRfcs
+    .map(r => `- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/${r.fileName}|${r.title.replace(/^RFC\s+/, '')}]]`)
+    .join('\n');
 
   const indexContent = `# 01 Negocio/02 Producto & Ingenieria — Arquitectura Tecnológica y Smart Contracts
 
@@ -698,11 +694,11 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 
 > [!NOTE]
 > **Tesis Tecnológica Fundamental:** *"Arquitectura de cuenta única de ultra-bajo coste con Metaplex Core en Solana, combinada con verificación biométrica en Stripe Identity, multisig institucional en Squads Protocol y pasarelas de pago híbridas crypto/fiat."*
-> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (\`jeisonsosablockdev/brids\`, rama \`develop\`) mediante \`sync-technical-docs.sh\`.
+> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (\`jeisonsosablockdev/brids\`, rama \`develop\`) mediante \`sync-technical-docs.ts\`.
 > 
 > **Estado del Catálogo Técnico:**
 > - 📌 **Último Commit Sincronizado:** \`${gitInfo.sha}\` (${gitInfo.date.split(' ')[0]})
-> - 📦 **Total de Artefactos OKF en Repositorio:** ${totalArtifacts} documentos (Arquitectura, RFCs, APIs, DB, Seguridad, Operaciones).
+> - 📦 **Total de Artefactos en Repositorio Core:** ${totalArtifacts} documentos (Arquitectura, RFCs, APIs, DB, Seguridad, Operaciones).
 > - 🛡️ **Garantía Anti-Drift:** Versionado continuo con respaldos automáticos en \`00 Inbox/Archive/\` y validación estricta de bóveda.
 
 ---
@@ -711,84 +707,35 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 
 ### 🗺️ 1. Roadmap y Madurez de Producto (\`product-roadmap/\`)
 - [[01 Negocio/02 Producto & Ingenieria/current-product-status-matrix.md|Matriz Viva de Estado y Madurez de Producto]]
-- [[01 Negocio/02 Producto & Ingenieria/app-technical-roadmap-investor-brief.md|Roadmap Técnico e Investor Brief de Producto]]
+${buildWikiLinksForCategory('Product Roadmap')}
 - [[01 Negocio/02 Producto & Ingenieria/product-roadmap/index.md|Sub-Índice de Roadmap de Producto]]
 
-### 🌐 2. Arquitectura Solana & Auth Híbrido (\`solana-architecture/\`)
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/architecture-overview.md|Arquitectura General del Sistema y Stack Tecnológico]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/solana-stack-spec.md|Especificación Técnica de Infraestructura Solana]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/auth-flow-workos-siws.md|Flujo de Autenticación Híbrida WorkOS y SIWS]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/authority-model-and-multisig.md|Modelo de Autoridades On-Chain y Gobernanza Multi-Sig]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/purchase-tracing-infrastructure.md|Infraestructura de Trazabilidad y Reconciliación de Compras]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/key-rotation-and-emergency-spec.md|Protocolo de Rotación de Llaves y Procedimientos de Emergencia]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/session-model-and-persistence.md|Modelo de Sesión y Persistencia Stateless vs Stateful]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/devnet-proof-and-verifications.md|Evidencia Verificable y Despliegues en Devnet]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/stake-audit-and-traceability.md|Auditoría y Trazabilidad del Mecanismo de Staking de Rentas]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/third-party-integrations-registry.md|Registro de Integraciones y Servicios de Terceros]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/toolchain-maintenance-policy.md|Política de Mantenimiento y Estándares de Toolchain]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/rbac-permissions-model.md|Modelo de Control de Acceso Basado en Roles (RBAC)]]
+### 🌐 2. Arquitectura Solana & Auth Híbrido (\`arquitectura/\`)
+${buildWikiLinksForCategory('Solana Architecture')}
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/index.md|Sub-Índice de Arquitectura Solana]]
 
-### 🧩 3. Estándar Metaplex Core (\`metaplex-core-specs/\`)
-- [[01 Negocio/02 Producto & Ingenieria/metaplex-core/metaplex-core-nft-spec.md|Estándar Metaplex Core y Especificación de NFTs RWA]]
-- [[01 Negocio/02 Producto & Ingenieria/metaplex-core/freeze-and-recovery-plugins.md|Máquina de Estados de Tokens y Protocolo de Recuperación]]
+### 🧩 3. Estándar Metaplex Core (\`metaplex-core/\`)
+${buildWikiLinksForCategory('Metaplex Core')}
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/index.md|Sub-Índice de Metaplex Core]]
 
-### 🛡️ 4. Seguridad, Modelos de Amenazas y Auditorías (\`security-audits/\`)
-- [[01 Negocio/02 Producto & Ingenieria/seguridad/threat-model-and-quality-policy.md|Modelo de Amenazas y Política de Seguridad Técnica]]
-- [[01 Negocio/02 Producto & Ingenieria/seguridad/smart-contract-security-guidelines.md|Guía y Políticas de Seguridad para Smart Contracts]]
-- [[01 Negocio/02 Producto & Ingenieria/seguridad/data-handling-and-privacy-compliance.md|Políticas de Manejo de Datos y Privacidad (KYC/AML)]]
-- [[01 Negocio/02 Producto & Ingenieria/seguridad/pci-compliance-and-fiat-ramps.md|Cumplimiento PCI y Seguridad de Pasarelas Fiat]]
-- [[01 Negocio/02 Producto & Ingenieria/seguridad/marketplace-threat-model.md|Modelo de Amenazas del Marketplace Inmobiliario]]
-- [[01 Negocio/02 Producto & Ingenieria/seguridad/mint-orchestrator-threat-model.md|Modelo de Amenazas del Orquestador de Minteo]]
-- [[01 Negocio/02 Producto & Ingenieria/seguridad/marketplace-security-audit-plan.md|Plan de Auditoría de Seguridad del Marketplace (BRI-164)]]
+### 🛡️ 4. Seguridad, Modelos de Amenazas y Auditorías (\`seguridad/\`)
+${buildWikiLinksForCategory('Security & Audits')}
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/index.md|Sub-Índice de Seguridad y Auditorías]]
 
-### 🗄️ 5. Arquitectura de Datos y Schemas (\`database-architecture/\`)
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/user-profile-schema.md|Modelo de Datos: Perfil de Usuario y Estado KYC]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-entry-schema.md|Modelo de Datos: Catálogo Inmobiliario y Metadatos de Activos]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/mint-job-schema.md|Modelo de Datos: Cola de Trabajos de Minteo Asíncrono]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/purchase-attempt-schema.md|Modelo de Datos: Intentos de Compra y Registro de Órdenes]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/stake-action-schema.md|Modelo de Datos: Registro de Acciones de Staking y Rentas]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/authority-registry-schema.md|Modelo de Datos: Registro de Autoridades y Permisos Off-Chain]]
+### 🗄️ 5. Arquitectura de Datos y Schemas (\`api-y-database/\`)
+${buildWikiLinksForCategory('Database Architecture')}
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/index.md|Sub-Índice de Base de Datos]]
 
-### 🔌 6. Especificaciones de APIs & RPC (\`api-specifications/\`)
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-api.md|Especificación de API: Catálogo Público y Detalle de Inversión]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/purchase-flow-api.md|Especificación de API: Flujo de Compra y Checkout Unificado]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/auth-api.md|Especificación de API: Autenticación, Nonce y Sesión]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/admin-assets-api.md|Especificación de API: Administración de Activos Inmobiliarios]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/collections-api.md|Especificación de API: Gestión de Colecciones Metaplex Core]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/mint-orchestrator-api.md|Especificación de API: Orquestador de Minteo y Emisión]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/stake-distribution-api.md|Especificación de API: Staking y Distribución de Rendimientos]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/webhooks-api.md|Especificación de API: Receptores de Webhooks Externos]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/metaplex-core-rpc.md|Especificación de RPC: Métodos On-Chain de Metaplex Core]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/solana-rpc-methods.md|Especificación de RPC: Métodos Nativos de Solana y Priorización]]
+### 🔌 6. Especificaciones de APIs & RPC (\`api-y-database/\`)
+${buildWikiLinksForCategory('API Specifications')}
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/index.md|Sub-Índice de APIs y RPC]]
 
-### 📋 7. Catálogo Maestro de RFCs Técnicos (\`technical-rfcs/\`)
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/index.md|Índice Consolidado del Catálogo de RFCs (14 Epics)]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-001-admin-asset-create-form.md|EPIC-001: Formulario Administrativo de Creación de Activos]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-002-core-candy-machine-mint-module.md|EPIC-002: Módulo de Minteo con Metaplex Core Candy Machine]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-003-nft-store-purchase-flow.md|EPIC-003: Flujo de Tienda y Compra de NFTs en USDC]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-004-user-profile-kyc-aml.md|EPIC-004: Perfil de Usuario y Cumplimiento KYC/AML Stripe Identity]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-005-migration-solana-kit.md|EPIC-005: Migración Completa de Solana Web3.js a Solana Kit]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-006-freeze-delegate-inheritance.md|EPIC-006: Despliegue de Delegación de Freeze y Gobernanza]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-007-offline-recovery-protocol.md|EPIC-007: Protocolo de Recuperación Institucional ante Pérdida de Llaves]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-008-recarga-recurrente-sphere-solana.md|EPIC-008: Recargas y On-Ramp Fiat Recurrente con Sphere y Littio]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-009-integracion-pasarela-pagos-web2.md|EPIC-009: Integración de Pasarela de Pagos Web2 y Tarjeta]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-010-ai-discovery-seo.md|EPIC-010: Infraestructura de Descubrimiento por IA y SEO Técnico]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-011-admin-collections-console.md|EPIC-011: Consola Administrativa de Colecciones y Proyectos]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-012-referral-marketing-system.md|EPIC-012: Sistema de Mercadeo de Referidos en Panel de Usuario]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-013-pwa-push-notifications.md|EPIC-013: Aplicación Progresiva (PWA) y Notificaciones Web Push]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-014-stake-distribution-traceability.md|EPIC-014: Trazabilidad y Motor de Distribución de Rentas de Staking]]
+### 📋 7. Catálogo Maestro de RFCs Técnicos (\`rfcs-tecnicos/\`)
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/index.md|Índice Consolidado del Catálogo de RFCs (${allRfcs.length} Epics)]]
+${rfcLinksMarkdown}
 
-### 🛠️ 8. Operaciones, Procedimientos & Runbooks (\`operations-and-runbooks/\`)
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/devnet-authority-lifecycle.md|Procedimiento Operativo: Ciclo de Vida de Autoridades Devnet]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/candy-machine-deploy-validation.md|Procedimiento Operativo: Validación de Despliegues de Candy Machine]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/health-checks-monitoring.md|Procedimiento Operativo: Monitoreo de Salud y Disponibilidad]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/purchase-trace-verification.md|Procedimiento Operativo: Verificación de Trazabilidad de Compras]]
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/backup-and-restore-procedures.md|Procedimiento Operativo: Respaldo y Restauración de Datos]]
+### 🛠️ 8. Operaciones, Procedimientos, Playbooks & Runbooks (\`rfcs-tecnicos/\`)
+${buildWikiLinksForCategory('Operations & Runbooks')}
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/index.md|Sub-Índice de Operaciones y Runbooks]]
 
 ---

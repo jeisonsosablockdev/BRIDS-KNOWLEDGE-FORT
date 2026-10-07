@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { scanCliches } from '../../evaluators/anti-cliche-filter.ts';
-import { evaluateDeliverable, SDD_THRESHOLD } from '../../evaluators/sdd-4d-rubric.ts';
+import { evaluateDeliverable, auditDeliverableText, SDD_THRESHOLD } from '../../evaluators/sdd-4d-rubric.ts';
 
 describe('Evaluator Engine & Anti-Cliché Filters (@spec SPEC-ARCH-002)', () => {
 
@@ -59,6 +59,23 @@ describe('Evaluator Engine & Anti-Cliché Filters (@spec SPEC-ARCH-002)', () => 
 
     assert.strictEqual(report.score, 7.2);
     assert.strictEqual(report.passed, false, 'Score < 8.5 must be rejected');
+  });
+
+  it('@spec REQ-001-CLEF should evaluate with Clef System One and guarantee SHA-256 idempotence', () => {
+    const draft =
+      'Eliminamos la intermediación en sindicaciones inmobiliarias mediante contratos inteligentes sobre Solana y Metaplex Core ' +
+      'con plugins de Freeze y Recovery. Cada activo opera bajo una SPV LLC en Delaware con verificación KYC en Stripe Identity ' +
+      'para Real Estate Sponsors que requieren liquidez y costos de estructuración predecibles. Agenda una demo técnica hoy.';
+    const spec = { intent: { target_icp: 'Real Estate Sponsors' } };
+
+    const firstEval = auditDeliverableText(draft, spec);
+    const secondEval = auditDeliverableText(draft, spec);
+
+    assert.ok(firstEval.clef_decision, 'Report must include clef_decision metadata');
+    assert.match(firstEval.clef_decision.cache_key, /^[a-f0-9]{64}$/, 'Cache key must be a 64-char SHA-256 hex digest');
+    assert.strictEqual(firstEval.clef_decision.cache_key, secondEval.clef_decision.cache_key, 'SHA-256 key must be identical');
+    assert.deepEqual(firstEval.clef_decision.probabilities, secondEval.clef_decision.probabilities, 'Clef probabilities must be 100% idempotent');
+    assert.strictEqual(firstEval.total_score, secondEval.total_score, 'Total 4D score must be 100% idempotent');
   });
 
 });

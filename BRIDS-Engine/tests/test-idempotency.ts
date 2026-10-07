@@ -315,6 +315,12 @@ Los participantes se verifican mediante Stripe Identity para cumplir estrictamen
 Agenda una sesión técnica con el equipo de estructuración en sponsors@brids.io para analizar tu cartera de activos.`;
     const auditPassed = orchestrator.evaluateDraft(testSddSlug, pristineDraft, 2);
     assert(auditPassed.passed, 'Borrador de alta calidad obtiene calificación >= 8.5');
+    const auditPassedRepeat = orchestrator.auditText(pristineDraft, auditPassed.data);
+    assert(
+      auditPassed.report.clef_decision.cache_key === auditPassedRepeat.clef_decision.cache_key &&
+        auditPassed.report.total_score === auditPassedRepeat.total_score,
+      'Evaluación híbrida con Clef System One es 100% idempotente (mismo SHA-256 y puntaje)'
+    );
 
     const h2PendingData = JSON.parse(fs.readFileSync(sddSpecJson, 'utf8'));
     assert(h2PendingData.status === 'deliverable_review', 'Estado pasa a deliverable_review tras aprobar el revisor');

@@ -4,11 +4,11 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 
 > [!NOTE]
 > **Tesis Tecnológica Fundamental:** *"Arquitectura de cuenta única de ultra-bajo coste con Metaplex Core en Solana, combinada con verificación biométrica en Stripe Identity, multisig institucional en Squads Protocol y pasarelas de pago híbridas crypto/fiat."*
-> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, rama `develop`) mediante `sync-technical-docs.sh`.
+> Toda la documentación en esta sección se sincroniza automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, rama `develop`) mediante `sync-technical-docs.ts`.
 > 
 > **Estado del Catálogo Técnico:**
 > - 📌 **Último Commit Sincronizado:** `b818558` (2026-09-24)
-> - 📦 **Total de Artefactos OKF en Repositorio:** 641 documentos (Arquitectura, RFCs, APIs, DB, Seguridad, Operaciones).
+> - 📦 **Total de Artefactos en Repositorio Core:** 641 documentos (Arquitectura, RFCs, APIs, DB, Seguridad, Operaciones).
 > - 🛡️ **Garantía Anti-Drift:** Versionado continuo con respaldos automáticos en `00 Inbox/Archive/` y validación estricta de bóveda.
 
 ---
@@ -20,28 +20,33 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/app-technical-roadmap-investor-brief.md|Roadmap Técnico e Investor Brief de Producto]]
 - [[01 Negocio/02 Producto & Ingenieria/product-roadmap/index.md|Sub-Índice de Roadmap de Producto]]
 
-### 🌐 2. Arquitectura Solana & Auth Híbrido (`solana-architecture/`)
+### 🌐 2. Arquitectura Solana & Auth Híbrido (`arquitectura/`)
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/architecture-overview.md|Arquitectura General del Sistema y Stack Tecnológico]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/solana-stack-spec.md|Especificación Técnica de Infraestructura Solana]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/auth-flow-workos-siws.md|Flujo de Autenticación Híbrida WorkOS y SIWS]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/authority-model-and-multisig.md|Modelo de Autoridades On-Chain y Gobernanza Multi-Sig]]
-- [[01 Negocio/02 Producto & Ingenieria/arquitectura/purchase-tracing-infrastructure.md|Infraestructura de Trazabilidad y Reconciliación de Compras]]
+- [[01 Negocio/02 Producto & Ingenieria/arquitectura/squads-treasury-security-design.md|Diseño de Seguridad de Tesorería Multi-Sig con Squads v4]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/key-rotation-and-emergency-spec.md|Protocolo de Rotación de Llaves y Procedimientos de Emergencia]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/session-model-and-persistence.md|Modelo de Sesión y Persistencia Stateless vs Stateful]]
+- [[01 Negocio/02 Producto & Ingenieria/arquitectura/purchase-tracing-infrastructure.md|Infraestructura de Trazabilidad y Reconciliación de Compras]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/devnet-proof-and-verifications.md|Evidencia Verificable y Despliegues en Devnet]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/stake-audit-and-traceability.md|Auditoría y Trazabilidad del Mecanismo de Staking de Rentas]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/third-party-integrations-registry.md|Registro de Integraciones y Servicios de Terceros]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/toolchain-maintenance-policy.md|Política de Mantenimiento y Estándares de Toolchain]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/rbac-permissions-model.md|Modelo de Control de Acceso Basado en Roles (RBAC)]]
+- [[01 Negocio/02 Producto & Ingenieria/arquitectura/ai-readable-endpoints-contracts.md|Contratos de Endpoints Legibles por IA y Descubrimiento GEO]]
+- [[01 Negocio/02 Producto & Ingenieria/arquitectura/json-ld-contracts.md|Contratos Semánticos JSON-LD para Activos Inmobiliarios]]
 - [[01 Negocio/02 Producto & Ingenieria/arquitectura/index.md|Sub-Índice de Arquitectura Solana]]
 
-### 🧩 3. Estándar Metaplex Core (`metaplex-core-specs/`)
+### 🧩 3. Estándar Metaplex Core (`metaplex-core/`)
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/metaplex-core-nft-spec.md|Estándar Metaplex Core y Especificación de NFTs RWA]]
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/freeze-and-recovery-plugins.md|Máquina de Estados de Tokens y Protocolo de Recuperación]]
+- [[01 Negocio/02 Producto & Ingenieria/metaplex-core/nft-governance-policy.md|Política de Gobernanza y Ciclo de Vida de NFTs RWA]]
 - [[01 Negocio/02 Producto & Ingenieria/metaplex-core/index.md|Sub-Índice de Metaplex Core]]
 
-### 🛡️ 4. Seguridad, Modelos de Amenazas y Auditorías (`security-audits/`)
+### 🛡️ 4. Seguridad, Modelos de Amenazas y Auditorías (`seguridad/`)
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/threat-model-and-quality-policy.md|Modelo de Amenazas y Política de Seguridad Técnica]]
+- [[01 Negocio/02 Producto & Ingenieria/seguridad/security-and-quality-governance-policy.md|Política Institucional de Seguridad y Calidad de Software]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/smart-contract-security-guidelines.md|Guía y Políticas de Seguridad para Smart Contracts]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/data-handling-and-privacy-compliance.md|Políticas de Manejo de Datos y Privacidad (KYC/AML)]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/pci-compliance-and-fiat-ramps.md|Cumplimiento PCI y Seguridad de Pasarelas Fiat]]
@@ -50,7 +55,7 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/marketplace-security-audit-plan.md|Plan de Auditoría de Seguridad del Marketplace (BRI-164)]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/index.md|Sub-Índice de Seguridad y Auditorías]]
 
-### 🗄️ 5. Arquitectura de Datos y Schemas (`database-architecture/`)
+### 🗄️ 5. Arquitectura de Datos y Schemas (`api-y-database/`)
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/user-profile-schema.md|Modelo de Datos: Perfil de Usuario y Estado KYC]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-entry-schema.md|Modelo de Datos: Catálogo Inmobiliario y Metadatos de Activos]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/mint-job-schema.md|Modelo de Datos: Cola de Trabajos de Minteo Asíncrono]]
@@ -59,21 +64,23 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/authority-registry-schema.md|Modelo de Datos: Registro de Autoridades y Permisos Off-Chain]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/index.md|Sub-Índice de Base de Datos]]
 
-### 🔌 6. Especificaciones de APIs & RPC (`api-specifications/`)
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-api.md|Especificación de API: Catálogo Público y Detalle de Inversión]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/purchase-flow-api.md|Especificación de API: Flujo de Compra y Checkout Unificado]]
-- [[01 Negocio/02 Producto & Ingenieria/api-y-database/auth-api.md|Especificación de API: Autenticación, Nonce y Sesión]]
+### 🔌 6. Especificaciones de APIs & RPC (`api-y-database/`)
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/admin-assets-api.md|Especificación de API: Administración de Activos Inmobiliarios]]
+- [[01 Negocio/02 Producto & Ingenieria/api-y-database/auth-api.md|Especificación de API: Autenticación, Nonce y Sesión]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/collections-api.md|Especificación de API: Gestión de Colecciones Metaplex Core]]
+- [[01 Negocio/02 Producto & Ingenieria/api-y-database/marketplace-api.md|Especificación de API: Catálogo Público y Detalle de Inversión]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/mint-orchestrator-api.md|Especificación de API: Orquestador de Minteo y Emisión]]
+- [[01 Negocio/02 Producto & Ingenieria/api-y-database/purchase-flow-api.md|Especificación de API: Flujo de Compra y Checkout Unificado]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/stake-distribution-api.md|Especificación de API: Staking y Distribución de Rendimientos]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/webhooks-api.md|Especificación de API: Receptores de Webhooks Externos]]
+- [[01 Negocio/02 Producto & Ingenieria/api-y-database/purchase-webhook-events-schema.md|Esquema de Eventos de Webhook de Compras y Pagos]]
+- [[01 Negocio/02 Producto & Ingenieria/api-y-database/ios-mobile-integration-guide.md|Guía de Integración de API y Autenticación para Cliente iOS]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/metaplex-core-rpc.md|Especificación de RPC: Métodos On-Chain de Metaplex Core]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/solana-rpc-methods.md|Especificación de RPC: Métodos Nativos de Solana y Priorización]]
 - [[01 Negocio/02 Producto & Ingenieria/api-y-database/index.md|Sub-Índice de APIs y RPC]]
 
-### 📋 7. Catálogo Maestro de RFCs Técnicos (`technical-rfcs/`)
-- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/index.md|Índice Consolidado del Catálogo de RFCs (14 Epics)]]
+### 📋 7. Catálogo Maestro de RFCs Técnicos (`rfcs-tecnicos/`)
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/index.md|Índice Consolidado del Catálogo de RFCs (16 Epics)]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-001-admin-asset-create-form.md|EPIC-001: Formulario Administrativo de Creación de Activos]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-002-core-candy-machine-mint-module.md|EPIC-002: Módulo de Minteo con Metaplex Core Candy Machine]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-003-nft-store-purchase-flow.md|EPIC-003: Flujo de Tienda y Compra de NFTs en USDC]]
@@ -88,13 +95,29 @@ Este directorio constituye la **fuente canónica de especificaciones de ingenier
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-012-referral-marketing-system.md|EPIC-012: Sistema de Mercadeo de Referidos en Panel de Usuario]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-013-pwa-push-notifications.md|EPIC-013: Aplicación Progresiva (PWA) y Notificaciones Web Push]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-014-stake-distribution-traceability.md|EPIC-014: Trazabilidad y Motor de Distribución de Rentas de Staking]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-015-squads-v4-treasury-claims.md|EPIC-015: Reclamos de Tesorería y Liquidación Verificable con Squads v4]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-016-rwa-yield-bearing-margin-collateral.md|EPIC-016: Colateral de Margen con Rendimiento RWA (Yield-Bearing Collateral)]]
 
-### 🛠️ 8. Operaciones, Procedimientos & Runbooks (`operations-and-runbooks/`)
+### 🛠️ 8. Operaciones, Procedimientos, Playbooks & Runbooks (`rfcs-tecnicos/`)
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/squads-devnet-multisig-ops.md|Operaciones Multi-Sig de Squads en Devnet]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/squads-v4-treasury-claims-operation.md|Procedimiento Operativo: Reclamos de Tesorería con Squads v4]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/epic-014-distribution-system-sop.md|SOP Operativo: Sistema de Distribución de Rentas (EPIC-014)]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/devnet-authority-lifecycle.md|Procedimiento Operativo: Ciclo de Vida de Autoridades Devnet]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/candy-machine-deploy-validation.md|Procedimiento Operativo: Validación de Despliegues de Candy Machine]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/health-checks-monitoring.md|Procedimiento Operativo: Monitoreo de Salud y Disponibilidad]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/purchase-trace-verification.md|Procedimiento Operativo: Verificación de Trazabilidad de Compras]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/backup-and-restore-procedures.md|Procedimiento Operativo: Respaldo y Restauración de Datos]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/playbook-admin-asset-creation.md|Playbook Operativo: Creación y Alta de Activos Inmobiliarios]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/playbook-asset-minting-deployment.md|Playbook Operativo: Despliegue y Minteo de Activos On-Chain]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/playbook-collection-creation-minting.md|Playbook Operativo: Creación y Minteo de Colecciones Core]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/playbook-marketplace-listing-management.md|Playbook Operativo: Gestión y Publicación en Marketplace]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/playbook-stake-event-reconciliation.md|Playbook Operativo: Reconciliación de Eventos de Staking]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/playbook-treasury-claims-and-notary-governance.md|Playbook Operativo: Reclamos de Tesorería y Gobernanza del PDA Notario]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/runbook-incident-solana-deployment.md|Runbook de Incidentes: Fallos de Despliegue y Transacciones en Solana]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/runbook-incident-wallet-connection.md|Runbook de Incidentes: Recuperación de Conexión de Wallet y SIWS]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/runbook-incident-data-freshness-alert.md|Runbook de Incidentes: Alerta de Frescura de Datos e Indexación]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/runbook-db-migration-rollback.md|Runbook de Incidentes: Rollback de Migraciones de Base de Datos]]
+- [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/runbook-vercel-deployment-rollback.md|Runbook de Incidentes: Rollback de Despliegues en Vercel]]
 - [[01 Negocio/02 Producto & Ingenieria/rfcs-tecnicos/index.md|Sub-Índice de Operaciones y Runbooks]]
 
 ---
