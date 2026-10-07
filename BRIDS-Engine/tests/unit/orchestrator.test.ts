@@ -215,4 +215,53 @@ describe('TaskOrchestrator End-to-End Coordination (@spec SPEC-ARCH-002)', () =>
     assert.strictEqual(finalValidation.report.adversarial_validation?.contract_verified, true);
   });
 
+  it('@spec REQ-004-HITL0-ADVERSARIAL-SPEC should discover skills (HITL-0), audit Spec adversarially (>= 8.5/9.0), and block HITL-1 on defective specs', () => {
+    // 1. HITL-0 Skill Discovery
+    const discovery = orchestrator.discoverSkills(
+      'Crear pitch deck para inversores YC sobre sindicación RWA en Solana',
+      '01 Negocio/04 Finanzas & YC Investors'
+    );
+    assert.ok(discovery.skills.length >= 2, 'Should discover at least 2 relevant skills');
+    assert.ok(
+      discovery.skills.some((s) => s.skillId.includes('pitch') || s.skillId.includes('yc') || s.skillId.includes('investor')),
+      'Should discover pitch/YC/investor skills'
+    );
+    assert.ok(discovery.recommendedSubagents.length >= 1, 'Should recommend at least 1 subagent');
+
+    // 2. Initialize Spec with HITL-0 approved skills
+    const slug = 'test-adversarial-spec-critic';
+    const approvedSkills = discovery.skills.slice(0, 2).map((s) => s.skillId);
+    orchestrator.initSpec({
+      slug,
+      title: 'Pitch Deck Semilla YC W26 Solana RWA',
+      targetFolder: '01 Negocio/04 Finanzas & YC Investors',
+      subagents: ['pitch-deck-architect', 'business-consultant'],
+      icp: 'Socios de Y Combinator & Fondos Pre-Seed',
+      goal: 'Estructurar deck de 10 slides con tesis Delaware SPV + Metaplex Core',
+      approvedSkills,
+    });
+    const specData = vault.loadSpec(slug).data;
+    assert.strictEqual(specData.spec_evaluation?.passed, true, 'Default rendered Spec with approved skills must pass >= 8.5');
+    assert.ok((specData.spec_evaluation?.score ?? 0) >= 8.5, 'Spec score must be >= 8.5/9.0');
+
+    // 3. Corrupt Spec Markdown (missing skills & anchors) -> Adversarial Spec Critic rejects and blocks HITL-1
+    const defectiveEval = orchestrator.evaluateAndRefineSpec(
+      slug,
+      '# Spec Incompleto\nSin skills ni anclas técnicas ni subagentes.'
+    );
+    assert.strictEqual(defectiveEval.passed, false, 'Defective Spec must be rejected by Adversarial Spec Critic');
+    assert.ok(defectiveEval.defects.length > 0, 'Must report specific remediation defects');
+
+    const blockedApproval = orchestrator.approveSpec(slug);
+    assert.strictEqual(blockedApproval.success, false, 'Must block HITL-1 approveSpec when Spec audit failed');
+    assert.match(blockedApproval.error || '', /Adversarial Spec Critic bloqueó HITL-1/i);
+
+    // 4. Refine Spec back to valid state -> Adversarial Spec Critic passes -> HITL-1 approval succeeds
+    orchestrator.refineSpec(slug, 'Incluir métricas auditables de CAC/LTV y flujo USDC');
+    const validApproval = orchestrator.approveSpec(slug);
+    assert.strictEqual(validApproval.success, true, 'approveSpec must succeed once Spec passes >= 8.5/9.0');
+  });
+
 });
+
+

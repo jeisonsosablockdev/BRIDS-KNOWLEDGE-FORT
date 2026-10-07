@@ -8,7 +8,7 @@
 | Domain | Task | Command |
 |--------|------|---------|
 | `bin/` | Unified Engine CLI & Lifecycle | `node BRIDS-Engine/bin/engine.ts <sdd\|promote\|ingest\|vault\|audit\|social\|test\|help>` |
-| `sdd/` | Spec-Driven Development & Sessions | `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts <init\|preview\|approve-spec\|evaluate\|loop-task\|review-deliverable\|approve-deliverable\|branch\|merge\|promote\|list\|session>` |
+| `sdd/` | Spec-Driven Development & Sessions | `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts <discover\|init\|audit-spec\|preview\|approve-spec\|evaluate\|loop-task\|review-deliverable\|approve-deliverable\|branch\|merge\|promote\|list\|session>` |
 | `sdd/` | 4-Tier Git Promotion (`feat` -> `develop` -> `main`) | `node BRIDS-Engine/bin/engine.ts promote <feature [feat/name]\|main> [--push]` |
 | `ingest/` | Sync Technical Docs & Brand (OKF) | `node BRIDS-Engine/scripts/ingest/sync-technical-docs.ts [--force]` |
 | `ingest/` | Sync Narrative Radar & Briefs | `node BRIDS-Engine/scripts/ingest/sync-narrative-intelligence.ts [slug\|--rumor-scan\|--extract-url]` |
@@ -52,27 +52,27 @@ Co-Authored-By: Google Gemini <gemini@google.com>
 - Skill activation instructions live in `BRIDS-Engine/docs/skills-activation.md`
 - Activate and sync skills via `node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts skills`
 
-## Anti-Drift Task Execution Protocol (5 Steps con Doble Guardrail HITL)
+## Anti-Drift Task Execution Protocol (6 Steps con Triple Guardrail HITL-0/1/2 & Doble Bucle Adversarial)
 To prevent prompt/context drift and ensure consistent quality, every document or content generation task must follow this sequence:
-1. **Solicitud de Usuario & Propuesta SDD:** El usuario expone el requerimiento o idea comercial. Se genera un artefacto de especificación formal previo usando `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts init <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"`. El spec queda en estado `spec_review` y declara obligatoriamente:
-   - Destino canónico en `BRIDS-Brain/` (`01 Negocio` o `02 Marketing`) y nombre de archivo.
-   - Sub-agentes asignados del squad (`business-consultant`, `market-research-analyst`, `pitch-deck-architect`, `compliance-officer`, `b2b-sponsor-lead`, `founder-ghostwriter`).
-   - Anclas técnicas verificables (Solana, Metaplex Core Freeze/Recovery, Delaware SPV, Stripe Identity) y filtro anti-clichés de IA.
-2. **Primer Guardrail HITL (Aprobación Humana del Spec):** Se presenta el objeto canónico del spec al usuario (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts preview <slug>`).
-   - Si el usuario solicita ajustes: se corre el optimizador (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts refine-spec <slug> "<observaciones>"`).
-   - **Bloqueo Mandatorio:** Ningún sub-agente comienza a redactar hasta que el usuario apruebe formalmente con `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts approve-spec <slug>`.
-3. **Bucle Evaluador-Optimizador Autónomo (Creador vs Revisor):** Redacción del borrador con los sub-agentes asignados respetando el spec aprobado.
+1. **HITL-0 (Descubrimiento de Skills & Subagentes):** Ante cualquier solicitud del usuario, primero descubre las skills de `BRIDS-Engine/skills/` y subagentes de `BRIDS-Engine/agents/` mediante `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts discover "<solicitud>" ["<target-folder>"]`. Presenta al usuario las skills candidatas (con su razón de selección) y solicita su aprobación explícita (vía `ask_question` o confirmación directa) antes de inicializar el Spec.
+2. **Inicialización & Bucle Adversarial del Spec (Spec Architect vs Adversarial Spec Critic):** Una vez aprobadas las skills en HITL-0, lee sus `SKILL.md` e inicializa el Spec con `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts init <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]" --skills <s1,s2>`.
+   - **Crítico Adversarial del Spec (`audit-spec`):** Evalúa el Spec en 4 dimensiones sobre 9.0 puntos (`skillIntegration` 2.5, `vaultGrounding` 2.5, `contractSpecificity` 2.0, `workerHandoffClarity` 2.0).
+   - **Bloqueo de Calidad del Spec:** El Spec debe obtener $\ge 8.5 / 9.0$ y `0` defectos (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts audit-spec <slug>`) antes de poder aprobarse en HITL-1.
+3. **HITL-1 (Aprobación Humana del Spec Perfecto):** Se presenta el Spec auditado ($\ge 8.5 / 9.0$) al usuario (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts preview <slug>`).
+   - Si el usuario solicita ajustes: se corre `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts refine-spec <slug> "<observaciones>"`.
+   - **Bloqueo Mandatorio:** Ningún sub-agente comienza a redactar hasta que el usuario apruebe formalmente con `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts approve-spec <slug>`. Al invocar subagentes, `workflow-gate-hook.ts` inyecta automáticamente `[AGENT_PERSONA]` y `[APPROVED_SKILLS]`.
+4. **Bucle Evaluador-Optimizador Autónomo del Entregable (Creador vs Revisor):** Redacción del borrador con los sub-agentes asignados respetando el spec aprobado.
    - **Agente Revisor (`sdd-reviewer`):** Audita en escala de 0 a 9 puntos en 4 dimensiones:
      - 1. Cumplimiento del Objetivo & ICP (2.5 pts)
      - 2. Veracidad Técnica & Fuentes (2.5 pts)
      - 3. Voz Fundadora vs Tono Robot (2.0 pts)
      - 4. Originalidad Léxica & Cero Clichés (2.0 pts)
    - **Condición de Calidad:** Debe superar una calificación $\ge 8.5 / 9.0$ (máximo 5 ciclos iterativos). Si no alcanza 8.5 en el ciclo 5, se congela para arbitraje (`frozen_for_arbitration`). Al superar 8.5, el texto pasa a estado `deliverable_review` (HITL-2).
-4. **Segundo Guardrail HITL (Aprobación del Entregable & Integración en Vault):** Se presenta el texto pulido al usuario (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts review-deliverable <slug>`).
+5. **HITL-2 (Aprobación del Entregable & Integración en Vault):** Se presenta el texto pulido al usuario (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts review-deliverable <slug>`).
    - Si el usuario solicita cambios: se re-ejecuta el bucle (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts refine-deliverable <slug> "<observaciones>"`).
    - **Bloqueo Mandatorio:** El archivo **NO se escribe en la carpeta de producción de `BRIDS-Brain/`** hasta la confirmación formal del usuario con `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts approve-deliverable <slug>`.
    - Al aprobarse, el motor promueve el entregable de forma atómica e idempotente con metadatos de calidad, tags `sdd-approved`, `hitl-validated` y changelog.
-5. **Medición & Cierre:** Registro del entregable, asignación de eventos y KPIs, y cierre en `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts session update`.
+6. **Medición, Fusión de Rama Spec & Cierre:** Fusión del Spec completado a su rama feature (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts merge <slug>`) y cierre en `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts session update`.
 
 ## Vault Conventions
 - The vault is structured into two core macro-domains under `BRIDS-Brain/`:

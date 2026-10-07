@@ -264,6 +264,55 @@ export function promoteDevelopToMain(push: boolean = false): { sourceBranch: str
 // CORE SDD COMMANDS (DELEGATED TO TaskOrchestrator — 3-ROLE ARCHITECTURE)
 // -------------------------------------------------------------
 
+export function discoverSkills(query?: string, targetFolder?: string) {
+  if (!query) {
+    console.error('❌ Uso: sdd-orchestrator discover "<idea o requerimiento>" ["<target-folder>"]');
+    process.exit(1);
+  }
+  const result = taskOrchestrator.discoverSkills(query, targetFolder);
+  console.log('\n' + '═'.repeat(80));
+  console.log(`🔍 DESCUBRIMIENTO DE SKILLS & AGENTES (HITL-0): "${query}"`);
+  console.log('═'.repeat(80));
+  console.log('📚 Top Skills Recomendadas (BRIDS-Engine/skills/):');
+  for (const s of result.skills) {
+    console.log(`   • ${s.skillId.padEnd(28)} (Score: ${s.relevanceScore}) — ${s.reason}`);
+    console.log(`     └─ ${s.skillMdPath}`);
+  }
+  console.log(`\n🤖 Subagentes Sugeridos (BRIDS-Engine/agents/): ${result.recommendedSubagents.join(', ')}`);
+  console.log('═'.repeat(80) + '\n');
+  return result;
+}
+
+export function auditSpec(slug?: string, specMdPathOverride?: string) {
+  if (!slug) {
+    console.error('❌ Uso: sdd-orchestrator audit-spec <slug> [ruta-spec.md]');
+    process.exit(1);
+  }
+  const customMd =
+    specMdPathOverride && fs.existsSync(specMdPathOverride)
+      ? fs.readFileSync(specMdPathOverride, 'utf8')
+      : undefined;
+  const report = taskOrchestrator.evaluateAndRefineSpec(slug, customMd);
+  console.log('\n' + '═'.repeat(80));
+  console.log(`⚖️  AUDITORÍA ADVERSARIAL DEL SPEC (Ciclo #${report.cycle}): ${slug}`);
+  console.log('═'.repeat(80));
+  console.log(`   Puntaje Total:           ${report.score} / 9.0 (Umbral >= 8.5, 0 defectos)`);
+  console.log(`   1. Integración Skills:   ${report.dimensions.skillIntegration} / 2.5`);
+  console.log(`   2. Anclaje en Vault/MCP: ${report.dimensions.vaultGrounding} / 2.5`);
+  console.log(`   3. Especificidad Contr.: ${report.dimensions.contractSpecificity} / 2.0`);
+  console.log(`   4. Claridad Handoff:     ${report.dimensions.workerHandoffClarity} / 2.0`);
+  if (report.passed) {
+    console.log('   ✅ SPEC APROBADO POR EL CRÍTICO ADVERSARIAL: Listo para presentar en HITL-1.');
+  } else {
+    console.log('   🛑 SPEC RECHAZADO POR EL CRÍTICO ADVERSARIAL — Defectos a corregir antes de HITL-1:');
+    for (const d of report.defects) {
+      console.log(`      • ${d}`);
+    }
+  }
+  console.log('═'.repeat(80) + '\n');
+  return report;
+}
+
 export function initSpec(
   slug?: string,
   title?: string,
@@ -271,10 +320,11 @@ export function initSpec(
   subagentsStr?: string,
   icp?: string,
   goal?: string,
-  featureOverride?: string
+  featureOverride?: string,
+  approvedSkillsStr?: string
 ) {
   if (!slug || !title || !targetFolder) {
-    console.error('❌ Uso: sdd-orchestrator init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]"');
+    console.error('❌ Uso: sdd-orchestrator init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]" [--skills s1,s2]');
     process.exit(1);
   }
 
@@ -301,6 +351,11 @@ export function initSpec(
   if (unknownAgents.length > 0) {
     console.warn(`⚠️ Advertencia: Los siguientes agentes no pertenecen al squad estándar: ${unknownAgents.join(', ')}`);
   }
+
+  const approvedSkills = (approvedSkillsStr || '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
 
   if (fs.existsSync(paths.specJsonPath) && fs.existsSync(paths.specMdPath)) {
     console.log(`ℹ️ El spec "${cleanSlug}" ya existe en ${paths.specJsonPath}.`);
@@ -333,7 +388,9 @@ export function initSpec(
     icp: icp || 'Real Estate Sponsors & LPs',
     goal: goal || `Consolidar ${title}`,
     ...(detectedFeature && !isAutomatedTestSlug ? { featureBranch: detectedFeature } : {}),
+    ...(approvedSkills.length > 0 ? { approvedSkills } : {}),
   });
+  const createdData = loadSpec(cleanSlug).data;
 
   const canonicalVaultFile = path.join(normalizedTarget, `${cleanSlug}.md`);
   console.log(`✅ Spec inicializado con éxito: ${paths.specId}`);
@@ -341,6 +398,14 @@ export function initSpec(
   console.log(`   ⚙️ Estado JSON:   ${paths.specJsonPath}`);
   console.log(`   🎯 Destino Final:  BRIDS-Brain/${canonicalVaultFile}`);
   console.log(`   🤖 Subagentes:     ${subagents.join(', ')}`);
+  if (createdData.approved_skills && createdData.approved_skills.length > 0) {
+    console.log(`   📚 Skills HITL-0:  ${createdData.approved_skills.join(', ')}`);
+  }
+  if (createdData.spec_evaluation) {
+    console.log(
+      `   ⚖️  Nota Spec:      ${createdData.spec_evaluation.score}/9.0 (${createdData.spec_evaluation.passed ? 'APROBADO' : 'REQUIERE REFINAMIENTO'})`
+    );
+  }
   if (detectedFeature && !isAutomatedTestSlug) {
     const featureClean = sanitizeSlug(detectedFeature.replace(/^(feat|feature)\//, ''));
     console.log(`   🌿 Rama Padre:     feat/${featureClean}`);
@@ -348,6 +413,7 @@ export function initSpec(
   }
   console.log(`\n🛑 GUARDRAIL HITL-1 ACTIVO:`);
   console.log(`   El spec y su ValidationContract están en espera de tu revisión humana.`);
+  console.log(`   👉 Para auditar:  node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts audit-spec ${cleanSlug}`);
   console.log(`   👉 Para aprobar:  node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts approve-spec ${cleanSlug}`);
   console.log(`   👉 Para ajustar:  node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts refine-spec ${cleanSlug} "<observaciones>"`);
   return paths;
@@ -526,6 +592,14 @@ export function previewSpec(slug?: string) {
   console.log(`Estado Global:        ${String(data.status).toUpperCase()}`);
   console.log(`Destino en Vault:     BRIDS-Brain/${data.target_file || data.target_folder}`);
   console.log(`Subagentes Squad:     ${(data.subagents_involved || data.subagents || []).join(', ')}`);
+  if (data.approved_skills && data.approved_skills.length > 0) {
+    console.log(`Skills Aprobadas:     ${data.approved_skills.join(', ')}`);
+  }
+  if (data.spec_evaluation) {
+    console.log(
+      `Nota Adversarial Spec: ${data.spec_evaluation.score}/9.0 (${data.spec_evaluation.passed ? 'APROBADO >= 8.5' : 'PENDIENTE DE CORRECCIÓN'})`
+    );
+  }
   if (data.validation_contract) {
     console.log(`Contrato Validación:  ${data.validation_contract.contract_id} (Umbral >= ${data.validation_contract.quality_threshold})`);
   }
@@ -757,16 +831,27 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
   const cmd = args[0];
 
   switch (cmd) {
-    case 'init':
-      // Disambiguate between SDD init (has targetFolder inVALID_VAULT_PREFIXES) vs Session init
-      if (args[3] && VALID_VAULT_PREFIXES.some((p) => args[3]!.replace(/^\/+|\/+$/g, '').startsWith(p))) {
-        initSpec(args[1], args[2], args[3], args[4], args[5], args[6]);
-      } else if (args.length <= 4 && (!args[3] || !args[3].includes('/'))) {
-        initSession(args[1], args[2], args[3], args[4]);
+    case 'discover':
+      discoverSkills(args[1], args[2]);
+      break;
+    case 'audit-spec': {
+      const res = auditSpec(args[1], args[2]);
+      process.exit(res.passed ? 0 : 2);
+      break;
+    }
+    case 'init': {
+      const skillsFlagIdx = args.indexOf('--skills');
+      const approvedSkillsArg = skillsFlagIdx >= 0 ? args[skillsFlagIdx + 1] : undefined;
+      const cleanArgs = args.filter((_, idx) => idx !== skillsFlagIdx && idx !== (skillsFlagIdx >= 0 ? skillsFlagIdx + 1 : -1));
+      if (cleanArgs[3] && VALID_VAULT_PREFIXES.some((p) => cleanArgs[3]!.replace(/^\/+|\/+$/g, '').startsWith(p))) {
+        initSpec(cleanArgs[1], cleanArgs[2], cleanArgs[3], cleanArgs[4], cleanArgs[5], cleanArgs[6], undefined, approvedSkillsArg);
+      } else if (cleanArgs.length <= 4 && (!cleanArgs[3] || !cleanArgs[3].includes('/'))) {
+        initSession(cleanArgs[1], cleanArgs[2], cleanArgs[3], cleanArgs[4]);
       } else {
-        initSpec(args[1], args[2], args[3], args[4], args[5], args[6]);
+        initSpec(cleanArgs[1], cleanArgs[2], cleanArgs[3], cleanArgs[4], cleanArgs[5], cleanArgs[6], undefined, approvedSkillsArg);
       }
       break;
+    }
     case 'session': {
       const sub = args[1];
       if (sub === 'init') initSession(args[2], args[3], args[4], args[5]);
@@ -881,8 +966,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
       console.log(`
 Spec-Driven Development (SDD) & Multi-Agent Session Engine - BRIDS.io (TypeScript)
 
-Comandos SDD (Arquitectura de 3 Roles + Doble Guardrail HITL + Ramas 4-Niveles):
-  init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]"
+Comandos SDD (Arquitectura de 3 Roles + Triple Guardrail HITL-0/1/2 + Ramas 4-Niveles):
+  discover "<idea/requerimiento>" ["<target-folder>"]
+  init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]" [--skills s1,s2]
+  audit-spec <slug> [ruta-spec.md]
   preview <slug> | refine-spec <slug> "<obs>" | approve-spec <slug>
   handoff <slug> <worker-id> "<completado>" "[pendiente]" "[decisiones]"
   evaluate <slug> <draft-file> | loop-task <slug> <draft-file>
