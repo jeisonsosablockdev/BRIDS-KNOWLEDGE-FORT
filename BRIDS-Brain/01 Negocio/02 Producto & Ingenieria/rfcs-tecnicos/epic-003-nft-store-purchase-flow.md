@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Technical RFCs"
 source_okf: "knowledge/rfcs/EPIC-003-nft-store-purchase-flow/README.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "cc91efc43cc0598f36520d35933e1241a2fdef7cb71e90cd889be2af0a40a48d"
 tags: [rfc, epic, epic-003, solana, architecture]
-updated_at: "2026-09-12T02:07:49.389Z"
+updated_at: "2026-10-03T02:51:18.569Z"
 ---
 
 # RFC EPIC-003: Flujo de Tienda y Compra de NFTs en USDC
 
 > [!NOTE]
 > **Resumen Técnico:** Checkout de compra directa con USDC, validación de balance y orquestación de minteo.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -174,3 +174,4 @@ updated_at: "2026-09-12T02:07:49.389Z"
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/rfcs/EPIC-003-nft-store-purchase-flow/README.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -6,20 +6,19 @@ Este directorio constituye el centro neurálgico de **adquisición, habilitació
 
 ---
 
-## 📌 Subdirectorios Operativos
+## 📌 Entregables Comerciales y de Pricing B2B
 
-- 📄 **`colateral-comercial/`**: 
-  - [[01 Negocio/05 Sponsors B2B & Ventas/colateral-comercial/propuesta-comercial-pitch-desarrollador.md|Propuesta Comercial & Pitch Institucional para Desarrolladores (One-Pager de Venta)]]
-  - One-pagers institucionales para ejecutivos de bienes raíces, fichas técnicas de producto sin jerga criptográfica innecesaria y comparativas de costes de capital.
-- 📬 **`prospeccion-outbound/`**: Secuencias de cold outreach para LinkedIn y correo dirigidas a directores de desarrollo inmobiliario, socios directores de fondos y gestores de capital.
-- 🤝 **`onboarding-pilotos/`**: Guías paso a paso de originación, verificación de títulos, parameterización de lotes y convenios de prueba para proyectos piloto.
+- [[01 Negocio/05 Sponsors B2B & Ventas/propuesta-comercial-pitch-desarrollador.md|Propuesta Comercial & Pitch Institucional para Desarrolladores (One-Pager de Venta)]]
+- [[01 Negocio/05 Sponsors B2B & Ventas/benchmark-competencia-sindicacion-para-partners.md|Documento 1: Benchmark Competitivo de Sindicación Inmobiliaria (Para Revisión con Partners)]]
+- [[01 Negocio/05 Sponsors B2B & Ventas/estrategia-pricing-b2b-para-partners.md|Documento 2: Estrategia de Pricing B2B: Modelo por Cupo de Recaudo de Equity (Propuesta para Partners)]]
+- [[01 Negocio/05 Sponsors B2B & Ventas/propuesta-lanzamiento-genesis-sponsor-pricing.md|Propuesta de Lanzamiento GTM: Genesis Sponsor Program & Estructura de Precios B2B ($0 Setup Piloto)]]
+
+> [!TIP] Exportaciones Ejecutivas en PDF y LaTeX
+> Las versiones compiladas en alta resolución (`.pdf` y `.tex`) de estos documentos viven desacopladas en `BRIDS-Engine/outputs/pdfs/` y se actualizan mediante `node BRIDS-Engine/bin/engine.ts export pdf <archivo.md>`.
 
 ---
 
 ## 🔗 Conceptos y Documentos de Referencia
-- [[01 Negocio/05 Sponsors B2B & Ventas/benchmark-competencia-sindicacion-para-partners.md|Documento 1: Benchmark Competitivo de Sindicación Inmobiliaria (Para Revisión con Partners)]]
-- [[01 Negocio/05 Sponsors B2B & Ventas/estrategia-pricing-b2b-para-partners.md|Documento 2: Estrategia de Pricing B2B: Cómo Podríamos Cobrar Nosotros (Propuesta para Partners)]]
-- [[01 Negocio/05 Sponsors B2B & Ventas/propuesta-lanzamiento-genesis-sponsor-pricing.md|Propuesta de Lanzamiento GTM: Genesis Sponsor Program & Estructura de Precios B2B ($0 Setup Piloto)]]
 - [[01 Negocio/01 Estrategia & Modelo/market-research/b2b-sponsor-fee-benchmark.md|B2B Sponsor Fee Benchmark: Comparativa de Tarifas de la Competencia para Promotores]]
 - [[01 Negocio/02 Producto & Ingenieria/modulo-desarrollador-spv-engine.md|Módulo del Desarrollador Inmobiliario y SPV Engine]]
 - [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md|C5: B2B Sponsor Value Prop]]

@@ -7,6 +7,13 @@ tools:
   subagents: false
   mcp: true
 
+architecture:
+  role_type: "worker"
+  execution_mode: "serial_write"
+  context_isolation: "fresh_context"
+  model_tier: "pro"
+  requires_structured_handoff: true
+
 skills:
   - pitch-deck-creator
   - yc-insight-driven-bp
@@ -15,7 +22,6 @@ skills:
 outputs:
   - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/pitch-decks/"
   - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/yc-application/"
-  - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/pitch-decks/"
   - "BRIDS-Engine/outputs/decks/"
 
 system_prompt: |

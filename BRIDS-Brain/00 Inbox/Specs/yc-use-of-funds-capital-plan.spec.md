@@ -1,29 +1,29 @@
 ---
 spec_id: "SPEC-yc-use-of-funds-capital-plan"
-title: "Plan Maestro de Asignación de Capital y Use of Funds (YC k)"
-target_vault_folder: "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/"
-target_file: "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/yc-use-of-funds-capital-plan.md"
+title: "Plan Maestro de Asignación de Capital y Use of Funds (YC $500k)"
+target_vault_folder: "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/yc-application"
+target_file: "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/yc-application/yc-use-of-funds-capital-plan.md"
 subagents_involved:
   - "business-consultant"
   - "pitch-deck-architect"
-status: spec_approved # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration
+status: completed # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration
 created_at: "2026-09-19"
-updated_at: "2026-09-19"
+updated_at: "2026-09-23"
 hitl_checkpoints:
   hitl_1_spec_approval:
-    status: pending # pending | refining | approved
-    approved_at: null
+    status: approved # pending | refining | approved
+    approved_at: "2026-09-20T18:36:06.784Z"
     user_feedback: []
   hitl_2_deliverable_approval:
-    status: pending # pending | refining | approved
-    approved_at: null
+    status: approved # pending | refining | approved
+    approved_at: "2026-09-23T04:19:58.925Z"
     user_feedback: []
 evaluation:
   target_score: 8.5
   scale_max: 9.0
   max_cycles: 5
-  current_cycle: 0
-  final_score: null
+  current_cycle: 1
+  final_score: 9.0
   criticism_history: []
 ---
 

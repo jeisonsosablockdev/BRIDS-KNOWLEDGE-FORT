@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/authority-model.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "9839ac7023e2daef4bf8d09c722b507b204b83663191a3aef22b63c1c5cb94c1"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "2c4f51f5c0ee3667d84ae7fec43f0767f0579546ca647d7f66d6582bc50a0af9"
 tags: [authority, squads, multisig, governance, solana]
-updated_at: "2026-09-12T02:07:49.360Z"
+updated_at: "2026-10-03T02:51:18.284Z"
 ---
 
 # Modelo de Autoridades On-Chain y Gobernanza Multi-Sig
 
 > [!NOTE]
 > **Resumen Técnico:** Definición de roles on-chain, jerarquía de autoridades de colección, delegates y multisig institucional en Squads.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -142,8 +142,9 @@ updated_at: "2026-09-12T02:07:49.360Z"
 - [x] Emergency operations bypass cooldown only with elevated quorum.
 - [x] Every prepared/submit operation emits auditable record (`authority_audit_events`) with proposal metadata and final signature.
 - [x] Registry state changes are collection-scoped and conflict-checked on submit.
+- [x] **EPIC-015 Treasury Policy Model:** 3-layer Squads v4 validation (Signer check, PDA re-derivation with index, and Multisig ownership check) prevents rogue authority initialization on `payout_settlement`.
 
-Last Updated: 2026-04-01 10:45:00 UTC
+Last Updated: 2026-08-21 12:00:00 UTC
 
 ---
 
@@ -152,3 +153,4 @@ Last Updated: 2026-04-01 10:45:00 UTC
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/architecture/authority-model.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Security & Audits"
 source_okf: "knowledge/security/threat-models/marketplace.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "53847b9a666e273be2f0a5749ba3d68cf39a41f97c0aefb6dc6ae26511c54eb6"
 tags: [threat-model, marketplace, security-audit, risk]
-updated_at: "2026-09-12T02:07:49.372Z"
+updated_at: "2026-10-03T02:51:18.328Z"
 ---
 
 # Modelo de Amenazas del Marketplace Inmobiliario
 
 > [!NOTE]
 > **Resumen Técnico:** Análisis de vectores de ataque, manipulación de precios, denegación de servicio y mitigaciones en el catálogo público.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -175,3 +175,4 @@ Each remediation in dedicated branch, TDD first:
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/security/threat-models/marketplace.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

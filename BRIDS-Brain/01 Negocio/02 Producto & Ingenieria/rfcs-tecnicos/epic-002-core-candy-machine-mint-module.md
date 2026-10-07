@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Technical RFCs"
 source_okf: "knowledge/rfcs/EPIC-002-core-candy-machine-mint-module/README.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "a3cad97a0041617b96c003ece4bb402731d5c708f91dd54e704c25ce9d7427f3"
 tags: [rfc, epic, epic-002, solana, architecture]
-updated_at: "2026-09-12T02:07:49.389Z"
+updated_at: "2026-10-03T02:51:18.567Z"
 ---
 
 # RFC EPIC-002: Módulo de Minteo con Metaplex Core Candy Machine
 
 > [!NOTE]
 > **Resumen Técnico:** Lógica on-chain en Solana para despliegue de Candy Machines con activos Metaplex Core.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -152,3 +152,4 @@ The following points constitute the official architectural guidance for the impl
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/rfcs/EPIC-002-core-candy-machine-mint-module/README.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Database Architecture"
 source_okf: "knowledge/database/models/authority-registry.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "81b91552d6c86b012be9a27324a848ec27ac4a0e814ce9ee04ffc06a81091164"
 tags: [database, authority-registry, audit-trail, security, postgres]
-updated_at: "2026-09-12T02:07:49.377Z"
+updated_at: "2026-10-03T02:51:18.384Z"
 ---
 
 # Modelo de Datos: Registro de Autoridades y Permisos Off-Chain
 
 > [!NOTE]
 > **Resumen Técnico:** Esquema para auditoría y persistencia de autoridades de colección, llaves de freeze delegadas y bitácora de rotación.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -135,3 +135,4 @@ SQUADS_EXECUTOR_ALLOWLIST=
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/database/models/authority-registry.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

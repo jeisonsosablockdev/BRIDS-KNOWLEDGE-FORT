@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/architecture-overview.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "f5915d578bd74a25126377b188ebc86fbab636569a2040dc84bf5dea9b944d87"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "fafcfbe15bdddfadb029e8eca01ffee1556814dc34e23f6c99057c5cd65f3d59"
 tags: [architecture, fullstack, solana, nextjs, postgres]
-updated_at: "2026-09-12T01:26:18.852Z"
+updated_at: "2026-10-03T02:51:18.279Z"
 ---
 
 # Arquitectura General del Sistema y Stack Tecnológico
 
 > [!NOTE]
 > **Resumen Técnico:** Especificación de alto nivel de componentes frontend, backend, RPCs, contratos Solana y modelos de datos.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -137,12 +137,18 @@ updated_at: "2026-09-12T01:26:18.852Z"
   - `economic_version` format gate + explicit support for `v1`.
   - Unsupported keys rejected (`additionalProperties=false` behavior).
   - Optional lifecycle timestamps accepted when omitted.
-- Devnet proof anchor:
-  - Collection: `2vPD7d2ojHbMTa4CubV5MwzhQKRNrc1DFbTpBBTBszHi`
-  - Asset: `D5HnpX9tXFi5gxaD1mds6EmtPvVSyeuWvHpu4Z7X7YqK`
-  - Final on-chain `AppData` confirms updated economic payload (`yield_mode=linear`, `yield_bps=1300`, `distribution_enabled=false`).
+## EPIC-015 STORY-015-01: Squads v4 Treasury Claims & Delegated Settlement
+- Scope:
+  - `programs/payout_settlement/` (Anchor on-chain program)
+  - `apps/web/src/features/staking-distribution/` (4-layer FDD structure)
+  - `knowledge/rfcs/EPIC-015-squads-v4-treasury-claims/`
+- Runtime components:
+  1. `payout_settlement` Anchor Program (`HLp7YXKZZ8uPuzwN3CtuDxtgYoWhc5Fb1FHj5bHEe9zE` on Devnet).
+  2. Double-attestation validation (Attester A & B) and deterministic 191B leaf preimage verification.
+  3. Atomic `ClaimReceipt` PDA creation to prevent replay / double claims.
+  4. Helium directional Merkle verification for O(log N) scalable settlements.
 
-Last Updated: 2026-04-01 08:20:33 UTC
+Last Updated: 2026-08-21 12:00:00 UTC
 
 ---
 
@@ -152,3 +158,4 @@ Last Updated: 2026-04-01 08:20:33 UTC
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde knowledge/architecture/architecture-overview.md |
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización automática de cambios desde rama develop |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

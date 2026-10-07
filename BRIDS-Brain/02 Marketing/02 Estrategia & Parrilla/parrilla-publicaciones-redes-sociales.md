@@ -10,7 +10,7 @@ status: in_progress
 version: "2.0"
 protected: true
 created_at: 2026-08-08
-updated_at: 2026-10-02
+updated_at: 2026-10-07
 tags:
   - marketing
   - social-content
@@ -23,7 +23,7 @@ tags:
 
 *Matriz Maestra Intercalada y Sincronizada para @brids_io*  
 *Folder: 02 Marketing / 03 Redes Sociales & Contenido*  
-*Last updated: 2026-10-02*
+*Last updated: 2026-10-07*
 
 > [!NOTE]
 > **Resumen Ejecutivo:** Matriz maestra de sincronización editorial de BRIDS para LinkedIn, X y Telegram. Mantiene alineación 1-a-1 entre la planificación estratégica, las tesis RWA, las notas entregables en Obsidian y los activos visuales.
@@ -31,8 +31,6 @@ tags:
 ---
 
 ## 📊 TABLA MAESTRA DE ALINEACIÓN & ESTADO (15 DÍAS)
-
-Esta tabla mantiene la **alineación 1-a-1** entre la planificación estratégica, los ganchos comerciales, los llamados a la acción (CTA), los textos alternativos accesibles (Alt Text), los hashtags de posicionamiento, las notas de contenido en Obsidian y las carpetas de activos visuales:
 
 | # | Fecha | Tesis / Concepto | Ancla Técnica | Gancho Principal (Hook) | Subtexto (CTA) | Texto Alt (SEO & Accesibilidad) | Hashtags | Copy Completo (Listo para Copiar) | Formato | Estado | ¿Publicado? | Link Publicación | Nota Entregable | Activos Visuales |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -56,11 +54,4 @@ Esta tabla mantiene la **alineación 1-a-1** entre la planificación estratégic
 
 ## 🔄 Historial de Revisiones (Changelog)
 - **v1.0 (2026-08-08):** Creación inicial de la matriz editorial.
-- **v2.0 (2026-10-02):** Migración a formato kebab-case institucional alineado con la arquitectura BRIDS.
-
----
-
-## 🔗 Referencias Cruzadas
-- Infraestructura RWA: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-solana-rwa-infrastructure.md]]
-- Estructuración Dual SPV: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-dual-entity-compliance.md]]
-- Propuesta de Valor Sponsors: [[01 Negocio/01 Estrategia & Modelo/Business Concepts/concept-b2b-sponsor-value-prop.md]]
+- **v2.0 (2026-10-07):** Migración a formato kebab-case institucional alineado con la arquitectura BRIDS.

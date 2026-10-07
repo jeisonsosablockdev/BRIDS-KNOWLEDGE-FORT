@@ -1,17 +1,17 @@
 {
   "spec_id": "SPEC-YC-USE-OF-FUNDS-CAPITAL-PLAN",
   "slug": "yc-use-of-funds-capital-plan",
-  "title": "Plan Maestro de Asignación de Capital y Use of Funds (YC k)",
-  "target_vault_folder": "01 Negocio/04 Finanzas & YC Investors",
-  "target_file": "01 Negocio/04 Finanzas & YC Investors/yc-use-of-funds-capital-plan.md",
+  "title": "Plan Maestro de Asignación de Capital y Use of Funds (YC $500k)",
+  "target_vault_folder": "01 Negocio/04 Finanzas & YC Investors/yc-application",
+  "target_file": "01 Negocio/04 Finanzas & YC Investors/yc-application/yc-use-of-funds-capital-plan.md",
   "subagents_involved": [
     "business-consultant",
     "pitch-deck-architect",
     "b2b-sponsor-lead"
   ],
-  "status": "spec_approved",
+  "status": "completed",
   "created_at": "2026-09-19T21:46:55.996Z",
-  "updated_at": "2026-09-20T18:36:06.785Z",
+  "updated_at": "2026-09-23T04:19:58.925Z",
   "hitl_checkpoints": {
     "hitl_1_spec_approval": {
       "status": "approved",
@@ -28,13 +28,13 @@
       ]
     },
     "hitl_2_deliverable_approval": {
-      "status": "pending",
-      "approved_at": null,
+      "status": "approved",
+      "approved_at": "2026-09-23T04:19:58.925Z",
       "user_feedback": []
     }
   },
   "intent": {
-    "business_goal": "Diseñar y documentar con rigor financiero el plan detallado de despliegue del capital de YC (,000 USD), incluyendo: (1) Estructura salarial de cofundadores tech (k/mes × 2) con cofundador inmobiliario a zsh, (2) Fuerza de ventas tercerizada B2B+B2C (k/mes), (3) Presupuesto para ferias y eventos de desarrolladores inmobiliarios en USA, (4) Estrategia de onboarding con setup fee reducido para primeros sponsors (monetizando via minting + dispersión fees), (5) Blindaje legal y estructuración jurídica (k), (6) Auditorías de smart contracts en Solana (k), (7) Integración con Sphere y pasarelas bancarias/procesamiento, (8) Fondo de contingencia operativa, (9) Cálculo de runway resultante y punto de break-even. Pipeline actual: M del cofundador inmobiliario + 3 desarrolladores adicionales interesados.",
+    "business_goal": "Diseñar y documentar con rigor financiero el plan detallado de despliegue del capital de YC ($500,000 USD), incluyendo: (1) Estructura salarial de cofundadores tech (k/mes × 2) con cofundador inmobiliario a $0, (2) Fuerza de ventas tercerizada B2B+B2C (k/mes), (3) Presupuesto para ferias y eventos de desarrolladores inmobiliarios en USA, (4) Estrategia de onboarding con setup fee reducido para primeros sponsors (monetizando via minting + dispersión fees), (5) Blindaje legal y estructuración jurídica (k), (6) Auditorías de smart contracts en Solana (k), (7) Integración con Sphere y pasarelas bancarias/procesamiento, (8) Fondo de contingencia operativa, (9) Cálculo de runway resultante y punto de break-even. Pipeline actual: $2M del cofundador inmobiliario + 3 desarrolladores adicionales interesados.",
     "target_icp": "YC Partners, Pre-Seed VCs, Cofounders",
     "constraints": [
       "Cero clichés de IA",
@@ -46,8 +46,8 @@
     "target_score": 8.5,
     "scale_max": 9,
     "max_cycles": 5,
-    "current_cycle": 0,
-    "final_score": null,
+    "current_cycle": 1,
+    "final_score": 9,
     "criticism_history": []
   },
   "execution_steps": [
@@ -60,7 +60,7 @@
     {
       "id": "STEP-02",
       "name": "Initial Draft Generation",
-      "status": "in_progress",
+      "status": "completed",
       "depends_on": [
         "STEP-01"
       ]
@@ -68,7 +68,7 @@
     {
       "id": "STEP-03",
       "name": "Autonomous Evaluator-Optimizer Loop",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "STEP-02"
       ]
@@ -76,7 +76,7 @@
     {
       "id": "STEP-04",
       "name": "HITL-2 Deliverable Review & Approval",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "STEP-03"
       ]
@@ -84,7 +84,7 @@
     {
       "id": "STEP-05",
       "name": "Vault Integration",
-      "status": "pending",
+      "status": "completed",
       "depends_on": [
         "STEP-04"
       ]

@@ -7,16 +7,21 @@ tools:
   subagents: false
   mcp: true
 
+architecture:
+  role_type: "worker"
+  execution_mode: "serial_write"
+  context_isolation: "fresh_context"
+  model_tier: "pro"
+  requires_structured_handoff: true
+
 skills:
   - investor-due-diligence
   - founder-interview-prep
   - mas-anti-drift
 
 outputs:
-  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/spvs/"
-  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/delaware-corp/"
-  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/data-room/"
-  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/kyc-aml/"
+  - "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/"
+  - "BRIDS-Brain/01 Negocio/06 Operaciones & Gobernanza/"
 
 system_prompt: |
   You are the Compliance & Legal Structuring Officer for BRIDS.io (Web3 Real Estate Syndication Platform on Solana).

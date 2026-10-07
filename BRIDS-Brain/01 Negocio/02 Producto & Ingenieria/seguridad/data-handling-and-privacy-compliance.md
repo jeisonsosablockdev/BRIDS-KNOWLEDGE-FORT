@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Security & Audits"
 source_okf: "knowledge/security/compliance/data-handling-privacy.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "c7235066b750753112aecf178eb46cb01327042fff571e1f66e5c772582af38b"
 tags: [privacy, kyc-aml, gdpr, pii, compliance]
-updated_at: "2026-09-12T02:07:49.370Z"
+updated_at: "2026-10-03T02:51:18.324Z"
 ---
 
 # Políticas de Manejo de Datos y Privacidad (KYC/AML)
 
 > [!NOTE]
 > **Resumen Técnico:** Políticas de almacenamiento segregado de PII, integración no custodiar con Stripe Identity y cumplimiento de privacidad.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -175,3 +175,4 @@ Standard Contractual Clauses (SCCs) in vendor DPAs.
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/security/compliance/data-handling-privacy.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

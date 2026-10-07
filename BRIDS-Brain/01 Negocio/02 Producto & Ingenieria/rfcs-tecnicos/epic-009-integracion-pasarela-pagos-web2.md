@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Technical RFCs"
 source_okf: "knowledge/rfcs/EPIC-009-integracion-pasarela-de-pagos-web-2/README.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "8774c19d4388a0a922bea135a2906920b04c5358a57140b3ddbd8c46afff7416"
 tags: [rfc, epic, epic-009, solana, architecture]
-updated_at: "2026-09-12T02:07:49.393Z"
+updated_at: "2026-10-03T02:51:18.582Z"
 ---
 
 # RFC EPIC-009: Integración de Pasarela de Pagos Web2 y Tarjeta
 
 > [!NOTE]
 > **Resumen Técnico:** Procesamiento de tarjetas de crédito/débito para compra de fracciones inmobiliarias.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -118,3 +118,4 @@ Este diseño es un excelente ejemplo de cómo un RFC evoluciona desde un borrado
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/rfcs/EPIC-009-integracion-pasarela-de-pagos-web-2/README.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

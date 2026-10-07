@@ -1,75 +1,37 @@
-# Skills Activation
+# Skills Activation (Google Antigravity Native)
 
-This project keeps the source of truth for skills inside the repository.
+This project keeps the source of truth for all 58 specialized skills inside `BRIDS-Engine/skills/`.
 
-## Source Paths
+## Native Antigravity Discovery (`.agents/skills.json`)
 
-- Local adapted skills: `BRIDS-Engine/skills/`
+Google Antigravity discovers workspace skills natively via `.agents/skills.json`:
 
-## Activation for Codex
+```json
+{
+  "entries": [
+    { "path": "BRIDS-Engine/skills" }
+  ]
+}
+```
 
-Codex discovers skills from `~/.codex/skills/`. To make the project skills available there without moving the source files, run:
+## Sync & Validation Commands
+
+To verify or regenerate `.agents/skills.json` and sync the brand context symlink into `BRIDS-Brain/`:
 
 ```bash
-bash BRIDS-Engine/scripts/enable-project-skills.sh
+node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts all
 ```
 
-On Windows PowerShell:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\\BRIDS-Engine\\scripts\\enable-project-skills.ps1
-```
-
-## Modes
-
-Safe mode:
+Or individually:
 
 ```bash
-bash BRIDS-Engine/scripts/enable-project-skills.sh
+# Verify / regenerate .agents/skills.json (58 skills)
+node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts skills
+
+# Sync brand context symlink into BRIDS-Brain/02 Marketing/01 Contexto de Marca/
+node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts brand
+
+# Audit all 58 skills for SKILL.md frontmatter compliance
+node BRIDS-Engine/scripts/audit/audit-runner.ts skills
 ```
 
-- links project-local skills that do not already exist in `~/.codex/skills`
-- does not replace existing entries
-
-Windows safe mode:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\\BRIDS-Engine\\scripts\\enable-project-skills.ps1
-```
-
-Force mode:
-
-```bash
-bash BRIDS-Engine/scripts/enable-project-skills.sh --force
-```
-
-- replaces existing entries in `~/.codex/skills` with the project versions
-
-Windows force mode:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\\BRIDS-Engine\\scripts\\enable-project-skills.ps1 --force
-```
-
-## Important Note
-
-- The skills still live in this project
-- macOS/Linux use symlinks
-- Windows tries symlinks first and falls back to copying if symlinks are blocked
-- if you edit a linked skill here, Codex will see the updated file through the symlink
-
-## Brand Context in the Vault
-
-On macOS/Linux, the brand context can be exposed in the vault as a symlink.
-
-On Windows, if symlinks are inconvenient, copy it into the vault with:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\\BRIDS-Engine\\scripts\\sync-brand-context.ps1
-```
-
-On macOS/Linux:
-
-```bash
-bash BRIDS-Engine/scripts/sync-brand-context.sh
-```

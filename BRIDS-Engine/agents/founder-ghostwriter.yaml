@@ -7,6 +7,13 @@ tools:
   subagents: false
   mcp: true
 
+architecture:
+  role_type: "worker"
+  execution_mode: "serial_write"
+  context_isolation: "fresh_context"
+  model_tier: "pro"
+  requires_structured_handoff: true
+
 skills:
   - founder-content-writer
   - content-multiplier
@@ -14,7 +21,7 @@ skills:
   - copywriting
 
 outputs:
-  - "BRIDS-Brain/02 Marketing/03 Redes Sociales & Contenido/Publicaciones/"
+  - "BRIDS-Brain/02 Marketing/03 Redes Sociales & Contenido/"
   - "BRIDS-Brain/02 Marketing/05 Email Marketing/"
   - "BRIDS-Brain/01 Negocio/04 Finanzas & YC Investors/yc-application/"
 

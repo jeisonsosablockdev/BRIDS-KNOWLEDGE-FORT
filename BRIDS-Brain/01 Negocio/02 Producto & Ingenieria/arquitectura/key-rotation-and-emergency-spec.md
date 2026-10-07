@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/rotation-spec.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "8cdf37fd564babf45cd10b598194235c2da0947c3f451611e8b6844cbd2a3c33"
 tags: [key-rotation, emergency, freeze, security, operations]
-updated_at: "2026-09-12T02:07:49.361Z"
+updated_at: "2026-10-03T02:51:18.289Z"
 ---
 
 # Protocolo de Rotación de Llaves y Procedimientos de Emergencia
 
 > [!NOTE]
 > **Resumen Técnico:** Procedimiento de rotación programada de llaves maestras, congelamiento preventivo y traspaso ante contingencias.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -422,3 +422,4 @@ git log --oneline -- knowledge/rotation-spec.md knowledge/devnet-proof.md knowle
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/architecture/rotation-spec.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |
