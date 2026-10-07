@@ -7,8 +7,9 @@
 ## File-Scoped Commands (TypeScript Domain Architecture)
 | Domain | Task | Command |
 |--------|------|---------|
-| `bin/` | Unified Engine CLI & Lifecycle | `node BRIDS-Engine/bin/engine.ts <sdd\|ingest\|vault\|audit\|social\|test\|help>` |
-| `sdd/` | Spec-Driven Development & Sessions | `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts <init\|preview\|approve-spec\|evaluate\|loop-task\|review-deliverable\|approve-deliverable\|list\|session>` |
+| `bin/` | Unified Engine CLI & Lifecycle | `node BRIDS-Engine/bin/engine.ts <sdd\|promote\|ingest\|vault\|audit\|social\|test\|help>` |
+| `sdd/` | Spec-Driven Development & Sessions | `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts <init\|preview\|approve-spec\|evaluate\|loop-task\|review-deliverable\|approve-deliverable\|branch\|merge\|promote\|list\|session>` |
+| `sdd/` | 4-Tier Git Promotion (`feat` -> `develop` -> `main`) | `node BRIDS-Engine/bin/engine.ts promote <feature [feat/name]\|main> [--push]` |
 | `ingest/` | Sync Technical Docs & Brand (OKF) | `node BRIDS-Engine/scripts/ingest/sync-technical-docs.ts [--force]` |
 | `ingest/` | Sync Narrative Radar & Briefs | `node BRIDS-Engine/scripts/ingest/sync-narrative-intelligence.ts [slug\|--rumor-scan\|--extract-url]` |
 | `ingest/` | Sync Workspace Brand & Skills | `node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts [all\|brand\|skills]` |
@@ -19,7 +20,12 @@
 | `social/` | Social Posts, Carousels, Grid & Assets | `node BRIDS-Engine/scripts/social/social-generator.ts <grid\|post\|carousel\|assets> [args]` |
 | `tests/` | Full TypeScript Test Suite | `node BRIDS-Engine/bin/engine.ts test all` |
 
-## Commit Attribution
+## Commit Attribution & 4-Tier Git Branching (`spec/*` -> `feat/*` -> `develop` -> `main`)
+- **Active Trunk is `develop`:** Never edit files or commit directly on `main`. `PreToolUse` (`workflow-gate-hook.ts`) physically blocks direct file edits and direct `git commit`/`git merge`/`git push` on `main`.
+- **Hierarchy:**
+  1. `spec/<feature>/<slug>`: Child branch per SDD Spec (`sdd-orchestrator.ts branch <slug>`). Merges (`--no-ff`) into `feat/<feature>` via `sdd-orchestrator.ts merge <slug>` after HITL-2 (`completed`).
+  2. `feat/<feature>`: Feature integration branch. Promotes (`--no-ff`) into `develop` via `node BRIDS-Engine/bin/engine.ts promote feature [feat/<feature>] [--push]`.
+  3. `develop`: Default working trunk. Promotes (`--no-ff`) into `main` via `node BRIDS-Engine/bin/engine.ts promote main [--push]` (runs clean tree check + full test suite + compliance audit, merges to `main`, and automatically returns HEAD to `develop`).
 - AI commits MUST include:
 ```text
 Co-Authored-By: Google Gemini <gemini@google.com>

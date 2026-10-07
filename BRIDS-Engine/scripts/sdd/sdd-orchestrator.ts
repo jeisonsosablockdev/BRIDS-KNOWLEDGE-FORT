@@ -98,7 +98,11 @@ export const saveSpec = (paths: { slug: string }, specData: Record<string, any>)
 export const auditText = (text: string, specData: Record<string, any> = {}) => auditDeliverableText(text, specData);
 export const autoRemediateDraft = (text: string, _report: Record<string, any> = {}) => evalAutoRemediateDraft(text);
 
-export function resolveFeatureBranch(explicitFeature?: string, gitRoot: string = ROOT_DIR): string | undefined {
+export function resolveFeatureBranch(
+  explicitFeature?: string,
+  gitRoot: string = ROOT_DIR,
+  fallbackSlug?: string
+): string | undefined {
   if (explicitFeature) {
     const clean = sanitizeSlug(explicitFeature.replace(/^(feat|feature|spec)\//, '').split('/')[0] || explicitFeature);
     return clean ? `feat/${clean}` : undefined;
@@ -113,6 +117,10 @@ export function resolveFeatureBranch(explicitFeature?: string, gitRoot: string =
     const parts = active.split('/');
     if (parts[1]) return `feat/${sanitizeSlug(parts[1])}`;
   }
+  if (active === 'develop' && fallbackSlug) {
+    const clean = sanitizeSlug(fallbackSlug);
+    return clean ? `feat/${clean}` : undefined;
+  }
   return undefined;
 }
 
@@ -122,19 +130,26 @@ export function branchSpec(slug?: string, explicitFeature?: string): { featureBr
     process.exit(1);
   }
   const cleanSlug = sanitizeSlug(slug);
-  let featureBranch = resolveFeatureBranch(explicitFeature);
+  let featureBranch = resolveFeatureBranch(explicitFeature, ROOT_DIR, cleanSlug);
   if (!featureBranch && vaultGateway.specExists(cleanSlug)) {
     featureBranch = loadSpec(cleanSlug).data.git_branch_topology?.feature_branch;
   }
   if (!featureBranch) {
-    throw new Error(`No se pudo inferir una rama padre feat/<feature> para "${cleanSlug}". Pasa el nombre del feature o sitúate en una rama feat/*.`);
+    throw new Error(`No se pudo inferir una rama padre feat/<feature> para "${cleanSlug}". Pasa el nombre del feature o sitúate en develop o feat/*.`);
   }
   const featureClean = sanitizeSlug(featureBranch.replace(/^(feat|feature)\//, ''));
+  const normalizedFeatureBranch = `feat/${featureClean}`;
   const specBranch = `spec/${featureClean}/${cleanSlug}`;
 
+  try {
+    execFileSync('git', ['rev-parse', '--verify', normalizedFeatureBranch], { cwd: ROOT_DIR, stdio: 'pipe' });
+  } catch {
+    execFileSync('git', ['branch', normalizedFeatureBranch], { cwd: ROOT_DIR, stdio: 'pipe' });
+  }
+
   execFileSync('git', ['checkout', '-B', specBranch], { cwd: ROOT_DIR, stdio: 'pipe' });
-  console.log(`🌱 Rama hija SDD activa: ${specBranch} (Padre: ${featureBranch})`);
-  return { featureBranch, specBranch };
+  console.log(`🌱 Rama hija SDD activa: ${specBranch} (Padre: ${normalizedFeatureBranch})`);
+  return { featureBranch: normalizedFeatureBranch, specBranch };
 }
 
 export function mergeSpec(slug?: string): { featureBranch: string; specBranch: string } {
@@ -162,6 +177,87 @@ export function mergeSpec(slug?: string): { featureBranch: string; specBranch: s
   );
   console.log(`🌿 Spec "${data.slug}" fusionado (--no-ff) desde ${topology.spec_branch} hacia ${topology.feature_branch}`);
   return { featureBranch: topology.feature_branch, specBranch: topology.spec_branch };
+}
+
+export function promoteFeatureToDevelop(featureBranchArg?: string, push: boolean = false): { featureBranch: string; targetBranch: string } {
+  const featureBranch = resolveFeatureBranch(featureBranchArg, ROOT_DIR);
+  if (!featureBranch) {
+    throw new Error('❌ Indica la rama feature (ej. feat/mi-feature) o sitúate en ella antes de ejecutar promote feature.');
+  }
+
+  const dirty = execFileSync('git', ['status', '--porcelain'], { cwd: ROOT_DIR, encoding: 'utf8' }).trim();
+  if (dirty) {
+    throw new Error(`❌ Working tree sucio. Haz commit o stash antes de promover ${featureBranch} a develop:\n${dirty}`);
+  }
+
+  const activeSpecs = vaultGateway.listSpecs();
+  const unfinished = activeSpecs.filter((s) => {
+    const full = vaultGateway.loadSpec(s.slug).data;
+    return (
+      full.git_branch_topology?.feature_branch === featureBranch &&
+      ['spec_review', 'task_loop', 'deliverable_review', 'frozen_for_arbitration'].includes(full.status)
+    );
+  });
+  if (unfinished.length > 0) {
+    throw new Error(
+      `❌ No se puede promover ${featureBranch} a develop: existen Specs hijos sin completar (${unfinished.map((u) => `${u.slug}[${u.status}]`).join(', ')}).`
+    );
+  }
+
+  try {
+    execFileSync('git', ['rev-parse', '--verify', 'develop'], { cwd: ROOT_DIR, stdio: 'pipe' });
+  } catch {
+    execFileSync('git', ['branch', 'develop', 'main'], { cwd: ROOT_DIR, stdio: 'pipe' });
+  }
+
+  execFileSync('git', ['checkout', 'develop'], { cwd: ROOT_DIR, stdio: 'pipe' });
+  execFileSync(
+    'git',
+    ['merge', '--no-ff', featureBranch, '-m', `feat(develop): promote ${featureBranch} into develop\n\nCo-Authored-By: Google Gemini <gemini@google.com>`],
+    { cwd: ROOT_DIR, stdio: 'pipe' }
+  );
+  console.log(`🚀 Rama ${featureBranch} promovida (--no-ff) a develop.`);
+
+  if (push) {
+    execFileSync('git', ['push', '-u', 'origin', 'develop'], { cwd: ROOT_DIR, stdio: 'inherit' });
+    console.log(`☁️  develop sincronizado con origin/develop.`);
+  }
+  return { featureBranch, targetBranch: 'develop' };
+}
+
+export function promoteDevelopToMain(push: boolean = false): { sourceBranch: string; targetBranch: string } {
+  const dirty = execFileSync('git', ['status', '--porcelain'], { cwd: ROOT_DIR, encoding: 'utf8' }).trim();
+  if (dirty) {
+    throw new Error(`❌ Gate 1 Fallido: Working tree sucio. Haz commit antes de promover develop -> main:\n${dirty}`);
+  }
+
+  execFileSync('git', ['rev-parse', '--verify', 'develop'], { cwd: ROOT_DIR, stdio: 'pipe' });
+  execFileSync('git', ['checkout', 'develop'], { cwd: ROOT_DIR, stdio: 'pipe' });
+
+  const engineCli = path.join(ROOT_DIR, 'BRIDS-Engine', 'bin', 'engine.ts');
+  console.log('🧪 Gate 2: Ejecutando suite completa de tests en develop...');
+  execFileSync('node', [engineCli, 'test', 'all'], { cwd: ROOT_DIR, stdio: 'inherit' });
+
+  console.log('🛡️  Gate 3: Ejecutando auditoría de gobernanza y compliance en develop...');
+  execFileSync('node', [engineCli, 'audit', 'compliance'], { cwd: ROOT_DIR, stdio: 'inherit' });
+
+  try {
+    execFileSync('git', ['checkout', 'main'], { cwd: ROOT_DIR, stdio: 'pipe' });
+    execFileSync(
+      'git',
+      ['merge', '--no-ff', 'develop', '-m', `release(main): promote verified develop to main\n\nCo-Authored-By: Google Gemini <gemini@google.com>`],
+      { cwd: ROOT_DIR, stdio: 'pipe' }
+    );
+    console.log('✅ Promoción atómica completada: develop -> main (--no-ff).');
+    if (push) {
+      execFileSync('git', ['push', 'origin', 'main'], { cwd: ROOT_DIR, stdio: 'inherit' });
+      console.log('☁️  main sincronizado con origin/main.');
+    }
+  } finally {
+    execFileSync('git', ['checkout', 'develop'], { cwd: ROOT_DIR, stdio: 'pipe' });
+    console.log('🔄 Workspace restaurado automáticamente a la rama develop.');
+  }
+  return { sourceBranch: 'develop', targetBranch: 'main' };
 }
 
 // -------------------------------------------------------------
@@ -213,7 +309,7 @@ export function initSpec(
     return paths;
   }
 
-  const detectedFeature = resolveFeatureBranch(featureOverride);
+  const detectedFeature = resolveFeatureBranch(featureOverride, ROOT_DIR, cleanSlug);
   const isAutomatedTestSlug = cleanSlug.startsWith('test-') || cleanSlug.startsWith('smoke-');
 
   if (
@@ -749,6 +845,20 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
     case 'merge':
       mergeSpec(args[1]);
       break;
+    case 'promote': {
+      const sub = args[1];
+      const pushFlag = args.includes('--push');
+      if (sub === 'feature') {
+        const featArg = args[2] && !args[2].startsWith('--') ? args[2] : undefined;
+        promoteFeatureToDevelop(featArg, pushFlag);
+      } else if (sub === 'main' || sub === 'release') {
+        promoteDevelopToMain(pushFlag);
+      } else {
+        console.error('Uso: sdd-orchestrator promote <feature [feat/nombre]|main> [--push]');
+        process.exit(1);
+      }
+      break;
+    }
     case 'list':
       listSpecs();
       break;
@@ -771,12 +881,14 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
       console.log(`
 Spec-Driven Development (SDD) & Multi-Agent Session Engine - BRIDS.io (TypeScript)
 
-Comandos SDD (Arquitectura de 3 Roles + Doble Guardrail HITL):
+Comandos SDD (Arquitectura de 3 Roles + Doble Guardrail HITL + Ramas 4-Niveles):
   init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]"
   preview <slug> | refine-spec <slug> "<obs>" | approve-spec <slug>
   handoff <slug> <worker-id> "<completado>" "[pendiente]" "[decisiones]"
   evaluate <slug> <draft-file> | loop-task <slug> <draft-file>
   review-deliverable <slug> | refine-deliverable <slug> "<obs>" | approve-deliverable <slug>
+  branch <slug> [feat/<feature>] | merge <slug>
+  promote feature [feat/<feature>] [--push] | promote main [--push]
   list
 
 Comandos de Sesiones Multi-Agente:

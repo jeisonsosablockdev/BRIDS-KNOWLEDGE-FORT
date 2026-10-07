@@ -172,6 +172,9 @@ export function evaluatePreToolUse(
 ): HookOutput {
   const specsDir = options.specsDir ?? DEFAULT_SPECS_DIR;
   const agentsDir = options.agentsDir ?? DEFAULT_AGENTS_DIR;
+  const gitRoot =
+    options.gitRoot ?? (options.specsDir ? path.resolve(options.specsDir, '../../..') : ROOT_DIR);
+  const activeBranch = readCurrentGitBranch(gitRoot);
   const toolName = payload?.toolCall?.name ?? '';
   const args = payload?.toolCall?.args ?? {};
 
@@ -186,11 +189,12 @@ export function evaluatePreToolUse(
     toolName === 'edit_file'
   ) {
     const targetFile = String(args.TargetFile ?? args.path ?? args.file_path ?? '');
+    const isArtifact = isArtifactPath(targetFile, payload.artifactDirectoryPath);
 
     // Rule 1A: Anti-Auto-Proceed on Artifacts (forces RequestFeedback: false via shallow overwrite)
     if (
       (toolName === 'write_to_file' || toolName === 'create_file') &&
-      isArtifactPath(targetFile, payload.artifactDirectoryPath) &&
+      isArtifact &&
       args.ArtifactMetadata &&
       args.ArtifactMetadata.RequestFeedback === true
     ) {
@@ -202,6 +206,14 @@ export function evaluatePreToolUse(
             RequestFeedback: false,
           },
         },
+      };
+    }
+
+    // Rule 1A-Main: Main Branch Immutability Protection (blocks direct edits on main)
+    if (!isArtifact && activeBranch === 'main') {
+      return {
+        decision: 'deny',
+        reason: `🛑 BLOQUEO DE RAMA MAIN (workflow-gate-hook): Prohibido modificar archivos directamente en "main". Trabaja sobre "develop", "feat/<feature>" o "spec/<feature>/<slug>" y promueve con "node BRIDS-Engine/bin/engine.ts promote main".`,
       };
     }
 
@@ -230,14 +242,11 @@ export function evaluatePreToolUse(
         };
       }
       const expectedBranch = spec.git_branch_topology?.spec_branch;
-      if (expectedBranch) {
-        const activeBranch = readCurrentGitBranch(options.gitRoot ?? ROOT_DIR);
-        if (activeBranch && activeBranch !== expectedBranch) {
-          return {
-            decision: 'deny',
-            reason: `🛑 BLOQUEO DE RAMA SDD (workflow-gate-hook): El Spec "${draftSlug}" pertenece a la rama hija "${expectedBranch}", pero el repositorio está en "${activeBranch}". Cambia a la rama hija antes de redactar borradores.`,
-          };
-        }
+      if (expectedBranch && activeBranch && activeBranch !== expectedBranch) {
+        return {
+          decision: 'deny',
+          reason: `🛑 BLOQUEO DE RAMA SDD (workflow-gate-hook): El Spec "${draftSlug}" pertenece a la rama hija "${expectedBranch}", pero el repositorio está en "${activeBranch}". Cambia a la rama hija antes de redactar borradores.`,
+        };
       }
     }
 
@@ -276,7 +285,7 @@ export function evaluatePreToolUse(
   }
 
   // =========================================================================
-  // 2. SHELL COMMAND VAULT BYPASS GUARD (run_command)
+  // 2. SHELL COMMAND VAULT & MAIN BRANCH BYPASS GUARD (run_command)
   // =========================================================================
   if (toolName === 'run_command') {
     const commandLine = String(args.CommandLine ?? args.command ?? '');
@@ -286,6 +295,20 @@ export function evaluatePreToolUse(
         reason: `🛑 BLOQUEO HITL-2 (workflow-gate-hook): Prohibido escribir o redirigir archivos directamente a BRIDS-Brain/01 Negocio o 02 Marketing mediante shell. Usa los scripts autorizados (sdd-orchestrator.ts approve-deliverable o refine-note.ts).`,
       };
     }
+
+    const isOfficialPromote =
+      commandLine.includes('promote main') || commandLine.includes('promote release');
+    if (
+      !isOfficialPromote &&
+      (activeBranch === 'main' && /\bgit\s+(commit|merge|push)\b/.test(commandLine)) ||
+      (!isOfficialPromote && /\bgit\s+push\s+\S+\s+main\b/.test(commandLine))
+    ) {
+      return {
+        decision: 'deny',
+        reason: `🛑 BLOQUEO DE RAMA MAIN (workflow-gate-hook): Prohibido hacer commits, merges o push directos sobre "main". Trabaja en "develop" y usa "node BRIDS-Engine/bin/engine.ts promote main".`,
+      };
+    }
+
     return { decision: 'allow' };
   }
 

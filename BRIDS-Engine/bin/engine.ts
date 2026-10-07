@@ -48,7 +48,10 @@ Dominios Principales (BRIDS-Engine/scripts/):
   5. social <grid|post|carousel|assets> [args]
      Generación de posts, carruseles de 4 slides, sincronización de parrilla y prompts visuales.
 
-  6. test [unit|smoke|idempotency|agent-reach|all]
+  6. promote <feature [feat/nombre]|main> [--push]
+     Promoción jerárquica con guardrails deterministas: feat/<feature> -> develop -> main.
+
+  7. test [unit|smoke|idempotency|agent-reach|all]
      Ejecuta las suites de pruebas en TypeScript puro.
 `);
 }
@@ -64,6 +67,10 @@ function runTsScript(relPath: string, scriptArgs: string[]) {
 }
 
 switch (command) {
+  case 'promote': {
+    runTsScript('../scripts/sdd/sdd-orchestrator.ts', ['promote', ...args.slice(1)]);
+    break;
+  }
   case 'task':
   case 'sdd': {
     if (args.length <= 1) {

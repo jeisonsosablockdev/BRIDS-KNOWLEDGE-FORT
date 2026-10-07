@@ -423,6 +423,79 @@ describe('SPEC-HOOK-004: Deterministic PreToolUse & Stop Hooks (3-Role Multi-Age
     );
     assert.equal(rightBranchRes.decision, 'allow');
   });
+
+  it('@spec REQ-HOOK-408: should enforce main branch immutability and allow official promote main flow', async () => {
+    const { resolveFeatureBranch } = await import('../../scripts/sdd/sdd-orchestrator.ts');
+
+    const fakeGitDir = path.join(tempRoot, '.git');
+    fs.mkdirSync(fakeGitDir, { recursive: true });
+    const headFile = path.join(fakeGitDir, 'HEAD');
+
+    // 1. On develop, resolveFeatureBranch with fallbackSlug infers feat/<slug>
+    fs.writeFileSync(headFile, 'ref: refs/heads/develop\n', 'utf8');
+    assert.equal(resolveFeatureBranch(undefined, tempRoot, 'spv-compliance'), 'feat/spv-compliance');
+
+    // 2. On main, any file edit in the workspace is DENIED
+    fs.writeFileSync(headFile, 'ref: refs/heads/main\n', 'utf8');
+    const editOnMain = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'replace_file_content',
+          args: {
+            TargetFile: path.join(tempRoot, 'BRIDS-Engine', 'bin', 'engine.ts'),
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(editOnMain.decision, 'deny');
+    assert.ok(editOnMain.reason?.includes('BLOQUEO DE RAMA MAIN'));
+
+    // 3. On main, direct git commit or git merge is DENIED
+    const commitOnMain = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'run_command',
+          args: {
+            CommandLine: 'git commit -m "direct commit on main"',
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(commitOnMain.decision, 'deny');
+    assert.ok(commitOnMain.reason?.includes('BLOQUEO DE RAMA MAIN'));
+
+    // 4. Even from develop, direct git push origin main is DENIED unless via promote main
+    fs.writeFileSync(headFile, 'ref: refs/heads/develop\n', 'utf8');
+    const directPushMain = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'run_command',
+          args: {
+            CommandLine: 'git push origin main',
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(directPushMain.decision, 'deny');
+    assert.ok(directPushMain.reason?.includes('BLOQUEO DE RAMA MAIN'));
+
+    // 5. Official promotion command is ALLOWED
+    const officialPromote = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'run_command',
+          args: {
+            CommandLine: 'node BRIDS-Engine/bin/engine.ts promote main --push',
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(officialPromote.decision, 'allow');
+  });
 });
 
 
