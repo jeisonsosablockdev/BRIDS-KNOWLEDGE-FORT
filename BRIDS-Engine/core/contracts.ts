@@ -181,6 +181,37 @@ export interface GitBranchTopology {
 }
 
 /**
+ * Discovered Skill Recommendation for HITL-0 Approval
+ */
+export interface SkillRecommendation {
+  skillId: string;
+  name: string;
+  description: string;
+  skillMdPath: string;
+  relevanceScore: number;
+  reason: string;
+}
+
+/**
+ * Adversarial Spec Quality Report (Pre-HITL-1)
+ */
+export interface SpecAdversarialReport {
+  score: number;
+  passed: boolean;
+  cycle: number;
+  engine?: 'clef-flash' | 'heuristic-fallback';
+  dimensions: {
+    skillIntegration: number;      // Max 2.5
+    vaultGrounding: number;        // Max 2.5
+    contractSpecificity: number;   // Max 2.0
+    workerHandoffClarity: number;  // Max 2.0
+  };
+  defects: string[];
+  remediation_directives: string[];
+  timestamp: string;
+}
+
+/**
  * Value Object / DTO for initializing a Spec without positional parameter pollution.
  */
 export interface CreateSpecRequest {
@@ -188,6 +219,7 @@ export interface CreateSpecRequest {
   title: string;
   targetFolder?: string;
   subagents?: string[];
+  approvedSkills?: string[];
   icp?: string;
   goal?: string;
   featureBranch?: string;
@@ -235,6 +267,9 @@ export interface TaskSpecData {
   target_file?: string;
   subagents: string[];
   subagents_involved?: string[];
+  approved_skills?: string[];
+  hitl_0_skills_approved?: boolean;
+  spec_evaluation?: SpecAdversarialReport;
   icp: string;
   goal: string;
   status: TaskLifecycleState | string;

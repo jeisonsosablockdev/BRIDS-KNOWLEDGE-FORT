@@ -7,8 +7,6 @@ import {
   type TaskSpecData,
   type ExecutionConcurrencyMode,
 } from '../../core/contracts.ts';
-import { VaultGateway } from '../../core/vault-gateway.ts';
-import { TaskOrchestrator } from '../../core/orchestrator.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -384,20 +382,40 @@ export function evaluatePreToolUse(
       }
     }
 
-    // Rule 3C: JIT Persona Injection (agents/*.yaml) + Strategic Model Routing
+    // Rule 3C: JIT Persona Injection (agents/*.yaml) + Approved Skills Injection + Strategic Model Routing
     let modified = false;
     const updatedSubagents = subagents.map((sub) => {
       const agentType = String(sub.TypeName || '');
       let nextSub = { ...sub };
 
-      // JIT Persona Injection from BRIDS-Engine/agents/<agentType>.yaml
       const rawPrompt = String(nextSub.Prompt || '');
+      const matchedSpec = allSpecs.find(
+        ({ slug, data }) =>
+          rawPrompt.includes(slug) ||
+          data.status === 'spec_approved' ||
+          data.status === 'task_loop'
+      );
+      const approvedSkills = matchedSpec?.data.approved_skills ?? [];
+      const skillsBlock =
+        approvedSkills.length > 0 && !rawPrompt.includes('[APPROVED_SKILLS:')
+          ? `\n\n[APPROVED_SKILLS: ${approvedSkills.join(', ')}]\nLectura obligatoria de SKILL.md antes de ejecutar:\n${approvedSkills
+              .map((s) => `- BRIDS-Engine/skills/${s}/SKILL.md`)
+              .join('\n')}`
+          : '';
+
+      // JIT Persona Injection from BRIDS-Engine/agents/<agentType>.yaml
       if (agentType && !rawPrompt.includes('[AGENT_PERSONA:')) {
         const systemPrompt = loadAgentSystemPrompt(agentType, agentsDir);
         if (systemPrompt) {
           modified = true;
-          nextSub.Prompt = `[AGENT_PERSONA: ${agentType}]\n${systemPrompt}\n\n[ASSIGNED_TASK]\n${rawPrompt}`;
+          nextSub.Prompt = `[AGENT_PERSONA: ${agentType}]\n${systemPrompt}${skillsBlock}\n\n[ASSIGNED_TASK]\n${rawPrompt}`;
+        } else if (skillsBlock) {
+          modified = true;
+          nextSub.Prompt = `${skillsBlock.trim()}\n\n[ASSIGNED_TASK]\n${rawPrompt}`;
         }
+      } else if (skillsBlock) {
+        modified = true;
+        nextSub.Prompt = `${rawPrompt}${skillsBlock}`;
       }
 
       // Strategic Model Routing (flash for parallel_read, pro/inherit for serial_write)
@@ -467,8 +485,11 @@ export async function evaluateStopHook(
   }
 
   const allSpecs = loadAllSpecs(specsDir);
+  const { VaultGateway } = await import('../../core/vault-gateway.ts');
+  const { TaskOrchestrator } = await import('../../core/orchestrator.ts');
   const vault = new VaultGateway(vaultRoot);
   const orchestrator = new TaskOrchestrator(vault);
+
 
   for (const { slug, data } of allSpecs) {
     if (data.status !== 'spec_approved' && data.status !== 'task_loop') {

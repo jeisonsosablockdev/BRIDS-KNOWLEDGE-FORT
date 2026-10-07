@@ -175,17 +175,22 @@ export class VaultGateway {
     title: string;
     targetFolder: string;
     subagents: string[];
+    approvedSkills?: string[];
     icp: string;
     goal: string;
     dateStr: string;
     state: string;
   }): string {
+    const skillsList =
+      params.approvedSkills && params.approvedSkills.length > 0
+        ? params.approvedSkills
+        : ['yc-insight-driven-bp'];
     const templatePath = path.join(this.templatesDir, 'deliverable-spec-template.md');
     if (fs.existsSync(templatePath)) {
       const templateContent = fs.readFileSync(templatePath, 'utf8');
       const primaryAgent = params.subagents[0] || 'founder-ghostwriter';
-      const secondaryAgent = params.subagents[1] || 'business-consultant';
-      return templateContent
+      const secondaryAgent = params.subagents.slice(1).join(', ') || 'business-consultant';
+      const rendered = templateContent
         .replace(/\{\{SLUG\}\}/g, params.slug)
         .replace(/\{\{TITLE\}\}/g, params.title)
         .replace(/\{\{CATEGORY_FOLDER\}\}/g, params.targetFolder)
@@ -198,9 +203,10 @@ export class VaultGateway {
         .replace(/\{\{TARGET_ICP\}\}/g, params.icp || 'Real Estate Sponsors, Institutional LPs, YC Partners')
         .replace(/\{\{PRIMARY_CTA\}\}/g, 'Agendar sesión técnica de estructuración / Revisar Data Room')
         .replace(/\{\{PRIMARY_KPI\}\}/g, 'Tasa de respuesta calificada >= 20%')
-        .replace(/\{\{REFERENCE_DOC_1\}\}/g, 'Whitepaper de Tokenización Metaplex Core')
-        .replace(/\{\{REFERENCE_DOC_2\}\}/g, 'Estructura Legal Delaware C-Corp vs SPV LLC')
+        .replace(/\{\{REFERENCE_DOC_1\}\}/g, `Skills Aprobadas (HITL-0): ${skillsList.join(', ')}`)
+        .replace(/\{\{REFERENCE_DOC_2\}\}/g, 'Estructura Legal Delaware C-Corp vs SPV LLC & Metaplex Core')
         .replace(/\{\{WORD_COUNT_RANGE\}\}/g, '400 - 800');
+      return `${rendered}\n\n## 9. Skills Aprobadas (HITL-0) e Integradas en el Spec\n${skillsList.map((s) => `- \`${s}\``).join('\n')}\n`;
     }
 
     return (
@@ -209,10 +215,11 @@ export class VaultGateway {
       `- **Objetivo:** ${params.goal || params.title}\n` +
       `- **Público Objetivo (ICP):** ${params.icp}\n` +
       `- **Subagentes Asignados:** ${params.subagents.join(', ')}\n` +
+      `- **Skills Aprobadas (HITL-0):** ${skillsList.join(', ')}\n` +
       `- **Destino Canónico:** ${params.targetFolder}/${params.slug}.md\n` +
       `- **Estado:** ${params.state}\n\n` +
-      `## Criterios de Aceptación Verificables\n` +
-      `1. Cobertura completa de la propuesta de valor y economía unitaria.\n` +
+      `## Desglose Estructural (Outline) & Criterios de Aceptación Verificables\n` +
+      `1. Cobertura completa de la propuesta de valor y economía unitaria aplicando ${skillsList.join(', ')}.\n` +
       `2. Veracidad técnica con anclas on-chain (Solana, Metaplex Core, Delaware SPV).\n` +
       `3. Cero clichés de LLM y tono directo de fundador YC.\n`
     );
