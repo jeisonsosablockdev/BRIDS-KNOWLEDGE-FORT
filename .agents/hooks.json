@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if [ -f \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" ]; then node \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" pre-tool; else node \"./BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" pre-tool; fi"
+            "command": "if [ -f \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" ]; then node \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" pre-tool; elif [ -f \"./BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" ]; then node \"./BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" pre-tool; else echo '{\"decision\":\"allow\"}'; fi"
           }
         ]
       }
@@ -14,7 +14,7 @@
     "Stop": [
       {
         "type": "command",
-        "command": "if [ -f \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" ]; then node \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" stop-check; else node \"./BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" stop-check; fi"
+        "command": "if [ -f \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" ]; then node \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" stop-check; elif [ -f \"./BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" ]; then node \"./BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" stop-check; else echo '{}'; fi"
       }
     ]
   }
