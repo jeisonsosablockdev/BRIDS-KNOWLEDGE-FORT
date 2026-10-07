@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/solana-stack.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "8183b84bccb3750209a13313dab3fcd33a44bf9f8cfbbb98c52822209d2c9282"
 tags: [solana, smart-contracts, umi, solana-kit, tps]
-updated_at: "2026-09-12T01:26:18.854Z"
+updated_at: "2026-10-03T02:51:18.281Z"
 ---
 
 # Especificación Técnica de Infraestructura Solana
 
 > [!NOTE]
 > **Resumen Técnico:** Detalle de integración con devnet/mainnet, Umi, Solana Kit, priorización de fees y manejo de transacciones.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -60,3 +60,4 @@ Use this guide when evaluating RFCs involving infrastructure, DeFi, security, or
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde knowledge/architecture/solana-stack.md |
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización automática de cambios desde rama develop |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -9,7 +9,9 @@ Este directorio alberga la **tesis fundacional, los conceptos nucleares de token
 ## 📌 Documentos Clave de Estrategia
 
 - [[01 Negocio/01 Estrategia & Modelo/master-business-concepts.md|Conceptos Maestros de Negocio (Documento Central)]]
-- [[01 Negocio/01 Estrategia & Modelo/BRIDS.io - Definición Estratégica de Negocio (Lean Canvas).docx|Definición Estratégica de Negocio (Lean Canvas)]]
+- [[01 Negocio/01 Estrategia & Modelo/rwa-series-llc-squads-model.md|Modelo de Negocio: Delaware C-Corp, Series LLCs y Bóvedas Squads]]
+- [[01 Negocio/01 Estrategia & Modelo/rwa-milestone-disbursement-rail.md|Arquitectura de Desembolsos por Hitos RWA (Squads v4 & Sphere)]]
+- [[00 Inbox/Imported files/BRIDS.io - Definición Estratégica de Negocio (Lean Canvas).docx|Definición Estratégica de Negocio (Lean Canvas Original .docx)]]
 
 ---
 

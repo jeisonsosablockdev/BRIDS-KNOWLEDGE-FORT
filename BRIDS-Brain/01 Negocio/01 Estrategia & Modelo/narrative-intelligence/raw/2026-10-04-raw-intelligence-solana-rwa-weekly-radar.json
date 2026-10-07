@@ -1,0 +1,91 @@
+{
+  "collected_at": "2026-10-04 09:22:23",
+  "search_queries": [
+    "opencli twitter search \"Solana RWA\" -f yaml",
+    "opencli twitter search \"Solana tokenization\" -f yaml",
+    "opencli twitter search \"real estate tokenization\" -f yaml",
+    "opencli reddit search \"RWA\" --subreddit solana -f yaml",
+    "opencli reddit search \"tokenization\" --subreddit solana -f yaml",
+    "opencli reddit search \"real estate\" --subreddit solana -f yaml"
+  ],
+  "total_records": 7,
+  "records": [
+    {
+      "id": "2106748934735663125",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "tokens",
+      "title": "@tokens: - This week on @Solana. A stablecoin from the payment giants, a Nasdaq list...",
+      "url": "https://x.com/tokens/status/2106748934735663125",
+      "content": "- This week on @Solana. A stablecoin from the payment giants, a Nasdaq listing on day two, a securities standard, a Korean bank and a newsroom. - @openstandard. OUSD went live on Solana, backed by Coinbase, Mastercard, Shopify, Stripe and Visa. Businesses mint and redeem it free. - Holders. Tokenized-stock holders on Solana hit a record 1.2 million, 775,000 of them new in September. Holders of tokenized commodities passed 70,000, more than double the count on 1 September. - @powerus_usa. Listed on Nasdaq on Thursday, put its own common stock on Solana on Friday. The company announced it itself. - @metaplex. MPL-3643, a standard for permissioned securities. The issuer's rules, from KYC to lockups, are checked on every transfer. - Shinhan Bank. One of Korea's largest banks ran corporate cross-border payments on stablecoins end to end, with the Solana Foundation as technical partner. - @DecryptMedia. Announced The Information Exchange on Solana: news, prediction markets and trading on the same page. Fully live before Breakpoint. - @Raydium. A record $2.8B in tokenized-stock trading in September, then past $6B all-time. - New listings. BlackRock, Nokia, Rocket Lab and Bloom Energy via @Backpack, Quant via @Sunrise, and Coinbase's cbADA. Nokia traded $11.45M in its first 45 minutes. - Network activity. About 3.2B successful non-vote transactions in September, a third straight monthly record, and a record 8.92B for the quarter. - Lending. More tokenized stocks are posted as collateral on Solana than any other chain: $20.7M of xStocks on @Kamino, more than three times Ethereum. Follow @tokens for tokenization and Solana ecosystem news.",
+      "likes": 4,
+      "views": 549,
+      "extracted_at": "2026-10-04 09:22:23"
+    },
+    {
+      "id": "2106688921157714243",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "tokens",
+      "title": "@tokens: '@sunrise Solana: The home of tokenization.'...",
+      "url": "https://x.com/tokens/status/2106688921157714243",
+      "content": "'@sunrise Solana: The home of tokenization.'",
+      "likes": 2,
+      "views": 99,
+      "extracted_at": "2026-10-04 09:22:23"
+    },
+    {
+      "id": "2106641455976493149",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "RWAFoundation_",
+      "title": "@RWAFoundation_: - RWA market cap grew $96.5M across the top 10 chains in the last 24 hours...",
+      "url": "https://x.com/RWAFoundation_/status/2106641455976493149",
+      "content": "- RWA market cap grew $96.5M across the top 10 chains in the last 24 hours 📈 @StellarOrg led with $36.4M, ahead of @BNBCHAIN at $23.2M. The two took 62% of the total. https://t.co/pV9MSJYyFf",
+      "likes": 108,
+      "views": 5431,
+      "extracted_at": "2026-10-04 09:22:23"
+    },
+    {
+      "id": "1wxeyvt",
+      "platform": "Reddit (r/solana)",
+      "author": "ansi09",
+      "title": "Solana Ecosystem News - October 4-2026 (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1wxeyvt/solana_ecosystem_news_october_42026/",
+      "content": "+ **Source:** [https://x.com/solana/status/2106723512631095559](https://x.com/solana/status/2106723512631095559) Nasdaq listed it, Solana moved it. A drone defense company did more volume onchain than on its home exchange, while Fiserv plugged in 90+ banks and credit unions. Q3 app revenue hit $365M, the tenth straight quarter Solana has led. Here’s everything that happened this week: 📰 **Headline News** \\- [@Fiserv](https://x.com/Fiserv)’s digital asset platform launched on Solana, enabling Roughrider Coin transfers across 90+ banks and credit unions \\- [**@**openstandard](https://x.com/openstandard)’s OUSD launched on Solana, with reserves at BlackRock, Lead Bank, and BNY \\- Solana led app revenue for the 10th consecutive quarter, generating $365M in Q3, up 42.6% QoQ \\- Tokenized Powerus ([$PUSA](https://x.com/search?q=%24PUSA&src=cashtag_click)) shares did more volume on Solana than on Nasdaq, day after listing via [@sunrise](https://x.com/sunrise) and [@Backpack](https://x.com/Backpack) Securities 📰 **Launches** \\- Solana’s tokenized-equity holders reached an ATH of 1.2M, with 775K joining in September \\- [@sunrise](https://x.com/sunrise) brought Coinbase’s wrapped Cardano asset, cbADA, to Solana via [@Chainlink](https://x.com/Chainlink) CCIP \\- [@domaprotocol](https://x.com/domaprotocol) opened Frontier on Solana via [@Loopscale](https://x.com/Loopscale), bringing tokenized domains onchain \\- [@FermiTrade](https://x.com/FermiTrade) launched an onchain perp DEX with verifiable first-in, first-out order matching \\- [@Sirius\\_Protocol](https://x.com/Sirius_Protocol) went live with private spot and perps trading, keeping positions off the public feed \\- [@cloak\\_ag](https://x.com/cloak_ag) launched private payroll with spreadsheet uploads and one-click payouts \\- [@metaplex](https://x.com/metaplex) introduced MPL-3643, a standard for permissioned RWAs and tokenized securities with built-in compliance \\- [@BackpackOnchain](https://x.com/BackpackOnchain) added Solana v1 transaction support for more complex trading routes and DeFi interactions \\- [@jup\\_mobile](https://x.com/jup_mobile) introduced the Claynosaurz x Jupiter Card with 2% cashback, full FX fee rebates through 2026 \\- [@DecryptMedia](https://x.com/DecryptMedia) and [@MyriadMarkets](https://x.com/MyriadMarkets) introduced The Information Exchange, connecting news and markets \\- [@useKled](https://x.com/useKled) unveiled Kled V3 for collecting real-world consumer datasets in under 72 hours, powered by Solana payments \\- [@flint\\_trade\\_](https://x.com/flint_trade_) announced its onchain perp DEX on Solana \\- [@proto\\_xyz](https://x.com/proto_xyz) previewed markets for trading exposure to rental GPU power usage, targeting Q4 \\- [@DGLD\\_Official](https://x.com/DGLD_Official) teased a Solana expansion for its token backed by physical PAMP gold stored in Switzerland \\- [@solana\\_devs](https://x.com/solana_devs) introduced Solana Scholars, offering funded three-month research internships for PhD students \\- [@joinfrontier](https://x.com/joinfrontier) wrapped its Seoul edition, with Solana Summit Singapore next on October 6 \\- [@SolanaEvents](https://x.com/SolanaEvents) confirmed the next wave of Breakpoint 2026 speakers 📰 **Milestones** \\- Solana’s September app revenue reached a nine-month high of $180M, accounting for 32% of revenue across chains \\- Solana led spot DEX volume for the fifth consecutive quarter with $197B in Q3, up 16.6% QoQ \\- [@xStocksFi](https://x.com/xStocksFi) recorded $1.8B in September trading volume on [@Raydium](https://x.com/Raydium) \\- [@Raydium](https://x.com/Raydium) crossed $6B in cumulative tokenized-stock trading volume \\- [@byreal\\_io](https://x.com/byreal_io) surpassed $5B in total trading volume on its first anniversary \\- [@nansen\\_ai](https://x.com/nansen_ai) hit weekly ATH for x402 transactions on Solana, with payment volume exceeding all other networks combined \\- Tokenized stocks pledged as collateral on [@kamino](https://x.com/kamino) exceeded the scale of any other chain by more than 3x If you enjoyed this week’s newsletter, please share it with an RT. Artwork by **nub** https://preview.redd.it/e80x8nk16gth1.png?width=680&format=png&auto=webp&s=868c10a2b9bd3e92fa17b365136da501863bf069",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-04 09:22:23"
+    },
+    {
+      "id": "1wwpjlm",
+      "platform": "Reddit (r/solana)",
+      "author": "Present_Let2487",
+      "title": "Has a transaction preview ever stopped you from signing something bad? (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1wwpjlm/has_a_transaction_preview_ever_stopped_you_from/",
+      "content": "- I’ll admit I approve transactions without really reading the preview. Last week the preview flagged that a transaction was moving a token I hadn't mentioned anywhere in the trade. When I took a closer look, it was just some account being closed and rent coming back. But yeah, for about ten seconds I was convinced I’d signed something sketchy. Since then I've been reading transaction previews properly, and I've noticed how much they vary between wallets. Some spell out exactly what's leaving while some show a wall of program calls that mean nothing to me. Has a transaction preview ever stopped you from signing something malicious? Also, if you read every transaction before approving it, did the technical stuff make sense, or do you mostly learn what looks suspicious?",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-04 09:22:23"
+    },
+    {
+      "id": 6,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Arrakis Research: Tokenized Equities on Solana Report",
+      "url": "https://arrakis.finance/tokenized-equities",
+      "content": "Reporte de investigación sobre más de 1.5M de direcciones en Solana y EVM para activos tokenizados y tesorería institucional.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-04 09:22:23"
+    },
+    {
+      "id": 7,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Solana Official: Real World Assets Infrastructure & Solutions",
+      "url": "https://solana.com/solutions/real-world-assets",
+      "content": "Portal oficial de infraestructura RWA de Solana Foundation con casos de uso de tesoros tokenizados y bienes raíces.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-04 09:22:23"
+    }
+  ]
+}

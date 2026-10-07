@@ -1,35 +1,31 @@
 # Agent Instructions
 
 ## Package Manager
-- Content-first workspace; no package manager required for normal work
-- Skill validation: `bash BRIDS-Engine/scripts/validate-skills.sh`
+- Content-first workspace; TypeScript runs natively in Node.js (`node <file>.ts`) without wrappers
+- Skill validation: `node BRIDS-Engine/scripts/audit/audit-runner.ts skills`
 
-## File-Scoped Commands
-| Task | Command |
-|------|---------|
-| Atomic Task Init & SDD Engine | `bash BRIDS-Engine/scripts/task-init.sh <slug> [titulo] [target-folder] [subagents] [icp] [goal]` |
-| Spec-Driven Development (SDD) | `bash BRIDS-Engine/scripts/sdd-manager.sh <init|preview|approve|evaluate|status|list>` |
-| Context-Aware Asset Generator | `bash BRIDS-Engine/scripts/generate-publication-assets.sh <nota|slug> [--input-image img]` |
-| Sync Master Content Grid | `bash BRIDS-Engine/scripts/sync-content-grid.sh [audit|sync|update]` |
-| Generate 4-Slide Carousel | `bash BRIDS-Engine/scripts/create-social-carousel.sh "<idea>" [img] [asset] [ref]` |
-| Generate Social Post | `bash BRIDS-Engine/scripts/create-social-post.sh <red> "<idea>" [tipo] [ref] [asset]` |
-| Verify Idempotency | `bash BRIDS-Engine/tests/test-idempotency.sh` |
-| Anti-Drift Compliance Audit | `bash BRIDS-Engine/scripts/enforce-compliance.sh` |
-| Manage Task Lifecycle | `bash BRIDS-Engine/scripts/task-manager.sh <init|add|show|update|list|close>` |
-| Non-Destructive Refine | `bash BRIDS-Engine/scripts/refine-note.sh <inspect|backup|refine|branch|rollback>` |
-| Read Markdown | `sed -n '1,160p' path/to/file.md` |
-| List vault folders | `find "BRIDS-Brain" -maxdepth 3 -type d | sort` |
-| Validate skills | `bash BRIDS-Engine/scripts/validate-skills.sh` |
-| Activate project skills | `bash BRIDS-Engine/scripts/enable-project-skills.sh` |
-| Activate project skills (Windows) | `powershell -ExecutionPolicy Bypass -File .\BRIDS-Engine\scripts\enable-project-skills.ps1` |
-| Inspect Agent Squad | `bash BRIDS-Engine/scripts/inspect-squad.sh` |
-| End-to-End System Smoke Test | `bash BRIDS-Engine/tests/smoke-test.sh` |
-| Sync Technical Docs & Brand (OKF) | `bash BRIDS-Engine/scripts/sync-technical-docs.sh [--force]` |
-| Sync Narrative Radar & Briefs | `bash BRIDS-Engine/scripts/sync-narrative-intelligence.sh [slug]` |
-| Audit Narrative Intelligence & Provenance | `bash BRIDS-Engine/scripts/audit-narrative-intelligence.sh [brief.md]` |
-| Export LaTeX / Markdown to PDF | `bash BRIDS-Engine/scripts/export-pdf.sh <file.md\|file.tex> [out.pdf] [--raw] [--open]` |
+## File-Scoped Commands (TypeScript Domain Architecture)
+| Domain | Task | Command |
+|--------|------|---------|
+| `bin/` | Unified Engine CLI & Lifecycle | `node BRIDS-Engine/bin/engine.ts <sdd\|promote\|ingest\|vault\|audit\|social\|test\|help>` |
+| `sdd/` | Spec-Driven Development & Sessions | `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts <init\|preview\|approve-spec\|evaluate\|loop-task\|review-deliverable\|approve-deliverable\|branch\|merge\|promote\|list\|session>` |
+| `sdd/` | 4-Tier Git Promotion (`feat` -> `develop` -> `main`) | `node BRIDS-Engine/bin/engine.ts promote <feature [feat/name]\|main> [--push]` |
+| `ingest/` | Sync Technical Docs & Brand (OKF) | `node BRIDS-Engine/scripts/ingest/sync-technical-docs.ts [--force]` |
+| `ingest/` | Sync Narrative Radar & Briefs | `node BRIDS-Engine/scripts/ingest/sync-narrative-intelligence.ts [slug\|--rumor-scan\|--extract-url]` |
+| `ingest/` | Sync Workspace Brand & Skills | `node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts [all\|brand\|skills]` |
+| `vault/` | Non-Destructive Note Refinement | `node BRIDS-Engine/scripts/vault/refine-note.ts <inspect\|backup\|refine\|branch\|rollback>` |
+| `vault/` | In-Memory Vault Search | `node BRIDS-Engine/scripts/vault/vault-search.ts "<query>" [--limit 5]` |
+| `vault/` | Export LaTeX / Markdown to PDF | `node BRIDS-Engine/scripts/vault/export-pdf.ts <file.md\|file.tex> [out.pdf] [--raw] [--staging]` |
+| `audit/` | Unified Governance & Compliance | `node BRIDS-Engine/scripts/audit/audit-runner.ts [compliance\|vault\|context\|skills\|squad\|narrative]` |
+| `social/` | Social Posts, Carousels, Grid & Assets | `node BRIDS-Engine/scripts/social/social-generator.ts <grid\|post\|carousel\|assets> [args]` |
+| `tests/` | Full TypeScript Test Suite | `node BRIDS-Engine/bin/engine.ts test all` |
 
-## Commit Attribution
+## Commit Attribution & 4-Tier Git Branching (`spec/*` -> `feat/*` -> `develop` -> `main`)
+- **Active Trunk is `develop`:** Never edit files or commit directly on `main`. `PreToolUse` (`workflow-gate-hook.ts`) physically blocks direct file edits and direct `git commit`/`git merge`/`git push` on `main`.
+- **Hierarchy:**
+  1. `spec/<feature>/<slug>`: Child branch per SDD Spec (`sdd-orchestrator.ts branch <slug>`). Merges (`--no-ff`) into `feat/<feature>` via `sdd-orchestrator.ts merge <slug>` after HITL-2 (`completed`).
+  2. `feat/<feature>`: Feature integration branch. Promotes (`--no-ff`) into `develop` via `node BRIDS-Engine/bin/engine.ts promote feature [feat/<feature>] [--push]`.
+  3. `develop`: Default working trunk. Promotes (`--no-ff`) into `main` via `node BRIDS-Engine/bin/engine.ts promote main [--push]` (runs clean tree check + full test suite + compliance audit, merges to `main`, and automatically returns HEAD to `develop`).
 - AI commits MUST include:
 ```text
 Co-Authored-By: Google Gemini <gemini@google.com>
@@ -38,11 +34,11 @@ Co-Authored-By: Google Gemini <gemini@google.com>
 ## Non-Destructive Content Refinement Rule (CRITICAL)
 - NEVER wipe or destructively overwrite existing document content unless explicitly requested by the user with unambiguous deletion keywords ('delete', 'remove', 'erase', 'elimina', 'borra').
 - When asked to perform a task or update an existing note, the default behavior is **incremental refinement**: read the existing note, preserve established insights, and augment/refine the specific sections requested.
-- Use `bash BRIDS-Engine/scripts/refine-note.sh refine <path> "<summary>"` to maintain safety snapshots, bump versioning, and update the document changelog.
+- Use `node BRIDS-Engine/scripts/vault/refine-note.ts refine <path> "<summary>"` to maintain safety snapshots, bump versioning, and update the document changelog.
 - For major structural pivots or alternative campaign angles, create a new versioned file (e.g. `homepage-copy-v2-aug-2026.md`) rather than destroying previous drafts.
 
 ## Workspace Layout
-- `BRIDS-Engine/`: source of truth for skills, agents, automation scripts, docs, and brand context
+- `BRIDS-Engine/`: source of truth for skills, agents, automation scripts (`sdd/`, `ingest/`, `vault/`, `audit/`, `social/`), docs, and brand context
 - `BRIDS-Brain/`: Obsidian vault, persistent knowledge base and final Markdown deliverables
 
 ## Content Workflow
@@ -54,17 +50,17 @@ Co-Authored-By: Google Gemini <gemini@google.com>
 ## Skills
 - Local adaptations live in `BRIDS-Engine/skills/`
 - Skill activation instructions live in `BRIDS-Engine/docs/skills-activation.md`
-- For Windows, prefer `enable-project-skills.ps1` and `sync-brand-context.ps1`
+- Activate and sync skills via `node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts skills`
 
 ## Anti-Drift Task Execution Protocol (5 Steps con Doble Guardrail HITL)
 To prevent prompt/context drift and ensure consistent quality, every document or content generation task must follow this sequence:
-1. **Solicitud de Usuario & Propuesta SDD:** El usuario expone el requerimiento o idea comercial. Se genera un artefacto de especificación formal previo usando `bash BRIDS-Engine/scripts/task-init.sh <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"` (o `sdd-manager.sh init`). El spec queda en estado `spec_review` y declara obligatoriamente:
+1. **Solicitud de Usuario & Propuesta SDD:** El usuario expone el requerimiento o idea comercial. Se genera un artefacto de especificación formal previo usando `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts init <slug> "<title>" "<target-folder>" "<subagents>" "[icp]" "[goal]"`. El spec queda en estado `spec_review` y declara obligatoriamente:
    - Destino canónico en `BRIDS-Brain/` (`01 Negocio` o `02 Marketing`) y nombre de archivo.
    - Sub-agentes asignados del squad (`business-consultant`, `market-research-analyst`, `pitch-deck-architect`, `compliance-officer`, `b2b-sponsor-lead`, `founder-ghostwriter`).
    - Anclas técnicas verificables (Solana, Metaplex Core Freeze/Recovery, Delaware SPV, Stripe Identity) y filtro anti-clichés de IA.
-2. **Primer Guardrail HITL (Aprobación Humana del Spec):** Se presenta el objeto canónico del spec al usuario (`bash BRIDS-Engine/scripts/sdd-manager.sh preview <slug>`).
-   - Si el usuario solicita ajustes: se corre el optimizador (`bash BRIDS-Engine/scripts/sdd-manager.sh refine-spec <slug> "<observaciones>"`).
-   - **Bloqueo Mandatorio:** Ningún sub-agente comienza a redactar hasta que el usuario apruebe formalmente con `bash BRIDS-Engine/scripts/sdd-manager.sh approve-spec <slug>`.
+2. **Primer Guardrail HITL (Aprobación Humana del Spec):** Se presenta el objeto canónico del spec al usuario (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts preview <slug>`).
+   - Si el usuario solicita ajustes: se corre el optimizador (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts refine-spec <slug> "<observaciones>"`).
+   - **Bloqueo Mandatorio:** Ningún sub-agente comienza a redactar hasta que el usuario apruebe formalmente con `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts approve-spec <slug>`.
 3. **Bucle Evaluador-Optimizador Autónomo (Creador vs Revisor):** Redacción del borrador con los sub-agentes asignados respetando el spec aprobado.
    - **Agente Revisor (`sdd-reviewer`):** Audita en escala de 0 a 9 puntos en 4 dimensiones:
      - 1. Cumplimiento del Objetivo & ICP (2.5 pts)
@@ -72,11 +68,11 @@ To prevent prompt/context drift and ensure consistent quality, every document or
      - 3. Voz Fundadora vs Tono Robot (2.0 pts)
      - 4. Originalidad Léxica & Cero Clichés (2.0 pts)
    - **Condición de Calidad:** Debe superar una calificación $\ge 8.5 / 9.0$ (máximo 5 ciclos iterativos). Si no alcanza 8.5 en el ciclo 5, se congela para arbitraje (`frozen_for_arbitration`). Al superar 8.5, el texto pasa a estado `deliverable_review` (HITL-2).
-4. **Segundo Guardrail HITL (Aprobación del Entregable & Integración en Vault):** Se presenta el texto pulido al usuario (`bash BRIDS-Engine/scripts/sdd-manager.sh review-deliverable <slug>`).
-   - Si el usuario solicita cambios: se re-ejecuta el bucle (`bash BRIDS-Engine/scripts/sdd-manager.sh refine-deliverable <slug> "<observaciones>"`).
-   - **Bloqueo Mandatorio:** El archivo **NO se escribe en la carpeta de producción de `BRIDS-Brain/`** hasta la confirmación formal del usuario con `bash BRIDS-Engine/scripts/sdd-manager.sh approve-deliverable <slug>`.
+4. **Segundo Guardrail HITL (Aprobación del Entregable & Integración en Vault):** Se presenta el texto pulido al usuario (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts review-deliverable <slug>`).
+   - Si el usuario solicita cambios: se re-ejecuta el bucle (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts refine-deliverable <slug> "<observaciones>"`).
+   - **Bloqueo Mandatorio:** El archivo **NO se escribe en la carpeta de producción de `BRIDS-Brain/`** hasta la confirmación formal del usuario con `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts approve-deliverable <slug>`.
    - Al aprobarse, el motor promueve el entregable de forma atómica e idempotente con metadatos de calidad, tags `sdd-approved`, `hitl-validated` y changelog.
-5. **Medición & Cierre:** Registro del entregable, asignación de eventos y KPIs, y cierre en `task-manager.sh update`.
+5. **Medición & Cierre:** Registro del entregable, asignación de eventos y KPIs, y cierre en `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts session update`.
 
 ## Vault Conventions
 - The vault is structured into two core macro-domains under `BRIDS-Brain/`:
@@ -91,8 +87,7 @@ To prevent prompt/context drift and ensure consistent quality, every document or
 
 ## Obsidian Integration
 - The Obsidian vault is `BRIDS-Brain/`
-- Local REST API is active on HTTPS port `27124` with Bearer token authentication
-- Sincroniza el contexto usando `bash BRIDS-Engine/scripts/sync-brand-context.sh`
+- Sincroniza el contexto usando `node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts brand`
 
 ## BRIDS Founder & YC Sub-Agent Squad
 The workspace includes 7 specialized sub-agents defined in `BRIDS-Engine/agents/` and registered via `define_subagent` to build the business and prepare for Y Combinator:
@@ -108,7 +103,7 @@ The workspace includes 7 specialized sub-agents defined in `BRIDS-Engine/agents/
 | `narrative-intelligence-analyst` | Emerging Narrative & Market Psychology Analyst | `01 Negocio/01 Estrategia & Modelo/narrative-intelligence/` | Early whisper radar, viral meme deconstruction, market psychology audits, narrative threat/opportunity briefs. **Protocol Rules:** 1) Mandatory direct clickable URLs for all citations. 2) Immutable raw data archival in `raw/*.json`. 3) Strict zero-judgments policy: hypotheses must be inductive and evidence-driven, never forcing a priori business assumptions. |
 
 - Definitions: Individual autonomous YAML files in `BRIDS-Engine/agents/*.yaml`
-- Verification: `bash BRIDS-Engine/scripts/inspect-squad.sh`
+- Verification: `node BRIDS-Engine/scripts/audit/audit-runner.ts squad`
 
 ## Solana Developer MCP Integration (mcp.solana.com)
 The workspace integrates the canonical **Solana Developer MCP** (`https://mcp.solana.com/mcp`):

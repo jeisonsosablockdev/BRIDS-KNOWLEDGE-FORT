@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Database Architecture"
 source_okf: "knowledge/database/models/marketplace-entry.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "2cf82aa2a0bb9237a0a2b903598a3f013b67a34ffaf9b514eb73c4834032443a"
 tags: [database, marketplace, assets, rwa, postgres]
-updated_at: "2026-09-12T02:07:49.375Z"
+updated_at: "2026-10-03T02:51:18.361Z"
 ---
 
 # Modelo de Datos: Catálogo Inmobiliario y Metadatos de Activos
 
 > [!NOTE]
 > **Resumen Técnico:** Esquema de propiedades listadas, proyecciones financieras, rentabilidades estimadas, estados de fondeo y galerías.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -173,3 +173,4 @@ From `lib/marketplace/property-read-repository.ts` and `property-write-repositor
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/database/models/marketplace-entry.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

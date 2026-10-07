@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Security & Audits"
 source_okf: "knowledge/security/compliance/pci-compliance.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "5b0649305ed7a820f92c67e2fe091ceda66cdcb2d3dbc55573ff3786397814ca"
 tags: [pci-compliance, fiat-ramp, payments, security]
-updated_at: "2026-09-12T02:07:49.370Z"
+updated_at: "2026-10-03T02:51:18.326Z"
 ---
 
 # Cumplimiento PCI y Seguridad de Pasarelas Fiat
 
 > [!NOTE]
 > **Resumen Técnico:** Blindaje y delimitación de alcance PCI para procesadores de tarjetas de crédito y rampas fiat hacia USDC.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -113,3 +113,4 @@ Since crypto payments are processed on-chain (buyer signs transaction, backend c
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/security/compliance/pci-compliance.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

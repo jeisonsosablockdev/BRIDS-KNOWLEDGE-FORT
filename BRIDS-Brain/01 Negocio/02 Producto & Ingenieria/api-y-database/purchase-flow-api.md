@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "API Specifications"
 source_okf: "knowledge/api/endpoints/purchase-flow.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "299137cd94337db030d9c61a8b84e548b15e587f9502b4653fda5f4ece480495"
 tags: [api, checkout, purchase, usdc, endpoints]
-updated_at: "2026-09-12T02:07:49.380Z"
+updated_at: "2026-10-03T02:51:18.481Z"
 ---
 
 # Especificación de API: Flujo de Compra y Checkout Unificado
 
 > [!NOTE]
 > **Resumen Técnico:** Endpoints para inicio de orden, verificación de balance en USDC, cotización de comisiones y confirmación de pago.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -123,3 +123,4 @@ Send `x-flow-id` header to correlate all steps in `purchase_flow_events`.
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/api/endpoints/purchase-flow.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

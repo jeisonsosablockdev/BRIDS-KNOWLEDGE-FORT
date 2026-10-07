@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Metaplex Core"
 source_okf: "knowledge/architecture/nft-spec.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "6b5c9a605dd171be7f71a89ae8fbf7b0760fc61d9523813c08526965c74302f5"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "5b8022cbaaaba6ae0d98b0a14ec6f0717eeab7e5e8192bb403aacc4fd08f4f88"
 tags: [metaplex-core, rwa-nft, candy-machine, freeze-plugin, solana]
-updated_at: "2026-09-12T01:26:18.854Z"
+updated_at: "2026-10-03T02:51:18.312Z"
 ---
 
 # Estándar Metaplex Core y Especificación de NFTs RWA
 
 > [!NOTE]
 > **Resumen Técnico:** Ciclo de vida de tokens de participación inmobiliaria, Core Candy Machine, plugins de Freeze y metadata on-chain.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -29,7 +29,13 @@ updated_at: "2026-09-12T01:26:18.854Z"
 
 ---
 
-Last Updated: 2026-06-07
+Last Updated: 2026-08-21
+
+## BRI-188 Brain Vault Asset Upload Boundary (Knowledge Markdown Media)
+- Image assets uploaded within BlockNote.js (`uploadBrainAssetAction`) are stored exclusively in the private GitHub knowledge repository (`BRIDS-KNOWLEDGE-FORT` at `BRIDS-Brain/assets/`).
+- Markdown media uploads are isolated from the Metaplex Core NFT Candy Machine / DAS pipeline.
+- Assets are restricted to a 5MB size ceiling and strict image MIME whitelisting (`image/png`, `image/jpeg`, `image/gif`, `image/webp`, `image/svg+xml`).
+- They do not create on-chain tokens, NFT mint snapshots, or metadata registrations.
 
 ## Admin Candy Machine Deploy Logging Contract
 
@@ -454,3 +460,4 @@ Last Updated: 2026-04-12 21:07:07 UTC
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde knowledge/architecture/nft-spec.md |
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización automática de cambios desde rama develop |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

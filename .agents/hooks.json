@@ -1,0 +1,21 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content|multi_replace_file_content|create_file|edit_file|invoke_subagent|start_subagent|run_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" ]; then node \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" pre-tool; else node \"./BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" pre-tool; fi"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "if [ -f \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" ]; then node \"../BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" stop-check; else node \"./BRIDS-Engine/scripts/sdd/workflow-gate-hook.ts\" stop-check; fi"
+      }
+    ]
+  }
+}

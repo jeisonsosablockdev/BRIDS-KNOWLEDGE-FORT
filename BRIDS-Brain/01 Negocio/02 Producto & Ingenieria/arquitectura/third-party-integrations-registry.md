@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/third-party-integrations.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "e3aec03d82322cf5a0469224b5ed2a61b37779200c8e5e41404bc73f7ad0585c"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "89d8091a38d8915092ccf21e06443379b4cb756913dda1b37633ea124a2e6b53"
 tags: [integrations, stripe, sphere, mapbox, infrastructure]
-updated_at: "2026-09-12T02:07:49.365Z"
+updated_at: "2026-10-03T02:51:18.305Z"
 ---
 
 # Registro de Integraciones y Servicios de Terceros
 
 > [!NOTE]
 > **Resumen Técnico:** Catálogo de APIs y servicios externos: Stripe Identity, Sphere Ramp, Littio, Mapbox, Supabase, QuickNode y Helius.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -125,8 +125,28 @@ Este documento es el **registro canónico del proyecto BRIDS** para la configura
 
 ---
 
+## 7. Knowledge Fort Vault Sync (GitHub Webhook & Vercel Blob)
+
+* **Propósito**: Sincronización reactiva por eventos de la base de conocimiento `/brain`, extrayendo títulos canónicos y cacheando el manifiesto jerárquico en Vercel Blob.
+* **Documento Canónico**: [`knowledge/features/feature-jaymusicmachine-BRI-188-brain-sync-web-hook-implementation.md`](../features/feature-jaymusicmachine-BRI-188-brain-sync-web-hook-implementation.md)
+* **Endpoints y Webhooks**:
+  * Payload URL: `https://brids.io/api/webhooks/brain-sync` (Producción) / `https://qa.brids.io/api/webhooks/brain-sync` (QA)
+  * Content type: `application/json`
+  * Secret: `GITHUB_WEBHOOK_SECRET` (Verificación HMAC SHA-256 en tiempo constante)
+  * Events: `Pushes`
+* **Variables de Entorno**:
+  * `GITHUB_WEBHOOK_SECRET`: Secreto compartido para validar la cabecera `X-Hub-Signature-256`.
+  * `GITHUB_TOKEN`: Personal Access Token para lecturas iniciales o commits desde el portal.
+  * `BRAIN_VAULT_OWNER`: Dueño del repositorio del vault (`jeisonsosablockdev`).
+  * `BRAIN_VAULT_REPO`: Repositorio del vault (`BRIDS-KNOWLEDGE-FORT`).
+  * `BRAIN_VAULT_BRANCH`: Rama principal del vault (`main`).
+  * `BLOB_READ_WRITE_TOKEN`: Token de Vercel Blob para persistencia de `vault/vault-manifest.json`.
+
+---
+
 ## 📜 Historial de Revisiones
 
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/architecture/third-party-integrations.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

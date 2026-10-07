@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/purchase-tracing.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "a18ccd27395b5723ad8bb8dd28be35dc49181546fd140474a150989e5c969c37"
 tags: [purchase-tracing, usdc, reconciliation, checkout, solana]
-updated_at: "2026-09-12T02:07:49.363Z"
+updated_at: "2026-10-03T02:51:18.298Z"
 ---
 
 # Infraestructura de Trazabilidad y Reconciliación de Compras
 
 > [!NOTE]
 > **Resumen Técnico:** Pipeline de seguimiento end-to-end de órdenes de compra, pagos en USDC, emisión de NFTs y reconciliación off-chain.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -188,3 +188,4 @@ Last Updated: 2026-03-20 19:25:00 UTC
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/architecture/purchase-tracing.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

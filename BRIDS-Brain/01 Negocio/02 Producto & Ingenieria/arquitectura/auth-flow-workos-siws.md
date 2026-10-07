@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Solana Architecture"
 source_okf: "knowledge/architecture/auth-flow.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "3e95a31fd17083b51cea042af94689cc11e026ff48b3d818c344e5affe7fb851"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "f839f56fd36baf13be8e425e7c69eef36d7f36dda43d28532ffeaee31c5282fb"
 tags: [auth, siws, workos, security, session]
-updated_at: "2026-09-12T02:07:49.359Z"
+updated_at: "2026-10-03T02:51:18.282Z"
 ---
 
 # Flujo de Autenticación Híbrida WorkOS y SIWS
 
 > [!NOTE]
 > **Resumen Técnico:** Especificación del modelo de autenticación dual: Web2 social via WorkOS y Web3 nativo via Sign-In with Solana.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -29,7 +29,51 @@ updated_at: "2026-09-12T02:07:49.359Z"
 
 ---
 
-Last Updated: 2026-07-22
+Last Updated: 2026-09-14
+
+## FEATURE-CREATE-ROBOTS-TXT Robots Policy & SEO Crawler Auth Boundary
+- The dynamic robots handler (`app/robots.ts`, `apps/web/src/app/robots.ts`, `@/lib/seo/robots.ts`) is a public Next.js metadata route handler.
+- Explicitly enforces crawler boundaries: blocks search engines and AI indexing agents from accessing private authenticated routes (`/admin`, `/profile`, `/protected`, `/api`, `/checkout`, `/brain`, `/403`).
+- Zero impact or mutations to authentication flows, WorkOS session validation, or SIWS wallet cryptography.
+- No session cookies, tokens, SIWS nonces, or wallet credentials are read, mutated, or inspected.
+
+## FIX-SOCIAL-GRAPH-CARD OpenGraph Social Card & Metadata Auth Boundary
+- The dynamic social graph image generator (`/opengraph-image`, `social-image-template.tsx`) and SEO metadata builders (`createPageMetadata`, `createRootMetadata`) are purely public presentation and SEO directives.
+- Zero impact or mutations to authentication flows, WorkOS session validation, or SIWS wallet cryptography.
+- No session cookies, tokens, SIWS nonces, or wallet credentials are read, mutated, or inspected during card generation or crawler scraping.
+
+## FIX-DARKREADER-LOCK Dark Reader Lock & Root Layout Auth Boundary
+- The root layout `<meta name="darkreader-lock" />` element and `createRootMetadata` configuration are purely client/presentation metadata directives.
+- Zero impact or mutations to authentication flows, WorkOS session validation, or SIWS wallet cryptography.
+- No session cookies, tokens, SIWS nonces, or wallet credentials are read, mutated, or inspected.
+
+## FIX-PWA-ROUTES PWA Service Worker & Favicon Route Auth Boundary
+- The Service Worker endpoint (`/sw.js`) and brand favicon endpoint (`/favicon.svg`) are strictly public presentation route handlers.
+- No session cookies, tokens, SIWS nonces, or wallet credentials are required or inspected.
+- Static file payloads are served directly from `apps/web/public/` with appropriate MIME types and cache headers.
+- Zero impact or mutations to authentication flows, WorkOS session validation, or SIWS cryptography.
+
+## EPIC-015 Squads v4 Treasury Claims & Admin UI Auth Boundary
+- Admin routes (`/api/admin/payout-runs/[id]/reject`, `/api/admin/payout-runs/[id]/veto`, `/api/admin/payout-runs/[id]/circuit-breaker`, `/api/admin/collections/[id]/date-change-request`) require authenticated admin sessions resolved via `getRequestRole(request)`.
+- Investor claim routes require authenticated SIWS wallet session matching the claim recipient wallet.
+- Direct HTTP mutation of project dates is strictly rejected with HTTP 400 (`IMMUTABLE_PROJECT_DATE_FIELD`). Project dates are governed on-chain via Squads multisig and ProjectConfig PDA.
+- Emergency circuit breaker and run rejection are server-gated and require admin role authority.
+
+## FIX-SOCIAL-GRAPH Social Graph Redesign Auth Boundary
+- The social graph image endpoints (`/opengraph-image`, `/twitter-image`) and root metadata (`/layout.tsx`) are strictly public presentation endpoints.
+- No session cookies, JWT tokens, SIWS nonces, or wallet credentials are created, accessed, or required.
+- Dynamic image generation executes statelessly via Edge runtime (`@vercel/og` / Satori) using optional public URL search parameters (`?lang=es|en`).
+- Zero changes to authentication flows, WorkOS integration, or SIWS verification logic.
+
+## BRI-188 BRIDS Brain Knowledge Interface Stealth & SIWS Auth Boundary
+- The `/brain` and `/brain/[[...slug]]` routes introduce an ultra-private, stealth Markdown knowledge base interface.
+- **Perimeter Defense**: Every entry point under `/brain` is protected server-side by `assertAdminSession()`.
+- **SIWS Authentication**: The route reads the cryptographic SIWS session cookie via `getAuthenticatedPublicKeyFromCookies()`. Unauthenticated requests immediately fail-closed and redirect to `/403`.
+- **RBAC Admin Gating**: The public key is verified against the configured `ADMIN_WALLETS` whitelist via `getRoleForWallet(publicKey)`. Wallets lacking the `admin` role are rejected with `UnauthorizedBrainAccessException("INSUFFICIENT_ROLE")`.
+- **Stealth Isolation**: The `/brain` perimeter emits HTTP headers `X-Robots-Tag: noindex, nofollow, noarchive` and `Referrer-Policy: no-referrer`. `/robots.txt` explicitly specifies `Disallow: /brain`. Zero navigation links or indicators exist across public Navbar, Footer, Hero, or sitemaps.
+- **Server Actions & GitHub I/O**: Document fetch (`fetchBrainDocumentAction`), tree resolution (`fetchBrainTreeAction`), document commit (`saveBrainDocumentAction`), and image upload (`uploadBrainAssetAction`) declare `import "server-only";` and execute `await assertAdminSession()` before parsing input or executing GitHub REST calls.
+- **Event-Driven Webhook Boundary (`/api/webhooks/brain-sync`)**: A dedicated machine-to-machine route that does not accept browser session cookies. It enforces cryptographic payload validation using HMAC SHA-256 (`X-Hub-Signature-256`) against `process.env.GITHUB_WEBHOOK_SECRET` with constant-time equality (`crypto.timingSafeEqual`). Unauthenticated requests fail-closed with HTTP 401.
+- **Vercel Blob Security Model**: Pre-compiled `vault-manifest.json` in Vercel Blob is accessed through server actions protected by `assertAdminSession()`, preventing direct unauthenticated public disclosure of the private vault hierarchy.
 
 ## BRI-182 4-Layer Architecture Alignment
 - Re-located auth state stores to Layer 2 (`/lib/state/auth-store.ts`, `/lib/state/auth-state.ts`) and updated all API routes in `/app/api/auth/` to import from canonical 4-layer paths.
@@ -931,3 +975,4 @@ Last Updated: 2026-04-14 14:20:00 UTC
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/architecture/auth-flow.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

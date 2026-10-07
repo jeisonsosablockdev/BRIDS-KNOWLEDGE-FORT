@@ -1,15 +1,16 @@
 # Seguridad, Modelos de Amenazas y Cumplimiento
 
-Modelos de amenazas de minteo y marketplace, guías de auditoría de smart contracts, políticas de manejo de datos privados y blindaje PCI.
+Modelos de amenazas de minteo y marketplace, guías de auditoría de smart contracts, políticas de calidad, manejo de datos privados y blindaje PCI.
 
 > [!NOTE]
-> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `6a40b30`).
+> **Sub-Índice de Dominio:** Sincronizado automáticamente desde el repositorio técnico oficial (`jeisonsosablockdev/brids`, commit: `b818558`).
 
 ---
 
 ## 📌 Documentos Clave de este Dominio
 
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/threat-model-and-quality-policy.md|Modelo de Amenazas y Política de Seguridad Técnica]]
+- [[01 Negocio/02 Producto & Ingenieria/seguridad/security-and-quality-governance-policy.md|Política Institucional de Seguridad y Calidad de Software]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/smart-contract-security-guidelines.md|Guía y Políticas de Seguridad para Smart Contracts]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/data-handling-and-privacy-compliance.md|Políticas de Manejo de Datos y Privacidad (KYC/AML)]]
 - [[01 Negocio/02 Producto & Ingenieria/seguridad/pci-compliance-and-fiat-ramps.md|Cumplimiento PCI y Seguridad de Pasarelas Fiat]]

@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Metaplex Core"
 source_okf: "knowledge/architecture/state-machine.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
-source_hash: "2aa18c5b86781f015fc87bd97c1c93cad18c9fd6035054693f90823ad887c5ac"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
+source_hash: "7b3a854fc438bf4bcec930cb4f043f338f392e94d537dbe643b3d41b55f0400b"
 tags: [state-machine, freeze-plugin, recovery-protocol, lost-key, compliance]
-updated_at: "2026-09-12T01:26:18.855Z"
+updated_at: "2026-10-03T02:51:18.315Z"
 ---
 
 # Máquina de Estados de Tokens y Protocolo de Recuperación
 
 > [!NOTE]
 > **Resumen Técnico:** Definición formal de estados on-chain/off-chain, rotación de autoridad, lock-ups por staking y protocolo de freeze/recovery.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -89,12 +89,16 @@ updated_at: "2026-09-12T01:26:18.855Z"
 | `appdata_adapter_ready` | write initial payload | `appdata_v1_written` | `AppData v1` schema validation |
 | `appdata_v1_written` | write updated payload | `appdata_v1_updated` | Same schema + authority constraints |
 
-### Illegal Transitions
-- [x] `appdata_unset -> appdata_v1_written` without adapter attach.
-- [x] Any state -> update with invalid `yield_mode`.
-- [x] Any state -> write with unsupported payload keys.
+## EPIC-015 STORY-015-01 Addendum (PayoutRun Lifecycle)
+### PayoutRun States
+| State | Description | Entry Condition | Allowed Next Actions |
+| --- | --- | --- | --- |
+| `Draft` (`0`) | Run initialized on-chain, escrow pending funding | `initialize_run` | `seal_run`, `cancel_run` |
+| `Active` (`1`) | Escrow exact funded, claims open for settlement | `seal_run` (escrow balance == total) | `settle_claim`, `pause_run`, `cancel_run` |
+| `Paused` (`2`) | Emergency circuit breaker active | `pause_run` (authorized key) | `resume_run`, `cancel_run` |
+| `Cancelled` (`3`) | Run aborted, remaining escrow refundable | `cancel_run` | Terminal state |
 
-Last Updated: 2026-04-01 08:20:33 UTC
+Last Updated: 2026-08-21 12:00:00 UTC
 
 ---
 
@@ -104,3 +108,4 @@ Last Updated: 2026-04-01 08:20:33 UTC
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde knowledge/architecture/state-machine.md |
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización automática de cambios desde rama develop |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Database Architecture"
 source_okf: "knowledge/database/models/stake-action.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "0488c71d48b8cf1a5f39c167991e367e0ef77c5d6032bf415e164adbd89fe0f7"
 tags: [database, staking, yield-distribution, postgres]
-updated_at: "2026-09-12T02:07:49.376Z"
+updated_at: "2026-10-03T02:51:18.380Z"
 ---
 
 # Modelo de Datos: Registro de Acciones de Staking y Rentas
 
 > [!NOTE]
 > **Resumen Técnico:** Esquema de transacciones de staking, bloqueo de NFTs, cálculo de periodos y reclamos de rendimientos acumulados.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -122,3 +122,4 @@ Asset must:
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/database/models/stake-action.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

@@ -97,10 +97,6 @@ Toda tarea ejecutada en este sistema sigue este flujo:
   bash BRIDS-Engine/scripts/task-manager.sh close <session-id> "Notas de cierre"
   ```
 
-* **Verificar Local REST API:**
-  ```bash
-  bash BRIDS-Engine/scripts/check-obsidian-api.sh
-  ```
 * **Sincronizar Contexto de Marca:**
   ```bash
   bash BRIDS-Engine/scripts/sync-brand-context.sh
