@@ -74,6 +74,7 @@ export const VALID_VAULT_PREFIXES = [
 ];
 
 const vaultGateway = new VaultGateway(VAULT_DIR, TEMPLATES_DIR);
+const taskOrchestrator = new TaskOrchestrator(vaultGateway);
 
 export {
   BANNED_PATTERNS,
@@ -87,30 +88,19 @@ export {
   evaluateDeliverable,
   evaluateWithClefSync,
   computeClefCacheKey,
+  taskOrchestrator,
 };
 
 export const sanitizeSlug = (str = '') => vaultGateway.sanitizeSlug(str);
 export const getSpecPaths = (slug: string) => vaultGateway.getSpecPaths(slug);
 export const loadSpec = (slug: string) => vaultGateway.loadSpec(slug);
-export const saveSpec = (paths: { slug: string }, specData: Record<string, any>) => vaultGateway.saveSpec(paths.slug, specData);
+export const saveSpec = (paths: { slug: string }, specData: Record<string, any>) =>
+  vaultGateway.saveSpec(paths.slug, specData as any);
 export const auditText = (text: string, specData: Record<string, any> = {}) => auditDeliverableText(text, specData);
-export const autoRemediateDraft = (text: string, _report: Record<string, any> = '') => evalAutoRemediateDraft(text);
-
-function buildStateMachineContext(data: Record<string, any>) {
-  return {
-    slug: data.slug,
-    title: data.title,
-    state: (data.status || 'initialized') as any,
-    currentCycle: (data.evaluation && data.evaluation.current_cycle) || 0,
-    maxCycles: (data.evaluation && data.evaluation.max_cycles) || MAX_OPTIMIZATION_CYCLES,
-    qualityThreshold: (data.evaluation && data.evaluation.target_score) || QUALITY_THRESHOLD,
-    lastScore: (data.evaluation && data.evaluation.final_score) || 0,
-    history: [],
-  };
-}
+export const autoRemediateDraft = (text: string, _report: Record<string, any> = {}) => evalAutoRemediateDraft(text);
 
 // -------------------------------------------------------------
-// CORE SDD COMMANDS (WITH DOUBLE HITL GUARDRAILS)
+// CORE SDD COMMANDS (DELEGATED TO TaskOrchestrator — 3-ROLE ARCHITECTURE)
 // -------------------------------------------------------------
 
 export function initSpec(
@@ -152,104 +142,28 @@ export function initSpec(
 
   if (fs.existsSync(paths.specJsonPath) && fs.existsSync(paths.specMdPath)) {
     console.log(`ℹ️ El spec "${cleanSlug}" ya existe en ${paths.specJsonPath}.`);
-    const currentData = JSON.parse(fs.readFileSync(paths.specJsonPath, 'utf8'));
+    const currentData = loadSpec(cleanSlug).data;
     console.log(`   Estado actual: ${currentData.status}`);
     return paths;
   }
 
-  ensureDir(SPECS_DIR);
-  ensureDir(paths.workDir);
-
-  const now = new Date().toISOString();
-  const dateStr = now.split('T')[0]!;
-  const targetFileName = `${cleanSlug}.md`;
-  const canonicalVaultFile = path.join(targetFolder, targetFileName);
-
-  let templateContent = '';
-  if (fs.existsSync(SPEC_TEMPLATE_PATH)) {
-    templateContent = fs.readFileSync(SPEC_TEMPLATE_PATH, 'utf8');
-  }
-
-  const primaryAgent = subagents[0] || 'founder-ghostwriter';
-  const secondaryAgent = subagents[1] || 'business-consultant';
-
-  const specMd = templateContent
-    .replace(/\{\{SLUG\}\}/g, cleanSlug)
-    .replace(/\{\{TITLE\}\}/g, title)
-    .replace(/\{\{CATEGORY_FOLDER\}\}/g, normalizedTarget)
-    .replace(/\{\{FILENAME\}\}/g, cleanSlug)
-    .replace(/\{\{PRIMARY_AGENT\}\}/g, primaryAgent)
-    .replace(/\{\{SECONDARY_AGENT\}\}/g, secondaryAgent)
-    .replace(/\{\{DATE\}\}/g, dateStr)
-    .replace(/\{\{EXECUTIVE_SUMMARY\}\}/g, goal || `Especificación formal para ${title}`)
-    .replace(/\{\{BUSINESS_GOAL\}\}/g, goal || `Consolidar ${title} con rigurosidad técnica y tracción medible.`)
-    .replace(/\{\{TARGET_ICP\}\}/g, icp || 'Real Estate Sponsors, Institutional LPs, YC Partners')
-    .replace(/\{\{PRIMARY_CTA\}\}/g, 'Agendar sesión técnica de estructuración / Revisar Data Room')
-    .replace(/\{\{PRIMARY_KPI\}\}/g, 'Tasa de respuesta calificada >= 20%')
-    .replace(/\{\{REFERENCE_DOC_1\}\}/g, 'Whitepaper de Tokenización Metaplex Core')
-    .replace(/\{\{REFERENCE_DOC_2\}\}/g, 'Estructura Legal Delaware C-Corp vs SPV LLC')
-    .replace(/\{\{WORD_COUNT_RANGE\}\}/g, '400 - 800');
-
-  fs.writeFileSync(paths.specMdPath, specMd, 'utf8');
-
-  const initialCtx = createInitialContext(cleanSlug, title);
-  const reviewTransition = startSpecReview(initialCtx);
-
-  const specJsonData = {
-    spec_id: paths.specId,
+  taskOrchestrator.initSpec({
     slug: cleanSlug,
     title,
-    target_folder: normalizedTarget,
-    target_vault_folder: normalizedTarget,
-    target_file: canonicalVaultFile,
+    targetFolder: normalizedTarget,
     subagents,
-    subagents_involved: subagents,
-    status: reviewTransition.context.state,
-    created_at: now,
-    updated_at: now,
-    hitl_checkpoints: {
-      hitl_1_spec_approval: {
-        status: 'pending',
-        approved_at: null,
-        user_feedback: [] as Array<{ timestamp: string; feedback: string }>,
-      },
-      hitl_2_deliverable_approval: {
-        status: 'pending',
-        approved_at: null,
-        user_feedback: [] as Array<{ timestamp: string; feedback: string }>,
-      },
-    },
-    intent: {
-      business_goal: goal || `Consolidar ${title}`,
-      target_icp: icp || 'Real Estate Sponsors & LPs',
-      constraints: ['Cero clichés de IA', 'Solana & Metaplex grounding', 'Estilo fundador'],
-    },
-    evaluation: {
-      target_score: QUALITY_THRESHOLD,
-      scale_max: 9.0,
-      max_cycles: MAX_OPTIMIZATION_CYCLES,
-      current_cycle: 0,
-      final_score: null as number | null,
-      criticism_history: [] as Array<Record<string, any>>,
-    },
-    execution_steps: [
-      { id: 'STEP-01', name: 'HITL-1 Spec Review & Approval', status: 'in_progress', depends_on: [] },
-      { id: 'STEP-02', name: 'Initial Draft Generation', status: 'pending', depends_on: ['STEP-01'] },
-      { id: 'STEP-03', name: 'Autonomous Evaluator-Optimizer Loop', status: 'pending', depends_on: ['STEP-02'] },
-      { id: 'STEP-04', name: 'HITL-2 Deliverable Review & Approval', status: 'pending', depends_on: ['STEP-03'] },
-      { id: 'STEP-05', name: 'Vault Integration', status: 'pending', depends_on: ['STEP-04'] },
-    ],
-  };
+    icp: icp || 'Real Estate Sponsors & LPs',
+    goal: goal || `Consolidar ${title}`,
+  });
 
-  saveSpec(paths, specJsonData);
-
+  const canonicalVaultFile = path.join(normalizedTarget, `${cleanSlug}.md`);
   console.log(`✅ Spec inicializado con éxito: ${paths.specId}`);
   console.log(`   📄 Documento Spec: ${paths.specMdPath}`);
   console.log(`   ⚙️ Estado JSON:   ${paths.specJsonPath}`);
   console.log(`   🎯 Destino Final:  BRIDS-Brain/${canonicalVaultFile}`);
   console.log(`   🤖 Subagentes:     ${subagents.join(', ')}`);
   console.log(`\n🛑 GUARDRAIL HITL-1 ACTIVO:`);
-  console.log(`   El spec está en espera de tu revisión humana. No se redactará nada hasta su aprobación.`);
+  console.log(`   El spec y su ValidationContract están en espera de tu revisión humana.`);
   console.log(`   👉 Para aprobar:  node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts approve-spec ${cleanSlug}`);
   console.log(`   👉 Para ajustar:  node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts refine-spec ${cleanSlug} "<observaciones>"`);
   return paths;
@@ -260,34 +174,8 @@ export function refineSpec(slug?: string, userFeedback?: string) {
     console.error('❌ Uso: sdd-orchestrator refine-spec <slug> "<observaciones_del_usuario>"');
     process.exit(1);
   }
-
-  const { data, paths } = loadSpec(slug);
-  if (data.status === 'completed') {
-    console.log(`ℹ️ El spec "${slug}" ya fue completado previamente.`);
-    return data;
-  }
-
-  const now = new Date().toISOString();
-  data.hitl_checkpoints.hitl_1_spec_approval.user_feedback.push({
-    timestamp: now,
-    feedback: userFeedback,
-  });
-  data.hitl_checkpoints.hitl_1_spec_approval.status = 'refining';
-  data.status = 'spec_review';
-
-  if (fs.existsSync(paths.specMdPath)) {
-    let md = fs.readFileSync(paths.specMdPath, 'utf8');
-    const adjustmentBlock = `\n\n### 📝 Ajustes Solicitados por el Usuario (${now.split('T')[0]})\n- ${userFeedback}\n`;
-    if (md.includes('## 5. Desglose Estructural (Outline)')) {
-      md = md.replace('## 5. Desglose Estructural (Outline)', `${adjustmentBlock}\n## 5. Desglose Estructural (Outline)`);
-    } else {
-      md += adjustmentBlock;
-    }
-    fs.writeFileSync(paths.specMdPath, md, 'utf8');
-  }
-
-  saveSpec(paths, data);
-  console.log(`✅ Especificación "${data.spec_id}" actualizada con el feedback del usuario.`);
+  const data = taskOrchestrator.refineSpec(slug, userFeedback);
+  console.log(`✅ Especificación "${data.spec_id || data.id}" actualizada con el feedback del usuario.`);
   return data;
 }
 
@@ -296,97 +184,64 @@ export function approveSpec(slug?: string) {
     console.error('❌ Uso: sdd-orchestrator approve-spec <slug>');
     process.exit(1);
   }
-  const { data, paths } = loadSpec(slug);
+  const { data } = loadSpec(slug);
 
   if (data.status === 'completed' || data.status === 'deliverable_review') {
     console.log(`ℹ️ La especificación "${slug}" ya fue aprobada previamente.`);
     return data;
   }
 
-  if (data.hitl_checkpoints.hitl_1_spec_approval.status === 'approved' && data.status === 'spec_approved') {
+  if (data.hitl_checkpoints?.hitl_1_spec_approval?.status === 'approved' && data.status === 'spec_approved') {
     console.log(`ℹ️ La especificación "${slug}" ya se encuentra aprobada formalmente.`);
     return data;
   }
 
-  const smTransition = smApproveSpec(buildStateMachineContext(data));
-  if (!smTransition.success) {
-    throw new Error(smTransition.error);
+  const res = taskOrchestrator.approveSpec(slug);
+  if (!res.success) {
+    throw new Error(res.error);
   }
 
-  const now = new Date().toISOString();
-  data.hitl_checkpoints.hitl_1_spec_approval.status = 'approved';
-  data.hitl_checkpoints.hitl_1_spec_approval.approved_at = now;
-  data.status = smTransition.context.state;
+  const updated = loadSpec(slug).data;
+  console.log(`🎉 GUARDRAIL HITL-1 SUPERADO: Especificación "${updated.spec_id || updated.id}" aprobada formalmente.`);
+  console.log('   La ejecución de Workers en serie (contexto limpio) y el Validador Adversarial quedan habilitados.');
+  return updated;
+}
 
-  data.execution_steps[0].status = 'completed';
-  data.execution_steps[1].status = 'in_progress';
-  saveSpec(paths, data);
-
-  if (fs.existsSync(paths.specMdPath)) {
-    let md = fs.readFileSync(paths.specMdPath, 'utf8');
-    md = md.replace(/^status:\s*[a-z_]+/m, 'status: spec_approved');
-    md = md.replace(/- \[ \] \*\*STEP-01/, '- [x] **STEP-01');
-    fs.writeFileSync(paths.specMdPath, md, 'utf8');
-    ensureDir(paths.workDir);
-    fs.writeFileSync(paths.approvedSpecPath, md, 'utf8');
+export function recordWorkerHandoff(
+  slug?: string,
+  workerId?: string,
+  completedStr?: string,
+  pendingStr?: string,
+  decisionsStr?: string
+) {
+  if (!slug || !workerId || !completedStr) {
+    console.error('❌ Uso: sdd-orchestrator handoff <slug> <worker-id> "<completado>" "[pendiente]" "[decisiones]"');
+    process.exit(1);
   }
+  const splitList = (raw?: string) =>
+    (raw || '')
+      .split(';')
+      .map((s) => s.trim())
+      .filter(Boolean);
 
-  console.log(`🎉 GUARDRAIL HITL-1 SUPERADO: Especificación "${data.spec_id}" aprobada formalmente.`);
-  console.log('   La fase de redacción y el bucle autónomo Evaluador-Optimizador quedan habilitados.');
-  return data;
+  const handoff = taskOrchestrator.recordWorkerHandoff(slug, {
+    worker_id: workerId,
+    completed_items: splitList(completedStr),
+    pending_items: splitList(pendingStr),
+    decisions_made: splitList(decisionsStr),
+  });
+
+  console.log(`🤝 HANDOFF ESTRUCTURADO REGISTRADO (Paso #${handoff.step_index} - Worker: ${handoff.worker_id})`);
+  console.log(`   ✅ Completados: ${handoff.completed_items.length} | ⏳ Pendientes: ${handoff.pending_items.length}`);
+  return handoff;
 }
 
 export function evaluateDraft(slug: string, draftContent: string, cycleOverride: number | null = null) {
-  const { data, paths } = loadSpec(slug);
+  const result = taskOrchestrator.auditAndEvaluateDraft(slug, draftContent, cycleOverride);
+  const { report, data, passed, frozen } = result;
+  const maxCycles = data.evaluation?.max_cycles || MAX_OPTIMIZATION_CYCLES;
 
-  const isSpecApproved =
-    data.hitl_checkpoints.hitl_1_spec_approval && data.hitl_checkpoints.hitl_1_spec_approval.status === 'approved';
-  if (!isSpecApproved && data.status === 'spec_review') {
-    const blocked = smEvaluateCycle(buildStateMachineContext(data), 0);
-    throw new Error(
-      `❌ HITL-1 BLOQUEADO: ${blocked.error || 'No se puede redactar ni evaluar el entregable sin aprobación previa del Spec por el usuario.'}`
-    );
-  }
-
-  const cycle = cycleOverride !== null ? cycleOverride : data.evaluation.current_cycle + 1;
-  const preCycleCtx = {
-    ...buildStateMachineContext(data),
-    state: 'task_loop' as const,
-    currentCycle: Math.max(0, cycle - 1),
-  };
-
-  data.status = 'draft_optimizing';
-  data.evaluation.current_cycle = cycle;
-
-  ensureDir(paths.workDir);
-  const draftFile = path.join(paths.workDir, `draft_cycle_${cycle}.md`);
-  fs.writeFileSync(draftFile, draftContent, 'utf8');
-
-  const report = auditText(draftContent, data);
-  report.spec_id = data.spec_id;
-  report.cycle = cycle;
-  report.target_file = data.target_file;
-  report.timestamp = new Date().toISOString();
-
-  const smResult = smEvaluateCycle(preCycleCtx, report.total_score);
-
-  const reportFile = path.join(paths.workDir, `criticism_cycle_${cycle}.json`);
-  fs.writeFileSync(reportFile, JSON.stringify(report, null, 2), 'utf8');
-
-  data.evaluation.criticism_history.push({
-    cycle,
-    total_score: report.total_score,
-    passed: report.passed,
-    timestamp: report.timestamp,
-    banned_phrases_count: report.banned_phrases_detected.length,
-    clef_engine: report.clef_decision.engine,
-    clef_cache_key: report.clef_decision.cache_key,
-    report_file: path.relative(ROOT_DIR, reportFile),
-  });
-
-  data.evaluation.final_score = report.total_score;
-
-  console.log(`\n🔍 AUDITORÍA DE CICLO ${cycle}/${data.evaluation.max_cycles}: ${data.spec_id}`);
+  console.log(`\n🔍 AUDITORÍA ADVERSARIAL DE CICLO ${report.cycle}/${maxCycles}: ${data.spec_id || data.id}`);
   console.log(`   Motor Decisión:  ${report.clef_decision.engine} (SHA256: ${report.clef_decision.cache_key.slice(0, 12)})`);
   console.log(`   Puntaje Total:   ${report.total_score} / ${report.scale_max} (Umbral: ${report.passing_threshold})`);
   console.log(`   Objetivo & ICP:  ${report.scoring_dimensions['1_goal_and_icp'].score} / 2.5 (Clef P=${report.scoring_dimensions['1_goal_and_icp'].clef_probability})`);
@@ -394,48 +249,28 @@ export function evaluateDraft(slug: string, draftContent: string, cycleOverride:
   console.log(`   Voz Fundadora:   ${report.scoring_dimensions['3_founder_voice'].score} / 2.0 (Clef P=${report.scoring_dimensions['3_founder_voice'].clef_probability})`);
   console.log(`   Originalidad:    ${report.scoring_dimensions['4_lexical_originality'].score} / 2.0 (Clef P=${report.scoring_dimensions['4_lexical_originality'].clef_probability})`);
 
-  if (report.passed) {
-    console.log(`   🎉 ¡APROBADO POR EL REVISOR TÉCNICO! Nota >= ${report.passing_threshold}`);
-    fs.writeFileSync(paths.approvedDraftPath, draftContent, 'utf8');
-
-    data.status = smResult.context.state;
-    data.execution_steps[1].status = 'completed';
-    data.execution_steps[2].status = 'completed';
-    data.execution_steps[3].status = 'in_progress';
-
-    if (fs.existsSync(paths.specMdPath)) {
-      let md = fs.readFileSync(paths.specMdPath, 'utf8');
-      md = md.replace(/^status:\s*[a-z_]+/m, 'status: deliverable_review');
-      md = md.replace(/final_score:\s*.*/m, `final_score: ${report.total_score}`);
-      md = md.replace(/- \[ \] \*\*STEP-02/, '- [x] **STEP-02');
-      md = md.replace(/- \[ \] \*\*STEP-03/, '- [x] **STEP-03');
-      fs.writeFileSync(paths.specMdPath, md, 'utf8');
-    }
-
-    saveSpec(paths, data);
+  if (passed) {
+    console.log(`   🎉 ¡APROBADO POR EL VALIDADOR ADVERSARIAL! Nota >= ${report.passing_threshold}`);
     console.log(`\n🛑 GUARDRAIL HITL-2 ACTIVADO:`);
     console.log(`   El texto superó la auditoría autónoma (${report.total_score}/9.0) y espera tu revisión humana.`);
     console.log(`   El archivo NO ha sido promovido al vault de producción aún.`);
     return { passed: true, ready_for_hitl_2: true, report, data };
-  } else {
-    console.log(`   ⚠️ NO APROBADO POR EL REVISOR: Calificación insuficiente (${report.total_score} < ${report.passing_threshold})`);
-    if (report.banned_phrases_detected.length > 0) {
-      console.log(`   🚫 Clichés detectados: ${report.banned_phrases_detected.map((b) => `"${b.phrase}" (${b.count}x)`).join(', ')}`);
-    }
-    for (const dir of report.remediation_directives) {
-      console.log(`      • ${dir}`);
-    }
-
-    if (smResult.context.state === 'frozen_for_arbitration' || cycle >= data.evaluation.max_cycles) {
-      console.log(`\n🛑 LÍMITE DE SEGURIDAD ALCANZADO (5 Ciclos).`);
-      data.status = 'frozen_for_arbitration';
-      saveSpec(paths, data);
-      return { passed: false, frozen: true, report, data };
-    } else {
-      saveSpec(paths, data);
-      return { passed: false, frozen: false, report, data };
-    }
   }
+
+  console.log(`   ⚠️ NO APROBADO POR EL VALIDADOR: Calificación insuficiente (${report.total_score} < ${report.passing_threshold})`);
+  if (report.banned_phrases_detected.length > 0) {
+    console.log(`   🚫 Clichés detectados: ${report.banned_phrases_detected.map((b) => `"${b.phrase}" (${b.count}x)`).join(', ')}`);
+  }
+  for (const dir of report.remediation_directives) {
+    console.log(`      • ${dir}`);
+  }
+
+  if (frozen) {
+    console.log(`\n🛑 LÍMITE DE SEGURIDAD ALCANZADO (${maxCycles} Ciclos).`);
+    return { passed: false, frozen: true, report, data };
+  }
+
+  return { passed: false, frozen: false, report, data };
 }
 
 export function reviewDeliverable(slug?: string) {
@@ -443,20 +278,12 @@ export function reviewDeliverable(slug?: string) {
     console.error('❌ Uso: sdd-orchestrator review-deliverable <slug>');
     process.exit(1);
   }
-  const { data, paths } = loadSpec(slug);
-  let draftToReview = '';
-
-  if (fs.existsSync(paths.approvedDraftPath)) {
-    draftToReview = fs.readFileSync(paths.approvedDraftPath, 'utf8');
-  } else {
-    const draftCycleFile = path.join(paths.workDir, `draft_cycle_${data.evaluation.current_cycle}.md`);
-    if (fs.existsSync(draftCycleFile)) {
-      draftToReview = fs.readFileSync(draftCycleFile, 'utf8');
-    }
-  }
+  const { data } = loadSpec(slug);
+  const currentCycle = data.evaluation?.current_cycle ?? data.iteration ?? 1;
+  const draftToReview = vaultGateway.loadLatestDraft(slug, currentCycle) || '';
 
   console.log('\n' + '═'.repeat(80));
-  console.log(`📄 REVISIÓN DE ENTREGABLE FINAL (HITL-2): ${data.spec_id} - ${data.title}`);
+  console.log(`📄 REVISIÓN DE ENTREGABLE FINAL (HITL-2): ${data.spec_id || data.id} - ${data.title}`);
   console.log('═'.repeat(80));
   console.log(draftToReview.trim());
   console.log('═'.repeat(80));
@@ -467,37 +294,11 @@ export function refineDeliverable(slug?: string, userFeedback?: string) {
     console.error('❌ Uso: sdd-orchestrator refine-deliverable <slug> "<observaciones_del_usuario>"');
     process.exit(1);
   }
-
-  const { data, paths } = loadSpec(slug);
-
-  let baseDraft = '';
-  if (fs.existsSync(paths.approvedDraftPath)) {
-    baseDraft = fs.readFileSync(paths.approvedDraftPath, 'utf8');
-  } else {
-    const draftCycleFile = path.join(paths.workDir, `draft_cycle_${data.evaluation.current_cycle}.md`);
-    if (fs.existsSync(draftCycleFile)) {
-      baseDraft = fs.readFileSync(draftCycleFile, 'utf8');
-    } else {
-      throw new Error(`No hay borrador previo para refinar en ${slug}`);
-    }
-  }
-
-  const now = new Date().toISOString();
-  data.hitl_checkpoints.hitl_2_deliverable_approval.user_feedback.push({
-    timestamp: now,
-    feedback: userFeedback,
-  });
-  data.status = 'deliverable_refining';
-  saveSpec(paths, data);
-
-  let refinedDraft = `${baseDraft}\n\n### Actualización por Revisión de Feedback (${now.split('T')[0]})\n${userFeedback}`;
-  refinedDraft = autoRemediateDraft(refinedDraft, { banned_phrases_detected: [] });
-
-  return evaluateDraft(slug, refinedDraft, data.evaluation.current_cycle + 1);
+  return taskOrchestrator.refineDeliverable(slug, userFeedback);
 }
 
 export function formatFinalVaultNote(specData: Record<string, any>, rawDraft: string, report: Record<string, any>): string {
-  return vaultGateway.formatFinalVaultNote(specData, rawDraft, report);
+  return vaultGateway.formatFinalVaultNote(specData, rawDraft, report as any);
 }
 
 export function approveDeliverable(slug?: string) {
@@ -512,50 +313,21 @@ export function approveDeliverable(slug?: string) {
     return data;
   }
 
-  if (!fs.existsSync(paths.approvedDraftPath) && (data.evaluation.final_score === null || data.evaluation.final_score < QUALITY_THRESHOLD)) {
+  const finalScore = data.evaluation?.final_score ?? null;
+  if (!fs.existsSync(paths.approvedDraftPath) && (finalScore === null || finalScore < QUALITY_THRESHOLD)) {
     throw new Error(
       `❌ No se puede integrar el entregable: no cuenta con una versión que supere el umbral de calidad >= ${QUALITY_THRESHOLD}.`
     );
   }
 
-  const smContext = {
-    ...buildStateMachineContext(data),
-    state: 'deliverable_review' as const,
-  };
-  const smTransition = smApproveDeliverable(smContext);
-  if (!smTransition.success) {
-    throw new Error(smTransition.error);
+  const res = taskOrchestrator.approveDeliverable(slug, undefined, true);
+  if (!res.success) {
+    throw new Error(res.error);
   }
 
-  const draftContent = fs.readFileSync(paths.approvedDraftPath, 'utf8');
-  const now = new Date().toISOString();
-
-  data.hitl_checkpoints.hitl_2_deliverable_approval.status = 'approved';
-  data.hitl_checkpoints.hitl_2_deliverable_approval.approved_at = now;
-  data.status = smTransition.context.state;
-
-  data.execution_steps[3].status = 'completed';
-  data.execution_steps[4].status = 'completed';
-
-  const finalReport = {
-    total_score: data.evaluation.final_score,
-    passing_threshold: data.evaluation.target_score,
-  };
-  const finalNoteContent = formatFinalVaultNote(data, draftContent, finalReport);
-  vaultGateway.commitDeliverable(slug, finalNoteContent, data.target_folder);
-
-  if (fs.existsSync(paths.specMdPath)) {
-    let md = fs.readFileSync(paths.specMdPath, 'utf8');
-    md = md.replace(/^status:\s*[a-z_]+/m, 'status: completed');
-    md = md.replace(/- \[ \] \*\*STEP-04/, '- [x] **STEP-04');
-    md = md.replace(/- \[ \] \*\*STEP-05/, '- [x] **STEP-05');
-    fs.writeFileSync(paths.specMdPath, md, 'utf8');
-  }
-
-  saveSpec(paths, data);
   console.log(`\n🎉 GUARDRAIL HITL-2 SUPERADO: Entregable aprobado formalmente por el usuario.`);
-  console.log(`🚀 Promovido e integrado con éxito a: BRIDS-Brain/${data.target_file}`);
-  return data;
+  console.log(`🚀 Promovido e integrado con éxito a: BRIDS-Brain/${res.data?.target_file || data.target_file}`);
+  return res.data || data;
 }
 
 export function previewSpec(slug?: string) {
@@ -565,11 +337,14 @@ export function previewSpec(slug?: string) {
   }
   const { data } = loadSpec(slug);
   console.log('\n' + '═'.repeat(75));
-  console.log(`📋 ESPECIFICACIÓN: ${data.spec_id} - ${data.title}`);
+  console.log(`📋 ESPECIFICACIÓN: ${data.spec_id || data.id} - ${data.title}`);
   console.log('═'.repeat(75));
-  console.log(`Estado Global:        ${data.status.toUpperCase()}`);
-  console.log(`Destino en Vault:     BRIDS-Brain/${data.target_file}`);
-  console.log(`Subagentes Squad:     ${data.subagents_involved.join(', ')}`);
+  console.log(`Estado Global:        ${String(data.status).toUpperCase()}`);
+  console.log(`Destino en Vault:     BRIDS-Brain/${data.target_file || data.target_folder}`);
+  console.log(`Subagentes Squad:     ${(data.subagents_involved || data.subagents || []).join(', ')}`);
+  if (data.validation_contract) {
+    console.log(`Contrato Validación:  ${data.validation_contract.contract_id} (Umbral >= ${data.validation_contract.quality_threshold})`);
+  }
   console.log('═'.repeat(75) + '\n');
 }
 
@@ -869,6 +644,9 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
     case 'refine-spec':
       refineSpec(args[1], args[2]);
       break;
+    case 'handoff':
+      recordWorkerHandoff(args[1], args[2], args[3], args[4], args[5]);
+      break;
     case 'evaluate': {
       const slug = args[1];
       const filePath = args[2];
@@ -926,13 +704,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
       console.log(`
 Spec-Driven Development (SDD) & Multi-Agent Session Engine - BRIDS.io (TypeScript)
 
-Atajo Rápido (task-init.sh):
-  ./task-init.sh <slug> [objetivo] [icp] [target-folder]
-  ./task-init.sh <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]"
-
-Comandos SDD (5 Pasos + Doble Guardrail HITL):
+Comandos SDD (Arquitectura de 3 Roles + Doble Guardrail HITL):
   init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]"
   preview <slug> | refine-spec <slug> "<obs>" | approve-spec <slug>
+  handoff <slug> <worker-id> "<completado>" "[pendiente]" "[decisiones]"
   evaluate <slug> <draft-file> | loop-task <slug> <draft-file>
   review-deliverable <slug> | refine-deliverable <slug> "<obs>" | approve-deliverable <slug>
   list

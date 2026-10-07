@@ -7,6 +7,13 @@ tools:
   subagents: false
   mcp: true
 
+architecture:
+  role_type: "worker"
+  execution_mode: "serial_write"
+  context_isolation: "fresh_context"
+  model_tier: "inherit"
+  requires_structured_handoff: true
+
 skills:
   - mas-sales-enablement
   - mas-cold-email

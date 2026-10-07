@@ -127,4 +127,92 @@ describe('TaskOrchestrator End-to-End Coordination (@spec SPEC-ARCH-002)', () =>
     assert.strictEqual(loopRes.finalStatus, 'deliverable_review');
   });
 
+  it('@spec REQ-003-3ROLE should enforce ValidationContract, Serial Worker StructuredHandoffs, and AdversarialValidator QA', () => {
+    const slug = 'test-three-role-architecture';
+
+    // 1. Orchestrator initializes spec via CreateSpecRequest DTO (no positional parameter pollution)
+    const ctx = orchestrator.initSpec({
+      slug,
+      title: 'Arquitectura 3 Roles RWA en Solana',
+      targetFolder: '01 Negocio/01 Estrategia & Modelo',
+      subagents: ['market-research-analyst', 'business-consultant', 'compliance-officer'],
+      icp: 'Real Estate Sponsors & YC Partners',
+      goal: 'Validar contratos en serie con handoffs estructurados',
+    });
+    assert.strictEqual(ctx.state, 'spec_review');
+
+    const loadedInitial = vault.loadSpec(slug).data;
+    assert.ok(loadedInitial.validation_contract, 'ValidationContract must be established before writing');
+    assert.ok(loadedInitial.execution_topology, 'ExecutionTopologyPlan must be generated');
+    assert.strictEqual(
+      loadedInitial.execution_topology?.parallelReadGatherers.length,
+      1,
+      'market-research-analyst routed as parallel_read (flash)'
+    );
+    assert.strictEqual(
+      loadedInitial.execution_topology?.serialWriteWorkers.length,
+      2,
+      'business-consultant and compliance-officer routed as serial_write (pro)'
+    );
+
+    // 2. Worker handoff before HITL-1 must be blocked
+    assert.throws(
+      () =>
+        orchestrator.recordWorkerHandoff(slug, {
+          worker_id: 'business-consultant',
+          completed_items: ['Modelo SaaS fee'],
+        }),
+      /HITL-1 Violation/i,
+      'Must block Worker handoffs before HITL-1 approval'
+    );
+
+    // 3. Approve Spec (HITL-1)
+    orchestrator.approveSpec(slug);
+
+    // 4. Serial Worker #1 records handoff leaving a pending item for Serial Worker #2
+    const handoff1 = orchestrator.recordWorkerHandoff(slug, {
+      worker_id: 'business-consultant',
+      completed_items: ['Estructura de fees SaaS ($2,500) y procesamiento (1%)'],
+      pending_items: ['Definir cláusula Delaware Series LLC SPV y Metaplex Core Recovery'],
+      decisions_made: ['Ticket mínimo fijado en $100 USD sobre Solana'],
+    });
+    assert.strictEqual(handoff1.step_index, 1);
+
+    const pristineText =
+      'Construimos en BRIDS la infraestructura de sindicación inmobiliaria institucional sobre Solana utilizando contratos ' +
+      'inteligentes con el estándar Metaplex Core y plugins nativos de Freeze y Recovery para cada Delaware Series LLC (SPV) ' +
+      'segregada, integrando verificación biométrica con Stripe Identity para Real Estate Sponsors e inversores institucionales ' +
+      'que buscan liquidez secundaria transparente y cumplimiento regulatorio automatizado sin fricción bancaria tradicional. ' +
+      'Este modelo elimina intermediarios costosos, optimiza la distribución programática de flujos de renta en USDC directamente ' +
+      'a las billeteras verificadas, protege la tabla de capitalización ante pérdida de llaves privadas mediante gobernanza multisig ' +
+      'y permite a cualquier desarrollador inmobiliario estructurar su activo comercial con trazabilidad on-chain completa. ' +
+      'Agenda una demo técnica hoy mismo con nuestro equipo de estructuración.';
+
+    // 5. Adversarial Validator rejects if the latest Worker handoff still has unresolved pending_items
+    const prematureValidation = orchestrator.auditAndEvaluateDraft(slug, pristineText, 1);
+    assert.strictEqual(
+      prematureValidation.passed,
+      false,
+      'Adversarial Validator must reject deliverable when latest Worker handoff has unresolved pending_items'
+    );
+    assert.strictEqual(
+      prematureValidation.report.adversarial_validation?.unresolved_handoff_items.length,
+      1
+    );
+
+    // 6. Serial Worker #2 (compliance-officer) completes pending items in fresh context and submits clean handoff
+    const handoff2 = orchestrator.recordWorkerHandoff(slug, {
+      worker_id: 'compliance-officer',
+      completed_items: ['Cláusula Delaware Series LLC SPV y Metaplex Core Recovery verificadas'],
+      pending_items: [],
+      decisions_made: ['Aislamiento legal C-Corp vs SPV confirmado'],
+    });
+    assert.strictEqual(handoff2.step_index, 2);
+
+    // 7. Adversarial Validator now approves both Technical QA and Functional ICP QA
+    const finalValidation = orchestrator.auditAndEvaluateDraft(slug, pristineText, 2);
+    assert.strictEqual(finalValidation.passed, true, 'Deliverable must pass once all handoff items are resolved');
+    assert.strictEqual(finalValidation.report.adversarial_validation?.contract_verified, true);
+  });
+
 });

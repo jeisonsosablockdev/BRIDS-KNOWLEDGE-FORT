@@ -85,6 +85,14 @@ export interface FullAuditReport {
   };
   banned_phrases_detected: Array<{ phrase: string; count: number; penaltyApplied: number }>;
   remediation_directives: string[];
+  adversarial_validation?: {
+    validator_role: 'sdd-reviewer';
+    zero_creator_bias: true;
+    technical_qa_passed: boolean;
+    functional_icp_qa_passed: boolean;
+    contract_verified: boolean;
+    unresolved_handoff_items: string[];
+  };
 }
 
 export const SDD_THRESHOLD = 8.5;
@@ -238,14 +246,17 @@ function evaluateLexicalOriginality(content: string, clefSyntheticProb: number) 
 }
 
 /**
- * Deterministic 4D text + Clef System One hybrid auditor for RWA, Solana & YC deliverables
+ * Deterministic 4D text + Clef System One hybrid Adversarial Validator for RWA, Solana & YC deliverables
  */
 export function auditDeliverableText(text: string, specData: Record<string, any> = {}): FullAuditReport {
   const content = text || '';
   const targetIcp = String(specData?.intent?.target_icp || specData?.icp || '');
+  const acceptanceCriteria = Array.isArray(specData?.validation_contract?.acceptance_criteria)
+    ? specData.validation_contract.acceptance_criteria
+    : [];
 
   // Layer 1: Clef System One forward-pass decision (SHA-256 memoized for strict idempotence)
-  const clefVerdict = evaluateWithClefSync(content, targetIcp);
+  const clefVerdict = evaluateWithClefSync(content, targetIcp, undefined, acceptanceCriteria);
   const probs = clefVerdict.probabilities;
 
   // Layer 0 + Layer 1 combined across the 4 dimensions
@@ -253,6 +264,20 @@ export function auditDeliverableText(text: string, specData: Record<string, any>
   const dim2 = evaluateTechnicalVeracity(content, probs.technicalVeracity);
   const dim3 = evaluateFounderVoice(content, probs.founderVoice);
   const dim4 = evaluateLexicalOriginality(content, probs.syntheticCliche);
+
+  // Layer 2: Adversarial verification of StructuredHandoff pending items
+  const handoffs = Array.isArray(specData?.worker_handoffs) ? specData.worker_handoffs : [];
+  const latestHandoff = handoffs.length > 0 ? handoffs[handoffs.length - 1] : null;
+  const unresolvedHandoffItems: string[] = Array.isArray(latestHandoff?.pending_items)
+    ? latestHandoff.pending_items.filter(Boolean)
+    : [];
+
+  if (unresolvedHandoffItems.length > 0) {
+    dim1.score = clampScore(dim1.score - 0.6, 2.5);
+    dim1.findings.push(
+      `Handoff incompleto del Worker (${latestHandoff.worker_id}): quedan ${unresolvedHandoffItems.length} ítem(s) pendientes (${unresolvedHandoffItems.join('; ')}).`
+    );
+  }
 
   const remediationDirectives: string[] = [];
   if (dim4.detectedBanned.length > 0) {
@@ -274,12 +299,15 @@ export function auditDeliverableText(text: string, specData: Record<string, any>
   );
 
   const totalScore = Math.round(rubricEval.score * 10) / 10;
+  const technicalQaPassed = rubricEval.dimensions.techRigor >= 2.2 && rubricEval.dimensions.originalityLexicon >= 1.8;
+  const functionalIcpQaPassed = rubricEval.dimensions.goalIcp >= 2.0 && rubricEval.dimensions.founderVoice >= 1.7;
+  const contractVerified = technicalQaPassed && functionalIcpQaPassed && unresolvedHandoffItems.length === 0;
 
   return {
     total_score: totalScore,
     scale_max: SCALE_MAX,
     passing_threshold: SDD_THRESHOLD,
-    passed: totalScore >= SDD_THRESHOLD,
+    passed: totalScore >= SDD_THRESHOLD && unresolvedHandoffItems.length === 0,
     clef_decision: {
       engine: clefVerdict.engine,
       model: clefVerdict.model,
@@ -323,6 +351,14 @@ export function auditDeliverableText(text: string, specData: Record<string, any>
       }
     },
     banned_phrases_detected: dim4.detectedBanned,
-    remediation_directives: remediationDirectives
+    remediation_directives: remediationDirectives,
+    adversarial_validation: {
+      validator_role: 'sdd-reviewer',
+      zero_creator_bias: true,
+      technical_qa_passed: technicalQaPassed,
+      functional_icp_qa_passed: functionalIcpQaPassed,
+      contract_verified: contractVerified,
+      unresolved_handoff_items: unresolvedHandoffItems
+    }
   };
 }

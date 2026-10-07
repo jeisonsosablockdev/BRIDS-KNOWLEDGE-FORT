@@ -1,0 +1,284 @@
+import { describe, it, beforeEach, afterEach } from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
+import { VaultGateway } from '../../core/vault-gateway.ts';
+import { TaskOrchestrator } from '../../core/orchestrator.ts';
+import {
+  evaluatePreToolUse,
+  evaluateStopHook,
+} from '../../scripts/sdd/workflow-gate-hook.ts';
+
+describe('SPEC-HOOK-004: Deterministic PreToolUse & Stop Hooks (3-Role Multi-Agent Gates)', () => {
+  let tempRoot: string;
+  let specsDir: string;
+  let vault: VaultGateway;
+  let orchestrator: TaskOrchestrator;
+
+  beforeEach(() => {
+    tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'brids-hook-test-'));
+    specsDir = path.join(tempRoot, '00 Inbox', 'Specs');
+    fs.mkdirSync(specsDir, { recursive: true });
+    vault = new VaultGateway(tempRoot);
+    orchestrator = new TaskOrchestrator(vault);
+  });
+
+  afterEach(() => {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  });
+
+  it('@spec REQ-HOOK-401: should force RequestFeedback=false on artifact write_to_file calls to prevent auto-proceed', () => {
+    const res = evaluatePreToolUse(
+      {
+        artifactDirectoryPath: '/Users/test/.gemini/antigravity/brain/conv-123',
+        toolCall: {
+          name: 'write_to_file',
+          args: {
+            TargetFile: '/Users/test/.gemini/antigravity/brain/conv-123/plan.md',
+            ArtifactMetadata: {
+              Summary: 'Architecture plan',
+              UserFacing: true,
+              RequestFeedback: true,
+            },
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(res.decision, 'allow');
+    assert.ok(res.overwrite, 'Expected overwrite payload');
+    assert.equal(res.overwrite.ArtifactMetadata.RequestFeedback, false);
+  });
+
+  it('@spec REQ-HOOK-402: should block writing draft_cycle_1.md before HITL-1 (approveSpec) and allow after approval', () => {
+    orchestrator.initSpec({
+      slug: 'hook-hitl1-test',
+      title: 'Hook HITL-1 Test',
+      targetFolder: '01 Negocio/03 Legal & Cumplimiento',
+      subagents: ['compliance-officer'],
+    });
+
+    const draftTarget = path.join(
+      tempRoot,
+      '00 Inbox',
+      'Specs',
+      'hook-hitl1-test-work',
+      'draft_cycle_1.md'
+    );
+
+    const blockedRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'write_to_file',
+          args: {
+            TargetFile: draftTarget,
+            CodeContent: '# Draft 1',
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(blockedRes.decision, 'deny');
+    assert.ok(blockedRes.reason?.includes('BLOQUEO HITL-1'));
+
+    // Approve Spec (HITL-1)
+    orchestrator.approveSpec('hook-hitl1-test');
+
+    const allowedRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'write_to_file',
+          args: {
+            TargetFile: draftTarget,
+            CodeContent: '# Draft 1 after HITL-1',
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(allowedRes.decision, 'allow');
+  });
+
+  it('@spec REQ-HOOK-403: should block direct write_to_file to BRIDS-Brain/01 Negocio without HITL-2 completion', () => {
+    orchestrator.initSpec({
+      slug: 'hook-hitl2-test',
+      title: 'Hook HITL-2 Test',
+      targetFolder: '01 Negocio/03 Legal & Cumplimiento',
+      subagents: ['compliance-officer'],
+    });
+    orchestrator.approveSpec('hook-hitl2-test');
+
+    const prodTarget = path.join(
+      tempRoot,
+      'BRIDS-Brain',
+      '01 Negocio',
+      '03 Legal & Cumplimiento',
+      'hook-hitl2-test.md'
+    );
+
+    const deniedRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'write_to_file',
+          args: {
+            TargetFile: prodTarget,
+            CodeContent: '# Unapproved direct write',
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(deniedRes.decision, 'deny');
+    assert.ok(deniedRes.reason?.includes('BLOQUEO HITL-2'));
+  });
+
+  it('@spec REQ-HOOK-404: should enforce Serial Execution for write workers, Parallel for read gatherers, and Strategic Model Routing', () => {
+    orchestrator.initSpec({
+      slug: 'serial-chain-spec',
+      title: 'Serial Chain Test',
+      targetFolder: '01 Negocio/04 Finanzas & YC Investors',
+      subagents: ['market-research-analyst', 'business-consultant', 'compliance-officer'],
+    });
+    orchestrator.approveSpec('serial-chain-spec');
+
+    // 1. Parallel read gatherers are allowed in batch and routed to Model: 'flash'
+    const parallelReadRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'invoke_subagent',
+          args: {
+            Subagents: [
+              {
+                TypeName: 'market-research-analyst',
+                Role: 'TAM Researcher',
+                Prompt: 'Gather TAM for serial-chain-spec',
+                Model: 'inherit',
+              },
+              {
+                TypeName: 'narrative-intelligence-analyst',
+                Role: 'Narrative Radar',
+                Prompt: 'Scan whispers for serial-chain-spec',
+                Model: 'pro',
+              },
+            ],
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(parallelReadRes.decision, 'allow');
+    assert.ok(parallelReadRes.overwrite, 'Should rewrite Model to flash for parallel_read gatherers');
+    assert.equal(parallelReadRes.overwrite.Subagents[0].Model, 'flash');
+    assert.equal(parallelReadRes.overwrite.Subagents[1].Model, 'flash');
+
+    // 2. Parallel write workers in a single batch MUST be denied
+    const parallelWriteRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'invoke_subagent',
+          args: {
+            Subagents: [
+              {
+                TypeName: 'business-consultant',
+                Role: 'Unit Economics',
+                Prompt: 'Draft economics for serial-chain-spec',
+              },
+              {
+                TypeName: 'compliance-officer',
+                Role: 'Legal Audit',
+                Prompt: 'Draft SPV section for serial-chain-spec',
+              },
+            ],
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(parallelWriteRes.decision, 'deny');
+    assert.ok(parallelWriteRes.reason?.includes('VIOLACIÓN DE EJECUCIÓN EN SERIE'));
+
+    // 3. Invoking step 2 (compliance-officer) BEFORE step 1 (business-consultant) records handoff MUST be denied
+    const prematureStep2Res = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'invoke_subagent',
+          args: {
+            Subagents: [
+              {
+                TypeName: 'compliance-officer',
+                Role: 'Legal Audit',
+                Prompt: 'Draft SPV section for serial-chain-spec',
+              },
+            ],
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(prematureStep2Res.decision, 'deny');
+    assert.ok(prematureStep2Res.reason?.includes('BLOQUEO DE HANDOFF EN SERIE'));
+
+    // 4. Record Handoff for step 1 (business-consultant), then invoke step 2 (compliance-officer)
+    orchestrator.recordWorkerHandoff('serial-chain-spec', {
+      worker_id: 'business-consultant',
+      completed_items: ['Unit economics table completed'],
+      pending_items: [],
+      decisions_made: ['Used 1.5% origination fee'],
+      issues_encountered: [],
+      artifact_path: '00 Inbox/Specs/serial-chain-spec-work/draft_cycle_1.md',
+    });
+
+    const validStep2Res = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'invoke_subagent',
+          args: {
+            Subagents: [
+              {
+                TypeName: 'compliance-officer',
+                Role: 'Legal Audit',
+                Prompt: 'Draft SPV section for serial-chain-spec',
+                Model: 'flash',
+              },
+            ],
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(validStep2Res.decision, 'allow');
+    assert.ok(validStep2Res.overwrite, 'Should upgrade serial_write worker from flash to pro');
+    assert.equal(validStep2Res.overwrite.Subagents[0].Model, 'pro');
+  });
+
+  it('@spec REQ-HOOK-405: should trigger Adversarial Validator on Stop hook when an unaudited draft fails ValidationContract', async () => {
+    orchestrator.initSpec({
+      slug: 'stop-hook-spec',
+      title: 'Stop Hook Adversarial Test',
+      targetFolder: '01 Negocio/03 Legal & Cumplimiento',
+      subagents: ['compliance-officer'],
+      acceptanceCriteria: ['Explain Delaware SPV LLC isolation'],
+    });
+    orchestrator.approveSpec('stop-hook-spec');
+
+    // Write a low-quality draft_cycle_1.md without running criticism_cycle_1.json
+    vault.saveDraftCycle(
+      'stop-hook-spec',
+      1,
+      '# Draft 1\nEn el mundo actual es importante destacar un texto vacío sin anclas técnicas.'
+    );
+
+    const stopRes = await evaluateStopHook({}, { vaultRoot: tempRoot, specsDir });
+    assert.equal(stopRes.decision, 'continue');
+    assert.ok(stopRes.reason?.includes('VALIDADOR ADVERSARIAL'));
+  });
+});

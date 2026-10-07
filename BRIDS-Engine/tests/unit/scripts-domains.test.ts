@@ -51,6 +51,7 @@ describe('SPEC-SCRIPTS-005: TypeScript Domain Architecture for BRIDS-Engine/scri
       'ingest/sync-technical-docs.ts',
       'ingest/sync-workspace-context.ts',
       'sdd/sdd-orchestrator.ts',
+      'sdd/workflow-gate-hook.ts',
       'social/social-generator.ts',
       'vault/export-pdf.ts',
       'vault/refine-note.ts',
