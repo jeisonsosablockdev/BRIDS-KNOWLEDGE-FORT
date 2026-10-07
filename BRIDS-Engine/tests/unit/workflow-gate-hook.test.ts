@@ -280,5 +280,75 @@ describe('SPEC-HOOK-004: Deterministic PreToolUse & Stop Hooks (3-Role Multi-Age
     const stopRes = await evaluateStopHook({}, { vaultRoot: tempRoot, specsDir });
     assert.equal(stopRes.decision, 'continue');
     assert.ok(stopRes.reason?.includes('VALIDADOR ADVERSARIAL'));
+    assert.ok(!stopRes.reason?.includes('undefined'), 'Stop hook reason must format numeric score cleanly without undefined');
+
+    // Infinite-loop guard: executionNum >= 3 or fullyIdle === false returns {}
+    const loopGuardRes = await evaluateStopHook({ executionNum: 3 }, { vaultRoot: tempRoot, specsDir });
+    assert.deepEqual(loopGuardRes, {});
+
+    const busyGuardRes = await evaluateStopHook({ fullyIdle: false }, { vaultRoot: tempRoot, specsDir });
+    assert.deepEqual(busyGuardRes, {});
+  });
+
+  it('@spec REQ-HOOK-406: should inject JIT YAML persona on invoke_subagent, enforce shallow overwrite, and block run_command shell writes to vault', () => {
+    // 1. Shallow overwrite + JIT Persona Injection from BRIDS-Engine/agents/compliance-officer.yaml
+    const subRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'invoke_subagent',
+          args: {
+            toolSummary: 'Invoke compliance officer',
+            Subagents: [
+              {
+                TypeName: 'compliance-officer',
+                Role: 'Legal Officer',
+                Prompt: 'Review SPV decoupling',
+                Model: 'flash',
+              },
+            ],
+          },
+        },
+      },
+      { specsDir }
+    );
+
+    assert.equal(subRes.decision, 'allow');
+    assert.ok(subRes.overwrite);
+    assert.deepEqual(Object.keys(subRes.overwrite), ['Subagents'], 'Overwrite must be shallow (only mutated top-level keys)');
+    assert.equal(subRes.overwrite.Subagents[0].Model, 'pro');
+    assert.ok(
+      subRes.overwrite.Subagents[0].Prompt.includes('[AGENT_PERSONA: compliance-officer]'),
+      'Should inject system_prompt from BRIDS-Engine/agents/compliance-officer.yaml'
+    );
+
+    // 2. Block direct shell redirection to BRIDS-Brain/01 Negocio via run_command
+    const shellDeny = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'run_command',
+          args: {
+            CommandLine: 'echo "# Bypass" > "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/bypass.md"',
+          },
+        },
+      },
+      { specsDir }
+    );
+    assert.equal(shellDeny.decision, 'deny');
+    assert.ok(shellDeny.reason?.includes('BLOQUEO HITL-2'));
+
+    // 3. Allow authorized engine script via run_command
+    const shellAllow = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'run_command',
+          args: {
+            CommandLine: 'node BRIDS-Engine/scripts/vault/refine-note.ts inspect "BRIDS-Brain/01 Negocio/index.md"',
+          },
+        },
+      },
+      { specsDir }
+    );
+    assert.equal(shellAllow.decision, 'allow');
   });
 });
+

@@ -29,7 +29,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { ensureDir, parseFrontmatter } from '../../core/vault-gateway.ts';
+import { VaultGateway, ensureDir, parseFrontmatter } from '../../core/vault-gateway.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -40,7 +40,7 @@ const SCRIPTS_DIR = path.join(ENGINE_DIR, 'scripts');
 const CONTEXT_DIR = path.join(ENGINE_DIR, 'context');
 const CACHE_DIR = path.join(CONTEXT_DIR, 'brids-core-repo-import');
 const VAULT_13_DIR = path.join(BRAIN_DIR, '01 Negocio', '02 Producto & Ingenieria');
-const ARCHIVE_DIR = path.join(BRAIN_DIR, '00 Inbox', 'Archive');
+const vaultGateway = new VaultGateway(BRAIN_DIR);
 
 const REPO_URL = 'https://github.com/jeisonsosablockdev/brids.git';
 const TARGET_BRANCH = 'develop';
@@ -60,14 +60,11 @@ function getGitCommitInfo() {
   }
 }
 
-function backupFile(filePath) {
-  if (!fs.existsSync(filePath)) return;
-  ensureDir(ARCHIVE_DIR);
-  const fileName = path.basename(filePath);
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const backupPath = path.join(ARCHIVE_DIR, `${fileName}.${timestamp}.bak.md`);
-  fs.copyFileSync(filePath, backupPath);
-  console.log(`   🛡️ Respaldo de seguridad creado: 00 Inbox/Archive/${path.basename(backupPath)}`);
+function backupFile(filePath: string) {
+  const backupPath = vaultGateway.createSafetyBackup(filePath);
+  if (backupPath) {
+    console.log(`   🛡️ Respaldo de seguridad creado: 00 Inbox/Archive/${path.basename(backupPath)}`);
+  }
 }
 
 function fetchTechnicalRepo(forceClone = false) {

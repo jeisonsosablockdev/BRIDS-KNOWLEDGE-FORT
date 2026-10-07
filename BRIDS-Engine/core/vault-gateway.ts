@@ -137,6 +137,15 @@ export class VaultGateway {
     }
     const raw = fs.readFileSync(paths.specJsonPath, 'utf8');
     const data: TaskSpecData = JSON.parse(raw);
+
+    // Normalize legacy dual-field aliases on load
+    data.spec_id = data.spec_id || data.id || paths.specId;
+    data.id = data.id || data.spec_id;
+    data.target_vault_folder = data.target_vault_folder || data.target_folder || '01 Negocio/01 Estrategia & Modelo';
+    data.target_folder = data.target_folder || data.target_vault_folder;
+    data.subagents_involved = data.subagents_involved || data.subagents || ['founder-ghostwriter'];
+    data.subagents = data.subagents || data.subagents_involved;
+
     return { data, paths };
   }
 

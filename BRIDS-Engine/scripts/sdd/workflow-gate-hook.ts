@@ -16,6 +16,7 @@ const ENGINE_DIR = path.resolve(__dirname, '../..');
 const ROOT_DIR = path.resolve(ENGINE_DIR, '..');
 const DEFAULT_BRAIN_DIR = path.join(ROOT_DIR, 'BRIDS-Brain');
 const DEFAULT_SPECS_DIR = path.join(DEFAULT_BRAIN_DIR, '00 Inbox', 'Specs');
+const DEFAULT_AGENTS_DIR = path.join(ENGINE_DIR, 'agents');
 
 export interface PreToolUsePayload {
   sessionId?: string;
@@ -32,6 +33,8 @@ export interface StopHookPayload {
   sessionId?: string;
   conversationId?: string;
   stopReason?: string;
+  fullyIdle?: boolean;
+  executionNum?: number;
 }
 
 export interface HookOutput {
@@ -43,6 +46,7 @@ export interface HookOutput {
 export interface GateOptions {
   specsDir?: string;
   vaultRoot?: string;
+  agentsDir?: string;
 }
 
 const PARALLEL_READ_AGENTS = new Set<string>([
@@ -51,12 +55,42 @@ const PARALLEL_READ_AGENTS = new Set<string>([
   'research',
 ]);
 
+const AUTHORIZED_VAULT_SCRIPTS = [
+  'sdd-orchestrator.ts',
+  'refine-note.ts',
+  'sync-technical-docs.ts',
+  'sync-narrative-intelligence.ts',
+  'sync-workspace-context.ts',
+  'social-generator.ts',
+  'engine.ts',
+];
+
 function getExecutionMode(agentType: string): ExecutionConcurrencyMode {
   if (PARALLEL_READ_AGENTS.has(agentType)) {
     return 'parallel_read';
   }
   const route = STRATEGIC_MODEL_ROUTING[agentType];
   return route ? route.executionMode : 'serial_write';
+}
+
+export function loadAgentSystemPrompt(
+  agentName: string,
+  agentsDir: string = DEFAULT_AGENTS_DIR
+): string | null {
+  const safeName = agentName.replace(/[^a-z0-9_-]/gi, '');
+  if (!safeName) return null;
+  const yamlPath = path.join(agentsDir, `${safeName}.yaml`);
+  if (!fs.existsSync(yamlPath)) return null;
+
+  const raw = fs.readFileSync(yamlPath, 'utf8');
+  const match = raw.match(/^system_prompt:\s*\|\r?\n([\s\S]*)$/m);
+  if (!match || !match[1]) return null;
+
+  return match[1]
+    .split(/\r?\n/)
+    .map((line) => (line.startsWith('  ') ? line.slice(2) : line))
+    .join('\n')
+    .trim();
 }
 
 function loadAllSpecs(specsDir: string): Array<{ slug: string; data: TaskSpecData }> {
@@ -100,35 +134,54 @@ function extractDraftWorkSlug(targetFile: string): string | null {
   return match ? match[1] : null;
 }
 
+function isDirectVaultWriteCommand(commandLine: string): boolean {
+  const normalized = commandLine.replace(/\\/g, '/');
+  const touchesProductionVault =
+    normalized.includes('BRIDS-Brain/01 Negocio') ||
+    normalized.includes('BRIDS-Brain/02 Marketing');
+  if (!touchesProductionVault) return false;
+
+  const usesAuthorizedScript = AUTHORIZED_VAULT_SCRIPTS.some((s) => normalized.includes(s));
+  if (usesAuthorizedScript) return false;
+
+  // Detect shell redirections or file mutation commands targeting the vault directly
+  return /(?:>>?|tee\s|cp\s|mv\s|cat\s.*>|echo\s.*>|printf\s.*>|sed\s+-i|perl\s+-i)/.test(
+    normalized
+  );
+}
+
 /**
  * Pure, synchronous, zero-latency (< 5ms) deterministic PreToolUse gate.
  * Enforces:
- * 1. Anti-Auto-Proceed on artifacts (forces RequestFeedback: false).
+ * 1. Anti-Auto-Proceed on artifacts (forces RequestFeedback: false via shallow overwrite).
  * 2. HITL-1 & ValidationContract before writing any draft_cycle_N.md.
- * 3. HITL-2 protection against direct writes to BRIDS-Brain/01 Negocio or 02 Marketing without a completed Spec.
- * 4. Serial Write Execution, StructuredHandoff continuity, and Strategic Model Routing on invoke_subagent.
+ * 3. HITL-2 protection against direct writes to BRIDS-Brain/01 Negocio or 02 Marketing (including run_command shell redirections).
+ * 4. Serial Write Execution, StructuredHandoff continuity, JIT Persona Injection (agents/*.yaml), and Strategic Model Routing on invoke_subagent / start_subagent.
  */
 export function evaluatePreToolUse(
   payload: PreToolUsePayload,
   options: GateOptions = {}
 ): HookOutput {
   const specsDir = options.specsDir ?? DEFAULT_SPECS_DIR;
+  const agentsDir = options.agentsDir ?? DEFAULT_AGENTS_DIR;
   const toolName = payload?.toolCall?.name ?? '';
   const args = payload?.toolCall?.args ?? {};
 
   // =========================================================================
-  // 1. FILE WRITE / EDIT GATES (write_to_file, replace_file_content, multi_replace_file_content)
+  // 1. FILE WRITE / EDIT GATES (IDE + Python SDK tool names)
   // =========================================================================
   if (
     toolName === 'write_to_file' ||
     toolName === 'replace_file_content' ||
-    toolName === 'multi_replace_file_content'
+    toolName === 'multi_replace_file_content' ||
+    toolName === 'create_file' ||
+    toolName === 'edit_file'
   ) {
-    const targetFile = String(args.TargetFile ?? '');
+    const targetFile = String(args.TargetFile ?? args.path ?? args.file_path ?? '');
 
-    // Rule 1A: Anti-Auto-Proceed on Artifacts (forces RequestFeedback: false)
+    // Rule 1A: Anti-Auto-Proceed on Artifacts (forces RequestFeedback: false via shallow overwrite)
     if (
-      toolName === 'write_to_file' &&
+      (toolName === 'write_to_file' || toolName === 'create_file') &&
       isArtifactPath(targetFile, payload.artifactDirectoryPath) &&
       args.ArtifactMetadata &&
       args.ArtifactMetadata.RequestFeedback === true
@@ -136,7 +189,6 @@ export function evaluatePreToolUse(
       return {
         decision: 'allow',
         overwrite: {
-          ...args,
           ArtifactMetadata: {
             ...args.ArtifactMetadata,
             RequestFeedback: false,
@@ -176,7 +228,6 @@ export function evaluatePreToolUse(
       const normalizedTarget = targetFile.replace(/\\/g, '/');
       const allSpecs = loadAllSpecs(specsDir);
 
-      // Find if there is a Spec matching this target file
       const matchingSpec = allSpecs.find(({ slug, data }) => {
         if (data.target_file && normalizedTarget.endsWith(data.target_file.replace(/\\/g, '/'))) {
           return true;
@@ -207,18 +258,35 @@ export function evaluatePreToolUse(
   }
 
   // =========================================================================
-  // 2. SUBAGENT INVOCATION GATES (invoke_subagent)
+  // 2. SHELL COMMAND VAULT BYPASS GUARD (run_command)
   // =========================================================================
-  if (toolName === 'invoke_subagent') {
-    const subagents: Array<Record<string, any>> = Array.isArray(args.Subagents)
+  if (toolName === 'run_command') {
+    const commandLine = String(args.CommandLine ?? args.command ?? '');
+    if (isDirectVaultWriteCommand(commandLine)) {
+      return {
+        decision: 'deny',
+        reason: `🛑 BLOQUEO HITL-2 (workflow-gate-hook): Prohibido escribir o redirigir archivos directamente a BRIDS-Brain/01 Negocio o 02 Marketing mediante shell. Usa los scripts autorizados (sdd-orchestrator.ts approve-deliverable o refine-note.ts).`,
+      };
+    }
+    return { decision: 'allow' };
+  }
+
+  // =========================================================================
+  // 3. SUBAGENT INVOCATION GATES (invoke_subagent + start_subagent)
+  // =========================================================================
+  if (toolName === 'invoke_subagent' || toolName === 'start_subagent') {
+    const isBatch = Array.isArray(args.Subagents);
+    const subagents: Array<Record<string, any>> = isBatch
       ? args.Subagents
-      : [];
+      : args.TypeName || args.Prompt || args.Role
+        ? [args]
+        : [];
 
     if (subagents.length === 0) {
       return { decision: 'allow' };
     }
 
-    // Rule 2A: Serial Execution for Writes, Parallel for Reads
+    // Rule 3A: Serial Execution for Writes, Parallel for Reads
     if (subagents.length > 1) {
       const nonParallelAgents = subagents
         .map((s) => String(s.TypeName || s.Role || ''))
@@ -232,7 +300,7 @@ export function evaluatePreToolUse(
       }
     }
 
-    // Rule 2B: Verify HITL-1 & Handoff Continuity when a Spec slug is referenced in Prompt
+    // Rule 3B: Verify HITL-1 & Handoff Continuity when a Spec slug is referenced in Prompt
     const allSpecs = loadAllSpecs(specsDir);
     for (const sub of subagents) {
       const agentType = String(sub.TypeName || '');
@@ -249,7 +317,6 @@ export function evaluatePreToolUse(
               };
             }
 
-            // Check Serial Handoff ordering if topology has multiple serialWriteWorkers
             const rawSerialWorkers =
               data.execution_topology?.serialWriteWorkers ??
               (data.execution_topology as any)?.serial_write_workers ??
@@ -276,36 +343,56 @@ export function evaluatePreToolUse(
       }
     }
 
-    // Rule 2C: Strategic Model Routing (flash for parallel_read, pro/inherit for serial_write)
+    // Rule 3C: JIT Persona Injection (agents/*.yaml) + Strategic Model Routing
     let modified = false;
     const updatedSubagents = subagents.map((sub) => {
       const agentType = String(sub.TypeName || '');
+      let nextSub = { ...sub };
+
+      // JIT Persona Injection from BRIDS-Engine/agents/<agentType>.yaml
+      const rawPrompt = String(nextSub.Prompt || '');
+      if (agentType && !rawPrompt.includes('[AGENT_PERSONA:')) {
+        const systemPrompt = loadAgentSystemPrompt(agentType, agentsDir);
+        if (systemPrompt) {
+          modified = true;
+          nextSub.Prompt = `[AGENT_PERSONA: ${agentType}]\n${systemPrompt}\n\n[ASSIGNED_TASK]\n${rawPrompt}`;
+        }
+      }
+
+      // Strategic Model Routing (flash for parallel_read, pro/inherit for serial_write)
       const route = STRATEGIC_MODEL_ROUTING[agentType];
-      if (!route) return sub;
-
-      if (route.executionMode === 'parallel_read' && sub.Model !== 'flash') {
-        modified = true;
-        return { ...sub, Model: 'flash' };
+      if (route) {
+        if (route.executionMode === 'parallel_read' && nextSub.Model !== 'flash') {
+          modified = true;
+          nextSub.Model = 'flash';
+        } else if (
+          route.executionMode === 'serial_write' &&
+          (nextSub.Model === 'flash' || nextSub.Model === 'flash_lite' || !nextSub.Model)
+        ) {
+          modified = true;
+          nextSub.Model = route.modelTier;
+        }
       }
 
-      if (
-        route.executionMode === 'serial_write' &&
-        (sub.Model === 'flash' || sub.Model === 'flash_lite' || !sub.Model)
-      ) {
-        modified = true;
-        return { ...sub, Model: route.modelTier };
-      }
-
-      return sub;
+      return nextSub;
     });
 
     if (modified) {
+      if (isBatch) {
+        return {
+          decision: 'allow',
+          overwrite: {
+            Subagents: updatedSubagents,
+          },
+        };
+      }
+      const single = updatedSubagents[0];
+      const flatOverwrite: Record<string, any> = {};
+      if (single.Model !== args.Model) flatOverwrite.Model = single.Model;
+      if (single.Prompt !== args.Prompt) flatOverwrite.Prompt = single.Prompt;
       return {
         decision: 'allow',
-        overwrite: {
-          ...args,
-          Subagents: updatedSubagents,
-        },
+        overwrite: flatOverwrite,
       };
     }
 
@@ -323,9 +410,14 @@ export function evaluatePreToolUse(
  * continue if the draft fails the ValidationContract (< 8.5/9.0).
  */
 export async function evaluateStopHook(
-  _payload: StopHookPayload,
+  payload: StopHookPayload,
   options: GateOptions = {}
 ): Promise<HookOutput> {
+  // Guard against background tasks still running or infinite Stop hook continuation loops
+  if (payload?.fullyIdle === false || (payload?.executionNum ?? 1) >= 3) {
+    return {};
+  }
+
   const vaultRoot = options.vaultRoot ?? DEFAULT_BRAIN_DIR;
   const specsDir = options.specsDir ?? path.join(vaultRoot, '00 Inbox', 'Specs');
 
@@ -364,12 +456,14 @@ export async function evaluateStopHook(
       const draftPath = path.join(workDir, `draft_cycle_${latestCycle}.md`);
       const draftContent = fs.readFileSync(draftPath, 'utf8');
 
-      const evalRes = await orchestrator.auditAndEvaluateDraft(slug, draftContent, latestCycle);
-      if (!evalRes.passed && evalRes.state !== 'frozen_for_arbitration') {
-        const directives = (evalRes.report?.remediation_directives ?? []).slice(0, 3).join(' | ');
+      const evalRes = orchestrator.auditAndEvaluateDraft(slug, draftContent, latestCycle);
+      if (!evalRes.passed && !evalRes.frozen) {
+        const score = evalRes.report.total_score;
+        const engine = evalRes.report.clef_decision?.engine ?? '4d-rubric';
+        const directives = (evalRes.report.remediation_directives ?? []).slice(0, 3).join(' | ');
         return {
           decision: 'continue',
-          reason: `⚖️ VALIDADOR ADVERSARIAL (Stop Hook - Score ${evalRes.score}/9.0 < 8.5): El borrador draft_cycle_${latestCycle}.md de "${slug}" no superó el ValidationContract (${evalRes.engine ?? '4d-rubric'}). Resuelve estas directivas antes de finalizar: ${directives}`,
+          reason: `⚖️ VALIDADOR ADVERSARIAL (Stop Hook - Score ${score}/9.0 < 8.5): El borrador draft_cycle_${latestCycle}.md de "${slug}" no superó el ValidationContract (${engine}). Resuelve estas directivas antes de finalizar: ${directives}`,
         };
       }
     }

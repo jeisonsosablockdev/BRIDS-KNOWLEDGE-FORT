@@ -258,8 +258,12 @@ Agenda una sesión técnica con el equipo de estructuración en sponsors@brids.i
       'Capa evaluators/ (anti-cliche-filter, sdd-4d-rubric) conectada al motor SDD');
     assert(fs.existsSync(path.join(ENGINE_DIR, 'outputs', 'decks')) && fs.existsSync(path.join(ENGINE_DIR, 'outputs', 'pdfs')),
       'Capa outputs/ (decks/, pdfs/) activa para artefactos binarios transitorios');
-    assert(fs.existsSync(path.join(ENGINE_DIR, 'mcp', 'clef-decision-mcp', 'server.py')),
-      'Capa mcp/clef-decision-mcp/ activa como servidor MCP local de decisiones');
+    assert(
+      fs.existsSync(path.join(ENGINE_DIR, 'evaluators', 'clef-client.ts')) &&
+        fs.existsSync(path.join(ROOT_DIR, '.agents', 'hooks.json')) &&
+        fs.existsSync(path.join(ROOT_DIR, '.agents', 'skills.json')),
+      'Capa evaluators/clef-client.ts y .agents/{hooks,skills}.json activas como motor local nativo Antigravity'
+    );
   } finally {
     if (fs.existsSync(targetVaultPath)) fs.unlinkSync(targetVaultPath);
     if (fs.existsSync(testSpecJson)) fs.unlinkSync(testSpecJson);

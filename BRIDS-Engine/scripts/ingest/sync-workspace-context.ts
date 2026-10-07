@@ -7,7 +7,6 @@
  */
 
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -17,6 +16,7 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '../../..');
 const ENGINE_DIR = path.join(ROOT_DIR, 'BRIDS-Engine');
 const BRAIN_DIR = path.join(ROOT_DIR, 'BRIDS-Brain');
+const AGENTS_CONFIG_DIR = path.join(ROOT_DIR, '.agents');
 
 export function syncBrandContext(): string {
   const targetDir = path.join(BRAIN_DIR, '02 Marketing', '01 Contexto de Marca');
@@ -39,14 +39,17 @@ export function syncBrandContext(): string {
   return target;
 }
 
-export function enableProjectSkills(mode: string = 'safe'): { linked: number; skipped: number } {
-  const codexSkillsDir = path.join(os.homedir(), '.codex', 'skills');
+export function enableProjectSkills(_mode: string = 'safe'): { linked: number; skipped: number } {
   const localSkillsDir = path.join(ENGINE_DIR, 'skills');
+  const skillsJsonPath = path.join(AGENTS_CONFIG_DIR, 'skills.json');
 
-  fs.mkdirSync(codexSkillsDir, { recursive: true });
+  fs.mkdirSync(AGENTS_CONFIG_DIR, { recursive: true });
 
-  console.log('Activating project skills from:');
-  console.log(`  local: ${localSkillsDir}\n`);
+  const canonicalConfig = {
+    entries: [{ path: 'BRIDS-Engine/skills' }],
+  };
+
+  fs.writeFileSync(skillsJsonPath, JSON.stringify(canonicalConfig, null, 2) + '\n', 'utf8');
 
   let linked = 0;
   let skipped = 0;
@@ -54,37 +57,19 @@ export function enableProjectSkills(mode: string = 'safe'): { linked: number; sk
   if (fs.existsSync(localSkillsDir)) {
     const entries = fs.readdirSync(localSkillsDir, { withFileTypes: true });
     for (const entry of entries) {
-      if (!entry.isDirectory()) continue;
-      const skillName = entry.name;
-      const sourceDir = path.join(localSkillsDir, skillName);
-      const target = path.join(codexSkillsDir, skillName);
-
-      let exists = false;
-      try {
-        fs.lstatSync(target);
-        exists = true;
-      } catch {
-        exists = false;
+      if (!entry.isDirectory() || entry.name.startsWith('.')) continue;
+      const skillMd = path.join(localSkillsDir, entry.name, 'SKILL.md');
+      if (fs.existsSync(skillMd)) {
+        linked++;
+      } else {
+        skipped++;
       }
-
-      if (exists) {
-        if (mode === '--force' || mode === 'force') {
-          fs.rmSync(target, { recursive: true, force: true });
-        } else {
-          console.log(`skip  ${skillName} (already exists in ~/.codex/skills)`);
-          skipped++;
-          continue;
-        }
-      }
-
-      fs.symlinkSync(sourceDir, target, 'dir');
-      console.log(`link  ${skillName} -> ${sourceDir}`);
-      linked++;
     }
   }
 
-  console.log('\nDone.');
-  console.log("Use '--force' to replace existing ~/.codex/skills entries with the project versions.");
+  console.log(`Activated ${linked} project skills for Google Antigravity via .agents/skills.json:`);
+  console.log(`  ${skillsJsonPath} -> BRIDS-Engine/skills`);
+  console.log('Done.');
   return { linked, skipped };
 }
 

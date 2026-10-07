@@ -39,10 +39,7 @@ const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '../../..');
 const VAULT_DIR = path.join(ROOT_DIR, 'BRIDS-Brain');
 const VAULT_INBOX = path.join(VAULT_DIR, '00 Inbox');
-const SPECS_DIR = path.join(VAULT_INBOX, 'Specs');
 const TEMPLATES_DIR = path.join(ROOT_DIR, 'BRIDS-Engine', 'templates');
-const SPEC_TEMPLATE_PATH = path.join(TEMPLATES_DIR, 'deliverable-spec-template.md');
-const SESSION_TEMPLATE_PATH = path.join(TEMPLATES_DIR, 'task-tracking-template.json');
 
 export const VALID_SUBAGENTS = [
   'business-consultant',
@@ -408,8 +405,7 @@ export function runTaskLoop(slug: string, initialDraftContent: string, maxCycles
 // -------------------------------------------------------------
 
 function getSessionPath(sessionId: string): string {
-  const slug = sanitizeSlug(sessionId);
-  return path.join(VAULT_INBOX, `${slug}.json`);
+  return path.join(VAULT_INBOX, `${sanitizeSlug(sessionId)}.json`);
 }
 
 function loadSession(sessionId: string): { data: Record<string, any>; path: string } {
@@ -434,20 +430,12 @@ export function initSession(sessionId?: string, goal?: string, icp?: string, con
   ensureDir(VAULT_INBOX);
   const slug = sanitizeSlug(sessionId);
   const targetPath = getSessionPath(slug);
-
   if (fs.existsSync(targetPath)) {
     console.error(`⚠️ La sesión "${slug}" ya existe en ${targetPath}`);
     process.exit(1);
   }
-
-  let baseTemplate: Record<string, any> = {};
-  if (fs.existsSync(SESSION_TEMPLATE_PATH)) {
-    baseTemplate = JSON.parse(fs.readFileSync(SESSION_TEMPLATE_PATH, 'utf8'));
-  }
-
   const now = new Date().toISOString();
   const sessionData = {
-    ...baseTemplate,
     session_id: slug,
     created_at: now,
     updated_at: now,
@@ -468,7 +456,6 @@ export function initSession(sessionId?: string, goal?: string, icp?: string, con
       tracking_plan_path: '02 Marketing/07 Analitica & Crecimiento/',
     },
   };
-
   saveSession(targetPath, sessionData);
   console.log(`\n✅ Sesión de tarea inicializada exitosamente: ${slug}`);
   return sessionData;
@@ -504,7 +491,6 @@ export function addSessionTask(
   const taskId = `TASK-${String(tasks.length + 1).padStart(3, '0')}`;
   const skills = (skillsStr || '').split(',').map((s) => s.trim()).filter(Boolean);
   const dependsOn = (dependsOnStr || '').split(',').map((s) => s.trim()).filter(Boolean);
-
   const newTask = {
     id: taskId,
     title: title.trim(),
@@ -512,23 +498,13 @@ export function addSessionTask(
     skills,
     status: 'pending',
     depends_on: dependsOn,
-    inputs: {
-      context_file: 'BRIDS-Engine/context/product-marketing-context.md',
-      reference_task_ids: dependsOn,
-    },
-    output: {
-      vault_path: outputPath.trim(),
-      format: 'markdown',
-      summary: `Entregable para ${title}`,
-    },
+    inputs: { context_file: 'BRIDS-Engine/context/product-marketing-context.md', reference_task_ids: dependsOn },
+    output: { vault_path: outputPath.trim(), format: 'markdown', summary: `Entregable para ${title}` },
     validation_criteria: [`Cumple estándar de ${workflow}`, 'Revisión y formato verificados'],
   };
-
   tasks.push(newTask);
   data.atomic_tasks = tasks;
-  if (!data.workflows_chained.includes(newTask.workflow)) {
-    data.workflows_chained.push(newTask.workflow);
-  }
+  if (!data.workflows_chained.includes(newTask.workflow)) data.workflows_chained.push(newTask.workflow);
   saveSession(filePath, data);
   console.log(`\n✅ Subtarea ${taskId} agregada a la sesión "${sessionId}".`);
   return newTask;
@@ -539,30 +515,24 @@ export function updateSessionTask(sessionId?: string, taskId?: string, newStatus
     console.error('Uso: sdd-orchestrator update <session-id> <task-id> <pending|in_progress|completed|blocked> [resumen]');
     process.exit(1);
   }
-  const validStatuses = ['pending', 'in_progress', 'completed', 'blocked'];
   const statusLower = newStatus.toLowerCase().trim();
-  if (!validStatuses.includes(statusLower)) {
+  if (!['pending', 'in_progress', 'completed', 'blocked'].includes(statusLower)) {
     console.error(`❌ Estado inválido: "${newStatus}"`);
     process.exit(1);
   }
-
   const { data, path: filePath } = loadSession(sessionId);
   const task = (data.atomic_tasks || []).find((t: any) => t.id === taskId.toUpperCase().trim());
   if (!task) {
     console.error(`❌ No se encontró la subtarea "${taskId}" en la sesión "${sessionId}"`);
     process.exit(1);
   }
-
   task.status = statusLower;
   if (summary) task.output.summary = summary.trim();
-
-  const allCompleted = data.atomic_tasks.every((t: any) => t.status === 'completed');
-  if (allCompleted && data.atomic_tasks.length > 0) {
+  if (data.atomic_tasks.length > 0 && data.atomic_tasks.every((t: any) => t.status === 'completed')) {
     data.status = 'completed';
   } else if (data.status === 'pending') {
     data.status = 'in_progress';
   }
-
   saveSession(filePath, data);
   console.log(`\n✅ Subtarea "${task.id}" actualizada a estado: ${statusLower.toUpperCase()}`);
   return data;
