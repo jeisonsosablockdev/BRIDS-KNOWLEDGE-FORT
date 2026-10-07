@@ -9,12 +9,21 @@
  * @spec SPEC-BRIDS-001 (BRIDS-Engine Clean Architecture — Solana RWA & YC Venture)
  */
 
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { scanCliches } from './anti-cliche-filter.ts';
 import { evaluateWithClefSync, computeClefCacheKey } from './clef-client.ts';
 import type { ClefDecisionVerdict, ClefProbabilities } from './clef-client.ts';
+import type { SkillRecommendation, SpecAdversarialReport } from '../core/contracts.ts';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DEFAULT_SKILLS_DIR = path.resolve(__dirname, '../skills');
+const DEFAULT_AGENTS_DIR = path.resolve(__dirname, '../agents');
 
 export { evaluateWithClefSync, computeClefCacheKey };
-export type { ClefDecisionVerdict, ClefProbabilities };
+export type { ClefDecisionVerdict, ClefProbabilities, SkillRecommendation, SpecAdversarialReport };
 
 export interface RubricDimensions {
   goalIcp: number;            // Max 2.5
@@ -362,3 +371,244 @@ export function auditDeliverableText(text: string, specData: Record<string, any>
     }
   };
 }
+
+// Discovers the most relevant skills from BRIDS-Engine/skills/<skill>/SKILL.md and maps recommended subagents
+// for HITL-0 approval before writing the Spec.
+export function discoverSkillsForTask(
+  query: string,
+  targetFolder: string = '',
+  limit: number = 4,
+  skillsDir: string = DEFAULT_SKILLS_DIR,
+  agentsDir: string = DEFAULT_AGENTS_DIR
+): { skills: SkillRecommendation[]; recommendedSubagents: string[] } {
+  const tokens = `${query} ${targetFolder}`
+    .toLowerCase()
+    .replace(/[^a-z0-9áéíóúñ\s-]/gi, ' ')
+    .split(/\s+/)
+    .filter((w) => w.length >= 3);
+
+  const agentAffinities = new Map<string, number>();
+  const agentSkillBoost = new Map<string, string>();
+
+  if (fs.existsSync(agentsDir)) {
+    for (const file of fs.readdirSync(agentsDir).filter((f) => f.endsWith('.yaml'))) {
+      const agentId = file.replace(/\.yaml$/, '');
+      const raw = fs.readFileSync(path.join(agentsDir, file), 'utf8');
+      const descMatch = raw.match(/^description:\s*"?([^"\n]+)"?/m);
+      const desc = (descMatch?.[1] || '').toLowerCase();
+      let agentScore = 0;
+      for (const t of tokens) {
+        if (agentId.includes(t) || desc.includes(t)) agentScore += 2;
+      }
+      if (targetFolder && raw.toLowerCase().includes(targetFolder.toLowerCase())) {
+        agentScore += 5;
+      }
+      if (agentScore > 0) {
+        agentAffinities.set(agentId, agentScore);
+      }
+
+      const skillsBlock = raw.match(/^skills:\r?\n((?:\s+-\s+[^\r\n]+\r?\n?)+)/m);
+      if (skillsBlock?.[1] && agentScore > 0) {
+        for (const line of skillsBlock[1].split(/\r?\n/)) {
+          const s = line.replace(/^\s*-\s*/, '').trim();
+          if (s) agentSkillBoost.set(s, agentId);
+        }
+      }
+    }
+  }
+
+  const recommendations: SkillRecommendation[] = [];
+  if (fs.existsSync(skillsDir)) {
+    for (const entry of fs.readdirSync(skillsDir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      const skillMdPath = path.join(skillsDir, entry.name, 'SKILL.md');
+      if (!fs.existsSync(skillMdPath)) continue;
+
+      const raw = fs.readFileSync(skillMdPath, 'utf8');
+      const fmMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+      const fm = fmMatch?.[1] || '';
+      const name = (fm.match(/^name:\s*(.+)$/m)?.[1] || entry.name).trim().replace(/^["']|["']$/g, '');
+      const description = (fm.match(/^description:\s*(.+)$/m)?.[1] || '').trim().replace(/^["']|["']$/g, '');
+
+      const searchable = `${entry.name} ${name} ${description}`.toLowerCase();
+      let score = 0;
+      const matchedTokens: string[] = [];
+
+      for (const token of tokens) {
+        if (entry.name.toLowerCase().includes(token)) {
+          score += 3;
+          matchedTokens.push(token);
+        } else if (searchable.includes(token)) {
+          score += 1.5;
+          matchedTokens.push(token);
+        }
+      }
+
+      const boostedByAgent = agentSkillBoost.get(entry.name);
+      if (boostedByAgent) {
+        score += 3.5;
+      }
+
+      if (score > 0) {
+        const uniqueMatches = Array.from(new Set(matchedTokens)).slice(0, 4);
+        const reasonParts: string[] = [];
+        if (uniqueMatches.length > 0) {
+          reasonParts.push(`Coincidencia directa con [${uniqueMatches.join(', ')}]`);
+        }
+        if (boostedByAgent) {
+          reasonParts.push(`skill canónica del subagente ${boostedByAgent}`);
+        }
+        recommendations.push({
+          skillId: entry.name,
+          name,
+          description,
+          skillMdPath,
+          relevanceScore: Number(score.toFixed(2)),
+          reason: reasonParts.join(' + ') || 'Relevancia de dominio',
+        });
+      }
+    }
+  }
+
+  recommendations.sort((a, b) => b.relevanceScore - a.relevanceScore || a.skillId.localeCompare(b.skillId));
+  const topSkills = recommendations.slice(0, limit);
+
+  if (topSkills.length === 0 && fs.existsSync(path.join(skillsDir, 'yc-insight-driven-bp', 'SKILL.md'))) {
+    topSkills.push({
+      skillId: 'yc-insight-driven-bp',
+      name: 'yc-insight-driven-bp',
+      description: 'Structure a minimalist 5-8 slide pitch deck or memo centered on a non-consensus insight for Y Combinator.',
+      skillMdPath: path.join(skillsDir, 'yc-insight-driven-bp', 'SKILL.md'),
+      relevanceScore: 1.0,
+      reason: 'Skill fundacional por defecto para entregables estratégicos YC/BRIDS',
+    });
+  }
+
+  const sortedAgents = Array.from(agentAffinities.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([id]) => id)
+    .slice(0, 2);
+
+  return {
+    skills: topSkills,
+    recommendedSubagents: sortedAgents.length > 0 ? sortedAgents : ['business-consultant', 'founder-ghostwriter'],
+  };
+}
+
+// Adversarial Spec Critic (Pre-HITL-1):
+// Audits the Spec Markdown and TaskSpecData across 4 dimensions (0 to 9.0, threshold >= 8.5)
+// before presenting the Spec artifact to the user in HITL-1.
+export function auditSpecDocument(
+  specMdContent: string,
+  specData: Record<string, any> = {},
+  cycle: number = 1
+): SpecAdversarialReport {
+  const content = specMdContent || '';
+  const defects: string[] = [];
+  const directives: string[] = [];
+
+  // Dimension 1: Skill Integration (Max 2.5)
+  let d1 = 2.5;
+  const approvedSkills: string[] = Array.isArray(specData.approved_skills) ? specData.approved_skills : [];
+  if (approvedSkills.length === 0) {
+    d1 -= 1.2;
+    defects.push('El Spec no declara approved_skills validadas en HITL-0.');
+    directives.push('Ejecutar descubrimiento de skills y registrar approved_skills en el Spec.');
+  } else {
+    const missingInMd = approvedSkills.filter((s) => !content.toLowerCase().includes(s.toLowerCase()));
+    if (missingInMd.length > 0) {
+      d1 -= 0.8;
+      defects.push(`Skills aprobadas no integradas en el cuerpo/outline del Spec: ${missingInMd.join(', ')}.`);
+      directives.push(`Incorporar los frameworks de [${missingInMd.join(', ')}] en el Desglose Estructural del Spec.`);
+    }
+  }
+  if (!/(outline|desglose estructural|criterios de aceptaci[oó]n)/i.test(content)) {
+    d1 -= 0.7;
+    defects.push('El Spec carece de sección de Desglose Estructural (Outline) o Criterios de Aceptación.');
+    directives.push('Añadir sección de Desglose Estructural (Outline) con capítulos verificables.');
+  }
+
+  // Dimension 2: Vault Grounding & Zero Unresolved Placeholders (Max 2.5)
+  let d2 = 2.5;
+  const unresolvedPlaceholders = content.match(/\{\{[A-Z0-9_]+\}\}/g) || [];
+  if (unresolvedPlaceholders.length > 0) {
+    d2 -= 1.5;
+    defects.push(`Quedan placeholders sin resolver en el Spec: ${Array.from(new Set(unresolvedPlaceholders)).join(', ')}.`);
+    directives.push('Reemplazar todos los placeholders {{...}} con datos concretos del caso de negocio.');
+  }
+  if (!SOLANA_RWA_GROUNDING_PATTERN.test(content)) {
+    d2 -= 1.0;
+    defects.push('El Spec no incluye anclas técnicas verificables (Solana, Metaplex Core, Delaware SPV).');
+    directives.push('Anclar el Spec a la arquitectura técnica y legal de BRIDS (Solana, Metaplex Core, Delaware SPV).');
+  }
+  if (SPECULATIVE_PROMISE_PATTERN.test(content) || MAINNET_FABRICATION_PATTERN.test(content)) {
+    d2 -= 1.5;
+    defects.push('El Spec contiene afirmaciones prohibidas (retornos garantizados o falso despliegue en mainnet-beta).');
+    directives.push('Eliminar cualquier afirmación prohibida del Spec.');
+  }
+
+  // Dimension 3: ValidationContract Specificity (Max 2.0)
+  let d3 = 2.0;
+  const criteria: string[] = Array.isArray(specData?.validation_contract?.acceptance_criteria)
+    ? specData.validation_contract.acceptance_criteria
+    : [];
+  const anchors: string[] = Array.isArray(specData?.validation_contract?.required_technical_anchors)
+    ? specData.validation_contract.required_technical_anchors
+    : [];
+  if (criteria.length < 3) {
+    d3 -= 1.0;
+    defects.push(`ValidationContract débil: solo tiene ${criteria.length} criterio(s) de aceptación (mínimo requerido: 3).`);
+    directives.push('Definir al menos 3 acceptance_criteria verificables en el ValidationContract.');
+  }
+  if (anchors.length < 2) {
+    d3 -= 0.5;
+    defects.push(`ValidationContract tiene menos de 2 required_technical_anchors (${anchors.length}).`);
+    directives.push('Especificar al menos 2 anclas técnicas obligatorias en validation_contract.required_technical_anchors.');
+  }
+
+  // Dimension 4: Worker Handoff & Subagent Clarity (Max 2.0)
+  let d4 = 2.0;
+  const subagents: string[] = Array.isArray(specData.subagents) ? specData.subagents : [];
+  if (subagents.length === 0) {
+    d4 -= 1.0;
+    defects.push('No hay subagentes asignados al Spec.');
+    directives.push('Asignar al menos un subagente del squad al Spec.');
+  } else {
+    const missingAgents = subagents.filter((a) => !content.toLowerCase().includes(a.toLowerCase()));
+    if (missingAgents.length > 0) {
+      d4 -= 0.8;
+      defects.push(`Subagentes asignados no documentados en el Spec: ${missingAgents.join(', ')}.`);
+      directives.push(`Detallar las responsabilidades de [${missingAgents.join(', ')}] en el Spec.`);
+    }
+  }
+
+  const clefVerdict = evaluateWithClefSync(
+    content,
+    String(specData?.icp || 'Real Estate Sponsors & YC Investors'),
+    undefined,
+    criteria
+  );
+
+  const clampedD1 = clampScore(d1, 2.5);
+  const clampedD2 = clampScore(d2, 2.5);
+  const clampedD3 = clampScore(d3, 2.0);
+  const clampedD4 = clampScore(d4, 2.0);
+  const totalScore = clampScore(clampedD1 + clampedD2 + clampedD3 + clampedD4, SCALE_MAX);
+
+  return {
+    score: totalScore,
+    passed: totalScore >= SDD_THRESHOLD && defects.length === 0,
+    cycle,
+    engine: clefVerdict.engine,
+    dimensions: {
+      skillIntegration: clampedD1,
+      vaultGrounding: clampedD2,
+      contractSpecificity: clampedD3,
+      workerHandoffClarity: clampedD4,
+    },
+    defects,
+    remediation_directives: directives,
+    timestamp: new Date().toISOString(),
+  };
+}
+

@@ -32,8 +32,15 @@ import type {
   StructuredHandoff,
   ValidationContract,
   ExecutionTopologyPlan,
+  SkillRecommendation,
+  SpecAdversarialReport,
 } from './contracts.ts';
-import { evaluateDeliverable, auditDeliverableText } from '../evaluators/sdd-4d-rubric.ts';
+import {
+  evaluateDeliverable,
+  auditDeliverableText,
+  discoverSkillsForTask,
+  auditSpecDocument,
+} from '../evaluators/sdd-4d-rubric.ts';
 import type { RubricDimensions, EvaluationReport, FullAuditReport } from '../evaluators/sdd-4d-rubric.ts';
 import { scanCliches, autoRemediateDraft } from '../evaluators/anti-cliche-filter.ts';
 
@@ -42,6 +49,8 @@ export type {
   StructuredHandoff,
   ValidationContract,
   ExecutionTopologyPlan,
+  SkillRecommendation,
+  SpecAdversarialReport,
 };
 
 export class TaskOrchestrator {
@@ -53,6 +62,17 @@ export class TaskOrchestrator {
 
   getVault(): VaultGateway {
     return this.vault;
+  }
+
+  /**
+   * HITL-0 Skill Discovery: Ranks the top skills and subagents for a given task query and vault folder.
+   */
+  discoverSkills(
+    query: string,
+    targetFolder: string = '',
+    limit: number = 4
+  ): { skills: SkillRecommendation[]; recommendedSubagents: string[] } {
+    return discoverSkillsForTask(query, targetFolder, limit);
   }
 
   private buildContextFromSpec(data: TaskSpecData): TaskContext {
@@ -81,7 +101,8 @@ export class TaskOrchestrator {
     subagents: string[] = ['business-consultant'],
     icp: string = 'Institutional Real Estate Sponsors & YC Investors',
     goal: string = ''
-  ): Required<Omit<CreateSpecRequest, 'validationContract' | 'featureBranch'>> & {
+  ): Required<Omit<CreateSpecRequest, 'validationContract' | 'featureBranch' | 'approvedSkills'>> & {
+    approvedSkills?: string[];
     featureBranch?: string;
     validationContract?: Partial<ValidationContract>;
   } {
@@ -94,6 +115,7 @@ export class TaskOrchestrator {
           requestOrSlug.subagents && requestOrSlug.subagents.length > 0
             ? requestOrSlug.subagents
             : ['business-consultant'],
+        approvedSkills: requestOrSlug.approvedSkills,
         icp: requestOrSlug.icp || 'Institutional Real Estate Sponsors & YC Investors',
         goal: requestOrSlug.goal || '',
         featureBranch: requestOrSlug.featureBranch,
@@ -113,7 +135,8 @@ export class TaskOrchestrator {
 
   /**
    * Role 1 (Orchestrator): Initializes a new deliverable spec in state 'spec_review'
-   * with a formal ValidationContract and Serial/Parallel ExecutionTopologyPlan.
+   * with HITL-0 approved skills, ValidationContract, Serial/Parallel ExecutionTopologyPlan,
+   * and an initial Adversarial Spec Critic audit.
    */
   initSpec(
     requestOrSlug: CreateSpecRequest | string,
@@ -138,6 +161,12 @@ export class TaskOrchestrator {
       ...baseContract,
       ...req.validationContract,
     };
+
+    const discovered = discoverSkillsForTask(`${req.title} ${req.goal}`, normalizedFolder, 3);
+    const approvedSkills =
+      req.approvedSkills && req.approvedSkills.length > 0
+        ? req.approvedSkills
+        : discovered.skills.map((s) => s.skillId);
 
     const topology = buildExecutionTopology(req.subagents);
     const canonicalVaultFile = path.join(normalizedFolder, `${cleanSlug}.md`);
@@ -165,6 +194,8 @@ export class TaskOrchestrator {
       target_file: canonicalVaultFile,
       subagents: req.subagents,
       subagents_involved: req.subagents,
+      approved_skills: approvedSkills,
+      hitl_0_skills_approved: Boolean(req.approvedSkills && req.approvedSkills.length > 0),
       icp: req.icp,
       goal: req.goal,
       status: reviewResult.context.state,
@@ -257,14 +288,47 @@ export class TaskOrchestrator {
       title: req.title,
       targetFolder: normalizedFolder,
       subagents: req.subagents,
+      approvedSkills,
       icp: req.icp,
       goal: req.goal,
       dateStr,
       state: reviewResult.context.state,
     });
 
+    specData.spec_evaluation = auditSpecDocument(specMarkdown, specData, 1);
+
     this.vault.saveSpec(cleanSlug, specData, specMarkdown);
     return reviewResult.context;
+  }
+
+  /**
+   * Adversarial Spec Critic Loop (Pre-HITL-1): Audits and optionally updates the Spec Markdown
+   * before human HITL-1 approval.
+   */
+  evaluateAndRefineSpec(slug: string, customSpecMarkdown?: string): SpecAdversarialReport {
+    const loaded = this.vault.loadSpec(slug);
+    const prevCycle = loaded.data.spec_evaluation?.cycle ?? 0;
+    const nextCycle = prevCycle + 1;
+
+    let mdContent = customSpecMarkdown;
+    if (mdContent === undefined) {
+      mdContent = this.vault.renderSpecMarkdown({
+        slug: loaded.data.slug,
+        title: loaded.data.title,
+        targetFolder: loaded.data.target_folder,
+        subagents: loaded.data.subagents,
+        approvedSkills: loaded.data.approved_skills,
+        icp: loaded.data.icp,
+        goal: loaded.data.goal,
+        dateStr: (loaded.data.updated_at || new Date().toISOString()).split('T')[0]!,
+        state: String(loaded.data.status),
+      });
+    }
+
+    const report = auditSpecDocument(mdContent, loaded.data, nextCycle);
+    loaded.data.spec_evaluation = report;
+    this.vault.saveSpec(slug, loaded.data, customSpecMarkdown !== undefined ? customSpecMarkdown : undefined);
+    return report;
   }
 
   /**
@@ -290,17 +354,45 @@ export class TaskOrchestrator {
     data.hitl_checkpoints.hitl_1_spec_approval.status = 'refining';
     data.status = 'spec_review';
 
-    this.vault.appendSpecFeedback(slug, now.split('T')[0]!, userFeedback);
-    this.vault.saveSpec(slug, data);
+    const dateStr = now.split('T')[0]!;
+    const refreshedMarkdown = this.vault.renderSpecMarkdown({
+      slug: data.slug,
+      title: data.title,
+      targetFolder: data.target_folder,
+      subagents: data.subagents,
+      approvedSkills: data.approved_skills,
+      icp: data.icp,
+      goal: data.goal,
+      dateStr,
+      state: 'spec_review',
+    });
+    data.spec_evaluation = auditSpecDocument(
+      refreshedMarkdown,
+      data,
+      (data.spec_evaluation?.cycle ?? 0) + 1
+    );
+
+    this.vault.saveSpec(slug, data, refreshedMarkdown);
+    this.vault.appendSpecFeedback(slug, dateStr, userFeedback);
     return data;
   }
 
   /**
    * Human approves specification & ValidationContract (HITL-1 Guardrail)
+   * Blocks approval if the Adversarial Spec Critic scored the Spec < 8.5/9.0.
    */
   approveSpec(slug: string): TransitionResult {
     const loaded = this.vault.loadSpec(slug);
     const ctx = this.buildContextFromSpec(loaded.data);
+
+    if (loaded.data.spec_evaluation && !loaded.data.spec_evaluation.passed) {
+      return {
+        success: false,
+        context: ctx,
+        error: `Adversarial Spec Critic bloqueó HITL-1: El Spec "${slug}" obtuvo ${loaded.data.spec_evaluation.score}/9.0 (< 8.5). Defectos: ${loaded.data.spec_evaluation.defects.join(' | ')}`,
+      };
+    }
+
     const res = smApproveSpec(ctx);
 
     if (!res.success) {
@@ -309,6 +401,7 @@ export class TaskOrchestrator {
 
     const now = new Date().toISOString();
     loaded.data.status = res.context.state;
+    loaded.data.hitl_0_skills_approved = true;
     if (loaded.data.hitl_checkpoints) {
       loaded.data.hitl_checkpoints.hitl_1_spec_approval.status = 'approved';
       loaded.data.hitl_checkpoints.hitl_1_spec_approval.approved_at = now;
