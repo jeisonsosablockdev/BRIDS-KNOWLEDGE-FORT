@@ -47,6 +47,14 @@ export interface GateOptions {
   specsDir?: string;
   vaultRoot?: string;
   agentsDir?: string;
+  gitRoot?: string;
+}
+
+export function readCurrentGitBranch(gitRoot: string = ROOT_DIR): string | null {
+  const headPath = path.join(gitRoot, '.git', 'HEAD');
+  if (!fs.existsSync(headPath)) return null;
+  const raw = fs.readFileSync(headPath, 'utf8').trim();
+  return raw.startsWith('ref: refs/heads/') ? raw.slice('ref: refs/heads/'.length) : null;
 }
 
 const PARALLEL_READ_AGENTS = new Set<string>([
@@ -220,6 +228,16 @@ export function evaluatePreToolUse(
           decision: 'deny',
           reason: `🛑 BLOQUEO DE CONTRATO (workflow-gate-hook): El Spec "${draftSlug}" no posee un ValidationContract con acceptance_criteria definidos.`,
         };
+      }
+      const expectedBranch = spec.git_branch_topology?.spec_branch;
+      if (expectedBranch) {
+        const activeBranch = readCurrentGitBranch(options.gitRoot ?? ROOT_DIR);
+        if (activeBranch && activeBranch !== expectedBranch) {
+          return {
+            decision: 'deny',
+            reason: `🛑 BLOQUEO DE RAMA SDD (workflow-gate-hook): El Spec "${draftSlug}" pertenece a la rama hija "${expectedBranch}", pero el repositorio está en "${activeBranch}". Cambia a la rama hija antes de redactar borradores.`,
+          };
+        }
       }
     }
 

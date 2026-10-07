@@ -172,6 +172,15 @@ export interface StructuredHandoff {
 }
 
 /**
+ * Hierarchical Feature -> Spec Git Branch Topology
+ */
+export interface GitBranchTopology {
+  feature_branch: string;   // Parent feature branch, e.g., "feat/yc-data-room"
+  spec_branch: string;      // Child spec branch, e.g., "spec/yc-data-room/spv-legal-memo"
+  merged_at?: string | null;
+}
+
+/**
  * Value Object / DTO for initializing a Spec without positional parameter pollution.
  */
 export interface CreateSpecRequest {
@@ -181,6 +190,7 @@ export interface CreateSpecRequest {
   subagents?: string[];
   icp?: string;
   goal?: string;
+  featureBranch?: string;
   validationContract?: Partial<ValidationContract>;
 }
 
@@ -231,6 +241,7 @@ export interface TaskSpecData {
   iteration?: number;
   created_at?: string;
   updated_at?: string;
+  git_branch_topology?: GitBranchTopology;
   validation_contract?: ValidationContract;
   execution_topology?: ExecutionTopologyPlan;
   worker_handoffs?: StructuredHandoff[];

@@ -12,6 +12,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { BANNED_PATTERNS, scanCliches, autoRemediateDraft as evalAutoRemediateDraft } from '../../evaluators/anti-cliche-filter.ts';
 import {
@@ -32,6 +33,7 @@ import {
 } from '../../core/state-machine.ts';
 import { VaultGateway, ensureDir } from '../../core/vault-gateway.ts';
 import { TaskOrchestrator } from '../../core/orchestrator.ts';
+import { readCurrentGitBranch } from './workflow-gate-hook.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -96,6 +98,72 @@ export const saveSpec = (paths: { slug: string }, specData: Record<string, any>)
 export const auditText = (text: string, specData: Record<string, any> = {}) => auditDeliverableText(text, specData);
 export const autoRemediateDraft = (text: string, _report: Record<string, any> = {}) => evalAutoRemediateDraft(text);
 
+export function resolveFeatureBranch(explicitFeature?: string, gitRoot: string = ROOT_DIR): string | undefined {
+  if (explicitFeature) {
+    const clean = sanitizeSlug(explicitFeature.replace(/^(feat|feature|spec)\//, '').split('/')[0] || explicitFeature);
+    return clean ? `feat/${clean}` : undefined;
+  }
+  const active = readCurrentGitBranch(gitRoot);
+  if (!active) return undefined;
+  if (active.startsWith('feat/') || active.startsWith('feature/')) {
+    const clean = sanitizeSlug(active.replace(/^(feat|feature)\//, '').split('/')[0] || '');
+    return clean ? `feat/${clean}` : undefined;
+  }
+  if (active.startsWith('spec/')) {
+    const parts = active.split('/');
+    if (parts[1]) return `feat/${sanitizeSlug(parts[1])}`;
+  }
+  return undefined;
+}
+
+export function branchSpec(slug?: string, explicitFeature?: string): { featureBranch: string; specBranch: string } {
+  if (!slug) {
+    console.error('❌ Uso: sdd-orchestrator branch <slug> [feature-branch]');
+    process.exit(1);
+  }
+  const cleanSlug = sanitizeSlug(slug);
+  let featureBranch = resolveFeatureBranch(explicitFeature);
+  if (!featureBranch && vaultGateway.specExists(cleanSlug)) {
+    featureBranch = loadSpec(cleanSlug).data.git_branch_topology?.feature_branch;
+  }
+  if (!featureBranch) {
+    throw new Error(`No se pudo inferir una rama padre feat/<feature> para "${cleanSlug}". Pasa el nombre del feature o sitúate en una rama feat/*.`);
+  }
+  const featureClean = sanitizeSlug(featureBranch.replace(/^(feat|feature)\//, ''));
+  const specBranch = `spec/${featureClean}/${cleanSlug}`;
+
+  execFileSync('git', ['checkout', '-B', specBranch], { cwd: ROOT_DIR, stdio: 'pipe' });
+  console.log(`🌱 Rama hija SDD activa: ${specBranch} (Padre: ${featureBranch})`);
+  return { featureBranch, specBranch };
+}
+
+export function mergeSpec(slug?: string): { featureBranch: string; specBranch: string } {
+  if (!slug) {
+    console.error('❌ Uso: sdd-orchestrator merge <slug>');
+    process.exit(1);
+  }
+  const { data } = loadSpec(slug);
+  if (data.status !== 'completed') {
+    throw new Error(`❌ El Spec "${slug}" debe estar en estado "completed" (HITL-2 aprobado) antes de fusionar a su rama padre.`);
+  }
+  const topology = data.git_branch_topology;
+  if (!topology?.feature_branch || !topology?.spec_branch) {
+    throw new Error(`❌ El Spec "${slug}" no tiene git_branch_topology configurada.`);
+  }
+
+  data.git_branch_topology = { ...topology, merged_at: new Date().toISOString() };
+  vaultGateway.saveSpec(data.slug, data);
+
+  execFileSync('git', ['checkout', topology.feature_branch], { cwd: ROOT_DIR, stdio: 'pipe' });
+  execFileSync(
+    'git',
+    ['merge', '--no-ff', topology.spec_branch, '-m', `feat(sdd): merge approved spec ${data.slug} into ${topology.feature_branch}\n\nCo-Authored-By: Google Gemini <gemini@google.com>`],
+    { cwd: ROOT_DIR, stdio: 'pipe' }
+  );
+  console.log(`🌿 Spec "${data.slug}" fusionado (--no-ff) desde ${topology.spec_branch} hacia ${topology.feature_branch}`);
+  return { featureBranch: topology.feature_branch, specBranch: topology.spec_branch };
+}
+
 // -------------------------------------------------------------
 // CORE SDD COMMANDS (DELEGATED TO TaskOrchestrator — 3-ROLE ARCHITECTURE)
 // -------------------------------------------------------------
@@ -106,7 +174,8 @@ export function initSpec(
   targetFolder?: string,
   subagentsStr?: string,
   icp?: string,
-  goal?: string
+  goal?: string,
+  featureOverride?: string
 ) {
   if (!slug || !title || !targetFolder) {
     console.error('❌ Uso: sdd-orchestrator init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]"');
@@ -144,6 +213,22 @@ export function initSpec(
     return paths;
   }
 
+  const detectedFeature = resolveFeatureBranch(featureOverride);
+  const isAutomatedTestSlug = cleanSlug.startsWith('test-') || cleanSlug.startsWith('smoke-');
+
+  if (
+    detectedFeature &&
+    !isAutomatedTestSlug &&
+    process.argv[1] &&
+    path.resolve(process.argv[1]) === __filename
+  ) {
+    try {
+      branchSpec(cleanSlug, detectedFeature);
+    } catch {
+      // Non-fatal if git checkout cannot switch
+    }
+  }
+
   taskOrchestrator.initSpec({
     slug: cleanSlug,
     title,
@@ -151,6 +236,7 @@ export function initSpec(
     subagents,
     icp: icp || 'Real Estate Sponsors & LPs',
     goal: goal || `Consolidar ${title}`,
+    ...(detectedFeature && !isAutomatedTestSlug ? { featureBranch: detectedFeature } : {}),
   });
 
   const canonicalVaultFile = path.join(normalizedTarget, `${cleanSlug}.md`);
@@ -159,6 +245,11 @@ export function initSpec(
   console.log(`   ⚙️ Estado JSON:   ${paths.specJsonPath}`);
   console.log(`   🎯 Destino Final:  BRIDS-Brain/${canonicalVaultFile}`);
   console.log(`   🤖 Subagentes:     ${subagents.join(', ')}`);
+  if (detectedFeature && !isAutomatedTestSlug) {
+    const featureClean = sanitizeSlug(detectedFeature.replace(/^(feat|feature)\//, ''));
+    console.log(`   🌿 Rama Padre:     feat/${featureClean}`);
+    console.log(`   🌱 Rama Hija Spec: spec/${featureClean}/${cleanSlug}`);
+  }
   console.log(`\n🛑 GUARDRAIL HITL-1 ACTIVO:`);
   console.log(`   El spec y su ValidationContract están en espera de tu revisión humana.`);
   console.log(`   👉 Para aprobar:  node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts approve-spec ${cleanSlug}`);
@@ -651,6 +742,12 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
     case 'approve-deliverable':
     case 'accept':
       approveDeliverable(args[1]);
+      break;
+    case 'branch':
+      branchSpec(args[1], args[2]);
+      break;
+    case 'merge':
+      mergeSpec(args[1]);
       break;
     case 'list':
       listSpecs();

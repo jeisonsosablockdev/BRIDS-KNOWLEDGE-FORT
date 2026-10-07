@@ -81,7 +81,8 @@ export class TaskOrchestrator {
     subagents: string[] = ['business-consultant'],
     icp: string = 'Institutional Real Estate Sponsors & YC Investors',
     goal: string = ''
-  ): Required<Omit<CreateSpecRequest, 'validationContract'>> & {
+  ): Required<Omit<CreateSpecRequest, 'validationContract' | 'featureBranch'>> & {
+    featureBranch?: string;
     validationContract?: Partial<ValidationContract>;
   } {
     if (typeof requestOrSlug === 'object' && requestOrSlug !== null) {
@@ -95,6 +96,7 @@ export class TaskOrchestrator {
             : ['business-consultant'],
         icp: requestOrSlug.icp || 'Institutional Real Estate Sponsors & YC Investors',
         goal: requestOrSlug.goal || '',
+        featureBranch: requestOrSlug.featureBranch,
         validationContract: requestOrSlug.validationContract,
       };
     }
@@ -140,6 +142,18 @@ export class TaskOrchestrator {
     const topology = buildExecutionTopology(req.subagents);
     const canonicalVaultFile = path.join(normalizedFolder, `${cleanSlug}.md`);
 
+    let gitBranchTopology = undefined;
+    if (req.featureBranch) {
+      const featureClean = this.vault.sanitizeSlug(
+        req.featureBranch.replace(/^(feat|feature|spec)\//, '').split('/')[0] || req.featureBranch
+      );
+      gitBranchTopology = {
+        feature_branch: `feat/${featureClean}`,
+        spec_branch: `spec/${featureClean}/${cleanSlug}`,
+        merged_at: null,
+      };
+    }
+
     const specData: TaskSpecData = {
       spec_version: '3.0.0',
       id: paths.specId,
@@ -157,6 +171,7 @@ export class TaskOrchestrator {
       iteration: 0,
       created_at: now,
       updated_at: now,
+      ...(gitBranchTopology ? { git_branch_topology: gitBranchTopology } : {}),
       validation_contract: validationContract,
       execution_topology: topology,
       worker_handoffs: [],

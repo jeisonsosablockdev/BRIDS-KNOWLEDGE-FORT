@@ -350,5 +350,79 @@ describe('SPEC-HOOK-004: Deterministic PreToolUse & Stop Hooks (3-Role Multi-Age
     );
     assert.equal(shellAllow.decision, 'allow');
   });
+
+  it('@spec REQ-HOOK-407: should enforce hierarchical feat/<feature> -> spec/<feature>/<slug> child branch via .git/HEAD (<0.05ms, zero subprocesses)', async () => {
+    const { resolveFeatureBranch } = await import('../../scripts/sdd/sdd-orchestrator.ts');
+
+    const fakeGitDir = path.join(tempRoot, '.git');
+    fs.mkdirSync(fakeGitDir, { recursive: true });
+    const headFile = path.join(fakeGitDir, 'HEAD');
+
+    // 1. When on parent feat/yc-data-room, resolveFeatureBranch returns feat/yc-data-room
+    fs.writeFileSync(headFile, 'ref: refs/heads/feat/yc-data-room\n', 'utf8');
+    assert.equal(resolveFeatureBranch(undefined, tempRoot), 'feat/yc-data-room');
+
+    // 2. When on a sibling child spec/yc-data-room/unit-economics, resolveFeatureBranch still infers parent feat/yc-data-room
+    fs.writeFileSync(headFile, 'ref: refs/heads/spec/yc-data-room/unit-economics\n', 'utf8');
+    assert.equal(resolveFeatureBranch(undefined, tempRoot), 'feat/yc-data-room');
+
+    // 3. Initialize Spec with featureBranch and approve HITL-1
+    orchestrator.initSpec({
+      slug: 'spv-legal-memo',
+      title: 'SPV Legal Memo',
+      targetFolder: '01 Negocio/03 Legal & Cumplimiento',
+      subagents: ['compliance-officer'],
+      featureBranch: 'feat/yc-data-room',
+    });
+    orchestrator.approveSpec('spv-legal-memo');
+
+    const loaded = vault.loadSpec('spv-legal-memo').data;
+    assert.deepEqual(loaded.git_branch_topology, {
+      feature_branch: 'feat/yc-data-room',
+      spec_branch: 'spec/yc-data-room/spv-legal-memo',
+      merged_at: null,
+    });
+
+    const draftTarget = path.join(
+      tempRoot,
+      '00 Inbox',
+      'Specs',
+      'spv-legal-memo-work',
+      'draft_cycle_1.md'
+    );
+
+    // 4. Attempting to write draft_cycle_1.md while still on feat/yc-data-room (or wrong child branch) is DENIED
+    const wrongBranchRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'write_to_file',
+          args: {
+            TargetFile: draftTarget,
+            CodeContent: '# Draft on wrong branch',
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(wrongBranchRes.decision, 'deny');
+    assert.ok(wrongBranchRes.reason?.includes('BLOQUEO DE RAMA SDD'));
+
+    // 5. Switching .git/HEAD to child branch spec/yc-data-room/spv-legal-memo ALLOWS writing draft_cycle_1.md
+    fs.writeFileSync(headFile, 'ref: refs/heads/spec/yc-data-room/spv-legal-memo\n', 'utf8');
+    const rightBranchRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'write_to_file',
+          args: {
+            TargetFile: draftTarget,
+            CodeContent: '# Draft on child spec branch',
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(rightBranchRes.decision, 'allow');
+  });
 });
+
 
