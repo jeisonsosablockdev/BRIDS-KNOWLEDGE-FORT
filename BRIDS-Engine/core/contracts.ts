@@ -180,6 +180,18 @@ export interface GitBranchTopology {
   merged_at?: string | null;
 }
 
+export type ExecutionEngineType = 'native_squad' | 'teamwork_preview';
+export type TeamworkScaleMode = 'full' | 'small' | 'review' | 'proof' | 'proof_large';
+export type TeamworkIntegrityMode = 'development' | 'demo' | 'benchmark';
+
+export interface TeamworkConfig {
+  scale_mode: TeamworkScaleMode;
+  integrity_mode: TeamworkIntegrityMode;
+  working_directory: string;
+  prompt_draft_path?: string;
+  verification_command: string;
+}
+
 /**
  * Discovered Skill Recommendation for HITL-0 Approval
  */
@@ -204,7 +216,7 @@ export interface SpecAdversarialReport {
     skillIntegration: number;      // Max 2.5
     vaultGrounding: number;        // Max 2.5
     contractSpecificity: number;   // Max 2.0
-    workerHandoffClarity: number;  // Max 2.0
+    workerHandoffClarity: number;  // Max 2.0 (or ForcingFunctionClarity when execution_engine === 'teamwork_preview')
   };
   defects: string[];
   remediation_directives: string[];
@@ -223,6 +235,9 @@ export interface CreateSpecRequest {
   icp?: string;
   goal?: string;
   featureBranch?: string;
+  executionEngine?: ExecutionEngineType;
+  teamworkScale?: TeamworkScaleMode;
+  teamworkIntegrityMode?: TeamworkIntegrityMode;
   validationContract?: Partial<ValidationContract>;
 }
 
@@ -269,6 +284,8 @@ export interface TaskSpecData {
   subagents_involved?: string[];
   approved_skills?: string[];
   hitl_0_skills_approved?: boolean;
+  execution_engine?: ExecutionEngineType;
+  teamwork_config?: TeamworkConfig;
   spec_evaluation?: SpecAdversarialReport;
   icp: string;
   goal: string;

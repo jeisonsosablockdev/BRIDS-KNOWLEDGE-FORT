@@ -63,16 +63,19 @@ function saveToDiskCache(cacheKey: string, probabilities: ClefProbabilities): vo
   }
 }
 
+let ollamaUnreachableInProcess = false;
+
 export function computeClefCacheKey(
   text: string,
   targetIcp: string = '',
   model: string = DEFAULT_CLEF_MODEL
 ): string {
+  const dateNormalizedText = text.trim().replace(/\b20\d{2}-\d{2}-\d{2}\b/g, 'YYYY-MM-DD');
   const normalizedPayload = JSON.stringify({
     v: RUBRIC_SCHEMA_VERSION,
     model,
     icp: targetIcp.trim().toLowerCase(),
-    text: text.trim(),
+    text: dateNormalizedText,
   });
   return crypto.createHash('sha256').update(normalizedPayload).digest('hex');
 }
@@ -150,8 +153,7 @@ function parseSystemOneAnswers(rawJson: string): ClefProbabilities | null {
 
 /**
  * Evaluates a draft synchronously against Cloudflare Clef (/v1/systemone) with SHA-256 idempotence.
- * Uses a fast 250ms connect-timeout (so offline Ollama fails immediately) and a 25s max-time + 30m keep_alive
- * so cold-starts into Mac unified memory do not prematurely abort at 12s.
+ * Uses a fast 250ms connect-timeout and process-level circuit breaker when Ollama is cold/offline.
  */
 export function evaluateWithClefSync(
   text: string,
@@ -172,8 +174,8 @@ export function evaluateWithClefSync(
     return { engine: 'clef-flash', model, cacheKey, cached: true, probabilities: diskCache[cacheKey] };
   }
 
-  if (process.env.CLEF_DISABLE_NETWORK === '1') {
-    return createFallbackVerdict(text, model, cacheKey);
+  if (process.env.CLEF_DISABLE_NETWORK === '1' || ollamaUnreachableInProcess) {
+    return createFallbackVerdict(text, model, cacheKey, (acceptanceCriteria?.length ?? 0) > 0);
   }
 
   const endpoint = `${OLLAMA_BASE_URL.replace(/\/+$/, '')}/v1/systemone`;
@@ -187,7 +189,7 @@ export function evaluateWithClefSync(
         '--connect-timeout',
         '0.25',
         '--max-time',
-        '60',
+        '4',
         '-H',
         'Content-Type: application/json',
         '-d',
@@ -202,8 +204,10 @@ export function evaluateWithClefSync(
       saveToDiskCache(cacheKey, probabilities);
       return { engine: 'clef-flash', model, cacheKey, cached: false, probabilities };
     }
+    ollamaUnreachableInProcess = true;
   } catch {
-    // Graceful deterministic fallback when Ollama is offline
+    // Graceful deterministic fallback when Ollama is offline or unresponsive
+    ollamaUnreachableInProcess = true;
   }
 
   return createFallbackVerdict(text, model, cacheKey, (acceptanceCriteria?.length ?? 0) > 0);

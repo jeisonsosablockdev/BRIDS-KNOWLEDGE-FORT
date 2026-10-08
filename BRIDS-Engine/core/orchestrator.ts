@@ -34,6 +34,10 @@ import type {
   ExecutionTopologyPlan,
   SkillRecommendation,
   SpecAdversarialReport,
+  ExecutionEngineType,
+  TeamworkScaleMode,
+  TeamworkIntegrityMode,
+  TeamworkConfig,
 } from './contracts.ts';
 import {
   evaluateDeliverable,
@@ -51,6 +55,10 @@ export type {
   ExecutionTopologyPlan,
   SkillRecommendation,
   SpecAdversarialReport,
+  ExecutionEngineType,
+  TeamworkScaleMode,
+  TeamworkIntegrityMode,
+  TeamworkConfig,
 };
 
 export class TaskOrchestrator {
@@ -65,13 +73,19 @@ export class TaskOrchestrator {
   }
 
   /**
-   * HITL-0 Skill Discovery: Ranks the top skills and subagents for a given task query and vault folder.
+   * HITL-0 Skill Discovery: Ranks the top skills, subagents, and recommended execution engine
+   * ('native_squad' vs 'teamwork_preview' + scale mode) for a given task query and vault folder.
    */
   discoverSkills(
     query: string,
     targetFolder: string = '',
     limit: number = 4
-  ): { skills: SkillRecommendation[]; recommendedSubagents: string[] } {
+  ): {
+    skills: SkillRecommendation[];
+    recommendedSubagents: string[];
+    recommendedExecutionEngine: ExecutionEngineType;
+    recommendedTeamworkScale?: TeamworkScaleMode;
+  } {
     return discoverSkillsForTask(query, targetFolder, limit);
   }
 
@@ -101,9 +115,22 @@ export class TaskOrchestrator {
     subagents: string[] = ['business-consultant'],
     icp: string = 'Institutional Real Estate Sponsors & YC Investors',
     goal: string = ''
-  ): Required<Omit<CreateSpecRequest, 'validationContract' | 'featureBranch' | 'approvedSkills'>> & {
+  ): Required<
+    Omit<
+      CreateSpecRequest,
+      | 'validationContract'
+      | 'featureBranch'
+      | 'approvedSkills'
+      | 'executionEngine'
+      | 'teamworkScale'
+      | 'teamworkIntegrityMode'
+    >
+  > & {
     approvedSkills?: string[];
     featureBranch?: string;
+    executionEngine?: ExecutionEngineType;
+    teamworkScale?: TeamworkScaleMode;
+    teamworkIntegrityMode?: TeamworkIntegrityMode;
     validationContract?: Partial<ValidationContract>;
   } {
     if (typeof requestOrSlug === 'object' && requestOrSlug !== null) {
@@ -119,6 +146,9 @@ export class TaskOrchestrator {
         icp: requestOrSlug.icp || 'Institutional Real Estate Sponsors & YC Investors',
         goal: requestOrSlug.goal || '',
         featureBranch: requestOrSlug.featureBranch,
+        executionEngine: requestOrSlug.executionEngine,
+        teamworkScale: requestOrSlug.teamworkScale,
+        teamworkIntegrityMode: requestOrSlug.teamworkIntegrityMode,
         validationContract: requestOrSlug.validationContract,
       };
     }
@@ -134,9 +164,62 @@ export class TaskOrchestrator {
   }
 
   /**
+   * Renders the canonical /teamwork-preview Step 9 prompt from TaskSpecData,
+   * preserving Teamwork's opening line routing rules ("Specify What, Not How") and
+   * embedding BRIDS-Engine's deterministic CLI verification oracle as the Forcing Function.
+   */
+  renderTeamworkPrompt(slug: string, specOverride?: TaskSpecData): string {
+    const data = specOverride ?? this.vault.loadSpec(slug).data;
+    const scale = data.teamwork_config?.scale_mode || 'full';
+    const integrity = data.teamwork_config?.integrity_mode || 'development';
+    const workingDir = data.teamwork_config?.working_directory || this.vault.getVaultDir();
+    const verificationCmd =
+      data.teamwork_config?.verification_command ||
+      `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts evaluate ${data.slug} "BRIDS-Brain/00 Inbox/Specs/${data.slug}-work/draft_cycle_1.md"`;
+
+    let openingPrefix = '';
+    if (scale === 'small') {
+      openingPrefix = 'This is a single self-contained fix; keep it small and focused.\n\n';
+    } else if (scale === 'proof_large') {
+      openingPrefix = 'Use a very large team of agents.\n\n';
+    }
+
+    const description = `${data.title}. ${data.goal || data.intent?.business_goal || `Deliverable for ${data.icp}.`}`;
+    const criteria = data.validation_contract?.acceptance_criteria || [];
+    const anchors = data.validation_contract?.required_technical_anchors || ['Solana', 'Metaplex', 'Delaware', 'SPV'];
+    const skills = data.approved_skills || [];
+
+    const criteriaLines = criteria.map((c) => `- [ ] ${c}`).join('\n');
+    const skillsLines =
+      skills.length > 0
+        ? `\n### Reference Skills (HITL-0 Approved)\n${skills.map((s) => `- \`BRIDS-Engine/skills/${s}/SKILL.md\``).join('\n')}\n`
+        : '';
+
+    return (
+      `${openingPrefix}${description}\n\n` +
+      `Working directory: ${workingDir}\n` +
+      `Integrity mode: ${integrity}\n` +
+      `${skillsLines}\n` +
+      `## Requirements\n\n` +
+      `### R1. Primary Deliverable (${data.title})\n` +
+      `Produce the complete deliverable tailored to ${data.icp}, grounded in BRIDS architecture (${anchors.join(', ')}).\n\n` +
+      `### R2. Controlled Vault Infrastructure\n` +
+      `Write all working drafts exclusively inside \`BRIDS-Brain/00 Inbox/Specs/${data.slug}-work/draft_cycle_1.md\`. Do not write directly to \`BRIDS-Brain/01 Negocio\` or \`02 Marketing\` before HITL-2 approval.\n\n` +
+      `## Verification Resources\n\n` +
+      `- **Programmatic Forcing Function (Mandatory Oracle):**\n` +
+      `  \`${verificationCmd}\`\n` +
+      `- The command evaluates the 4D Rubric + Anti-Cliché Filter + Clef System One and must exit with code \`0\` (score >= 8.5/9.0).\n\n` +
+      `## Acceptance Criteria\n\n` +
+      `### Quality & Contract Verification\n` +
+      `${criteriaLines}\n` +
+      `- [ ] \`${verificationCmd}\` passes with score >= 8.5/9.0 and 0 banned clichés.\n`
+    );
+  }
+
+  /**
    * Role 1 (Orchestrator): Initializes a new deliverable spec in state 'spec_review'
    * with HITL-0 approved skills, ValidationContract, Serial/Parallel ExecutionTopologyPlan,
-   * and an initial Adversarial Spec Critic audit.
+   * optional Teamwork Swarm configuration (prompt_draft.md), and an initial Adversarial Spec Critic audit.
    */
   initSpec(
     requestOrSlug: CreateSpecRequest | string,
@@ -168,6 +251,19 @@ export class TaskOrchestrator {
         ? req.approvedSkills
         : discovered.skills.map((s) => s.skillId);
 
+    const executionEngine: ExecutionEngineType = req.executionEngine || 'native_squad';
+    const verificationCommand = `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts evaluate ${cleanSlug} "BRIDS-Brain/00 Inbox/Specs/${cleanSlug}-work/draft_cycle_1.md"`;
+    let teamworkConfig: TeamworkConfig | undefined = undefined;
+    if (executionEngine === 'teamwork_preview') {
+      teamworkConfig = {
+        scale_mode: req.teamworkScale || discovered.recommendedTeamworkScale || 'full',
+        integrity_mode: req.teamworkIntegrityMode || 'development',
+        working_directory: path.resolve(this.vault.getVaultDir(), '..'),
+        prompt_draft_path: path.join(paths.workDir, 'prompt_draft.md'),
+        verification_command: verificationCommand,
+      };
+    }
+
     const topology = buildExecutionTopology(req.subagents);
     const canonicalVaultFile = path.join(normalizedFolder, `${cleanSlug}.md`);
 
@@ -196,6 +292,8 @@ export class TaskOrchestrator {
       subagents_involved: req.subagents,
       approved_skills: approvedSkills,
       hitl_0_skills_approved: Boolean(req.approvedSkills && req.approvedSkills.length > 0),
+      execution_engine: executionEngine,
+      ...(teamworkConfig ? { teamwork_config: teamworkConfig } : {}),
       icp: req.icp,
       goal: req.goal,
       status: reviewResult.context.state,
@@ -246,7 +344,10 @@ export class TaskOrchestrator {
         },
         {
           id: 'STEP-02',
-          name: 'Fresh-Context Serial Worker Implementation & Structured Handoffs',
+          name:
+            executionEngine === 'teamwork_preview'
+              ? 'Teamwork Swarm Execution (Specify What, Not How + Forcing Function)'
+              : 'Fresh-Context Serial Worker Implementation & Structured Handoffs',
           role: 'worker',
           execution_mode: 'serial_write',
           model_tier: topology.serialWriteWorkers[0]?.modelTier || 'pro',
@@ -293,11 +394,17 @@ export class TaskOrchestrator {
       goal: req.goal,
       dateStr,
       state: reviewResult.context.state,
+      executionEngine,
+      verificationCommand,
     });
 
     specData.spec_evaluation = auditSpecDocument(specMarkdown, specData, 1);
 
     this.vault.saveSpec(cleanSlug, specData, specMarkdown);
+    if (executionEngine === 'teamwork_preview') {
+      const promptDraft = this.renderTeamworkPrompt(cleanSlug, specData);
+      this.vault.saveTeamworkPromptDraft(cleanSlug, promptDraft);
+    }
     return reviewResult.context;
   }
 
@@ -322,6 +429,8 @@ export class TaskOrchestrator {
         goal: loaded.data.goal,
         dateStr: (loaded.data.updated_at || new Date().toISOString()).split('T')[0]!,
         state: String(loaded.data.status),
+        executionEngine: loaded.data.execution_engine,
+        verificationCommand: loaded.data.teamwork_config?.verification_command,
       });
     }
 
