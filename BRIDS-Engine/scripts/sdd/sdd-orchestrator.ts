@@ -57,6 +57,7 @@ export const VALID_VAULT_PREFIXES = [
   '00 Inbox',
   '01 Negocio',
   '02 Marketing',
+  '03 Academy',
   '01 Negocio/01 Estrategia & Modelo',
   '01 Negocio/02 Producto & Ingenieria',
   '01 Negocio/03 Legal & Cumplimiento',
@@ -70,6 +71,8 @@ export const VALID_VAULT_PREFIXES = [
   '02 Marketing/05 Email Marketing',
   '02 Marketing/06 SEO & Descubrimiento',
   '02 Marketing/07 Analitica & Crecimiento',
+  '03 Academy/Clases',
+  '03 Academy/Mis Conceptos',
 ];
 
 const vaultGateway = new VaultGateway(VAULT_DIR, TEMPLATES_DIR);

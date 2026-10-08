@@ -15,10 +15,11 @@ This file defines how the system should organize Markdown documents and when it 
 
 ## Folder Taxonomy
 
-The vault is structured into two primary operational macro-domains plus an inbox:
+The vault is structured into three primary operational macro-domains plus an inbox:
 1. `00 Inbox/`: Raw captures, draft ideas, and formal SDD specifications under review.
 2. `01 Negocio/`: Corporate, legal, technical architecture (synced from OKF), unit economics, B2B sales, and governance.
 3. `02 Marketing/`: Brand context, strategic content grid, social media assets, copy, lifecycle email, SEO, and growth analytics.
+4. `03 Academy/`: YC Academy classes (`Clases/`), personal founder concepts (`Mis Conceptos/`), and self-contained applications of YC lessons to BRIDS.io.
 
 ---
 
@@ -103,6 +104,20 @@ Use for:
 #### `07 Analitica & Crecimiento/`
 - Event tracking taxonomies (GA4, Mixpanel) and conversion funnels
 - Growth loops, referral programs, and KPI scorecards
+
+---
+
+### `03 Academy` (YC Academy & Founder Knowledge Base)
+
+#### `Clases/`
+- One subfolder per YC Academy class (`01-<nombre-de-la-clase>/`, `02-<nombre-de-la-clase>/`, etc.)
+- Each class subfolder contains 3 core documents:
+  - `datos-de-la-clase.md`: YC lecture notes, speaker insights, and core frameworks
+  - `conceptos.md`: Personal founder concepts, definitions, and mental models from the class
+  - `aplicacion-en-brids.md`: Self-contained application of the class topics to BRIDS.io
+
+#### `Mis Conceptos/`
+- Personal founder glossary, cross-cutting concepts, and mental models stored independently of a single class
 
 ## When to Create a New Folder
 

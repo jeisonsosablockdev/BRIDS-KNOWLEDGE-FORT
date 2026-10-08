@@ -12,6 +12,7 @@
 | `sdd/` | 4-Tier Git Promotion (`feat` -> `develop` -> `main`) | `node BRIDS-Engine/bin/engine.ts promote <feature [feat/name]\|main> [--push]` |
 | `ingest/` | Sync Technical Docs & Brand (OKF) | `node BRIDS-Engine/scripts/ingest/sync-technical-docs.ts [--force]` |
 | `ingest/` | Sync Narrative Radar & Briefs | `node BRIDS-Engine/scripts/ingest/sync-narrative-intelligence.ts [slug\|--rumor-scan\|--extract-url]` |
+| `ingest/` | Ingest YC Academy (YouTube & Web -> MD) | `node BRIDS-Engine/scripts/ingest/ingest-yc-academy.ts --class <slug> [--youtube <url>] [--web <url>]` |
 | `ingest/` | Sync Workspace Brand & Skills | `node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts [all\|brand\|skills]` |
 | `vault/` | Non-Destructive Note Refinement | `node BRIDS-Engine/scripts/vault/refine-note.ts <inspect\|backup\|refine\|branch\|rollback>` |
 | `vault/` | In-Memory Vault Search | `node BRIDS-Engine/scripts/vault/vault-search.ts "<query>" [--limit 5]` |
@@ -76,14 +77,15 @@ To prevent prompt/context drift and ensure consistent quality, every document or
 6. **Medición, Fusión de Rama Spec & Cierre:** Fusión del Spec completado a su rama feature (`node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts merge <slug>`) y cierre en `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts session update`.
 
 ## Vault Conventions
-- The vault is structured into two core macro-domains under `BRIDS-Brain/`:
+- The vault is structured into three core macro-domains plus an inbox under `BRIDS-Brain/`:
   - `01 Negocio/`: Estrategia & Modelo, Producto & Ingeniería (OKF sync), Legal & Cumplimiento, Finanzas & YC Investors, Sponsors B2B & Ventas, Operaciones & Gobernanza.
   - `02 Marketing/`: Contexto de Marca, Estrategia & Parrilla, Redes Sociales & Contenido, Copywriting & Web, Email Marketing, SEO & Descubrimiento, Analítica & Crecimiento.
+  - `03 Academy/`: Clases (subcarpetas por clase de YC Academy con `datos-de-la-clase.md`, `conceptos.md`, `aplicacion-en-brids.md`) y Mis Conceptos.
   - `00 Inbox/`: Raw captures, drafts, and SDD specs under review.
 - Prefer descriptive file names like `linkedin-post-ideas-apr-2026.md`
 - Keep one note per deliverable or per coherent working artifact
 - Create a new subfolder only when there are 3+ related deliverables that do not fit an existing subfolder cleanly
-- Do not create top-level folders beyond `00 Inbox`, `01 Negocio`, and `02 Marketing`
+- Do not create top-level folders beyond `00 Inbox`, `01 Negocio`, `02 Marketing`, and `03 Academy`
 - Prefer saving drafts in `00 Inbox` when the final destination is unclear
 
 ## Obsidian Integration
