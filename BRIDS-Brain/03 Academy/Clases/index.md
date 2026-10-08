@@ -13,4 +13,4 @@
 
 | # | Clase / Tema | Datos de la Clase | Conceptos | Aplicación en BRIDS | Estado |
 |---|---|---|---|---|---|
-| `01` | *Pendiente de iniciar primera clase* | — | — | — | ⏳ Lista para crear |
+| `01` | **Module 1: Deciding to Start a Startup** | [[03 Academy/Clases/01-deciding-to-start-a-startup/datos-de-la-clase.md|📄 Datos (4)]] | [[03 Academy/Clases/01-deciding-to-start-a-startup/conceptos.md|🧠 Conceptos]] | [[03 Academy/Clases/01-deciding-to-start-a-startup/aplicacion-en-brids.md|🚀 Aplicación BRIDS]] | ✅ Activa |
