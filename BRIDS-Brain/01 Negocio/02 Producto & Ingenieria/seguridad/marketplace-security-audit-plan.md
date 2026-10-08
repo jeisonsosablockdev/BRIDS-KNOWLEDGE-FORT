@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Security & Audits"
 source_okf: "knowledge/security/audits/bri-164-marketplace-security-audit-plan.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "f772630aab77ab558dc503793d19f657e196ea4b04e0b9392c6a656ba7a87a05"
 tags: [audit-plan, pentest, marketplace, hardening]
-updated_at: "2026-09-12T02:07:49.373Z"
+updated_at: "2026-10-03T02:51:18.350Z"
 ---
 
 # Plan de Auditoría de Seguridad del Marketplace (BRI-164)
 
 > [!NOTE]
 > **Resumen Técnico:** Metodología, matrices de prueba de penetración y verificación de seguridad para vistas 3D, mapas y detalle de activos.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -190,3 +190,4 @@ Each in dedicated branch, TDD first:
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/security/audits/bri-164-marketplace-security-audit-plan.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

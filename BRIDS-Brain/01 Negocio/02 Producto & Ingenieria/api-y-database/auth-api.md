@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "API Specifications"
 source_okf: "knowledge/api/endpoints/auth.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "bdc4ea1ffd433b4497dd86871111cd1b5d478a04415f71d0d9f3b395d845ee8b"
 tags: [api, auth, siws, jwt, endpoints]
-updated_at: "2026-09-12T02:07:49.378Z"
+updated_at: "2026-10-03T02:51:18.444Z"
 ---
 
 # Especificación de API: Autenticación, Nonce y Sesión
 
 > [!NOTE]
 > **Resumen Técnico:** Endpoints para generación de desafíos SIWS (Sign-In with Solana), intercambio de credenciales WorkOS y refresh de tokens.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -96,3 +96,4 @@ Hybrid authentication: WorkOS AuthKit (account) + Phantom SIWS (wallet).
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/api/endpoints/auth.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

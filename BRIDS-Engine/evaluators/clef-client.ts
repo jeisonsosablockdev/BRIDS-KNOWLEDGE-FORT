@@ -1,0 +1,240 @@
+/**
+ * Cloudflare Clef (System One) Deterministic Decision Client for BRIDS-Engine
+ * Evaluates SDD 4D rubric dimensions + ValidationContract criteria in a single forward pass (/v1/systemone)
+ * with content-addressed SHA-256 memoization, fast 250ms socket connect-timeout, and 30m keep_alive for local Mac Ollama.
+ *
+ * @spec SPEC-BRIDS-001 (BRIDS-Engine Clean Architecture — Solana RWA & YC Venture)
+ */
+
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const CACHE_FILE_PATH = path.resolve(__dirname, '../context/.clef-eval-cache.json');
+const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
+const DEFAULT_CLEF_MODEL = process.env.CLEF_DEFAULT_MODEL || 'clef-flash';
+const RUBRIC_SCHEMA_VERSION = '2.0.0';
+
+export interface ClefProbabilities {
+  goalIcp: number;
+  technicalVeracity: number;
+  founderVoice: number;
+  syntheticCliche: number;
+  contractCompliance?: number;
+}
+
+export interface ClefDecisionVerdict {
+  engine: 'clef-flash' | 'heuristic-fallback';
+  model: string;
+  cacheKey: string;
+  cached: boolean;
+  probabilities: ClefProbabilities;
+}
+
+const memoryCache = new Map<string, ClefProbabilities>();
+
+function loadDiskCache(): Record<string, ClefProbabilities> {
+  if (!fs.existsSync(CACHE_FILE_PATH)) {
+    return {};
+  }
+  try {
+    return JSON.parse(fs.readFileSync(CACHE_FILE_PATH, 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
+function saveToDiskCache(cacheKey: string, probabilities: ClefProbabilities): void {
+  try {
+    const dir = path.dirname(CACHE_FILE_PATH);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    const current = loadDiskCache();
+    current[cacheKey] = probabilities;
+    fs.writeFileSync(CACHE_FILE_PATH, JSON.stringify(current, null, 2), 'utf8');
+  } catch {
+    // Non-fatal if filesystem is read-only
+  }
+}
+
+let ollamaUnreachableInProcess = false;
+
+export function computeClefCacheKey(
+  text: string,
+  targetIcp: string = '',
+  model: string = DEFAULT_CLEF_MODEL
+): string {
+  const dateNormalizedText = text.trim().replace(/\b20\d{2}-\d{2}-\d{2}\b/g, 'YYYY-MM-DD');
+  const normalizedPayload = JSON.stringify({
+    v: RUBRIC_SCHEMA_VERSION,
+    model,
+    icp: targetIcp.trim().toLowerCase(),
+    text: dateNormalizedText,
+  });
+  return crypto.createHash('sha256').update(normalizedPayload).digest('hex');
+}
+
+function buildSystemOnePayload(
+  text: string,
+  targetIcp: string,
+  model: string,
+  acceptanceCriteria: string[] = []
+) {
+  const icpContext = targetIcp || 'Real Estate Sponsors & Institutional Investors';
+  const questions: Record<string, { type: 'noul'; instructions: string }> = {
+    q1_goal_icp: {
+      type: 'noul',
+      instructions: `Does this document articulate a clear business value proposition tailored to ${icpContext} and include an actionable next step or call to action?`,
+    },
+    q2_technical_veracity: {
+      type: 'noul',
+      instructions:
+        'Does this document reference concrete technical or legal RWA architecture (such as Solana, Metaplex Core, Delaware SPV LLC, or Stripe Identity) without promising guaranteed risk-free returns?',
+    },
+    q3_founder_voice: {
+      type: 'noul',
+      instructions:
+        'Is this written in a direct, assertive founder voice rather than vague, passive corporate filler?',
+    },
+    q4_synthetic_cliche: {
+      type: 'noul',
+      instructions:
+        'Is this text dominated by generic AI cliches like "en resumen", "en el vertiginoso mundo", "juega un papel crucial", "cambio de paradigma", or "in conclusion"?',
+    },
+  };
+
+  if (acceptanceCriteria.length > 0) {
+    questions.q5_contract_compliance = {
+      type: 'noul',
+      instructions: `Does this document satisfy these validation contract criteria: ${acceptanceCriteria.join(' | ')}?`,
+    };
+  }
+
+  return {
+    model,
+    keep_alive: '30m',
+    state: text,
+    questions,
+  };
+}
+
+function parseSystemOneAnswers(rawJson: string): ClefProbabilities | null {
+  try {
+    const parsed = JSON.parse(rawJson);
+    const answers = parsed?.answers;
+    if (!answers || typeof answers !== 'object') {
+      return null;
+    }
+    const round4 = (n: unknown, fallback: number) =>
+      typeof n === 'number' && Number.isFinite(n) ? Number(n.toFixed(4)) : fallback;
+
+    const result: ClefProbabilities = {
+      goalIcp: round4(answers.q1_goal_icp?.noul, 0.8),
+      technicalVeracity: round4(answers.q2_technical_veracity?.noul, 0.8),
+      founderVoice: round4(answers.q3_founder_voice?.noul, 0.75),
+      syntheticCliche: round4(answers.q4_synthetic_cliche?.noul, 0.1),
+    };
+
+    if (answers.q5_contract_compliance?.noul !== undefined) {
+      result.contractCompliance = round4(answers.q5_contract_compliance.noul, 0.8);
+    }
+
+    return result;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Evaluates a draft synchronously against Cloudflare Clef (/v1/systemone) with SHA-256 idempotence.
+ * Uses a fast 250ms connect-timeout and process-level circuit breaker when Ollama is cold/offline.
+ */
+export function evaluateWithClefSync(
+  text: string,
+  targetIcp: string = '',
+  model: string = DEFAULT_CLEF_MODEL,
+  acceptanceCriteria: string[] = []
+): ClefDecisionVerdict {
+  const cacheKey = computeClefCacheKey(text, targetIcp, model);
+
+  const memHit = memoryCache.get(cacheKey);
+  if (memHit) {
+    return { engine: 'clef-flash', model, cacheKey, cached: true, probabilities: memHit };
+  }
+
+  const diskCache = loadDiskCache();
+  if (diskCache[cacheKey]) {
+    memoryCache.set(cacheKey, diskCache[cacheKey]);
+    return { engine: 'clef-flash', model, cacheKey, cached: true, probabilities: diskCache[cacheKey] };
+  }
+
+  if (process.env.CLEF_DISABLE_NETWORK === '1' || ollamaUnreachableInProcess) {
+    return createFallbackVerdict(text, model, cacheKey, (acceptanceCriteria?.length ?? 0) > 0);
+  }
+
+  const endpoint = `${OLLAMA_BASE_URL.replace(/\/+$/, '')}/v1/systemone`;
+  const payload = JSON.stringify(buildSystemOnePayload(text, targetIcp, model, acceptanceCriteria));
+
+  try {
+    const rawOut = execFileSync(
+      'curl',
+      [
+        '-sS',
+        '--connect-timeout',
+        '0.25',
+        '--max-time',
+        '4',
+        '-H',
+        'Content-Type: application/json',
+        '-d',
+        payload,
+        endpoint,
+      ],
+      { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }
+    );
+    const probabilities = parseSystemOneAnswers(rawOut);
+    if (probabilities) {
+      memoryCache.set(cacheKey, probabilities);
+      saveToDiskCache(cacheKey, probabilities);
+      return { engine: 'clef-flash', model, cacheKey, cached: false, probabilities };
+    }
+    ollamaUnreachableInProcess = true;
+  } catch {
+    // Graceful deterministic fallback when Ollama is offline or unresponsive
+    ollamaUnreachableInProcess = true;
+  }
+
+  return createFallbackVerdict(text, model, cacheKey, (acceptanceCriteria?.length ?? 0) > 0);
+}
+
+function createFallbackVerdict(
+  text: string,
+  model: string,
+  cacheKey: string,
+  hasCriteria: boolean = false
+): ClefDecisionVerdict {
+  const words = (text || '').trim().split(/\s+/).filter(Boolean).length;
+  const hasTech = /(solana|metaplex|delaware|spv|llc|stripe identity)/i.test(text);
+  const hasCta = /(agenda|contacto|demo|invers|participa|hablemos|sindicaci[oó]n)/i.test(text);
+  const hasCliches = /(en resumen|en conclusi[oó]n|vertiginoso mundo|papel crucial|cambio de paradigma)/i.test(text);
+
+  return {
+    engine: 'heuristic-fallback',
+    model,
+    cacheKey,
+    cached: false,
+    probabilities: {
+      goalIcp: words >= 80 && hasCta ? 0.85 : 0.45,
+      technicalVeracity: hasTech ? 0.85 : 0.35,
+      founderVoice: hasCliches ? 0.3 : 0.8,
+      syntheticCliche: hasCliches ? 0.85 : 0.05,
+      ...(hasCriteria ? { contractCompliance: hasTech && !hasCliches ? 0.85 : 0.4 } : {}),
+    },
+  };
+}

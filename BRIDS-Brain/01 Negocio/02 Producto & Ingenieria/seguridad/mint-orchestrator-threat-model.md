@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Security & Audits"
 source_okf: "knowledge/security/threat-models/mint-orchestrator.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "f9fcacfd1da121957313c08fb123bb848ac8384025f0ba9eb05ce0bffd9bfb14"
 tags: [threat-model, minting, concurrency, security]
-updated_at: "2026-09-12T02:07:49.373Z"
+updated_at: "2026-10-03T02:51:18.331Z"
 ---
 
 # Modelo de Amenazas del Orquestador de Minteo
 
 > [!NOTE]
 > **Resumen Técnico:** Evaluación de seguridad en la tubería de minteo asíncrono, protección contra doble gasto y control de rate limits.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -114,3 +114,4 @@ updated_at: "2026-09-12T02:07:49.373Z"
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/security/threat-models/mint-orchestrator.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

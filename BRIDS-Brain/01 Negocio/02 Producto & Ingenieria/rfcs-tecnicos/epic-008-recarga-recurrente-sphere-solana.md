@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Technical RFCs"
 source_okf: "knowledge/rfcs/EPIC-008-recarga-recurrente-co-littio-sphere-solana/README.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "c37d4b6c8b3099fcaea2fa991856d2a1c221940cec803216e141e34ac5b06488"
 tags: [rfc, epic, epic-008, solana, architecture]
-updated_at: "2026-09-12T02:07:49.392Z"
+updated_at: "2026-10-03T02:51:18.581Z"
 ---
 
 # RFC EPIC-008: Recargas y On-Ramp Fiat Recurrente con Sphere y Littio
 
 > [!NOTE]
 > **Resumen Técnico:** Integración de rampas fiat para canalización de ahorros recurrentes hacia inversiones RWA.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -159,3 +159,4 @@ updated_at: "2026-09-12T02:07:49.392Z"
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/rfcs/EPIC-008-recarga-recurrente-co-littio-sphere-solana/README.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

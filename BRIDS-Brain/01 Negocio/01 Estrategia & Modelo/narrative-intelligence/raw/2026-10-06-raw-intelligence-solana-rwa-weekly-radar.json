@@ -1,0 +1,69 @@
+{
+  "collected_at": "2026-10-06 10:20:16",
+  "search_queries": [
+    "opencli twitter search \"Solana RWA\" -f yaml",
+    "opencli twitter search \"Solana tokenization\" -f yaml",
+    "opencli twitter search \"real estate tokenization\" -f yaml",
+    "opencli reddit search \"RWA\" --subreddit solana -f yaml",
+    "opencli reddit search \"tokenization\" --subreddit solana -f yaml",
+    "opencli reddit search \"real estate\" --subreddit solana -f yaml"
+  ],
+  "total_records": 5,
+  "records": [
+    {
+      "id": "2107490067375857863",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "tokens",
+      "title": "@tokens: - LATEST: @Securitize, behind @BlackRock’s BUIDL fund, signed an MOU with L...",
+      "url": "https://x.com/tokens/status/2107490067375857863",
+      "content": "- LATEST: @Securitize, behind @BlackRock’s BUIDL fund, signed an MOU with LG CNS to develop tokenized assets in South Korea. https://t.co/Tpo7Xkr57d",
+      "likes": 0,
+      "views": 379,
+      "extracted_at": "2026-10-06 10:20:16"
+    },
+    {
+      "id": "2107484936378921446",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "solana_devs",
+      "title": "@solana_devs: - The builders are taking the stage. At TOKEN2049 Singapore, @decentra1ized...",
+      "url": "https://x.com/solana_devs/status/2107484936378921446",
+      "content": "- The builders are taking the stage. At TOKEN2049 Singapore, @decentra1ized_ from @SolanaFndn joins @superteam and @SuperteamBlack for Ship on Solana: Builders Hour to spotlight the teams shipping across the @solana ecosystem. &gt; Startup Village Stage &gt; Wed, Oct 7 &gt; 12:00–1:00 PM https://t.co/CLl9DrBjRo",
+      "likes": 12,
+      "views": 1288,
+      "extracted_at": "2026-10-06 10:20:16"
+    },
+    {
+      "id": "2107475587778380045",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "RWAFoundation_",
+      "title": "@RWAFoundation_: \"Where chains lead in RWAs so far in 2026 @BNBCHAIN: #1 in RWA market cap g...",
+      "url": "https://x.com/RWAFoundation_/status/2107475587778380045",
+      "content": "\"Where chains lead in RWAs so far in 2026 @BNBCHAIN: #1 in RWA market cap growth and tokenized stocks, #1 in holder growth for stablecoins, commodities and stocks \\L@solana: top 10 in all five market cap sectors, #1 in credit \\L@StellarOrg: #1 in tokenized funds with +$2.7B \\L@XRPLedger: #1 in commodities with +$2.2B \\L@ethereum and @base: in all five holder sectors Data via @tokenterminal\"",
+      "likes": 30,
+      "views": 1033,
+      "extracted_at": "2026-10-06 10:20:16"
+    },
+    {
+      "id": "1wa2lei",
+      "platform": "Reddit (r/solana)",
+      "author": "ansi09",
+      "title": "GetStake Is Bringing Real Estate At Scale Onchain With Solana (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1wa2lei/getstake_is_bringing_real_estate_at_scale_onchain/",
+      "content": "+ **Source:** [https://x.com/SuperteamAE/status/2096977111307415814](https://x.com/SuperteamAE/status/2096977111307415814) Real estate, onchain with [@Solana](https://x.com/solana). [@GetStake](https://x.com/GetStake) is bringing it at scale: • 2M+ users • 450K+ investments • AED 1.5B+ transacted Tokenized real estate, built for a global market. And it’s happening in Dubai ↓ https://reddit.com/link/1wa2lei/video/mgjt4z35l5oh1/player",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-06 10:20:16"
+    },
+    {
+      "id": 5,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Arrakis Research: Tokenized Equities on Solana Report",
+      "url": "https://arrakis.finance/tokenized-equities",
+      "content": "Reporte de investigación sobre más de 1.5M de direcciones en Solana y EVM para activos tokenizados y tesorería institucional.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-06 10:20:16"
+    }
+  ]
+}

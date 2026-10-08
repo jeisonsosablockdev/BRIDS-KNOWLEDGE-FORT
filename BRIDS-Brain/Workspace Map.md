@@ -12,14 +12,17 @@ BRIDS-Brain/
 │   ├── 04 Finanzas & YC Investors/
 │   ├── 05 Sponsors B2B & Ventas/
 │   └── 06 Operaciones & Gobernanza/
-└── 02 Marketing/                # Dominio de Marca, Contenidos, Adquisición y Crecimiento
-    ├── 01 Contexto de Marca/
-    ├── 02 Estrategia & Parrilla/
-    ├── 03 Redes Sociales & Contenido/
-    ├── 04 Copywriting & Web/
-    ├── 05 Email Marketing/
-    ├── 06 SEO & Descubrimiento/
-    └── 07 Analitica & Crecimiento/
+├── 02 Marketing/                # Dominio de Marca, Contenidos, Adquisición y Crecimiento
+│   ├── 01 Contexto de Marca/
+│   ├── 02 Estrategia & Parrilla/
+│   ├── 03 Redes Sociales & Contenido/
+│   ├── 04 Copywriting & Web/
+│   ├── 05 Email Marketing/
+│   ├── 06 SEO & Descubrimiento/
+│   └── 07 Analitica & Crecimiento/
+└── 03 Academy/                  # Dominio YC Academy: Clases, Conceptos Propios y Aplicación en BRIDS
+    ├── Clases/
+    └── Mis Conceptos/
 ```
 
 ---
@@ -42,3 +45,9 @@ BRIDS-Brain/
 - **[[02 Marketing/05 Email Marketing/index.md|05 Email Marketing]]**: Secuencias de onboarding, newsletters y nutrición de inversores retail.
 - **[[02 Marketing/06 SEO & Descubrimiento/index.md|06 SEO & Descubrimiento]]**: Estrategias de posicionamiento orgánico, AI SEO (GEO) y análisis de intención de búsqueda RWA.
 - **[[02 Marketing/07 Analitica & Crecimiento/index.md|07 Analitica & Crecimiento]]**: Medición de eventos on-chain / off-chain, métricas de embudo CRO y retención de inversores.
+
+---
+
+### 🎓 Dominio 03: YC Academy & Conocimiento Fundador (`03 Academy/`)
+- **[[03 Academy/Clases/index.md|Clases]]**: Subcarpetas por cada clase de YC Academy (`datos-de-la-clase.md`, `conceptos.md` y `aplicacion-en-brids.md`).
+- **[[03 Academy/Mis Conceptos/index.md|Mis Conceptos]]**: Biblioteca personal de conceptos propios, definiciones y modelos mentales del fundador.

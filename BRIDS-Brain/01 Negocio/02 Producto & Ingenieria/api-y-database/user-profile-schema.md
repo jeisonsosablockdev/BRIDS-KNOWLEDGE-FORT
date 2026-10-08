@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Database Architecture"
 source_okf: "knowledge/database/models/user-profile.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "79d3be47f3fdf91a15b1e605d96a028461131d2993330b4a6aa40927da2f4a59"
 tags: [database, prisma, user-profile, kyc, postgres]
-updated_at: "2026-09-12T02:07:49.374Z"
+updated_at: "2026-10-03T02:51:18.356Z"
 ---
 
 # Modelo de Datos: Perfil de Usuario y Estado KYC
 
 > [!NOTE]
 > **Resumen Técnico:** Esquema relacional de usuarios, vinculación con wallet principal, estado de verificación de identidad y preferencias.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -141,3 +141,4 @@ pending_profile → pending_kyc → pending_review → earned → reserved → c
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/database/models/user-profile.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

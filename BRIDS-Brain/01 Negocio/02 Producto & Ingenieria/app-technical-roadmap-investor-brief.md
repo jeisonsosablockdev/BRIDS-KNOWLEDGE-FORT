@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Product Roadmap"
 source_okf: "knowledge/architecture/app-technical-roadmap-investor-brief.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "bdc5651f9c38a5d294971cab4b3023aa6c9263c7a29d37a8726c9af35e4e98e9"
 tags: [roadmap, investor-brief, product-maturity, solana, architecture]
-updated_at: "2026-09-12T01:26:18.850Z"
+updated_at: "2026-10-03T02:51:18.276Z"
 ---
 
 # Roadmap Técnico e Investor Brief de Producto
 
 > [!NOTE]
 > **Resumen Técnico:** Resumen ejecutivo de madurez técnica, stack activo, gaps y fases de producto para inversores y equipo.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -1401,3 +1401,4 @@ Testing:
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (OKF v0.1) | Sincronización e ingesta canónica desde knowledge/architecture/app-technical-roadmap-investor-brief.md |
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización automática de cambios desde rama develop |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

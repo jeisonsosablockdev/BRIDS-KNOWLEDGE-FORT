@@ -7,14 +7,21 @@ tools:
   subagents: false
   mcp: true
 
+architecture:
+  role_type: "worker"
+  execution_mode: "serial_write"
+  context_isolation: "fresh_context"
+  model_tier: "inherit"
+  requires_structured_handoff: true
+
 skills:
   - mas-sales-enablement
   - mas-cold-email
   - mas-copywriting
 
 outputs:
-  - "BRIDS-Brain/01 Negocio/05 Sponsors B2B & Ventas/colateral-comercial/"
-  - "BRIDS-Brain/01 Negocio/05 Sponsors B2B & Ventas/prospeccion-outbound/"
+  - "BRIDS-Brain/01 Negocio/05 Sponsors B2B & Ventas/"
+  - "BRIDS-Engine/outputs/pdfs/"
 
 system_prompt: |
   You are the B2B Sponsor Lead & Sales Enablement Specialist for BRIDS.io (Web3 Real Estate Syndication Platform on Solana).

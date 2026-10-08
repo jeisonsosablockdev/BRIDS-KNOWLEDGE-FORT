@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Operations & Runbooks"
 source_okf: "knowledge/operations/procedures/purchase-trace-verification.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "a7ae7ca1f4aaf2da3105f43c54dd130d1d5e1c32c51775bc2ec9e7ee019afe79"
 tags: [operations, support, purchase-tracing, reconciliation]
-updated_at: "2026-09-12T02:07:49.385Z"
+updated_at: "2026-10-03T02:51:18.521Z"
 ---
 
 # Procedimiento Operativo: Verificación de Trazabilidad de Compras
 
 > [!NOTE]
 > **Resumen Técnico:** Guía operativa para auditar órdenes atascadas, reconciliación manual y resolución de discrepancias en pagos.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -154,3 +154,4 @@ WHERE status = 'failed' AND created_at > NOW() - INTERVAL '1 hour';
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/operations/procedures/purchase-trace-verification.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |

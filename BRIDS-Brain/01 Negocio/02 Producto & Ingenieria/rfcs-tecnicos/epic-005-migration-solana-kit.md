@@ -6,18 +6,18 @@ workflow: production
 version: 1.0.0
 category: "Technical RFCs"
 source_okf: "knowledge/rfcs/EPIC-005-full-migration-from-solana-web3-js-to-solana-kit/README.md"
-source_commit: "6a40b30"
-source_commit_date: "2026-08-22 12:42:13 -0500"
+source_commit: "b818558"
+source_commit_date: "2026-09-24 23:00:27 -0500"
 source_hash: "4f5774c8a8c8b12e37e5449ea2e90e0d4ce1eb755966c16802f0642b51646e5c"
 tags: [rfc, epic, epic-005, solana, architecture]
-updated_at: "2026-09-12T02:07:49.390Z"
+updated_at: "2026-10-03T02:51:18.572Z"
 ---
 
 # RFC EPIC-005: Migración Completa de Solana Web3.js a Solana Kit
 
 > [!NOTE]
 > **Resumen Técnico:** Transición hacia la nueva suite modular de alto rendimiento @solana/kit.
-> *Documento sincronizado desde el repositorio técnico institucional (Commit: `6a40b30`).*
+> *Documento sincronizado desde el repositorio técnico institucional (Commit: `b818558`).*
 
 ---
 
@@ -134,3 +134,4 @@ Referencias directas detectadas en codigo de trabajo (`app/lib/components/tests/
 | Fecha | Versión | Autor / Origen | Cambios Principales |
 |---|---|---|---|
 | 2026-09-12 | v1.0.0 | sync-technical-docs (`6a40b30`) | Sincronización e ingesta canónica desde knowledge/rfcs/EPIC-005-full-migration-from-solana-web3-js-to-solana-kit/README.md |
+| 2026-10-03 | v1.0.0 | sync-technical-docs (`b818558`) | Sincronización automática de cambios desde rama develop |
