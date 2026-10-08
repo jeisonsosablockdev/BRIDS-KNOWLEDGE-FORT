@@ -262,6 +262,78 @@ describe('TaskOrchestrator End-to-End Coordination (@spec SPEC-ARCH-002)', () =>
     assert.strictEqual(validApproval.success, true, 'approveSpec must succeed once Spec passes >= 8.5/9.0');
   });
 
+  it('@spec REQ-005-TEAMWORK-ORCH should recommend execution mode in HITL-0, initialize Teamwork spec with prompt_draft.md scaffold, and evaluate ForcingFunctionClarity in audit-spec', () => {
+    // 1. HITL-0 discovery recommends teamwork_preview for multi-artifact / cross-domain or document review requests
+    const multiPartDiscovery = orchestrator.discoverSkills(
+      'Auditar todos los documentos del Data Room legal y financiero y construir suite completa de memo, pro-forma y pitch deck',
+      '01 Negocio/04 Finanzas & YC Investors'
+    );
+    assert.strictEqual(
+      multiPartDiscovery.recommendedExecutionEngine,
+      'teamwork_preview',
+      'Should recommend teamwork_preview for cross-domain / multi-artifact projects'
+    );
+    assert.ok(
+      ['full', 'review', 'small', 'proof'].includes(multiPartDiscovery.recommendedTeamworkScale || ''),
+      'Should recommend a valid Teamwork scale mode'
+    );
+
+    // 2. Initialize Spec in teamwork_preview mode (small focused team)
+    const slug = 'test-teamwork-small-fix';
+    orchestrator.initSpec({
+      slug,
+      title: 'Refactor quirúrgico de validación SPV en Solana',
+      targetFolder: '01 Negocio/03 Legal & Cumplimiento',
+      executionEngine: 'teamwork_preview',
+      teamworkScale: 'small',
+      teamworkIntegrityMode: 'development',
+      approvedSkills: ['investor-due-diligence'],
+      icp: 'Real Estate Sponsors & YC Investors',
+      goal: 'Validar aislamiento legal Delaware Series LLC y Metaplex Core FreezeDelegate',
+    });
+
+    const loaded = vault.loadSpec(slug);
+    assert.strictEqual(loaded.data.execution_engine, 'teamwork_preview');
+    assert.strictEqual(loaded.data.teamwork_config?.scale_mode, 'small');
+    assert.strictEqual(loaded.data.teamwork_config?.integrity_mode, 'development');
+    assert.ok(loaded.data.teamwork_config?.prompt_draft_path, 'Must record prompt_draft.md path');
+    assert.strictEqual(
+      fs.existsSync(loaded.data.teamwork_config!.prompt_draft_path!),
+      true,
+      'prompt_draft.md must be created on disk during initSpec'
+    );
+
+    const promptDraftText = orchestrator.renderTeamworkPrompt(slug);
+    assert.ok(
+      promptDraftText.startsWith('This is a single self-contained fix; keep it small and focused.'),
+      'Small scale mode must open with canonical Teamwork routing sentence'
+    );
+    assert.ok(promptDraftText.includes('Working directory:'), 'Must include Working directory directive');
+    assert.ok(promptDraftText.includes('Integrity mode: development'), 'Must include Integrity mode directive');
+    assert.ok(promptDraftText.includes('## Requirements'), 'Must include Requirements section');
+    assert.ok(promptDraftText.includes('## Verification Resources'), 'Must include Verification Resources forcing function');
+    assert.ok(promptDraftText.includes('## Acceptance Criteria'), 'Must include Acceptance Criteria section');
+
+    // 3. Adversarial Spec Critic (audit-spec) evaluates ForcingFunctionClarity in Dimension 4 (>= 8.5/9.0)
+    assert.strictEqual(loaded.data.spec_evaluation?.passed, true, 'Teamwork Spec with Forcing Function must pass audit-spec');
+    assert.ok((loaded.data.spec_evaluation?.score ?? 0) >= 8.5);
+
+    // 4. If Verification Resources / objective CLI oracle is stripped from a Teamwork Spec, Dimension 4 fails
+    const missingOracleEval = orchestrator.evaluateAndRefineSpec(
+      slug,
+      '# Spec: Refactor SPV\nIncluye investor-due-diligence, Solana, Metaplex Core y Delaware SPV.\n## Desglose Estructural (Outline)\n1. Todo bien pero sin Verification Resources ni comando objetivo.'
+    );
+    assert.strictEqual(
+      missingOracleEval.passed,
+      false,
+      'Teamwork Spec without objective Verification Resources / Forcing Function must be rejected'
+    );
+    assert.ok(
+      missingOracleEval.defects.some((d) => /Forcing Function|Verification Resources/i.test(d)),
+      'Must report missing Forcing Function / Verification Resources defect'
+    );
+  });
+
 });
 
 

@@ -496,6 +496,93 @@ describe('SPEC-HOOK-004: Deterministic PreToolUse & Stop Hooks (3-Role Multi-Age
     );
     assert.equal(officialPromote.decision, 'allow');
   });
+
+  it('@spec REQ-HOOK-409: should enforce HITL-1 & spec/* branch on teamwork_preview invocation, preserve prompt opening for Teamwork router, and append Verification Resources + Approved Skills suffix', () => {
+    const fakeGitDir = path.join(tempRoot, '.git');
+    fs.mkdirSync(fakeGitDir, { recursive: true });
+    const headFile = path.join(fakeGitDir, 'HEAD');
+    fs.writeFileSync(headFile, 'ref: refs/heads/feat/teamwork-suite\n', 'utf8');
+
+    const slug = 'teamwork-rwa-suite';
+    orchestrator.initSpec({
+      slug,
+      title: 'Suite RWA con Teamwork',
+      targetFolder: '01 Negocio/04 Finanzas & YC Investors',
+      executionEngine: 'teamwork_preview',
+      teamworkScale: 'small',
+      approvedSkills: ['yc-insight-driven-bp'],
+      featureBranch: 'feat/teamwork-suite',
+    });
+
+    const canonicalPrompt =
+      'This is a single self-contained fix; keep it small and focused.\n\n' +
+      `Build RWA deliverable for ${slug}.\n\nWorking directory: ${tempRoot}\nIntegrity mode: development\n\n## Requirements\n### R1. Deliverable`;
+
+    // 1. Before HITL-1 approval, invoking teamwork_preview is DENIED
+    const unapprovedRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'invoke_subagent',
+          args: {
+            TypeName: 'teamwork_preview',
+            Role: 'Teamwork Swarm',
+            Prompt: canonicalPrompt,
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(unapprovedRes.decision, 'deny');
+    assert.ok(unapprovedRes.reason?.includes('BLOQUEO HITL-1'));
+
+    // 2. Approve HITL-1, but stay on parent feat/teamwork-suite instead of child spec/teamwork-suite/teamwork-rwa-suite -> DENIED
+    orchestrator.approveSpec(slug);
+    const wrongBranchRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'invoke_subagent',
+          args: {
+            TypeName: 'teamwork_preview',
+            Role: 'Teamwork Swarm',
+            Prompt: canonicalPrompt,
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(wrongBranchRes.decision, 'deny');
+    assert.ok(wrongBranchRes.reason?.includes('BLOQUEO DE RAMA SDD'));
+
+    // 3. Switch to child branch spec/teamwork-suite/teamwork-rwa-suite -> ALLOWED with non-intrusive suffix
+    fs.writeFileSync(headFile, `ref: refs/heads/spec/teamwork-suite/${slug}\n`, 'utf8');
+    const allowedRes = evaluatePreToolUse(
+      {
+        toolCall: {
+          name: 'invoke_subagent',
+          args: {
+            TypeName: 'teamwork_preview',
+            Role: 'Teamwork Swarm',
+            Prompt: canonicalPrompt,
+          },
+        },
+      },
+      { specsDir, gitRoot: tempRoot }
+    );
+    assert.equal(allowedRes.decision, 'allow');
+    assert.ok(allowedRes.overwrite, 'Should append BRIDS Verification Resources and Approved Skills suffix');
+    assert.equal(allowedRes.overwrite.Model, undefined, 'Must NOT overwrite Model for teamwork_preview');
+    const mutatedPrompt = String(allowedRes.overwrite.Prompt || '');
+    assert.ok(
+      mutatedPrompt.startsWith('This is a single self-contained fix; keep it small and focused.'),
+      'Must preserve exact opening line for Teamwork internal router (zero prepended persona)'
+    );
+    assert.ok(!mutatedPrompt.includes('[AGENT_PERSONA:'), 'Must NOT inject [AGENT_PERSONA] into teamwork_preview');
+    assert.ok(mutatedPrompt.includes('[APPROVED_SKILLS: yc-insight-driven-bp]'), 'Must append approved skills at the end');
+    assert.ok(
+      mutatedPrompt.includes('sdd-orchestrator.ts evaluate teamwork-rwa-suite'),
+      'Must append objective CLI verification command at the end'
+    );
+  });
 });
 
 

@@ -279,6 +279,11 @@ export function discoverSkills(query?: string, targetFolder?: string) {
     console.log(`     └─ ${s.skillMdPath}`);
   }
   console.log(`\n🤖 Subagentes Sugeridos (BRIDS-Engine/agents/): ${result.recommendedSubagents.join(', ')}`);
+  console.log(
+    `🐝 Motor Recomendado: ${result.recommendedExecutionEngine}${
+      result.recommendedTeamworkScale ? ` (Escala: ${result.recommendedTeamworkScale})` : ''
+    }`
+  );
   console.log('═'.repeat(80) + '\n');
   return result;
 }
@@ -300,7 +305,7 @@ export function auditSpec(slug?: string, specMdPathOverride?: string) {
   console.log(`   1. Integración Skills:   ${report.dimensions.skillIntegration} / 2.5`);
   console.log(`   2. Anclaje en Vault/MCP: ${report.dimensions.vaultGrounding} / 2.5`);
   console.log(`   3. Especificidad Contr.: ${report.dimensions.contractSpecificity} / 2.0`);
-  console.log(`   4. Claridad Handoff:     ${report.dimensions.workerHandoffClarity} / 2.0`);
+  console.log(`   4. Claridad Handoff/FF:  ${report.dimensions.workerHandoffClarity} / 2.0`);
   if (report.passed) {
     console.log('   ✅ SPEC APROBADO POR EL CRÍTICO ADVERSARIAL: Listo para presentar en HITL-1.');
   } else {
@@ -321,10 +326,14 @@ export function initSpec(
   icp?: string,
   goal?: string,
   featureOverride?: string,
-  approvedSkillsStr?: string
+  approvedSkillsStr?: string,
+  teamworkScaleArg?: string,
+  teamworkIntegrityArg?: string
 ) {
   if (!slug || !title || !targetFolder) {
-    console.error('❌ Uso: sdd-orchestrator init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]" [--skills s1,s2]');
+    console.error(
+      '❌ Uso: sdd-orchestrator init <slug> "<titulo>" "<target-folder>" "<subagents>" "[icp]" "[goal]" [--skills s1,s2] [--teamwork full|small|review|proof] [--integrity development|demo|benchmark]'
+    );
     process.exit(1);
   }
 
@@ -347,7 +356,7 @@ export function initSpec(
     .filter(Boolean);
 
   const subagents = rawAgents.length > 0 ? rawAgents : ['founder-ghostwriter'];
-  const unknownAgents = subagents.filter((a) => !VALID_SUBAGENTS.includes(a));
+  const unknownAgents = subagents.filter((a) => !VALID_SUBAGENTS.includes(a) && a !== 'teamwork_preview');
   if (unknownAgents.length > 0) {
     console.warn(`⚠️ Advertencia: Los siguientes agentes no pertenecen al squad estándar: ${unknownAgents.join(', ')}`);
   }
@@ -356,6 +365,8 @@ export function initSpec(
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean);
+
+  const isTeamwork = Boolean(teamworkScaleArg) || subagents.includes('teamwork_preview');
 
   if (fs.existsSync(paths.specJsonPath) && fs.existsSync(paths.specMdPath)) {
     console.log(`ℹ️ El spec "${cleanSlug}" ya existe en ${paths.specJsonPath}.`);
@@ -389,6 +400,13 @@ export function initSpec(
     goal: goal || `Consolidar ${title}`,
     ...(detectedFeature && !isAutomatedTestSlug ? { featureBranch: detectedFeature } : {}),
     ...(approvedSkills.length > 0 ? { approvedSkills } : {}),
+    ...(isTeamwork
+      ? {
+          executionEngine: 'teamwork_preview',
+          teamworkScale: (teamworkScaleArg as any) || 'full',
+          teamworkIntegrityMode: (teamworkIntegrityArg as any) || 'development',
+        }
+      : {}),
   });
   const createdData = loadSpec(cleanSlug).data;
 
@@ -397,7 +415,16 @@ export function initSpec(
   console.log(`   📄 Documento Spec: ${paths.specMdPath}`);
   console.log(`   ⚙️ Estado JSON:   ${paths.specJsonPath}`);
   console.log(`   🎯 Destino Final:  BRIDS-Brain/${canonicalVaultFile}`);
-  console.log(`   🤖 Subagentes:     ${subagents.join(', ')}`);
+  console.log(
+    `   🤖 Motor/Agentes:  ${
+      createdData.execution_engine === 'teamwork_preview'
+        ? `teamwork_preview (Escala: ${createdData.teamwork_config?.scale_mode}, Integridad: ${createdData.teamwork_config?.integrity_mode})`
+        : subagents.join(', ')
+    }`
+  );
+  if (createdData.teamwork_config?.prompt_draft_path) {
+    console.log(`   🐝 Prompt Draft:   ${createdData.teamwork_config.prompt_draft_path}`);
+  }
   if (createdData.approved_skills && createdData.approved_skills.length > 0) {
     console.log(`   📚 Skills HITL-0:  ${createdData.approved_skills.join(', ')}`);
   }
@@ -842,14 +869,71 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
     case 'init': {
       const skillsFlagIdx = args.indexOf('--skills');
       const approvedSkillsArg = skillsFlagIdx >= 0 ? args[skillsFlagIdx + 1] : undefined;
-      const cleanArgs = args.filter((_, idx) => idx !== skillsFlagIdx && idx !== (skillsFlagIdx >= 0 ? skillsFlagIdx + 1 : -1));
+      const teamworkFlagIdx = args.indexOf('--teamwork');
+      const teamworkScaleArg =
+        teamworkFlagIdx >= 0
+          ? args[teamworkFlagIdx + 1] && !args[teamworkFlagIdx + 1]!.startsWith('--')
+            ? args[teamworkFlagIdx + 1]
+            : 'full'
+          : undefined;
+      const integrityFlagIdx = args.indexOf('--integrity');
+      const teamworkIntegrityArg = integrityFlagIdx >= 0 ? args[integrityFlagIdx + 1] : undefined;
+
+      const excludedIndices = new Set<number>();
+      if (skillsFlagIdx >= 0) {
+        excludedIndices.add(skillsFlagIdx);
+        excludedIndices.add(skillsFlagIdx + 1);
+      }
+      if (teamworkFlagIdx >= 0) {
+        excludedIndices.add(teamworkFlagIdx);
+        if (args[teamworkFlagIdx + 1] && !args[teamworkFlagIdx + 1]!.startsWith('--')) {
+          excludedIndices.add(teamworkFlagIdx + 1);
+        }
+      }
+      if (integrityFlagIdx >= 0) {
+        excludedIndices.add(integrityFlagIdx);
+        excludedIndices.add(integrityFlagIdx + 1);
+      }
+
+      const cleanArgs = args.filter((_, idx) => !excludedIndices.has(idx));
       if (cleanArgs[3] && VALID_VAULT_PREFIXES.some((p) => cleanArgs[3]!.replace(/^\/+|\/+$/g, '').startsWith(p))) {
-        initSpec(cleanArgs[1], cleanArgs[2], cleanArgs[3], cleanArgs[4], cleanArgs[5], cleanArgs[6], undefined, approvedSkillsArg);
+        initSpec(
+          cleanArgs[1],
+          cleanArgs[2],
+          cleanArgs[3],
+          cleanArgs[4],
+          cleanArgs[5],
+          cleanArgs[6],
+          undefined,
+          approvedSkillsArg,
+          teamworkScaleArg,
+          teamworkIntegrityArg
+        );
       } else if (cleanArgs.length <= 4 && (!cleanArgs[3] || !cleanArgs[3].includes('/'))) {
         initSession(cleanArgs[1], cleanArgs[2], cleanArgs[3], cleanArgs[4]);
       } else {
-        initSpec(cleanArgs[1], cleanArgs[2], cleanArgs[3], cleanArgs[4], cleanArgs[5], cleanArgs[6], undefined, approvedSkillsArg);
+        initSpec(
+          cleanArgs[1],
+          cleanArgs[2],
+          cleanArgs[3],
+          cleanArgs[4],
+          cleanArgs[5],
+          cleanArgs[6],
+          undefined,
+          approvedSkillsArg,
+          teamworkScaleArg,
+          teamworkIntegrityArg
+        );
       }
+      break;
+    }
+    case 'teamwork-prompt': {
+      const slug = args[1];
+      if (!slug) {
+        console.error('Uso: sdd-orchestrator teamwork-prompt <slug>');
+        process.exit(1);
+      }
+      console.log(taskOrchestrator.renderTeamworkPrompt(slug));
       break;
     }
     case 'session': {

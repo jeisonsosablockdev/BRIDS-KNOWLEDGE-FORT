@@ -15,7 +15,12 @@ import { fileURLToPath } from 'node:url';
 import { scanCliches } from './anti-cliche-filter.ts';
 import { evaluateWithClefSync, computeClefCacheKey } from './clef-client.ts';
 import type { ClefDecisionVerdict, ClefProbabilities } from './clef-client.ts';
-import type { SkillRecommendation, SpecAdversarialReport } from '../core/contracts.ts';
+import type {
+  SkillRecommendation,
+  SpecAdversarialReport,
+  ExecutionEngineType,
+  TeamworkScaleMode,
+} from '../core/contracts.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,7 +28,14 @@ const DEFAULT_SKILLS_DIR = path.resolve(__dirname, '../skills');
 const DEFAULT_AGENTS_DIR = path.resolve(__dirname, '../agents');
 
 export { evaluateWithClefSync, computeClefCacheKey };
-export type { ClefDecisionVerdict, ClefProbabilities, SkillRecommendation, SpecAdversarialReport };
+export type {
+  ClefDecisionVerdict,
+  ClefProbabilities,
+  SkillRecommendation,
+  SpecAdversarialReport,
+  ExecutionEngineType,
+  TeamworkScaleMode,
+};
 
 export interface RubricDimensions {
   goalIcp: number;            // Max 2.5
@@ -372,15 +384,20 @@ export function auditDeliverableText(text: string, specData: Record<string, any>
   };
 }
 
-// Discovers the most relevant skills from BRIDS-Engine/skills/<skill>/SKILL.md and maps recommended subagents
-// for HITL-0 approval before writing the Spec.
+// Discovers the most relevant skills from BRIDS-Engine/skills/<skill>/SKILL.md, maps recommended subagents,
+// and recommends execution engine ('native_squad' vs 'teamwork_preview' + scale mode) for HITL-0 approval.
 export function discoverSkillsForTask(
   query: string,
   targetFolder: string = '',
   limit: number = 4,
   skillsDir: string = DEFAULT_SKILLS_DIR,
   agentsDir: string = DEFAULT_AGENTS_DIR
-): { skills: SkillRecommendation[]; recommendedSubagents: string[] } {
+): {
+  skills: SkillRecommendation[];
+  recommendedSubagents: string[];
+  recommendedExecutionEngine: ExecutionEngineType;
+  recommendedTeamworkScale?: TeamworkScaleMode;
+} {
   const tokens = `${query} ${targetFolder}`
     .toLowerCase()
     .replace(/[^a-z0-9áéíóúñ\s-]/gi, ' ')
@@ -489,9 +506,34 @@ export function discoverSkillsForTask(
     .map(([id]) => id)
     .slice(0, 2);
 
+  const qLower = query.toLowerCase();
+  const isCrossDomainOrSwarm =
+    /(suite completa|multi-artefacto|paquete completo|auditar todos|revisar todos|data room completo|teamwork|enjambre|proof|teorema|demostrar invariante)/i.test(
+      qLower
+    ) || agentAffinities.size >= 4;
+
+  let recommendedExecutionEngine: ExecutionEngineType = isCrossDomainOrSwarm
+    ? 'teamwork_preview'
+    : 'native_squad';
+  let recommendedTeamworkScale: TeamworkScaleMode | undefined = undefined;
+
+  if (recommendedExecutionEngine === 'teamwork_preview') {
+    if (/(auditar|revisar|review|data room)/i.test(qLower) && !/(construir|crear|generar suite)/i.test(qLower)) {
+      recommendedTeamworkScale = 'review';
+    } else if (/(proof|teorema|invariante|matem[aá]tic)/i.test(qLower)) {
+      recommendedTeamworkScale = 'proof';
+    } else if (/(quir[uú]rgico|peque[ñn]o|single|acotado)/i.test(qLower)) {
+      recommendedTeamworkScale = 'small';
+    } else {
+      recommendedTeamworkScale = 'full';
+    }
+  }
+
   return {
     skills: topSkills,
     recommendedSubagents: sortedAgents.length > 0 ? sortedAgents : ['business-consultant', 'founder-ghostwriter'],
+    recommendedExecutionEngine,
+    ...(recommendedTeamworkScale ? { recommendedTeamworkScale } : {}),
   };
 }
 
@@ -522,7 +564,7 @@ export function auditSpecDocument(
       directives.push(`Incorporar los frameworks de [${missingInMd.join(', ')}] en el Desglose Estructural del Spec.`);
     }
   }
-  if (!/(outline|desglose estructural|criterios de aceptaci[oó]n)/i.test(content)) {
+  if (!/(outline|desglose estructural|criterios de aceptaci[oó]n|requirements)/i.test(content)) {
     d1 -= 0.7;
     defects.push('El Spec carece de sección de Desglose Estructural (Outline) o Criterios de Aceptación.');
     directives.push('Añadir sección de Desglose Estructural (Outline) con capítulos verificables.');
@@ -566,19 +608,33 @@ export function auditSpecDocument(
     directives.push('Especificar al menos 2 anclas técnicas obligatorias en validation_contract.required_technical_anchors.');
   }
 
-  // Dimension 4: Worker Handoff & Subagent Clarity (Max 2.0)
+  // Dimension 4: Dual Rubric — Worker Handoff Clarity (native_squad) OR ForcingFunctionClarity (teamwork_preview) (Max 2.0)
   let d4 = 2.0;
-  const subagents: string[] = Array.isArray(specData.subagents) ? specData.subagents : [];
-  if (subagents.length === 0) {
-    d4 -= 1.0;
-    defects.push('No hay subagentes asignados al Spec.');
-    directives.push('Asignar al menos un subagente del squad al Spec.');
+  if (specData.execution_engine === 'teamwork_preview') {
+    const hasForcingFunction =
+      /(sdd-orchestrator\.ts\s+evaluate|engine\.ts\s+test|audit-runner\.ts)/i.test(content);
+    if (!hasForcingFunction) {
+      d4 -= 1.2;
+      defects.push(
+        'El Spec de Teamwork carece de Verification Resources / Forcing Function objetiva (comando CLI verificable).'
+      );
+      directives.push(
+        'Incluir sección Verification Resources con comando objetivo de BRIDS-Engine (ej. sdd-orchestrator.ts evaluate).'
+      );
+    }
   } else {
-    const missingAgents = subagents.filter((a) => !content.toLowerCase().includes(a.toLowerCase()));
-    if (missingAgents.length > 0) {
-      d4 -= 0.8;
-      defects.push(`Subagentes asignados no documentados en el Spec: ${missingAgents.join(', ')}.`);
-      directives.push(`Detallar las responsabilidades de [${missingAgents.join(', ')}] en el Spec.`);
+    const subagents: string[] = Array.isArray(specData.subagents) ? specData.subagents : [];
+    if (subagents.length === 0) {
+      d4 -= 1.0;
+      defects.push('No hay subagentes asignados al Spec.');
+      directives.push('Asignar al menos un subagente del squad al Spec.');
+    } else {
+      const missingAgents = subagents.filter((a) => !content.toLowerCase().includes(a.toLowerCase()));
+      if (missingAgents.length > 0) {
+        d4 -= 0.8;
+        defects.push(`Subagentes asignados no documentados en el Spec: ${missingAgents.join(', ')}.`);
+        directives.push(`Detallar las responsabilidades de [${missingAgents.join(', ')}] en el Spec.`);
+      }
     }
   }
 

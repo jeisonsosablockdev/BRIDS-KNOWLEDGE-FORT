@@ -339,7 +339,7 @@ export function evaluatePreToolUse(
       }
     }
 
-    // Rule 3B: Verify HITL-1 & Handoff Continuity when a Spec slug is referenced in Prompt
+    // Rule 3B: Verify HITL-1, Child Branch (for teamwork_preview) & Handoff Continuity when a Spec slug is referenced in Prompt
     const allSpecs = loadAllSpecs(specsDir);
     for (const sub of subagents) {
       const agentType = String(sub.TypeName || '');
@@ -354,6 +354,17 @@ export function evaluatePreToolUse(
                 decision: 'deny',
                 reason: `🛑 BLOQUEO HITL-1 (workflow-gate-hook): No puedes invocar al Worker de escritura "${agentType}" para el Spec "${slug}" porque sigue en estado "${data.status}" sin aprobación humana.`,
               };
+            }
+
+            if (agentType === 'teamwork_preview') {
+              const expectedBranch = data.git_branch_topology?.spec_branch;
+              if (expectedBranch && activeBranch && activeBranch !== expectedBranch) {
+                return {
+                  decision: 'deny',
+                  reason: `🛑 BLOQUEO DE RAMA SDD (workflow-gate-hook): El Spec "${slug}" pertenece a la rama hija "${expectedBranch}", pero el repositorio está en "${activeBranch}". Cambia a la rama hija antes de delegar a teamwork_preview.`,
+                };
+              }
+              continue;
             }
 
             const rawSerialWorkers =
@@ -383,6 +394,7 @@ export function evaluatePreToolUse(
     }
 
     // Rule 3C: JIT Persona Injection (agents/*.yaml) + Approved Skills Injection + Strategic Model Routing
+    // (When agentType === 'teamwork_preview', preserve exact prompt opening & Model, appending only the suffix)
     let modified = false;
     const updatedSubagents = subagents.map((sub) => {
       const agentType = String(sub.TypeName || '');
@@ -402,6 +414,22 @@ export function evaluatePreToolUse(
               .map((s) => `- BRIDS-Engine/skills/${s}/SKILL.md`)
               .join('\n')}`
           : '';
+
+      if (agentType === 'teamwork_preview') {
+        const targetSlug = matchedSpec?.slug || 'active-spec';
+        const verificationCmd =
+          matchedSpec?.data.teamwork_config?.verification_command ||
+          `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts evaluate ${targetSlug} "BRIDS-Brain/00 Inbox/Specs/${targetSlug}-work/draft_cycle_1.md"`;
+        const verificationSuffix = !rawPrompt.includes('sdd-orchestrator.ts evaluate')
+          ? `\n\n## BRIDS-Engine Verification & Infrastructure Guardrails\n- Oráculo Programático Obligatorio (Forcing Function): \`${verificationCmd}\`\n- Sandbox de trabajo: \`BRIDS-Brain/00 Inbox/Specs/${targetSlug}-work/\``
+          : '';
+
+        if (skillsBlock || verificationSuffix) {
+          modified = true;
+          nextSub.Prompt = `${rawPrompt}${verificationSuffix}${skillsBlock}`;
+        }
+        return nextSub;
+      }
 
       // JIT Persona Injection from BRIDS-Engine/agents/<agentType>.yaml
       if (agentType && !rawPrompt.includes('[AGENT_PERSONA:')) {

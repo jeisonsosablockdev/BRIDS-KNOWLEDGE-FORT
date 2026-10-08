@@ -180,11 +180,17 @@ export class VaultGateway {
     goal: string;
     dateStr: string;
     state: string;
+    executionEngine?: 'native_squad' | 'teamwork_preview';
+    verificationCommand?: string;
   }): string {
     const skillsList =
       params.approvedSkills && params.approvedSkills.length > 0
         ? params.approvedSkills
         : ['yc-insight-driven-bp'];
+    const teamworkSection =
+      params.executionEngine === 'teamwork_preview'
+        ? `\n\n## 10. Verification Resources (Teamwork Forcing Function)\n- **Motor de Ejecución:** \`teamwork_preview\` (*Specify What, Not How*)\n- **Oráculo Programático Obligatorio:** \`${params.verificationCommand || `node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts evaluate ${params.slug} "BRIDS-Brain/00 Inbox/Specs/${params.slug}-work/draft_cycle_1.md"`}\`\n`
+        : '';
     const templatePath = path.join(this.templatesDir, 'deliverable-spec-template.md');
     if (fs.existsSync(templatePath)) {
       const templateContent = fs.readFileSync(templatePath, 'utf8');
@@ -206,7 +212,7 @@ export class VaultGateway {
         .replace(/\{\{REFERENCE_DOC_1\}\}/g, `Skills Aprobadas (HITL-0): ${skillsList.join(', ')}`)
         .replace(/\{\{REFERENCE_DOC_2\}\}/g, 'Estructura Legal Delaware C-Corp vs SPV LLC & Metaplex Core')
         .replace(/\{\{WORD_COUNT_RANGE\}\}/g, '400 - 800');
-      return `${rendered}\n\n## 9. Skills Aprobadas (HITL-0) e Integradas en el Spec\n${skillsList.map((s) => `- \`${s}\``).join('\n')}\n`;
+      return `${rendered}\n\n## 9. Skills Aprobadas (HITL-0) e Integradas en el Spec\n${skillsList.map((s) => `- \`${s}\``).join('\n')}${teamworkSection}\n`;
     }
 
     return (
@@ -221,8 +227,20 @@ export class VaultGateway {
       `## Desglose Estructural (Outline) & Criterios de Aceptación Verificables\n` +
       `1. Cobertura completa de la propuesta de valor y economía unitaria aplicando ${skillsList.join(', ')}.\n` +
       `2. Veracidad técnica con anclas on-chain (Solana, Metaplex Core, Delaware SPV).\n` +
-      `3. Cero clichés de LLM y tono directo de fundador YC.\n`
+      `3. Cero clichés de LLM y tono directo de fundador YC.` +
+      `${teamworkSection}\n`
     );
+  }
+
+  /**
+   * Saves the canonical Teamwork prompt_draft.md inside the Spec work directory
+   */
+  saveTeamworkPromptDraft(slug: string, promptContent: string): string {
+    const paths = this.getSpecPaths(slug);
+    this.ensureDir(paths.workDir);
+    const draftPath = path.join(paths.workDir, 'prompt_draft.md');
+    fs.writeFileSync(draftPath, promptContent, 'utf8');
+    return draftPath;
   }
 
   /**
