@@ -12,6 +12,7 @@
 | `sdd/` | 4-Tier Git Promotion (`feat` -> `develop` -> `main`) | `node BRIDS-Engine/bin/engine.ts promote <feature [feat/name]\|main> [--push]` |
 | `ingest/` | Sync Technical Docs & Brand (OKF) | `node BRIDS-Engine/scripts/ingest/sync-technical-docs.ts [--force]` |
 | `ingest/` | Sync Narrative Radar & Briefs | `node BRIDS-Engine/scripts/ingest/sync-narrative-intelligence.ts [slug\|--rumor-scan\|--extract-url]` |
+| `ingest/` | Ingest YC Academy (YouTube & Web -> MD) | `node BRIDS-Engine/scripts/ingest/ingest-yc-academy.ts --class <slug> [--youtube <url>] [--web <url>]` |
 | `ingest/` | Sync Workspace Brand & Skills | `node BRIDS-Engine/scripts/ingest/sync-workspace-context.ts [all\|brand\|skills]` |
 | `vault/` | Non-Destructive Note Refinement | `node BRIDS-Engine/scripts/vault/refine-note.ts <inspect\|backup\|refine\|branch\|rollback>` |
 | `vault/` | In-Memory Vault Search | `node BRIDS-Engine/scripts/vault/vault-search.ts "<query>" [--limit 5]` |

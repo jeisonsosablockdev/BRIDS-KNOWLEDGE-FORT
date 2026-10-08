@@ -67,6 +67,7 @@ const AUTHORIZED_VAULT_SCRIPTS = [
   'sync-technical-docs.ts',
   'sync-narrative-intelligence.ts',
   'sync-workspace-context.ts',
+  'ingest-yc-academy.ts',
   'social-generator.ts',
   'engine.ts',
 ];

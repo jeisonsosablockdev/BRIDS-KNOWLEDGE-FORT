@@ -36,8 +36,8 @@ Dominios Principales (BRIDS-Engine/scripts/):
   1. sdd / task <init|preview|approve-spec|evaluate|loop-task|review-deliverable|approve-deliverable|status|list>
      Orquestador del ciclo de vida SDD con doble guardrail HITL y sesiones de tareas.
 
-  2. ingest <docs|narrative|context> [args]
-     Ingesta de documentación técnica (OKF), inteligencia narrativa y sincronización de contexto/skills.
+  2. ingest <docs|narrative|academy|context> [args]
+     Ingesta de documentación técnica (OKF), inteligencia narrativa, clases de YC Academy (YouTube/Web -> MD) y contexto/skills.
 
   3. vault <search|refine|export|specs|validate> [args]
      Operaciones de bóveda: búsqueda in-memory, refinamiento no destructivo y exportación a PDF.
@@ -80,6 +80,10 @@ switch (command) {
     runTsScript('../scripts/sdd/sdd-orchestrator.ts', args.slice(1));
     break;
   }
+  case 'academy': {
+    runTsScript('../scripts/ingest/ingest-yc-academy.ts', args.slice(1));
+    break;
+  }
   case 'ingest': {
     const sub = args[1] || 'context';
     const rest = args.slice(2);
@@ -87,6 +91,8 @@ switch (command) {
       runTsScript('../scripts/ingest/sync-technical-docs.ts', rest);
     } else if (sub === 'narrative') {
       runTsScript('../scripts/ingest/sync-narrative-intelligence.ts', rest);
+    } else if (sub === 'academy') {
+      runTsScript('../scripts/ingest/ingest-yc-academy.ts', rest);
     } else {
       runTsScript('../scripts/ingest/sync-workspace-context.ts', rest);
     }
