@@ -72,9 +72,21 @@ export interface IngestClassOptions {
   title?: string;
   speaker?: string;
   youtubeUrl?: string;
+  youtubeUrls?: string[];
   webUrl?: string;
+  webUrls?: string[];
   localFilePath?: string;
   vaultRoot?: string;
+}
+
+export interface IngestedResourceDoc {
+  fileName: string;
+  filePath: string;
+  title: string;
+  type: 'youtube' | 'web' | 'file';
+  url?: string;
+  speakerOrSource: string;
+  durationOrTier: string;
 }
 
 export function resolveYtDlpBinary(): string {
@@ -263,88 +275,129 @@ export function htmlToMarkdown(html: string): { title: string; markdown: string 
     .replace(/<nav[\s\S]*?<\/nav>/gi, '')
     .replace(/<footer[\s\S]*?<\/footer>/gi, '')
     .replace(/<header[\s\S]*?<\/header>/gi, '')
+    .replace(/<map[\s\S]*?<\/map>/gi, '')
+    .replace(/<b>Want to start a startup\?<\/b>\s*Get funded by\s*<a[^>]*>Y Combinator<\/a>\./gi, '')
     .replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, '\n\n# $1\n\n')
     .replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, '\n\n## $1\n\n')
     .replace(/<h3[^>]*>([\s\S]*?)<\/h3>/gi, '\n\n### $1\n\n')
     .replace(/<h4[^>]*>([\s\S]*?)<\/h4>/gi, '\n\n#### $1\n\n')
     .replace(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi, '\n\n> $1\n\n')
     .replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, '\n- $1')
+    .replace(/(?:<br\s*\/?>\s*){2,}/gi, '\n\n')
     .replace(/<(?:p|div|section|br)[^>]*>/gi, '\n\n')
     .replace(/<(?:strong|b)[^>]*>([\s\S]*?)<\/(?:strong|b)>/gi, '**$1**')
     .replace(/<(?:em|i)[^>]*>([\s\S]*?)<\/(?:em|i)>/gi, '*$1*')
     .replace(/<a[^>]+href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi, '[$2]($1)')
     .replace(/<[^>]+>/g, '')
+    .replace(/&mdash;/gi, '—')
+    .replace(/&ndash;/gi, '–')
+    .replace(/&rsquo;/gi, "'")
+    .replace(/&lsquo;/gi, "'")
+    .replace(/&rdquo;/gi, '"')
+    .replace(/&ldquo;/gi, '"')
+    .replace(/&hellip;/gi, '...')
     .replace(/&amp;/g, '&')
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, ' ')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
+    .replace(/&nbsp;/g, ' ');
 
-  return { title, markdown: body };
+  // Normalize paragraphs: unwrap hard single-line breaks inside paragraphs while preserving lists/headings
+  const paragraphs = body
+    .split(/\n\s*\n/)
+    .map((block) => {
+      const trimmed = block.trim();
+      if (!trimmed) return '';
+      if (/^(?:#{1,6}\s|-\s|>\s|\|\s)/.test(trimmed)) {
+        return trimmed;
+      }
+      // Convert standalone bold line into a Markdown subheading
+      if (/^\*\*[^*\n]{2,80}\*\*$/.test(trimmed)) {
+        return `### ${trimmed.slice(2, -2).trim()}`;
+      }
+      return trimmed.replace(/\s*\r?\n\s*/g, ' ').replace(/\s{2,}/g, ' ');
+    })
+    .filter(Boolean);
+
+  return { title, markdown: paragraphs.join('\n\n').trim() };
 }
 
 /**
  * Extracts a webpage into clean Markdown using a 3-tier ladder.
  */
 export function extractWebToMarkdown(url: string): WebExtractionResult {
-  // Tier 1: Jina Reader
-  try {
-    const jinaOut = execFileSync(
-      'curl',
-      ['-s', '-L', '--max-time', '15', `https://r.jina.ai/${url}`],
-      { encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] }
-    ).trim();
+  const candidateUrls = [url];
+  if (url.includes('://www.')) {
+    candidateUrls.push(url.replace('://www.', '://'));
+  }
 
-    if (jinaOut.length > 200 && !jinaOut.includes('Warning: Target URL returned error')) {
-      const titleLine = jinaOut.match(/^Title:\s*(.+)$/m);
-      const title = titleLine?.[1]?.trim() || 'Lectura Web YC Academy';
-      const cleaned = jinaOut
-        .replace(/^Title:.*$/m, '')
-        .replace(/^URL Source:.*$/m, '')
-        .replace(/^Markdown Content:\s*/m, '')
-        .trim();
-      return {
-        url,
-        title,
-        tierUsed: 'jina_reader',
-        markdownContent: cleaned,
-      };
+  // Tier 1: Jina Reader
+  for (const candidateUrl of candidateUrls) {
+    try {
+      const jinaOut = execFileSync(
+        'curl',
+        ['-s', '-L', '--max-time', '8', `https://r.jina.ai/${candidateUrl}`],
+        { encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] }
+      ).trim();
+
+      if (
+        jinaOut.length > 200 &&
+        !jinaOut.includes('Warning: Target URL returned error') &&
+        !jinaOut.includes('Could Not Connect')
+      ) {
+        const titleLine = jinaOut.match(/^Title:\s*(.+)$/m);
+        const title = titleLine?.[1]?.trim() || 'Lectura Web YC Academy';
+        const cleaned = jinaOut
+          .replace(/^Title:.*$/m, '')
+          .replace(/^URL Source:.*$/m, '')
+          .replace(/^Markdown Content:\s*/m, '')
+          .trim();
+        return {
+          url,
+          title,
+          tierUsed: 'jina_reader',
+          markdownContent: cleaned,
+        };
+      }
+    } catch {
+      // Try next candidate or Tier 2
     }
-  } catch {
-    // Fallback to Tier 2
   }
 
   // Tier 2: Direct HTML fetch + native HTML-to-Markdown parser
-  try {
-    const rawHtml = execFileSync(
-      'curl',
-      [
-        '-s',
-        '-L',
-        '--max-time',
-        '15',
-        '-A',
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
-        url,
-      ],
-      { encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] }
-    );
-    if (rawHtml && rawHtml.length > 100) {
-      const parsed = htmlToMarkdown(rawHtml);
-      if (parsed.markdown.length > 80) {
-        return {
-          url,
-          title: parsed.title,
-          tierUsed: 'native_html',
-          markdownContent: parsed.markdown,
-        };
+  for (const candidateUrl of candidateUrls) {
+    try {
+      const rawHtml = execFileSync(
+        'curl',
+        [
+          '-s',
+          '-L',
+          '--max-time',
+          '12',
+          '-A',
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+          candidateUrl,
+        ],
+        { encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'] }
+      );
+      if (rawHtml && rawHtml.length > 100) {
+        const parsed = htmlToMarkdown(rawHtml);
+        if (
+          parsed.markdown.length > 80 &&
+          !parsed.title.toLowerCase().includes('could not connect')
+        ) {
+          return {
+            url,
+            title: parsed.title,
+            tierUsed: 'native_html',
+            markdownContent: parsed.markdown,
+          };
+        }
       }
+    } catch {
+      // Try next candidate
     }
-  } catch {
-    // Fallback to Tier 3
   }
 
   return {
@@ -386,15 +439,16 @@ export function extractYouTubeToMarkdown(url: string): YouTubeExtractionResult {
         }))
       : [];
 
-    // Download subtitles (prefer Spanish or English manual/auto VTT)
+    // Download subtitles (prefer native English or Spanish manual/auto VTT, with --ignore-errors so rate-limited auto-translations never block native tracks)
     try {
       execFileSync(
         ytDlp,
         [
+          '--ignore-errors',
           '--write-subs',
           '--write-auto-subs',
           '--sub-langs',
-          'es.*,en.*',
+          'en,en-US,en-orig,es',
           '--sub-format',
           'vtt',
           '--skip-download',
@@ -412,14 +466,7 @@ export function extractYouTubeToMarkdown(url: string): YouTubeExtractionResult {
     const vttFiles = fs
       .readdirSync(tmpDir)
       .filter((f) => f.endsWith('.vtt'))
-      .sort((a, b) => {
-        // Prefer Spanish if available, otherwise English
-        const aEs = a.includes('.es');
-        const bEs = b.includes('.es');
-        if (aEs && !bEs) return -1;
-        if (!aEs && bEs) return 1;
-        return a.localeCompare(b);
-      });
+      .sort((a, b) => a.localeCompare(b));
 
     let cues: VttCue[] = [];
     if (vttFiles.length > 0) {
@@ -458,15 +505,27 @@ export function sanitizeFolderSlug(input: string): string {
     .replace(/^-|-$/g, '');
 }
 
+export function buildCleanDocSlug(rawTitle: string, indexNum: number): string {
+  const cleanedTitle = rawTitle
+    .replace(/\|.*$/g, '')
+    .replace(/—.*$/g, '')
+    .trim();
+  const base = sanitizeFolderSlug(cleanedTitle) || `recurso-${indexNum}`;
+  const prefix = String(indexNum).padStart(2, '0');
+  return `${prefix}-${base}.md`;
+}
+
 /**
  * Main orchestrator: creates or updates the class folder in `03 Academy/Clases/<classSlug>/`
- * with `datos-de-la-clase.md`, `conceptos.md`, and `aplicacion-en-brids.md`.
+ * with a standalone Markdown document per ingested resource, plus `datos-de-la-clase.md`,
+ * `conceptos.md`, and `aplicacion-en-brids.md`.
  */
 export function ingestYcAcademyClass(options: IngestClassOptions): {
   classDir: string;
   datosPath: string;
   conceptosPath: string;
   aplicacionPath: string;
+  resourceDocs: IngestedResourceDoc[];
 } {
   const vaultRoot = options.vaultRoot || VAULT_DIR;
   const clasesRoot = path.join(vaultRoot, '03 Academy', 'Clases');
@@ -481,28 +540,202 @@ export function ingestYcAcademyClass(options: IngestClassOptions): {
   ensureDir(rawSourcesDir);
 
   const today = new Date().toISOString().split('T')[0]!;
-  let ytData: YouTubeExtractionResult | undefined;
-  let webData: WebExtractionResult | undefined;
-  let localContent: string | undefined;
+  const ytUrls = Array.from(
+    new Set([
+      ...(options.youtubeUrls || []),
+      ...(options.youtubeUrl ? [options.youtubeUrl] : []),
+    ])
+  );
+  const webUrls = Array.from(
+    new Set([
+      ...(options.webUrls || []),
+      ...(options.webUrl ? [options.webUrl] : []),
+    ])
+  );
 
-  if (options.youtubeUrl) {
-    console.log(`🎬 Extrayendo video de YouTube con yt-dlp: ${options.youtubeUrl}`);
-    ytData = extractYouTubeToMarkdown(options.youtubeUrl);
+  const ytResults: YouTubeExtractionResult[] = [];
+  const webResults: WebExtractionResult[] = [];
+  const resourceDocs: IngestedResourceDoc[] = [];
+  let localContent: string | undefined;
+  let docCounter = 1;
+
+  const resolvedClassTitle =
+    options.title || `Clase YC Academy: ${slug}`;
+
+  for (const yUrl of ytUrls) {
+    console.log(`🎬 Extrayendo video de YouTube con yt-dlp: ${yUrl}`);
+    const ytData = extractYouTubeToMarkdown(yUrl);
+    ytResults.push(ytData);
+
+    const docFileName = buildCleanDocSlug(ytData.title, docCounter++);
+    const docFilePath = path.join(classDir, docFileName);
+
     fs.writeFileSync(
-      path.join(rawSourcesDir, 'youtube-transcript.md'),
+      path.join(rawSourcesDir, docFileName),
       `# ${ytData.title}\n\n- **URL:** ${ytData.url}\n- **Canal:** ${ytData.channel}\n- **Duración:** ${formatTimestamp(ytData.durationSeconds)}\n\n## Descripción\n\n${ytData.description}\n\n## Transcripción Completa\n\n${ytData.transcriptMarkdown}\n`,
       'utf8'
     );
+
+    const chaptersListMd =
+      ytData.chapters.length > 0
+        ? ytData.chapters.map((c) => `- **[${formatTimestamp(c.start_time)}]** ${c.title}`).join('\n')
+        : '- _Sin capítulos predefinidos; transcripción organizada por bloques de tiempo._';
+
+    const standaloneVideoMd = `---
+title: "${ytData.title.replace(/"/g, "'")}"
+version: "1.0"
+status: "sdd-approved"
+workflow: "yc-academy-ingest"
+created: "${today}"
+updated: "${today}"
+domain: "03 Academy"
+subdomain: "Clases/${slug}"
+source_type: "youtube"
+source_url: "${ytData.url}"
+speaker: "${ytData.channel.replace(/"/g, "'")}"
+duration: "${formatTimestamp(ytData.durationSeconds)}"
+tags:
+  - "yc-academy"
+  - "video-clase"
+  - "${slug}"
+---
+
+# 🎬 ${ytData.title}
+
+> [!NOTE]
+> **Resumen Ejecutivo:** Transcripción estructurada y metadatos del video **${ytData.title}** (${ytData.channel}, \`${formatTimestamp(ytData.durationSeconds)}\`), parte de la clase **[[03 Academy/Clases/${slug}/datos-de-la-clase.md|${resolvedClassTitle}]]**. Conecta con [[03 Academy/Clases/${slug}/conceptos.md|🧠 Conceptos]] y [[03 Academy/Clases/${slug}/aplicacion-en-brids.md|🚀 Aplicación en BRIDS]].
+
+---
+
+## 📋 Ficha del Recurso (Video YouTube)
+
+| Campo | Detalle |
+|---|---|
+| **Clase / Módulo** | [[03 Academy/Clases/${slug}/datos-de-la-clase.md|${resolvedClassTitle}]] |
+| **Título del Video** | ${ytData.title} |
+| **Canal / Ponente** | ${ytData.channel} |
+| **Duración** | \`${formatTimestamp(ytData.durationSeconds)}\` |
+| **Fecha de Publicación** | ${ytData.uploadDate} |
+| **Enlace Original** | [Ver en YouTube (${ytData.url})](${ytData.url}) |
+
+---
+
+## 📑 Índice de Capítulos del Video
+
+${chaptersListMd}
+
+---
+
+## 📝 Descripción Oficial
+
+${ytData.description || '_Sin descripción adicional._'}
+
+---
+
+## 🎙️ Transcripción Completa en Markdown
+
+${ytData.transcriptMarkdown}
+
+---
+
+## Historial de Revisiones (Changelog)
+
+| Versión | Fecha | Resumen de Cambios |
+|---|---|---|
+| \`1.0\` | ${today} | Ingesta de video de YouTube a documento individual en \`03 Academy/Clases/${slug}/${docFileName}\`. |
+`;
+
+    fs.writeFileSync(docFilePath, standaloneVideoMd, 'utf8');
+    resourceDocs.push({
+      fileName: docFileName,
+      filePath: docFilePath,
+      title: ytData.title,
+      type: 'youtube',
+      url: ytData.url,
+      speakerOrSource: ytData.channel,
+      durationOrTier: formatTimestamp(ytData.durationSeconds),
+    });
   }
 
-  if (options.webUrl) {
-    console.log(`🌐 Importando página web a Markdown: ${options.webUrl}`);
-    webData = extractWebToMarkdown(options.webUrl);
+  for (const wUrl of webUrls) {
+    console.log(`🌐 Importando página web a Markdown: ${wUrl}`);
+    const webData = extractWebToMarkdown(wUrl);
+    webResults.push(webData);
+
+    const docFileName = buildCleanDocSlug(webData.title, docCounter++);
+    const docFilePath = path.join(classDir, docFileName);
+
     fs.writeFileSync(
-      path.join(rawSourcesDir, 'web-article.md'),
+      path.join(rawSourcesDir, docFileName),
       `# ${webData.title}\n\n- **URL:** ${webData.url}\n- **Método de Extracción:** ${webData.tierUsed}\n\n---\n\n${webData.markdownContent}\n`,
       'utf8'
     );
+
+    const inferredAuthor = wUrl.includes('paulgraham.com')
+      ? 'Paul Graham (Y Combinator)'
+      : options.speaker || 'Y Combinator';
+
+    const standaloneWebMd = `---
+title: "${webData.title.replace(/"/g, "'")}"
+version: "1.0"
+status: "sdd-approved"
+workflow: "yc-academy-ingest"
+created: "${today}"
+updated: "${today}"
+domain: "03 Academy"
+subdomain: "Clases/${slug}"
+source_type: "web"
+source_url: "${webData.url}"
+author: "${inferredAuthor.replace(/"/g, "'")}"
+extraction_tier: "${webData.tierUsed}"
+tags:
+  - "yc-academy"
+  - "lectura-web"
+  - "${slug}"
+---
+
+# 🌐 ${webData.title}
+
+> [!NOTE]
+> **Resumen Ejecutivo:** Lectura fundamental **${webData.title}** (${inferredAuthor}), importada íntegramente a Markdown como parte de la clase **[[03 Academy/Clases/${slug}/datos-de-la-clase.md|${resolvedClassTitle}]]**. Conecta con [[03 Academy/Clases/${slug}/conceptos.md|🧠 Conceptos]] y [[03 Academy/Clases/${slug}/aplicacion-en-brids.md|🚀 Aplicación en BRIDS]].
+
+---
+
+## 📋 Ficha del Recurso (Lectura / Ensayo Web)
+
+| Campo | Detalle |
+|---|---|
+| **Clase / Módulo** | [[03 Academy/Clases/${slug}/datos-de-la-clase.md|${resolvedClassTitle}]] |
+| **Título del Ensayo** | ${webData.title} |
+| **Autor / Fuente** | ${inferredAuthor} |
+| **URL Original** | [${webData.url}](${webData.url}) |
+| **Método de Extracción** | \`${webData.tierUsed}\` |
+
+---
+
+## 📖 Contenido Completo en Markdown
+
+${webData.markdownContent}
+
+---
+
+## Historial de Revisiones (Changelog)
+
+| Versión | Fecha | Resumen de Cambios |
+|---|---|---|
+| \`1.0\` | ${today} | Ingesta de lectura web a documento individual en \`03 Academy/Clases/${slug}/${docFileName}\`. |
+`;
+
+    fs.writeFileSync(docFilePath, standaloneWebMd, 'utf8');
+    resourceDocs.push({
+      fileName: docFileName,
+      filePath: docFilePath,
+      title: webData.title,
+      type: 'web',
+      url: webData.url,
+      speakerOrSource: inferredAuthor,
+      durationOrTier: webData.tierUsed,
+    });
   }
 
   if (options.localFilePath && fs.existsSync(options.localFilePath)) {
@@ -516,49 +749,32 @@ export function ingestYcAcademyClass(options: IngestClassOptions): {
     }
   }
 
+  const firstYt = ytResults[0];
+  const firstWeb = webResults[0];
   const resolvedTitle =
-    options.title || ytData?.title || webData?.title || `Clase YC Academy: ${slug}`;
-  const resolvedSpeaker = options.speaker || ytData?.channel || 'Y Combinator';
+    options.title || firstYt?.title || firstWeb?.title || `Clase YC Academy: ${slug}`;
+  const resolvedSpeaker = options.speaker || firstYt?.channel || 'Y Combinator';
 
   const datosPath = path.join(classDir, 'datos-de-la-clase.md');
   const conceptosPath = path.join(classDir, 'conceptos.md');
   const aplicacionPath = path.join(classDir, 'aplicacion-en-brids.md');
 
-  const chaptersListMd =
-    ytData && ytData.chapters.length > 0
-      ? ytData.chapters.map((c) => `- **[${formatTimestamp(c.start_time)}]** ${c.title}`).join('\n')
-      : '- _Sin capítulos predefinidos; transcripción organizada por bloques de tiempo._';
+  const resourcesTableMd =
+    resourceDocs.length > 0
+      ? `## 📚 Documentos Individuales de la Clase (${resourceDocs.length} Recursos)
 
-  const youtubeSectionMd = ytData
-    ? `## 🎬 Contenido Extraído de YouTube
+Cada video y lectura de este módulo ha sido ingerido en su propio documento Markdown dentro de esta carpeta:
 
-- **Título Original:** ${ytData.title}
-- **Ponente / Canal:** ${ytData.channel}
-- **Duración:** ${formatTimestamp(ytData.durationSeconds)}
-- **Enlace Directo:** [Ver en YouTube](${ytData.url})
-
-### Índice de Capítulos del Video
-${chaptersListMd}
-
-### Descripción de la Clase
-${ytData.description || '_Sin descripción adicional._'}
-
-### Transcripción Limpia en Markdown
-${ytData.transcriptMarkdown}
+| # | Tipo | Documento en Vault | Autor / Canal | Duración / Extracción | Fuente Original |
+|---|---|---|---|---|---|
+${resourceDocs
+  .map(
+    (doc, idx) =>
+      `| \`${String(idx + 1).padStart(2, '0')}\` | ${doc.type === 'youtube' ? '🎬 Video YouTube' : '🌐 Ensayo Web'} | [[03 Academy/Clases/${slug}/${doc.fileName}\\|${doc.title.replace(/\|/g, '-')}]] | ${doc.speakerOrSource} | \`${doc.durationOrTier}\` | ${doc.url ? `[Abrir enlace](${doc.url})` : '—'} |`
+  )
+  .join('\n')}
 `
-    : '';
-
-  const webSectionMd = webData
-    ? `## 🌐 Contenido Importado desde Página Web
-
-- **Título de la Página:** ${webData.title}
-- **Fuente Original:** [${webData.url}](${webData.url})
-- **Nivel de Extracción:** \`${webData.tierUsed}\`
-
-### Texto Extraído en Markdown
-${webData.markdownContent}
-`
-    : '';
+      : '';
 
   const localSectionMd = localContent
     ? `## 📄 Contenido Importado desde Archivo Local
@@ -577,7 +793,8 @@ updated: "${today}"
 domain: "03 Academy"
 subdomain: "Clases/${slug}"
 speaker: "${resolvedSpeaker.replace(/"/g, "'")}"
-${ytData ? `youtube_url: "${ytData.url}"\n` : ''}${webData ? `web_url: "${webData.url}"\n` : ''}tags:
+resources_count: ${resourceDocs.length}
+tags:
   - "yc-academy"
   - "datos-de-la-clase"
   - "${slug}"
@@ -586,7 +803,7 @@ ${ytData ? `youtube_url: "${ytData.url}"\n` : ''}${webData ? `web_url: "${webDat
 # 🎓 Datos de la Clase: ${resolvedTitle}
 
 > [!NOTE]
-> **Resumen Ejecutivo:** Fuente documental primaria de la clase **${resolvedTitle}** (${resolvedSpeaker}) en YC Academy. Conecta directamente con tus conceptos en [[03 Academy/Clases/${slug}/conceptos.md|conceptos.md]] y su aterrizaje estratégico en [[03 Academy/Clases/${slug}/aplicacion-en-brids.md|aplicacion-en-brids.md]].
+> **Resumen Ejecutivo:** Hub documental de la clase **${resolvedTitle}** (${resolvedSpeaker}) en YC Academy. Desde aquí accedes a cada video y ensayo en su propio documento individual, así como a tus conceptos en [[03 Academy/Clases/${slug}/conceptos.md|conceptos.md]] y su aterrizaje estratégico en [[03 Academy/Clases/${slug}/aplicacion-en-brids.md|aplicacion-en-brids.md]].
 
 ---
 
@@ -595,33 +812,31 @@ ${ytData ? `youtube_url: "${ytData.url}"\n` : ''}${webData ? `web_url: "${webDat
 | Campo | Detalle |
 |---|---|
 | **Clase / Carpeta** | \`${slug}\` |
-| **Título** | ${resolvedTitle} |
+| **Título del Módulo** | ${resolvedTitle} |
 | **Ponente / Fuente** | ${resolvedSpeaker} |
-| **Video YouTube** | ${ytData ? `[${ytData.url}](${ytData.url}) (${formatTimestamp(ytData.durationSeconds)})` : '—'} |
-| **Lectura Web** | ${webData ? `[${webData.url}](${webData.url})` : '—'} |
+| **Recursos Ingeridos** | ${resourceDocs.length > 0 ? `${resourceDocs.length} documentos individuales (${ytResults.length} videos · ${webResults.length} lecturas web)` : localContent ? '1 archivo local' : '—'} |
 | **Notas Relacionadas** | [[03 Academy/Clases/${slug}/conceptos.md|🧠 Conceptos]] · [[03 Academy/Clases/${slug}/aplicacion-en-brids.md|🚀 Aplicación en BRIDS]] |
+
+---
+
+${resourcesTableMd}
 
 ---
 
 ## 🎯 Puntos Clave de YC en esta Clase
 
-- **Principio Central de YC:** *(Destilar aquí la tesis principal del ponente)*
+- **Principio Central de YC:** *(Destilar aquí la tesis principal del módulo)*
 - **Errores Comunes que YC Advierte:** *(Señales de alerta o trampas frecuentes en fundadores)*
 - **Métrica o Regla de Oro:** *(Heurística accionable enseñada en la sesión)*
 
----
-
-${youtubeSectionMd}
-${webSectionMd}
-${localSectionMd}
-
+${localSectionMd ? `---\n\n${localSectionMd}` : ''}
 ---
 
 ## Historial de Revisiones (Changelog)
 
 | Versión | Fecha | Resumen de Cambios |
 |---|---|---|
-| \`1.0\` | ${today} | Ingesta inicial de la clase en \`03 Academy/Clases/${slug}/\`. |
+| \`1.0\` | ${today} | Ingesta inicial de la clase en \`03 Academy/Clases/${slug}/\` con ${resourceDocs.length} documentos individuales. |
 `;
 
   fs.writeFileSync(datosPath, datosContent, 'utf8');
@@ -736,7 +951,7 @@ tags:
   const indexFile = path.join(clasesRoot, 'index.md');
   if (fs.existsSync(indexFile)) {
     let idxContent = fs.readFileSync(indexFile, 'utf8');
-    const rowLink = `[[03 Academy/Clases/${slug}/datos-de-la-clase.md|📄 Datos]]`;
+    const rowLink = `[[03 Academy/Clases/${slug}/datos-de-la-clase.md|📄 Datos (${resourceDocs.length || 1})]]`;
     if (!idxContent.includes(`03 Academy/Clases/${slug}/`)) {
       // Remove placeholder row if present
       idxContent = idxContent.replace(
@@ -756,6 +971,7 @@ tags:
     datosPath,
     conceptosPath,
     aplicacionPath,
+    resourceDocs,
   };
 }
 
@@ -767,24 +983,33 @@ if (isMain) {
     const idx = argv.indexOf(flag);
     return idx >= 0 && idx + 1 < argv.length ? argv[idx + 1] : undefined;
   };
+  const getAllFlags = (...flags: string[]): string[] => {
+    const values: string[] = [];
+    for (let i = 0; i < argv.length; i++) {
+      if (flags.includes(argv[i]!) && i + 1 < argv.length) {
+        values.push(argv[i + 1]!);
+      }
+    }
+    return values;
+  };
 
   const classSlug = getFlag('--class') || getFlag('-c');
-  const youtubeUrl = getFlag('--youtube') || getFlag('--yt');
-  const webUrl = getFlag('--web') || getFlag('--url');
+  const youtubeUrls = getAllFlags('--youtube', '--yt');
+  const webUrls = getAllFlags('--web', '--url');
   const localFilePath = getFlag('--file') || getFlag('-f');
   const title = getFlag('--title') || getFlag('-t');
   const speaker = getFlag('--speaker') || getFlag('-s');
 
-  if (!classSlug || (!youtubeUrl && !webUrl && !localFilePath && !title)) {
+  if (!classSlug || (youtubeUrls.length === 0 && webUrls.length === 0 && !localFilePath && !title)) {
     console.log(`
 🎓 BRIDS YC Academy Ingestor (YouTube a MD & Web a MD)
 Uso:
   node BRIDS-Engine/scripts/ingest/ingest-yc-academy.ts --class <slug-clase> [opciones]
 
 Opciones:
-  --class, -c <slug>      Nombre de la subcarpeta en 03 Academy/Clases/ (ej. "01-how-to-get-startup-ideas")
-  --youtube, --yt <url>   URL de YouTube para extraer metadatos, capítulos y transcripción a Markdown
-  --web, --url <url>      URL de página web (ensayo YC, artículo, guía) para importar su texto a Markdown
+  --class, -c <slug>      Nombre de la subcarpeta en 03 Academy/Clases/ (ej. "01-deciding-to-start-a-startup")
+  --youtube, --yt <url>   URL de YouTube (repetible para múltiples videos; cada uno genera su propio .md)
+  --web, --url <url>      URL de página web (repetible para múltiples ensayos; cada uno genera su propio .md)
   --file, -f <ruta>       Archivo local (.vtt, .html, .txt, .md) para importar a la clase
   --title, -t "<título>"  Título personalizado de la clase (opcional; se autodetecta de YouTube/Web)
   --speaker, -s "<autor>" Ponente de YC (opcional; se autodetecta del canal/página)
@@ -794,8 +1019,8 @@ Opciones:
 
   const result = ingestYcAcademyClass({
     classSlug,
-    youtubeUrl,
-    webUrl,
+    youtubeUrls,
+    webUrls,
     localFilePath,
     title,
     speaker,
@@ -803,7 +1028,11 @@ Opciones:
 
   console.log(`\n✅ Clase creada/actualizada en 03 Academy:`);
   console.log(`   📁 Carpeta:     ${result.classDir}`);
+  for (const doc of result.resourceDocs) {
+    console.log(`   📄 Recurso (${doc.type}): ${doc.filePath}`);
+  }
   console.log(`   📄 Datos Clase: ${result.datosPath}`);
   console.log(`   🧠 Conceptos:   ${result.conceptosPath}`);
   console.log(`   🚀 Aplicación:  ${result.aplicacionPath}\n`);
 }
+

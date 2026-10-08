@@ -47,6 +47,7 @@ describe('SPEC-SCRIPTS-005: TypeScript Domain Architecture for BRIDS-Engine/scri
 
     const expectedCanonicalModules = [
       'audit/audit-runner.ts',
+      'ingest/ingest-yc-academy.ts',
       'ingest/sync-narrative-intelligence.ts',
       'ingest/sync-technical-docs.ts',
       'ingest/sync-workspace-context.ts',
