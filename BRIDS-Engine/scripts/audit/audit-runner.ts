@@ -30,7 +30,7 @@ const AGENTS_DIR = path.join(ENGINE_DIR, 'agents');
 const NARRATIVE_DIR = path.join(VAULT_ROOT, '01 Negocio', '01 Estrategia & Modelo', 'narrative-intelligence');
 const RAW_DIR = path.join(NARRATIVE_DIR, 'raw');
 
-const ALLOWED_TOP_FOLDERS = ['00 Inbox', '01 Negocio', '02 Marketing'];
+const ALLOWED_TOP_FOLDERS = ['00 Inbox', '01 Negocio', '02 Marketing', '03 Academy'];
 
 export interface AuditOptions {
   silent?: boolean;
@@ -142,7 +142,7 @@ function lintNote(filePath: string) {
 
   const topFolder = relPath.split(path.sep)[0] || '';
   if (!isSpecialDoc && !ALLOWED_TOP_FOLDERS.includes(topFolder)) {
-    errors.push(`Carpeta fuera de la taxonomía oficial de dominios (00 Inbox, 01 Negocio, 02 Marketing): "${topFolder}"`);
+    errors.push(`Carpeta fuera de la taxonomía oficial de dominios (00 Inbox, 01 Negocio, 02 Marketing, 03 Academy): "${topFolder}"`);
   }
 
   if (!isSpecialDoc) {

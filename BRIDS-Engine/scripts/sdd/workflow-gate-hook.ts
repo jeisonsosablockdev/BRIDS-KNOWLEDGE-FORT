@@ -128,9 +128,11 @@ function isArtifactPath(targetFile: string, artifactDir?: string): boolean {
 
 function isProductionVaultPath(targetFile: string): boolean {
   const normalized = targetFile.replace(/\\/g, '/');
+  if (normalized.endsWith('/index.md')) return false;
   return (
     normalized.includes('BRIDS-Brain/01 Negocio/') ||
-    normalized.includes('BRIDS-Brain/02 Marketing/')
+    normalized.includes('BRIDS-Brain/02 Marketing/') ||
+    normalized.includes('BRIDS-Brain/03 Academy/')
   );
 }
 
@@ -144,7 +146,8 @@ function isDirectVaultWriteCommand(commandLine: string): boolean {
   const normalized = commandLine.replace(/\\/g, '/');
   const touchesProductionVault =
     normalized.includes('BRIDS-Brain/01 Negocio') ||
-    normalized.includes('BRIDS-Brain/02 Marketing');
+    normalized.includes('BRIDS-Brain/02 Marketing') ||
+    normalized.includes('BRIDS-Brain/03 Academy');
   if (!touchesProductionVault) return false;
 
   const usesAuthorizedScript = AUTHORIZED_VAULT_SCRIPTS.some((s) => normalized.includes(s));
