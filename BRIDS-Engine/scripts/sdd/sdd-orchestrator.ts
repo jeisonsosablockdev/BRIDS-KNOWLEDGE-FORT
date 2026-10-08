@@ -245,7 +245,21 @@ export function promoteDevelopToMain(push: boolean = false): { sourceBranch: str
   execFileSync('node', [engineCli, 'audit', 'compliance'], { cwd: ROOT_DIR, stdio: 'inherit' });
 
   try {
+    if (push) {
+      try {
+        execFileSync('git', ['fetch', 'origin', 'main'], { cwd: ROOT_DIR, stdio: 'pipe' });
+      } catch {
+        // Ignore fetch errors in offline environments
+      }
+    }
     execFileSync('git', ['checkout', 'main'], { cwd: ROOT_DIR, stdio: 'pipe' });
+    if (push) {
+      try {
+        execFileSync('git', ['reset', '--hard', 'origin/main'], { cwd: ROOT_DIR, stdio: 'pipe' });
+      } catch {
+        // Ignore if origin/main does not exist yet
+      }
+    }
     execFileSync(
       'git',
       ['merge', '--no-ff', 'develop', '-m', `release(main): promote verified develop to main\n\nCo-Authored-By: Google Gemini <gemini@google.com>`],
