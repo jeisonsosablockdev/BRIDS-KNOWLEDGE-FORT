@@ -1,0 +1,91 @@
+{
+  "collected_at": "2026-10-10 09:16:38",
+  "search_queries": [
+    "opencli twitter search \"Solana RWA\" -f yaml",
+    "opencli twitter search \"Solana tokenization\" -f yaml",
+    "opencli twitter search \"real estate tokenization\" -f yaml",
+    "opencli reddit search \"RWA\" --subreddit solana -f yaml",
+    "opencli reddit search \"tokenization\" --subreddit solana -f yaml",
+    "opencli reddit search \"real estate\" --subreddit solana -f yaml"
+  ],
+  "total_records": 7,
+  "records": [
+    {
+      "id": "2108924222710182319",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "tokenmewallet",
+      "title": "@tokenmewallet: - RWA is moving from narrative to infrastructure. Real estate. Treasuries....",
+      "url": "https://x.com/tokenmewallet/status/2108924222710182319",
+      "content": "- RWA is moving from narrative to infrastructure. Real estate. Treasuries. Equities. Credit. Commodities. More real-world assets are being digitized, tokenized, and connected to on-chain markets. The biggest change isn’t just bringing assets on-chain. It’s creating a financial system where capital can move faster, markets can connect globally, and access can become more open. RWA could become one of the most important bridges between traditional finance and Web3. At TokenMe, we believe the future is multi-asset, global, and increasingly on-chain. #TokenMe #TME #RWA #RealWorldAssets #Tokenization #Web3 #DeFi #Blockchain #TradFi #OnChainFinance #DigitalAssets #Stocks #Crypto #FinTech #FutureOfFinance #CapitalMarkets #AssetTokenization #GlobalMarkets",
+      "likes": 0,
+      "views": 2,
+      "extracted_at": "2026-10-10 09:16:38"
+    },
+    {
+      "id": "2108921594659897523",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "Rwa_NOVA",
+      "title": "@Rwa_NOVA: - Tokenization isn't just about putting assets onchain. It's about what the...",
+      "url": "https://x.com/Rwa_NOVA/status/2108921594659897523",
+      "content": "- Tokenization isn't just about putting assets onchain. It's about what they connect to. 🔗 Real estate, gold, real businesses: for real-world assets to matter onchain, they need transparency, trust and people. What matters most for RWA to you? #TOKEN2049 #RWA #NOVA https://t.co/aSdvWYfB0P",
+      "likes": 2,
+      "views": 50,
+      "extracted_at": "2026-10-10 09:16:38"
+    },
+    {
+      "id": "2108920492883132764",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "Monasolanatoken",
+      "title": "@Monasolanatoken: - Just drop your $SOL address Follow @Monasolanatoken &amp; RT 🔄 900 First...",
+      "url": "https://x.com/Monasolanatoken/status/2108920492883132764",
+      "content": "- Just drop your $SOL address Follow @Monasolanatoken &amp; RT 🔄 900 First 👇⏳ #SolanaAirdrop #Solana 🌐 BUY $MONA NOW: https://t.co/EXu4psX5SC https://t.co/gH0DP6kWaK",
+      "likes": 19,
+      "views": 1693,
+      "extracted_at": "2026-10-10 09:16:38"
+    },
+    {
+      "id": "1x2efil",
+      "platform": "Reddit (r/solana)",
+      "author": "ansi09",
+      "title": "THIS WEEK IN MEDIA - 10/2-10/8 (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1x2efil/this_week_in_media_102108/",
+      "content": "**Source:** [https://x.com/solana/status/2108890556957065542](https://x.com/solana/status/2108890556957065542) https://preview.redd.it/ulzlnibjymuh1.png?width=680&format=png&auto=webp&s=f3ef80780546b688b93c26280e8dfd4238d9a7ee **Read** * CoinDesk: [Samsung integrates USDC to overhaul cross-border remittances for 82 million Galaxy users](https://www.coindesk.com/tech/2026/10/08/solana-partners-with-samsung-to-integrate-usdc-in-82-million-phones) * The Block: [Samsung to launch USDC transfers on Solana for US Galaxy users](https://www.theblock.co/news/business/2026-10-07-samsung-to-launch-usdc-transfers-on-solana-for-us-galaxy-users-418004) * Decrypt: [Samsung Wallet Taps Solana for USDC Transfers on 82M US Galaxy Devices](https://decrypt.co/380377/samsung-wallet-taps-solana-for-usdc-transfers-on-82m-us-galaxy-devices) * Decrypt: [Solana Debuts Institutional Settlement Standard With J.P. Morgan Input](https://decrypt.co/380126/solana-institutional-settlement-standard-jp-morgan) * CoinDesk: [Solana Foundation unveils a program to settle institutional trades in seconds. JPMorgan gave input](https://www.coindesk.com/markets/2026/10/06/solana-foundation-unveils-a-program-to-settle-institutional-trades-in-seconds-with-jpmorgan-s-inputs) * Genfinity: [Solana DvP Gives Institutions an Open Escrow Standard to Settle Tokenized Assets and Cash in One Transaction](https://genfinity.io/2026/10/06/solana-dvp-atomic-settlement-program-financial-institutions/) * Wall Street Journal: [Securitize Launches Tokenized Stock Trading for U.S. Investors](https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-10-08-2026/card/securitize-launches-tokenized-stock-trading-for-u-s-investors-dUqrm7mXGjwUrAdo4x6M?mod=author_content_page_1_pos_5) * The Block: [Solana’s Orca merges with Loopscale in push to finance AI, robotics and defense](https://theblock.co/news/defi/2026-10-07-solanas-orca-merges-with-loopscale-push-to-finance-ai-robotics-defense-417924) * CoinDesk: [Solana is about to halve its block times as final 200-millisecond upgrade nears](https://www.coindesk.com/tech/2026/10/09/solana-is-about-to-halve-its-block-times-as-final-200-millisecond-upgrade-nears) * Genfinity: [Open USD, USDv, and Project Harmonia: Solana’s September 2026 Intelligence Report](https://genfinity.io/2026/10/08/solana-september-2026-intelligence-report/) **Watch** * CNBC: [Solana Foundation’s Lily Liu: Global access to U.S. assets is blockchain’s core value](https://www.cnbc.com/video/2026/10/07/solana-foundation-president-global-access-to-u-s-assets-is-blockchains-core-value.html) * CNBC: [Securitize CEO Carlos Domingo talks new rollout of tokenized stocks](https://www.cnbc.com/video/2026/10/08/securitize-ceo-carlos-domingo-talks-new-rollout-of-tokenized-stocks.html) * SolanaFloor: [Vibhu on Samsung bringing cross-border USDC payments to 82M Galaxy devices](https://x.com/SolanaFloor/status/2108177081628590232) * The Wolf Of All Streets: [Samsung Brings Crypto To 82 Million People](https://x.com/scottmelker/status/2108181370690482651) * The Rollup: [Vibhu Norby on Crypto’s Consumer Shift](https://x.com/therollupco/status/2107660949645836369) * The Rollup: [Nick Ducoff On The Tokenization Supercycle](https://x.com/robbieklages/status/2108538754835038363) * The Block: [Rachel Conlan on The Starting Block live from Digital Asset Summit Asia](https://x.com/TheBlockCo/status/2107661617823641882) **Listen** * Talking Tokens: [Why Banks Risk More by Ignoring Stablecoins](https://solana.com/podcasts/talking-tokens/episodes/why-banks-risk-more-by-ignoring-stablecoins-e3pvji5) * Solana is Global with Alex Scott: [The Missing Financial Instrument for Betting on Beliefs](https://solana.com/podcasts/solana-is-global-with-alex-scott/episodes/the-missing-financial-instrument-for-betting-on-beliefs-e3q0853) * Genfinity: [R3 CEO Richard Brown on Corda Protocol, Institutional Tokenization, and Solana](https://x.com/Genfinity/status/2107831498833326207?s=20) * Pirates Parley: [Ellie Platis on All Things Solana Events and Breakpoint 2026](https://x.com/SteveCleanBrook/status/2108465888361927150?s=20)",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-10 09:16:38"
+    },
+    {
+      "id": "1x27ro1",
+      "platform": "Reddit (r/solana)",
+      "author": "ansi09",
+      "title": "Payments Roundup: September 2026 (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1x27ro1/payments_roundup_september_2026/",
+      "content": "**Source:** [https://x.com/solanapayments/status/2108637161985802517](https://x.com/solanapayments/status/2108637161985802517) Payment Channels went live on September 3, putting 1,000,000 payments per second on Solana. [@rishinsharma](https://x.com/@rishinsharma), Head of AI Growth at Solana Foundation, described the mechanic plainly: \"Think of it like a bar tab or a prepaid meter: you put money down up front, run up usage without paying for each transaction, and settle payment once when you leave.\" Two weeks later a bank put stablecoins in its core. [@column](https://x.com/@column), the FDIC-insured bank behind Brex and Slash, made USDC and USDT on Solana convertible to and from dollars 24/7. The month closed with OUSD going live from [@openstandard](https://x.com/@openstandard). Stablecoin supply on Solana hit an all-time high of $17.3B on September 25. Daily stablecoin active addresses reached 888K in September, up 269% from 333K a year earlier. Solana carried 420M USDC transactions in a month and 76% of all [@x402](https://x.com/@x402) transactions, 23.2M in four weeks against 3.39M on the next-largest network. https://preview.redd.it/5d2288v3zkuh1.png?width=680&format=png&auto=webp&s=c08ebed4130d4be5b4b8eba3f5d1d7cbd4e018a7 Here's what happened across September for payments on Solana: # Agentic Payments * Payment Channels shipped on Solana, taking agentic payments to 1,000,000 per second over [@x402](https://x.com/@x402) or MPP, with [u/@alibaba\\_cloud](https://x.com/@alibaba_cloud) API endpoints payable through it on day one * Solana took 76% of all [@/x402](https://x.com/@x402) transactions, 23.2M in four weeks, and led both transactions and volume week after week * Solana processed 1.81M x402 agent payments in a single 24 hours ([@tokens](https://x.com/@tokens), Sept 2) * [@nansen\\_ai](https://x.com/@nansen_ai) hit a weekly x402 ATH on Solana, settling more there than on all other networks combined, with agents buying its smart money data a cent at a time through [@PayAINetwork](https://x.com/@PayAINetwork) [https://x.com/solana/status/2095577162598236283](https://x.com/solana/status/2095577162598236283) https://preview.redd.it/jfy9jvp9zkuh1.png?width=560&format=png&auto=webp&s=e91508f25e23dd3c4e7cd9d8e77621c86cc4c1b2 # Banking & Stablecoin Issuance * [@column](https://x.com/@column), the FDIC-insured bank behind Brex and Slash, built stablecoins into its banking core, with USDC and USDT on Solana convertible to and from dollars 24/7 * OUSD went live on Solana from [@openstandard](https://x.com/@openstandard), issued by [@Stablecoin](https://x.com/@Stablecoin) with reserves at [@BlackRock](https://x.com/@BlackRock), [@Lead\\_Bank](https://x.com/@Lead_Bank) and BNY, mintable and burnable 1:1 at no cost through [@BVNKFinance](https://x.com/@BVNKFinance), [@stripe](https://x.com/@stripe) and [Visa](https://x.com/@Visa)'s Stablecoin Platform * CADD from [@TetraDigitalGrp](https://x.com/@TetraDigitalGrp) launched on Solana, bringing the Canadian dollar onchain for payments, transfers, treasury and settlement * ZARsc, a Rand-pegged stablecoin, went live on Solana, issued by [@supercoinxyz](https://x.com/@supercoinxyz) under an FSCA licence with custody by [@fireblocks](https://x.com/@fireblocks) and screening by [@Chainalysis](https://x.com/@Chainalysis) # Business Payments & Treasury * [@altitude](https://x.com/@altitude) acquired Acctual, a stablecoin-native invoicing platform, and opened four new markets: UK, Mexico, Brazil and Colombia * $2.44B in stablecoin volume was authorized through [@multisig](https://x.com/@multisig) on Solana in August, a monthly ATH and more than double July ([@surfquery](https://x.com/@surfquery)) * [@cloak\\_ag](https://x.com/@cloak_ag) shipped private payroll on Solana * PST by [@humafinance](https://x.com/@humafinance) became the largest yield-bearing asset on Solana # Cards & Spending * [@KASTxyz](https://x.com/@KASTxyz) passed $2B in all-time deposits after five consecutive weeks of growth ( [@Paymentscan](https://x.com/@Paymentscan)) * [@NOMADZxyz](https://x.com/@NOMADZxyz) opened flights and stays to stablecoin payments on Solana, 300+ airlines and 1M+ stays, with a 3% saving for paying in stablecoins # Remittances & Cross-Border * Everything on remittances sits in Solana Foundation's report, [An Evolution of Money Movement](https://solana.com/reports/remittances-report): the composable stack, five business models beyond money movement, four entry paths, and corridor deep dives for US to Mexico, Brazil, Nigeria, the Philippines and India # Tokenized Cash & Capital * Africa's biggest IPO opened for subscription with stablecoins on Solana: the Dangote Petroleum Refinery offer, live on [@Nectar\\_finance](https://x.com/@Nectar_finance) and powered by [@GetEquity](https://x.com/@GetEquity), with a ₦10,000 minimum and the offer closing October 13 * Project Harmonia opened for applications. [@Allfunds](https://x.com/@Allfunds) connects 3,300+ asset managers and financial institutions with €1.9T under administration, and tokenized funds on Solana can now apply to reach them [https://x.com/Nectar\\_finance/status/2099531191246369093](https://x.com/Nectar_finance/status/2099531191246369093) https://preview.redd.it/6ggjx2jnzkuh1.png?width=448&format=png&auto=webp&s=f63868718879f6fc625e711106dc52d3eacc9843 # Data * Stablecoin supply on Solana hit an all-time high of $17.3B (Sept 25) * Daily stablecoin active addresses reached 888K in September, up 269% from 333K a year earlier * 420M USDC transactions settled on Solana in a month (Sept 18) * Solana is #1 for monthly USDC senders at 6.2M in 30 days, 42% of everyone sending USDC and 2.5x the next network (Sept 9) https://preview.redd.it/zwyowyoozkuh1.png?width=680&format=png&auto=webp&s=4c5965e9f670f3cc1a5213059f5b5e0e63de77ca # Solana Foundation * Jamal Raees ( [u/@proofofjamal](https://x.com/@proofofjamal) ) was named General Manager of Payments at Solana Foundation on September 24, working with payment companies and enterprises to expand Solana as global payments infrastructure. He joins from Polygon Labs, and before that Bridge and Wyre * Rachel Conlan was named Chief Strategy Officer the same day, leading strategy across institutional partnerships, ecosystem growth and go-to-market. She joins from three years as Global CMO at Binance, and before that OKX, CAA Sports and Havas. # On the Mic * [@afscott](https://x.com/@afscott)'s Solana is Global ran Rene Michau of [@StanChart](https://x.com/@StanChart) on tokenization, stablecoin infrastructure, and what a bank has to build before it can custody and move digital assets at scale * [@amiravalliani](https://x.com/@amiravalliani)'s Bits to Bricks ran [@0xErbil](https://x.com/@0xErbil), CEO of [@humafinance](https://x.com/@humafinance), on trade finance: an invoice paid in thirty days, a supplier who needs the money now, and who charges for the gap * [@nocircuit](https://x.com/@nocircuit)'s The Stack ran Peter Tapling, former CRO of Zelle at Early Warning, on the plumbing that makes card payments feel simple and what digital money has to build to match it * Lily Hansen-Gillis of [@tetradigitalgrp](https://x.com/@tetradigitalgrp) on bringing Canada's first regulated stablecoin to Solana: \"We didn't pick Solana for speed. It's a network we can take to a large institution considering onchain rails.\" * [@proofofjamal](https://x.com/@proofofjamal), General Manager of Payments at Solana Foundation, on onchain payments becoming the newest infrastructure for moving money across borders [https://x.com/humafinance/status/2104231792018657577](https://x.com/humafinance/status/2104231792018657577) https://preview.redd.it/hoigtbuuzkuh1.png?width=560&format=png&auto=webp&s=b9a4f7f2b9e762171d54437f1d3c35ef77815cda",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-10 09:16:38"
+    },
+    {
+      "id": 6,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Arrakis Research: Tokenized Equities on Solana Report",
+      "url": "https://arrakis.finance/tokenized-equities",
+      "content": "Reporte de investigación sobre más de 1.5M de direcciones en Solana y EVM para activos tokenizados y tesorería institucional.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-10 09:16:38"
+    },
+    {
+      "id": 7,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Solana Official: Real World Assets Infrastructure & Solutions",
+      "url": "https://solana.com/solutions/real-world-assets",
+      "content": "Portal oficial de infraestructura RWA de Solana Foundation con casos de uso de tesoros tokenizados y bienes raíces.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-10 09:16:38"
+    }
+  ]
+}
