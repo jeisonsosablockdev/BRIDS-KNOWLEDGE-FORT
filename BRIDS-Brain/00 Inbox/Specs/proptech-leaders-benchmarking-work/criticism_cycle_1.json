@@ -1,0 +1,68 @@
+{
+  "total_score": 9,
+  "scale_max": 9,
+  "passing_threshold": 8.5,
+  "passed": true,
+  "clef_decision": {
+    "engine": "heuristic-fallback",
+    "model": "clef-flash",
+    "cache_key": "27c32a49c406f8fad23d850ea5244fe4f85736df2199abf483fd664d5fc59698",
+    "cached": false,
+    "probabilities": {
+      "goalIcp": 0.85,
+      "technicalVeracity": 0.85,
+      "founderVoice": 0.8,
+      "syntheticCliche": 0.05,
+      "contractCompliance": 0.85
+    }
+  },
+  "scoring_dimensions": {
+    "1_goal_and_icp": {
+      "name": "Cumplimiento del Objetivo & ICP",
+      "score": 2.5,
+      "max_score": 2.5,
+      "passed": true,
+      "clef_probability": 0.85,
+      "findings": []
+    },
+    "2_technical_veracity": {
+      "name": "Veracidad Técnica & Fuentes",
+      "score": 2.5,
+      "max_score": 2.5,
+      "passed": true,
+      "clef_probability": 0.85,
+      "findings": []
+    },
+    "3_founder_voice": {
+      "name": "Voz Fundadora vs Tono Robot",
+      "score": 2,
+      "max_score": 2,
+      "passed": true,
+      "clef_probability": 0.8,
+      "findings": []
+    },
+    "4_lexical_originality": {
+      "name": "Originalidad Léxica & Cero Clichés",
+      "score": 2,
+      "max_score": 2,
+      "passed": true,
+      "clef_probability": 0.95,
+      "banned_phrases_found": [],
+      "findings": []
+    }
+  },
+  "banned_phrases_detected": [],
+  "remediation_directives": [],
+  "adversarial_validation": {
+    "validator_role": "sdd-reviewer",
+    "zero_creator_bias": true,
+    "technical_qa_passed": true,
+    "functional_icp_qa_passed": true,
+    "contract_verified": true,
+    "unresolved_handoff_items": []
+  },
+  "spec_id": "SPEC-PROPTECH-LEADERS-BENCHMARKING",
+  "cycle": 1,
+  "target_file": "01 Negocio/01 Estrategia & Modelo/market-research/proptech-leaders-benchmarking.md",
+  "timestamp": "2026-10-17T05:09:02.692Z"
+}

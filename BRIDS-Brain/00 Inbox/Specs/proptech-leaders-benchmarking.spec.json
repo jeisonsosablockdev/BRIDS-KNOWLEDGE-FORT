@@ -1,0 +1,369 @@
+{
+  "spec_version": "3.0.0",
+  "id": "SPEC-PROPTECH-LEADERS-BENCHMARKING",
+  "spec_id": "SPEC-PROPTECH-LEADERS-BENCHMARKING",
+  "slug": "proptech-leaders-benchmarking",
+  "title": "Benchmark Estratégico PropTech: Gigantes Residenciales e Inversión Fraccional vs BRIDS",
+  "target_folder": "01 Negocio/01 Estrategia & Modelo/market-research",
+  "target_vault_folder": "01 Negocio/01 Estrategia & Modelo/market-research",
+  "target_file": "01 Negocio/01 Estrategia & Modelo/market-research/proptech-leaders-benchmarking.md",
+  "subagents": [
+    "market-research-analyst",
+    "business-consultant",
+    "narrative-intelligence-analyst"
+  ],
+  "subagents_involved": [
+    "market-research-analyst",
+    "business-consultant",
+    "narrative-intelligence-analyst"
+  ],
+  "approved_skills": [
+    "competitor-tracker",
+    "market-intel-brief",
+    "social-intelligence"
+  ],
+  "hitl_0_skills_approved": true,
+  "execution_engine": "teamwork_preview",
+  "teamwork_config": {
+    "scale_mode": "full",
+    "integrity_mode": "development",
+    "working_directory": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT",
+    "prompt_draft_path": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/prompt_draft.md",
+    "verification_command": "node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts evaluate proptech-leaders-benchmarking \"BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/draft_cycle_1.md\""
+  },
+  "icp": "Real Estate Sponsors, LPs, Fund Managers & PropTech Investors",
+  "goal": "Analizar modelos de negocio, balances y producto de Opendoor, Redfin, Compass, Fundrise y Lofty para extraer patrones a adoptar y trampas a evitar frente a BRIDS",
+  "status": "completed",
+  "iteration": 0,
+  "created_at": "2026-10-17T02:12:16.151Z",
+  "updated_at": "2026-10-17T14:46:45.394Z",
+  "git_branch_topology": {
+    "feature_branch": "feat/proptech-leaders-benchmarking",
+    "spec_branch": "spec/proptech-leaders-benchmarking/proptech-leaders-benchmarking",
+    "merged_at": "2026-10-17T14:46:45.392Z"
+  },
+  "validation_contract": {
+    "contract_id": "VC-SPEC-PROPTECH-LEADERS-BENCHMARKING",
+    "required_technical_anchors": [
+      "Solana",
+      "Metaplex",
+      "Delaware",
+      "SPV"
+    ],
+    "forbidden_claims": [
+      "live on solana mainnet-beta",
+      "retorno garantizado 100%",
+      "cero riesgo absoluto"
+    ],
+    "min_word_count": 100,
+    "requires_actionable_cta": true,
+    "quality_threshold": 8.5,
+    "acceptance_criteria": [
+      "Cobertura completa de la propuesta de valor y economía unitaria para el ICP.",
+      "Veracidad técnica con anclas on-chain (Solana, Metaplex Core, Delaware SPV).",
+      "Cero clichés de IA y voz directa de fundador YC.",
+      "Cero bloqueos o tareas críticas pendientes en el StructuredHandoff final."
+    ]
+  },
+  "execution_topology": {
+    "orchestrator": {
+      "agentId": "orchestrator",
+      "roleType": "orchestrator",
+      "executionMode": "serial_write",
+      "contextIsolation": "fresh_context",
+      "modelTier": "pro",
+      "requiresStructuredHandoff": false
+    },
+    "parallelReadGatherers": [
+      {
+        "agentId": "market-research-analyst",
+        "roleType": "worker",
+        "executionMode": "parallel_read",
+        "contextIsolation": "fresh_context",
+        "modelTier": "flash",
+        "requiresStructuredHandoff": true
+      },
+      {
+        "agentId": "narrative-intelligence-analyst",
+        "roleType": "worker",
+        "executionMode": "parallel_read",
+        "contextIsolation": "fresh_context",
+        "modelTier": "flash",
+        "requiresStructuredHandoff": true
+      }
+    ],
+    "serialWriteWorkers": [
+      {
+        "agentId": "business-consultant",
+        "roleType": "worker",
+        "executionMode": "serial_write",
+        "contextIsolation": "fresh_context",
+        "modelTier": "pro",
+        "requiresStructuredHandoff": true
+      }
+    ],
+    "adversarialValidator": {
+      "agentId": "sdd-reviewer",
+      "roleType": "validator",
+      "executionMode": "serial_write",
+      "contextIsolation": "fresh_context",
+      "modelTier": "pro",
+      "requiresStructuredHandoff": false
+    }
+  },
+  "worker_handoffs": [],
+  "hitl_checkpoints": {
+    "hitl_1_spec_approval": {
+      "status": "approved",
+      "approved_at": "2026-10-17T04:51:05.049Z",
+      "user_feedback": []
+    },
+    "hitl_2_deliverable_approval": {
+      "status": "approved",
+      "approved_at": "2026-10-17T14:35:52.152Z",
+      "user_feedback": []
+    }
+  },
+  "intent": {
+    "business_goal": "Analizar modelos de negocio, balances y producto de Opendoor, Redfin, Compass, Fundrise y Lofty para extraer patrones a adoptar y trampas a evitar frente a BRIDS",
+    "target_icp": "Real Estate Sponsors, LPs, Fund Managers & PropTech Investors",
+    "constraints": [
+      "Cero clichés de IA",
+      "Solana & Metaplex grounding",
+      "Estilo fundador"
+    ]
+  },
+  "evaluation": {
+    "current_cycle": 12,
+    "max_cycles": 5,
+    "passing_threshold": 8.5,
+    "target_score": 8.5,
+    "scale_max": 9,
+    "final_score": 9,
+    "history": [
+      {
+        "cycle": 1,
+        "score": 9,
+        "status": "passed",
+        "timestamp": "2026-10-17T05:09:02.695Z"
+      },
+      {
+        "cycle": 2,
+        "score": 9,
+        "status": "passed",
+        "timestamp": "2026-10-17T05:10:23.645Z"
+      },
+      {
+        "cycle": 3,
+        "score": 9,
+        "status": "passed",
+        "timestamp": "2026-10-17T05:13:19.384Z"
+      },
+      {
+        "cycle": 4,
+        "score": 9,
+        "status": "passed",
+        "timestamp": "2026-10-17T05:13:24.537Z"
+      },
+      {
+        "cycle": 5,
+        "score": 9,
+        "status": "passed",
+        "timestamp": "2026-10-17T05:13:33.650Z"
+      }
+    ],
+    "criticism_history": [
+      {
+        "cycle": 1,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:09:02.692Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "27c32a49c406f8fad23d850ea5244fe4f85736df2199abf483fd664d5fc59698",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_1.json"
+      },
+      {
+        "cycle": 2,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:10:23.643Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "27c32a49c406f8fad23d850ea5244fe4f85736df2199abf483fd664d5fc59698",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_2.json"
+      },
+      {
+        "cycle": 3,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:13:19.383Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "27c32a49c406f8fad23d850ea5244fe4f85736df2199abf483fd664d5fc59698",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_3.json"
+      },
+      {
+        "cycle": 4,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:13:24.536Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "27c32a49c406f8fad23d850ea5244fe4f85736df2199abf483fd664d5fc59698",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_4.json"
+      },
+      {
+        "cycle": 5,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:13:33.649Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "27c32a49c406f8fad23d850ea5244fe4f85736df2199abf483fd664d5fc59698",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_5.json"
+      },
+      {
+        "cycle": 6,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:24:36.953Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "27c32a49c406f8fad23d850ea5244fe4f85736df2199abf483fd664d5fc59698",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_6.json"
+      },
+      {
+        "cycle": 7,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:30:04.656Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "8205a5164772874e53c9b3d36de89aec3c06dc38005793b1ab45c6bc4a3a82fb",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_7.json"
+      },
+      {
+        "cycle": 8,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:33:22.721Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "8205a5164772874e53c9b3d36de89aec3c06dc38005793b1ab45c6bc4a3a82fb",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_8.json"
+      },
+      {
+        "cycle": 9,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:33:53.449Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "8205a5164772874e53c9b3d36de89aec3c06dc38005793b1ab45c6bc4a3a82fb",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_9.json"
+      },
+      {
+        "cycle": 10,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T05:34:46.440Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "8205a5164772874e53c9b3d36de89aec3c06dc38005793b1ab45c6bc4a3a82fb",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_10.json"
+      },
+      {
+        "cycle": 11,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T13:57:12.859Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "befd574a2b8f78209cc2f8bbd10db3bb9c9429e410b6617d4756a695bc743434",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_11.json"
+      },
+      {
+        "cycle": 12,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-17T14:31:18.359Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "6a2b42c11b05940227509350886aadb9f9258144a9355df101d18d5f0863ed91",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/proptech-leaders-benchmarking-work/criticism_cycle_12.json"
+      }
+    ]
+  },
+  "evaluations": [],
+  "execution_steps": [
+    {
+      "id": "STEP-01",
+      "name": "HITL-1 Spec & Validation Contract Approval",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": []
+    },
+    {
+      "id": "STEP-02",
+      "name": "Teamwork Swarm Execution (Specify What, Not How + Forcing Function)",
+      "role": "worker",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": [
+        "STEP-01"
+      ]
+    },
+    {
+      "id": "STEP-03",
+      "name": "Adversarial Validator Loop (Technical + Functional QA)",
+      "role": "validator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": [
+        "STEP-02"
+      ]
+    },
+    {
+      "id": "STEP-04",
+      "name": "HITL-2 Deliverable Review & Approval",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": [
+        "STEP-03"
+      ]
+    },
+    {
+      "id": "STEP-05",
+      "name": "Atomic Vault Promotion & Safety Backup",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": [
+        "STEP-04"
+      ]
+    }
+  ],
+  "spec_evaluation": {
+    "score": 9,
+    "passed": true,
+    "cycle": 2,
+    "engine": "heuristic-fallback",
+    "dimensions": {
+      "skillIntegration": 2.5,
+      "vaultGrounding": 2.5,
+      "contractSpecificity": 2,
+      "workerHandoffClarity": 2
+    },
+    "defects": [],
+    "remediation_directives": [],
+    "timestamp": "2026-10-17T02:13:05.899Z"
+  }
+}

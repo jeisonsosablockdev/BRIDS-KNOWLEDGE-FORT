@@ -71,3 +71,5 @@ tags:
 | 2026-10-16 09:15:51 | X / Twitter (OpenCLI Burner) | [https://x.com/RWAFoundation_/status/2111097266224193648](https://x.com/RWAFoundation_/status/2111097266224193648) | Señal capturada automáticamente para brief 2026-10-16 |
 | 2026-10-16 09:15:51 | Ecosistema Solana & Web | [https://arrakis.finance/tokenized-equities](https://arrakis.finance/tokenized-equities) | Señal capturada automáticamente para brief 2026-10-16 |
 | 2026-10-16 09:15:51 | Ecosistema Solana & Web | [https://solana.com/solutions/real-world-assets](https://solana.com/solutions/real-world-assets) | Señal capturada automáticamente para brief 2026-10-16 |
+| 2026-10-17 09:17:33 | Ecosistema Solana & Web | [https://arrakis.finance/tokenized-equities](https://arrakis.finance/tokenized-equities) | Señal capturada automáticamente para brief 2026-10-17 |
+| 2026-10-17 09:17:33 | Ecosistema Solana & Web | [https://solana.com/solutions/real-world-assets](https://solana.com/solutions/real-world-assets) | Señal capturada automáticamente para brief 2026-10-17 |
