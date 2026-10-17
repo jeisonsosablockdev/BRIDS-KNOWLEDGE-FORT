@@ -172,6 +172,17 @@ export function mergeSpec(slug?: string): { featureBranch: string; specBranch: s
   data.git_branch_topology = { ...topology, merged_at: new Date().toISOString() };
   vaultGateway.saveSpec(data.slug, data);
 
+  try {
+    execFileSync('git', ['add', `BRIDS-Brain/00 Inbox/Specs/${data.slug}.spec.json`], { cwd: ROOT_DIR, stdio: 'pipe' });
+    execFileSync(
+      'git',
+      ['commit', '-m', `chore(sdd): record merged_at for ${data.slug}\n\nCo-Authored-By: Google Gemini <gemini@google.com>`],
+      { cwd: ROOT_DIR, stdio: 'pipe' }
+    );
+  } catch {
+    // Ignorar si el árbol ya estaba limpio o sin cambios
+  }
+
   execFileSync('git', ['checkout', topology.feature_branch], { cwd: ROOT_DIR, stdio: 'pipe' });
   execFileSync(
     'git',
