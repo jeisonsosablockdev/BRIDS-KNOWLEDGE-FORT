@@ -1,0 +1,193 @@
+{
+  "spec_version": "3.0.0",
+  "id": "SPEC-LEGAL-TEMPLATES",
+  "spec_id": "SPEC-LEGAL-TEMPLATES",
+  "slug": "legal-templates",
+  "title": "Integracion Repositorio General-Legal Legal Templates y Script de Acuerdos BRIDS",
+  "target_folder": "01 Negocio/03 Legal & Cumplimiento",
+  "target_vault_folder": "01 Negocio/03 Legal & Cumplimiento",
+  "target_file": "01 Negocio/03 Legal & Cumplimiento/legal-templates.md",
+  "subagents": [
+    "compliance-officer"
+  ],
+  "subagents_involved": [
+    "compliance-officer"
+  ],
+  "approved_skills": [
+    "investor-due-diligence",
+    "content-multiplier"
+  ],
+  "hitl_0_skills_approved": true,
+  "execution_engine": "native_squad",
+  "icp": "Fundadores, LPs, Sponsors Inmobiliarios, Asesores y Abogados RWA",
+  "goal": "Integrar legal-templates con referencias canonicas, estructurar acuerdos corporativos para BRIDS Inc. y SPVs, e implementar el script legal-template",
+  "status": "deferred",
+  "iteration": 0,
+  "created_at": "2026-10-15T13:44:27.568Z",
+  "updated_at": "2026-10-15T13:50:39.604Z",
+  "git_branch_topology": {
+    "feature_branch": "feat/legal-templates-domain",
+    "spec_branch": "spec/legal-templates-domain/legal-templates",
+    "merged_at": null
+  },
+  "validation_contract": {
+    "contract_id": "VC-SPEC-LEGAL-TEMPLATES",
+    "required_technical_anchors": [
+      "Solana",
+      "Metaplex",
+      "Delaware",
+      "SPV"
+    ],
+    "forbidden_claims": [
+      "live on solana mainnet-beta",
+      "retorno garantizado 100%",
+      "cero riesgo absoluto"
+    ],
+    "min_word_count": 100,
+    "requires_actionable_cta": true,
+    "quality_threshold": 8.5,
+    "acceptance_criteria": [
+      "Cobertura completa de la propuesta de valor y economía unitaria para el ICP.",
+      "Veracidad técnica con anclas on-chain (Solana, Metaplex Core, Delaware SPV).",
+      "Cero clichés de IA y voz directa de fundador YC.",
+      "Cero bloqueos o tareas críticas pendientes en el StructuredHandoff final."
+    ]
+  },
+  "execution_topology": {
+    "orchestrator": {
+      "agentId": "orchestrator",
+      "roleType": "orchestrator",
+      "executionMode": "serial_write",
+      "contextIsolation": "fresh_context",
+      "modelTier": "pro",
+      "requiresStructuredHandoff": false
+    },
+    "parallelReadGatherers": [],
+    "serialWriteWorkers": [
+      {
+        "agentId": "compliance-officer",
+        "roleType": "worker",
+        "executionMode": "serial_write",
+        "contextIsolation": "fresh_context",
+        "modelTier": "pro",
+        "requiresStructuredHandoff": true
+      }
+    ],
+    "adversarialValidator": {
+      "agentId": "sdd-reviewer",
+      "roleType": "validator",
+      "executionMode": "serial_write",
+      "contextIsolation": "fresh_context",
+      "modelTier": "pro",
+      "requiresStructuredHandoff": false
+    }
+  },
+  "worker_handoffs": [],
+  "hitl_checkpoints": {
+    "hitl_1_spec_approval": {
+      "status": "refining",
+      "approved_at": null,
+      "user_feedback": [
+        {
+          "timestamp": "2026-10-15T13:50:07.393Z",
+          "feedback": "Incluir la descarga local de las 12 plantillas legales de General-Legal/legal-templates con almacenamiento local en el vault/templates, e implementar en el script legal-templates.ts la capacidad de sincronizar, importar y actualizar inteligentemente desde GitHub comparando hashes/commits para actualizar solo si hay una nueva version disponible o si faltan archivos, preservando referencias canonicas y licencias CC0."
+        }
+      ]
+    },
+    "hitl_2_deliverable_approval": {
+      "status": "pending",
+      "approved_at": null,
+      "user_feedback": []
+    }
+  },
+  "intent": {
+    "business_goal": "Integrar legal-templates con referencias canonicas, estructurar acuerdos corporativos para BRIDS Inc. y SPVs, e implementar el script legal-template",
+    "target_icp": "Fundadores, LPs, Sponsors Inmobiliarios, Asesores y Abogados RWA",
+    "constraints": [
+      "Cero clichés de IA",
+      "Solana & Metaplex grounding",
+      "Estilo fundador"
+    ]
+  },
+  "evaluation": {
+    "current_cycle": 0,
+    "max_cycles": 5,
+    "passing_threshold": 8.5,
+    "target_score": 8.5,
+    "scale_max": 9,
+    "final_score": null,
+    "history": [],
+    "criticism_history": []
+  },
+  "evaluations": [],
+  "execution_steps": [
+    {
+      "id": "STEP-01",
+      "name": "HITL-1 Spec & Validation Contract Approval",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "in_progress",
+      "depends_on": []
+    },
+    {
+      "id": "STEP-02",
+      "name": "Fresh-Context Serial Worker Implementation & Structured Handoffs",
+      "role": "worker",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "pending",
+      "depends_on": [
+        "STEP-01"
+      ]
+    },
+    {
+      "id": "STEP-03",
+      "name": "Adversarial Validator Loop (Technical + Functional QA)",
+      "role": "validator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "pending",
+      "depends_on": [
+        "STEP-02"
+      ]
+    },
+    {
+      "id": "STEP-04",
+      "name": "HITL-2 Deliverable Review & Approval",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "pending",
+      "depends_on": [
+        "STEP-03"
+      ]
+    },
+    {
+      "id": "STEP-05",
+      "name": "Atomic Vault Promotion & Safety Backup",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "pending",
+      "depends_on": [
+        "STEP-04"
+      ]
+    }
+  ],
+  "spec_evaluation": {
+    "score": 9,
+    "passed": true,
+    "cycle": 3,
+    "engine": "heuristic-fallback",
+    "dimensions": {
+      "skillIntegration": 2.5,
+      "vaultGrounding": 2.5,
+      "contractSpecificity": 2,
+      "workerHandoffClarity": 2
+    },
+    "defects": [],
+    "remediation_directives": [],
+    "timestamp": "2026-10-15T13:50:39.597Z"
+  }
+}

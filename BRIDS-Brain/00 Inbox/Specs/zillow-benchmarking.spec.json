@@ -1,0 +1,251 @@
+{
+  "spec_version": "3.0.0",
+  "id": "SPEC-ZILLOW-BENCHMARKING",
+  "spec_id": "SPEC-ZILLOW-BENCHMARKING",
+  "slug": "zillow-benchmarking",
+  "title": "Benchmark Estratégico Zillow vs BRIDS: PropTech 1.0 vs Infraestructura RWA en Solana, Autopsia de Zillow Offers (iBuying) y Mitigación de Riesgos",
+  "target_folder": "01 Negocio/01 Estrategia & Modelo/market-research",
+  "target_vault_folder": "01 Negocio/01 Estrategia & Modelo/market-research",
+  "target_file": "01 Negocio/01 Estrategia & Modelo/market-research/zillow-benchmarking.md",
+  "subagents": [
+    "market-research-analyst",
+    "business-consultant",
+    "founder-ghostwriter"
+  ],
+  "subagents_involved": [
+    "market-research-analyst",
+    "business-consultant",
+    "founder-ghostwriter"
+  ],
+  "approved_skills": [
+    "competitor-tracker",
+    "market-intel-brief",
+    "founder-content-writer"
+  ],
+  "hitl_0_skills_approved": true,
+  "execution_engine": "teamwork_preview",
+  "teamwork_config": {
+    "scale_mode": "full",
+    "integrity_mode": "development",
+    "working_directory": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT",
+    "prompt_draft_path": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/zillow-benchmarking-work/prompt_draft.md",
+    "verification_command": "node BRIDS-Engine/scripts/sdd/sdd-orchestrator.ts evaluate zillow-benchmarking \"BRIDS-Brain/00 Inbox/Specs/zillow-benchmarking-work/draft_cycle_1.md\""
+  },
+  "icp": "Inversionistas Retail Globales, Nativos Web3/Solana, Desarrolladores Inmobiliarios (Sponsors B2B) y Comités de Inversión YC",
+  "goal": "Consolidar un benchmark exhaustivo de Zillow vs BRIDS documentando las diferencias de modelo de negocio, el colapso de Zillow Offers iBuying, el enfoque asset-light SaaS de BRIDS y la mitigación de riesgo físico mediante desarrolladores y tasadores expertos",
+  "status": "completed",
+  "iteration": 0,
+  "created_at": "2026-10-16T02:37:10.293Z",
+  "updated_at": "2026-10-16T02:45:32.584Z",
+  "git_branch_topology": {
+    "feature_branch": "feat/legal-templates-domain",
+    "spec_branch": "spec/legal-templates-domain/zillow-benchmarking",
+    "merged_at": "2026-10-16T02:45:32.583Z"
+  },
+  "validation_contract": {
+    "contract_id": "VC-SPEC-ZILLOW-BENCHMARKING",
+    "required_technical_anchors": [
+      "Solana",
+      "Metaplex",
+      "Delaware",
+      "SPV"
+    ],
+    "forbidden_claims": [
+      "live on solana mainnet-beta",
+      "retorno garantizado 100%",
+      "cero riesgo absoluto"
+    ],
+    "min_word_count": 100,
+    "requires_actionable_cta": true,
+    "quality_threshold": 8.5,
+    "acceptance_criteria": [
+      "Cobertura completa de la propuesta de valor y economía unitaria para el ICP.",
+      "Veracidad técnica con anclas on-chain (Solana, Metaplex Core, Delaware SPV).",
+      "Cero clichés de IA y voz directa de fundador YC.",
+      "Cero bloqueos o tareas críticas pendientes en el StructuredHandoff final."
+    ]
+  },
+  "execution_topology": {
+    "orchestrator": {
+      "agentId": "orchestrator",
+      "roleType": "orchestrator",
+      "executionMode": "serial_write",
+      "contextIsolation": "fresh_context",
+      "modelTier": "pro",
+      "requiresStructuredHandoff": false
+    },
+    "parallelReadGatherers": [
+      {
+        "agentId": "market-research-analyst",
+        "roleType": "worker",
+        "executionMode": "parallel_read",
+        "contextIsolation": "fresh_context",
+        "modelTier": "flash",
+        "requiresStructuredHandoff": true
+      }
+    ],
+    "serialWriteWorkers": [
+      {
+        "agentId": "business-consultant",
+        "roleType": "worker",
+        "executionMode": "serial_write",
+        "contextIsolation": "fresh_context",
+        "modelTier": "pro",
+        "requiresStructuredHandoff": true
+      },
+      {
+        "agentId": "founder-ghostwriter",
+        "roleType": "worker",
+        "executionMode": "serial_write",
+        "contextIsolation": "fresh_context",
+        "modelTier": "pro",
+        "requiresStructuredHandoff": true
+      }
+    ],
+    "adversarialValidator": {
+      "agentId": "sdd-reviewer",
+      "roleType": "validator",
+      "executionMode": "serial_write",
+      "contextIsolation": "fresh_context",
+      "modelTier": "pro",
+      "requiresStructuredHandoff": false
+    }
+  },
+  "worker_handoffs": [],
+  "hitl_checkpoints": {
+    "hitl_1_spec_approval": {
+      "status": "approved",
+      "approved_at": "2026-10-16T02:38:24.548Z",
+      "user_feedback": []
+    },
+    "hitl_2_deliverable_approval": {
+      "status": "approved",
+      "approved_at": "2026-10-16T02:45:29.467Z",
+      "user_feedback": []
+    }
+  },
+  "intent": {
+    "business_goal": "Consolidar un benchmark exhaustivo de Zillow vs BRIDS documentando las diferencias de modelo de negocio, el colapso de Zillow Offers iBuying, el enfoque asset-light SaaS de BRIDS y la mitigación de riesgo físico mediante desarrolladores y tasadores expertos",
+    "target_icp": "Inversionistas Retail Globales, Nativos Web3/Solana, Desarrolladores Inmobiliarios (Sponsors B2B) y Comités de Inversión YC",
+    "constraints": [
+      "Cero clichés de IA",
+      "Solana & Metaplex grounding",
+      "Estilo fundador"
+    ]
+  },
+  "evaluation": {
+    "current_cycle": 2,
+    "max_cycles": 5,
+    "passing_threshold": 8.5,
+    "target_score": 8.5,
+    "scale_max": 9,
+    "final_score": 9,
+    "history": [
+      {
+        "cycle": 1,
+        "score": 9,
+        "status": "passed",
+        "timestamp": "2026-10-16T02:39:15.721Z"
+      },
+      {
+        "cycle": 2,
+        "score": 9,
+        "status": "passed",
+        "timestamp": "2026-10-16T02:45:05.413Z"
+      }
+    ],
+    "criticism_history": [
+      {
+        "cycle": 1,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-16T02:39:15.719Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "5c8e3f122987abe879fb2479c388dc60973050fea94125b803c97c259d7d6fcc",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/zillow-benchmarking-work/criticism_cycle_1.json"
+      },
+      {
+        "cycle": 2,
+        "total_score": 9,
+        "passed": true,
+        "timestamp": "2026-10-16T02:45:05.411Z",
+        "banned_phrases_count": 0,
+        "clef_engine": "heuristic-fallback",
+        "clef_cache_key": "5f38d6ca581804648d722c4bba6cb686da8c7e195915e6541f7b0d523bbecce1",
+        "report_file": "/Users/jaymusicmachine/Library/CloudStorage/GoogleDrive-goodacrematas498@gmail.com/My Drive/01 Primal Code Lab/BRIDS/Business/BRIDS KNOWLEDGE FORT/BRIDS-Brain/00 Inbox/Specs/zillow-benchmarking-work/criticism_cycle_2.json"
+      }
+    ]
+  },
+  "evaluations": [],
+  "execution_steps": [
+    {
+      "id": "STEP-01",
+      "name": "HITL-1 Spec & Validation Contract Approval",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": []
+    },
+    {
+      "id": "STEP-02",
+      "name": "Teamwork Swarm Execution (Specify What, Not How + Forcing Function)",
+      "role": "worker",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": [
+        "STEP-01"
+      ]
+    },
+    {
+      "id": "STEP-03",
+      "name": "Adversarial Validator Loop (Technical + Functional QA)",
+      "role": "validator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": [
+        "STEP-02"
+      ]
+    },
+    {
+      "id": "STEP-04",
+      "name": "HITL-2 Deliverable Review & Approval",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": [
+        "STEP-03"
+      ]
+    },
+    {
+      "id": "STEP-05",
+      "name": "Atomic Vault Promotion & Safety Backup",
+      "role": "orchestrator",
+      "execution_mode": "serial_write",
+      "model_tier": "pro",
+      "status": "completed",
+      "depends_on": [
+        "STEP-04"
+      ]
+    }
+  ],
+  "spec_evaluation": {
+    "score": 9,
+    "passed": true,
+    "cycle": 2,
+    "engine": "heuristic-fallback",
+    "dimensions": {
+      "skillIntegration": 2.5,
+      "vaultGrounding": 2.5,
+      "contractSpecificity": 2,
+      "workerHandoffClarity": 2
+    },
+    "defects": [],
+    "remediation_directives": [],
+    "timestamp": "2026-10-16T02:37:21.821Z"
+  }
+}
