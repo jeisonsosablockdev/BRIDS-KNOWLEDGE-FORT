@@ -6,7 +6,7 @@ target_file: "BRIDS-Brain/01 Negocio/01 Estrategia & Modelo/market-research/prop
 subagents_involved:
   - "market-research-analyst"
   - "business-consultant, narrative-intelligence-analyst"
-status: completed # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration
+status: deliverable_review # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration
 created_at: "2026-10-17"
 updated_at: "2026-10-17"
 hitl_checkpoints:
