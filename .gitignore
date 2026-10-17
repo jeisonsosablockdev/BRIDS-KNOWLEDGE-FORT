@@ -10,3 +10,4 @@ BRIDS-Engine/context/brids-core-repo-import/
 BRIDS-Engine/context/.clef-eval-cache.json
 *.bak.md
 BRIDS-Brain/00 Inbox/Archive/
+.agents/teamwork/
