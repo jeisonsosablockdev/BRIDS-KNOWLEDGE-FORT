@@ -64,3 +64,10 @@ tags:
 | 2026-10-14 22:48:05 | Ecosistema Solana & Web | [https://solana.com/solutions/real-world-assets](https://solana.com/solutions/real-world-assets) | Señal capturada automáticamente para brief 2026-10-13 |
 | 2026-10-15 22:47:40 | Ecosistema Solana & Web | [https://arrakis.finance/tokenized-equities](https://arrakis.finance/tokenized-equities) | Señal capturada automáticamente para brief 2026-10-14 |
 | 2026-10-15 22:47:40 | Ecosistema Solana & Web | [https://solana.com/solutions/real-world-assets](https://solana.com/solutions/real-world-assets) | Señal capturada automáticamente para brief 2026-10-14 |
+| 2026-10-15 09:17:31 | Ecosistema Solana & Web | [https://arrakis.finance/tokenized-equities](https://arrakis.finance/tokenized-equities) | Señal capturada automáticamente para brief 2026-10-15 |
+| 2026-10-15 09:17:31 | Ecosistema Solana & Web | [https://solana.com/solutions/real-world-assets](https://solana.com/solutions/real-world-assets) | Señal capturada automáticamente para brief 2026-10-15 |
+| 2026-10-16 09:15:51 | X / Twitter (OpenCLI Burner) | [https://x.com/0xjiongying/status/2111098609521598833](https://x.com/0xjiongying/status/2111098609521598833) | Señal capturada automáticamente para brief 2026-10-16 |
+| 2026-10-16 09:15:51 | X / Twitter (OpenCLI Burner) | [https://x.com/laki_0x/status/2111098543960383819](https://x.com/laki_0x/status/2111098543960383819) | Señal capturada automáticamente para brief 2026-10-16 |
+| 2026-10-16 09:15:51 | X / Twitter (OpenCLI Burner) | [https://x.com/RWAFoundation_/status/2111097266224193648](https://x.com/RWAFoundation_/status/2111097266224193648) | Señal capturada automáticamente para brief 2026-10-16 |
+| 2026-10-16 09:15:51 | Ecosistema Solana & Web | [https://arrakis.finance/tokenized-equities](https://arrakis.finance/tokenized-equities) | Señal capturada automáticamente para brief 2026-10-16 |
+| 2026-10-16 09:15:51 | Ecosistema Solana & Web | [https://solana.com/solutions/real-world-assets](https://solana.com/solutions/real-world-assets) | Señal capturada automáticamente para brief 2026-10-16 |
