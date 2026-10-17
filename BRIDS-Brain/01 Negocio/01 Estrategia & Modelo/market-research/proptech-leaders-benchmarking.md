@@ -60,55 +60,107 @@ A diferencia de análisis teóricos abstractos, este benchmark se apoya exclusiv
 
 ---
 
-## 2. Mapa Comparativo Transversal: Cinco Plataformas vs BRIDS.io
+## 2. Mapa Comparativo Transversal: Cinco Plataformas vs Infraestructura BRIDS vs Marketplace BRIDS.io
 
-| Dimensión de Análisis | Opendoor (iBuying) | Redfin (Híbrido) | Compass (Brokerage Tech) | Fundrise (eREITs / Reg A+) | Lofty.ai (Tokenización) | BRIDS.io (Marketplace & Infraestructura RWA) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Rol en el Activo** | Comprador principal con balance corporativo | Portal de leads + agencia de corretaje | Correduría tradicional asistida por software | Gestor de fondos ciegos (*blind pools*) | Marketplace de micro-fracciones (\$50) | **Marketplace de inversión directa (Deal-by-Deal) + Software SaaS de sindicación y SPVs** |
-| **Riesgo de Balance** | **Crítico:** Miles de millones en inventario | Eliminado tras cerrar RedfinNow | Cero en inmuebles; alto en costes fijos SG&A | Cero directo (el riesgo lo absorbe el fondo) | Cero para la plataforma; total para inversores | **Cero:** BRIDS Inc. nunca adquiere, posee ni financia; opera como marketplace y software fiduciario |
-| **Margen Bruto / Modelo** | 4% a 9% (negativo en caídas de ciclo) | 18% a 25% (arrastrado por corretaje) | 18% a 19% (81% entregado a agentes) | Tarifa fija de 1.00% anual sobre AUM | 5%–6% round-trip en marketplace | **Superior al 80% (Setup SaaS + Success Fee 1%-2.5% en Marketplace Primario + 0.5%-1% en Trading Secundario)** |
-| **Toma de Decisiones Físicas** | Centralizada por contratistas internos | No aplica tras liquidar inventario | No aplica (gestión del cliente final) | Gestor profesional interno con discreción total | **Micro-DAO caótica (voto minorista por goteras)** | **Desarrollador / GP local con custodia por hitos (AIA G702) y Backup Servicer (\$0)** |
-| **Mecanismo de Salida / Liquidez** | Venta en mercado abierto con agentes | No aplica a balance | No aplica a balance | **Puertas de rescate (máx. 5% trimestral)** | Libro de órdenes interno / DEX con slippage | **Marketplace Secundario P2P en BRIDS.io (Private Bulletin Board en Fase 1 / ATS en Fase 2)** |
-| **Estructura Jurídica** | VIEs consolidadas con deuda bancaria | Matriz cotizada en NASDAQ | Matriz cotizada en NYSE | Fideicomisos Maryland / Delaware Trust | Delaware LLC por propiedad | **Delaware Series LLC SPV segregada por activo** |
-| **Custodia e Identidad** | Título tradicional en registro condal | Notarías y agentes tradicionales | Registros tradicionales de condado | Cuenta en agente de transferencias registrado | Billeteras cripto sin recuperación formal | **Stripe Identity + Metaplex Core Delegates + Bóvedas Squads v4** |
+| Dimensión de Análisis | Opendoor (iBuying) | Redfin (Híbrido) | Compass (Brokerage Tech) | Fundrise (eREITs / Reg A+) | Lofty.ai (Tokenización Micro-DAO) | Infraestructura BRIDS (B2B SaaS & SPV Engine) | Marketplace BRIDS.io (B2B2C Launchpad & Trading) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Público Objetivo** | Propietarios residenciales particulares | Compradores y vendedores particulares | Agentes inmobiliarios tradicionales | Inversores minoristas no acreditados | Especuladores minoristas cripto | **Promotores (Sponsors), GPs, Constructoras y Family Offices** | **Inversores acreditados (Reg D 506c), globales (Reg S) y LPs** |
+| **Rol en el Activo** | Comprador principal con balance corporativo | Portal de leads + agencia de corretaje | Correduría tradicional asistida por software | Gestor de fondos ciegos (*blind pools*) | Marketplace de micro-fracciones (\$50) | **Motor de originación, estructuración celular (SPVs Delaware) y custodia** | **Escaparate de inversión directa (*deal-by-deal*), sindicación y liquidez** |
+| **Riesgo de Balance** | **Crítico:** Miles de millones en inventario | Eliminado tras cerrar RedfinNow | Cero en inmuebles; alto en costes fijos SG&A | Cero directo (el riesgo lo absorbe el fondo) | Cero para la plataforma; total para inversores | **Cero:** Software SaaS no custodial; jamás adquiere inmuebles ni deuda | **Cero:** Escaparate digital y tablón privado; jamás toma posición de contraparte |
+| **Modelo de Ingresos** | 4% a 9% margen bruto (negativo en caídas) | 18% a 25% (arrastrado por corretaje) | 18% a 19% (81% entregado a agentes) | Tarifa fija de 1.00% anual sobre AUM | 5%–6% round-trip en transacciones | **Tarifa por proyecto (\$1.5k–\$3k USD) + suscripción SaaS por gestión de cap tables** | **Success Fee (1.0%–2.5% del capital fondeado) + Trading Fee secundario (0.5%–1.0%)** |
+| **Toma de Decisiones Físicas** | Centralizada por contratistas internos | No aplica tras liquidar inventario | No aplica (gestión del cliente final) | Gestor profesional interno con discreción total | **Micro-DAO caótica (voto minorista por goteras)** | **Promotor local con peritaje ASTM E2018-15, custodia por hitos (AIA G702) y Backup Servicer (\$0)** | El inversor no vota goteras; audita hitos y rendimientos desde su panel |
+| **Mecanismo de Salida / Liquidez** | Venta en mercado abierto con agentes | No aplica a balance | No aplica a balance | **Puertas de rescate (máx. 5% trimestral)** | Libro de órdenes interno / DEX con slippage | Configuración técnica de estándares (Metaplex Core Permanent Delegate) | **Private Bulletin Board P2P (Fase 1) / ATS regulado por SEC/FINRA (Fase 2)** |
+| **Estructura Jurídica** | VIEs consolidadas con deuda bancaria | Matriz cotizada en NASDAQ | Matriz cotizada en NYSE | Fideicomisos Maryland / Delaware Trust | Delaware LLC por propiedad | **Delaware Series LLC SPV segregada por activo (célula estanca)** | Contrato de suscripción digital del inversor en la célula de la SPV |
+| **Custodia e Identidad** | Título tradicional en registro condal | Notarías y agentes tradicionales | Registros tradicionales de condado | Cuenta en agente de transferencias registrado | Billeteras cripto sin recuperación formal | **Bóvedas Squads v4 Multisig (2-de-3) + Retención estatutaria Texas Ch. 53** | **Stripe Identity (KYC/AML) + Checkout USDC o USD fiduciario (Sphere Labs)** |
 
 ---
 
-### 2.1 La Anatomía de BRIDS.io: Por qué somos un Marketplace Inmobiliario Directo (*Deal-by-Deal*) y no un Fondo Ciego ni una Inmobiliaria Tradicional
+### 2.1 Infraestructura BRIDS: El Motor Fiduciario, Legal y On-Chain para Promotores (B2B SaaS)
 
-A menudo se describe a BRIDS exclusivamente como un "proveedor técnico de backend" o una "herramienta SaaS para promotores". En la práctica comercial, la cara visible al usuario e inversor es **BRIDS.io como un Marketplace Inmobiliario Digital de Dos Lados (*Two-Sided Real Estate Marketplace & Launchpad*)**, diseñado para conectar la oferta de desarrolladores de primer nivel con la demanda de inversores minoristas acreditados y globales:
+La **Infraestructura BRIDS** es la capa técnica y jurídica invisible para el inversor minorista, pero vital para el promotor inmobiliario (*Sponsor / GP*). Resuelve la originación, estructuración y custodia del proyecto:
+1. **SPV Engine Celular (Delaware Series LLC):** Genera automáticamente vehículos de propósito especial segregados estatutariamente (amparados en *6 Del. C. § 18-215*), blindando cada inmueble contra contingencias legales de otros proyectos o de la matriz.
+2. **Riel de Custodia por Hitos (*Milestone Escrow*):** Bóvedas multifirma en Solana (*Squads v4 Multisig 2-de-3: Compliance, Inspector y Sponsor*) donde el 100% de los fondos captados permanecen custodiados. Los desembolsos se liberan progresivamente únicamente contra certificaciones de obra física independientes (*AIA Document G702/G703*) y retención estatutaria del 10% (*Texas Property Code, Chapter 53*).
+3. **Administrador de Respaldo (*Backup Servicer*) a Coste \$0:** Cláusula de remoción y sustitución contractual (*Removal of Manager for Cause*, amparada en *6 Del. C. § 18-402*). Si el promotor quiebra, la SPV contrata a una gestora profesional sufragada con los propios fondos en custodia de la obra, costándole exactamente **\$0 USD al balance de BRIDS Inc.**
+4. **Peritaje Técnico Preventivo (ASTM E2018-15):** Auditoría física in-situ obligatoria de patologías estructurales y vicios ocultos previa a cualquier emisión de tokens.
+5. **Monetización B2B:** Tarifa de estructuración por proyecto (\$1,500 – \$3,000 USD) + suscripción mensual por administración de cap table y gobernanza celular.
 
-1. **Mercado Primario (Launchpad de Inversión Directa Deal-by-Deal):**
-   * **Elección Granular vs Fondos Ciegos:** A diferencia de **Fundrise**, donde el inversor deposita su capital en un fondo ciego (*blind pool*) sin poder elegir en qué edificio específico se invierte su dinero, en `BRIDS.io` cada inmueble es un producto de inversión independiente (*deal-by-deal*). El usuario explora un escaparate interactivo, visualiza renders y fotografías de alta resolución, analiza la tasa interna de retorno proyectada (IRR), el *Cap Rate*, los dividendos de alquiler estimados, el cronograma de construcción, el historial del promotor (*Track Record*), el peritaje técnico **ASTM E2018-15** y el contrato de la SPV de Delaware antes de colocar un solo dólar.
-   * **Inversión Fluida con Tickets Accesibles:** Permite a inversores acreditados (Reg D 506c) y extranjeros (Reg S) suscribir fracciones directas (desde tickets de \$200 USD o el mínimo fijado por el promotor) en segundos mediante USDC o transferencias fiduciarias en USD (Sphere Labs), tras un proceso de verificación de identidad instantáneo con **Stripe Identity**.
+---
 
-2. **Mercado Secundario (Private Bulletin Board P2P & Liquidez Atómica):**
-   * En lugar de obligar a los inversores a esperar liquidaciones a 5 o 10 años o atraparlos en compuertas de reembolso discrecionales del 5% trimestral (como Fundrise), el marketplace de `BRIDS.io` incorpora un **Tablón de Anuncios Privado (*Private Bulletin Board*) en Fase 1** (conforme a las exenciones de la SEC para tablones no transaccionales) y una pasarela hacia un **ATS / Broker-Dealer regulado en Fase 2**.
-   * Los tenedores de tokens pueden publicar órdenes de venta y otros inversores verificados pueden adquirirlas directamente peer-to-peer con liquidación atómica sobre Solana, sin intermediarios manuales ni fricción notarial.
+### 2.2 Marketplace BRIDS.io: El Portal de Descubrimiento, Inversión Directa y Trading Secundario (B2B2C)
 
-3. **Modelo de Ingresos Two-Sided del Marketplace:**
-   * **Del Lado del Promotor / Sponsor (Supply):** Tarifa de estructuración SaaS inicial (\$1,500 – \$3,000 USD) + **Comisión de Éxito / Listing Fee en el Marketplace (1.0% a 2.5% del capital total fondeado)**. Este porcentaje es enormemente competitivo frente al 3%–5% que cobran intermediarios como CrowdStreet o los abusivos splits del 81% de corredurías tradicionales como Compass.
-   * **Del Lado del Inversor / LP (Demand):** Comisión transaccional reducida en el mercado secundario (0.5% a 1.0%), eliminando de raíz la tarifa fija de gestión de cartera del 1.0% anual sobre AUM que drena la rentabilidad en Fundrise.
+El **Marketplace BRIDS.io** es la cara visible, interactiva y de captación de capital de la compañía, donde inversores acreditados y globales descubren y transaccionan participaciones inmobiliarias:
+1. **Inversión Directa por Activo (*Deal-by-Deal Launchpad*):** A diferencia de los fondos ciegos (*blind pools*) de **Fundrise**, en `BRIDS.io` el inversor tiene soberanía total para elegir el inmueble específico. Examina renders, fotos de alta resolución, proyecciones financieras auditadas (IRR, Cap Rate, cash flow mensual de rentas), ubicación, cronograma de obra y peritajes técnicos, participando con tickets accesibles desde **\$200 USD**.
+2. **Onboarding Fiduciario Instantáneo:** Integración fluida con **Stripe Identity** (KYC/AML) y rieles de pago duales en USDC sobre Solana o transferencias en USD fiduciario mediante **Sphere Labs**, eliminando la fricción de los procesos de suscripción analógicos de 30 días.
+3. **Mercado Secundario P2P & Tablón Privado:** En Fase 1, opera un **Private Bulletin Board** no transaccional (conforme a las exenciones de la SEC) que permite a los inversores publicar intenciones de compra/venta entre usuarios verificados con liquidación atómica sobre Solana. En Fase 2, se conecta con un **ATS / Broker-Dealer regulado por FINRA y la SEC**.
+4. **Curaduría Institucional (Cero Goteras ni DAOs Caóticas):** Frente a la degradación de Lofty.ai por listar viviendas residenciales individuales problemáticas gobernadas por votaciones en foros, `BRIDS.io` ofrece exclusivamente desarrollos comerciales, multifamiliares o proyectos residenciales prime promovidos por desarrolladores verificados ex-ante.
+5. **Monetización de Marketplace:** Comisión de Éxito / Listing Fee (1.0% a 2.5% del capital total fondeado) + Tarifa transaccional secundaria (0.5% a 1.0%), sin comisiones anuales de gestión de cartera sobre AUM (0% AUM fee frente al 1% de Fundrise).
 
-4. **Curaduría Institucional vs el "Bazar de Goteras" (La Lección de Lofty.ai):**
-   * El fracaso de Lofty.ai demostró que abrir un marketplace a cualquier vivienda unifamiliar de bajo valor en zonas deprimidas atrae inquilinos morosos y administradores negligentes.
-   * `BRIDS.io` se posiciona como un **Marketplace Curado de Grado Institucional**: solo los promotores que superan el filtro ex-ante de solvencia (*KYB/Underwriting*) y cuyos proyectos cuentan con peritajes independientes y auditoría técnica pueden listar sus activos en el escaparate de la plataforma.
+---
+
+### 2.3 Matriz de Interacción: Cómo se Acoplan la Infraestructura BRIDS y el Marketplace BRIDS.io
+
+```mermaid
+flowchart TD
+    subgraph Capa B2B: Infraestructura BRIDS (Engine)
+        A["Sponsor / Desarrollador Inmobiliario"] -->|1. Onboarding KYB & Due Diligence| B["Perfil Promotora & Compliance BRIDS"]
+        B -->|2. Creación Celular| C["SPV Delaware Series LLC"]
+        C -->|3. Peritaje Físico In-Situ| D["Inspección ASTM E2018-15"]
+        D -->|4. Configuración Bóveda| E["Squads v4 Multisig 2-de-3 (Solana)"]
+    end
+
+    subgraph Capa B2B2C: Marketplace BRIDS.io (Portal)
+        E -->|5. Publicación en Escaparate| F["Catálogo Deal-by-Deal BRIDS.io"]
+        G["Inversores Acreditados & LPs"] -->|6. KYC Instantáneo Stripe| F
+        F -->|7. Suscripción desde \$200 USD| H["Bóveda Escrow Squads v4 (100% Fondos Bloqueados)"]
+    end
+
+    subgraph Ejecución de Obra & Desembolsos
+        I["Avance de Construcción"] --> J["Inspector Independiente (AIA G702/G703)"]
+        J -->|8. Desembolso por Hito| H
+        H -->|Liberación Progresiva - 10% Retención| K["Constructor / General Contractor (Sphere Labs)"]
+        H -.->|Auditoría en Tiempo Real| F
+    end
+
+    subgraph Liquidez Secundaria & Rentas
+        K --> L["Inmueble Operativo / Rentas"]
+        L -->|9. Distribución Atómica| G
+        G <-->|10. Compra/Venta P2P en Solana| M["Marketplace Secundario BRIDS.io (Private Bulletin Board / ATS)"]
+    end
+
+    style E fill:#d4edda,stroke:#28a745,color:#155724
+    style F fill:#cce5ff,stroke:#004085,color:#004085
+    style H fill:#fff3cd,stroke:#ffc107,color:#856404
+    style M fill:#e2e3e5,stroke:#383d41,color:#1b1e21
+```
 
 ---
 
 ## 3. Síntesis Estratégica: Qué Adoptar vs Qué Descartar
 
 ### ✅ Qué Debemos Adoptar de los Pioneros
-1. **De Opendoor y Redfin:** La excelencia visual y operativa de sus marketplaces: motores de búsqueda y filtrado por tipología de activo, simuladores interactivos de rentabilidad neta (IRR, Cap Rate, cash flow mensual proyectado), y desglose transparente de impuestos prediales y gastos de la SPV en el escaparate de **BRIDS.io**.
-2. **De Compass:** El estándar visual sobrio y sofisticado en los paneles de control para profesionales inmobiliarios, otorgando estatus institucional a los promotores (*Sponsors*) que listan sus proyectos en el marketplace.
-3. **De Fundrise:** La experiencia móvil intuitiva para el inversor minorista y la reinversión automatizada de rentas en el marketplace de **BRIDS.io**, pero superando su limitación crítica al ofrecer inversión directa deal-by-deal en lugar de fondos ciegos opacos.
-4. **De Lofty.ai:** La visualización en tiempo real del flujo de ingresos por alquileres acreditados de forma transparente directamente en la billetera o panel de usuario.
+
+#### Para la Infraestructura BRIDS (B2B SaaS & SPV Engine)
+1. **De Opendoor:** El diseño de flujos ágiles de onboarding y simulación de estructuración para promotores, eliminando semanas de burocracia analógica mediante wizards automatizados.
+2. **De Compass:** El estándar visual sobrio y sofisticado en los paneles de control para profesionales inmobiliarios, otorgando estatus institucional a los promotores (*Sponsors*).
+3. **De Lofty.ai:** La arquitectura técnica de liquidación atómica on-chain de rentas con costes marginales insignificantes sobre Solana.
+
+#### Para el Marketplace BRIDS.io (B2B2C Launchpad & Trading)
+1. **De Redfin:** La transparencia radical en el desglose de costes de cada inmueble (impuestos prediales, seguros, cuotas de la SPV) y la potencia del contenido educativo para captar tráfico orgánico de calidad.
+2. **De Fundrise:** La experiencia móvil intuitiva para el inversor minorista y la reinversión automatizada de rentas en el marketplace, pero superando los fondos ciegos mediante inversión directa deal-by-deal.
+3. **De Lofty.ai:** La visualización en tiempo real del flujo de ingresos por alquileres acreditados de forma transparente directamente en el panel de usuario.
+
+---
 
 ### ❌ Qué Debemos Descartar Categóricamente
+
+#### Para la Infraestructura BRIDS
 1. **El Riesgo de Balance (iBuying):** Jamás comprar inventario inmobiliario residencial en el balance de BRIDS. Las autopsias de Zillow Offers (\$881M de pérdida) y RedfinNow (\$(90.6)M de pérdida) demuestran que las empresas de software quiebran cuando pretenden arbitrar ladrillo físico con deuda.
-2. **El Subsidio de Comisiones Humanas:** No competir en el negocio de corretaje tradicional pagando splits del 80% o concediendo bonos en efectivo a intermediarios (la trampa de Compass).
-3. **Los Fondos Ciegos con Puertas de Rescate Arbitrarias:** No atrapar a los inversores en cestas genéricas donde no saben qué compran ni cuándo podrán salir, cobrando un 1% anual continuo sobre su capital (Fundrise).
-4. **La Micro-Gobernanza DAO de Viviendas y Desembolsos sin Hitos:** Nunca someter reparaciones físicas de fontanería, tejados o contratos de inquilinos al voto de una multitud de billeteras cripto (el error mortal de Lofty.ai que causó la degradación de sus viviendas), ni transferir jamás fondos por adelantado al promotor. En BRIDS el capital permanece bloqueado en custodia multisig con liberaciones progresivas contra certificaciones de avance físico (AIA G702/G703).
+2. **La Descentralización Ficticia de Decisiones Físicas:** Nunca someter reparaciones físicas de fontanería, tejados o contratos de inquilinos al voto de una multitud de billeteras cripto (el error mortal de Lofty.ai que causó la degradación de sus viviendas). La ejecución es fiduciaria del promotor bajo custodia de hitos (AIA G702) y Backup Servicer a coste \$0.
+
+#### Para el Marketplace BRIDS.io
+1. **Los Fondos Ciegos con Puertas de Rescate Arbitrarias:** No atrapar a los inversores en cestas genéricas donde no saben qué compran ni cuándo podrán salir, cobrando un 1% anual continuo sobre su capital (Fundrise).
+2. **El Subsidio de Comisiones Tradicionales:** No competir en el negocio de corretaje tradicional pagando splits del 80% o concediendo bonos en efectivo a intermediarios (la trampa de Compass).
+3. **El Marketplace de Activos Degradados:** No abrir el catálogo a viviendas residenciales de bajo valor en zonas conflictivas que generen morosidad y dañen la credibilidad de la plataforma (Lofty.ai). BRIDS.io mantiene un catálogo curado de proyectos prime con promotores solventes.
 
 ---
 
@@ -151,7 +203,8 @@ BRIDS no compite intentando ser un fondo inmobiliario ni una inmobiliaria con pr
 
 ## 🔄 Historial de Revisiones SDD (Changelog)
 - **v1.0 (2026-10-17):** Aprobado por el usuario e integrado en el vault tras 12 ciclos de optimización con nota de 9/9.0.
-- **v1.1 (2026-10-17):** Integración explícita de la arquitectura de Marketplace de BRIDS.io (Primario deal-by-deal con tickets de \$200 USD, Secundario P2P Private Bulletin Board, modelo de comisiones two-sided y mitigación del efecto de red).
+- **v1.1 (2026-10-17):** Integración de la arquitectura de Marketplace de BRIDS.io (Primario deal-by-deal con tickets de \$200 USD, Secundario P2P Private Bulletin Board y modelo two-sided).
+- **v1.2 (2026-10-17):** Desacoplamiento formal en matriz comparativa de 7 columnas entre la Infraestructura BRIDS (B2B SaaS / SPV Engine) y el Marketplace BRIDS.io (B2B2C Launchpad & Trading), con diagrama de flujo y delimitación de roles.
 
 ## 🔗 Trazabilidad
 - Artefacto de Especificación: [[00 Inbox/Specs/proptech-leaders-benchmarking.spec.md]]
