@@ -1,0 +1,58 @@
+{
+  "collected_at": "2026-10-12 11:31:02",
+  "search_queries": [
+    "opencli twitter search \"Solana RWA\" -f yaml",
+    "opencli twitter search \"Solana tokenization\" -f yaml",
+    "opencli twitter search \"real estate tokenization\" -f yaml",
+    "opencli reddit search \"RWA\" --subreddit solana -f yaml",
+    "opencli reddit search \"tokenization\" --subreddit solana -f yaml",
+    "opencli reddit search \"real estate\" --subreddit solana -f yaml"
+  ],
+  "total_records": 4,
+  "records": [
+    {
+      "id": "1x3z5b7",
+      "platform": "Reddit (r/solana)",
+      "author": "ansi09",
+      "title": "2WA Solana Brings $USDGO Plus SP, The US Federally Regulated Stablecoin, Onchain On Solana (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1x3z5b7/2wa_solana_brings_usdgo_plus_sp_the_us_federally/",
+      "content": "**Source:** [https://x.com/solana/status/2109599597064859666](https://x.com/solana/status/2109599597064859666) BREAKING: [@2WA\\_Official](https://x.com/2WA_Official) brings USDGO Plus SP onchain on Solana The first market-neutral digital asset fund built on USDGO, the $1B+ US federally regulated stablecoin. Tokenized and distributed by [@osldotcom](https://x.com/osldotcom) for eligible professional investors in Hong Kong https://preview.redd.it/f0wvheopr0vh1.png?width=680&format=png&auto=webp&s=62c8589a9a2eba9a6fd7ba441b514202fb480bc7 OSL tokenized the fund and handles custody and distribution, while USDGO is issued by Anchorage Digital Bank, the first federally chartered crypto bank in the US Learn more: [https://markets.ft.com/data/announce/detail?dockey=600-202610080405PR\\_NEWS\\_USPRX\\_\\_\\_\\_HK66850-1](https://t.co/TFBQg1MKeV)",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-12 11:31:02"
+    },
+    {
+      "id": "1x3vukn",
+      "platform": "Reddit (r/solana)",
+      "author": "Lordpototoy",
+      "title": "My rule-based Solana memecoin bot loses after realistic costs. What edge did profitable builders actually find? (r/solana)",
+      "url": "https://www.reddit.com/r/solana/comments/1x3vukn/my_rulebased_solana_memecoin_bot_loses_after/",
+      "content": "- I'm building a deterministic (no-AI) memecoin bot on Solana and paper testing it carefully. I'll share real numbers in exchange for honest advice. **Setup:** free Helius tier + public RPC, running on a small VPS (\\~1–3 s latency). **What I've tried:** * Post-migration momentum (pump.fun → PumpSwap): enter shortly after migration, exit on time cuts. * Copying the logic of profitable bot wallets. When I replicate their entries at my latency, most of their edge disappears. * Filters on volume, holders, buy/sell ratio, big-buy triggers and minimum activity. **What the data says:** * I backtested \\~800 tokens. Across \\~1,500 simple entry rules and \\~180 exit combos (trailing stops, break-even, partials, stops), nothing held up on unseen data once fees, slippage and failed transactions were included. * About 45% of entries reach +20% at some point, but a third of those still end red. The move is there, but I can't capture it. * Unfiltered, the average result is slightly negative, about −0.02 to −0.04 SOL per 1 SOL trade. **Specific questions:** 1. **Where does the edge come from?** If you're profitable, is it mainly speed (landing in the same block or the next one), token selection, or exits? If I had to pick one to fix first, which would it be? 2. **Latency:** at \\~1–3 s behind the trigger, am I already too late for post-migration momentum? What latency did you need before your results turned positive? 3. **Paper vs live:** how far were your live results from your simulation? What did your paper model get wrong (fills, failed transactions, MEV/sandwiches, priority fees)? 4. **Exits:** about 45% of my entries hit +20% and a third of those still end red. How do you capture the move: fixed take-profit, scaling out, or exits based on order flow (sell pressure, whales leaving) instead of price? 5. **What signal actually worked for you?** Not volume or holder counts (those didn't separate winners from losers in my data), but something like dev or insider wallet behavior, funding source of early buyers, bundles, or the first sells? 6. **Copying bot wallets:** has anyone made copy-trading profitable at retail latency? Or is the useful thing to learn *which* tokens they pick and then trade them differently (later entry, longer hold)? 7. **Validation:** how many trades or days did you need before trusting a strategy, and how did you avoid fooling yourself with a strategy that only worked by luck? 8. **Rules vs AI:** is a purely rule-based bot the right approach, or did you get better results with an AI/ML model deciding entries and exits (or AI used only to filter or score tokens, with rules executing)? Was it worth the extra cost and latency? Any advice from people who built something profitable, on Solana or EVM, is welcome, even \"you're looking in the wrong place\". Thanks!",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-12 11:31:02"
+    },
+    {
+      "id": 3,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Arrakis Research: Tokenized Equities on Solana Report",
+      "url": "https://arrakis.finance/tokenized-equities",
+      "content": "Reporte de investigación sobre más de 1.5M de direcciones en Solana y EVM para activos tokenizados y tesorería institucional.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-12 11:31:02"
+    },
+    {
+      "id": 4,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Solana Official: Real World Assets Infrastructure & Solutions",
+      "url": "https://solana.com/solutions/real-world-assets",
+      "content": "Portal oficial de infraestructura RWA de Solana Foundation con casos de uso de tesoros tokenizados y bienes raíces.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-12 11:31:02"
+    }
+  ]
+}

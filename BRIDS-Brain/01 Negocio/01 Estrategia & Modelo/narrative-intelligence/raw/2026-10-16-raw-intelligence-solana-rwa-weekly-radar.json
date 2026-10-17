@@ -1,0 +1,69 @@
+{
+  "collected_at": "2026-10-16 09:15:11",
+  "search_queries": [
+    "opencli twitter search \"Solana RWA\" -f yaml",
+    "opencli twitter search \"Solana tokenization\" -f yaml",
+    "opencli twitter search \"real estate tokenization\" -f yaml",
+    "opencli reddit search \"RWA\" --subreddit solana -f yaml",
+    "opencli reddit search \"tokenization\" --subreddit solana -f yaml",
+    "opencli reddit search \"real estate\" --subreddit solana -f yaml"
+  ],
+  "total_records": 5,
+  "records": [
+    {
+      "id": "2111098609521598833",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "0xjiongying",
+      "title": "@0xjiongying: '@laki_0x @solana rwa demand is right there'...",
+      "url": "https://x.com/0xjiongying/status/2111098609521598833",
+      "content": "'@laki_0x @solana rwa demand is right there'",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-16 09:15:11"
+    },
+    {
+      "id": "2111098543960383819",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "laki_0x",
+      "title": "@laki_0x: - always wondered why projects launch 1390294302 L2 chains that shut down a...",
+      "url": "https://x.com/laki_0x/status/2111098543960383819",
+      "content": "- always wondered why projects launch 1390294302 L2 chains that shut down a few months later instead of just building rwa the demand is already there, rwa on @solana: - $0.96B → $2.84B in 12 months - 909k wallets hold tokenized assets - BlackRock, Franklin Templeton and J.P. Morgan are already in no need to bootstrap a new chain when the assets are already on solana",
+      "likes": 1,
+      "views": 54,
+      "extracted_at": "2026-10-16 09:15:11"
+    },
+    {
+      "id": "2111097266224193648",
+      "platform": "X / Twitter (OpenCLI Burner)",
+      "author": "RWAFoundation_",
+      "title": "@RWAFoundation_: - @BlackRock's BUIDL is the largest RWA product on @Solana, at $871.5 milli...",
+      "url": "https://x.com/RWAFoundation_/status/2111097266224193648",
+      "content": "- @BlackRock's BUIDL is the largest RWA product on @Solana, at $871.5 million across 13 wallets on https://t.co/eUjIkCve7e. It held $20.0 million on Solana in March 2025, when its share class launched, and $175.5 million a year ago. https://t.co/QtjFLKBacx",
+      "likes": 3,
+      "views": 360,
+      "extracted_at": "2026-10-16 09:15:11"
+    },
+    {
+      "id": 4,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Arrakis Research: Tokenized Equities on Solana Report",
+      "url": "https://arrakis.finance/tokenized-equities",
+      "content": "Reporte de investigación sobre más de 1.5M de direcciones en Solana y EVM para activos tokenizados y tesorería institucional.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-16 09:15:11"
+    },
+    {
+      "id": 5,
+      "platform": "Ecosistema Solana & Web",
+      "author": "Solana Foundation / Ecosystem",
+      "title": "Solana Official: Real World Assets Infrastructure & Solutions",
+      "url": "https://solana.com/solutions/real-world-assets",
+      "content": "Portal oficial de infraestructura RWA de Solana Foundation con casos de uso de tesoros tokenizados y bienes raíces.",
+      "likes": 0,
+      "views": 0,
+      "extracted_at": "2026-10-16 09:15:11"
+    }
+  ]
+}
