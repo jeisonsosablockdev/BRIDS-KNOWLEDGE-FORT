@@ -6,7 +6,7 @@ target_file: "BRIDS-Brain/01 Negocio/03 Legal & Cumplimiento/legal-templates.md"
 subagents_involved:
   - "compliance-officer"
   - "business-consultant"
-status: spec_review # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration
+status: deferred # spec_review | spec_approved | draft_optimizing | deliverable_review | completed | frozen_for_arbitration | deferred
 created_at: "2026-10-15"
 updated_at: "2026-10-15"
 hitl_checkpoints:
